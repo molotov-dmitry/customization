@@ -71,6 +71,7 @@ appinstall 'ibus-gtk'               'ibus-gtk'
 debinstall 'Numix wallpaper'        'numix-wallpaper-notd' "${ROOT_PATH}/files/numix-wallpaper-notd.deb"
 
 debinstall 'Azure GTK theme'        'azure-gtk-theme'
+debinstall 'Flattice GTK theme'     'flattice-theme'
 
 ### Customization ==============================================================
 
@@ -78,21 +79,25 @@ title 'Customization'
 
 ## Icon theme ------------------------------------------------------------------
 
-gsettings set org.gnome.desktop.interface icon-theme 'Numix-Circle'
+#icon_theme='Numix-Circle'
+icon_theme='Numix-Circle-Light'
+
+gsettings set org.gnome.desktop.interface icon-theme "${icon_theme}"
 
 ## Cursor theme ----------------------------------------------------------------
 
-#cursor_theme='oxy-white'
+cursor_theme='oxy-white'
 #cursor_theme='oxy-sea_blue'
-cursor_theme='oxy-zion'
+#cursor_theme='oxy-zion'
 
 gsettings set org.gnome.desktop.interface cursor-theme "${cursor_theme}"
 silentsudo '' update-alternatives --set x-cursor-theme "/etc/X11/cursors/${cursor_theme}.theme"
 
 ## Gtk theme -------------------------------------------------------------------
 
-theme_name='Numix'
+#theme_name='Numix'
 #theme_name='Azure'
+theme_name='Flattice'
 
 gsettings set org.gnome.desktop.interface gtk-theme "${theme_name}"
 gsettings set org.gnome.desktop.wm.preferences theme "${theme_name}"
@@ -127,8 +132,8 @@ gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "['<
 
 gsettings set org.gnome.gedit.preferences.editor use-default-font       true
 
-gsettings set org.gnome.gedit.preferences.editor use-default-font       false
-gsettings set org.gnome.gedit.preferences.editor editor-font            'Droid Sans Mono 10'
+#gsettings set org.gnome.gedit.preferences.editor use-default-font       false
+#gsettings set org.gnome.gedit.preferences.editor editor-font            'Droid Sans Mono 10'
 
 gsettings set org.gnome.gedit.preferences.editor display-line-numbers   true
 gsettings set org.gnome.gedit.preferences.editor highlight-current-line true
@@ -184,5 +189,5 @@ msgdone
 ## Finalization ================================================================
 
 nautilus -q
-setsid unity
+setsid unity &
 
