@@ -43,6 +43,7 @@ ppaadd  'Numix Project'             'numix'
 ppaadd  'LibreOffice'               'libreoffice'
 ppaadd  'Elementary OS'             'elementary-os'             'daily'
 ppaadd  'Azure theme'               'noobslab'                  'themes'
+ppaadd  'Ubuntu Make'               'ubuntu-desktop'            'ubuntu-make'
 
 ## Updating --------------------------------------------------------------------
 
@@ -67,6 +68,8 @@ appinstall 'Qt SDK'                 'qtcreator'
 appinstall 'RabbitVCS'              'rabbitvcs-core rabbitvcs-nautilus'
 
 appinstall 'ibus-gtk'               'ibus-gtk'
+
+appinstall 'Ubuntu Make'            'ubuntu-make'
 
 debinstall 'Numix wallpaper'        'numix-wallpaper-notd' "${ROOT_PATH}/files/numix-wallpaper-notd.deb"
 
