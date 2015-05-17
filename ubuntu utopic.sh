@@ -65,6 +65,7 @@ appinstall 'Postgres'               'postgresql pgadmin3 libpq5 libpq-dev'
 appinstall 'SQLite'                 'sqlite sqliteman libsqlite3-0 libsqlite3-dev'
 appinstall 'Build tools'            'build-essential astyle'
 appinstall 'Qt SDK'                 'qtcreator'
+appinstall 'VCS'                    'git subversion'
 appinstall 'RabbitVCS'              'rabbitvcs-core rabbitvcs-nautilus'
 
 appinstall 'ibus-gtk'               'ibus-gtk'
@@ -82,25 +83,25 @@ title 'Customization'
 
 ## Icon theme ------------------------------------------------------------------
 
-#icon_theme='Numix-Circle'
-icon_theme='Numix-Circle-Light'
+icon_theme='Numix-Circle'
+#icon_theme='Numix-Circle-Light'
 
 gsettings set org.gnome.desktop.interface icon-theme "${icon_theme}"
 
 ## Cursor theme ----------------------------------------------------------------
 
-cursor_theme='oxy-white'
+#cursor_theme='oxy-white'
 #cursor_theme='oxy-sea_blue'
-#cursor_theme='oxy-zion'
+cursor_theme='oxy-zion'
 
 gsettings set org.gnome.desktop.interface cursor-theme "${cursor_theme}"
 silentsudo '' update-alternatives --set x-cursor-theme "/etc/X11/cursors/${cursor_theme}.theme"
 
 ## Gtk theme -------------------------------------------------------------------
 
-#theme_name='Numix'
+theme_name='Numix'
 #theme_name='Azure'
-theme_name='Flattice'
+#theme_name='Flattice'
 
 gsettings set org.gnome.desktop.interface gtk-theme "${theme_name}"
 gsettings set org.gnome.desktop.wm.preferences theme "${theme_name}"
