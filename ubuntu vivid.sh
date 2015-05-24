@@ -87,7 +87,7 @@ appinstall 'Azure GTK theme'        'azure-gtk-theme'
 
 ### System =====================================================================
 
-silentsudo 'Fixing ntfs permissions in fstab' sed -i 's/umask=[0-9]\{3\}/umask=777/' /etc/fstab
+silentsudo 'Fixing ntfs permissions' sed -i "s/umask=[0-9]\{3\}/umask=000,uid=$(id -u ${USER})/" /etc/fstab
 
 ### Customization ==============================================================
 
