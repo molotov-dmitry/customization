@@ -68,6 +68,16 @@ function msgfail()
     return 0
 }
 
+function conntest()
+{
+    if ping -w 5 -c 1 mirror.yandex.ru 1>/dev/null 2>&1
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
 function ispkginstalled()
 {
     app="$1"
@@ -85,7 +95,7 @@ function isppaadded()
     author="$1"
     repo="$2"
 
-    count=$(grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep -v list.save | grep -v deb-src | grep -v '#deb' | grep deb | grep "/${author}/${repo}" | wc -l)
+    count=$(grep -h ^ /etc/apt/sources.list /etc/apt/sources.list.d/* 2> /dev/null | grep -v list.save | grep -v deb-src | grep -v '#deb' | grep deb | grep "/${author}/${repo}" | wc -l)
 
     if [[ count -gt 0 ]]
     then
@@ -167,7 +177,7 @@ function appremove()
 
     for app in ${applist}
     do
-        if ispkginstalled "{app}"
+        if ispkginstalled "${app}"
         then
             remlist="${remlist} ${app}"
         fi
