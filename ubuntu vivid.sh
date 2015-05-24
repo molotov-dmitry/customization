@@ -10,6 +10,18 @@ sudo echo -n
 clear
 clear
 
+### Test internet connection ===================================================
+
+title 'testing internet connection'
+
+if conntest
+then
+    msgdone
+else
+    msgfail
+    exit 1
+fi
+
 ### Applications ===============================================================
 
 ## Remove ----------------------------------------------------------------------
@@ -52,14 +64,12 @@ appupgrade
 
 ## Install ---------------------------------------------------------------------
 
-appinstall 'Chromium'               'chromium-browser chromium-browser-l10n'
+#appinstall 'Chromium'               'chromium-browser chromium-browser-l10n'
 
-appinstall 'Numix theme'            'numix-icon-theme-circle numix-icon-theme-bevel numix-gtk-theme numix-plymouth-theme'
+appinstall 'Numix theme'            'numix-icon-theme-circle numix-gtk-theme numix-plymouth-theme'
 appinstall 'Oxygen cursors'         'oxygen-cursor-theme oxygen-cursor-theme-extra'
 appinstall 'Libreoffice icons'      'libreoffice-style-sifr'
 appinstall 'Elementary theme'       'elementary-icon-theme elementary-theme elementary-wallpapers'
-
-appinstall 'Open Terminal Here'     'nautilus-open-terminal'
 
 appinstall 'Postgres'               'postgresql pgadmin3 libpq5 libpq-dev'
 appinstall 'SQLite'                 'sqlite sqliteman libsqlite3-0 libsqlite3-dev'
@@ -72,14 +82,12 @@ appinstall 'ibus-gtk'               'ibus-gtk'
 
 appinstall 'Ubuntu Make'            'ubuntu-make'
 
-debinstall 'Numix wallpaper'        'numix-wallpaper-notd' "${ROOT_PATH}/files/numix-wallpaper-notd.deb"
-
-debinstall 'Azure GTK theme'        'azure-gtk-theme'
-debinstall 'Flattice GTK theme'     'flattice-theme'
+appinstall 'Azure GTK theme'        'azure-gtk-theme'
+#appinstall 'Flattice GTK theme'     'flattice-theme'
 
 ### System =====================================================================
 
-silentsudo 'Fixing ntfs permissions in fstab' sed -i "s/umask=[0-9]\{3\}/umask=000,uid=$(id -u ${USER})/" /etc/fstab
+silentsudo 'Fixing ntfs permissions in fstab' sed -i 's/umask=[0-9]\{3\}/umask=777/' /etc/fstab
 
 ### Customization ==============================================================
 
@@ -114,7 +122,7 @@ gsettings set org.gnome.desktop.wm.preferences theme "${theme_name}"
 
 gsettings set org.gnome.desktop.interface font-name 'Droid Sans 10'
 gsettings set org.gnome.desktop.interface document-font-name 'Droid Serif 10'
-gsettings set org.gnome.desktop.interface monospace-font-name 'Droid Sans Mono 10'
+gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 10'
 gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Droid Sans 10'
 
 ## Wallpaper -------------------------------------------------------------------
@@ -123,7 +131,7 @@ gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgr
 
 ## Border for unity launcher ---------------------------------------------------
 
-silentsudo '' tar zxvf "${ROOT_PATH}/files/icons.tar.gz" -C /usr/share/unity
+#silentsudo '' tar zxvf "${ROOT_PATH}/files/icons.tar.gz" -C /usr/share/unity
 
 ## Launcher applications -------------------------------------------------------
 
@@ -139,9 +147,6 @@ gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "['<
 ## gedit -----------------------------------------------------------------------
 
 gsettings set org.gnome.gedit.preferences.editor use-default-font       true
-
-#gsettings set org.gnome.gedit.preferences.editor use-default-font       false
-#gsettings set org.gnome.gedit.preferences.editor editor-font            'Droid Sans Mono 10'
 
 gsettings set org.gnome.gedit.preferences.editor display-line-numbers   true
 gsettings set org.gnome.gedit.preferences.editor highlight-current-line true
@@ -160,13 +165,11 @@ gsettings set org.gnome.gedit.plugins active-plugins "['changecase', 'filebrowse
 
 ## gnome-terminal --------------------------------------------------------------
 
-gconftool-2 --set '/apps/gnome-terminal/profiles/Default/background_type'       --type string   'transparent'
-gconftool-2 --set '/apps/gnome-terminal/profiles/Default/background_darkness'   --type float    '0.95'
+term_profile=$(gsettings get org.gnome.Terminal.ProfilesList default | cut -d "'" -f 2)
 
-gconftool-2 --set '/apps/gnome-terminal/profiles/Default/use_system_font'       --type bool     'true'
+gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" use-transparent-background true 
+gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" background-transparency-percent 5
 
-#gconftool-2 --set '/apps/gnome-terminal/profiles/Default/use_system_font'       --type bool     'false'
-#gconftool-2 --set '/apps/gnome-terminal/profiles/Default/font'                  --type string   'Droid Sans Mono 10'
 
 ## astyle local ----------------------------------------------------------------
 
@@ -197,5 +200,5 @@ msgdone
 ## Finalization ================================================================
 
 nautilus -q
-setsid unity &
+#setsid unity &
 
