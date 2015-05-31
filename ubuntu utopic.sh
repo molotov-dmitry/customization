@@ -37,6 +37,11 @@ appremove 'Landscape'               'landscape-client-ui-install'
 #firefox
 #appremove 'Web camera' 'cheese cheese-common'
 
+### Enabling 'universe' and 'multiverse' package sources -----------------------
+
+silentsudo 'Enabling universe source' add-apt-repository universe
+silentsudo 'Enabling multiverse source' add-apt-repository multiverse
+
 ## Adding PPA`s ----------------------------------------------------------------
 
 ppaadd  'Numix Project'             'numix'
