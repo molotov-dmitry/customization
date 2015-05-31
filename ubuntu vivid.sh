@@ -36,6 +36,7 @@ appremove 'Remote desktop client'   'remmina remmina-common remmina-plugin-rdp r
 appremove 'Unity web browser'       'webbrowser-app'
 appremove 'Thunderbird mail client' 'thunderbird'
 appremove 'Onboard'                 'onboard'
+appremove 'Fcitx'                   'fcitx fcitx-bin fcitx-config-common fcitx-data fcitx-modules fcitx-frontend-all'
 appremove 'Orca screen reader'      'gnome-orca'
 appremove 'X Diagnostic utility'    'xdiagnose'
 appremove 'Backup utility'          'deja-dup'
@@ -48,6 +49,11 @@ appremove 'Landscape'               'landscape-client-ui-install'
 #wacom
 #firefox
 #appremove 'Web camera' 'cheese cheese-common'
+
+### Enabling 'universe' and 'multiverse' package sources -----------------------
+
+silentsudo 'Enabling universe source' add-apt-repository universe
+silentsudo 'Enabling multiverse source' add-apt-repository multiverse
 
 ## Adding PPA`s ----------------------------------------------------------------
 
