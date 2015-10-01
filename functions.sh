@@ -302,3 +302,62 @@ function silentsudo()
         return 1
     fi
 }
+
+function launcherclear()
+{
+    if [[ "${XDG_CURRENT_DESKTOP}" == 'Unity' ]]
+    then
+        gsettings set com.canonical.Unity.Launcher favorites '[]'
+    elif [[ "${XDG_CURRENT_DESKTOP}" == 'GNOME' ]]
+    then
+        gsettings set org.gnome.shell favorite-apps '[]'
+    fi
+}
+
+function launcheradd_var()
+{
+    application="$1"
+    launcher="$2"
+    favname="$3"
+
+    applist=$(gsettings get $launcher $favname | sed "s/\['//g" | sed "s/'\]//g" | sed "s/'\, '/\n/g" | sed '/unity:/d' | sed "s/.*:\/\///g" | sed "s/.desktop//g")
+
+    if [[ -z "$(echo "$applist" | grep "^${application}.desktop$")" ]]
+    then
+        applist="${applist}
+$1"
+        newlauncher="["
+
+        let isfirst=1
+
+        for app in $applist
+        do
+            if [[ ${isfirst} -gt 0 ]]
+            then
+                let isfirst=0
+            else
+                newlauncher="${newlauncher}, "
+            fi
+
+            newlauncher="$newlauncher'${app}.desktop'"
+        done
+
+        newlauncher="${newlauncher}]"
+
+        gsettings set $launcher $favname "${newlauncher}"
+
+    fi
+}
+
+function launcheradd()
+{
+    application="$1"
+
+    if [[ "${XDG_CURRENT_DESKTOP}" == 'Unity' ]]
+    then
+        launcheradd_var "$application" 'com.canonical.Unity.Launcher' 'favorites'
+    elif [[ "${XDG_CURRENT_DESKTOP}" == 'GNOME' ]]
+    then
+        launcheradd_var "$application" 'org.gnome.shell' 'favorite-apps'
+    fi
+}
