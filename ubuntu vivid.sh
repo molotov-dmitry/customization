@@ -45,10 +45,13 @@ appremove 'Font viewer'             'gnome-font-viewer'
 appremove 'Symbols table'           'gucharmap'
 appremove 'xterm'                   'xterm'
 appremove 'Landscape'               'landscape-client-ui-install'
-
-#wacom
-#firefox
-#appremove 'Web camera' 'cheese cheese-common'
+#appremove 'Firefox'                 'firefox'
+appremove 'Evolution'               'evolution evolution-common evolution-plugins'
+appremove 'Dconf editor'            'dconf-editor'
+appremove 'Empathy'                 'empathy empathy-common'
+appremove 'Web camera'              'cheese'
+appremove 'Gnome applications'      'gnome-contacts gnome-weather gnome-documents gnome-maps'
+appremove 'Transmission'            'transmission-common transmission-gtk'
 
 ### Enabling 'universe' and 'multiverse' package sources -----------------------
 
@@ -61,35 +64,32 @@ ppaadd  'Numix Project'             'numix'
 ppaadd  'LibreOffice'               'libreoffice'
 ppaadd  'Elementary OS'             'elementary-os'             'daily'
 ppaadd  'Azure theme'               'noobslab'                  'themes'
-ppaadd  'Ubuntu Make'               'ubuntu-desktop'            'ubuntu-make'
 
 ## Updating --------------------------------------------------------------------
 
 appupdate
-appupgrade
+#appupgrade
 
 ## Install ---------------------------------------------------------------------
 
 #appinstall 'Chromium'               'chromium-browser chromium-browser-l10n'
 
+appinstall 'VCS'                    'git subversion'
+
+if ispkginstalled nautilus
+then
+    appinstall 'RabbitVCS'          'rabbitvcs-core rabbitvcs-nautilus'
+fi
+
 appinstall 'Numix theme'            'numix-icon-theme-circle numix-gtk-theme numix-plymouth-theme'
+appinstall 'Azure theme'            'azure-gtk-theme'
 appinstall 'Oxygen cursors'         'oxygen-cursor-theme oxygen-cursor-theme-extra'
 appinstall 'Libreoffice icons'      'libreoffice-style-sifr'
 appinstall 'Elementary theme'       'elementary-icon-theme elementary-theme elementary-wallpapers'
 
-appinstall 'Postgres'               'postgresql pgadmin3 libpq5 libpq-dev'
-appinstall 'SQLite'                 'sqlite sqliteman libsqlite3-0 libsqlite3-dev'
-appinstall 'Build tools'            'build-essential astyle'
-appinstall 'Qt SDK'                 'qtcreator'
-appinstall 'VCS'                    'git subversion'
-appinstall 'RabbitVCS'              'rabbitvcs-core rabbitvcs-nautilus'
-
 appinstall 'ibus-gtk'               'ibus-gtk'
 
-appinstall 'Ubuntu Make'            'ubuntu-make'
-
-appinstall 'Azure GTK theme'        'azure-gtk-theme'
-#appinstall 'Flattice GTK theme'     'flattice-theme'
+appinstall 'Droid fonts'            'fonts-droid'
 
 ### System =====================================================================
 
@@ -108,9 +108,7 @@ gsettings set org.gnome.desktop.interface icon-theme "${icon_theme}"
 
 ## Cursor theme ----------------------------------------------------------------
 
-#cursor_theme='oxy-white'
-#cursor_theme='oxy-sea_blue'
-cursor_theme='oxy-zion'
+cursor_theme='oxy-white'
 
 gsettings set org.gnome.desktop.interface cursor-theme "${cursor_theme}"
 silentsudo '' update-alternatives --set x-cursor-theme "/etc/X11/cursors/${cursor_theme}.theme"
@@ -119,7 +117,6 @@ silentsudo '' update-alternatives --set x-cursor-theme "/etc/X11/cursors/${curso
 
 theme_name='Numix'
 #theme_name='Azure'
-#theme_name='Flattice'
 
 gsettings set org.gnome.desktop.interface gtk-theme "${theme_name}"
 gsettings set org.gnome.desktop.wm.preferences theme "${theme_name}"
@@ -128,20 +125,21 @@ gsettings set org.gnome.desktop.wm.preferences theme "${theme_name}"
 
 gsettings set org.gnome.desktop.interface font-name 'Droid Sans 10'
 gsettings set org.gnome.desktop.interface document-font-name 'Droid Serif 10'
-gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 10'
+gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 11'
 gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Droid Sans 10'
 
 ## Wallpaper -------------------------------------------------------------------
 
+#gsettings set org.gnome.desktop.background show-desktop-icons false
 gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/168.jpg'
-
-## Border for unity launcher ---------------------------------------------------
-
-#silentsudo '' tar zxvf "${ROOT_PATH}/files/icons.tar.gz" -C /usr/share/unity
 
 ## Launcher applications -------------------------------------------------------
 
-gsettings set com.canonical.Unity.Launcher favorites "['nautilus.desktop', 'chromium-browser.desktop', 'firefox.desktop', 'gnome-terminal.desktop', 'qtcreator.desktop']"
+launcherclear
+launcheradd 'nautilus'
+launcheradd 'firefox'
+#launcheradd 'chromium-browser'
+launcheradd 'gnome-terminal'
 
 ## Keyboard --------------------------------------------------------------------
 
@@ -176,29 +174,6 @@ term_profile=$(gsettings get org.gnome.Terminal.ProfilesList default | cut -d "'
 gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" use-transparent-background true 
 gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" background-transparency-percent 5
 
-
-## astyle local ----------------------------------------------------------------
-
-silent '' rm -f "${HOME}/.astylerc"
-silent '' touch "${HOME}/.astylerc"
-
-echo '--style=allman' >> "${HOME}/.astylerc"
-echo '--indent=spaces=4' >> "${HOME}/.astylerc"
-echo '--indent-namespaces' >> "${HOME}/.astylerc"
-echo '--indent-preproc-define' >> "${HOME}/.astylerc"
-echo '--indent-col1-comments' >> "${HOME}/.astylerc"
-echo '#--break-blocks' >> "${HOME}/.astylerc"
-echo '--unpad-paren' >> "${HOME}/.astylerc"
-echo '--pad-header' >> "${HOME}/.astylerc"
-echo '--pad-oper' >> "${HOME}/.astylerc"
-echo '#--delete-empty-lines' >> "${HOME}/.astylerc"
-echo '--align-pointer=type' >> "${HOME}/.astylerc"
-echo '--align-reference=type' >> "${HOME}/.astylerc"
-echo '--convert-tabs' >> "${HOME}/.astylerc"
-echo '--close-templates' >> "${HOME}/.astylerc"
-echo '--max-code-length=80' >> "${HOME}/.astylerc"
-echo '--break-after-logical' >> "${HOME}/.astylerc"
-
 ## -----------------------------------------------------------------------------
 
 msgdone
@@ -206,5 +181,5 @@ msgdone
 ## Finalization ================================================================
 
 nautilus -q
-#setsid unity &
+setsid unity &
 
