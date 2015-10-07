@@ -1,7 +1,8 @@
 ### constants ==================================================================
-readonly CL_RED='\E[31;35m'
-readonly CL_YELLOW='\E[31;33m'
-readonly CL_GREEN='\E[31;32m'
+readonly CL_RED='\e[91m'
+readonly CL_YELLOW='\e[93m'
+readonly CL_GREEN='\e[92m'
+readonly CL_BLUE='\e[94m'
 
 readonly TITLE_LENGTH=50
 readonly SPACE_CHAR='.'
@@ -46,6 +47,15 @@ function msgdone()
     [[ -n "$1" ]] && msg="$1" || msg='[done]'
 
     message "$msg" "$CL_GREEN"
+
+    return 0
+}
+
+function msginfo()
+{
+    [[ -n "$1" ]] && msg="$1" || msg='[info]'
+
+    message "$msg" "$CL_BLUE"
 
     return 0
 }
