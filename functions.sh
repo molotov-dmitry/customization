@@ -1,4 +1,5 @@
 ### constants ==================================================================
+
 readonly CL_RED='\e[91m'
 readonly CL_YELLOW='\e[93m'
 readonly CL_GREEN='\e[92m'
@@ -6,6 +7,8 @@ readonly CL_BLUE='\e[94m'
 
 readonly TITLE_LENGTH=50
 readonly SPACE_CHAR='.'
+
+### Messages ===================================================================
 
 function spaces()
 {
@@ -78,6 +81,17 @@ function msgfail()
     return 0
 }
 
+### Strings ====================================================================
+
+function safestring()
+{
+    inputstr="$1"
+
+    echo "${inputstr}" | sed 's/\//\\\//g'
+}
+
+### Connection =================================================================
+
 function conntest()
 {
     if ping -w 5 -c 1 mirror.yandex.ru 1>/dev/null 2>&1
@@ -87,6 +101,8 @@ function conntest()
         return 1
     fi
 }
+
+### Packages ===================================================================
 
 function ispkginstalled()
 {
@@ -98,23 +114,6 @@ function ispkginstalled()
     else
         return 1
     fi
-}
-
-function isppaadded()
-{
-    author="$1"
-    repo="$2"
-
-    count=$(grep -h ^ /etc/apt/sources.list /etc/apt/sources.list.d/* 2> /dev/null | grep -v list.save | grep -v deb-src | grep -v '#deb' | grep deb | grep "/${author}/${repo}" | wc -l)
-
-    if [[ count -gt 0 ]]
-    then
-        return 0
-    else
-        return 1
-    fi
-
-    return 0
 }
 
 function debinstall()
@@ -243,6 +242,25 @@ function appupgrade()
     fi
 }
 
+### PPA functions ==============================================================
+
+function isppaadded()
+{
+    author="$1"
+    repo="$2"
+
+    count=$(grep -h ^ /etc/apt/sources.list /etc/apt/sources.list.d/* 2> /dev/null | grep -v list.save | grep -v deb-src | grep -v '#deb' | grep deb | grep "/${author}/${repo}" | wc -l)
+
+    if [[ count -gt 0 ]]
+    then
+        return 0
+    else
+        return 1
+    fi
+
+    return 0
+}
+
 function ppaadd()
 {
     reponame="$1"
@@ -274,6 +292,8 @@ function ppaadd()
         return 0
     fi
 }
+
+### Silent exec functions ======================================================
 
 function silent()
 {
@@ -312,6 +332,8 @@ function silentsudo()
         return 1
     fi
 }
+
+### Launcher functions =========================================================
 
 function launcherclear()
 {
@@ -370,4 +392,53 @@ function launcheradd()
     then
         launcheradd_var "$application" 'org.gnome.shell' 'favorite-apps'
     fi
+}
+
+### File system ================================================================
+
+function fixpermissions()
+{
+    mountpoint="$1"
+
+    title "Fixing permissions for ${mountpoint}"
+
+    mountpointsafe=$(safestring "${mountpoint}")
+
+    fstype=$(grep "${mountpointsafe}" /etc/fstab | grep -v '^#' | sed "s/.*${mountpointsafe}[ \t]*//" | sed 's/[ \t].*//')
+
+    userid=$(id -u)
+    plugdevgroup=$(grep plugdev /etc/group | cut -d ':' -f 3)
+
+    [[ -z "${plugdevgroup}" ]] && plugdevgroup=$(id -g)
+
+    case "${fstype}" in
+    "ntfs")
+        silentsudo '' sed -i "s/${mountpointsafe}[ \t]*${fstype}[ \t]*defaults[^ \t]*/${mountpointsafe}\t${fstype}\tdefaults,umask=000,uid=${userid},gid=${plugdevgroup}/" /etc/fstab
+
+        if [[ $? -eq 0 ]]
+        then
+            msgdone
+            return 0
+        else
+            msgfail
+            return 1
+        fi
+    ;;
+    "ext4")
+        silentsudo '' chmod ${USER}:${USER} "${mountpoint}"
+
+        if [[ $? -eq 0 ]]
+        then
+            msgdone
+            return 0
+        else
+            msgfail
+            return 1
+        fi
+    ;;
+    * )
+        msgwarn '[not fonund in fstab]'
+        return 0
+    ;;
+    esac
 }
