@@ -14,13 +14,13 @@ clear
 
 ## Remove ----------------------------------------------------------------------
 
-appremove 'Rhythmbox'               'rhythmbox thythmbox-data rhythmbox-plugins'
-appremove 'Shotwell'                'shotwell shotwell-common'
-appremove 'Video'                   'totem totem-common totem-mozilla totem-plugins'
+#appremove 'Rhythmbox'               'rhythmbox thythmbox-data rhythmbox-plugins'
+#appremove 'Shotwell'                'shotwell shotwell-common'
+#appremove 'Video'                   'totem totem-common totem-mozilla totem-plugins'
 
 ## Adding PPA`s ----------------------------------------------------------------
 
-ppaadd  'Ubuntu Make'               'ubuntu-desktop'            'ubuntu-make'
+#ppaadd  'Ubuntu Make'               'ubuntu-desktop'            'ubuntu-make'
 
 ## Updating --------------------------------------------------------------------
 
@@ -33,9 +33,9 @@ appinstall 'Postgres'               'postgresql pgadmin3 libpq5 libpq-dev'
 appinstall 'SQLite'                 'sqlite sqliteman libsqlite3-0 libsqlite3-dev'
 
 appinstall 'Build tools'            'build-essential astyle'
-appinstall 'Qt SDK'                 'qtcreator'
+appinstall 'Qt SDK'                 'qtbase5-dev qtcreator'
 
-appinstall 'Ubuntu Make'            'ubuntu-make'
+#appinstall 'Ubuntu Make'            'ubuntu-make'
 
 appinstall 'Doxygen'                'doxygen'
 
