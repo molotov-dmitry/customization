@@ -93,7 +93,8 @@ appinstall 'Droid fonts'            'fonts-droid'
 
 ### System =====================================================================
 
-silentsudo 'Fixing ntfs permissions' sed -i "s/umask=[0-9]\{3\}/umask=000,uid=$(id -u ${USER})/" /etc/fstab
+fixpermissions '/media/documents'
+fixpermissions '/media/windows'
 
 ### Customization ==============================================================
 
