@@ -5,14 +5,25 @@ cd "${ROOT_PATH}" || exit 1
 
 . "${ROOT_PATH}/functions.sh"
 
+
+
+### Директория, в которой находятся каталоги с документами
 readonly target_disk='/media/documents'
 
+
+### Имена целевых директорий
 target_dir=( "Downloads" "Documents" "Music" "Images" "Video" "Templates" "Projects" )
+
+### Имена исходных директорий
 source_dir=( "" "" "" "" "" "" "${HOME}/Projects" )
+
+### Имена исходных директорий, берущихся из файла XDG user dirs
 source_xdg=( "DOWNLOAD" "DOCUMENTS" "MUSIC" "PICTURES" "VIDEOS" "TEMPLATES" "" )
 
+### Количество директорий
 let DIR_COUNT=${#target_dir[@]}
-#let DIR_COUNT=6
+
+
 
 for (( index=0; index<${DIR_COUNT}; index++ ))
 do
@@ -26,8 +37,19 @@ do
     then
         msgdone
     else
-        msgfail
-        exit 1
+        msgwarn '[missing]'
+
+        title "creating ${name_dir} destination folder"
+
+        mkdir -p "${dst_dir}"
+
+        if test -d "${dst_dir}"
+        then
+            msgdone
+        else
+            msgfail
+            exit 1
+        fi
     fi
 done
 
