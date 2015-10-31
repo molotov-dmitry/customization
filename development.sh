@@ -33,7 +33,7 @@ appinstall 'Postgres'               'postgresql pgadmin3 libpq5 libpq-dev'
 appinstall 'SQLite'                 'sqlite sqliteman libsqlite3-0 libsqlite3-dev'
 
 appinstall 'Build tools'            'build-essential astyle'
-appinstall 'Qt SDK'                 'qtbase5-dev qtcreator'
+appinstall 'Qt SDK'                 'qml qtbase5-dev qtdeclarative5-dev qtcreator'
 
 #appinstall 'Ubuntu Make'            'ubuntu-make'
 
