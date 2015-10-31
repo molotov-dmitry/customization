@@ -68,11 +68,11 @@ ppaadd  'Azure theme'               'noobslab'                  'themes'
 ## Updating --------------------------------------------------------------------
 
 appupdate
-#appupgrade
+appupgrade
 
 ## Install ---------------------------------------------------------------------
 
-#appinstall 'Chromium'               'chromium-browser chromium-browser-l10n'
+appinstall 'Chromium'               'chromium-browser chromium-browser-l10n'
 
 appinstall 'VCS'                    'git subversion'
 
@@ -84,12 +84,17 @@ fi
 appinstall 'Numix theme'            'numix-icon-theme-circle numix-gtk-theme numix-plymouth-theme'
 appinstall 'Azure theme'            'azure-gtk-theme'
 appinstall 'Oxygen cursors'         'oxygen-cursor-theme oxygen-cursor-theme-extra'
+appinstall 'Breeze cursors'         'breeze-cursor-theme'
 appinstall 'Libreoffice icons'      'libreoffice-style-sifr'
 appinstall 'Elementary theme'       'elementary-icon-theme elementary-theme elementary-wallpapers'
 
 appinstall 'ibus-gtk'               'ibus-gtk'
 
 appinstall 'Droid fonts'            'fonts-droid'
+
+## Remove unused ---------------------------------------------------------------
+
+silentsudo 'Removing unused packages' apt-get autoremove --yes --force-yes --purge
 
 ### System =====================================================================
 
@@ -109,7 +114,8 @@ gsettings set org.gnome.desktop.interface icon-theme "${icon_theme}"
 
 ## Cursor theme ----------------------------------------------------------------
 
-cursor_theme='oxy-white'
+#cursor_theme='oxy-white'
+cursor_theme='breeze_cursors'
 
 gsettings set org.gnome.desktop.interface cursor-theme "${cursor_theme}"
 silentsudo '' update-alternatives --set x-cursor-theme "/etc/X11/cursors/${cursor_theme}.theme"
@@ -139,7 +145,7 @@ gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgr
 launcherclear
 launcheradd 'nautilus'
 launcheradd 'firefox'
-#launcheradd 'chromium-browser'
+launcheradd 'chromium-browser'
 launcheradd 'gnome-terminal'
 
 ## Keyboard --------------------------------------------------------------------
