@@ -10,6 +10,26 @@ sudo echo -n
 clear
 clear
 
+### Applications ===============================================================
+## Install ---------------------------------------------------------------------
+
+debinstall 'Cifs utils' 'cifs-utils' "$(ls /tools/cifs-utils_*.deb)"
+
+### Fix permissions ============================================================
+
+fixpermissions '/media/documents'
+
+### Add smaba shares to fstab ==================================================
+
+title 'Adding cifs shares'
+silentsudo '' sed -i '/[ \t]cifs[ \t]/d' /etc/fstab
+
+sudo sh -c "echo >> /etc/fstab"
+sudo sh -c "echo '//172.16.8.91/usr /media/dima cifs guest,uid=1000,forceuid,gid=1000,forcegid,file_mode=0775,dir_mode=0775,iocharset=utf8 0 0' >> /etc/fstab"
+sudo sh -c "echo '//172.16.8.91/share2 /media/cub cifs guest,uid=1000,forceuid,gid=1000,forcegid,file_mode=0775,dir_mode=0775,iocharset=utf8 0 0' >> /etc/fstab"
+
+msgdone
+
 ### Customization ==============================================================
 
 title 'Customization'
@@ -55,8 +75,9 @@ gsettings set org.gnome.desktop.background picture-uri ''
 launcherclear
 launcheradd 'nautilus'
 launcheradd 'firefox'
-launcheradd 'chromium-browser'
-launcheradd "qtcreator"
+#launcheradd 'chromium-browser'
+launcheradd 'qtcreator'
+launcheradd 'anjuta'
 launcheradd 'gnome-terminal'
 
 ## Keyboard --------------------------------------------------------------------
@@ -82,6 +103,8 @@ gsettings set org.gnome.gedit.preferences.editor right-margin-position  80
 gsettings set org.gnome.gedit.preferences.editor syntax-highlighting    true
 
 gsettings set org.gnome.gedit.preferences.editor scheme                 'kate'
+
+gsettings set org.gnome.gedit.preferences.editor wrap-mode              'none'
 
 gsettings set org.gnome.gedit.plugins active-plugins "['changecase', 'filebrowser', 'time', 'zeitgeistplugin', 'docinfo']"
 
