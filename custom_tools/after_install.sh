@@ -87,6 +87,30 @@ gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "['<
 
 ### Application customization ==================================================
 
+## qt creator ------------------------------------------------------------------
+
+silent '' rm -f "${HOME}/.config"
+silent '' mkdir -p "${HOME}/.config/QtProject"
+silent '' touch "${HOME}/.config/QtProject/QtCreator.ini"
+
+echo '[Directories]'                    >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo 'BuildDirectory.Template=build'    >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo "Projects=${HOME}/Projects"        >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo 'UseProjectsDirectory=true'        >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo ''                                 >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo '[TextEditor]'                     >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo 'FontFamily=Ubuntu Mono'           >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo 'FontSize=11'                      >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo ''                                 >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo '[textDisplaySettings]'            >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo 'DisplayFileEncoding=true'         >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo 'CenterCursorOnScroll=true'        >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo 'HighlightCurrentLine2Key=true'    >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo ''                                 >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo '[textMarginSettings]'             >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo 'MarginColumn=80'                  >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo 'ShowMargin=true'                  >> "${HOME}/.config/QtProject/QtCreator.ini"
+
 ## gedit -----------------------------------------------------------------------
 
 gsettings set org.gnome.gedit.preferences.editor use-default-font       true
@@ -120,24 +144,22 @@ gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/prof
 silent '' rm -f "${HOME}/.astylerc"
 silent '' touch "${HOME}/.astylerc"
 
-echo '--style=allman' >> "${HOME}/.astylerc"
-echo '--indent=spaces=4' >> "${HOME}/.astylerc"
-echo '--indent-namespaces' >> "${HOME}/.astylerc"
-echo '--indent-preproc-define' >> "${HOME}/.astylerc"
-echo '--indent-col1-comments' >> "${HOME}/.astylerc"
-echo '#--break-blocks' >> "${HOME}/.astylerc"
-echo '--unpad-paren' >> "${HOME}/.astylerc"
-echo '--pad-header' >> "${HOME}/.astylerc"
-echo '--pad-oper' >> "${HOME}/.astylerc"
-echo '#--delete-empty-lines' >> "${HOME}/.astylerc"
-echo '--align-pointer=type' >> "${HOME}/.astylerc"
-echo '--align-reference=type' >> "${HOME}/.astylerc"
-echo '--convert-tabs' >> "${HOME}/.astylerc"
-echo '--close-templates' >> "${HOME}/.astylerc"
-echo '--max-code-length=80' >> "${HOME}/.astylerc"
-echo '--break-after-logical' >> "${HOME}/.astylerc"
-
-## -----------------------------------------------------------------------------
+echo '--style=allman'           >> "${HOME}/.astylerc"
+echo '--indent=spaces=4'        >> "${HOME}/.astylerc"
+echo '--indent-namespaces'      >> "${HOME}/.astylerc"
+echo '--indent-preproc-define'  >> "${HOME}/.astylerc"
+echo '--indent-col1-comments'   >> "${HOME}/.astylerc"
+echo '#--break-blocks'          >> "${HOME}/.astylerc"
+echo '--unpad-paren'            >> "${HOME}/.astylerc"
+echo '--pad-header'             >> "${HOME}/.astylerc"
+echo '--pad-oper'               >> "${HOME}/.astylerc"
+echo '#--delete-empty-lines'    >> "${HOME}/.astylerc"
+echo '--align-pointer=type'     >> "${HOME}/.astylerc"
+echo '--align-reference=type'   >> "${HOME}/.astylerc"
+echo '--convert-tabs'           >> "${HOME}/.astylerc"
+echo '--close-templates'        >> "${HOME}/.astylerc"
+echo '--max-code-length=80'     >> "${HOME}/.astylerc"
+echo '--break-after-logical'    >> "${HOME}/.astylerc"
 
 ## -----------------------------------------------------------------------------
 
