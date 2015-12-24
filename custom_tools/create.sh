@@ -122,7 +122,7 @@ appinstall 'GTK+ SDK'               'libgtk-3-dev libgtkmm-3.0-dev libtool libto
 appinstall 'GTK+ Libs'              'libgtksourceview-3.0-dev libgtksourceview-3.0-1 libgtksourceviewmm-3.0-0v5 libgtksourceview-3.0-dev libpeas-1.0-0 libpeas-dev libgit2-glib-1.0-dev libgit2-glib-1.0-0'
 appinstall 'GTK+ IDE'               'anjuta glade'
 
-appinstall 'Doxygen'                'doxygen'
+appinstall 'Doxygen'                'doxygen graphviz'
 
 appinstall 'Postgres'               'postgresql pgadmin3 libpq5 libpq-dev'
 appinstall 'SQLite'                 'sqlite sqliteman libsqlite3-0 libsqlite3-dev'
