@@ -94,7 +94,7 @@ silent '' mkdir -p "${HOME}/.config/QtProject"
 silent '' touch "${HOME}/.config/QtProject/QtCreator.ini"
 
 echo '[Directories]'                    >> "${HOME}/.config/QtProject/QtCreator.ini"
-echo 'BuildDirectory.Template=build'    >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo 'BuildDirectory.Template=build/%{CurrentProject:Name}/%{CurrentBuild:Name}'    >> "${HOME}/.config/QtProject/QtCreator.ini"
 echo "Projects=${HOME}/Projects"        >> "${HOME}/.config/QtProject/QtCreator.ini"
 echo 'UseProjectsDirectory=true'        >> "${HOME}/.config/QtProject/QtCreator.ini"
 echo ''                                 >> "${HOME}/.config/QtProject/QtCreator.ini"
