@@ -60,6 +60,7 @@ silentsudo 'Removing create script'         rm -rf "${rootfs_dir}/tools/create.s
 silentsudo 'Copying functions script #2'    cp -f "${ROOT_PATH}/functions.sh" "${rootfs_dir}/tools/"
 silentsudo 'Copying folders script'         cp -f "${ROOT_PATH}/folders.sh" "${rootfs_dir}/tools/"
 silentsudo 'Copying after install script'   cp -f "${ROOT_PATH}/custom_tools/after_install.sh" "${rootfs_dir}/tools/"
+silentsudo 'Copying financedb script'       cp -f "${ROOT_PATH}/financedb.sh" "${rootfs_dir}/tools/"
 
 silentsudo 'Changing tools mode'            chmod -R 777 "${rootfs_dir}/tools"
 
