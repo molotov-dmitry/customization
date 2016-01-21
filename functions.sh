@@ -333,6 +333,31 @@ function silentsudo()
     fi
 }
 
+### Desktop environment detection functions ====================================
+
+function desktoptype()
+{
+    echo "${XDG_CURRENT_DESKTOP}"
+    
+    return 0;
+}
+
+function systemtype()
+{
+    if [[ "${XDG_CURRENT_DESKTOP}" == 'Unity' ]]
+    then
+        echo 'GNOME'
+    elif [[ "${XDG_CURRENT_DESKTOP}" == 'GNOME' ]]
+    then
+        echo 'GNOME'
+    elif [[ "${XDG_CURRENT_DESKTOP}" == 'KDE' ]]
+    then
+        echo 'KDE'
+    fi
+    
+    return 0;
+}
+
 ### Launcher functions =========================================================
 
 function launcherclear()
