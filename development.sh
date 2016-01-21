@@ -33,7 +33,7 @@ appinstall 'Postgres'               'postgresql pgadmin3 libpq5 libpq-dev'
 appinstall 'SQLite'                 'sqlite sqliteman libsqlite3-0 libsqlite3-dev'
 
 appinstall 'Build tools'            'build-essential astyle'
-appinstall 'Qt SDK'                 'qml qtbase5-dev qtdeclarative5-dev qtcreator'
+appinstall 'Qt SDK'                 'qml qtbase5-dev qtdeclarative5-dev qtcreator qt5-doc'
 
 #appinstall 'Ubuntu Make'            'ubuntu-make'
 
@@ -53,13 +53,42 @@ title 'Customization'
 
 ## Wallpaper -------------------------------------------------------------------
 
-gsettings set org.gnome.desktop.background primary-color '#20204a4a8787'
-gsettings set org.gnome.desktop.background picture-options 'none'
-gsettings set org.gnome.desktop.background picture-uri ''
+if [[ "$(systemtype)" == 'GNOME' ]]
+then
+    gsettings set org.gnome.desktop.background primary-color '#20204a4a8787'
+    gsettings set org.gnome.desktop.background picture-options 'none'
+    gsettings set org.gnome.desktop.background picture-uri ''
+fi
 
 ## Unity launcher icons --------------------------------------------------------
 
 launcheradd "qtcreator"
+
+### Application customization ==================================================
+
+## qt creator ------------------------------------------------------------------
+
+silent '' rm -f "${HOME}/.config"
+silent '' mkdir -p "${HOME}/.config/QtProject"
+silent '' touch "${HOME}/.config/QtProject/QtCreator.ini"
+
+echo '[Directories]'                    >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo 'BuildDirectory.Template=build/%{CurrentProject:Name}/%{CurrentBuild:Name}'    >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo "Projects=${HOME}/Projects"        >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo 'UseProjectsDirectory=true'        >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo ''                                 >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo '[TextEditor]'                     >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo 'FontFamily=Ubuntu Mono'           >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo 'FontSize=11'                      >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo ''                                 >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo '[textDisplaySettings]'            >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo 'DisplayFileEncoding=true'         >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo 'CenterCursorOnScroll=true'        >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo 'HighlightCurrentLine2Key=true'    >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo ''                                 >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo '[textMarginSettings]'             >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo 'MarginColumn=80'                  >> "${HOME}/.config/QtProject/QtCreator.ini"
+echo 'ShowMargin=true'                  >> "${HOME}/.config/QtProject/QtCreator.ini"
 
 ## astyle local ----------------------------------------------------------------
 
