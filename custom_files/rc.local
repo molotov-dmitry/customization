@@ -21,4 +21,14 @@ then
     bash /media/documents/Tools/timesync.sh &
 fi
 
+if test -f /media/documents/Tools/ir_build.sh
+then
+    bash /media/documents/Tools/ir_build.sh &
+fi
+
+if test -f /media/documents/Tools/ir_server.sh
+then
+    bash /media/documents/Tools/ir_server.sh &
+fi
+
 exit 0
