@@ -26,7 +26,8 @@ silentsudo '' sed -i '/[ \t]cifs[ \t]/d' /etc/fstab
 
 sudo sh -c "echo >> /etc/fstab"
 sudo sh -c "echo '//172.16.8.91/usr /media/dima cifs guest,uid=1000,forceuid,gid=1000,forcegid,file_mode=0775,dir_mode=0775,iocharset=utf8 0 0' >> /etc/fstab"
-sudo sh -c "echo '//172.16.8.91/share2 /media/cub cifs guest,uid=1000,forceuid,gid=1000,forcegid,file_mode=0775,dir_mode=0775,iocharset=utf8 0 0' >> /etc/fstab"
+sudo sh -c "echo '//172.16.8.91/share2 /media/cub_local cifs guest,uid=1000,forceuid,gid=1000,forcegid,file_mode=0775,dir_mode=0775,iocharset=utf8 0 0' >> /etc/fstab"
+sudo sh -c "echo '//172.16.8.21/share2 /media/cub cifs guest,uid=1000,forceuid,gid=1000,forcegid,file_mode=0775,dir_mode=0775,iocharset=utf8 0 0' >> /etc/fstab"
 
 msgdone
 
