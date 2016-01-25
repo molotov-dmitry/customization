@@ -109,6 +109,7 @@ appinstall 'VCS'                    'git subversion'
 appinstall 'VCS GUI'                'rabbitvcs-core rabbitvcs-nautilus'
 
 appinstall 'Build tools'            'build-essential astyle'
+appinstall 'Multilib tools'         'gcc-multilib g++-multilib'
 appinstall 'Static analysis tools'  'cppcheck'
 appinstall 'Dynamic analysis tools' 'valgrind'
 
