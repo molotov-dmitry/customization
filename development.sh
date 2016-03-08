@@ -29,15 +29,28 @@ appupdate
 
 ## Install ---------------------------------------------------------------------
 
+appinstall 'Build tools'            'build-essential astyle'
+appinstall 'Multilib tools'         'gcc-multilib g++-multilib'
+appinstall 'Static analysis tools'  'cppcheck'
+appinstall 'Dynamic analysis tools' 'valgrind'
+
+appinstall 'X11 sdk'                'libx11-dev'
+
+appinstall 'OpenGL sdk'             'freeglut3 freeglut3-dev libglew1.10 libglew-dbg libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev'
+
+appinstall 'Qt SDK'                 'qml qtbase5-dev libqt5svg5 qtdeclarative5-dev qt5-doc'
+appinstall 'Qt IDE'                 'qtcreator'
+
+appinstall 'GTK+ SDK'               'libgtk-3-dev libgtkmm-3.0-dev libtool libtool-bin'
+appinstall 'GTK+ Libs'              'libgtksourceview-3.0-dev libgtksourceview-3.0-1 libgtksourceviewmm-3.0-0v5 libgtksourceview-3.0-dev libpeas-1.0-0 libpeas-dev libgit2-glib-1.0-dev libgit2-glib-1.0-0'
+appinstall 'GTK+ IDE'               'anjuta glade'
+
+appinstall 'Doxygen'                'doxygen graphviz'
+
 appinstall 'Postgres'               'postgresql pgadmin3 libpq5 libpq-dev'
 appinstall 'SQLite'                 'sqlite sqliteman libsqlite3-0 libsqlite3-dev'
 
-appinstall 'Build tools'            'build-essential astyle'
-appinstall 'Qt SDK'                 'qml qtbase5-dev qtdeclarative5-dev qtcreator qt5-doc'
-
 #appinstall 'Ubuntu Make'            'ubuntu-make'
-
-appinstall 'Doxygen'                'doxygen'
 
 ## Umake nstall ----------------------------------------------------------------
 
