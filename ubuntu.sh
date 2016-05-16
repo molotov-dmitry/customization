@@ -63,7 +63,6 @@ silentsudo 'Enabling multiverse source' add-apt-repository multiverse
 ppaadd  'Numix Project'             'numix'
 ppaadd  'LibreOffice'               'libreoffice'
 ppaadd  'Elementary OS'             'elementary-os'             'daily'
-ppaadd  'Azure theme'               'noobslab'                  'themes'
 
 ## Updating --------------------------------------------------------------------
 
@@ -71,6 +70,9 @@ appupdate
 appupgrade
 
 ## Install ---------------------------------------------------------------------
+
+appinstall 'Restricted extras'		'ubuntu-restricted-extras'
+appinstall 'Archiver'				'p7zip-full p7zip-rar unrar'
 
 appinstall 'Chromium'               'chromium-browser chromium-browser-l10n'
 
@@ -81,16 +83,15 @@ then
     appinstall 'RabbitVCS'          'rabbitvcs-core rabbitvcs-nautilus'
 fi
 
-appinstall 'Numix theme'            'numix-icon-theme-circle numix-gtk-theme numix-plymouth-theme'
-appinstall 'Azure theme'            'azure-gtk-theme'
+appinstall 'Numix theme'            'numix-icon-theme-circle numix-gtk-theme'
+appinstall 'Breeze theme'           'breeze-icon-theme breeze-cursor-theme'
 appinstall 'Oxygen cursors'         'oxygen-cursor-theme oxygen-cursor-theme-extra'
-appinstall 'Breeze cursors'         'breeze-cursor-theme'
 appinstall 'Libreoffice icons'      'libreoffice-style-sifr'
 appinstall 'Elementary theme'       'elementary-icon-theme elementary-theme elementary-wallpapers'
 
 appinstall 'ibus-gtk'               'ibus-gtk'
 
-appinstall 'Droid fonts'            'fonts-droid'
+appinstall 'Noto fonts'             'fonts-noto'
 
 ## Remove unused ---------------------------------------------------------------
 
@@ -108,13 +109,11 @@ title 'Customization'
 ## Icon theme ------------------------------------------------------------------
 
 icon_theme='Numix-Circle'
-#icon_theme='Numix-Circle-Light'
 
 gsettings set org.gnome.desktop.interface icon-theme "${icon_theme}"
 
 ## Cursor theme ----------------------------------------------------------------
 
-#cursor_theme='oxy-white'
 cursor_theme='breeze_cursors'
 
 gsettings set org.gnome.desktop.interface cursor-theme "${cursor_theme}"
@@ -123,17 +122,16 @@ silentsudo '' update-alternatives --set x-cursor-theme "/etc/X11/cursors/${curso
 ## Gtk theme -------------------------------------------------------------------
 
 theme_name='Numix'
-#theme_name='Azure'
 
 gsettings set org.gnome.desktop.interface gtk-theme "${theme_name}"
 gsettings set org.gnome.desktop.wm.preferences theme "${theme_name}"
 
 ## Fonts -----------------------------------------------------------------------
 
-gsettings set org.gnome.desktop.interface font-name 'Droid Sans 10'
-gsettings set org.gnome.desktop.interface document-font-name 'Droid Serif 10'
+gsettings set org.gnome.desktop.interface font-name 'Ubuntu 10'
+gsettings set org.gnome.desktop.interface document-font-name 'Noto Serif 10'
 gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 11'
-gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Droid Sans 10'
+gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Ubuntu 10'
 
 ## Wallpaper -------------------------------------------------------------------
 
@@ -178,8 +176,18 @@ gsettings set org.gnome.gedit.plugins active-plugins "['changecase', 'filebrowse
 
 term_profile=$(gsettings get org.gnome.Terminal.ProfilesList default | cut -d "'" -f 2)
 
-gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" use-transparent-background true 
+gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" use-transparent-background true
 gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" background-transparency-percent 5
+
+## LibreOffice -----------------------------------------------------------------
+
+mkdir -p "${HOME}/.config/libreoffice/4/user/config/soffice.cfg/modules/swriter/toolbar"
+cp -f "${ROOT_PATH}/files/libreoffice/writer/standardbar.xml" "${HOME}/.config/libreoffice/4/user/config/soffice.cfg/modules/swriter/toolbar/"
+cp -f "${ROOT_PATH}/files/libreoffice/writer/textobjectbar.xml" "${HOME}/.config/libreoffice/4/user/config/soffice.cfg/modules/swriter/toolbar/"
+
+mkdir -p "${HOME}/.config/libreoffice/4/user/config/soffice.cfg/modules/scalc/toolbar"
+cp -f "${ROOT_PATH}/files/libreoffice/calc/standardbar.xml" "${HOME}/.config/libreoffice/4/user/config/soffice.cfg/modules/scalc/toolbar/"
+cp -f "${ROOT_PATH}/files/libreoffice/calc/formatobjectbar.xml" "${HOME}/.config/libreoffice/4/user/config/soffice.cfg/modules/scalc/toolbar/"
 
 ## -----------------------------------------------------------------------------
 
