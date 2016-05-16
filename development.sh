@@ -12,12 +12,6 @@ clear
 
 ### Applications ===============================================================
 
-## Remove ----------------------------------------------------------------------
-
-#appremove 'Rhythmbox'               'rhythmbox thythmbox-data rhythmbox-plugins'
-#appremove 'Shotwell'                'shotwell shotwell-common'
-#appremove 'Video'                   'totem totem-common totem-mozilla totem-plugins'
-
 ## Adding PPA`s ----------------------------------------------------------------
 
 #ppaadd  'Ubuntu Make'               'ubuntu-desktop'            'ubuntu-make'
@@ -29,21 +23,24 @@ appupdate
 
 ## Install ---------------------------------------------------------------------
 
-appinstall 'Build tools'            'build-essential astyle'
+appinstall 'Build tools'            'build-essential astyle unifdef'
 appinstall 'Multilib tools'         'gcc-multilib g++-multilib'
-appinstall 'Static analysis tools'  'cppcheck'
+appinstall 'Static analysis tools'  'cppcheck cppcheck-gui'
 appinstall 'Dynamic analysis tools' 'valgrind'
 
 appinstall 'X11 sdk'                'libx11-dev'
 
 appinstall 'OpenGL sdk'             'freeglut3 freeglut3-dev libglew1.10 libglew-dbg libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev'
 
-appinstall 'Qt SDK'                 'qml qtbase5-dev libqt5svg5 qtdeclarative5-dev qt5-doc'
+appinstall 'Qt SDK'                 'qml qtbase5-dev qtdeclarative5-dev qt5-doc'
+appinstall 'Qt Libs'                'libqt5svg5 libqt5webkit5-dev'
 appinstall 'Qt IDE'                 'qtcreator'
 
 appinstall 'GTK+ SDK'               'libgtk-3-dev libgtkmm-3.0-dev libtool libtool-bin'
 appinstall 'GTK+ Libs'              'libgtksourceview-3.0-dev libgtksourceview-3.0-1 libgtksourceviewmm-3.0-0v5 libgtksourceview-3.0-dev libpeas-1.0-0 libpeas-dev libgit2-glib-1.0-dev libgit2-glib-1.0-0'
 appinstall 'GTK+ IDE'               'anjuta glade'
+
+appinstall 'GNOME IDE'              'gnome-builder'
 
 appinstall 'Doxygen'                'doxygen graphviz'
 
