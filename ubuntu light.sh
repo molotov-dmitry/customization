@@ -22,6 +22,22 @@ else
     exit 1
 fi
 
+### Check UCK is installed =====================================================
+
+title 'Checking UCK is installed'
+
+if ispkginstalled 'uck'
+then
+    msgdone
+else
+    msgwarn '[not installed]'
+
+    if ! appinstall 'UCK' 'uck'
+    then
+        exit 2
+    fi
+fi
+
 ### Preparing ISO ==============================================================
 
 iso_src="$1"

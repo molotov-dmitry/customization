@@ -58,6 +58,8 @@ appremove 'Transmission'            'transmission-common transmission-gtk'
 silentsudo 'Enabling universe source' add-apt-repository universe
 silentsudo 'Enabling multiverse source' add-apt-repository multiverse
 
+silentsudo 'Accepting EULA license' sh -c 'echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections'
+
 ## Adding PPA`s ----------------------------------------------------------------
 
 ppaadd  'Numix Project'             'numix'
@@ -71,10 +73,24 @@ appupgrade
 
 ## Install ---------------------------------------------------------------------
 
-appinstall 'Restricted extras'		'ubuntu-restricted-extras'
-appinstall 'Archiver'				'p7zip-full p7zip-rar unrar'
+## Themes  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+appinstall 'Numix theme'            'numix-icon-theme-circle numix-gtk-theme'
+appinstall 'Breeze theme'           'breeze-cursor-theme breeze-icon-theme'
+appinstall 'Oxygen cursors'         'oxygen-cursor-theme oxygen-cursor-theme-extra'
+appinstall 'Elementary theme'       'elementary-icon-theme elementary-theme elementary-wallpapers'
+
+## Fonts - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+#appinstall 'Droid fonts'            'fonts-droid-fallback'
+appinstall 'MS TTF core fonts'      'ttf-mscorefonts-installer'
+appinstall 'Noto fonts'             'fonts-noto'
+
+## Internet  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 appinstall 'Chromium'               'chromium-browser chromium-browser-l10n'
+
+### VCS  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 appinstall 'VCS'                    'git subversion'
 
@@ -83,15 +99,11 @@ then
     appinstall 'RabbitVCS'          'rabbitvcs-core rabbitvcs-nautilus'
 fi
 
-appinstall 'Numix theme'            'numix-icon-theme-circle numix-gtk-theme'
-appinstall 'Breeze theme'           'breeze-icon-theme breeze-cursor-theme'
-appinstall 'Oxygen cursors'         'oxygen-cursor-theme oxygen-cursor-theme-extra'
-appinstall 'Libreoffice icons'      'libreoffice-style-sifr'
-appinstall 'Elementary theme'       'elementary-icon-theme elementary-theme elementary-wallpapers'
+## Other - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+appinstall 'Restricted extras'		'ubuntu-restricted-extras'
+appinstall '7-zip'                  'p7zip-rar p7zip-full'
 appinstall 'ibus-gtk'               'ibus-gtk'
-
-appinstall 'Noto fonts'             'fonts-noto'
 
 ## Remove unused ---------------------------------------------------------------
 

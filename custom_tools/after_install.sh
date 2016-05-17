@@ -43,7 +43,6 @@ gsettings set org.gnome.desktop.interface icon-theme "${icon_theme}"
 
 ## Cursor theme ----------------------------------------------------------------
 
-#cursor_theme='oxy-white'
 cursor_theme='breeze_cursors'
 
 gsettings set org.gnome.desktop.interface cursor-theme "${cursor_theme}"
@@ -161,6 +160,16 @@ echo '--convert-tabs'           >> "${HOME}/.astylerc"
 echo '--close-templates'        >> "${HOME}/.astylerc"
 echo '--max-code-length=80'     >> "${HOME}/.astylerc"
 echo '--break-after-logical'    >> "${HOME}/.astylerc"
+
+## LibreOffice -----------------------------------------------------------------
+
+mkdir -p "${HOME}/.config/libreoffice/4/user/config/soffice.cfg/modules/swriter/toolbar"
+cp -f "${ROOT_PATH}/files/libreoffice/writer/standardbar.xml" "${HOME}/.config/libreoffice/4/user/config/soffice.cfg/modules/swriter/toolbar/"
+cp -f "${ROOT_PATH}/files/libreoffice/writer/textobjectbar.xml" "${HOME}/.config/libreoffice/4/user/config/soffice.cfg/modules/swriter/toolbar/"
+
+mkdir -p "${HOME}/.config/libreoffice/4/user/config/soffice.cfg/modules/scalc/toolbar"
+cp -f "${ROOT_PATH}/files/libreoffice/calc/standardbar.xml" "${HOME}/.config/libreoffice/4/user/config/soffice.cfg/modules/scalc/toolbar/"
+cp -f "${ROOT_PATH}/files/libreoffice/calc/formatobjectbar.xml" "${HOME}/.config/libreoffice/4/user/config/soffice.cfg/modules/scalc/toolbar/"
 
 ## -----------------------------------------------------------------------------
 
