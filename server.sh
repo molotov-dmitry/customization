@@ -10,11 +10,53 @@ sudo echo -n
 clear
 clear
 
+### Test internet connection ===================================================
+
+title 'testing internet connection'
+
+if conntest
+then
+    msgdone
+else
+    msgfail
+    exit 1
+fi
+
+### Fix directory permissions ==================================================
+
 fixpermissions '/media/documents'
 fixpermissions '/media/windows'
 fixpermissions '/media/something'
 
-msgfail
-msgwarn
-msginfo
+### Applications ===============================================================
+
+## Updating --------------------------------------------------------------------
+
+appupdate
+appupgrade
+
+## Install ---------------------------------------------------------------------
+
+appinstall 'MiniDLNA'               'minidlna'
+
+### Customization ==============================================================
+
+title 'Customization'
+
+## -----------------------------------------------------------------------------
+
 msgdone
+
+### Application customization ==================================================
+
+title 'Configuring applications'
+
+## MiniDLNA --------------------------------------------------------------------
+
+sudo cp -f "${ROOT_PATH}/files/minidlna/minidlna.conf" "/etc/"
+
+## -----------------------------------------------------------------------------
+
+msgdone
+
+
