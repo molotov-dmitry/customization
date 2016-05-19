@@ -39,13 +39,13 @@ appupgrade
 
 appinstall 'MiniDLNA'               'minidlna'
 
-### Customization ==============================================================
+### Configuration ==============================================================
 
-title 'Customization'
+## Inotify fix for MiniDLNA ----------------------------------------------------
+
+silentsudo 'Inotyfy max watchs fix' bash -c 'echo -e "# Increase inotify max watchs per user for local minidlna\nfs.inotify.max_user_watches = 100000" > /etc/sysctl.d/90-inotify.conf'
 
 ## -----------------------------------------------------------------------------
-
-msgdone
 
 ### Application customization ==================================================
 
