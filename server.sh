@@ -38,25 +38,30 @@ appupgrade
 ## Install ---------------------------------------------------------------------
 
 appinstall 'MiniDLNA'               'minidlna'
+appinstall 'Transmission'           'transmission-daemon' 
 
 ### Configuration ==============================================================
 
 ## Inotify fix for MiniDLNA ----------------------------------------------------
 
-silentsudo 'Inotyfy max watchs fix' bash -c 'echo -e "# Increase inotify max watchs per user for local minidlna\nfs.inotify.max_user_watches = 100000" > /etc/sysctl.d/90-inotify.conf'
+#silentsudo 'Inotyfy max watchs fix' bash -c 'echo -e "# Increase inotify max watchs per user for local minidlna\nfs.inotify.max_user_watches = 100000" > /etc/sysctl.d/90-inotify.conf'
+#silentsudo 'Inotify max watchs fix' sysctl fs.inotify.max_user_watches=100000
 
 ## -----------------------------------------------------------------------------
 
-### Application customization ==================================================
-
-title 'Configuring applications'
+### Application configuration ==================================================
 
 ## MiniDLNA --------------------------------------------------------------------
 
-sudo cp -f "${ROOT_PATH}/files/minidlna/minidlna.conf" "/etc/"
+#silentsudo 'Stopping MiniDLNA'      service minidlna stop
+#silentsudo 'Copying MiniDLNA config' sudo cp -f "${ROOT_PATH}/files/minidlna/minidlna.conf" "/etc/"
+#silentsudo 'Starting MiniDLNA'      service minidlna start
 
-## -----------------------------------------------------------------------------
+## Transmission ----------------------------------------------------------------
 
-msgdone
+silentsudo 'Stopping Transmission' service transmission-daemon stop
+silentsudo 'Creating dir for Transmission config' sudo mkdir -p "/etc/transmission-daemon"
+silentsudo 'Copying Transmission config' sudo cp -f "${ROOT_PATH}/files/transmission/settings.json" "/etc/transmission-daemon/"
+silentsudo 'Starting Transmission' service transmission-daemon start
 
 
