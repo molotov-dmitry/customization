@@ -242,6 +242,22 @@ function appupgrade()
     fi
 }
 
+function appdistupgrade()
+{
+    title 'Upgrading distributive'
+
+    sudo apt-get dist-upgrade --yes --force-yes >/dev/null 2>&1
+
+    if [[ $? -eq 0 ]]
+    then
+        msgdone
+        return 0
+    else
+        msgfail
+        return 1
+    fi
+}
+
 ### PPA functions ==============================================================
 
 function isppaadded()
@@ -261,6 +277,56 @@ function isppaadded()
     return 0
 }
 
+function debian_ppaadd()
+{
+    reponame="$1"
+    author="$2"
+    repo="$3"
+
+    ppapage=$(wget -q -O - "https://launchpad.net/~${author}/+archive/ubuntu/${repo}")
+
+    if [[ -z "${ppapage}" ]]
+    then
+        return 1
+    fi
+
+    recvkey=$(echo "${ppapage}" | grep '<code>' | sed 's/.*<code>//' | sed 's/<\/code>.*//' | cut -d '/' -f 2)
+
+    if [[ -z "${recvkey}" ]]
+    then
+        return 2
+    fi
+
+    links=$(echo "${ppapage}" | grep -B1 'YOUR_UBUNTU_VERSION' | grep '^deb' | sed 's/<\/a>.*//' | sed 's/<.*>//')
+
+    if [[ -z "${links}" ]]
+    then
+        return 3
+    fi
+
+    version=$(echo "${ppapage}" | grep '<option' | grep '(' | sed -n 2p | cut -d '"' -f 2)
+
+    if [[ -z "${version}" ]]
+    then
+        return 4
+    fi
+
+    keyserver=$(echo "${ppapage}" | grep -A2 'Signing key' | grep 'http' | cut -d '"' -f 2 | cut -d ':' -f 2 | cut -d '/' -f 3)
+
+    sudo apt-key adv --keyserver $keyserver --recv $recvkey >/dev/null 2>&1
+
+    if [[ $? -ne 0 ]]
+    then
+        return 1
+    fi
+
+    sourceslist="$(echo "${links}" | sed "s/$/ ${version} main/")"
+
+    echo "${sourceslist}" | sudo tee "/etc/apt/sources.list.d/${author}-${repo}-${version}.list" >/dev/null 2>&1
+
+    return $?
+}
+
 function ppaadd()
 {
     reponame="$1"
@@ -277,7 +343,14 @@ function ppaadd()
     if ! isppaadded "${author}" "${repo}"
     then
 
-        sudo add-apt-repository --yes ppa:${author}/${repo} >/dev/null 2>&1
+        if [[ "$(lsb_release -si)" == "Ubuntu" ]]
+        then
+            sudo add-apt-repository --yes ppa:${author}/${repo} >/dev/null 2>&1
+
+        elif [[ "$(lsb_release -si)" == "Debian" ]]
+        then
+            debian_ppaadd "${reponame}" "${author}" "${repo}"
+        fi
 
         if [[ $? -eq 0 ]]
         then
@@ -290,6 +363,45 @@ function ppaadd()
     else
         msgwarn '[already added]'
         return 0
+    fi
+}
+
+function changerelease()
+{
+    release="$1"
+    current_release=$(cat /etc/apt/sources.list | grep '^deb' | cut -d ' ' -f 3 | grep -v updates | grep -v 'backports' | grep -v 'security' | head -n1)
+
+    if [[ -z "${release}" ]]
+    then
+        title 'Changing release'
+        msgfail
+        return 1
+    fi
+
+    if [[ -z "${current_release}" ]]
+    then
+        title 'Changing release'
+        msgfail
+        return 2
+    fi
+
+    silentsudo "Changing release '${current_release}' to '${release}'" sed -i "s/${current_release}/${release}/g" /etc/apt/sources.list
+
+    return $?
+}
+
+function repoaddnonfree()
+{
+    if [[ "$(lsb_release -si)" == "Ubuntu" ]]
+    then
+        silentsudo 'Enabling universe source'   add-apt-repository universe
+        silentsudo 'Enabling multiverse source' add-apt-repository multiverse
+
+    elif [[ "$(lsb_release -si)" == "Debian" ]]
+    then
+        silentsudo 'Clear sources.list'         sed -i 's/ contrib//g;s/ non-free//g' /etc/apt/sources.list
+        silentsudo 'Enabling contrib/non-free'  sed -i 's/main[  ]*$/main contrib non-free/g' /etc/apt/sources.list
+
     fi
 }
 
@@ -450,7 +562,8 @@ function fixpermissions()
         fi
     ;;
     "ext4")
-        silentsudo '' chmod ${USER}:${USER} "${mountpoint}"
+        silentsudo '' chown -R ${USER}:${USER} "${mountpoint}"
+        silentsudo '' chmod -R a=rwx "${mountpoint}"
 
         if [[ $? -eq 0 ]]
         then
