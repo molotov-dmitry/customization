@@ -25,12 +25,13 @@ fi
 ### Creating directories for distrib ===========================================
 
 silentsudo 'Creating Distrib directory' mkdir -p /media/documents/Distrib
-silentsudo 'Creating Books directory' mkdir -p /media/documents/Books
+silentsudo 'Creating Books directory'   mkdir -p /media/documents/Books
+silentsudo 'Creating Archive directory' mkdir -p /media/documents/Archive
+silentsudo 'Creating incomplete direcrory' mkdir -p /media/documents/Downloads/Incomplete
 
 ### Fix directory permissions ==================================================
 
 fixpermissions '/media/documents'
-fixpermissions '/media/windows'
 
 ### Applications ===============================================================
 
@@ -45,6 +46,7 @@ appinstall 'MiniDLNA'               'minidlna'
 appinstall 'Transmission'           'transmission-daemon'
 appinstall 'Samba'                  'samba'
 appinstall 'Open SSH'               'openssh-server'
+appinstall 'EiskaltDC++'            'eiskaltdcpp-daemon'
 
 ### Configuration ==============================================================
 
@@ -66,14 +68,25 @@ silentsudo 'Starting MiniDLNA'      service minidlna start
 ## Transmission ----------------------------------------------------------------
 
 silentsudo 'Stopping Transmission'  service transmission-daemon stop
-silentsudo 'Creating dir for Transmission config' mkdir -p '/etc/transmission-daemon'
+silentsudo 'Creating Transmission config dir' mkdir -p '/etc/transmission-daemon'
 silentsudo 'Configuring Transmission' cp -f "${ROOT_PATH}/files/transmission/settings.json" '/etc/transmission-daemon/'
 silentsudo 'Starting Transmission'  service transmission-daemon start
 
 ## Samba -----------------------------------------------------------------------
 
 silentsudo 'Stopping Samba'         service smbd stop
-silentsudo 'Creating dir for Samba config' mkdir -p '/etc/samba'
+silentsudo 'Creating Samba config dir' mkdir -p '/etc/samba'
 silentsudo 'Configuring Samba'      cp -f "${ROOT_PATH}/files/samba/smb.conf" '/etc/samba/'
 silentsudo 'Starting Samba'         service smbd start
+
+## EiskaltDC++ -----------------------------------------------------------------
+
+silentsudo 'Stopping EiskaltDC++'           service eiskaltdcpp stop
+silentsudo 'Enabling EiskaltDC++ service'   systemctl disable eiskaltdcpp
+silentsudo 'Creating EiskaltDC++ config dir' mkdir -p '/etc/eiskaltdcpp'
+silentsudo 'Configuring EiskaltDC++'        cp -f "${ROOT_PATH}/files/eiskaltdcpp/DCPlusPlus.xml" '/etc/eiskaltdcpp/'
+silentsudo 'Configuring EiskaltDC++ Hubs'   cp -f "${ROOT_PATH}/files/eiskaltdcpp/Favorites.xml" '/etc/eiskaltdcpp/'
+silentsudo 'Creating EiskaltDC++ service'   cp -f "${ROOT_PATH}/files/eiskaltdcpp/eiskaltdcpp.service" '/etc/systemd/system/'
+silentsudo 'Enabling EiskaltDC++ service'   systemctl enable eiskaltdcpp
+silentsudo 'Starting EiskaltDC++'           service eiskaltdcpp start
 

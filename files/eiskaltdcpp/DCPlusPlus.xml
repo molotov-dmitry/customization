@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<DCPlusPlus>
+    <Settings>
+        <ConfigVersion type="string">2.2.9</ConfigVersion>
+
+        <Nick type="string">AsusHomeEiskalt</Nick>
+        <DownloadDirectory type="string">/media/documents/Downloads/</DownloadDirectory>
+        <TempDownloadDirectory type="string">/media/documents/Downloads/Incomplete/</TempDownloadDirectory>
+
+        <IncomingConnections type="int">3</IncomingConnections>
+
+        <AutoSearch type="int">1</AutoSearch>
+        <AutoSearchTime type="int">2</AutoSearchTime>
+        <AutoSearchAutoMatch type="int">0</AutoSearchAutoMatch>
+        <ReportFoundAlternates type="int">1</ReportFoundAlternates>
+
+        <IgnoreHubPms type="int">1</IgnoreHubPms>
+        <IgnoreBotPms type="int">1</IgnoreBotPms>
+
+        <FastHash type="int">0</FastHash>
+
+        <ReconnectDelay type="int">15</ReconnectDelay>
+    </Settings>
+    <SearchTypes>
+        <SearchType Id="7">iso;mdf;mds;nrg;vcd;bwt;ccd;cdi;pdi;cue;isz;img;vc4</SearchType>
+        <SearchType Id="6">3gp;asf;asx;avi;divx;flv;mkv;mov;mp4;mpeg;mpg;ogm;pxp;qt;rm;rmvb;swf;vob;webm;wmv</SearchType>
+        <SearchType Id="5">bmp;cdr;eps;gif;ico;img;jpeg;jpg;png;ps;psd;sfw;tga;tif;webp</SearchType>
+        <SearchType Id="1">ape;flac;m4a;mid;mp3;mpc;ogg;ra;wav;wma</SearchType>
+        <SearchType Id="2">7z;ace;arj;bz2;gz;lha;lzh;rar;tar;z;zip</SearchType>
+        <SearchType Id="3">doc;docx;htm;html;nfo;odf;odp;ods;odt;pdf;ppt;pptx;rtf;txt;xls;xlsx;xml;xps</SearchType>
+        <SearchType Id="4">app;bat;cmd;com;dll;exe;jar;msi;ps1;vbs;wsf</SearchType>
+    </SearchTypes>
+    <Share>
+        <Directory Virtual="Video">/media/documents/Video/</Directory>
+        <Directory Virtual="Music">/media/documents/Music/</Directory>
+    </Share>
+</DCPlusPlus>
