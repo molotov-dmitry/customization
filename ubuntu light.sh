@@ -10,6 +10,18 @@ sudo echo -n
 clear
 clear
 
+#### functions =================================================================
+
+function isdebain
+{
+    if [[ "$(basename "${iso_src}")" == debian* ]]
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
 ### Test internet connection ===================================================
 
 title 'testing internet connection'
@@ -55,6 +67,12 @@ read
 silentsudo 'Removing old CD'                rm -rf "${remaster_dir}"
 
 silentsudo 'Unpacking iso'                  uck-remaster-unpack-iso "${iso_src}"
+
+if isdebain
+then
+    silentsudo '[DEB] Moving squashfs'      mv "${iso_dir}/live" "${iso_dir}/casper"
+fi
+
 silentsudo 'Unpacking rootfs'               uck-remaster-unpack-rootfs
 silentsudo 'Removing Win32 files'           uck-remaster-remove-win32-files
 
@@ -69,6 +87,12 @@ silentsudo 'Copying create script'          cp -f "${ROOT_PATH}/light_tools/crea
 silentsudo 'Copying net config'             cp -f "${ROOT_PATH}/light_files/interfaces" "${rootfs_dir}/etc/network/interfaces"
 silentsudo 'Copying init script'            cp -f "${ROOT_PATH}/light_files/rc.local" "${rootfs_dir}/etc/rc.local"
 
+if isdebain
+then
+    silentsudo '[DEB] removing mtab'        rm "${rootfs_dir}/etc/mtab"
+fi
+
+sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" echo -n
 sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" bash /tools/create.sh
 
 silentsudo 'Removing create script'         rm -rf "${rootfs_dir}/tools/create.sh" "${rootfs_dir}/tools/functions.sh"
@@ -81,5 +105,11 @@ silentsudo 'Copying after install script'   cp -f "${ROOT_PATH}/light_tools/afte
 silentsudo 'Changing tools mode'            chmod -R 777 "${rootfs_dir}/tools"
 
 silentsudo 'Packing rootfs'                 uck-remaster-pack-rootfs -c
-silentsudo 'Packing iso'                    uck-remaster-pack-iso ubuntu-15.10-light-amd64.iso -h -g -d "Ubuntu 15.10"
+
+if isdebain
+then
+    silentsudo '[DEB] Moving squashfs back' mv "${iso_dir}/casper" "${iso_dir}/live"
+fi
+
+silentsudo 'Packing iso'                    uck-remaster-pack-iso "$(basename "${iso_src}")" -h -g -d "Custom"
 
