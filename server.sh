@@ -24,10 +24,10 @@ fi
 
 ### Creating directories for distrib ===========================================
 
-silentsudo 'Creating Distrib directory' mkdir -p /media/documents/Distrib
-silentsudo 'Creating Books directory'   mkdir -p /media/documents/Books
-silentsudo 'Creating Archive directory' mkdir -p /media/documents/Archive
-silentsudo 'Creating incomplete direcrory' mkdir -p /media/documents/Downloads/Incomplete
+silentsudo 'Creating Distrib directory' mkdir -p /media/documents/Distrib -m 0777
+silentsudo 'Creating Books directory'   mkdir -p /media/documents/Books -m 0777
+silentsudo 'Creating Archive directory' mkdir -p /media/documents/Archive -m 0777
+silentsudo 'Creating incomplete direcrory' mkdir -p /media/documents/Downloads/Incomplete -m 0777
 
 ### Fix directory permissions ==================================================
 
