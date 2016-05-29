@@ -6,6 +6,8 @@ After=network.target
 Type=forking
 User=root
 Group=plugdev
+Restart=always
+RestartSec=3
 
 ExecStart=/usr/bin/eiskaltdcpp-daemon --daemon --ip=0.0.0.0 --confdir=/etc/eiskaltdcpp
 
