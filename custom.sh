@@ -45,7 +45,7 @@ function checkfilemime()
     else
         msgfail "[not an ${filetype}]"
         exit 1
-    fi 
+    fi
 }
 
 ### Test internet connection ===================================================
@@ -145,7 +145,11 @@ silentsudo 'Copying create script'          cp -f "${ROOT_PATH}/custom/tools/${c
 if test -f "${ROOT_PATH}/custom/tools/${config}/custom.sh"
 then
     . "${ROOT_PATH}/custom/tools/${config}/custom.sh"
+else
+   msgwarn '[no custom script]'
 fi
+
+read
 
 ## Executing create script -----------------------------------------------------
 
