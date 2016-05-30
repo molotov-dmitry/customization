@@ -50,32 +50,32 @@ silentsudo 'Inotify max watchs fix' sysctl fs.inotify.max_user_watches=100000
 
 ## MiniDLNA --------------------------------------------------------------------
 
-silentsudo 'Stopping MiniDLNA'      service minidlna stop
+#silentsudo 'Stopping MiniDLNA'      service minidlna stop
 silentsudo 'Configuring MiniDLNA'   sudo cp -f "${ROOT_PATH}/files/minidlna/minidlna.conf" '/etc/'
-silentsudo 'Starting MiniDLNA'      service minidlna start
+#silentsudo 'Starting MiniDLNA'      service minidlna start
 
 ## Transmission ----------------------------------------------------------------
 
-silentsudo 'Stopping Transmission'  service transmission-daemon stop
+#silentsudo 'Stopping Transmission'  service transmission-daemon stop
 silentsudo 'Creating Transmission config dir' mkdir -p '/etc/transmission-daemon'
 silentsudo 'Configuring Transmission' cp -f "${ROOT_PATH}/files/transmission/settings.json" '/etc/transmission-daemon/'
-silentsudo 'Starting Transmission'  service transmission-daemon start
+#silentsudo 'Starting Transmission'  service transmission-daemon start
 
 ## Samba -----------------------------------------------------------------------
 
-silentsudo 'Stopping Samba'         service smbd stop
+#silentsudo 'Stopping Samba'         service smbd stop
 silentsudo 'Creating Samba config dir' mkdir -p '/etc/samba'
 silentsudo 'Configuring Samba'      cp -f "${ROOT_PATH}/files/samba/smb.conf" '/etc/samba/'
-silentsudo 'Starting Samba'         service smbd start
+#silentsudo 'Starting Samba'         service smbd start
 
 ## EiskaltDC++ -----------------------------------------------------------------
 
-silentsudo 'Stopping EiskaltDC++'           service eiskaltdcpp stop
-silentsudo 'Enabling EiskaltDC++ service'   systemctl disable eiskaltdcpp
+#silentsudo 'Stopping EiskaltDC++'           service eiskaltdcpp stop
+#silentsudo 'Disabling EiskaltDC++ service'  systemctl disable eiskaltdcpp
 silentsudo 'Creating EiskaltDC++ config dir' mkdir -p '/etc/eiskaltdcpp'
 silentsudo 'Configuring EiskaltDC++'        cp -f "${ROOT_PATH}/files/eiskaltdcpp/DCPlusPlus.xml" '/etc/eiskaltdcpp/'
 silentsudo 'Configuring EiskaltDC++ Hubs'   cp -f "${ROOT_PATH}/files/eiskaltdcpp/Favorites.xml" '/etc/eiskaltdcpp/'
 silentsudo 'Creating EiskaltDC++ service'   cp -f "${ROOT_PATH}/files/eiskaltdcpp/eiskaltdcpp.service" '/etc/systemd/system/'
-silentsudo 'Enabling EiskaltDC++ service'   systemctl enable eiskaltdcpp
-silentsudo 'Starting EiskaltDC++'           service eiskaltdcpp start
+silentsudo 'Enabling EiskaltDC++ service'   ln -s /etc/systemd/system/network-online.target.wants/eiskaltdcpp.service /etc/systemd/system/eiskaltdcpp.service
+#silentsudo 'Starting EiskaltDC++'           service eiskaltdcpp start
 
