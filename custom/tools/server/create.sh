@@ -76,6 +76,7 @@ silentsudo 'Creating EiskaltDC++ config dir' mkdir -p '/etc/eiskaltdcpp'
 silentsudo 'Configuring EiskaltDC++'        cp -f "${ROOT_PATH}/files/eiskaltdcpp/DCPlusPlus.xml" '/etc/eiskaltdcpp/'
 silentsudo 'Configuring EiskaltDC++ Hubs'   cp -f "${ROOT_PATH}/files/eiskaltdcpp/Favorites.xml" '/etc/eiskaltdcpp/'
 silentsudo 'Creating EiskaltDC++ service'   cp -f "${ROOT_PATH}/files/eiskaltdcpp/eiskaltdcpp.service" '/etc/systemd/system/'
-silentsudo 'Enabling EiskaltDC++ service'   ln -s /etc/systemd/system/network-online.target.wants/eiskaltdcpp.service /etc/systemd/system/eiskaltdcpp.service
+silentsudo 'Enabling Network-online target' mkdir -p /etc/systemd/system/network-online.target.wants
+silentsudo 'Enabling EiskaltDC++ service'   ln -s /etc/systemd/system/eiskaltdcpp.service /etc/systemd/system/network-online.target.wants/eiskaltdcpp.service
 #silentsudo 'Starting EiskaltDC++'           service eiskaltdcpp start
 
