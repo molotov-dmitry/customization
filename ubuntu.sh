@@ -79,6 +79,7 @@ appinstall 'Numix theme'            'numix-icon-theme-circle numix-gtk-theme'
 appinstall 'Breeze theme'           'breeze-cursor-theme breeze-icon-theme'
 appinstall 'Oxygen cursors'         'oxygen-cursor-theme oxygen-cursor-theme-extra'
 appinstall 'Elementary theme'       'elementary-icon-theme elementary-theme elementary-wallpapers'
+debinstall 'Arc theme'              'arc-theme' "${ROOT_PATH}/files/arc/arc-theme_1465131682.3095952_all.deb"
 
 ## Fonts - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -133,17 +134,28 @@ silentsudo '' update-alternatives --set x-cursor-theme "/etc/X11/cursors/${curso
 
 ## Gtk theme -------------------------------------------------------------------
 
-theme_name='Numix'
+if [[ "$(desktoptype)" == 'GNOME' ]]
+then
+    theme_name='Arc'
+else
+    theme_name='Numix'
+fi
 
-gsettings set org.gnome.desktop.interface gtk-theme "${theme_name}"
-gsettings set org.gnome.desktop.wm.preferences theme "${theme_name}"
+if [[ -z "${theme_name}" ]]
+then
+    msgfail '[Theme name not set]'
+    exit 1
+fi
+
+gsettings set org.gnome.desktop.interface gtk-theme     "${theme_name}"
+gsettings set org.gnome.desktop.wm.preferences theme    "${theme_name}"
 
 ## Fonts -----------------------------------------------------------------------
 
-gsettings set org.gnome.desktop.interface font-name 'Ubuntu 10'
-gsettings set org.gnome.desktop.interface document-font-name 'Noto Serif 10'
-gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 11'
-gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Ubuntu 10'
+gsettings set org.gnome.desktop.interface font-name             'Ubuntu 10'
+gsettings set org.gnome.desktop.interface document-font-name    'Noto Serif 10'
+gsettings set org.gnome.desktop.interface monospace-font-name   'Ubuntu Mono 11'
+gsettings set org.gnome.desktop.wm.preferences titlebar-font    'Ubuntu 10'
 
 ## Wallpaper -------------------------------------------------------------------
 
@@ -160,7 +172,7 @@ launcheradd 'gnome-terminal'
 
 ## Keyboard --------------------------------------------------------------------
 
-gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['<Shift>Alt_L']"
+gsettings set org.gnome.desktop.wm.keybindings switch-input-source          "['<Shift>Alt_L']"
 gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "['<Primary><Shift>Alt_L']"
 
 ### Application customization ==================================================
