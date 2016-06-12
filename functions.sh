@@ -348,9 +348,7 @@ function ppaadd()
         if [[ "$(lsb_release -si)" == "Ubuntu" ]]
         then
             sudo add-apt-repository --yes ppa:${author}/${repo} >/dev/null 2>&1
-
-        elif [[ "$(lsb_release -si)" == "Debian" ]]
-        then
+		else
             debian_ppaadd "${reponame}" "${author}" "${repo}"
         fi
 
