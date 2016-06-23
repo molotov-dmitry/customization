@@ -62,14 +62,15 @@ silentsudo 'Accepting EULA license' sh -c 'echo ttf-mscorefonts-installer msttco
 
 ## Adding PPA`s ----------------------------------------------------------------
 
-ppaadd  'Numix Project'             'numix'
 ppaadd  'LibreOffice'               'libreoffice'
+ppaadd  'Numix Project'             'numix'
 ppaadd  'Elementary OS'             'elementary-os'             'daily'
+ppaadd  'Paper theme'               'snwh'                      'pulp'
 
 ## Updating --------------------------------------------------------------------
 
 appupdate
-appupgrade
+#appupgrade
 
 ## Install ---------------------------------------------------------------------
 
@@ -79,6 +80,7 @@ appinstall 'Numix theme'            'numix-icon-theme-circle numix-gtk-theme'
 appinstall 'Breeze theme'           'breeze-cursor-theme breeze-icon-theme'
 appinstall 'Oxygen cursors'         'oxygen-cursor-theme oxygen-cursor-theme-extra'
 appinstall 'Elementary theme'       'elementary-icon-theme elementary-theme elementary-wallpapers'
+appinstall 'Paper theme'            'paper-gtk-theme paper-icon-theme'
 debinstall 'Arc theme'              'arc-theme' "${ROOT_PATH}/files/arc/arc-theme_1465131682.3095952_all.deb"
 
 ## Fonts - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -136,7 +138,8 @@ silentsudo '' update-alternatives --set x-cursor-theme "/etc/X11/cursors/${curso
 
 if [[ "$(desktoptype)" == 'GNOME' ]]
 then
-    theme_name='Arc'
+    theme_name='Paper'
+    #theme_name='Arc'
 else
     theme_name='Numix'
 fi
