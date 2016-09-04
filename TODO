@@ -2,5 +2,6 @@ Add 'disable bold' to terminal configuration;
 Add network configuration to custom/server configuration;
 Add 'disable word wrap' to gedit configuration;
 Add mc and tree programs;
+Add firstboot.sh to rc.local init script to custom configuration;
 
 DONE: ==========================================================================

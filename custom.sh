@@ -140,6 +140,8 @@ silentsudo 'Copying folders script'         cp -f "${ROOT_PATH}/folders.sh"   "$
 
 silentsudo 'Copying create script'          cp -f "${ROOT_PATH}/custom/tools/${config}/create.sh" "${rootfs_dir}/tools/"
 
+silentsudo 'Copying usersboot script'       cp -f "${ROOT_PATH}/usersboot.sh" "${rootfs_dir}/tools/"
+
 ## Executing custom config script ----------------------------------------------
 
 if test -f "${ROOT_PATH}/custom/tools/${config}/custom.sh"
@@ -158,9 +160,17 @@ sudo                                        uck-remaster-chroot-rootfs "${remast
 
 silentsudo 'Removing create script'         rm -rf "${rootfs_dir}/tools/create.sh"
 
+## Copying first boot script ---------------------------------------------------
+
+silentsudo 'Copying first boot script'      cp -f "${ROOT_PATH}/custom/tools/${config}/firstboot.sh" "${rootfs_dir}/tools/"
+
 ## Copying user script ---------------------------------------------------------
 
 silentsudo 'Copying user script'            cp -f "${ROOT_PATH}/custom/tools/${config}/user.sh" "${rootfs_dir}/tools/"
+
+## Autostarting boot scripts ---------------------------------------------------
+
+silentsudo 'Adding boot script autostart'   sed -i '$iif [[ ! islive && ! -e /tools/.firstboot ]]\nthen\n    bash /tools/firstboot.sh\n    touch /tools/.firstboot\nfi\n\nbash /tools/usersboot.sh\n' /etc/rc.local
 
 ## Finalizing customization ----------------------------------------------------
 
@@ -175,5 +185,5 @@ then
     silentsudo '[DEB] Moving squashfs back' mv "${iso_dir}/casper" "${iso_dir}/live"
 fi
 
-silentsudo 'Packing iso'                    uck-remaster-pack-iso "$(basename "${iso_src}")" -h -g -d "Custom"
+silentsudo 'Packing iso'                    uck-remaster-pack-iso "$(basename "${iso_src}")" -h -g -d "${config}"
 

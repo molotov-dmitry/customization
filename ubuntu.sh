@@ -186,6 +186,7 @@ gsettings set org.gnome.gedit.preferences.editor use-default-font       true
 
 gsettings set org.gnome.gedit.preferences.editor display-line-numbers   true
 gsettings set org.gnome.gedit.preferences.editor highlight-current-line true
+gsettings set org.gnome.gedit.preferences.editor bracket-matching       true
 
 gsettings set org.gnome.gedit.preferences.editor insert-spaces          true
 gsettings set org.gnome.gedit.preferences.editor tabs-size              4
@@ -196,6 +197,10 @@ gsettings set org.gnome.gedit.preferences.editor right-margin-position  80
 gsettings set org.gnome.gedit.preferences.editor syntax-highlighting    true
 
 gsettings set org.gnome.gedit.preferences.editor scheme                 'kate'
+
+gsettings set org.gnome.gedit.preferences.editor wrap-mode              'none'
+
+gsettings set org.gnome.gedit.preferences.editor display-overview-map   true
 
 gsettings set org.gnome.gedit.plugins active-plugins "['changecase', 'filebrowser', 'time', 'zeitgeistplugin', 'docinfo']"
 

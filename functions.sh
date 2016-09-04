@@ -580,3 +580,16 @@ function fixpermissions()
     ;;
     esac
 }
+
+### Live boot detection ========================================================
+
+function islive()
+{
+    if [[ -n "$(grep ' / ' /etc/mtab | grep 'cow\|aufs')" ]]
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
