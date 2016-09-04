@@ -12,7 +12,7 @@ clear
 
 #### functions =================================================================
 
-function isdebain()
+function isdebian()
 {
     if [[ "$(basename "${iso_src}")" == debian* ]]
     then
@@ -114,7 +114,7 @@ silentsudo 'Removing old CD'                rm -rf "${remaster_dir}"
 
 silentsudo 'Unpacking iso'                  uck-remaster-unpack-iso "${iso_src}"
 
-if isdebain
+if isdebian
 then
     silentsudo '[DEB] Moving squashfs'      mv "${iso_dir}/live" "${iso_dir}/casper"
 fi
@@ -124,7 +124,7 @@ silentsudo 'Removing Win32 files'           uck-remaster-remove-win32-files
 
 silentsudo 'Setting default language'       sh -c "echo ru > \"${iso_dir}\"/isolinux/lang"
 
-if isdebain
+if isdebian
 then
     silentsudo '[DEB] removing mtab'        rm "${rootfs_dir}/etc/mtab"
 fi
@@ -151,11 +151,12 @@ else
    msgwarn '[no custom script]'
 fi
 
-read
+#read
 
 ## Executing create script -----------------------------------------------------
 
-sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" echo -n
+#sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" echo -n
+sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}"
 sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" bash /tools/create.sh
 
 silentsudo 'Removing create script'         rm -rf "${rootfs_dir}/tools/create.sh"
@@ -180,10 +181,19 @@ silentsudo 'Changing tools mode'            chmod -R 777 "${rootfs_dir}/tools"
 
 silentsudo 'Packing rootfs'                 uck-remaster-pack-rootfs -c
 
-if isdebain
+if isdebian
 then
     silentsudo '[DEB] Moving squashfs back' mv "${iso_dir}/casper" "${iso_dir}/live"
 fi
+
+## Adding EFI x32 --------------------------------------------------------------
+
+if ! isdebian
+then
+    silentsudo 'Getting EFI 32 image'       wget https://github.com/jfwells/linux-asus-t100ta/raw/master/boot/bootia32.efi -O "${iso_dir}/EFI/BOOT/bootia32.efi"
+fi
+
+## Packing ISO -----------------------------------------------------------------
 
 silentsudo 'Packing iso'                    uck-remaster-pack-iso "$(basename "${iso_src}")" -h -g -d "${config}"
 
