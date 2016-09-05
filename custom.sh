@@ -144,11 +144,11 @@ silentsudo 'Copying usersboot script'       cp -f "${ROOT_PATH}/usersboot.sh" "$
 
 ## Executing custom config script ----------------------------------------------
 
-if test -f "${ROOT_PATH}/custom/tools/${config}/custom.sh"
+if test -f "${ROOT_PATH}/custom/tools/${config}/prepare.sh"
 then
-    . "${ROOT_PATH}/custom/tools/${config}/custom.sh"
+    . "${ROOT_PATH}/custom/tools/${config}/prepare.sh"
 else
-   msgwarn '[no custom script]'
+   msgwarn '[no prepare script]'
 fi
 
 #read
