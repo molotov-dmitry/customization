@@ -117,7 +117,7 @@ function packiso()
         silentsudo 'Removing old iso md5' rm -f "${res_dir}/${iso_name}.md5"
     fi
 
-    silentsudo 'Generating md5 for iso' md5sum "${res_dir}/${iso_name}" -out "${res_dir}/${iso_name}.md5"
+    silentsudo 'Generating md5 for iso' bash -c "md5sum \"${res_dir}/${iso_name}\" > \"${res_dir}/${iso_name}.md5\""
 }
 
 ### Test internet connection ===================================================
