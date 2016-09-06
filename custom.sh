@@ -55,13 +55,69 @@ function unpackiso()
     silentsudo 'Unmounting /mnt' umount /mnt
     silentsudo 'Mounting iso' mount -o loop "${isopath}" /mnt || exit 1
     silentsudo 'Creating directory for image' mkdir -p "${iso_dir}" || exit 1
-    sudo  cp -rfa /mnt/. "${iso_dir}" || exit 1
+    silentsudo 'Unpacking iso' cp -rfa /mnt/. "${iso_dir}" || exit 1
     silentsudo 'Unmounting iso' umount /mnt
 }
 
 function unpackroot()
 {
-    sudo unsquashfs -f -d "${rootfs_dir}" "${iso_dir}/casper/filesystem.squashfs" || exit 1
+    silentsudo 'Unpacking rootfs' unsquashfs -f -d "${rootfs_dir}" "${iso_dir}/casper/filesystem.squashfs" || exit 1
+}
+
+function packroot()
+{
+    silentsudo 'Updating package list' bash -c "chroot "${rootfs_dir}" dpkg-query -W --showformat='${Package} ${Version}\n' > \"${iso_dir}/casper/filesystem.manifest\""
+
+    if [[ -e "${iso_dir}/casper/manifest.diff" ]]
+    then
+        silentsudo 'Getting versions from manifest' bash -c "cat \"${iso_dir}/casper/filesystem.manifest\" | cut -d ' ' -f 1 > \"${iso_dir}/filesystem.manifest.tmp\""
+        silentsudo 'Diff manifests'                 bash -c "diff --unchanged-group-format='' \"${iso_dir}/filesystem.manifest.tmp\" \"${iso_dir}/casper/manifest.diff\" > \"${iso_dir}/filesystem.manifest-desktop.tmp\""
+        silentsudo 'Building manifest desktop file' bash -c "chroot \"${rootfs_dir}\"  dpkg-query -W --showformat='${Package} ${Version}\n' $(cat "${iso_dir}/filesystem.manifest-desktop.tmp") | egrep '.+ .+' > \"${iso_dir}/casper/filesystem.manifest-desktop\""
+        silentsudo 'Removing temp files'            bash -c "rm \"${iso_dir}/filesystem.manifest.tmp\" \"${iso_dir}/filesystem.manifest-desktop.tmp\""
+    else
+        silentsudo 'Creating desktop manifest' cp -f "${iso_dir}/casper/filesystem.manifest" "${iso_dir}/casper/filesystem.manifest-desktop"
+    fi
+
+    silentsudo 'Removing old rootfs' rm -f "${iso_dir}/casper/filesystem.squashfs"
+    silentsudo 'Packing rootfs' mksquashfs "${rootfs_dir}" "${iso_dir}/casper/filesystem.squashfs" -comp xz || exit 1
+}
+
+function packiso()
+{
+    iso_name="$1"
+    iso_description="$2"
+
+    silentsudo 'calculating md5' find "${iso_dir}/" -type f -print0 \
+        | sed 's/\x0\x0//g' \
+        | grep --null-data -v -E '/isolinux/isolinux.bin|/isolinux/boot.cat|/md5sum.txt|/.checksum.md5|/manifest.diff' \
+        | xargs -0 md5sum \
+        | sed "s/$(safestring "${iso_dir}")/\./g" || exit 1
+
+    silentsudo 'Making dir for iso' mkdir -p "${res_dir}"
+
+    if [[ -e "${res_dir}/${iso_name}" ]]
+    then
+        silentsudo 'Removing old iso' rm -f "${res_dir}/${iso_name}"
+    fi
+
+    silentsudo 'Generating iso' genisoimage -o "${res_dir}/${iso_name}" \
+        -b "isolinux/isolinux.bin" \
+        -c "isolinux/boot.cat" \
+        -p "Dmitry Sorokin" -V "${iso_description}" \
+        -no-emul-boot -boot-load-size 4 -boot-info-table \
+        -cache-inodes -r -J -l \
+        -x "${iso_dir}"/casper/manifest.diff \
+        -joliet-long \
+        "${iso_dir}" || exit 1
+
+    silentsudo 'Making iso hybrid' isohybrid "${res_dir}/${iso_name}" || exit 1
+
+    if [[ -e "${res_dir}/${iso_name}.md5" ]]
+    then
+        silentsudo 'Removing old iso md5' rm -f "${res_dir}/${iso_name}.md5"
+    fi
+
+    silentsudo 'Generating md5 for iso' md5sum "${res_dir}/${iso_name}" -out "${res_dir}/${iso_name}.md5"
 }
 
 ### Test internet connection ===================================================
@@ -100,6 +156,7 @@ config="$2"
 remaster_dir="${HOME}/tmp"
 iso_dir="${remaster_dir}/remaster-iso"
 rootfs_dir="${remaster_dir}/remaster-root"
+res_dir="{remaster_dir}/remaster-new_files"
 
 #### Checking parameters =======================================================
 
@@ -198,7 +255,8 @@ silentsudo 'Changing tools mode'            chmod -R 777 "${rootfs_dir}/tools"
 
 ## Packing image ---------------------------------------------------------------
 
-silentsudo 'Packing rootfs'                 uck-remaster-pack-rootfs -c
+#silentsudo 'Packing rootfs'                 uck-remaster-pack-rootfs -c
+packroot
 
 if isdebian
 then
@@ -214,5 +272,5 @@ fi
 
 ## Packing ISO -----------------------------------------------------------------
 
-silentsudo 'Packing iso'                    uck-remaster-pack-iso "$(basename "${iso_src}")" -h -g -d "${config}"
-
+#silentsudo 'Packing iso'                    uck-remaster-pack-iso "$(basename "${iso_src}")" -h -g -d "${config}"
+packiso "$(basename "${iso_src}")" "${config}"
