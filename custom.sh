@@ -254,7 +254,7 @@ silentsudo 'Copying user script'            cp -f "${ROOT_PATH}/custom/tools/${c
 
 ## Autostarting boot scripts ---------------------------------------------------
 
-silentsudo 'Adding boot script autostart'   sed -i '$iif [[ ! islive && ! -e /tools/.firstboot ]]\nthen\n    bash /tools/firstboot.sh\n    touch /tools/.firstboot\nfi\n\nbash /tools/usersboot.sh\n' "${rootfs_dir}/etc/rc.local"
+silentsudo 'Adding boot script autostart'   sed -i '$i. /tools/functions.sh\n\nif [[ ! islive && ! -e /tools/.firstboot ]]\nthen\n    bash /tools/firstboot.sh\n    touch /tools/.firstboot\nfi\n\nbash /tools/usersboot.sh\n' "${rootfs_dir}/etc/rc.local"
 
 ## Finalizing customization ----------------------------------------------------
 

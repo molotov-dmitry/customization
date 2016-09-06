@@ -4,10 +4,10 @@ ROOT_PATH='/tools'
 
 . "${ROOT_PATH}/functions.sh"
 
-for userinfo in $(cat /etc/passwd | grep -v nologin | grep -v /bin/false | grep -v /bin/sync | grep -v postgres | grep -v ftp)
+for userinfo in $(cat /etc/passwd | grep -v nologin | grep -v /bin/false | grep -v /bin/sync | grep -v postgres | grep -v ftp | cut -d ':' -f 1,6)
 do
-    user_name=$(echo ${userinfo} | cut -d ':' -f 1)
-    user_dir=$(echo ${userinfo} | cut -d ':' -f 6)
+    user_name=$(echo "${userinfo}" | cut -d ':' -f 1)
+    user_dir=$(echo "${userinfo}" | cut -d ':' -f 2)
 
     [[ -z "${user_name}" ]] && continue
     [[ -z "${user_dir}" ]] && continue
