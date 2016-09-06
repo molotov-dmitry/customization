@@ -48,6 +48,22 @@ function checkfilemime()
     fi
 }
 
+function unpackiso()
+{
+    isopath="$1"
+
+    silentsudo 'Unmounting /mnt' umount /mnt
+    silentsudo 'Mounting iso' mount -o loop "${isopath}" /mnt || exit 1
+    silentsudo 'Creating directory for image' mkdir -p "${iso_dir}" || exit 1
+    sudo  cp -rfa /mnt/. "${iso_dir}" || exit 1
+    silentsudo 'Unmounting iso' umount /mnt
+}
+
+function unpackroot()
+{
+    sudo unsquashfs -f -d "${rootfs_dir}" "${iso_dir}/casper/filesystem.squashfs" || exit 1
+}
+
 ### Test internet connection ===================================================
 
 title 'testing internet connection'
@@ -112,20 +128,23 @@ read
 
 silentsudo 'Removing old CD'                rm -rf "${remaster_dir}"
 
-silentsudo 'Unpacking iso'                  uck-remaster-unpack-iso "${iso_src}"
+unpackiso                                   "${iso_src}"
+#silentsudo 'Unpacking iso'                  uck-remaster-unpack-iso "${iso_src}"
 
 if isdebian
 then
     silentsudo '[DEB] Moving squashfs'      mv "${iso_dir}/live" "${iso_dir}/casper"
 fi
 
-silentsudo 'Unpacking rootfs'               uck-remaster-unpack-rootfs
+#silentsudo 'Unpacking rootfs'               uck-remaster-unpack-rootfs
+unpackroot
 silentsudo 'Removing Win32 files'           uck-remaster-remove-win32-files
 
 silentsudo 'Setting default language'       sh -c "echo ru > \"${iso_dir}\"/isolinux/lang"
 
 if isdebian
 then
+    silentsudo '[DEB] copying resolv.conf'  cp /etc/resolv.conf "${rootfs_dir}/etc/resolv.conf"
     silentsudo '[DEB] removing mtab'        rm "${rootfs_dir}/etc/mtab"
 fi
 
