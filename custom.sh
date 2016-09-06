@@ -134,7 +134,7 @@ fi
 
 ### Check UCK is installed =====================================================
 
-if ispkginstalled 'uck'
+if ! ispkginstalled 'uck'
 then
     appinstall 'UCK' 'uck' || exit 1
 fi
