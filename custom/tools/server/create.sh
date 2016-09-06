@@ -74,5 +74,5 @@ silentsudo 'Enabling EiskaltDC++ service'   ln -s /etc/systemd/system/eiskaltdcp
 
 ## FTP server ------------------------------------------------------------------
 
-silentsudo 'Configuring vsftpd'             cp -f "${ROOT_PATH}/files/vsftpd/vsfdtpd.conf" '/etc/'
+silentsudo 'Configuring vsftpd'             cp -f "${ROOT_PATH}/files/vsftpd/vsftpd.conf" '/etc/'
 
