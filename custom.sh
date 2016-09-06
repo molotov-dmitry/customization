@@ -134,18 +134,24 @@ fi
 
 ### Check UCK is installed =====================================================
 
-title 'Checking UCK is installed'
-
 if ispkginstalled 'uck'
 then
-    msgdone
-else
-    msgwarn '[not installed]'
+    appinstall 'UCK' 'uck' || exit 1
+fi
 
-    if ! appinstall 'UCK' 'uck'
-    then
-        exit 2
-    fi
+if ! ispkginstalled 'syslinux-utils'
+then
+    appinstall 'Syslinux tools' 'syslinux-utils' || exit 1
+fi
+
+if ! ispkgisnstalled 'squashfs-tools'
+then
+    appinstall 'Squashfs tools' 'squashfs-tools' || exit 1
+fi
+
+if ! ispkgisnstalled 'genisoimage'
+then
+    appinstall 'ISO tools' 'genisoimage' || exit 1
 fi
 
 ### Getting parameters =========================================================
@@ -156,7 +162,7 @@ config="$2"
 remaster_dir="${HOME}/tmp"
 iso_dir="${remaster_dir}/remaster-iso"
 rootfs_dir="${remaster_dir}/remaster-root"
-res_dir="{remaster_dir}/remaster-new_files"
+res_dir="${remaster_dir}/remaster-new-files"
 
 #### Checking parameters =======================================================
 
@@ -195,6 +201,7 @@ fi
 
 #silentsudo 'Unpacking rootfs'               uck-remaster-unpack-rootfs
 unpackroot
+
 silentsudo 'Removing Win32 files'           uck-remaster-remove-win32-files
 
 silentsudo 'Setting default language'       sh -c "echo ru > \"${iso_dir}\"/isolinux/lang"
@@ -231,8 +238,8 @@ fi
 
 ## Executing create script -----------------------------------------------------
 
-#sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" echo -n
-sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}"
+sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" echo -n
+#sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}"
 sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" bash /tools/create.sh
 
 silentsudo 'Removing create script'         rm -rf "${rootfs_dir}/tools/create.sh"
@@ -247,7 +254,7 @@ silentsudo 'Copying user script'            cp -f "${ROOT_PATH}/custom/tools/${c
 
 ## Autostarting boot scripts ---------------------------------------------------
 
-silentsudo 'Adding boot script autostart'   sed -i '$iif [[ ! islive && ! -e /tools/.firstboot ]]\nthen\n    bash /tools/firstboot.sh\n    touch /tools/.firstboot\nfi\n\nbash /tools/usersboot.sh\n' /etc/rc.local
+silentsudo 'Adding boot script autostart'   sed -i '$iif [[ ! islive && ! -e /tools/.firstboot ]]\nthen\n    bash /tools/firstboot.sh\n    touch /tools/.firstboot\nfi\n\nbash /tools/usersboot.sh\n' "${rootfs_dir}/etc/rc.local"
 
 ## Finalizing customization ----------------------------------------------------
 
