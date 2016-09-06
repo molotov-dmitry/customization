@@ -144,12 +144,12 @@ then
     appinstall 'Syslinux tools' 'syslinux-utils' || exit 1
 fi
 
-if ! ispkgisnstalled 'squashfs-tools'
+if ! ispkginstalled 'squashfs-tools'
 then
     appinstall 'Squashfs tools' 'squashfs-tools' || exit 1
 fi
 
-if ! ispkgisnstalled 'genisoimage'
+if ! ispkginstalled 'genisoimage'
 then
     appinstall 'ISO tools' 'genisoimage' || exit 1
 fi
