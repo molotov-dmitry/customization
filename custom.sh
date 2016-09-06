@@ -223,7 +223,7 @@ silentsudo 'Copying folders script'         cp -f "${ROOT_PATH}/folders.sh"   "$
 
 silentsudo 'Copying create script'          cp -f "${ROOT_PATH}/custom/tools/${config}/create.sh" "${rootfs_dir}/tools/"
 
-silentsudo 'Copying usersboot script'       cp -f "${ROOT_PATH}/usersboot.sh" "${rootfs_dir}/tools/"
+silentsudo 'Copying usersboot script'       cp -f "${ROOT_PATH}/startup.sh" "${rootfs_dir}/tools/"
 
 ## Executing custom config script ----------------------------------------------
 
@@ -254,7 +254,7 @@ silentsudo 'Copying user script'            cp -f "${ROOT_PATH}/custom/tools/${c
 
 ## Autostarting boot scripts ---------------------------------------------------
 
-silentsudo 'Adding boot script autostart'   sed -i '$i\nbash /tools/startup.sh\n\n' "${rootfs_dir}/etc/rc.local"
+silentsudo 'Adding boot script autostart'   sed -i '$ibash /tools/startup.sh\n\n' "${rootfs_dir}/etc/rc.local"
 
 ## Finalizing customization ----------------------------------------------------
 
@@ -281,3 +281,4 @@ fi
 
 #silentsudo 'Packing iso'                    uck-remaster-pack-iso "$(basename "${iso_src}")" -h -g -d "${config}"
 packiso "$(basename "${iso_src}")" "${config}"
+
