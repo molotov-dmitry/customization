@@ -120,6 +120,10 @@ function packiso()
     silentsudo 'Generating md5 for iso' bash -c "md5sum \"${res_dir}/${iso_name}\" > \"${res_dir}/${iso_name}.md5\""
 }
 
+#### ===========================================================================
+#### ===========================================================================
+#### ===========================================================================
+
 ### Test internet connection ===================================================
 
 title 'testing internet connection'
@@ -192,14 +196,12 @@ read
 silentsudo 'Removing old CD'                rm -rf "${remaster_dir}"
 
 unpackiso                                   "${iso_src}"
-#silentsudo 'Unpacking iso'                  uck-remaster-unpack-iso "${iso_src}"
 
 if isdebian
 then
     silentsudo '[DEB] Moving squashfs'      mv "${iso_dir}/live" "${iso_dir}/casper"
 fi
 
-#silentsudo 'Unpacking rootfs'               uck-remaster-unpack-rootfs
 unpackroot
 
 silentsudo 'Removing Win32 files'           uck-remaster-remove-win32-files
@@ -236,12 +238,9 @@ else
    msgwarn '[no prepare script]'
 fi
 
-#read
-
 ## Executing create script -----------------------------------------------------
 
 sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" echo -n
-#sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}"
 sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" bash /tools/create.sh
 sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}"
 
@@ -265,7 +264,6 @@ silentsudo 'Changing tools mode'            chmod -R 777 "${rootfs_dir}/tools"
 
 ## Packing image ---------------------------------------------------------------
 
-#silentsudo 'Packing rootfs'                 uck-remaster-pack-rootfs -c
 packroot
 
 if isdebian
@@ -282,6 +280,5 @@ fi
 
 ## Packing ISO -----------------------------------------------------------------
 
-#silentsudo 'Packing iso'                    uck-remaster-pack-iso "$(basename "${iso_src}")" -h -g -d "${config}"
 packiso "$(basename "${iso_src}")" "${config}"
 

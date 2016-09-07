@@ -120,22 +120,23 @@ appinstall 'Build tools'            'build-essential'
 
 if [[ "$(lsb_release -si)" == "Ubuntu" ]]
 then
-    appinstall 'Kernel headers'         'linux-headers-generic'
+    appinstall 'Kernel headers'     'linux-headers-generic'
 elif [[ "$(lsb_release -si)" == "Debian" ]]
 then
-    appinstall 'Kernel headers'         "linux-headers-$(dpkg-query -W -f='${binary:Package}\n' linux-image-* | head -n 1 | sed 's/linux-image-//')"
+    appinstall 'Kernel headers'     "linux-headers-$(kernelversion)"
 fi
 
 ## Wi-Fi -----------------------------------------------------------------------
 
 silentsudo 'Creating directory for drivers' mkdir -p /usr/bin/drivers
+
 cd /usr/bin/drivers
 
 silentsudo 'Cloning wi-fi driver'   git clone https://github.com/hadess/rtl8723as.git
+
 cd rtl8723as
 
-kernel_version=$(dpkg-query -W -f='${binary:Package}\n' linux-image-* | head -n 1 | sed 's/linux-image-//')
-silentsudo 'Faking kernel version'  sed -i "s/uname -r/echo ${kernel_version}/" Makefile
+silentsudo 'Faking kernel version'  sed -i "s/uname -r/echo $(kernelversion)/" Makefile
 silentsudo 'Building driver'        make
 silentsudo 'Installing driver'      make install
 

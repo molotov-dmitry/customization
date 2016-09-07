@@ -593,3 +593,11 @@ function islive()
     fi
 }
 
+### Kernel version =============================================================
+
+function kernelversion()
+{
+    dpkg-query -W -f='${binary:Package}\n' linux-image-* | head -n 1 | sed 's/linux-image-//'
+    return 0;
+}
+
