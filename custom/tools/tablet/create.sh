@@ -53,10 +53,9 @@ fi
 #appremove 'Gnome applications'      'gnome-contacts gnome-weather gnome-documents gnome-maps'
 #appremove 'Transmission'            'transmission-common transmission-gtk'
 
-### Enabling 'universe' and 'multiverse' package sources -----------------------
+### Enable all package sources -------------------------------------------------
 
-silentsudo 'Enabling universe source' add-apt-repository universe
-silentsudo 'Enabling multiverse source' add-apt-repository multiverse
+repoaddnonfree
 
 silentsudo 'Accepting EULA license' sh -c 'echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections'
 
@@ -117,7 +116,15 @@ appdistupgrade
 
 ## Kernel headers --------------------------------------------------------------
 
-appinstall 'Kernel headers'         'linux-headers-generic'
+appinstall 'Build tools'            'build-essential'
+
+if [[ "$(lsb_release -si)" == "Ubuntu" ]]
+then
+    appinstall 'Kernel headers'         'linux-headers-generic'
+elif [[ "$(lsb_release -si)" == "Debian" ]]
+then
+    appinstall 'Kernel headers'         "linux-headers-$(dpkg-query -W -f='${binary:Package}\n' linux-image-* | head -n 1 | sed 's/linux-image-//')"
+fi
 
 ## Wi-Fi -----------------------------------------------------------------------
 
@@ -126,6 +133,9 @@ cd /usr/bin/drivers
 
 silentsudo 'Cloning wi-fi driver'   git clone https://github.com/hadess/rtl8723as.git
 cd rtl8723as
+
+kernel_version=$(dpkg-query -W -f='${binary:Package}\n' linux-image-* | head -n 1 | sed 's/linux-image-//')
+silentsudo 'Faking kernel version'  sed -i "s/uname -r/echo ${kernel_version}/" Makefile
 silentsudo 'Building driver'        make
 silentsudo 'Installing driver'      make install
 

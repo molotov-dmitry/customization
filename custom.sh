@@ -206,9 +206,11 @@ silentsudo 'Removing Win32 files'           uck-remaster-remove-win32-files
 
 silentsudo 'Setting default language'       sh -c "echo ru > \"${iso_dir}\"/isolinux/lang"
 
+silentsudo 'removing resolv.conf'           rm "${rootfs_dir}/etc/resolv.conf"
+
 if isdebian
 then
-    silentsudo '[DEB] copying resolv.conf'  cp /etc/resolv.conf "${rootfs_dir}/etc/resolv.conf"
+#    silentsudo '[DEB] copying resolv.conf'  cp /etc/resolv.conf "${rootfs_dir}/etc/resolv.conf"
     silentsudo '[DEB] removing mtab'        rm "${rootfs_dir}/etc/mtab"
 fi
 
@@ -241,6 +243,7 @@ fi
 sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" echo -n
 #sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}"
 sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" bash /tools/create.sh
+sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}"
 
 silentsudo 'Removing create script'         rm -rf "${rootfs_dir}/tools/create.sh"
 
