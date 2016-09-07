@@ -208,7 +208,10 @@ silentsudo 'Removing Win32 files'           uck-remaster-remove-win32-files
 
 silentsudo 'Setting default language'       sh -c "echo ru > \"${iso_dir}\"/isolinux/lang"
 
-silentsudo 'removing resolv.conf'           rm "${rootfs_dir}/etc/resolv.conf"
+if [[ -e "${rootfs_dir}/etc/resolv.conf" ]]
+then
+    silentsudo 'backing up resolv.conf'     mv -f "${rootfs_dir}/etc/resolv.conf" "${rootfs_dir}/etc/resolv.conf.bak"
+fi
 
 if isdebian
 then
@@ -245,6 +248,13 @@ sudo                                        uck-remaster-chroot-rootfs "${remast
 sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}"
 
 silentsudo 'Removing create script'         rm -rf "${rootfs_dir}/tools/create.sh"
+
+## Cleaning up chroot ----------------------------------------------------------
+
+if [[ -e "${rootfs_dir}/etc/resolv.conf.bak" ]]
+then
+    silentsudo 'Restoring resolv.conf'      mv -f "${rootfs_dir}/etc/resolv.conf.bak" "${rootfs_dir}/etc/resolv.conf"
+fi
 
 ## Copying first boot script ---------------------------------------------------
 
