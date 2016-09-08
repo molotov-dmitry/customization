@@ -158,7 +158,7 @@ then
     appinstall 'ISO tools' 'genisoimage' || exit 1
 fi
 
-if ! ispkginstalled qemu || ! ispkginstalled qemu-kvm || !ispkginstalled qemu-system-x86
+if ! ispkginstalled qemu || ! ispkginstalled qemu-kvm || ! ispkginstalled qemu-system-x86
 then
     appinstall 'QEMU' 'qemu qemu-kvm qemu-system-x86'
 fi
