@@ -37,6 +37,10 @@ appinstall 'Samba'                  'samba'
 appinstall 'Open SSH'               'openssh-server'
 appinstall 'EiskaltDC++'            'eiskaltdcpp-daemon'
 appinstall 'FTP server'             'vsftpd'
+appinstall 'Iperf'                  'iperf iperf3'
+
+appinstall 'Tree'                   'tree'
+appinstall 'Midnight Commander'     'mc'
 
 ### Configuration ==============================================================
 
