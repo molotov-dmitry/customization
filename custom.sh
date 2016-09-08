@@ -52,7 +52,7 @@ function unpackiso()
 {
     isopath="$1"
 
-    silentsudo 'Unmounting /mnt' umount /mnt
+    silentsudo '' umount /mnt
     silentsudo 'Mounting iso' mount -o loop "${isopath}" /mnt || exit 1
     silentsudo 'Creating directory for image' mkdir -p "${iso_dir}" || exit 1
     silentsudo 'Unpacking iso' cp -rfa /mnt/. "${iso_dir}" || exit 1
@@ -88,8 +88,8 @@ function packiso()
     iso_description="$2"
 
     silentsudo 'calculating md5' find "${iso_dir}/" -type f -print0 \
-        | sed 's/\x0\x0//g' \
         | grep --null-data -v -E '/isolinux/isolinux.bin|/isolinux/boot.cat|/md5sum.txt|/.checksum.md5|/manifest.diff' \
+        | sed 's/\x0\x0//g' \
         | xargs -0 md5sum \
         | sed "s/$(safestring "${iso_dir}")/\./g" || exit 1
 
