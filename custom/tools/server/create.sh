@@ -39,6 +39,8 @@ appinstall 'EiskaltDC++'            'eiskaltdcpp-daemon'
 appinstall 'FTP server'             'vsftpd'
 appinstall 'Iperf'                  'iperf iperf3'
 
+appinstall 'VCS'                    'git subversion colordiff'
+
 appinstall 'Tree'                   'tree'
 appinstall 'Midnight Commander'     'mc'
 
