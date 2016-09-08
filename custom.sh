@@ -158,6 +158,11 @@ then
     appinstall 'ISO tools' 'genisoimage' || exit 1
 fi
 
+if ! ispkginstalled qemu || ! ispkginstalled qemu-kvm || !ispkginstalled qemu-system-x86
+then
+    appinstall 'QEMU' 'qemu qemu-kvm qemu-system-x86'
+fi
+
 ### Getting parameters =========================================================
 
 iso_src="$1"
@@ -217,6 +222,11 @@ if isdebian
 then
 #    silentsudo '[DEB] copying resolv.conf'  cp /etc/resolv.conf "${rootfs_dir}/etc/resolv.conf"
     silentsudo '[DEB] removing mtab'        rm "${rootfs_dir}/etc/mtab"
+fi
+
+if [[ -e "${rootfs_dir}/etc/udev/rules.d/80-net-setup-link.rules" ]]
+then
+    silentsudo 'Disabling the assignment of fixed interface names' ln -sf /dev/null "${rootfs_dir}/etc/udev/rules.d/80-net-setup-link.rules"
 fi
 
 ## Preparing customization scripts ---------------------------------------------
