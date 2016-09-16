@@ -18,6 +18,10 @@ cursor_theme='breeze_cursors'
 
 update-alternatives --set x-cursor-theme "/etc/X11/cursors/${cursor_theme}.theme"
 
+## Qt5 GTK2 theme --------------------------------------------------------------
+
+echo 'export QT_QPA_PLATFORMTHEME=qt5gtk2' > /etc/X11/Xsession.d/100-qt5gtk2
+
 ### Add samba shares to fstab ==================================================
 
 sed -i '/[ \t]cifs[ \t]/d' /etc/fstab

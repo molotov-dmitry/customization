@@ -83,6 +83,7 @@ appinstall 'Numix theme'            'numix-icon-theme-circle numix-gtk-theme'
 appinstall 'Paper theme'            'paper-gtk-theme'
 appinstall 'Breeze theme'           'breeze-cursor-theme breeze-icon-theme'
 appinstall 'Oxygen cursors'         'oxygencursors'
+appinstall 'GTK2 theme for Qt5'     'libqt5libqgtk2'
 
 ## Fonts - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
