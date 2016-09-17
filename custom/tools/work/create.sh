@@ -82,7 +82,7 @@ appupgrade
 appinstall 'Numix theme'            'numix-icon-theme-circle numix-gtk-theme'
 appinstall 'Paper theme'            'paper-gtk-theme'
 appinstall 'Breeze theme'           'breeze-cursor-theme breeze-icon-theme'
-appinstall 'Oxygen cursors'         'oxygencursors'
+appinstall 'Oxygen cursors'         'oxygen-cursor-theme oxygen-cursor-theme-extra'
 appinstall 'GTK2 theme for Qt5'     'libqt5libqgtk2'
 appinstall 'Libreoffice breeze'     'libreoffice-style-breeze'
 
@@ -161,5 +161,5 @@ silentsudo 'Ptrace fix'             sed -i 's/[ \t]*kernel.yama.ptrace_scope[ \t
 
 ## FTP server ------------------------------------------------------------------
 
-silentsudo 'Configuring vsftpd'             cp -f "${ROOT_PATH}/files/vsftpd/vsftpd.conf" '/etc/'
+silentsudo 'Configuring vsftpd'     cp -f "${ROOT_PATH}/files/vsftpd/vsftpd.conf" '/etc/'
 
