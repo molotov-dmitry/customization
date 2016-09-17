@@ -157,3 +157,9 @@ appinstall 'Locales for apps'       'gimp-help-ru libreoffice-help-ru firefox-lo
 
 silentsudo 'Ptrace fix'             sed -i 's/[ \t]*kernel.yama.ptrace_scope[ \t]*=[ \t]*1/kernel.yama.ptrace_scope = 0/' /etc/sysctl.d/10-ptrace.conf
 
+### Application configuration ==================================================
+
+## FTP server ------------------------------------------------------------------
+
+silentsudo 'Configuring vsftpd'             cp -f "${ROOT_PATH}/files/vsftpd/vsftpd.conf" '/etc/'
+
