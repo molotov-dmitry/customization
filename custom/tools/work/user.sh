@@ -45,7 +45,7 @@ gsettings set org.gnome.desktop.wm.preferences titlebar-font    'Ubuntu 10'
 
 ## Wallpaper -------------------------------------------------------------------
 
-gsettings set org.gnome.desktop.background primary-color        '#20204a4a8787'
+gsettings set org.gnome.desktop.background primary-color        '#204a87'
 gsettings set org.gnome.desktop.background picture-options      'none'
 gsettings set org.gnome.desktop.background picture-uri          ''
 
@@ -56,7 +56,7 @@ launcheradd 'nautilus'
 launcheradd 'firefox'
 launcheradd 'qtcreator'
 launcheradd 'anjuta'
-launcheradd 'gnome-builder'
+launcheradd 'org.gnome.Builder'
 launcheradd 'gnome-terminal'
 
 ## Keyboard --------------------------------------------------------------------
@@ -90,7 +90,7 @@ echo '[textMarginSettings]'             >> "${HOME}/.config/QtProject/QtCreator.
 echo 'MarginColumn=80'                  >> "${HOME}/.config/QtProject/QtCreator.ini"
 echo 'ShowMargin=true'                  >> "${HOME}/.config/QtProject/QtCreator.ini"
 
-## svn color side-by-side diff ------------------------------------------------- 
+## svn color side-by-side diff -------------------------------------------------
 
 echo alias svndiff=\'svn --diff-cmd "colordiff" --extensions '"-y -W $(( $(tput cols) - 2 ))"' diff\' >> ~/.bash_aliases
 
@@ -122,7 +122,7 @@ gsettings set org.gnome.gedit.plugins active-plugins "['changecase', 'filebrowse
 
 term_profile=$(gsettings get org.gnome.Terminal.ProfilesList default | cut -d "'" -f 2)
 
-gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" use-transparent-background true 
+gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" use-transparent-background true
 gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" background-transparency-percent 5
 
 ## astyle local ----------------------------------------------------------------
