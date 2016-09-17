@@ -133,10 +133,14 @@ appinstall 'Imagemagick'            'imagemagick'
 
 ## Other - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+appinstall 'Open SSH'               'openssh-server'
 appinstall 'FTP server'             'vsftpd'
 appinstall 'Samba'                  'cifs-utils samba'
 appinstall '7-zip'                  'p7zip-rar p7zip-full'
 appinstall 'ibus-gtk'               'ibus-gtk'
+appinstall 'Midnight Commander'     'mc'
+appinstall 'Directory tree'         'tree'
+appinstall 'Iperf'                  'iperf iperf3'
 
 ## VMWare tools  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -148,4 +152,8 @@ appinstall 'Language support'       'hyphen-ru language-pack-gnome-ru language-p
 appinstall 'Locales for apps'       'gimp-help-ru libreoffice-help-ru firefox-locale-ru mythes-ru hunspell-ru'
 
 ### Configuration ==============================================================
+
+## Ptrace fix for gdb ----------------------------------------------------------
+
+silentsudo 'Ptrace fix'             sed -i 's/[ \t]*kernel.yama.ptrace_scope[ \t]*=[ \t]*1/kernel.yama.ptrace_scope = 0/' /etc/sysctl.d/10-ptrace.conf
 
