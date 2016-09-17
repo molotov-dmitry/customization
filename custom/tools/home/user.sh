@@ -73,6 +73,19 @@ gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "['<
 
 ### Application customization ==================================================
 
+## rhythmbox -------------------------------------------------------------------
+
+gsettingsclear org.gnome.rhythmbox.plugins active-plugins
+
+gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'replaygain'
+gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'rb'
+gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'power-manager'
+gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'notification'
+gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'mpris'
+gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'mmkeys'
+gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'grilo'
+gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'generic-player'
+
 ## qt creator ------------------------------------------------------------------
 
 rm -f    "${HOME}/.config/QtProject"

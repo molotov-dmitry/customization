@@ -47,11 +47,11 @@ appremove 'Font viewer'             'gnome-font-viewer'
 appremove 'Symbols table'           'gucharmap'
 appremove 'xterm'                   'xterm'
 appremove 'Landscape'               'landscape-client-ui-install'
-appremove 'Evolution'               'evolution evolution-common evolution-plugins'
+#appremove 'Evolution'               'evolution evolution-common evolution-plugins'
 appremove 'Dconf editor'            'dconf-editor'
-appremove 'Empathy'                 'empathy empathy-common'
-appremove 'Web camera'              'cheese'
-appremove 'Gnome applications'      'gnome-contacts gnome-weather gnome-documents gnome-maps'
+#appremove 'Empathy'                 'empathy empathy-common'
+#appremove 'Web camera'              'cheese'
+#appremove 'Gnome applications'      'gnome-contacts gnome-weather gnome-documents gnome-maps'
 appremove 'Transmission'            'transmission-common transmission-gtk'
 
 ## Remove unused ---------------------------------------------------------------
@@ -91,7 +91,11 @@ appinstall 'Libreoffice breeze'     'libreoffice-style-breeze'
 appinstall 'MS TTF core fonts'      'ttf-mscorefonts-installer'
 appinstall 'Noto fonts'             'fonts-noto'
 
-### VCS  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+## Media - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+appinstall 'Kodi media center'      'kodi'
+
+## VCS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 appinstall 'VCS'                    'git subversion'
 
@@ -133,18 +137,11 @@ appinstall 'Imagemagick'            'imagemagick'
 
 ## Other - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-appinstall 'Open SSH'               'openssh-server'
-appinstall 'FTP server'             'vsftpd'
-appinstall 'Samba'                  'cifs-utils samba'
 appinstall '7-zip'                  'p7zip-rar p7zip-full'
 appinstall 'ibus-gtk'               'ibus-gtk'
 appinstall 'Midnight Commander'     'mc'
 appinstall 'Directory tree'         'tree'
 appinstall 'Iperf'                  'iperf iperf3'
-
-## VMWare tools  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-appinstall 'VMWare tools'           'open-vm-tools open-vm-tools-desktop fuse xauth xserver-xorg-input-vmmouse xserver-xorg-video-vmware xdg-utils'
 
 ## Shell extensions  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -163,7 +160,4 @@ silentsudo 'Ptrace fix'             sed -i 's/[ \t]*kernel.yama.ptrace_scope[ \t
 
 ### Application configuration ==================================================
 
-## FTP server ------------------------------------------------------------------
-
-silentsudo 'Configuring vsftpd'     cp -f "${ROOT_PATH}/files/vsftpd/vsftpd.conf" '/etc/'
 

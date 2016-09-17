@@ -164,7 +164,7 @@ function appinstall()
     then
         msgwarn '[already installed]'
         return 0
-    else        
+    else
         sudo apt-get install $installlist --yes --force-yes >/dev/null 2>&1
 
         if [[ $? -eq 0 ]]
@@ -183,7 +183,7 @@ function appremove()
     appname="$1"
     applist="$2"
     title "Removing $appname"
-    
+
     remlist=""
 
     for app in ${applist}
@@ -198,7 +198,7 @@ function appremove()
     then
         msgwarn '[already removed]'
         return 0
-    else        
+    else
         sudo apt-get purge ${remlist} --yes --force-yes --purge >/dev/null 2>&1
 
         if [[ $? -eq 0 ]]
@@ -405,6 +405,75 @@ function repoaddnonfree()
     fi
 }
 
+### Gnome shell extensions functions ===========================================
+
+function gnomeshellextension()
+{
+    extid="$1"
+    shellver=$(dpkg-query -W -f='${Version}\n' gnome-shell | cut -d '.' -f 1-2)
+
+    if [[ -z "${shellver}" ]]
+    then
+        title "Downloading extension #${extid}"
+        msgfail 'shell not installed'
+        return 1
+    fi
+
+    extinfo=$(wget "https://extensions.gnome.org/extension-info/?pk=${extid}&shell_version=${shellver}" -q -O - | tr '{' '\n' | tail -n1 | sed 's/.*}}//')
+
+    if [[ $? -ne 0 ]]
+    then
+        title "Downloading extension #${extid}"
+        msgfail
+        return 1
+    fi
+
+    ext_name=$(echo "${extinfo}" | sed 's/.*"name":[ ]*//' | cut -d '"' -f 2)
+    ext_uuid=$(echo "${extinfo}" | sed 's/.*"uuid":[ ]*//' | cut -d '"' -f 2)
+    ext_durl=$(echo "${extinfo}" | sed 's/.*"download_url":[ ]*//' | cut -d '"' -f 2)
+
+    title "Downloading ${ext_name}"
+
+    if [[ -z "${ext_uuid}" || -z "${ext_durl}" ]]
+    then
+        msgfail
+        return 1
+    fi
+
+    sudo wget -O /tmp/extension.zip "https://extensions.gnome.org/${ext_durl}" >/dev/null 2>&1
+    if [[ $? -ne 0 ]]
+    then
+        msgfail
+        return 1
+    fi
+
+    sudo rm -rf "/usr/share/gnome-shell/extensions/${ext_uuid}"
+    if [[ $? -ne 0 ]]
+    then
+        msgfail '[remove dir]'
+        return 1
+    fi
+
+    sudo mkdir -p "/usr/share/gnome-shell/extensions/${ext_uuid}"
+    if [[ $? -ne 0 ]]
+    then
+        msgfail '[create dir]'
+        return 1
+    fi
+
+    sudo unzip /tmp/extension.zip -d "/usr/share/gnome-shell/extensions/${ext_uuid}"
+    if [[ $? -ne 0 ]]
+    then
+        msgfail '[unzip]'
+        return 1
+    fi
+
+    sudo rm -f /tmp/extension.zip
+
+    msgdone
+    return 0
+}
+
 ### Silent exec functions ======================================================
 
 function silent()
@@ -450,7 +519,7 @@ function silentsudo()
 function desktoptype()
 {
     echo "${XDG_CURRENT_DESKTOP}"
-    
+
     return 0;
 }
 
@@ -466,8 +535,41 @@ function systemtype()
     then
         echo 'KDE'
     fi
-    
+
     return 0;
+}
+
+### Gsettings functions ========================================================
+
+function gsettingsclear()
+{
+    category="$1"
+    setting="$2"
+
+    gsettings set ${category} ${setting} '[]'
+}
+
+function gsettingsadd()
+{
+    category="$1"
+    setting="$2"
+    value="$3"
+
+    valuelist=$(gsettings get $category $setting | sed "s/\['//g" | sed "s/'\]//g" | sed "s/'\, '/\n/g")
+
+    if [[ -n "$(echo "${valuelist}" | grep ^${value}$)" ]]
+    then
+        return 0
+    fi
+
+    valuelist="${valuelist}
+${value}"
+
+    newvalue="[$(echo "$valuelist" | sed "s/^/'/;s/$/'/" | tr '\n' '\t' | sed 's/\t$//' | sed 's/\t/, /g')]"
+
+    gsettings set $category $setting "${newvalue}"
+
+    return $?
 }
 
 ### Launcher functions =========================================================
@@ -494,7 +596,8 @@ function launcheradd_var()
     if [[ -z "$(echo "$applist" | grep "^${application}.desktop$")" ]]
     then
         applist="${applist}
-$1"
+${application}"
+
         newlauncher="["
 
         let isfirst=1
