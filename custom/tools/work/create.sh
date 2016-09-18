@@ -167,3 +167,10 @@ silentsudo 'Ptrace fix'             sed -i 's/[ \t]*kernel.yama.ptrace_scope[ \t
 
 silentsudo 'Configuring vsftpd'     cp -f "${ROOT_PATH}/files/vsftpd/vsftpd.conf" '/etc/'
 
+## Subversion server -----------------------------------------------------------
+
+addservice 'Subversion server'      'svnserve'
+addservice 'Time sync'              'timesync'
+addservice 'M711-IR build'          'irbuild'
+addservice 'M711-IR emulator'       'irserver'
+
