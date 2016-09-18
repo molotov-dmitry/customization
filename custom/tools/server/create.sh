@@ -74,9 +74,12 @@ silentsudo 'Configuring Samba'              cp -f "${ROOT_PATH}/files/samba/smb.
 silentsudo 'Creating EiskaltDC++ config dir' mkdir -p '/etc/eiskaltdcpp'
 silentsudo 'Configuring EiskaltDC++'        cp -f "${ROOT_PATH}/files/eiskaltdcpp/DCPlusPlus.xml" '/etc/eiskaltdcpp/'
 silentsudo 'Configuring EiskaltDC++ Hubs'   cp -f "${ROOT_PATH}/files/eiskaltdcpp/Favorites.xml" '/etc/eiskaltdcpp/'
-silentsudo 'Creating EiskaltDC++ service'   cp -f "${ROOT_PATH}/files/eiskaltdcpp/eiskaltdcpp.service" '/etc/systemd/system/'
-silentsudo 'Enabling Network-online target' mkdir -p /etc/systemd/system/network-online.target.wants
-silentsudo 'Enabling EiskaltDC++ service'   ln -s /etc/systemd/system/eiskaltdcpp.service /etc/systemd/system/network-online.target.wants/eiskaltdcpp.service
+
+addservice 'EiskaltDC++' 'eiskaltdcpp' 'eiskaltdcpp'
+
+#silentsudo 'Creating EiskaltDC++ service'   cp -f "${ROOT_PATH}/files/eiskaltdcpp/eiskaltdcpp.service" '/etc/systemd/system/'
+#silentsudo 'Enabling Network-online target' mkdir -p /etc/systemd/system/network-online.target.wants
+#silentsudo 'Enabling EiskaltDC++ service'   ln -s /etc/systemd/system/eiskaltdcpp.service /etc/systemd/system/network-online.target.wants/eiskaltdcpp.service
 
 ## FTP server ------------------------------------------------------------------
 
