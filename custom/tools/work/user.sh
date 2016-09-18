@@ -7,6 +7,10 @@ cd "${ROOT_PATH}" || exit 1
 
 ### Customization ==============================================================
 
+## Animations ------------------------------------------------------------------
+
+gsettings set org.gnome.desktop.interface enable-animations false
+
 ## Icon theme ------------------------------------------------------------------
 
 icon_theme='Numix-Circle'
@@ -36,12 +40,6 @@ then
     gsettings set org.gnome.desktop.wm.preferences theme        "${theme_name}"
 fi
 
-## Gnome Shell extensions ------------------------------------------------------
-
-if [[ "$(desktoptype)" == 'GNOME' ]]
-then
-    gsettingsadd org.gnome.shell enabled-extensions             'mediaplayer@patapon.info' 
-fi
 
 ## Fonts -----------------------------------------------------------------------
 

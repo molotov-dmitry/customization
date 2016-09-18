@@ -40,7 +40,7 @@ fi
 
 if [[ "$(desktoptype)" == 'GNOME' ]]
 then
-    gsettingsadd org.gnome.shell enabled-extensions             'mediaplayer@patapon.info' 
+    gsettingsadd org.gnome.shell enabled-extensions             'mediaplayer@patapon.info'
 fi
 
 ## Fonts -----------------------------------------------------------------------
