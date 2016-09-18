@@ -461,7 +461,7 @@ function gnomeshellextension()
         return 1
     fi
 
-    sudo unzip /tmp/extension.zip -qq -d "/usr/share/gnome-shell/extensions/${ext_uuid}" >/dev/null 2>&1
+    sudo unzip /tmp/extension.zip -d "/usr/share/gnome-shell/extensions/${ext_uuid}" >/dev/null 2>&1
     if [[ $? -ne 0 ]]
     then
         msgfail '[unzip]'
