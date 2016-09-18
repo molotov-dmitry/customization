@@ -468,10 +468,10 @@ function gnomeshellextension()
         return 1
     fi
 
-    sudo chown -R a+r "/usr/share/gnome-shell/extensions/${ext_uuid}" >/dev/null 2>&1
+    sudo chmod -R a+r "/usr/share/gnome-shell/extensions/${ext_uuid}" >/dev/null 2>&1
     if [[ $? -ne 0 ]]
     then
-        msgfail '[chown]'
+        msgfail '[chmod]'
         return 1
     fi
 
