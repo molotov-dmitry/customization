@@ -180,8 +180,8 @@ iso_dir="${remaster_dir}/remaster-iso"
 rootfs_dir="${remaster_dir}/remaster-root"
 res_dir="${remaster_dir}/remaster-new-files"
 
-common_files_path="${ROOT_PATH}/files"
-custom_files_path="${ROOT_PATH}/custom/files/${config}"
+common_file_path="${ROOT_PATH}/files"
+custom_file_path="${ROOT_PATH}/custom/files/${config}"
 
 #### Checking parameters =======================================================
 
