@@ -145,9 +145,9 @@ appinstall 'Iperf'                  'iperf iperf3'
 
 ## Shell extensions  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-gnomeshellextension 55 
+gnomeshellextension 55              # Music player
 
-## Localization  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+## Localization  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 appinstall 'Language support'       'hyphen-ru language-pack-gnome-ru language-pack-gnome-ru-base language-pack-ru language-pack-ru-base libreoffice-l10n-ru'
 appinstall 'Locales for apps'       'gimp-help-ru libreoffice-help-ru firefox-locale-ru mythes-ru hunspell-ru'
