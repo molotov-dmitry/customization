@@ -82,7 +82,7 @@ function packroot()
 
 function packiso()
 {
-    iso_name="$1"
+    iso_name="${config}-$1"
     iso_description="$2"
 
     silentsudo 'calculating md5' find "${iso_dir}/" -type f -print0 \
@@ -116,6 +116,8 @@ function packiso()
     fi
 
     silentsudo 'Generating md5 for iso' bash -c "md5sum \"${res_dir}/${iso_name}\" > \"${res_dir}/${iso_name}.md5\""
+
+    silentsudo 'Changing rights for iso' chmod -R a+rw "${res_dir}"
 }
 
 #### ===========================================================================
@@ -175,10 +177,10 @@ fi
 iso_src="$1"
 config="$2"
 
-remaster_dir="${HOME}/tmp"
+remaster_dir="/tmp/remaster/${config}"
 iso_dir="${remaster_dir}/remaster-iso"
 rootfs_dir="${remaster_dir}/remaster-root"
-res_dir="${remaster_dir}/remaster-new-files"
+res_dir="/media/documents/Distrib/OS/custom"
 
 common_file_path="${ROOT_PATH}/files"
 custom_file_path="${ROOT_PATH}/custom/files/${config}"
