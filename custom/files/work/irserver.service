@@ -3,10 +3,15 @@ Description=M711-IR emulator
 After=network.target
 
 [Service]
-Type=oneshot
+user=dmitry
+group=dmitry
+Type=simple
+Restart=always
+RestartSec=3
 
-ConditionPathExists=/media/documents/Tools/ir_server.sh
-ExecStart=bash /media/documents/Tools/ir_server.sh
+WorkingDirectory=/media/documents/IR_MEDIA
+ConditionPathExists=/media/documents/Projects/ir_server/ir.bin
+ExecStart=/media/documents/Projects/ir_server/ir.bin
 
 [Install]
 WantedBy=multi-user.target
