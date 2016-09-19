@@ -531,7 +531,7 @@ function addservice
 
     silentsudo "Creating ${srvdesc} service"   cp -f "${ROOT_PATH}/files/${srvpath}/${srvname}.service" '/etc/systemd/system/' || return 1
 
-    for target in $(grep WantedBy "/etc/systemd/system/" | cut -d '=' -f 2 | tr ' ' '\n')
+    for target in $(grep WantedBy "/etc/systemd/system/${srvname}.service" | cut -d '=' -f 2 | tr ' ' '\n')
     do
         silentsudo " Creating ${target//.*} target" mkdir -p "/etc/systemd/system/${target}.wants"
         silentsudo " Enabling ${srvdesc} for ${target//.target}" ln -s "/etc/systemd/system/${srvname}.service" "/etc/systemd/system/${target}.wants/${srvname}.service" || return 1
