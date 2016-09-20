@@ -236,7 +236,7 @@ then
     silentsudo '[DEB] removing mtab'        rm "${rootfs_dir}/etc/mtab"
 fi
 
-if [[ -e "${rootfs_dir}/etc/udev/rules.d/80-net-setup-link.rules" ]]
+if [[ -e "${rootfs_dir}/etc/udev/rules.d/80-net-setup-link.rules" || -e /lib/udev/rules.d/80-net-setup-link.rules ]]
 then
     silentsudo 'Disabling the assignment of fixed interface names' ln -sf /dev/null "${rootfs_dir}/etc/udev/rules.d/80-net-setup-link.rules"
 fi
@@ -267,7 +267,7 @@ fi
 
 sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" echo -n
 sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" bash /tools/create.sh
-sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}"
+#sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}"
 
 silentsudo 'Removing create script'         rm -rf "${rootfs_dir}/tools/create.sh"
 
