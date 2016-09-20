@@ -1,12 +1,10 @@
 [Unit]
 Description=M711-IR emulator build service
 After=network.target
+ConditionFileNotEmpty=/media/documents/Tools/ir_build.sh
 
 [Service]
-Type=oneshot
-
-ConditionPathExists=/media/documents/Tools/ir_build.sh
-ExecStart=bash /media/documents/Tools/ir_build.sh
+ExecStart=/bin/bash /media/documents/Tools/ir_build.sh
 
 [Install]
 WantedBy=multi-user.target

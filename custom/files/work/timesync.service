@@ -1,12 +1,10 @@
 [Unit]
 Description=Time sync script
 After=network.target
+ConditionFileNotEmpty=/media/documents/Tools/timesync.sh
 
 [Service]
-Type=oneshot
-
-ConditionPathExists=/media/documents/Tools/timesync.sh
-ExecStart=bash /media/documents/Tools/timesync.sh
+ExecStart=/bin/bash /media/documents/Tools/timesync.sh
 
 [Install]
 WantedBy=multi-user.target
