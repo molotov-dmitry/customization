@@ -32,7 +32,7 @@ appremove 'Brasero'                 'brasero brasero-cdrkit brasero-common'
 
 appremove 'Simple Scanning Utility' 'simple-scan'
 appremove 'LibreOffice unused apps' 'libreoffice-draw libreoffice-impress libreoffice-math'
-appremove 'Games'                   'gnome-mines gnome-sudoku gnome-mahjongg aisleriot'
+#appremove 'Games'                   'gnome-mines gnome-sudoku gnome-mahjongg aisleriot'
 appremove 'Firefox Extensions'      'xul-ext-ubufox xul-ext-unity xul-ext-webaccounts xul-ext-websites-integration'
 appremove 'Remote desktop client'   'remmina remmina-common remmina-plugin-rdp remmina-plugin-vnc'
 appremove 'Unity web browser'       'webbrowser-app'
@@ -53,6 +53,11 @@ appremove 'Empathy'                 'empathy empathy-common'
 appremove 'Web camera'              'cheese'
 appremove 'Gnome applications'      'gnome-contacts gnome-weather gnome-documents gnome-maps'
 appremove 'Transmission'            'transmission-common transmission-gtk'
+appremove 'Rhythmbox'               'rhythmbox rhythmbox-data'
+appremove 'Totem'                   'totem totem-common'
+appremove 'GNOME Music'             'gnome-music'
+appremove 'GNOME Calendar'          'gnome-calendar'
+appremove 'USB creator'             'usb-creator-gtk usb-creator-common'
 
 ## Remove unused ---------------------------------------------------------------
 
@@ -146,11 +151,7 @@ appinstall 'Iperf'                  'iperf iperf3'
 
 appinstall 'VMWare tools'           'open-vm-tools open-vm-tools-desktop fuse xauth xserver-xorg-input-vmmouse xserver-xorg-video-vmware xdg-utils'
 
-## Shell extensions  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-gnomeshellextension 55 
-
-## Localization  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+## Localization  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 appinstall 'Language support'       'hyphen-ru language-pack-gnome-ru language-pack-gnome-ru-base language-pack-ru language-pack-ru-base libreoffice-l10n-ru'
 appinstall 'Locales for apps'       'gimp-help-ru libreoffice-help-ru firefox-locale-ru mythes-ru hunspell-ru'
