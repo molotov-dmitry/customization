@@ -1,6 +1,0 @@
-auto eth0
-iface eth0 inet static
-  address 172.16.8.81
-  netmask 255.255.255.0
-  gateway 172.16.8.253
-  dns-nameservers 172.16.56.3 172.16.56.1
