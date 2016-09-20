@@ -3,14 +3,12 @@ Description=M711-IR emulator
 After=network.target
 
 [Service]
-user=dmitry
-group=dmitry
+User=dmitry
+Group=dmitry
 Type=simple
 Restart=always
 RestartSec=3
-
 WorkingDirectory=/media/documents/IR_MEDIA
-ConditionPathExists=/media/documents/Projects/ir_server/ir.bin
 ExecStart=/media/documents/Projects/ir_server/ir.bin
 
 [Install]
