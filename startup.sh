@@ -4,7 +4,7 @@ ROOT_PATH='/tools'
 
 . "${ROOT_PATH}/functions.sh"
 
-if [[ ! islive && ! -e /tools/.firstboot ]]
+if ! islive && ! -e /tools/.firstboot
 then
     bash /tools/firstboot.sh
 
