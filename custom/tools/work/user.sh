@@ -7,21 +7,19 @@ cd "${ROOT_PATH}" || exit 1
 
 ### User network configuration =================================================
 
-ifnames=$(ip link | grep '^[[:digit:]]*:' | cut -d ':' -f 2 | sed 's/^[ \t]*//' | grep -v '^lo$') )
+ifnames=( $(ip link | grep '^[[:digit:]]*:' | cut -d ':' -f 2 | sed 's/^[ \t]*//' | grep -v '^lo$') )
 
 ifname=${ifnames[0]}
 
 nmcli connection delete DmitryServer
-nmcli connection add con-name DmitryServer ifname ${ifname} type ethernet ip4 172.16.8.81/24 gw 172.16.8.253
+nmcli connection add con-name DmitryServer ifname ${ifname} type ethernet ip4 172.16.8.81/24 gw4 172.16.8.253
 nmcli connection modify DmitryServer ipv4.dns "172.16.56.3 172.16.56.1"
 nmcli connection modify DmitryServer ipv4.ignore-auto-dns yes
 nmcli connection modify DmitryServer ipv6.method ignore
 
-let name_length=$(nmcli connection show | head -n1 | sed 's/UUID.*//' | wc -m)-1
-
-for profile in $(nmcli conn show | tail -n-1 | cut -c 1-${name_length} | sed 's/ *$//' | grep -v '^DmitryServer$')
+nmcli connection show | tail -n +2 | sed 's/ *[^ ]*-.*//' | grep -v '^DmitryServer$' | while read profile
 do
-    nmcli delete "${profile}"
+    nmcli connection delete "${profile}"
 done
 
 ### Customization ==============================================================
