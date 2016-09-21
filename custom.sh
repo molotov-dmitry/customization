@@ -87,8 +87,7 @@ function packiso()
 
     silentsudo 'calculating md5' find "${iso_dir}/" -type f -print0 \
         | grep --null-data -v -E '/isolinux/isolinux.bin|/isolinux/boot.cat|/md5sum.txt|/.checksum.md5|/manifest.diff' \
-        | sed 's/\x0\x0//g' \
-        | xargs -0 md5sum \
+        | xargs -0 md5sum 2>/dev/null \
         | sed "s/$(safestring "${iso_dir}")/\./g" || exit 1
 
     silentsudo 'Making dir for iso' mkdir -p "${res_dir}"
@@ -297,6 +296,11 @@ silentsudo 'Changing tools mode'            chmod -R 777 "${rootfs_dir}/tools"
 ## Packing image ---------------------------------------------------------------
 
 packroot
+
+if grep '^cifs-utils$' "${iso_dir}/casper/filesystem.manifest-remove" > /dev/null 2>&1
+then
+    silentsudo 'Removing cifs-utils from remove manifest' sed -i '/^cifs-utils$/d' "${iso_dir}/casper/filesystem.manifest-remove"
+fi
 
 if isdebian
 then
