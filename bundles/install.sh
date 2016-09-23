@@ -121,7 +121,7 @@ case "${bundle}" in
 ### Version control system =====================================================
 
     "vcs")
-        appinstall 'VCS'                    'git subversion'
+        appinstall 'VCS'                    'git subversion colordiff'
 
         if ispkginstalled nautilus
         then
