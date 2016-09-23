@@ -47,11 +47,7 @@ appremove 'Font viewer'             'gnome-font-viewer'
 appremove 'Symbols table'           'gucharmap'
 appremove 'xterm'                   'xterm'
 appremove 'Landscape'               'landscape-client-ui-install'
-#appremove 'Evolution'               'evolution evolution-common evolution-plugins'
 appremove 'Dconf editor'            'dconf-editor'
-#appremove 'Empathy'                 'empathy empathy-common'
-#appremove 'Web camera'              'cheese'
-#appremove 'Gnome applications'      'gnome-contacts gnome-weather gnome-documents gnome-maps'
 appremove 'Transmission'            'transmission-common transmission-gtk'
 
 ## Remove unused ---------------------------------------------------------------
@@ -61,8 +57,6 @@ silentsudo 'Removing unused packages' apt-get autoremove --yes --force-yes --pur
 ## Enable all package sources --------------------------------------------------
 
 repoaddnonfree
-
-silentsudo 'Accepting EULA license' sh -c 'echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections'
 
 ## Add PPA`s -------------------------------------------------------------------
 
@@ -77,87 +71,44 @@ appupgrade
 
 ## Install ---------------------------------------------------------------------
 
-## Themes  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+## Gnome defaults  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-appinstall 'Numix theme'            'numix-icon-theme-circle numix-gtk-theme'
-appinstall 'Paper theme'            'paper-gtk-theme'
-appinstall 'Breeze theme'           'breeze-cursor-theme breeze-icon-theme'
-appinstall 'Oxygen cursors'         'oxygen-cursor-theme oxygen-cursor-theme-extra'
-appinstall 'GTK2 theme for Qt5'     'libqt5libqgtk2'
-appinstall 'Libreoffice breeze'     'libreoffice-style-breeze'
+bundle install 'gnome'
 
-## Fonts - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+## Qt support  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-appinstall 'MS TTF core fonts'      'ttf-mscorefonts-installer'
-appinstall 'Noto fonts'             'fonts-noto'
+bundle install 'qt'
 
-## Media - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-appinstall 'Kodi media center'      'kodi'
+## Appearance  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-## VCS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-appinstall 'VCS'                    'git subversion'
-
-if ispkginstalled nautilus
-then
-    appinstall 'RabbitVCS'          'rabbitvcs-core rabbitvcs-nautilus'
-fi
+bundle install 'themes'
+bundle install 'fonts'
 
 ## Development - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-appinstall 'Build tools'            'build-essential astyle unifdef'
-appinstall 'Multilib tools'         'gcc-multilib g++-multilib'
-appinstall 'Static analysis tools'  'cppcheck cppcheck-gui'
-appinstall 'Dynamic analysis tools' 'valgrind'
+bundle install 'dev'
 
-appinstall 'X11 sdk'                'libx11-dev'
+## VCS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-appinstall 'OpenGL sdk'             'freeglut3 freeglut3-dev libglew1.10 libglew-dbg libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev'
+bundle install 'vcs'
 
-appinstall 'Qt SDK'                 'qml qtbase5-dev qtdeclarative5-dev qt5-doc'
-appinstall 'Qt Libs'                'libqt5svg5 libqt5webkit5-dev'
-appinstall 'Qt IDE'                 'qtcreator'
+## Office  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-appinstall 'GTK+ SDK'               'libgtk-3-dev libgtkmm-3.0-dev libtool libtool-bin'
-appinstall 'GTK+ Libs'              'libgtksourceview-3.0-dev libgtksourceview-3.0-1 libgtksourceviewmm-3.0-0v5 libgtksourceview-3.0-dev libpeas-1.0-0 libpeas-dev libgit2-glib-1.0-dev libgit2-glib-1.0-0'
-appinstall 'GTK+ IDE'               'anjuta glade'
+bundle install 'office'
 
-appinstall 'GNOME IDE'              'gnome-builder'
+## Media - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-appinstall 'Doxygen'                'doxygen graphviz'
-
-appinstall 'Postgres'               'postgresql pgadmin3 libpq5 libpq-dev'
-appinstall 'SQLite'                 'sqlite sqliteman libsqlite3-0 libsqlite3-dev'
+bundle install 'media'
 
 ## Graphic - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-appinstall 'GIMP'                   'gimp'
-appinstall 'Imagemagick'            'imagemagick'
+bundle install 'graphics'
 
 ## Other - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-appinstall '7-zip'                  'p7zip-rar p7zip-full'
-appinstall 'ibus-gtk'               'ibus-gtk'
-appinstall 'Midnight Commander'     'mc'
-appinstall 'Directory tree'         'tree'
+bundle install 'archive'
+bundle install 'cli/files'
+
 appinstall 'Iperf'                  'iperf iperf3'
-
-## Shell extensions  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-gnomeshellextension 55              # Music player
-
-## Localization  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-appinstall 'Language support'       'hyphen-ru language-pack-gnome-ru language-pack-gnome-ru-base language-pack-ru language-pack-ru-base libreoffice-l10n-ru'
-appinstall 'Locales for apps'       'gimp-help-ru libreoffice-help-ru firefox-locale-ru mythes-ru hunspell-ru'
-
-### Configuration ==============================================================
-
-## Ptrace fix for gdb ----------------------------------------------------------
-
-silentsudo 'Ptrace fix'             sed -i 's/[ \t]*kernel.yama.ptrace_scope[ \t]*=[ \t]*1/kernel.yama.ptrace_scope = 0/' /etc/sysctl.d/10-ptrace.conf
-
-### Application configuration ==================================================
-
 

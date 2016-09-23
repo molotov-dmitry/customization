@@ -253,6 +253,8 @@ silentsudo 'Copying create script'          cp -f "${ROOT_PATH}/custom/tools/${c
 
 silentsudo 'Copying usersboot script'       cp -f "${ROOT_PATH}/startup.sh" "${rootfs_dir}/tools/"
 
+silentsudo 'Copying bundle scripts'         cp -rf "${ROOT_PATH}/bundles" "${rootfs_dir}/tools/"
+
 ## Executing custom config script ----------------------------------------------
 
 if test -f "${ROOT_PATH}/custom/tools/${config}/prepare.sh"
