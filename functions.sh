@@ -10,6 +10,45 @@ readonly CL_BLUE='\e[94m'
 readonly TITLE_LENGTH=50
 readonly SPACE_CHAR='.'
 
+### Aliases ===================================================================
+
+function bundle()
+{
+    command="$1"
+
+    shift
+
+    case "${command}" in
+
+    "install")
+        bash "${ROOT_PATH}/bundles/install.sh" $@
+        return $?
+    ;;
+
+    "prepare")
+        bash "${ROOT_PATH}/bundles/prepare.sh" "${config}" "${rootfs_dir}" $@
+        return $?
+    ;;
+
+    "config")
+        bash "${ROOT_PATH}/bundles/config.sh" $@
+        return $?
+    ;;
+
+    "user")
+        bash "${ROOT_PATH}/bundles/user.sh" $@
+        return $?
+    ;;
+
+    *)
+        msgfail '[unknown command]'
+        return -1
+    ;;
+
+    esac
+
+}
+
 ### Messages ===================================================================
 
 function spaces()
@@ -657,6 +696,40 @@ function launcheradd()
     elif [[ "${XDG_CURRENT_DESKTOP}" == 'GNOME' ]]
     then
         launcheradd_var "$application" 'org.gnome.shell' 'favorite-apps'
+    fi
+}
+
+### Wallpaper ==================================================================
+
+function setwallpaper()
+{
+    wallpaper="$1"
+
+    if [[ "${wallpaper:0:1}" == '#' && ${#wallpaper} -eq 7 ]]
+    then
+        if [[ "${XDG_CURRENT_DESKTOP}" == 'Unity' ]]
+        then
+            r=${wallpaper:1:2}
+            g=${wallpaper:3:2}
+            b=${wallpaper:5:2}
+
+            gsettings set org.gnome.desktop.background primary-color    "#${r}${r}${g}${g}${b}${b}"
+            gsettings set org.gnome.desktop.background picture-options  'none'
+            gsettings set org.gnome.desktop.background picture-uri      ''
+
+        elif [[ "${XDG_CURRENT_DESKTOP}" == 'GNOME' ]]
+        then
+            gsettings set org.gnome.desktop.background primary-color    "${wallpaper}"
+            gsettings set org.gnome.desktop.background secondary-color  "${wallpaper}"
+            gsettings set org.gnome.desktop.background color-shading-type 'solid'
+            gsettings set org.gnome.desktop.background picture-options  'wallpaper'
+            gsettings set org.gnome.desktop.background picture-uri      'file:////usr/share/gnome-control-center/pixmaps/noise-texture-light.png'
+        fi
+
+    elif test -f "${wallapper}"
+    then
+        gsettings set org.gnome.desktop.background picture-options      'zoom'
+        gsettings set org.gnome.desktop.background picture-uri          "${wallapper}"
     fi
 }
 
