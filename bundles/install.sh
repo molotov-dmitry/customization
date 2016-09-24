@@ -149,7 +149,7 @@ case "${bundle}" in
 ### Office applications ========================================================
 
 "office")
-    appinstall 'LibreOffice'            'libreoffice-calc libreoffice-writer libreoffice-pdfimport libreoffice-gtk2 libreofice-gnome libreoffice-style-breeze libreoffice-l10n-ru libreoffice-help-ru'
+    appinstall 'LibreOffice'            'libreoffice-calc libreoffice-writer libreoffice-pdfimport libreoffice-gtk2 libreoffice-gnome libreoffice-style-breeze libreoffice-l10n-ru libreoffice-help-ru'
     appinstall 'Document viewer'        'evince'
 ;;
 
@@ -174,7 +174,7 @@ case "${bundle}" in
 ### Network and communication applications =====================================
 
 "network")
-    appinstall 'Chromium browser'       'chromium chromium-l10n'
+    appinstall 'Chromium browser'       'chromium-browser chromium-browser-l10n'
     appinstall 'Transmission remote'    'transmission-remote-gtk'
     appinstall 'Empathy'                'empathy'
 
