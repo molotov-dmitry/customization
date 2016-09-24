@@ -21,6 +21,15 @@ case "${bundle}" in
 
 ;;
 
+### Network remote =============================================================
+
+"network-remote")
+
+    silentsudo 'Copy Transmission remote config' cp -rf "${ROOT_PATH}/files/transmission-remote-gtk" "${rootfs_dir}/tools/files/"
+    #TODO eiskaltdcpp-qt5 config
+
+;;
+
 ### ============================================================================
 
 *)

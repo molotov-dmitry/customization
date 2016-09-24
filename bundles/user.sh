@@ -139,7 +139,7 @@ case "${bundle}" in
 
     ## launcher ----------------------------------------------------------------
 
-    launcheradd 'anjuta'
+    #launcheradd 'anjuta'
 
 ;;
 
@@ -149,7 +149,7 @@ case "${bundle}" in
 
     ## launcher ----------------------------------------------------------------
 
-    launcheradd 'org.gnome.Builder'
+    #launcheradd 'org.gnome.Builder'
 
     ## gnome builder -----------------------------------------------------------
 
@@ -258,7 +258,7 @@ case "${bundle}" in
     ## launcher ----------------------------------------------------------------
 
     #launcheradd 'kodi'
-    launcheradd totem
+    launcheradd 'totem'
 
     ## Media player gnome shell extension --------------------------------------
 
@@ -284,7 +284,19 @@ case "${bundle}" in
 ### Network ====================================================================
 
 "network")
+
     launcheradd 'chromium-browser'
+
+;;
+
+### Network remote =============================================================
+
+"network-remote")
+
+    mkdir -p "${HOME}/.config/transmission-remote-gtk/"
+    cp -rf "${ROOT_PATH}/files/transmission-remote-gtk/config.json" "${HOME}/.config/transmission-remote-gtk/"
+    #TODO eiskaltdcpp-qt5 config
+
 ;;
 
 ### ============================================================================

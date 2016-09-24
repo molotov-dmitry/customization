@@ -175,10 +175,17 @@ case "${bundle}" in
 
 "network")
     appinstall 'Chromium browser'       'chromium-browser chromium-browser-l10n'
-    appinstall 'Transmission remote'    'transmission-remote-gtk'
     appinstall 'Empathy'                'empathy telepathy-haze'
     appinstall 'Telegram protocol'      'telegram-purple'
+;;
+
+### Network remote =============================================================
+
+"network-remote")
+
+    appinstall 'Transmission remote'    'transmission-remote-gtk'
     #TODO eiskaltdcpp-remote
+
 ;;
 
 ### Graphic applications =======================================================
