@@ -255,6 +255,10 @@ case "${bundle}" in
 
 "media")
 
+    ## launcher ----------------------------------------------------------------
+
+    launcheradd 'kodi'
+
     ## Media player gnome shell extension --------------------------------------
 
     if [[ "$(desktoptype)" == 'GNOME' ]]
