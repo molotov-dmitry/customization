@@ -80,7 +80,6 @@ bundle install 'gnome'
 
 bundle install 'qt'
 
-
 ## Appearance  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 bundle install 'themes'
@@ -94,6 +93,10 @@ bundle install 'dev'
 
 bundle install 'vcs'
 
+## Network - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+bundle install 'network'
+
 ## Office  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 bundle install 'office'
@@ -101,6 +104,7 @@ bundle install 'office'
 ## Media - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 bundle install 'media'
+bundle install 'media-online'
 
 ## Graphic - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
