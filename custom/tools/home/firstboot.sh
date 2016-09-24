@@ -9,7 +9,7 @@ cd "${ROOT_PATH}" || exit 1
 
 ## Cursor theme ----------------------------------------------------------------
 
-bundle config 'theme'
+bundle config 'themes'
 
 ## Qt5 GTK2 theme --------------------------------------------------------------
 
