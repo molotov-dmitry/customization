@@ -33,6 +33,10 @@ bundle user 'dev'
 
 bundle user 'vcs'
 
+## Network ---------------------------------------------------------------------
+
+bundle user 'network'
+
 ## Office ----------------------------------------------------------------------
 
 bundle user 'office'
@@ -40,3 +44,7 @@ bundle user 'office'
 ## Multimedia ------------------------------------------------------------------
 
 bundle user 'media'
+
+### Directories ================================================================
+
+bash "${ROOT_PATH}/folders.sh"
