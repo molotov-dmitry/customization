@@ -63,6 +63,7 @@ repoaddnonfree
 ppaadd  'Numix Project'             'numix'
 ppaadd  'Paper Themes (Daily)'      'snwh' 'pulp'
 ppaadd  'LibreOffice'               'libreoffice'
+ppaadd  'Web Upd8'                  'nilarimogard' 'webupd8'
 
 ## Update ----------------------------------------------------------------------
 
