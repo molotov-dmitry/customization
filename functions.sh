@@ -10,45 +10,6 @@ readonly CL_BLUE='\e[94m'
 readonly TITLE_LENGTH=50
 readonly SPACE_CHAR='.'
 
-### Aliases ===================================================================
-
-function bundle()
-{
-    command="$1"
-
-    shift
-
-    case "${command}" in
-
-    "install")
-        bash "${ROOT_PATH}/bundles/install.sh" $@
-        return $?
-    ;;
-
-    "prepare")
-        bash "${ROOT_PATH}/bundles/prepare.sh" "${config}" "${rootfs_dir}" $@
-        return $?
-    ;;
-
-    "config")
-        bash "${ROOT_PATH}/bundles/config.sh" $@
-        return $?
-    ;;
-
-    "user")
-        bash "${ROOT_PATH}/bundles/user.sh" $@
-        return $?
-    ;;
-
-    *)
-        msgfail '[unknown command]'
-        return -1
-    ;;
-
-    esac
-
-}
-
 ### Messages ===================================================================
 
 function spaces()
@@ -558,6 +519,89 @@ function silentsudo()
         [[ -n "${cmdtitle}" ]] && msgfail
         return 1
     fi
+}
+
+### Bundles ===================================================================
+
+function bundle()
+{
+    command="$1"
+
+    shift
+
+    case "${command}" in
+
+    "install")
+        bash "${ROOT_PATH}/bundles/install.sh" $@
+        return $?
+    ;;
+
+    "prepare")
+        bash "${ROOT_PATH}/bundles/prepare.sh" "${config}" "${rootfs_dir}" $@
+        return $?
+    ;;
+
+    "config")
+        bash "${ROOT_PATH}/bundles/config.sh" $@
+        return $?
+    ;;
+
+    "user")
+        bash "${ROOT_PATH}/bundles/user.sh" $@
+        return $?
+    ;;
+
+    *)
+        msgfail '[unknown command]'
+        return -1
+    ;;
+
+    esac
+
+}
+
+function bundlelist()
+{
+    echo
+    echo "Checking bundles:"
+
+    for category in prepare install config user
+    do
+
+        custom_tool="${category}"
+        [[ "${custom_tool}" == 'install' ]] && custom_tool='create'
+        [[ "${custom_tool}" == 'config' ]] && custom_tool='firstboot'
+
+        echo
+        msginfo "${category}:"
+
+        ## Check for unused bundles
+
+        bundle_list=$(grep '^[ \t]*"[a-z,/-]*")' "${ROOT_PATH}/bundles/${category}.sh" | cut -d '"' -f 2)
+        bundle_used=$(grep "^[ \t]*bundle[ \t]*${category}" "${ROOT_PATH}/custom/tools/${config}/${custom_tool}.sh" | sed "s/^[ \t]*bundle[ \t]*${category}[ \t]*//" | tr -d " '")
+
+        for bundle in ${bundle_list}
+        do
+            if [[ -n "$(echo "${bundle_used}" | grep "^${bundle}$")" ]]
+            then
+                msgdone " + ${bundle}"
+            else
+                msgwarn " - ${bundle}"
+            fi
+        done
+
+        ## Check for wrong bundles
+
+        for bundle in ${bundle_used}
+        do
+            if [[ -z "$(echo "${bundle_list}" | grep "^${bundle}$")" ]]
+            then
+                msgfail " ! ${bundle}"
+            fi
+        done
+    done
+
+    echo
 }
 
 ### SystemD service functions ==================================================
