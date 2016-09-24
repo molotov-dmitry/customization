@@ -167,8 +167,8 @@ case "${bundle}" in
 ### Online video ===============================================================
 
 "media-online")
-    appinstall 'youtube-dl'
-    appinstall 'gnome-twitch'
+    appinstall 'Youtube downloader'     'youtube-dl'
+    appinstall 'Gnome Twitch app'       'gnome-twitch'
 ;;
 
 ### Network and communication applications =====================================
@@ -176,10 +176,8 @@ case "${bundle}" in
 "network")
     appinstall 'Chromium browser'       'chromium-browser chromium-browser-l10n'
     appinstall 'Transmission remote'    'transmission-remote-gtk'
-    appinstall 'Empathy'                'empathy'
-
-    #TODO telepathy-haze telegram-purple
-    #TODO telepathy-morse
+    appinstall 'Empathy'                'empathy telepathy-haze'
+    appinstall 'Telegram protocol'      'telegram-purple'
     #TODO eiskaltdcpp-remote
 ;;
 
