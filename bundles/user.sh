@@ -257,7 +257,8 @@ case "${bundle}" in
 
     ## launcher ----------------------------------------------------------------
 
-    launcheradd 'kodi'
+    #launcheradd 'kodi'
+    launcheradd totem
 
     ## Media player gnome shell extension --------------------------------------
 
@@ -283,7 +284,7 @@ case "${bundle}" in
 ### Network ====================================================================
 
 "network")
-
+    launcheradd 'chromium-browser'
 ;;
 
 ### ============================================================================
