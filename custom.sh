@@ -203,6 +203,10 @@ checkfilemime 'user script'         "${ROOT_PATH}/custom/tools/${config}/user.sh
 echo "iso image:    ${iso_src}"
 echo "remaster dir: ${remaster_dir}"
 
+### Showing bundles ============================================================
+
+bundlelist
+
 read
 
 ### Generating custom CD =======================================================
