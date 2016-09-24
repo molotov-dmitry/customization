@@ -24,6 +24,18 @@ source_xdg=( "DOWNLOAD" "DOCUMENTS" "MUSIC" "PICTURES" "VIDEOS" "TEMPLATES" "" )
 let DIR_COUNT=${#target_dir[@]}
 
 
+### Проверка директории
+
+title "Checking destination folder"
+
+
+if [[ -d "${target_disk}" ]]
+then
+    msgdone
+else
+    msgfail
+    exit 1
+fi
 
 for (( index=0; index<${DIR_COUNT}; index++ ))
 do
