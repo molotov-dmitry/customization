@@ -1,0 +1,39 @@
+<?xml version="1.0" standalone="yes"?>
+<rhythmdb version="2.0">
+  <entry type="iradio">
+    <title>Raute Musik - Rock</title>
+    <genre>Rock</genre>
+    <artist></artist>
+    <album></album>
+    <location>http://rock-high.rautemusik.fm</location>
+    <date>0</date>
+    <media-type>application/octet-stream</media-type>
+  </entry>
+  <entry type="iradio">
+    <title>Raute Musik - Main</title>
+    <genre>Pop</genre>
+    <artist></artist>
+    <album></album>
+    <location>http://main-high.rautemusik.fm</location>
+    <date>0</date>
+    <media-type>application/octet-stream</media-type>
+  </entry>
+  <entry type="iradio">
+    <title>Radio Record (128 kbps)</title>
+    <genre>Club</genre>
+    <artist></artist>
+    <album></album>
+    <location>http://air.radiorecord.ru/rr_128</location>
+    <date>0</date>
+    <media-type>application/octet-stream</media-type>
+  </entry>
+  <entry type="iradio">
+    <title>Radio Record (AAC)</title>
+    <genre>Club</genre>
+    <artist></artist>
+    <album></album>
+    <location>http://air.radiorecord.ru/rr_aac</location>
+    <date>0</date>
+    <media-type>application/octet-stream</media-type>
+  </entry>
+</rhythmdb>
