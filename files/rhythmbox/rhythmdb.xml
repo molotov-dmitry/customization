@@ -1,5 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
 <rhythmdb version="2.0">
+
   <entry type="iradio">
     <title>Raute Musik - Rock</title>
     <genre>Rock</genre>
@@ -9,6 +10,7 @@
     <date>0</date>
     <media-type>application/octet-stream</media-type>
   </entry>
+
   <entry type="iradio">
     <title>Raute Musik - Main</title>
     <genre>Pop</genre>
@@ -18,22 +20,58 @@
     <date>0</date>
     <media-type>application/octet-stream</media-type>
   </entry>
+
+
+
   <entry type="iradio">
     <title>Radio Record (128 kbps)</title>
     <genre>Club</genre>
     <artist></artist>
     <album></album>
-    <location>http://air.radiorecord.ru/rr_128</location>
+    <location>http://air.radiorecord.ru:8101/rr_128</location>
     <date>0</date>
     <media-type>application/octet-stream</media-type>
   </entry>
+
   <entry type="iradio">
-    <title>Radio Record (AAC)</title>
+    <title>Radio Record (320 kbps)</title>
     <genre>Club</genre>
     <artist></artist>
     <album></album>
-    <location>http://air.radiorecord.ru/rr_aac</location>
+    <location>http://air.radiorecord.ru:8101/rr_320</location>
     <date>0</date>
     <media-type>application/octet-stream</media-type>
   </entry>
+
+
+  <entry type="iradio">
+    <title>Radio Record Rock (320 kbps)</title>
+    <genre>Rock</genre>
+    <artist></artist>
+    <album></album>
+    <location>http://air.radiorecord.ru:8102/rock_320</location>
+    <date>0</date>
+    <media-type>application/octet-stream</media-type>
+  </entry>
+
+  <entry type="iradio">
+    <title>Radio Record Rock (AAC 32 kbps)</title>
+    <genre>Rock</genre>
+    <artist></artist>
+    <album></album>
+    <location>http://air.radiorecord.ru:8102/rock_aac</location>
+    <date>0</date>
+    <media-type>application/octet-stream</media-type>
+  </entry>
+
+  <entry type="iradio">
+    <title>Radio Record Rock (AAC 64 kbps)</title>
+    <genre>Rock</genre>
+    <artist></artist>
+    <album></album>
+    <location>http://air.radiorecord.ru:8102/rock_aac_64</location>
+    <date>0</date>
+    <media-type>application/octet-stream</media-type>
+  </entry>
+
 </rhythmdb>
