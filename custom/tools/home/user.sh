@@ -25,6 +25,11 @@ setwallpaper '#204a87'
 
 bundle user 'gnome'
 
+## Network ---------------------------------------------------------------------
+
+bundle user 'network'
+bundle user 'network-remote'
+
 ## Development -----------------------------------------------------------------
 
 bundle user 'dev'
@@ -32,10 +37,6 @@ bundle user 'dev'
 ## Version control system ------------------------------------------------------
 
 bundle user 'vcs'
-
-## Network ---------------------------------------------------------------------
-
-bundle user 'network'
 
 ## Office ----------------------------------------------------------------------
 
