@@ -270,6 +270,9 @@ case "${bundle}" in
 
     ## rhythmbox ---------------------------------------------------------------
 
+    mkdir -p "${HOME}/.local/share/rhythmbox"
+    cp -f "${ROOT_PATH}/files/rhythmbox/rhythmdb.xml" "${HOME}/.local/share/rhythmbox/"
+
     gsettingsclear org.gnome.rhythmbox.plugins active-plugins
 
     gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'replaygain'
