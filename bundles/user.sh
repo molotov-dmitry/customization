@@ -258,6 +258,7 @@ case "${bundle}" in
     ## launcher ----------------------------------------------------------------
 
     #launcheradd 'kodi'
+    launcheradd 'rhythmbox'
     launcheradd 'totem'
 
     ## Media player gnome shell extension --------------------------------------
