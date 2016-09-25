@@ -157,10 +157,14 @@ case "${bundle}" in
 
 "media")
     appinstall 'Restricted extras'      'ubuntu-restricted-extras'
+
     appinstall 'Rhythmbox'              'rhythmbox'
     appinstall 'Totem video player'     'totem'
     #appinstall 'Kodi media center'      'kodi'
     appinstall 'MPV Player'             'mpv'
+
+    appinstall 'EasyTag'                'easytag'
+
     gnomeshellextension 55              # Music player
 ;;
 
