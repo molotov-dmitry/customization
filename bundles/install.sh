@@ -181,6 +181,8 @@ case "${bundle}" in
     appinstall 'Chromium browser'       'chromium-browser chromium-browser-l10n'
     appinstall 'Empathy'                'empathy telepathy-haze'
     appinstall 'Telegram protocol'      'telegram-purple'
+    appinstall 'Gnome Maps'             'gnome-maps'
+    appinstall 'Gnome Weather'          'gnome-weather'
 ;;
 
 ### Network remote =============================================================
