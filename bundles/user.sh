@@ -285,11 +285,19 @@ case "${bundle}" in
     gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'generic-player'
 ;;
 
-### Network ====================================================================
+### Network and communication ==================================================
 
 "network")
 
+    ## Launcher ----------------------------------------------------------------
+
     launcheradd 'chromium-browser'
+
+    ## Empathy -----------------------------------------------------------------
+
+    gsettings set org.gnome.Empathy.conversation theme          'adium'
+    gsettings set org.gnome.Empathy.conversation theme-variant  'Green Alternate'
+    gsettings set org.gnome.Empathy.conversation adium-path     '/usr/share/adium/message-styles/material.AdiumMessageStyle'
 
 ;;
 

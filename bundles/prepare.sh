@@ -27,6 +27,14 @@ case "${bundle}" in
     silentsudo 'Copy Rhythmbox radio database' cp -rf "${ROOT_PATH}/files/rhythmbox" "${rootfs_dir}/tools/files/"
 ;;
 
+### Network and communication ==================================================
+
+"network")
+
+    silentsudo 'Copy Empathy theme' cp -rf "${ROOT_PATH}/files/empathy" "${rootfs_dir}/tools/files/"
+
+;;
+
 ### Network remote =============================================================
 
 "network-remote")

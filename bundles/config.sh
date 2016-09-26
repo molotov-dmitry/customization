@@ -21,7 +21,7 @@ case "${bundle}" in
 
 ;;
 
-## Qt ==========================================================================
+### Qt =========================================================================
 
 "qt")
 
@@ -31,6 +31,26 @@ case "${bundle}" in
     then
         echo 'export QT_QPA_PLATFORMTHEME=qt5gtk2' > /etc/X11/Xsession.d/100-qt5gtk2
     fi
+
+;;
+
+### Network and communication ==================================================
+
+"network")
+
+    ## Empathy -----------------------------------------------------------------
+
+    mkdir -p ' /usr/share/adium/message-styles'
+    cp -rf "${ROOT_PATH}/empathy/material.AdiumMessageStyle" '/usr/share/adium/message-styles/'
+
+    while read color
+    do
+        colorvalue=$(echo "${color}" | cut -d ' ' -f 1)
+        colorname=$(echo "${color}" | cut -d ' ' -f 2-)
+
+        bash '/usr/share/adium/message-styles/material.AdiumMessageStyl/Contents/Resources/create.sh' "${colorname}" "${colorvalue}"
+
+    done < '/usr/share/adium/message-styles/material.AdiumMessageStyl/Contents/Resources/colorlist'
 
 ;;
 

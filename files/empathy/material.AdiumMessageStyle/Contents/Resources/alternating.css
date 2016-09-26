@@ -1,0 +1,38 @@
+
+/* Outgoing ================================================================= */
+
+.outgoingItem .avatar {
+	float:right;
+}
+
+.outgoingItem .myBubble {
+	position:relative;
+}
+
+.outgoingItem .indicator {
+
+	position:absolute;
+	right:-11px;
+	top:0;
+	left:auto;
+
+	width: 0;
+	height: 0;
+	border-style: solid;
+}
+
+.outgoingItem .myBubble .indicator {
+    border-width: 11px 12px 0 0;
+
+    border-color: white transparent transparent transparent;
+}
+
+.myBubble {
+	margin-right:40px;
+}
+
+.outgoingItem .tableBubble {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 0;
+}
+
