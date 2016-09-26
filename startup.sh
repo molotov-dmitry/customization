@@ -4,11 +4,9 @@ ROOT_PATH='/tools'
 
 . "${ROOT_PATH}/functions.sh"
 
-if ! islive && ! -e /tools/.firstboot
+if ! -e /tools/.firstboot
 then
-    bash /tools/firstboot.sh
-
-    touch /tools/.firstboot
+    bash /tools/firstboot.sh 2>> /tools/firstboot.log && touch /tools/.firstboot
 fi
 
 for userinfo in $(cat /etc/passwd | grep -v nologin | grep -v /bin/false | grep -v /bin/sync | grep -v postgres | grep -v ftp | cut -d ':' -f 1,6)
