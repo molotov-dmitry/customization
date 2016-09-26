@@ -14,7 +14,7 @@ cp -f "Template/Template Alternating.css" "Variants/${name} Alternating.css"
 cp -f "Template/Template No Names.css" "Variants/${name} No Names.css"
 cp -f "Template/Template No Names Alt.css" "Variants/${name} No Names Alt.css"
 
-cp -f "Template/Demo.html" ".Demo/${name}.html"
+cp -f "Template/Demo.html" "./Demo/${name}.html"
 cp -f "Template/Demo Alternate.html" "./Demo/${name} Alternate.html"
 
 for file in "Variants/${name}.css" "Variants/${name} Alternating.css" "Variants/${name} No Names.css" "Variants/${name} No Names Alt.css" "./Demo/${name}.html" "./Demo/${name} Alternate.html" 
