@@ -40,7 +40,7 @@ case "${bundle}" in
 
     ## Empathy -----------------------------------------------------------------
 
-    mkdir -p ' /usr/share/adium/message-styles'
+    mkdir -p '/usr/share/adium/message-styles'
     cp -rf "${ROOT_PATH}/empathy/material.AdiumMessageStyle" '/usr/share/adium/message-styles/'
 
     while read color
@@ -48,9 +48,9 @@ case "${bundle}" in
         colorvalue=$(echo "${color}" | cut -d ' ' -f 1)
         colorname=$(echo "${color}" | cut -d ' ' -f 2-)
 
-        bash '/usr/share/adium/message-styles/material.AdiumMessageStyl/Contents/Resources/create.sh' "${colorname}" "${colorvalue}"
+        bash '/usr/share/adium/message-styles/material.AdiumMessageStyle/Contents/Resources/create.sh' "${colorname}" "${colorvalue}"
 
-    done < '/usr/share/adium/message-styles/material.AdiumMessageStyl/Contents/Resources/colorlist'
+    done < '/usr/share/adium/message-styles/material.AdiumMessageStyle/Contents/Resources/colorlist'
 
 ;;
 

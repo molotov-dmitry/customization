@@ -24,7 +24,9 @@ case "${bundle}" in
 ### Multimedia applications ====================================================
 
 "media")
+
     silentsudo 'Copy Rhythmbox radio database' cp -rf "${ROOT_PATH}/files/rhythmbox" "${rootfs_dir}/tools/files/"
+
 ;;
 
 ### Network and communication ==================================================
