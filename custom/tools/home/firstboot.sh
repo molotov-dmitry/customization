@@ -15,6 +15,10 @@ bundle config 'themes'
 
 bundle config 'qt'
 
+## Network and communication ---------------------------------------------------
+
+bundle config 'network'
+
 ### Fix directory permissions ==================================================
 
 fixpermissions '/media/documents'
