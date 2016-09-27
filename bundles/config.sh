@@ -41,7 +41,7 @@ case "${bundle}" in
     ## Empathy -----------------------------------------------------------------
 
     mkdir -p '/usr/share/adium/message-styles'
-    cp -rf "${ROOT_PATH}/empathy/material.AdiumMessageStyle" '/usr/share/adium/message-styles/'
+    cp -rf "${ROOT_PATH}/files/empathy/material.AdiumMessageStyle" '/usr/share/adium/message-styles/'
 
     while read color
     do
