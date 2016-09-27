@@ -321,7 +321,7 @@ case "${bundle}" in
     ## Empathy -----------------------------------------------------------------
 
     gsettings set org.gnome.Empathy.conversation theme          'material'
-    gsettings set org.gnome.Empathy.conversation theme-variant  'Green Alternate'
+    gsettings set org.gnome.Empathy.conversation theme-variant  'Green Alternating'
     gsettings set org.gnome.Empathy.conversation adium-path     '/usr/share/adium/message-styles/material.AdiumMessageStyle'
 
 ;;

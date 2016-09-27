@@ -49,6 +49,7 @@ appremove 'xterm'                   'xterm'
 appremove 'Landscape'               'landscape-client-ui-install'
 appremove 'Dconf editor'            'dconf-editor'
 appremove 'Transmission'            'transmission-common transmission-gtk'
+appremove 'Gnome Music'             'gnome-music'
 
 ## Remove unused ---------------------------------------------------------------
 
