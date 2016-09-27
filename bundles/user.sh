@@ -109,7 +109,7 @@ case "${bundle}" in
 
     ## Qt Creator --------------------------------------------------------------
 
-    rm -f    "${HOME}/.config/QtProject"
+    rm -rf   "${HOME}/.config/QtProject"
 
     mkdir -p "${HOME}/.config/QtProject"
     touch    "${HOME}/.config/QtProject/QtCreator.ini"
@@ -273,6 +273,29 @@ case "${bundle}" in
     mkdir -p "${HOME}/.local/share/rhythmbox"
     cp -f "${ROOT_PATH}/files/rhythmbox/rhythmdb.xml" "${HOME}/.local/share/rhythmbox/"
 
+    gsettingsclear org.gnome.rhythmbox.plugins seen-plugins
+
+    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'soundcloud'
+    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'sendto'
+    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'replaygain'
+    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'rbzeitgeist'
+    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'rblirc'
+    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'rb'
+    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'pythonconsole'
+    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'notification'
+    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'mtpdevice'
+    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'mpris'
+    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'magnatune'
+    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'lyrics'
+    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'ipod'
+    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'im-status'
+    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'grilo'
+    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'fmradio'
+    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'dbus-media-server'
+    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'daap'
+    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'audioscrobbler'
+    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'artsearch'
+
     gsettingsclear org.gnome.rhythmbox.plugins active-plugins
 
     gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'replaygain'
@@ -283,6 +306,8 @@ case "${bundle}" in
     gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'mmkeys'
     gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'grilo'
     gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'generic-player'
+
+    gsettings set org.gnome.rhythmbox.plugins.iradio initial-stations-loaded true
 ;;
 
 ### Network and communication ==================================================
@@ -295,7 +320,7 @@ case "${bundle}" in
 
     ## Empathy -----------------------------------------------------------------
 
-    gsettings set org.gnome.Empathy.conversation theme          'adium'
+    gsettings set org.gnome.Empathy.conversation theme          'material'
     gsettings set org.gnome.Empathy.conversation theme-variant  'Green Alternate'
     gsettings set org.gnome.Empathy.conversation adium-path     '/usr/share/adium/message-styles/material.AdiumMessageStyle'
 

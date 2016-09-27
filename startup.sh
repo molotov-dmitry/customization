@@ -4,7 +4,7 @@ ROOT_PATH='/tools'
 
 . "${ROOT_PATH}/functions.sh"
 
-if ! -e /tools/.firstboot
+if [[ ! -e /tools/.firstboot ]]
 then
     bash /tools/firstboot.sh 2>> /tools/firstboot.log && touch /tools/.firstboot
 fi
