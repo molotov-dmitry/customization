@@ -77,7 +77,7 @@ function packroot()
     fi
 
     silentsudo 'Removing old rootfs' rm -f "${iso_dir}/casper/filesystem.squashfs"
-    silentsudo 'Packing rootfs' mksquashfs "${rootfs_dir}" "${iso_dir}/casper/filesystem.squashfs" -comp xz || exit 1
+    silentsudo 'Packing rootfs' mksquashfs "${rootfs_dir}" "${iso_dir}/casper/filesystem.squashfs" || exit 1
 }
 
 function packiso()
