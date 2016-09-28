@@ -23,9 +23,11 @@ do
     then
         echo '
 
-if [[ -f /tools/user.sh && ! -e "${HOME}"/.firstboot ]]
+if [[ -f /tools/user.sh && ! -e "${HOME}/.config/.firstboot" ]]
 then
-    bash /tools/user.sh && touch "${HOME}"/.firstboot
+    mkdir -p "${HOME}"/.config
+    bash /tools/user.sh
+    echo "$?" > "${HOME}"/.config/.firstboot
 fi
 
 ' >> "${user_dir}"/.profile
