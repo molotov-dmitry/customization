@@ -83,8 +83,7 @@ bundle install 'qt'
 
 ## Appearance  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-bundle install 'themes'
-bundle install 'fonts'
+bundle install 'appearance'
 
 ## Development - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
