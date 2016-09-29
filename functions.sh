@@ -570,7 +570,6 @@ function bundlelist()
 
         custom_tool="${category}"
         [[ "${custom_tool}" == 'install' ]] && custom_tool='create'
-        [[ "${custom_tool}" == 'config' ]] && custom_tool='firstboot'
 
         echo
         msginfo "${category}:"
@@ -582,12 +581,44 @@ function bundlelist()
 
         for bundle in ${bundle_list}
         do
+            bundlelevel=$(echo "${bundle}" | grep -o '/' | wc -l)
+
+            for i in $(seq 1 ${bundlelevel})
+            do
+                echo -n ' '
+            done
+
             if [[ -n "$(echo "${bundle_used}" | grep "^${bundle}$")" ]]
             then
                 msgdone " + ${bundle}"
             else
-                msgwarn " - ${bundle}"
+
+                if [[ ${bundlelevel} -gt 0 ]]
+                then
+                    for i in $(seq 1 $((bundlelevel+1)) )
+                    do
+                        if [[ ${i} -eq $((bundlelevel+1)) ]]
+                        then
+                            msgwarn " - ${bundle}"
+                            break
+                        fi
+                            
+                        bundle_parent=$(echo ${bundle} | cut -d '/' -f 1-${i})
+
+                        if [[ -n "$(echo "${bundle_used}" | grep "^${bundle_parent}$")" ]]
+                        then
+                            msgdone " + ${bundle}"
+                            break;
+                        fi
+                    done
+                else
+                    msgwarn " - ${bundle}"
+                fi
+                
+                
             fi
+
+            #exit 1
         done
 
         ## Check for wrong bundles

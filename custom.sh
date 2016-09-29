@@ -196,6 +196,7 @@ checkfilemime 'functions script'    "${ROOT_PATH}/functions.sh" 'text/x-shellscr
 checkfilemime 'folders script'      "${ROOT_PATH}/folders.sh"   'text/x-shellscript' 'shell script'
 
 checkfilemime 'create script'       "${ROOT_PATH}/custom/tools/${config}/create.sh"  'text/x-shellscript' 'shell script'
+checkfilemime 'config script'       "${ROOT_PATH}/custom/tools/${config}/config.sh"  'text/x-shellscript' 'shell script'
 checkfilemime 'user script'         "${ROOT_PATH}/custom/tools/${config}/user.sh"    'text/x-shellscript' 'shell script'
 
 ### Showing parameters =========================================================
@@ -254,6 +255,7 @@ silentsudo 'Copying functions script'       cp -f "${ROOT_PATH}/functions.sh" "$
 silentsudo 'Copying folders script'         cp -f "${ROOT_PATH}/folders.sh"   "${rootfs_dir}/tools/"
 
 silentsudo 'Copying create script'          cp -f "${ROOT_PATH}/custom/tools/${config}/create.sh" "${rootfs_dir}/tools/"
+silentsudo 'Copying config script'          cp -f "${ROOT_PATH}/custom/tools/${config}/config.sh" "${rootfs_dir}/tools/"
 
 silentsudo 'Copying usersboot script'       cp -f "${ROOT_PATH}/startup.sh" "${rootfs_dir}/tools/"
 
@@ -272,9 +274,10 @@ fi
 
 sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" echo -n
 sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" bash /tools/create.sh
-#sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}"
+sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" bash /tools/config.sh
 
 silentsudo 'Removing create script'         rm -rf "${rootfs_dir}/tools/create.sh"
+silentsudo 'Removing config script'         rm -rf "${rootfs_dir}/tools/create.sh"
 
 ## Cleaning up chroot ----------------------------------------------------------
 
