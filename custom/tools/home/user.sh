@@ -13,9 +13,7 @@ launcherclear
 
 ## Appearance ------------------------------------------------------------------
 
-bundle user 'themes'
-
-bundle user 'fonts'
+bundle user 'appearance'
 
 setwallpaper '#204a87'
 
