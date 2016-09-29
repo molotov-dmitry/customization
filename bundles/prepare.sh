@@ -20,7 +20,9 @@ case "${bundle}" in
 "server")
 
     bash "${scriptpath}" 'server/ftp'
+    bash "${scriptpath}" 'server/smb'
     bash "${scriptpath}" 'server/svn'
+    bash "${scriptpath}" 'server/media'
 
 ;;
 
