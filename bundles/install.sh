@@ -40,7 +40,9 @@ case "${bundle}" in
     bash "${scriptpath}" 'server/ssh'
     bash "${scriptpath}" 'server/ftp'
     bash "${scriptpath}" 'server/smb'
+    bash "${scriptpath}" 'server/svn'
     bash "${scriptpath}" 'server/iperf'
+    bash "${scriptpath}" 'server/media'
 
 ;;
 
@@ -226,8 +228,8 @@ case "${bundle}" in
 
 "appearance")
 
-    bash "${scriptpath}" 'themes'
-    bash "${scriptpath}" 'fonts'
+    bash "${scriptpath}" 'appearance/themes'
+    bash "${scriptpath}" 'appearance/fonts'
 
 ;;
 

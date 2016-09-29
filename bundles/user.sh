@@ -203,8 +203,8 @@ case "${bundle}" in
 
 "appearance")
 
-    bash "${scriptpath}" 'themes'
-    bash "${scriptpath}" 'fonts'
+    bash "${scriptpath}" 'appearance/themes'
+    bash "${scriptpath}" 'appearance/fonts'
 
 ;;
 
