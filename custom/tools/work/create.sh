@@ -67,8 +67,6 @@ silentsudo 'Removing unused packages' apt-get autoremove --yes --force-yes --pur
 
 repoaddnonfree
 
-silentsudo 'Accepting EULA license' sh -c 'echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections'
-
 ## Add PPA`s -------------------------------------------------------------------
 
 ppaadd  'Numix Project'             'numix'
@@ -82,96 +80,43 @@ appupgrade
 
 ## Install ---------------------------------------------------------------------
 
+## Gnome - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+bundle install 'gnome'
+bundle install 'qt'
+
 ## Themes  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-appinstall 'Numix theme'            'numix-icon-theme-circle numix-gtk-theme'
-appinstall 'Paper theme'            'paper-gtk-theme'
-appinstall 'Breeze theme'           'breeze-cursor-theme breeze-icon-theme'
-appinstall 'Oxygen cursors'         'oxygen-cursor-theme oxygen-cursor-theme-extra'
-appinstall 'GTK2 theme for Qt5'     'libqt5libqgtk2'
-appinstall 'Libreoffice breeze'     'libreoffice-style-breeze'
-
-## Fonts - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-appinstall 'MS TTF core fonts'      'ttf-mscorefonts-installer'
-appinstall 'Noto fonts'             'fonts-noto'
+bundle install 'appearance'
 
 ### VCS  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-appinstall 'VCS'                    'git subversion'
-
-if ispkginstalled nautilus
-then
-    appinstall 'RabbitVCS'          'rabbitvcs-core rabbitvcs-nautilus'
-fi
+bundle install 'vcs'
 
 ## Development - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-appinstall 'Build tools'            'build-essential astyle unifdef'
-appinstall 'Multilib tools'         'gcc-multilib g++-multilib'
-appinstall 'Static analysis tools'  'cppcheck cppcheck-gui'
-appinstall 'Dynamic analysis tools' 'valgrind'
+bundle install 'dev'
 
-appinstall 'X11 sdk'                'libx11-dev'
+## Office  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-appinstall 'OpenGL sdk'             'freeglut3 freeglut3-dev libglew1.10 libglew-dbg libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev'
-
-appinstall 'Qt SDK'                 'qml qtbase5-dev qtdeclarative5-dev qt5-doc'
-appinstall 'Qt Libs'                'libqt5svg5 libqt5webkit5-dev'
-appinstall 'Qt IDE'                 'qtcreator'
-
-appinstall 'GTK+ SDK'               'libgtk-3-dev libgtkmm-3.0-dev libtool libtool-bin'
-appinstall 'GTK+ Libs'              'libgtksourceview-3.0-dev libgtksourceview-3.0-1 libgtksourceviewmm-3.0-0v5 libgtksourceview-3.0-dev libpeas-1.0-0 libpeas-dev libgit2-glib-1.0-dev libgit2-glib-1.0-0'
-appinstall 'GTK+ IDE'               'anjuta glade'
-
-appinstall 'GNOME IDE'              'gnome-builder'
-
-appinstall 'Doxygen'                'doxygen graphviz'
-
-appinstall 'Postgres'               'postgresql pgadmin3 libpq5 libpq-dev'
-appinstall 'SQLite'                 'sqlite sqliteman libsqlite3-0 libsqlite3-dev'
+bundle install 'office'
 
 ## Graphic - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-appinstall 'GIMP'                   'gimp'
-appinstall 'Imagemagick'            'imagemagick'
+bundle install 'graphics'
 
 ## Other - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-appinstall 'Open SSH'               'openssh-server'
-appinstall 'FTP server'             'vsftpd'
-appinstall 'Samba'                  'cifs-utils samba'
-appinstall '7-zip'                  'p7zip-rar p7zip-full'
-appinstall 'ibus-gtk'               'ibus-gtk'
-appinstall 'Midnight Commander'     'mc'
-appinstall 'Directory tree'         'tree'
-appinstall 'Iperf'                  'iperf iperf3'
+bundle install 'archive'
+bundle install 'cli/files'
+
+bundle install 'server/ssh'
+bundle install 'server/ftp'
+bundle install 'server/svn'
+bundle install 'server/iperf'
 
 ## VMWare tools  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-appinstall 'VMWare tools'           'open-vm-tools open-vm-tools-desktop fuse xauth xserver-xorg-input-vmmouse xserver-xorg-video-vmware xdg-utils'
+bundle install 'vm'
 
-## Localization  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-appinstall 'Language support'       'hyphen-ru language-pack-gnome-ru language-pack-gnome-ru-base language-pack-ru language-pack-ru-base libreoffice-l10n-ru'
-appinstall 'Locales for apps'       'gimp-help-ru libreoffice-help-ru firefox-locale-ru mythes-ru hunspell-ru'
-
-### Configuration ==============================================================
-
-## Ptrace fix for gdb ----------------------------------------------------------
-
-silentsudo 'Ptrace fix'             sed -i 's/[ \t]*kernel.yama.ptrace_scope[ \t]*=[ \t]*1/kernel.yama.ptrace_scope = 0/' /etc/sysctl.d/10-ptrace.conf
-
-### Application configuration ==================================================
-
-## FTP server ------------------------------------------------------------------
-
-silentsudo 'Configuring vsftpd'     cp -f "${ROOT_PATH}/files/vsftpd/vsftpd.conf" '/etc/'
-
-## Subversion server -----------------------------------------------------------
-
-addservice 'Subversion server'      'svnserve'
-addservice 'Time sync'              'timesync'
-addservice 'M711-IR build'          'irbuild'
-addservice 'M711-IR emulator'       'irserver'
 
