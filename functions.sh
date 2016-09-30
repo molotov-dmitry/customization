@@ -872,6 +872,11 @@ function islive()
 
 ### Kernel version =============================================================
 
+function kernelversionlist()
+{
+    ls /lib/modules/
+}
+
 function kernelversion()
 {
     dpkg-query -W -f='${binary:Package}\n' linux-image-* | head -n 1 | sed 's/linux-image-//'
