@@ -26,97 +26,103 @@ fi
 
 ## Remove ----------------------------------------------------------------------
 
-#appremove 'Brasero'                 'brasero brasero-cdrkit brasero-common'
+appremove 'Apt listchanges'         'apt-listchanges'
 
-#appremove 'Simple Scanning Utility' 'simple-scan'
-#appremove 'LibreOffice unused apps' 'libreoffice-draw libreoffice-impress libreoffice-math'
-#appremove 'Games'                   'gnome-mines gnome-sudoku gnome-mahjongg aisleriot'
-#appremove 'Firefox Extensions'      'xul-ext-ubufox xul-ext-unity xul-ext-webaccounts xul-ext-websites-integration'
-#appremove 'Remote desktop client'   'remmina remmina-common remmina-plugin-rdp remmina-plugin-vnc'
-#appremove 'Unity web browser'       'webbrowser-app'
-#appremove 'Thunderbird mail client' 'thunderbird'
-#appremove 'Onboard'                 'onboard'
-#appremove 'Fcitx'                   'fcitx fcitx-bin fcitx-config-common fcitx-data fcitx-modules fcitx-frontend-all'
-#appremove 'Orca screen reader'      'gnome-orca'
-#appremove 'X Diagnostic utility'    'xdiagnose'
-#appremove 'Backup utility'          'deja-dup'
-#appremove 'Help'                    'yelp yelp-xsl gnome-user-guide ubuntu-docs'
-#appremove 'Font viewer'             'gnome-font-viewer'
-#appremove 'Symbols table'           'gucharmap'
-#appremove 'xterm'                   'xterm'
-#appremove 'Landscape'               'landscape-client-ui-install'
-#appremove 'Firefox'                 'firefox'
-#appremove 'Evolution'               'evolution evolution-common evolution-plugins'
-#appremove 'Dconf editor'            'dconf-editor'
-#appremove 'Empathy'                 'empathy empathy-common'
-#appremove 'Web camera'              'cheese'
-#appremove 'Gnome applications'      'gnome-contacts gnome-weather gnome-documents gnome-maps'
-#appremove 'Transmission'            'transmission-common transmission-gtk'
+appremove 'Brasero'                 'brasero brasero-cdrkit brasero-common'
 
-### Enable all package sources -------------------------------------------------
+appremove 'Simple Scanning Utility' 'simple-scan'
+appremove 'LibreOffice unused apps' 'libreoffice-draw libreoffice-impress libreoffice-math'
+appremove 'Games'                   'gnome-mines gnome-sudoku gnome-mahjongg aisleriot'
+appremove 'Firefox Extensions'      'xul-ext-ubufox xul-ext-unity xul-ext-webaccounts xul-ext-websites-integration'
+appremove 'Remote desktop client'   'remmina remmina-common remmina-plugin-rdp remmina-plugin-vnc'
+appremove 'Unity web browser'       'webbrowser-app'
+appremove 'Thunderbird mail client' 'thunderbird'
+appremove 'Onboard'                 'onboard'
+appremove 'Fcitx'                   'fcitx fcitx-bin fcitx-config-common fcitx-data fcitx-modules fcitx-frontend-all'
+appremove 'Orca screen reader'      'gnome-orca'
+appremove 'X Diagnostic utility'    'xdiagnose'
+appremove 'Backup utility'          'deja-dup'
+appremove 'Help'                    'yelp yelp-xsl gnome-user-guide ubuntu-docs'
+appremove 'Font viewer'             'gnome-font-viewer'
+appremove 'Symbols table'           'gucharmap'
+appremove 'xterm'                   'xterm'
+appremove 'Landscape'               'landscape-client-ui-install'
+appremove 'Dconf editor'            'dconf-editor'
+appremove 'Transmission'            'transmission-common transmission-gtk'
+appremove 'Gnome Music'             'gnome-music'
+
+## Remove unused ---------------------------------------------------------------
+
+silentsudo 'Removing unused packages' apt-get autoremove --yes --force-yes --purge
+
+## Enable all package sources --------------------------------------------------
 
 repoaddnonfree
 
-silentsudo 'Accepting EULA license' sh -c 'echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections'
+## Add PPA`s -------------------------------------------------------------------
 
-## Adding PPA`s ----------------------------------------------------------------
-
-ppaadd  'LibreOffice'               'libreoffice'
 ppaadd  'Numix Project'             'numix'
-ppaadd  'Elementary OS'             'elementary-os'             'daily'
-ppaadd  'Paper theme'               'snwh'                      'pulp'
+ppaadd  'Paper Themes (Daily)'      'snwh' 'pulp'
+#ppaadd  'LibreOffice'               'libreoffice'
+ppaadd  'Web Upd8'                  'nilarimogard' 'webupd8'
 
 ## Update ----------------------------------------------------------------------
 
 appupdate
-#appupgrade
-
+appupgrade
 
 ## Install ---------------------------------------------------------------------
 
-## Themes  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+## Gnome defaults  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-#appinstall 'Numix theme'            'numix-icon-theme-circle numix-gtk-theme'
-#appinstall 'Breeze theme'           'breeze-cursor-theme breeze-icon-theme'
-#appinstall 'Oxygen cursors'         'oxygen-cursor-theme oxygen-cursor-theme-extra'
-#appinstall 'Elementary theme'       'elementary-icon-theme elementary-theme elementary-wallpapers'
-#appinstall 'Paper theme'            'paper-gtk-theme paper-icon-theme'
-#debinstall 'Arc theme'              'arc-theme' "${ROOT_PATH}/files/arc/arc-theme_1465131682.3095952_all.deb"
+bundle install 'gnome'
 
-## Fonts - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+## Qt support  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-#appinstall 'Droid fonts'            'fonts-droid-fallback'
-#appinstall 'MS TTF core fonts'      'ttf-mscorefonts-installer'
-#appinstall 'Noto fonts'             'fonts-noto'
+bundle install 'qt'
 
-## Internet  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+## Appearance  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-#appinstall 'Chromium'               'chromium-browser chromium-browser-l10n'
+bundle install 'appearance'
 
-### VCS  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+## Development - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-appinstall 'VCS'                    'git subversion'
+#bundle install 'dev'
 
-#if ispkginstalled nautilus
-#then
-#    appinstall 'RabbitVCS'          'rabbitvcs-core rabbitvcs-nautilus'
-#fi
+## VCS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+bundle install 'vcs'
+
+## Network - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+#bundle install 'network'
+#bundle install 'network-remote'
+
+## Office  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+#bundle install 'office'
+
+## Media - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+#bundle install 'media'
+#bundle install 'media-online'
+
+## Graphic - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+#bundle install 'graphics'
 
 ## Other - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-#appinstall 'Restricted extras'		'ubuntu-restricted-extras'
-#appinstall '7-zip'                  'p7zip-rar p7zip-full'
-#appinstall 'ibus-gtk'               'ibus-gtk'
+bundle install 'archive'
+bundle install 'cli/files'
 
-## Upgrade ---------------------------------------------------------------------
-
-appdistupgrade
+#appinstall 'Iperf'                  'iperf iperf3'
 
 ### Drivers ====================================================================
 
 ## Kernel headers --------------------------------------------------------------
 
-appinstall 'Build tools'            'build-essential'
+bundle install 'dev/build'
 
 if [[ "$(lsb_release -si)" == "Ubuntu" ]]
 then
@@ -136,9 +142,18 @@ silentsudo 'Cloning wi-fi driver'   git clone https://github.com/hadess/rtl8723a
 
 cd rtl8723as
 
-silentsudo 'Faking kernel version'  sed -i "s/uname -r/echo $(kernelversion)/" Makefile
-silentsudo 'Building driver'        make
-silentsudo 'Installing driver'      make install
+for kernelver in $(kernelversionlist)
+do
+
+    cp -f Makefile Makefile.bak
+
+    silentsudo 'Faking kernel version'  sed -i "s/uname -r/echo ${kernelver}/" Makefile
+    silentsudo 'Building driver'        make
+    silentsudo 'Installing driver'      make install
+
+    mv -f Makefile.bak Makefile
+
+done
 
 silentsudo 'Adding module to autostart' bash -c 'echo r8723bs >> /etc/modules-load.d/rtl8723bs.conf'
 
