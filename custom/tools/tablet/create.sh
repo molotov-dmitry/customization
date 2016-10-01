@@ -118,6 +118,10 @@ bundle install 'cli/files'
 
 #appinstall 'Iperf'                  'iperf iperf3'
 
+## Modem - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+appinstall 'Modem tools' 'libmbim-utils libqmi-utils minicom'
+
 ### Drivers ====================================================================
 
 silentsudo 'Creating directory for drivers' mkdir -p /usr/bin/drivers
