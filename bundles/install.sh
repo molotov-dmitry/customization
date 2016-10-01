@@ -238,7 +238,7 @@ case "${bundle}" in
 "appearance/themes")
 
     appinstall 'Numix theme'            'numix-icon-theme-circle numix-gtk-theme'
-    appinstall 'Paper theme'            'paper-gtk-theme'
+    appinstall 'Paper theme'            'paper-gtk-theme paper-icon-theme'
     appinstall 'Breeze theme'           'breeze-cursor-theme breeze-icon-theme'
     appinstall 'Oxygen cursors'         'oxygen-cursor-theme oxygen-cursor-theme-extra'
 
@@ -251,6 +251,7 @@ case "${bundle}" in
     silentsudo 'Accepting EULA license' sh -c 'echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections'
     appinstall 'MS TTF core fonts'      'ttf-mscorefonts-installer'
     appinstall 'Noto fonts'             'fonts-noto'
+    appinstall 'Linux Libertine fonst'  'fonts-linuxlibertine'
 
 ;;
 
