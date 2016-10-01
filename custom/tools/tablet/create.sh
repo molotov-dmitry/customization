@@ -120,21 +120,23 @@ bundle install 'cli/files'
 
 ### Drivers ====================================================================
 
+silentsudo 'Creating directory for drivers' mkdir -p /usr/bin/drivers
+
 ## Kernel headers --------------------------------------------------------------
 
 bundle install 'dev/build'
 
+for kernelver in $(kernelversionlist)
+do
+    appinstall "${kernelver} kernel headers"     "linux-headers-${kernelver}"
+done
+
 if [[ "$(lsb_release -si)" == "Ubuntu" ]]
 then
-    appinstall 'Kernel headers'     'linux-headers-generic'
-elif [[ "$(lsb_release -si)" == "Debian" ]]
-then
-    appinstall 'Kernel headers'     "linux-headers-$(kernelversion)"
+    appinstall 'Generic kernel headers'     'linux-headers-generic'
 fi
 
 ## Wi-Fi -----------------------------------------------------------------------
-
-silentsudo 'Creating directory for drivers' mkdir -p /usr/bin/drivers
 
 cd /usr/bin/drivers
 
@@ -159,7 +161,29 @@ silentsudo 'Adding module to autostart' bash -c 'echo r8723bs >> /etc/modules-lo
 
 ## Bluetooth -------------------------------------------------------------------
 
+cd /usr/bin/drivers
 
+silentsudo 'Cloning bluetooth driver'   git clone https://github.com/lwfinger/rtl8723bs_bt.git
+
+cd rtl8723bs_bt
+
+silentsudo 'Building bluetooth driver'  make
+silentsudo 'Installing bluetooth driver' make install
+
+## battery ---------------------------------------------------------------------
+
+appinstall 'i2c-tools'  'i2c-tools'
+
+cd /usr/bin/drivers
+
+silentsudo 'Cloning battery driver'   git clone https://github.com/Icenowy/axpd.git
+
+cd axpd
+
+silentsudo '' mkdir -p "${ROOT_PATH}/files/axpd/"
+silentsudo '' cp -f axpd.service "${ROOT_PATH}/files/axpd/"
+
+addservice 'AXP288 I2C Daemon' 'axpd' 'axpd'
 
 ### Cleaning up ================================================================
 
