@@ -351,6 +351,7 @@ function ppaadd()
     reponame="$1"
     author="$2"
     repo="$3"
+    release="$4"
 
     if [[ -z "${repo}" ]]
     then
@@ -369,7 +370,14 @@ function ppaadd()
             debian_ppaadd "${reponame}" "${author}" "${repo}"
         fi
 
-        if [[ $? -eq 0 ]]
+        res=$?
+
+        if [[ -n "${release}" ]]
+        then
+            sed -i "s/[ \t]$(lsb_release -cs)[ \t]/ ${release} /g" /etc/apt/sources.list.d/${author}-*-${repo}-*.list >/dev/null 2>&1
+        fi
+
+        if [[ $res -eq 0 ]]
         then
             msgdone
             return 0
