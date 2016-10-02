@@ -104,13 +104,6 @@ function conntest()
     fi
 }
 
-### Architecture ===============================================================
-
-function targetarch()
-{
-    
-}
-
 ### Packages ===================================================================
 
 function ispkginstalled()
