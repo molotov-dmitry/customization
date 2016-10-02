@@ -332,8 +332,6 @@ function debian_ppaadd()
 
     for (( index=0; index<${version_count}; index++ ))
     do
-        echo "[${versions[$index]}/$(lsb_release -cs)]"
-
         if [[ "${versions[$index]}" == "$(lsb_release -cs)" ]]
         then
             version="${versions[$index]}"
