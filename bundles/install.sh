@@ -306,7 +306,7 @@ case "${bundle}" in
     appinstall 'Chromium browser'       'chromium-browser chromium-browser-l10n'
     appinstall 'Empathy'                'empathy telepathy-haze'
     appinstall 'Telegram protocol'      'telegram-purple'
-    appinstall 'Vk.com protocol'        'purple-vk-plugin'
+    appinstall 'VK protocol'            'purple-vk-plugin'
     appinstall 'Gnome Maps'             'gnome-maps'
     appinstall 'Gnome Weather'          'gnome-weather'
 
