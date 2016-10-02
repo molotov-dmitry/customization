@@ -354,10 +354,35 @@ case "${bundle}" in
 
 "network-remote")
 
+    ## Transmission Remote -----------------------------------------------------
+
     mkdir -p "${HOME}/.config/transmission-remote-gtk/"
     cp -rf "${ROOT_PATH}/files/transmission-remote-gtk/config.json" "${HOME}/.config/transmission-remote-gtk/"
-    #TODO eiskaltdcpp-qt5 config
+    
+    ## EiskaltDC++ Remote ------------------------------------------------------
 
+    eiskaltdcpp-remote-qt-config --server-ip '188.134.72.31'
+
+    eiskaltdcpp-remote-qt-config --clear-directory
+
+    eiskaltdcpp-remote-qt-config --add-directory /media/documents/Video/Фильмы
+    eiskaltdcpp-remote-qt-config --add-directory /media/documents/Video/Youtube
+    eiskaltdcpp-remote-qt-config --add-directory /media/documents/Video/Аниме
+    eiskaltdcpp-remote-qt-config --add-directory /media/documents/Video/Мультфильмы
+    eiskaltdcpp-remote-qt-config --add-directory /media/documents/Books
+    eiskaltdcpp-remote-qt-config --add-directory /media/documents/Documents
+    eiskaltdcpp-remote-qt-config --add-directory /media/documents/Music
+    eiskaltdcpp-remote-qt-config --add-directory /media/documents/Downloads
+    eiskaltdcpp-remote-qt-config --add-directory /media/documents/Images
+    eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib
+    eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Драйверы
+    eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Игры
+    eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/OS
+    eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Утилиты
+    eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Сеть
+    eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Медиа
+
+    eiskaltdcpp-remote-qt-config --last-directory /media/documents/Downloads
 ;;
 
 ### ============================================================================
