@@ -127,9 +127,9 @@ function debprepare()
 
     debpath="${ROOT_PATH}/packages/${debname}_${debversion}_${debarch}.deb"
 
-    mkdir -p "${rootfs_dir}/packages"
+    mkdir -p "${rootfs_dir}/tools/packages"
 
-    silentsudo "Copy ${appname} package" cp -f "${debpath}" "${rootfs_dir}/packages/"
+    silentsudo "Copy ${appname} package" cp -f "${debpath}" "${rootfs_dir}/tools/packages/"
 }
 
 function debinstall()
