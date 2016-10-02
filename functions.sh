@@ -323,7 +323,42 @@ function debian_ppaadd()
         return 3
     fi
 
-    version=$(echo "${ppapage}" | grep '<option' | grep '(' | sed -n 2p | cut -d '"' -f 2)
+    versions=( $(echo "${ppapage}" | grep '<option' | grep '(' | cut -d '"' -f 2) )
+    release_dates=( $(echo "${ppapage}" | grep '<option' | grep '(' | sed 's/.*(//g;s/).*//g') )
+
+    version_count=${#versions[@]}
+
+    unset version
+
+    for (( index=0; index<${version_count}; index++ ))
+    do
+        echo "[${versions[$index]}/$(lsb_release -cs)]"
+
+        if [[ "${versions[$index]}" == "$(lsb_release -cs)" ]]
+        then
+            version="${versions[$index]}"
+            break
+        fi
+    done
+
+    if [[ -z "${version}" ]]
+    then
+        for (( index=0; index<${version_count}; index++ ))
+        do
+            release_stamp=${release_dates[$index]/./}20
+
+            if [[ $(date +%y%m%d) -gt ${release_stamp} ]]
+            then
+                version="${versions[$index]}"
+                break
+            fi
+        done
+    fi
+
+    if [[ -z "${version}" ]]
+    then
+        version="${versions[-1]}"
+    fi
 
     if [[ -z "${version}" ]]
     then
@@ -351,7 +386,6 @@ function ppaadd()
     reponame="$1"
     author="$2"
     repo="$3"
-    release="$4"
 
     if [[ -z "${repo}" ]]
     then
@@ -363,21 +397,14 @@ function ppaadd()
     if ! isppaadded "${author}" "${repo}"
     then
 
-        if [[ "$(lsb_release -si)" == "Ubuntu" ]]
-        then
-            sudo add-apt-repository --yes ppa:${author}/${repo} >/dev/null 2>&1
-		else
-            debian_ppaadd "${reponame}" "${author}" "${repo}"
-        fi
+        #if [[ "$(lsb_release -si)" == "Ubuntu" ]]
+        #then
+        #    sudo add-apt-repository --yes ppa:${author}/${repo} >/dev/null 2>&1
+		#else
+        debian_ppaadd "${reponame}" "${author}" "${repo}"
+        #fi
 
-        res=$?
-
-        if [[ -n "${release}" ]]
-        then
-            sed -i "s/[ \t]$(lsb_release -cs)[ \t]/ ${release} /g" /etc/apt/sources.list.d/${author}-*-${repo}-*.list >/dev/null 2>&1
-        fi
-
-        if [[ $res -eq 0 ]]
+        if [[ $? -eq 0 ]]
         then
             msgdone
             return 0
