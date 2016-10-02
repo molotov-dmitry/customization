@@ -345,8 +345,12 @@ case "${bundle}" in
     ## Empathy -----------------------------------------------------------------
 
     gsettings set org.gnome.Empathy.conversation theme          'material'
-    gsettings set org.gnome.Empathy.conversation theme-variant  'Green Alternating'
+    gsettings set org.gnome.Empathy.conversation theme-variant  'Green'
     gsettings set org.gnome.Empathy.conversation adium-path     '/usr/share/adium/message-styles/material.AdiumMessageStyle'
+
+    gsettings set org.gnome.Empathy.ui show-groups              true
+
+    gsettings set org.gnome.Empathy.conversation spell-checker-languages 'en,ru'
 
 ;;
 
