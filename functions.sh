@@ -104,6 +104,13 @@ function conntest()
     fi
 }
 
+### Architecture ===============================================================
+
+function targetarch()
+{
+    
+}
+
 ### Packages ===================================================================
 
 function ispkginstalled()
@@ -118,17 +125,34 @@ function ispkginstalled()
     fi
 }
 
+function debprepare()
+{
+    appname="$1"
+    debname="$2"
+    debversion="$3"
+    debarch="$4"
+
+    debpath="${ROOT_PATH}/packages/${debname}_${debversion}_${debarch}.deb"
+
+    mkdir -p "${rootfs_dir}/packages"
+
+    silentsudo "Copy ${appname} package" cp -f "${debpath}" "${rootfs_dir}/packages/"
+}
+
 function debinstall()
 {
     appname="$1"
-    package="$2"
-    debpath="$3"
+    debname="$2"
+    debversion="$3"
+    debarch="$4"
+
+    debpath="${ROOT_PATH}/packages/${debname}_${debversion}_${debarch}.deb"
 
     title "Installing $appname"
 
-    if ! ispkginstalled "${package}"
+    if ! ispkginstalled "${debname}"
     then
-        sudo dpkg -i "${debpath}"
+        sudo dpkg -i "${debpath}" >/dev/null 2>&1
 
         if [[ $? -eq 0 ]]
             then

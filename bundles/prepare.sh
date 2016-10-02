@@ -97,8 +97,8 @@ case "${bundle}" in
 "network-remote")
 
     silentsudo 'Copy Transmission remote config' cp -rf "${ROOT_PATH}/files/transmission-remote-gtk" "${rootfs_dir}/tools/files/"
-    #TODO eiskaltdcpp-qt5 config
 
+    debprepare 'EiskaltDC++ Remote Qt' 'eiskaltdcpp-remote-qt' '18' 'amd64'
 ;;
 
 ### ============================================================================
