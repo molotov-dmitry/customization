@@ -109,6 +109,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'dev/gtk'
     bash "${scriptpath}" 'dev/gnome'
     bash "${scriptpath}" 'dev/db'
+    bash "${scriptpath}" 'dev/net'
 
 ;;
 
@@ -204,6 +205,15 @@ case "${bundle}" in
 
     appinstall 'Postgres'               'postgresql pgadmin3 libpq5 libpq-dev'
     appinstall 'SQLite'                 'sqlite sqliteman libsqlite3-0 libsqlite3-dev'
+
+;;
+
+### Network ====================================================================
+
+"dev/net")
+
+    silentsudo 'Wireshark fix'          sh -c 'debconf-set-selections <<< "wireshark-common wireshark-common/install-setuid boolean true"'
+    appinstall 'Wireshark'              'wireshark-gtk'
 
 ;;
 

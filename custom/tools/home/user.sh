@@ -30,7 +30,8 @@ bundle user 'network-remote'
 
 ## Development -----------------------------------------------------------------
 
-bundle user 'dev'
+bundle user 'dev/style'
+bundle user 'dev/qt'
 
 ## Version control system ------------------------------------------------------
 

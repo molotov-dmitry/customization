@@ -88,7 +88,11 @@ bundle install 'appearance'
 
 ## Development - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-bundle install 'dev'
+bundle install 'dev/build'
+bundle install 'dev/analysis'
+bundle install 'dev/style'
+bundle install 'dev/qt'
+bundle install 'dev/db'
 
 ## VCS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
