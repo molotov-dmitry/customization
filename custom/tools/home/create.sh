@@ -91,6 +91,7 @@ bundle install 'appearance'
 bundle install 'dev/build'
 bundle install 'dev/analysis'
 bundle install 'dev/style'
+bundle install 'dev/doc'
 bundle install 'dev/qt'
 bundle install 'dev/db'
 
