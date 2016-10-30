@@ -212,7 +212,7 @@ case "${bundle}" in
 
 "dev/net")
 
-    silentsudo 'Wireshark fix'          sh -c 'debconf-set-selections <<< "wireshark-common wireshark-common/install-setuid boolean true"'
+    silentsudo 'Wireshark fix'          sh -c 'echo wireshark-common wireshark-common/install-setuid boolean true | sudo debconf-set-selections'
     appinstall 'Wireshark'              'wireshark-gtk'
 
 ;;
