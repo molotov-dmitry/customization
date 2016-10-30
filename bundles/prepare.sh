@@ -46,7 +46,7 @@ case "${bundle}" in
 
 "server/svn")
 
-    silentsudo "Copy svnserve unit" cp -rf "${ROOT_PATH}/svnserve" "${rootfs_dir}/tools/files/"
+    silentsudo "Copy svnserve unit" cp -rf "${ROOT_PATH}/files/svnserve" "${rootfs_dir}/tools/files/"
     
 ;;
 
