@@ -261,8 +261,8 @@ silentsudo 'Copying usersboot script'       cp -f "${ROOT_PATH}/startup.sh" "${r
 
 silentsudo 'Copying bundle scripts'         cp -rf "${ROOT_PATH}/bundles" "${rootfs_dir}/tools/" || exit 1
 
-silentsudo 'Copying firstboot service'      cp -f "${ROOT_PATH}/files/startup/custom-startup.service" "${rootfs_dir}/systemd/system/" || exit 1
-silentsudo 'Copying firstboot service'      cp -f "${ROOT_PATH}/files/startup/enable-startup.sh" "${rootfs_dir}/tools/files" || exit 1
+silentsudo 'Copying firstboot service'      cp -f "${ROOT_PATH}/files/startup/custom-startup.service" "${rootfs_dir}/tools/files" || exit 1
+silentsudo 'Copying firstboot service'      cp -f "${ROOT_PATH}/files/startup/enable-startup.sh" "${rootfs_dir}/tools" || exit 1
 
 ## Executing custom config script ----------------------------------------------
 
