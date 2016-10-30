@@ -1,0 +1,10 @@
+[Unit]
+Description=Custom configuration startup script
+ConditionFileIsExecutable=/tools/startup.sh
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=bash /tools/startup.sh
+TimeoutSec=0
+RemainAfterExit=yes

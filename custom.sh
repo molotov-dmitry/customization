@@ -247,19 +247,22 @@ fi
 
 ## Preparing customization scripts ---------------------------------------------
 
-silentsudo 'Removing Tools dir'             rm -rf   "${rootfs_dir}/tools"
-silentsudo 'Creating Tools dir'             mkdir -p "${rootfs_dir}/tools"
-silentsudo 'Creating Files dir'             mkdir -p "${rootfs_dir}/tools/files"
+silentsudo 'Removing Tools dir'             rm -rf   "${rootfs_dir}/tools" || exit 1
+silentsudo 'Creating Tools dir'             mkdir -p "${rootfs_dir}/tools" || exit 1
+silentsudo 'Creating Files dir'             mkdir -p "${rootfs_dir}/tools/files" || exit 1
 
-silentsudo 'Copying functions script'       cp -f "${ROOT_PATH}/functions.sh" "${rootfs_dir}/tools/"
-silentsudo 'Copying folders script'         cp -f "${ROOT_PATH}/folders.sh"   "${rootfs_dir}/tools/"
+silentsudo 'Copying functions script'       cp -f "${ROOT_PATH}/functions.sh" "${rootfs_dir}/tools/" || exit 1
+silentsudo 'Copying folders script'         cp -f "${ROOT_PATH}/folders.sh"   "${rootfs_dir}/tools/" || exit 1
 
-silentsudo 'Copying create script'          cp -f "${ROOT_PATH}/custom/tools/${config}/create.sh" "${rootfs_dir}/tools/"
-silentsudo 'Copying config script'          cp -f "${ROOT_PATH}/custom/tools/${config}/config.sh" "${rootfs_dir}/tools/"
+silentsudo 'Copying create script'          cp -f "${ROOT_PATH}/custom/tools/${config}/create.sh" "${rootfs_dir}/tools/" || exit 1
+silentsudo 'Copying config script'          cp -f "${ROOT_PATH}/custom/tools/${config}/config.sh" "${rootfs_dir}/tools/" || exit 1
 
-silentsudo 'Copying usersboot script'       cp -f "${ROOT_PATH}/startup.sh" "${rootfs_dir}/tools/"
+silentsudo 'Copying usersboot script'       cp -f "${ROOT_PATH}/startup.sh" "${rootfs_dir}/tools/" || exit 1
 
-silentsudo 'Copying bundle scripts'         cp -rf "${ROOT_PATH}/bundles" "${rootfs_dir}/tools/"
+silentsudo 'Copying bundle scripts'         cp -rf "${ROOT_PATH}/bundles" "${rootfs_dir}/tools/" || exit 1
+
+silentsudo 'Copying firstboot service'      cp -f "${ROOT_PATH}/files/startup/custom-startup.service" "${rootfs_dir}/systemd/system/" || exit 1
+silentsudo 'Copying firstboot service'      cp -f "${ROOT_PATH}/files/startup/enable-startup.sh" "${rootfs_dir}/tools/files" || exit 1
 
 ## Executing custom config script ----------------------------------------------
 
@@ -275,9 +278,11 @@ fi
 sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" echo -n
 sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" bash /tools/create.sh
 sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" bash /tools/config.sh
+sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" bash /tools/enable-startup.sh
 
 silentsudo 'Removing create script'         rm -rf "${rootfs_dir}/tools/create.sh"
 silentsudo 'Removing config script'         rm -rf "${rootfs_dir}/tools/create.sh"
+silentsudo 'Removing statrup gen script'    rm -rf "${rootfs_dir}/tools/enable-startup.sh"
 
 ## Cleaning up chroot ----------------------------------------------------------
 
@@ -293,10 +298,6 @@ silentsudo 'Copying first boot script'      cp -f "${ROOT_PATH}/custom/tools/${c
 ## Copying user script ---------------------------------------------------------
 
 silentsudo 'Copying user script'            cp -f "${ROOT_PATH}/custom/tools/${config}/user.sh" "${rootfs_dir}/tools/"
-
-## Autostarting boot scripts ---------------------------------------------------
-
-silentsudo 'Adding boot script autostart'   sed -i '$ibash /tools/startup.sh\n\n' "${rootfs_dir}/etc/rc.local"
 
 ## Finalizing customization ----------------------------------------------------
 
