@@ -8,7 +8,6 @@ cd "${ROOT_PATH}" || exit 1
 sudo echo -n
 
 clear
-clear
 
 ### Test internet connection ===================================================
 

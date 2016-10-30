@@ -6,7 +6,6 @@ cd "${ROOT_PATH}" || exit 1
 . "${ROOT_PATH}/functions.sh"
 
 clear
-clear
 
 ### Test internet connection ===================================================
 
