@@ -68,7 +68,7 @@ repoaddnonfree
 ## Add PPA`s -------------------------------------------------------------------
 
 ppaadd  'Numix Project'             'numix'
-ppaadd  'Paper Themes (Daily)'      'snwh' 'pulp'
+ppaadd  'Paper Themes (Daily)'      'snwh' 'pulp' 'xenial'
 ppaadd  'LibreOffice'               'libreoffice'
 
 ## Update ----------------------------------------------------------------------
