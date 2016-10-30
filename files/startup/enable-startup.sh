@@ -5,4 +5,4 @@ cd "${ROOT_PATH}" || exit 1
 
 . "${ROOT_PATH}/functions.sh"
 
-addservice 'Startup script'      '' 'custom-startup'
+addservice 'Startup script' 'custom-startup' ''
