@@ -301,6 +301,7 @@ function debian_ppaadd()
     reponame="$1"
     author="$2"
     repo="$3"
+    version="$4"
 
     ppapage=$(wget -q -O - "https://launchpad.net/~${author}/+archive/ubuntu/${repo}")
 
@@ -328,16 +329,17 @@ function debian_ppaadd()
 
     version_count=${#versions[@]}
 
-    unset version
-
-    for (( index=0; index<${version_count}; index++ ))
-    do
-        if [[ "${versions[$index]}" == "$(lsb_release -cs)" ]]
-        then
-            version="${versions[$index]}"
-            break
-        fi
-    done
+    if [[ -z "${version}" ]]
+    then
+        for (( index=0; index<${version_count}; index++ ))
+        do
+            if [[ "${versions[$index]}" == "$(lsb_release -cs)" ]]
+            then
+                version="${versions[$index]}"
+                break
+            fi
+        done
+    fi
 
     if [[ -z "${version}" ]]
     then
@@ -384,6 +386,7 @@ function ppaadd()
     reponame="$1"
     author="$2"
     repo="$3"
+    release="$4"
 
     if [[ -z "${repo}" ]]
     then
@@ -399,7 +402,7 @@ function ppaadd()
         #then
         #    sudo add-apt-repository --yes ppa:${author}/${repo} >/dev/null 2>&1
 		#else
-        debian_ppaadd "${reponame}" "${author}" "${repo}"
+        debian_ppaadd "${reponame}" "${author}" "${repo}" "${release}"
         #fi
 
         if [[ $? -eq 0 ]]
