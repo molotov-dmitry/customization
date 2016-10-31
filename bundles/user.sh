@@ -214,7 +214,14 @@ case "${bundle}" in
 
     ## Icon theme --------------------------------------------------------------
 
-    icon_theme='Numix-Circle'
+    if [[ "$(desktoptype)" == 'Unity' ]]
+    then
+        icon_theme='Numix-Circle'
+
+    elif [[ "$(desktoptype)" == 'GNOME' ]]
+    then
+        icon_theme='Paper'
+    fi
 
     gsettings set org.gnome.desktop.interface icon-theme "${icon_theme}"
 
