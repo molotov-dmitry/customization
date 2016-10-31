@@ -377,7 +377,7 @@ case "${bundle}" in
 
 "vm")
 
-    appinstall 'VMWare tools'           'open-vm-tools open-vm-tools-desktop fuse xauth xserver-xorg-video-vmware xdg-utils'
+    appinstall 'VMWare tools'           'open-vm-tools open-vm-tools-desktop fuse xauth xserver-xorg-input-vmmouse xserver-xorg-video-vmware xdg-utils'
 
 ;;
 
