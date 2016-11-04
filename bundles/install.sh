@@ -327,7 +327,7 @@ case "${bundle}" in
 "network-remote")
 
     appinstall 'Transmission remote'    'transmission-remote-gtk'
-    debinstall 'EiskaltDC++ Remote Qt'  'eiskaltdcpp-remote-qt' '22' 'amd64'
+    debinstall 'EiskaltDC++ Remote Qt'  'eiskaltdcpp-remote-qt' '24' 'amd64'
 
 ;;
 

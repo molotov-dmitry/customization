@@ -98,7 +98,7 @@ case "${bundle}" in
 
     silentsudo 'Copy Transmission remote config' cp -rf "${ROOT_PATH}/files/transmission-remote-gtk" "${rootfs_dir}/tools/files/"
 
-    debprepare 'EiskaltDC++ Remote Qt' 'eiskaltdcpp-remote-qt' '22' 'amd64'
+    debprepare 'EiskaltDC++ Remote Qt' 'eiskaltdcpp-remote-qt' '24' 'amd64'
 ;;
 
 ### ============================================================================
