@@ -22,6 +22,18 @@ case "${bundle}" in
     launcheradd 'nautilus'
     launcheradd 'gnome-terminal'
 
+    ## hide apps from application menu -----------------------------------------
+
+    hideapp 'ipython'
+    hideapp 'im-config'
+    hideapp 'gparted'
+    hideapp 'gnome-control-center'
+    hideapp 'gnome-tweak-tool'
+    hideapp 'gnome-session-properties'
+    hideapp 'software-properties-drivers'
+    hideapp 'software-properties-gnome'
+    hideapp 'software-properties-gtk'
+
     ## Keyboard ----------------------------------------------------------------
 
     gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['<Shift>Alt_L']"
@@ -265,6 +277,10 @@ case "${bundle}" in
 
 "office")
 
+    ## hide apps from application menu -----------------------------------------
+
+    hideapp 'libreoffice-startcenter'
+
     ## Libreoffice  ------------------------------------------------------------
 
     mkdir -p "${HOME}/.config/libreoffice/4/user/config/soffice.cfg/modules/swriter/toolbar"
@@ -287,6 +303,11 @@ case "${bundle}" in
     #launcheradd 'kodi'
     launcheradd 'rhythmbox'
     launcheradd 'totem'
+
+    ## hide apps from application menu -----------------------------------------
+
+    hideapp 'easytag'
+    hideapp 'mpv'
 
     ## Media player gnome shell extension --------------------------------------
 
@@ -369,7 +390,7 @@ case "${bundle}" in
 
     mkdir -p "${HOME}/.config/transmission-remote-gtk/"
     cp -rf "${ROOT_PATH}/files/transmission-remote-gtk/config.json" "${HOME}/.config/transmission-remote-gtk/"
-    
+
     ## EiskaltDC++ Remote ------------------------------------------------------
 
     eiskaltdcpp-remote-qt-config --server-ip '188.134.72.31'
@@ -394,6 +415,25 @@ case "${bundle}" in
     eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Медиа
 
     eiskaltdcpp-remote-qt-config --last-directory /media/documents/Downloads
+;;
+
+### ============================================================================
+### Command line ===============================================================
+### ============================================================================
+
+"cli")
+
+    bash "${scriptpath}" 'cli/files'
+
+;;
+
+### Command line file manager applications =====================================
+
+"cli/files")
+
+    hideapp 'mc'
+    hideapp 'mcedit'
+
 ;;
 
 ### ============================================================================
