@@ -765,6 +765,31 @@ ${value}"
     return $?
 }
 
+### Application menu functions =================================================
+
+function hideapp()
+{
+    app="$1"
+
+    if [[ ! -f "/usr/share/applications/${app}.desktop" ]]
+    then
+        return 0
+    fi
+
+    if grep '^NoDisplay=true$' "/usr/share/applications/${app}.desktop"
+    then
+        return 0
+    fi
+
+    mkdir -p "${HOME}/.local/share/applications/"
+
+    cp -f "/usr/share/applications/${app}.desktop" "${HOME}/.local/share/applications/${app}.desktop"
+    sed -i '/^NoDisplay=/d' "${HOME}/.local/share/applications/${app}.desktop"
+    echo 'NoDisplay=true' >> "${HOME}/.local/share/applications/${app}.desktop"
+
+    return 0
+}
+
 ### Launcher functions =========================================================
 
 function launcherclear()
