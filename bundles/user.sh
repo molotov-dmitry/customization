@@ -68,6 +68,7 @@ case "${bundle}" in
     term_profile=$(gsettings get org.gnome.Terminal.ProfilesList default | cut -d "'" -f 2)
 
     gsettings set org.gnome.Terminal.Legacy.Settings default-show-menubar false
+    gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'dark'
 
     gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" use-transparent-background true
     gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" background-transparency-percent 5
@@ -249,10 +250,10 @@ case "${bundle}" in
     then
         theme_name='Numix'
 
-    elif [[ "$(desktoptype)" == 'GNOME' && $(gnome-shell --version | cut -d '.' -f 2) -lt 22 ]]
+    elif [[ "$(desktoptype)" == 'GNOME' && $(gnome-shell --version | cut -d '.' -f 2) -lt 20 ]]
     then
         theme_name='Paper'
-    
+
     else
         theme_name='Numix'
     fi
