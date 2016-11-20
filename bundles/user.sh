@@ -249,9 +249,12 @@ case "${bundle}" in
     then
         theme_name='Numix'
 
-    elif [[ "$(desktoptype)" == 'GNOME' ]]
+    elif [[ "$(desktoptype)" == 'GNOME' && $(gnome-shell --version | cut -d '.' -f 2) -lt 22 ]]
     then
         theme_name='Paper'
+    
+    else
+        theme_name='Numix'
     fi
 
     if [[ -n "${theme_name}" ]]
