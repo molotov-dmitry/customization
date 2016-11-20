@@ -45,6 +45,10 @@ bundle user 'office'
 
 bundle user 'media'
 
+## Console ---------------------------------------------------------------------
+
+bundle user 'cli/files'
+
 ### Directories ================================================================
 
 bash "${ROOT_PATH}/folders.sh"
