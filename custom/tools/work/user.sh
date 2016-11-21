@@ -55,3 +55,8 @@ bundle user 'vcs'
 
 bundle user 'office'
 
+## Console ---------------------------------------------------------------------
+
+bundle user 'cli/files'
+
+
