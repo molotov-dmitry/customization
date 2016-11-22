@@ -184,6 +184,7 @@ silentsudo 'Cloning battery driver'   git clone https://github.com/Icenowy/axpd.
 
 cd axpd
 
+silentsudo '' sed -i 's/\/usr\/libexec/\/usr\/bin\/drivers\/axpd' axpd.service
 silentsudo '' mkdir -p "${ROOT_PATH}/files/axpd/"
 silentsudo '' cp -f axpd.service "${ROOT_PATH}/files/axpd/"
 
