@@ -64,6 +64,7 @@ ppaadd  'Numix Project'             'numix'
 ppaadd  'Paper Themes (Daily)'      'snwh' 'pulp' 'xenial'
 #ppaadd  'LibreOffice'               'libreoffice'
 ppaadd  'Web Upd8'                  'nilarimogard' 'webupd8'
+ppaadd  'Purple VK plugin'          'purple-vk-plugin' 'dev'
 
 ## Update ----------------------------------------------------------------------
 
@@ -94,17 +95,17 @@ bundle install 'vcs'
 
 ## Network - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-#bundle install 'network'
-#bundle install 'network-remote'
+bundle install 'network'
+bundle install 'network-remote'
 
 ## Office  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-#bundle install 'office'
+bundle install 'office'
 
 ## Media - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-#bundle install 'media'
-#bundle install 'media-online'
+bundle install 'media'
+bundle install 'media-online'
 
 ## Graphic - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

@@ -17,7 +17,7 @@ bundle config 'qt'
 
 ## Development =================================================================
 
-bundle config 'dev'
+bundle config 'dev/build'
 
 ## Network and communication ===================================================
 
