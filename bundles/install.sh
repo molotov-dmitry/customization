@@ -49,7 +49,7 @@ case "${bundle}" in
 ### OpenSSH server =============================================================
 
 "server/ssh")
-    
+
     appinstall 'Open SSH'               'openssh-server'
 
 ;;
@@ -75,7 +75,7 @@ case "${bundle}" in
 "server/svn")
 
     appinstall 'Samba'                  'cifs-utils samba'
-    
+
 ;;
 
 ### Iperf server ===============================================================
@@ -90,6 +90,27 @@ case "${bundle}" in
 "server/media")
 
     #TODO
+
+;;
+
+#### GitLab ====================================================================
+
+"gitlab")
+
+    debconfselect 'gitlab' 'gitlab/ssl'         'false'
+    debconfselect 'gitlab' 'gitlab/letsencrypt' 'false'
+    debconfselect 'gitlab' 'gitlab/fqdn'        'gitlab.local'
+
+    title 'Installing Gitlab'
+
+    appinstall 'GitLab' 'gitlab' >/dev/null 2>&1
+
+    if [[ $? -eq 0 ]]
+    then
+        msgdone
+    else
+        msgwarn '[first boot may take long time]'
+    fi
 
 ;;
 

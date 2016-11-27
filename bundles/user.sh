@@ -216,8 +216,10 @@ case "${bundle}" in
 
 "appearance")
 
-    bash "${scriptpath}" 'appearance/themes'
-    bash "${scriptpath}" 'appearance/fonts'
+    shift
+
+    bash "${scriptpath}" 'appearance/themes' "$@"
+    bash "${scriptpath}" 'appearance/fonts'  "$@"
 
 ;;
 
@@ -258,7 +260,7 @@ case "${bundle}" in
         theme_name='Numix'
     fi
 
-    if [[ -n "${theme_name}" ]]
+    if [[ -n "${theme_name}" && "$2" != "tablet" ]]
     then
         gsettings set org.gnome.desktop.interface gtk-theme         "${theme_name}"
         gsettings set org.gnome.desktop.wm.preferences theme        "${theme_name}"
