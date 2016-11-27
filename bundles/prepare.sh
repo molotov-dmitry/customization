@@ -88,7 +88,7 @@ case "${bundle}" in
 
 "network")
 
-    silentsudo 'Copy Empathy theme' cp -rf "${ROOT_PATH}/files/empathy" "${rootfs_dir}/tools/files/"
+    silentsudo 'Copy Empathy theme and config' cp -rf "${ROOT_PATH}/files/empathy" "${rootfs_dir}/tools/files/"
 
 ;;
 

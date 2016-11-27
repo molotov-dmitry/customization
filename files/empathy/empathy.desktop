@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=empathy -h
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[ru_RU]=Empathy
+Name=Empathy
+Comment[ru_RU]=Запустить Empathy фоновым процессом
+Comment=Open Empathy hidden in background
