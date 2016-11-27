@@ -31,7 +31,7 @@ appremove 'Simple Scanning Utility' 'simple-scan'
 appremove 'LibreOffice unused apps' 'libreoffice-draw libreoffice-impress libreoffice-math'
 #appremove 'Games'                   'gnome-mines gnome-sudoku gnome-mahjongg aisleriot'
 appremove 'Firefox Extensions'      'xul-ext-ubufox xul-ext-unity xul-ext-webaccounts xul-ext-websites-integration'
-appremove 'Remote desktop client'   'remmina remmina-common remmina-plugin-rdp remmina-plugin-vnc'
+#appremove 'Remote desktop client'   'remmina remmina-common remmina-plugin-rdp remmina-plugin-vnc'
 appremove 'Unity web browser'       'webbrowser-app'
 appremove 'Thunderbird mail client' 'thunderbird'
 appremove 'Onboard'                 'onboard'
@@ -55,6 +55,7 @@ appremove 'Totem'                   'totem totem-common'
 appremove 'GNOME Music'             'gnome-music'
 appremove 'GNOME Calendar'          'gnome-calendar'
 appremove 'USB creator'             'usb-creator-gtk usb-creator-common'
+appremove 'AppArmor'                'apparmor apparmor-utils'
 
 ## Remove unused ---------------------------------------------------------------
 
