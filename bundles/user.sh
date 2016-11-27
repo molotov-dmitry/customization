@@ -378,6 +378,9 @@ case "${bundle}" in
 
     ## Empathy -----------------------------------------------------------------
 
+    mkdir -p "${HOME}/.config/autostart"
+    cp -f "${ROOT_PATH}/files/empathy/empathy.desktop" "${HOME}/.config/autostart/"
+
     gsettings set org.gnome.Empathy.conversation theme          'material'
     gsettings set org.gnome.Empathy.conversation theme-variant  'Green'
     gsettings set org.gnome.Empathy.conversation adium-path     '/usr/share/adium/message-styles/material.AdiumMessageStyle'
