@@ -13,7 +13,7 @@ launcherclear
 
 ## Appearance ------------------------------------------------------------------
 
-bundle user 'appearance'
+bundle user 'appearance' 'tablet'
 
 setwallpaper '#204a87'
 
