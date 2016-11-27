@@ -106,6 +106,15 @@ function conntest()
 
 ### Packages ===================================================================
 
+function debconfselect()
+{
+    package="$1"
+    selection="$2"
+    value="$3"
+
+    sh -c "echo ${package} ${selection} select ${value} | sudo debconf-set-selections"
+}
+
 function ispkginstalled()
 {
     app="$1"
@@ -419,6 +428,30 @@ function ppaadd()
     fi
 }
 
+function changemirror()
+{
+    mirror="$1"
+    current_mirror=$(cat /etc/apt/sources.list | grep '^deb' | grep -v updates | grep -v 'backports' | sed -r 's/[[:blank:]]*deb(\-src)?[[:blank:]]*//' | cut -d ' ' -f 1 | sed 's/.*:\/\///' | cut -d '/' -f 1 | head -n1)
+
+    if [[ -z "${mirror}" ]]
+    then
+        title 'Changing mirror'
+        msgfail
+        return 1
+    fi
+
+    if [[ -z "${current_mirror}" ]]
+    then
+        title 'Changing mirror'
+        msgfail
+        return 2
+    fi
+
+    silentsudo "Changing mirror '${current_mirror}' to '${mirror}'" sed -i "s/${current_mirror}/${mirror}/g" /etc/apt/sources.list
+
+    return $?
+}
+
 function changerelease()
 {
     release="$1"
@@ -630,7 +663,7 @@ function bundlelist()
         ## Check for unused bundles
 
         bundle_list=$(grep '^[ \t]*"[a-z,/-]*")' "${ROOT_PATH}/bundles/${category}.sh" | cut -d '"' -f 2)
-        bundle_used=$(grep "^[ \t]*bundle[ \t]*${category}" "${ROOT_PATH}/custom/tools/${config}/${custom_tool}.sh" | sed "s/^[ \t]*bundle[ \t]*${category}[ \t]*//" | tr -d " '")
+        bundle_used=$(grep "^[ \t]*bundle[ \t]*${category}" "${ROOT_PATH}/custom/tools/${config}/${custom_tool}.sh" | sed "s/^[ \t]*bundle[ \t]*${category}[ \t]*//" | cut -d ' ' -f 1 | tr -d " '")
 
         for bundle in ${bundle_list}
         do
@@ -655,7 +688,7 @@ function bundlelist()
                             msgwarn " - ${bundle}"
                             break
                         fi
-                            
+
                         bundle_parent=$(echo ${bundle} | cut -d '/' -f 1-${i})
 
                         if [[ -n "$(echo "${bundle_used}" | grep "^${bundle_parent}$")" ]]
