@@ -28,10 +28,6 @@ bundle user 'gnome'
 bundle user 'network'
 bundle user 'network-remote'
 
-## Development -----------------------------------------------------------------
-
-bundle user 'dev'
-
 ## Version control system ------------------------------------------------------
 
 bundle user 'vcs'
