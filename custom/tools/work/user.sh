@@ -57,6 +57,6 @@ bundle user 'office'
 
 ## Console ---------------------------------------------------------------------
 
-bundle user 'cli/files'
+bundle user 'cli'
 
 

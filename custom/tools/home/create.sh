@@ -121,7 +121,7 @@ bundle install 'graphics'
 ## Other - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 bundle install 'archive'
-bundle install 'cli/files'
+bundle install 'cli'
 
 appinstall 'Iperf'                  'iperf iperf3'
 

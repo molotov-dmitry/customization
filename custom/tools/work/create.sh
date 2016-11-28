@@ -107,7 +107,7 @@ bundle install 'graphics'
 ## Other - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 bundle install 'archive'
-bundle install 'cli/files'
+bundle install 'cli'
 
 bundle install 'server/ssh'
 bundle install 'server/ftp'
