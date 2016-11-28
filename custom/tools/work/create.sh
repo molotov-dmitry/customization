@@ -56,6 +56,7 @@ appremove 'GNOME Music'             'gnome-music'
 appremove 'GNOME Calendar'          'gnome-calendar'
 appremove 'USB creator'             'usb-creator-gtk usb-creator-common'
 appremove 'AppArmor'                'apparmor apparmor-utils'
+appremove 'Apport'                  'apport apport-gtk'
 
 ## Remove unused ---------------------------------------------------------------
 

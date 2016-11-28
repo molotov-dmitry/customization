@@ -50,6 +50,7 @@ appremove 'Dconf editor'            'dconf-editor'
 appremove 'Transmission'            'transmission-common transmission-gtk'
 appremove 'Gnome Music'             'gnome-music'
 appremove 'AppArmor'                'apparmor apparmor-utils'
+appremove 'Apport'                  'apport apport-gtk'
 
 ## Remove unused ---------------------------------------------------------------
 
