@@ -41,6 +41,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'server/ftp'
     bash "${scriptpath}" 'server/smb'
     bash "${scriptpath}" 'server/svn'
+    bash "${scriptpath}" 'server/db'
     bash "${scriptpath}" 'server/iperf'
     bash "${scriptpath}" 'server/media'
 
@@ -75,6 +76,22 @@ case "${bundle}" in
 "server/svn")
 
     appinstall 'Samba'                  'cifs-utils samba'
+
+;;
+
+### DB server ==================================================================
+
+"server/db")
+
+    bash "${scriptpath}" "server/db/postgres"
+
+;;
+
+### Postgres -------------------------------------------------------------------
+
+"server/db/postgres")
+
+    appinstall 'Postgres DB server' 'postgresql'
 
 ;;
 
@@ -224,7 +241,7 @@ case "${bundle}" in
 
 "dev/db")
 
-    appinstall 'Postgres'               'postgresql pgadmin3 libpq5 libpq-dev'
+    appinstall 'Postgres'               'libpq5 libpq-dev'
     appinstall 'SQLite'                 'sqlite sqliteman libsqlite3-0 libsqlite3-dev'
 
 ;;
