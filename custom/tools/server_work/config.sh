@@ -9,7 +9,7 @@ cd "${ROOT_PATH}" || exit 1
 
 ## Build tools - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-bundle install 'dev/build'
+bundle config 'dev/build'
 
 ### Server =====================================================================
 
