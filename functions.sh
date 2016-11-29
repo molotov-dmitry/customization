@@ -936,6 +936,7 @@ function setwallpaper()
 function fixpermissions()
 {
     mountpoint="$1"
+    userid="$2"
 
     title "Fixing permissions for ${mountpoint}"
 
@@ -943,7 +944,7 @@ function fixpermissions()
 
     fstype=$(grep "${mountpointsafe}" /etc/fstab | grep -v '^#' | sed "s/.*${mountpointsafe}[ \t]*//" | sed 's/[ \t].*//')
 
-    userid=$(id -u)
+    [[ -z "${userid}" ]] && userid=$(id -u)
     plugdevgroup=$(grep plugdev /etc/group | cut -d ':' -f 3)
 
     [[ -z "${plugdevgroup}" ]] && plugdevgroup=$(id -g)
@@ -962,7 +963,7 @@ function fixpermissions()
         fi
     ;;
     "ext4")
-        silentsudo '' chown -R ${USER}:${USER} "${mountpoint}"
+        silentsudo '' chown -R ${userid}:${userid} "${mountpoint}"
         silentsudo '' chmod -R a=rwx "${mountpoint}"
 
         if [[ $? -eq 0 ]]
