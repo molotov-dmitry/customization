@@ -35,16 +35,26 @@ appupgrade
 
 ## Install ---------------------------------------------------------------------
 
+## Server  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 bundle install 'server/ssh'
 bundle install 'server/ftp'
 bundle install 'server/smb'
 bundle install 'server/svn'
 bundle install 'server/iperf'
 
-bundle install 'cli'
+## Console tools - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-bundle install 'gitlab'
+bundle install 'cli'
 
 ## VMWare tools  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 bundle install 'vm'
+
+## Remove unused applications  - - - - - - - - - - - - - - - - - - - - - - - - -
+
+## GitLab  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+#bundle install 'gitlab'
+
+

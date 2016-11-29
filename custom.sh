@@ -278,6 +278,7 @@ fi
 sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" echo -n
 sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" bash /tools/create.sh
 sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" bash /tools/config.sh
+sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" apt-get autoremove --yes --force-yes -qq
 sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" bash /tools/enable-startup.sh
 
 silentsudo 'Removing create script'         rm -rf "${rootfs_dir}/tools/create.sh"
