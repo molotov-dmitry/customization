@@ -19,22 +19,4 @@ bundle config 'qt'
 
 bundle config 'dev'
 
-### Server =====================================================================
-
-## FTP server ------------------------------------------------------------------
-
-bundle config 'server/ftp'
-
-## SVN server ------------------------------------------------------------------
-
-bundle config 'server/svn'
-
-### IR emulator ================================================================
-
-addservice 'M711-IR build'          'irbuild'
-addservice 'M711-IR emulator'       'irserver'
-
-### Time sync ==================================================================
-
-addservice 'Time sync'              'timesync'
 

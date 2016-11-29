@@ -11,13 +11,13 @@ ifnames=( $(ip link | grep '^[[:digit:]]*:' | cut -d ':' -f 2 | sed 's/^[ \t]*//
 
 ifname=${ifnames[0]}
 
-nmcli connection delete DmitryServer
-nmcli connection add con-name DmitryServer ifname ${ifname} type ethernet ip4 172.16.8.81/24 gw4 172.16.8.253
-nmcli connection modify DmitryServer ipv4.dns "172.16.56.3 172.16.56.1"
-nmcli connection modify DmitryServer ipv4.ignore-auto-dns yes
-nmcli connection modify DmitryServer ipv6.method ignore
+nmcli connection delete WiredConnection
+nmcli connection add con-name WiredConnection ifname ${ifname} type ethernet ip4 172.16.8.81/24 gw4 172.16.8.253
+nmcli connection modify WiredConnection ipv4.dns "172.16.56.3 172.16.56.1"
+nmcli connection modify WiredConnection ipv4.ignore-auto-dns yes
+nmcli connection modify WiredConnection ipv6.method ignore
 
-nmcli connection show | tail -n +2 | sed 's/ *[^ ]*-.*//' | grep -v '^DmitryServer$' | while read profile
+nmcli connection show | tail -n +2 | sed 's/ *[^ ]*-.*//' | grep -v '^WiredConnection$' | while read profile
 do
     nmcli connection delete "${profile}"
 done

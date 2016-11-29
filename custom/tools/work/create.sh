@@ -109,11 +109,6 @@ bundle install 'graphics'
 bundle install 'archive'
 bundle install 'cli'
 
-bundle install 'server/ssh'
-bundle install 'server/ftp'
-bundle install 'server/svn'
-bundle install 'server/iperf'
-
 ## VMWare tools  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 bundle install 'vm'

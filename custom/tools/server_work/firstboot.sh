@@ -10,28 +10,16 @@ sudo echo -n
 clear
 clear
 
-### Test internet connection ===================================================
+### Add samba shares to fstab ==================================================
 
-title 'Testing internet connection'
+sed -i '/[ \t]cifs[ \t]/d' /etc/fstab
 
-if conntest
-then
-    msgdone
-else
-    msgfail
-    exit 1
-fi
-
-### Creating directories for distrib ===========================================
-
-silentsudo 'Creating Distrib directory'     mkdir -p /media/documents/Distrib   -m 0777
-silentsudo 'Creating Books directory'       mkdir -p /media/documents/Books     -m 0777
-silentsudo 'Creating Archive directory'     mkdir -p /media/documents/Archive   -m 0777
-silentsudo 'Creating incomplete direcrory'  mkdir -p /media/documents/Downloads/Incomplete -m 0777
+echo '' >> /etc/fstab
+echo '//172.16.8.21/share2 /media/cub cifs guest,user=root,uid=1000,forceuid,gid=1000,forcegid,file_mode=0775,dir_mode=0775,iocharset=utf8,sec=ntlm 0 0' >> /etc/fstab
 
 ### Fix directory permissions ==================================================
 
-fixpermissions '/media/documents'
+fixpermissions '/media/documents' '1000'
 
 ### Configuring GitLab (if not properly configured) ============================
 
