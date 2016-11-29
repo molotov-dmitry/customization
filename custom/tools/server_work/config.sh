@@ -5,14 +5,30 @@ cd "${ROOT_PATH}" || exit 1
 
 . "${ROOT_PATH}/functions.sh"
 
-### Customization ==============================================================
+### Server =====================================================================
 
-### Server ---------------------------------------------------------------------
+## FTP server ------------------------------------------------------------------
 
 bundle config 'server/ftp'
-bundle config 'server/smb'
+
+## SVN server ------------------------------------------------------------------
+
 bundle config 'server/svn'
 
-### Nginx ----------------------------------------------------------------------
+## Smb server ------------------------------------------------------------------
+
+bundle config 'server/smb'
+
+### Gitlab ---------------------------------------------------------------------
 
 silentsudo 'Removing default nginx site' rm /etc/nginx/sites-enabled/default
+
+### IR emulator ================================================================
+
+addservice 'M711-IR build'          'irbuild'
+addservice 'M711-IR emulator'       'irserver'
+
+### Time sync ==================================================================
+
+addservice 'Time sync'              'timesync'
+

@@ -25,16 +25,13 @@ fi
 
 appremove 'apt-listchanges' 'apt-listchanges'
 
-## Updating --------------------------------------------------------------------
+## Update ----------------------------------------------------------------------
 
 changemirror  'mirror.yandex.ru'
 changerelease 'stretch'
 
-sudo apt-get update --yes --force-yes
-sudo apt-get dist-upgrade --yes --force-yes
-
-#appupdate
-#appupgrade
+appupdate
+appupgrade
 
 ## Install ---------------------------------------------------------------------
 
@@ -47,3 +44,7 @@ bundle install 'server/iperf'
 bundle install 'cli'
 
 bundle install 'gitlab'
+
+## VMWare tools  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+bundle install 'vm'
