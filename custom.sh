@@ -319,7 +319,7 @@ fi
 
 ## Adding EFI x32 --------------------------------------------------------------
 
-if ! isdebian
+if test -d "${iso_dir}/EFI/BOOT" && ! isdebian
 then
     silentsudo 'Getting EFI 32 image'       wget https://github.com/jfwells/linux-asus-t100ta/raw/master/boot/bootia32.efi -O "${iso_dir}/EFI/BOOT/bootia32.efi"
 fi
