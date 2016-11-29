@@ -127,6 +127,18 @@ function ispkginstalled()
     fi
 }
 
+function ispkgavailable()
+{
+    app="$1"
+
+    if [[ -n "$(apt-cache search "$app" | cut -d ' ' -f 1 | grep "^$app$")" ]]
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
 function debprepare()
 {
     appname="$1"

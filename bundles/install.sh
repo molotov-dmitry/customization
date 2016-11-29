@@ -415,7 +415,17 @@ case "${bundle}" in
 
 "vm")
 
-    appinstall 'VMWare tools'           'open-vm-tools open-vm-tools-desktop fuse xauth xserver-xorg-input-vmmouse xserver-xorg-video-vmware xdg-utils'
+    appinstall 'VMWare tools'   'open-vm-tools'
+
+    if ispkginstalled 'xorg'
+    then
+        appinstall 'VMWare Xorg drivers' 'xserver-xorg-video-vmware xauth xdg-utils'
+
+        if ispkgavailable 'xserver-xorg-input-vmmouse'
+        then
+            appinstall 'VMWare mouse drivers' 'xserver-xorg-input-vmmouse'    
+        fi
+    fi
 
 ;;
 
