@@ -67,7 +67,7 @@ case "${bundle}" in
 
 "server/smb")
 
-    #TODO
+    appinstall 'Samba'                  'cifs-utils samba'
 
 ;;
 
@@ -75,7 +75,7 @@ case "${bundle}" in
 
 "server/svn")
 
-    appinstall 'Samba'                  'cifs-utils samba'
+    appinstall 'Subversion'             'subversion'
 
 ;;
 
@@ -91,7 +91,7 @@ case "${bundle}" in
 
 "server/db/postgres")
 
-    appinstall 'Postgres DB server' 'postgresql'
+    appinstall 'Postgres DB server'     'postgresql'
 
 ;;
 

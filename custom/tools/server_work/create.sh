@@ -35,6 +35,10 @@ appupgrade
 
 ## Install ---------------------------------------------------------------------
 
+## Build tools - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+bundle install 'dev/build'
+
 ## Server  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 bundle install 'server/ssh'
@@ -42,6 +46,10 @@ bundle install 'server/ftp'
 bundle install 'server/smb'
 bundle install 'server/svn'
 bundle install 'server/iperf'
+
+## VCS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+bundle install 'vcs'
 
 ## Console tools - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
