@@ -339,7 +339,7 @@ case "${bundle}" in
 "media-online")
 
     appinstall 'Youtube downloader'     'youtube-dl'
-    appinstall 'Gnome Twitch app'       'gnome-twitch'
+    #appinstall 'Gnome Twitch app'       'gnome-twitch'
 
 ;;
 
