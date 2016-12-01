@@ -57,6 +57,7 @@ appremove 'GNOME Calendar'          'gnome-calendar'
 appremove 'USB creator'             'usb-creator-gtk usb-creator-common'
 appremove 'AppArmor'                'apparmor apparmor-utils'
 appremove 'Apport'                  'apport apport-gtk'
+appremove 'Firefox'                 'firefox firefox-locale-en firefox-locale-ru'
 
 ## Remove unused ---------------------------------------------------------------
 
@@ -83,6 +84,8 @@ appupgrade
 
 bundle install 'gnome'
 bundle install 'qt'
+
+appinstall 'Gnome Web' 'epiphany-browser'
 
 ## Themes  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
