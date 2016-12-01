@@ -52,6 +52,7 @@ appremove 'Gnome applications'      'gnome-contacts gnome-weather gnome-document
 appremove 'Transmission'            'transmission-common transmission-gtk'
 appremove 'Rhythmbox'               'rhythmbox rhythmbox-data'
 appremove 'Totem'                   'totem totem-common'
+appremove 'Gnome Software'          'gnome-software gnome-software-common'
 appremove 'GNOME Music'             'gnome-music'
 appremove 'GNOME Calendar'          'gnome-calendar'
 appremove 'USB creator'             'usb-creator-gtk usb-creator-common'
