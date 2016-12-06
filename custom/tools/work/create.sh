@@ -60,6 +60,8 @@ appremove 'USB creator'             'usb-creator-gtk usb-creator-common'
 appremove 'AppArmor'                'apparmor apparmor-utils'
 appremove 'Apport'                  'apport apport-gtk'
 appremove 'Firefox'                 'firefox firefox-locale-en firefox-locale-ru'
+appremove 'Plymouth'                'plymouth'
+appremove 'Update manager'          'update-manager'
 
 ## Remove unused ---------------------------------------------------------------
 
