@@ -397,6 +397,8 @@ case "${bundle}" in
 "cli")
 
     bash "${scriptpath}" 'cli/files'
+    bash "${scriptpath}" 'cli/monitor'
+    bash "${scriptpath}" 'cli/net'
 
 ;;
 
@@ -406,6 +408,23 @@ case "${bundle}" in
 
     appinstall 'Midnight Commander'     'mc'
     appinstall 'Directory tree'         'tree'
+
+;;
+
+### Command line monitor applications ==========================================
+
+"cli/monitor")
+
+    appinstall 'htop'                   'htop'
+
+;;
+
+### Command line network applications ==========================================
+
+"cli/net")
+
+    silentsudo 'Wireshark fix'          sh -c 'echo wireshark-common wireshark-common/install-setuid boolean true | sudo debconf-set-selections'
+    appinstall 'tshark'                 'tshark'
 
 ;;
 
