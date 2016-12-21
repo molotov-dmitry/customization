@@ -424,6 +424,14 @@ case "${bundle}" in
     eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Медиа
 
     eiskaltdcpp-remote-qt-config --last-directory /media/documents/Downloads
+
+    ## Bookmarks for SFTP ------------------------------------------------------
+
+    mkdir -p "${HOME}/.config/gtk-3.0/"
+
+    echo 'sftp://188.134.72.31:2222/media/documents SFTP' >> "${HOME}/.config/gtk-3.0/bookmarks"
+    echo 'sftp://192.168.1.10/media/documents SFTP (LAN)' >> "${HOME}/.config/gtk-3.0/bookmarks"
+
 ;;
 
 ### ============================================================================
