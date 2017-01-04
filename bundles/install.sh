@@ -44,6 +44,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'server/db'
     bash "${scriptpath}" 'server/iperf'
     bash "${scriptpath}" 'server/media'
+    bash "${scriptpath}" 'server/download'
 
 ;;
 
@@ -106,11 +107,21 @@ case "${bundle}" in
 
 "server/media")
 
-    #TODO
+    appinstall 'MiniDLNA'               'minidlna'
 
 ;;
 
-#### GitLab ====================================================================
+### Download server ============================================================
+
+"server/download")
+
+    appinstall 'Transmission'           'transmission-daemon'
+    appinstall 'EiskaltDC++'            'eiskaltdcpp-daemon'
+
+;;
+
+
+### GitLab =====================================================================
 
 "gitlab")
 
