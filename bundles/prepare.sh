@@ -19,11 +19,11 @@ case "${bundle}" in
 
 "server")
 
-    bash "${scriptpath}" 'server/ftp'
-    bash "${scriptpath}" 'server/smb'
-    bash "${scriptpath}" 'server/svn'
-    bash "${scriptpath}" 'server/media'
-    bash "${scriptpath}" 'server/download'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/ftp'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/smb'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/svn'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/media'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/download'
 
 ;;
 
