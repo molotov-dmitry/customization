@@ -253,8 +253,12 @@ case "${bundle}" in
 "dev/db")
 
     appinstall 'Postgres'               'libpq5 libpq-dev'
-    appinstall 'SQLite'                 'sqlite sqliteman libsqlite3-0 libsqlite3-dev'
+    appinstall 'SQLite'                 'sqlite libsqlite3-0 libsqlite3-dev'
 
+    if [[ "$(lsb_release -si)" == "Ubuntu" ]] && ispkginstalled
+    then
+        appinstall 'Sqliteman'          'sqliteman'
+    fi
 ;;
 
 ### Network ====================================================================
