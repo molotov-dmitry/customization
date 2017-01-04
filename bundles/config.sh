@@ -39,6 +39,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'server/smb'
     bash "${scriptpath}" 'server/svn'
     bash "${scriptpath}" 'server/media'
+    bash "${scriptpath}" 'server/download'
 
 ;;
 
@@ -54,7 +55,8 @@ case "${bundle}" in
 
 "server/smb")
 
-    #TODO
+    silentsudo 'Creating Samba config dir'      mkdir -p '/etc/samba'
+    silentsudo 'Configuring Samba'              cp -f "${ROOT_PATH}/files/samba/smb.conf" '/etc/samba/'
 
 ;;
 
@@ -70,7 +72,29 @@ case "${bundle}" in
 
 "server/media")
 
-    #TODO
+    silentsudo 'Inotyfy max watchs fix' bash -c 'echo -e "fs.inotify.max_user_watches = 100000" > /etc/sysctl.d/90-inotify.conf'
+    silentsudo 'Inotify max watchs fix' sysctl fs.inotify.max_user_watches=100000
+
+    silentsudo 'Configuring MiniDLNA'   sudo cp -f "${ROOT_PATH}/files/minidlna/minidlna.conf" '/etc/'
+
+;;
+
+### Download server ============================================================
+
+"server/download")
+
+    ## Transmission ------------------------------------------------------------
+
+    silentsudo 'Creating Transmission config dir' mkdir -p '/etc/transmission-daemon'
+    silentsudo 'Configuring Transmission'   cp -f "${ROOT_PATH}/files/transmission/settings.json" '/etc/transmission-daemon/'
+
+    ## EiskaltDC++ -------------------------------------------------------------
+
+    silentsudo 'Creating EiskaltDC++ config dir' mkdir -p '/etc/eiskaltdcpp'
+    silentsudo 'Configuring EiskaltDC++'        cp -f "${ROOT_PATH}/files/eiskaltdcpp/DCPlusPlus.xml" '/etc/eiskaltdcpp/'
+    silentsudo 'Configuring EiskaltDC++ Hubs'   cp -f "${ROOT_PATH}/files/eiskaltdcpp/Favorites.xml" '/etc/eiskaltdcpp/'
+
+    addservice 'EiskaltDC++' 'eiskaltdcpp' 'eiskaltdcpp'
 
 ;;
 

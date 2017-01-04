@@ -23,6 +23,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'server/smb'
     bash "${scriptpath}" 'server/svn'
     bash "${scriptpath}" 'server/media'
+    bash "${scriptpath}" 'server/download'
 
 ;;
 
@@ -38,7 +39,7 @@ case "${bundle}" in
 
 "server/smb")
 
-    #TODO
+    silentsudo 'Copy Samba config'  cp -rf "${ROOT_PATH}/files/samba"           "${rootfs_dir}/tools/files/"
 
 ;;
 
@@ -54,7 +55,16 @@ case "${bundle}" in
 
 "server/media")
 
-    #TODO
+    silentsudo 'Copy MiniDLNA config' cp -rf "${ROOT_PATH}/files/minidlna"        "${rootfs_dir}/tools/files/"
+
+;;
+
+### Download server ============================================================
+
+"server/download")
+
+    silentsudo 'Copy Transmission config'   cp -rf "${ROOT_PATH}/files/transmission" "${rootfs_dir}/tools/files/"
+    silentsudo 'Copy EiskaltDC++ config'    cp -rf "${ROOT_PATH}/files/eiskaltdcpp"  "${rootfs_dir}/tools/files/"
 
 ;;
 
