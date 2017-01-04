@@ -35,11 +35,22 @@ case "${bundle}" in
 
 "server")
 
+    bash "${scriptpath}" 'server/ssh'
     bash "${scriptpath}" 'server/ftp'
     bash "${scriptpath}" 'server/smb'
     bash "${scriptpath}" 'server/svn'
     bash "${scriptpath}" 'server/media'
     bash "${scriptpath}" 'server/download'
+
+;;
+
+### OpenSSH server =============================================================
+
+"server/ssh")
+
+    silentsudo 'Configuring Open SSH' touch /etc/ssh/sshd_config
+    silentsudo 'Configuring Open SSH' sed -i '/^ClientAliveInterval/d;/^ClientAliveCountMax/d' /etc/ssh/sshd_config
+    silentsudo 'Configuring Open SSH' bash -c 'echo -e "\nClientAliveInterval 300\nClientAliveCountMax 2" >> /etc/ssh/sshd_config'
 
 ;;
 
