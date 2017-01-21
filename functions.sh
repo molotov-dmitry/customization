@@ -169,6 +169,13 @@ function debinstall()
         sudo dpkg -i "${debpath}" >/dev/null 2>&1
 
         if [[ $? -eq 0 ]]
+        then
+            msgdone
+            return 0
+        else
+            sudo apt-get install -f --yes --force-yes 
+
+            if [[ $? -eq 0 ]]
             then
                 msgdone
                 return 0
@@ -176,6 +183,7 @@ function debinstall()
                 msgfail
                 return 1
             fi
+        fi
     else
         msgwarn '[already installed]'
         return 0
@@ -644,6 +652,11 @@ function bundle()
         return $?
     ;;
 
+    "firstboot")
+        bash "${ROOT_PATH}/bundles/firstboot.sh" $@
+        return $?
+    ;;
+
     "user")
         bash "${ROOT_PATH}/bundles/user.sh" $@
         return $?
@@ -663,7 +676,7 @@ function bundlelist()
     echo
     echo "Checking bundles:"
 
-    for category in prepare install config user
+    for category in prepare install config firstboot user
     do
 
         custom_tool="${category}"
