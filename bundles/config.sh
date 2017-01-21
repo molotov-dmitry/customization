@@ -83,10 +83,20 @@ case "${bundle}" in
 
 "server/media")
 
+    ## MiniDLNA ----------------------------------------------------------------
+
     silentsudo 'Inotyfy max watchs fix' bash -c 'echo -e "fs.inotify.max_user_watches = 100000" > /etc/sysctl.d/90-inotify.conf'
     silentsudo 'Inotify max watchs fix' sysctl fs.inotify.max_user_watches=100000
 
     silentsudo 'Configuring MiniDLNA'   sudo cp -f "${ROOT_PATH}/files/minidlna/minidlna.conf" '/etc/'
+
+    ## Plex Media Server -------------------------------------------------------
+
+    silentsudo 'Creating Plex config dir'   mkdir -p '/var/lib/plexmediaserver/Library/Application Support/Plex Media Server'
+    silentsudo 'Configuring Plex'           sudo cp -f "${ROOT_PATH}/files/plexmediaserver/Preferences.xml" '/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/'
+    silentsudo 'Changing Plex config owner' chown -R plex:plex '/var/lib/plexmediaserver'
+
+    silentsudo 'Modify firstboot script'    sed -i 's/^After=/After=plexmediaserver.service /' '/tools/files/custom-startup.service'
 
 ;;
 

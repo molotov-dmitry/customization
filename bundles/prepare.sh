@@ -55,9 +55,15 @@ case "${bundle}" in
 
 "server/media")
 
-    silentsudo 'Copy MiniDLNA config' cp -rf "${ROOT_PATH}/files/minidlna"        "${rootfs_dir}/tools/files/"
+     ## MiniDLNA ----------------------------------------------------------------
+
+    silentsudo 'Copy MiniDLNA config' cp -rf "${ROOT_PATH}/files/minidlna"          "${rootfs_dir}/tools/files/"
+
+    ## Plex Media Server -------------------------------------------------------
 
     debprepare 'Plex Media Server' 'plexmediaserver' '1.3.3.3148-b38628e' 'amd64'
+    
+    silentsudo 'Copy Plex config' cp -rf "${ROOT_PATH}/files/plexmediaserver"   "${rootfs_dir}/tools/files/"
 
 ;;
 
