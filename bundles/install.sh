@@ -432,6 +432,7 @@ case "${bundle}" in
 "cli/monitor")
 
     appinstall 'htop'                   'htop'
+    appinstall 'tmux'                   'tmux'
 
 ;;
 
