@@ -57,6 +57,8 @@ case "${bundle}" in
 
     silentsudo 'Copy MiniDLNA config' cp -rf "${ROOT_PATH}/files/minidlna"        "${rootfs_dir}/tools/files/"
 
+    debprepare 'Plex Media Server' 'plexmediaserver' '1.3.3.3148-b38628e' 'amd64'
+
 ;;
 
 ### Download server ============================================================
