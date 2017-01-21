@@ -1,9 +1,11 @@
 #!/bin/bash
 
-ROOT_PATH="$(cd "$(dirname "$0")" && pwd)"
+ROOT_PATH="$(cd "$(dirname "$0")/.." && pwd)"
 cd "${ROOT_PATH}" || exit 1
 
 . "${ROOT_PATH}/functions.sh"
+
+bundle="$1"
 
 scriptpath="${ROOT_PATH}/bundles/$(basename "$0")"
 
