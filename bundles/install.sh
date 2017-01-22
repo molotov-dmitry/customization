@@ -126,6 +126,32 @@ case "${bundle}" in
 
 "gitlab")
 
+    mkdir -p "${rootfs_dir}/tools/packages"
+
+    pushd "${rootfs_dir}/tools/packages" > /dev/null
+
+    silentsudo 'Download Gitlab package' apt-get download gitlab
+
+    pkgname=$(ls gitlab_*.deb | sed 's/^gitlab/gitlab-stub/' | sed 's/_.*_/_current_/')
+
+    silentsudo '' mkdir -p gitlab-stub/DEBIAN
+    silentsudo 'Extracting package info' dpkg -e gitlab*.deb gitlab-stub/DEBIAN
+
+    pushd gitlab-stub/DEBIAN > /dev/null
+
+    silentsudo 'Remove all info but control' find . -mindepth 1 ! -name 'control' -exec rm -rf {} +
+    silentsudo 'Replacing package name' sed -i 's/^Package: gitlab/Package: gitlab-stub/' control
+
+    popd > /dev/null
+
+    silentsudo '' chmod -R 0755 gitlab-stub
+    silentsudo 'Creating Gitlab stub package' fakeroot dpkg-deb --build gitlab-stub
+    silentsudo 'Changing stub package name' mv gitlab-stub.deb "${pkgname}"
+
+    silentsudo 'Removing temp files' rm -rf gitlab-stub
+
+    popd > /dev/null
+
     debinstall 'Gitlab stub'      'gitlab-stub' '' 'all'
 
 ;;
