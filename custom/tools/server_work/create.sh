@@ -45,6 +45,7 @@ bundle install 'server/ssh'
 bundle install 'server/ftp'
 bundle install 'server/smb'
 bundle install 'server/svn'
+bundle install 'server/db'
 bundle install 'server/iperf'
 
 ## VCS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -63,6 +64,6 @@ bundle install 'vm'
 
 ## GitLab  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-#bundle install 'gitlab'
+bundle install 'gitlab'
 
 
