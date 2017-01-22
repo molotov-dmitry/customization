@@ -7,9 +7,6 @@ cd "${ROOT_PATH}" || exit 1
 
 sudo echo -n
 
-clear
-clear
-
 ### Add samba shares to fstab ==================================================
 
 sed -i '/[ \t]cifs[ \t]/d' /etc/fstab
