@@ -182,9 +182,9 @@ function debinstall()
             msgdone
             return 0
         else
-            sudo apt-get install -f --yes --force-yes 
+            sudo apt-get install -f --yes --force-yes >/dev/null 2>&1
 
-            if [[ $? -eq 0 ]]
+            if [[ $? -eq 0 ]] && ispkginstalled "${debname}"
             then
                 msgdone
                 return 0
