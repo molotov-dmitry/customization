@@ -13,6 +13,10 @@ bundle config 'dev/build'
 
 ### Server =====================================================================
 
+## SSH server ------------------------------------------------------------------
+
+bundle config 'server/ssh'
+
 ## FTP server ------------------------------------------------------------------
 
 bundle config 'server/ftp'
@@ -27,7 +31,7 @@ bundle config 'server/smb'
 
 ### Gitlab ---------------------------------------------------------------------
 
-#silentsudo 'Removing default nginx site' rm /etc/nginx/sites-enabled/default
+silentsudo 'Removing default nginx site' rm /etc/nginx/sites-enabled/default
 
 ### IR emulator ================================================================
 
