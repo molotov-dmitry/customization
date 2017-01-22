@@ -126,20 +126,7 @@ case "${bundle}" in
 
 "gitlab")
 
-    debconfselect 'gitlab' 'gitlab/ssl'         'false'
-    debconfselect 'gitlab' 'gitlab/letsencrypt' 'false'
-    debconfselect 'gitlab' 'gitlab/fqdn'        'gitlab.local'
-
-    title 'Installing Gitlab'
-
-    appinstall 'GitLab' 'gitlab' >/dev/null 2>&1
-
-    if [[ $? -eq 0 ]]
-    then
-        msgdone
-    else
-        msgwarn '[first boot may take long time]'
-    fi
+    debinstall 'Gitlab stub'      'gitlab-stub' '' 'all'
 
 ;;
 

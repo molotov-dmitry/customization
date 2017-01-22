@@ -160,6 +160,15 @@ function debinstall()
     debversion="$3"
     debarch="$4"
 
+    if [[ -z "${debversion}" ]]
+    then
+        pushd "${ROOT_PATH}/packages" > /dev/null
+
+        debversion=$(ls ${debname}_*_${debarch}.deb | sort | tail -n 1 | cut -d '_' -f 2)
+
+        popd > /dev/null
+    fi
+
     debpath="${ROOT_PATH}/packages/${debname}_${debversion}_${debarch}.deb"
 
     title "Installing $appname"
