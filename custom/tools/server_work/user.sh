@@ -8,6 +8,3 @@ cd "${ROOT_PATH}" || exit 1
 bundle user 'vcs'
 bundle user 'cli'
 
-clear
-clear
-

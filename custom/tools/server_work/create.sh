@@ -7,8 +7,6 @@ cd "${ROOT_PATH}" || exit 1
 
 sudo echo -n
 
-clear
-
 ### Test internet connection ===================================================
 
 title 'Testing internet connection'
