@@ -123,6 +123,11 @@ case "${bundle}" in
 
 "gitlab")
 
+    if [[ -d /etc/nginx/sites-enabled/default ]]
+    then
+        silentsudo 'Removing default nginx site' rm /etc/nginx/sites-enabled/default
+    fi
+
     silentsudo 'Modify firstboot script'    sed -i 's/^After=/After=postgresql.service /' '/tools/files/custom-startup.service'
 
 ;;

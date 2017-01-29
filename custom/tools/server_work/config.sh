@@ -31,7 +31,7 @@ bundle config 'server/smb'
 
 ### Gitlab ---------------------------------------------------------------------
 
-silentsudo 'Removing default nginx site' rm /etc/nginx/sites-enabled/default
+bundle config 'gitlab'
 
 ### IR emulator ================================================================
 
