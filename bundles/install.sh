@@ -45,6 +45,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'server/iperf'
     bash "${scriptpath}" 'server/media'
     bash "${scriptpath}" 'server/download'
+    bash "${scriptpath}" 'server/proxy'
 
 ;;
 
