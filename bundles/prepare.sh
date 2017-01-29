@@ -24,6 +24,7 @@ case "${bundle}" in
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/svn'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/media'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/download'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/proxy'
 
 ;;
 
