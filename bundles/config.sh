@@ -119,6 +119,18 @@ case "${bundle}" in
 
 ;;
 
+### Proxy server ===============================================================
+
+"server/proxy")
+
+    ## Squid3 ------------------------------------------------------------------
+
+    silentsudo 'Creating Squid3 config dir' mkdir -p '/etc/squid3'
+    silentsudo 'Configuring Squid3'         cp -f "${ROOT_PATH}/files/squid3/squid.conf" '/etc/squid3/'
+    silentsudo 'Creating Squid3 users list' touch '/etc/squid3/internet_users'
+
+;;
+
 ### GitLab =====================================================================
 
 "gitlab")
