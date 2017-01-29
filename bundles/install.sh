@@ -455,6 +455,7 @@ case "${bundle}" in
 
     silentsudo 'Wireshark fix'          sh -c 'echo wireshark-common wireshark-common/install-setuid boolean true | sudo debconf-set-selections'
     appinstall 'tshark'                 'tshark'
+    appinstall 'curl'                   'curl'
 
 ;;
 
