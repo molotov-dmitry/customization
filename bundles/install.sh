@@ -109,7 +109,7 @@ case "${bundle}" in
 "server/media")
 
     appinstall 'MiniDLNA'               'minidlna'
-    debinstall 'Plex Media Server'      'plexmediaserver' '1.3.3.3148-b38628e' 'amd64'
+    debinstall 'Plex Media Server'      'plexmediaserver' '1.3.4.3285-b46e0ea' 'amd64'
 
 ;;
 
