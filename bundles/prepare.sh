@@ -62,7 +62,7 @@ case "${bundle}" in
 
     ## Plex Media Server -------------------------------------------------------
 
-    debprepare 'Plex Media Server' 'plexmediaserver' '1.3.3.3148-b38628e' 'amd64'
+    debprepare 'Plex Media Server' 'plexmediaserver' '1.3.4.3285-b46e0ea' 'amd64'
     
     silentsudo 'Copy Plex config' cp -rf "${ROOT_PATH}/files/plexmediaserver"   "${rootfs_dir}/tools/files/"
 
