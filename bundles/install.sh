@@ -365,7 +365,7 @@ case "${bundle}" in
 
     appinstall 'Rhythmbox'              'rhythmbox'
     appinstall 'Totem video player'     'totem'
-    appinstall 'MPV Player'             'mpv'
+    appinstall 'MPV Player'             'mpv gnome-mpv'
 
     appinstall 'EasyTag'                'easytag'
 
