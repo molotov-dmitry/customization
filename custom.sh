@@ -3,10 +3,11 @@
 ROOT_PATH="$(cd "$(dirname "$0")" && pwd)"
 cd "${ROOT_PATH}" || exit 1
 
-. "${ROOT_PATH}/functions.sh"
+clear
+clear
 
-clear
-clear
+. "${ROOT_PATH}/functions.sh"
+. "${ROOT_PATH}/chroot.sh"
 
 #### functions =================================================================
 
@@ -46,22 +47,6 @@ function checkfilemime()
     fi
 }
 
-function unpackiso()
-{
-    isopath="$1"
-
-    silentsudo '' umount /mnt
-    silentsudo 'Mounting iso' mount -o loop "${isopath}" /mnt || exit 1
-    silentsudo 'Creating directory for image' mkdir -p "${iso_dir}" || exit 1
-    silentsudo 'Unpacking iso' cp -rfa /mnt/. "${iso_dir}" || exit 1
-    silentsudo 'Unmounting iso' umount /mnt
-}
-
-function unpackroot()
-{
-    silentsudo 'Unpacking rootfs' unsquashfs -f -d "${rootfs_dir}" "${iso_dir}/casper/filesystem.squashfs" || exit 1
-}
-
 function packroot()
 {
     silentsudo 'Updating package list' bash -c "chroot "${rootfs_dir}" dpkg-query -W --showformat='${Package} ${Version}\n' > \"${iso_dir}/casper/filesystem.manifest\""
@@ -76,7 +61,11 @@ function packroot()
         silentsudo 'Creating desktop manifest' cp -f "${iso_dir}/casper/filesystem.manifest" "${iso_dir}/casper/filesystem.manifest-desktop"
     fi
 
-    silentsudo 'Removing old rootfs' rm -f "${iso_dir}/casper/filesystem.squashfs"
+    if [[ -e "${iso_dir}/casper/filesystem.squashfs" ]]
+    then
+        silentsudo 'Removing old rootfs' rm -f "${iso_dir}/casper/filesystem.squashfs"
+    fi
+
     silentsudo 'Packing rootfs' mksquashfs "${rootfs_dir}" "${iso_dir}/casper/filesystem.squashfs" || exit 1
 }
 
@@ -144,12 +133,7 @@ else
     exit 1
 fi
 
-### Check UCK is installed =====================================================
-
-if ! ispkginstalled 'uck'
-then
-    appinstall 'UCK' 'uck' || exit 1
-fi
+### Check required packages installed ==========================================
 
 if ! ispkginstalled 'syslinux-utils'
 then
@@ -166,17 +150,24 @@ then
     appinstall 'ISO tools' 'genisoimage' || exit 1
 fi
 
-if ! ispkginstalled qemu || ! ispkginstalled qemu-kvm || ! ispkginstalled qemu-system-x86
+### Check available ram ========================================================
+
+freemem=$(cat /proc/meminfo | grep MemAvailable | cut -d ":" -f 2 | sed 's/[^0-9]//g')
+if [[ $freemem -gt 12*1024*1024 ]]
 then
-    appinstall 'QEMU' 'qemu qemu-kvm qemu-system-x86'
-fi
+    let use_ram=1
+else
+    let use_ram=0
+fi    
+
+unset freemem
 
 ### Getting parameters =========================================================
 
 iso_src="$1"
 config="$2"
 
-remaster_dir="/tmp/remaster/${config}"
+remaster_dir="/remaster/${config}"
 iso_dir="${remaster_dir}/remaster-iso"
 rootfs_dir="${remaster_dir}/remaster-root"
 res_dir="/media/documents/Distrib/OS/custom"
@@ -210,35 +201,45 @@ bundlelist
 
 read
 
-### Generating custom CD =======================================================
+### Unpacking image ============================================================
 
-## Preparing -------------------------------------------------------------------
-
+silentsudo '' umount "${remaster_dir}"
 silentsudo 'Removing old CD'                rm -rf "${remaster_dir}"
+silentsudo 'Creating remaster directory'    mkdir -p "${remaster_dir}"
 
-unpackiso                                   "${iso_src}"
+if [[ $useram -eq 1 ]]
+then
+    silentsudo 'Creating TMPFS for remaster' mount -t tmpfs -o size=12G tmpfs "${remaster_dir}"
+fi
+
+## Unpacking ISO ---------------------------------------------------------------
+
+silentsudo '' umount /mnt
+silentsudo 'Mounting iso' mount -o loop "${iso_src}" /mnt || exit 1
+silentsudo 'Creating directory for image' mkdir -p "${iso_dir}" || exit 1
+
+#silentsudo 'Unpacking iso' 
+rsync --exclude=/casper/filesystem.squashfs -a /mnt/ "${iso_dir}/" || exit 1
+#silentsudo 'Removing Win32 files'           rm -rf ${iso_dir}/*.exe ${iso_dir}/*.ini ${iso_dir}/*.inf ${iso_dir}/*.ico ${iso_dir}/*.bmp ${iso_dir}/programs ${iso_dir}/bin ${iso_dir}/disctree ${iso_dir}/pics
 
 if isdebian
 then
     silentsudo '[DEB] Moving squashfs'      mv "${iso_dir}/live" "${iso_dir}/casper"
 fi
 
-unpackroot
+## Unpacking SquashFS ----------------------------------------------------------
 
-silentsudo 'Removing Win32 files'           uck-remaster-remove-win32-files
+silentsudo 'Unpacking rootfs' unsquashfs -f -d "${rootfs_dir}" "/mnt/casper/filesystem.squashfs" || exit 1
+
+## -----------------------------------------------------------------------------
+
+silentsudo 'Unmounting iso' umount /mnt
+
+### Generating custom CD =======================================================
+
+## Preparing -------------------------------------------------------------------
 
 silentsudo 'Setting default language'       sh -c "echo ru > \"${iso_dir}\"/isolinux/lang"
-
-if [[ -e "${rootfs_dir}/etc/resolv.conf" ]]
-then
-    silentsudo 'backing up resolv.conf'     mv -f "${rootfs_dir}/etc/resolv.conf" "${rootfs_dir}/etc/resolv.conf.bak"
-fi
-
-if isdebian
-then
-#    silentsudo '[DEB] copying resolv.conf'  cp /etc/resolv.conf "${rootfs_dir}/etc/resolv.conf"
-    silentsudo '[DEB] removing mtab'        rm "${rootfs_dir}/etc/mtab"
-fi
 
 if [[ -e "${rootfs_dir}/etc/udev/rules.d/80-net-setup-link.rules" || -e /lib/udev/rules.d/80-net-setup-link.rules ]]
 then
@@ -275,22 +276,18 @@ fi
 
 ## Executing create script -----------------------------------------------------
 
-sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" echo -n
-sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" bash /tools/create.sh
-sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" bash /tools/config.sh
-sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" apt-get autoremove --yes --force-yes -qq
-sudo                                        uck-remaster-chroot-rootfs "${remaster_dir}" bash /tools/enable-startup.sh
+start_chroot "${rootfs_dir}"
+
+chroot_rootfs "${rootfs_dir}" bash /tools/create.sh
+chroot_rootfs "${rootfs_dir}" bash /tools/config.sh
+chroot_rootfs "${rootfs_dir}" apt-get autoremove --yes --force-yes -qq
+chroot_rootfs "${rootfs_dir}" bash /tools/enable-startup.sh
+
+finish_chroot "${rootfs_dir}"
 
 silentsudo 'Removing create script'         rm -rf "${rootfs_dir}/tools/create.sh"
 silentsudo 'Removing config script'         rm -rf "${rootfs_dir}/tools/create.sh"
 silentsudo 'Removing statrup gen script'    rm -rf "${rootfs_dir}/tools/enable-startup.sh"
-
-## Cleaning up chroot ----------------------------------------------------------
-
-if [[ -e "${rootfs_dir}/etc/resolv.conf.bak" ]]
-then
-    silentsudo 'Restoring resolv.conf'      mv -f "${rootfs_dir}/etc/resolv.conf.bak" "${rootfs_dir}/etc/resolv.conf"
-fi
 
 ## Copying first boot script ---------------------------------------------------
 
@@ -304,7 +301,7 @@ silentsudo 'Copying user script'            cp -f "${ROOT_PATH}/custom/tools/${c
 
 silentsudo 'Changing tools mode'            chmod -R 777 "${rootfs_dir}/tools"
 
-## Packing image ---------------------------------------------------------------
+## Packing image ===============================================================
 
 packroot
 
@@ -328,4 +325,11 @@ fi
 ## Packing ISO -----------------------------------------------------------------
 
 packiso "$(basename "${iso_src}")" "${config}"
+
+### Unmounting remaster dir ====================================================
+
+if [[ $useram -eq 1 ]]
+then
+    silentsudo 'Unmounting remaster dir' umount "${remaster_dir}"
+fi
 
