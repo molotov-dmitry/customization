@@ -35,5 +35,7 @@ bundle install 'dev/db'
 
 bundle install 'server'
 
+bundle install 'vcs'
+
 bundle install 'cli'
 
