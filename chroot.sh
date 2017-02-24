@@ -127,8 +127,8 @@ function finish_chroot()
 
     silent 'Removing D-Bus UUID' rm -f "${ROOTFS_DIR}/var/lib/dbus/machine-id"
 
-    silent 'Unmounting filesystems' chroot "${ROOTFS_DIR}" umount /proc /sys /dev/pts
-    silent 'Unmounting /dev' umount "${ROOTFS_DIR}/dev"
+    silent 'Unmounting filesystems' chroot "${ROOTFS_DIR}" umount -l /proc /sys /dev/pts
+    silent 'Unmounting /dev' umount -l "${ROOTFS_DIR}/dev"
 
     restore "${ROOTFS_DIR}" "/etc/fstab"
     restore "${ROOTFS_DIR}" "/etc/resolv.conf"
