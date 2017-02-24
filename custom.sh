@@ -334,6 +334,6 @@ packiso "$(basename "${iso_src}")" "${config}"
 
 if [[ $useram -eq 1 ]]
 then
-    silentsudo 'Unmounting remaster dir' umount "${remaster_dir}"
+    silentsudo 'Unmounting remaster dir' umount -l "${remaster_dir}"
 fi
 
