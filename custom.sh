@@ -152,13 +152,17 @@ fi
 
 ### Check available ram ========================================================
 
+title 'Checking free RAM'
+
 freemem=$(cat /proc/meminfo | grep MemAvailable | cut -d ":" -f 2 | sed 's/[^0-9]//g')
 if [[ $freemem -gt 12*1024*1024 ]]
 then
-    let use_ram=1
+    msgdone '[use RAM]'
+    let useram=1
 else
-    let use_ram=0
-fi    
+    msgwarn '[use HDD]'
+    let useram=0
+fi
 
 unset freemem
 
