@@ -222,9 +222,8 @@ silentsudo '' umount /mnt
 silentsudo 'Mounting iso' mount -o loop "${iso_src}" /mnt || exit 1
 silentsudo 'Creating directory for image' mkdir -p "${iso_dir}" || exit 1
 
-#silentsudo 'Unpacking iso' 
-rsync --exclude=/casper/filesystem.squashfs -a /mnt/ "${iso_dir}/" || exit 1
-#silentsudo 'Removing Win32 files'           rm -rf ${iso_dir}/*.exe ${iso_dir}/*.ini ${iso_dir}/*.inf ${iso_dir}/*.ico ${iso_dir}/*.bmp ${iso_dir}/programs ${iso_dir}/bin ${iso_dir}/disctree ${iso_dir}/pics
+silentsudo 'Unpacking iso'                  rsync --exclude=/casper/filesystem.squashfs -a /mnt/ "${iso_dir}/" || exit 1
+silentsudo 'Removing Win32 files'           rm -rf ${iso_dir}/*.exe ${iso_dir}/*.ini ${iso_dir}/*.inf ${iso_dir}/*.ico ${iso_dir}/*.bmp ${iso_dir}/programs ${iso_dir}/bin ${iso_dir}/disctree ${iso_dir}/pics
 
 if isdebian
 then
