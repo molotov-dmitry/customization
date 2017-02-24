@@ -438,6 +438,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'cli/files'
     bash "${scriptpath}" 'cli/monitor'
     bash "${scriptpath}" 'cli/net'
+    bash "${scriptpath}" 'cli/time'
 
 ;;
 
@@ -466,6 +467,15 @@ case "${bundle}" in
     silentsudo 'Wireshark fix'          sh -c 'echo wireshark-common wireshark-common/install-setuid boolean true | sudo debconf-set-selections'
     appinstall 'tshark'                 'tshark'
     appinstall 'curl'                   'curl'
+    appinstall 'CLI web browsers'       'elinks w3m'
+
+;;
+
+### Command line tools for time sync ===========================================
+
+"cli/time")
+    
+    appinstall 'NTP client'             'ntp'
 
 ;;
 
