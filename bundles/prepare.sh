@@ -105,7 +105,13 @@ case "${bundle}" in
 
 "media")
 
+    ## Rhythmbox ---------------------------------------------------------------
+
     silentsudo 'Copy Rhythmbox radio database' cp -rf "${ROOT_PATH}/files/rhythmbox" "${rootfs_dir}/tools/files/"
+
+    ## MPV ---------------------------------------------------------------------
+
+    silentsudo 'Copy MPV config' cp -rf "${ROOT_PATH}/files/mpv" "${rootfs_dir}/tools/files/"
 
 ;;
 

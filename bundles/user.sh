@@ -366,6 +366,11 @@ case "${bundle}" in
     gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'generic-player'
 
     gsettings set org.gnome.rhythmbox.plugins.iradio initial-stations-loaded true
+
+    ## MPV ---------------------------------------------------------------------
+
+    mkdir -p "${HOME}/.config/mpv"
+    cp -f "${ROOT_PATH}/files/mpv/mpv.conf" "${HOME}/.config/mpv/"
 ;;
 
 ### ============================================================================
