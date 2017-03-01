@@ -362,6 +362,7 @@ case "${bundle}" in
 "media")
 
     appinstall 'Restricted extras'      'ubuntu-restricted-extras'
+    appinstall 'VA API drivers'         'va-driver-all gstreamer1.0-vaapi'
 
     appinstall 'Rhythmbox'              'rhythmbox'
     appinstall 'Totem video player'     'totem'
@@ -378,7 +379,7 @@ case "${bundle}" in
 "media-online")
 
     appinstall 'Youtube downloader'     'youtube-dl'
-    #appinstall 'Gnome Twitch app'       'gnome-twitch'
+    appinstall 'Gnome Twitch app'       'gnome-twitch'
 
 ;;
 
