@@ -117,6 +117,7 @@ case "${bundle}" in
 
 "server/download")
 
+    appinstall 'Youtube downloader'     'youtube-dl'
     appinstall 'Transmission'           'transmission-daemon'
     appinstall 'EiskaltDC++'            'eiskaltdcpp-daemon'
 
