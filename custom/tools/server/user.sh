@@ -7,6 +7,7 @@ cd "${ROOT_PATH}" || exit 1
 
 ### Bundles ====================================================================
 
+bundle user 'server'
 bundle user 'vcs'
 bundle user 'cli'
 
