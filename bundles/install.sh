@@ -183,6 +183,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'dev/gtk'
     bash "${scriptpath}" 'dev/gnome'
     bash "${scriptpath}" 'dev/db'
+    bash "${scriptpath}" 'dev/json'
     bash "${scriptpath}" 'dev/net'
 
 ;;
@@ -284,6 +285,14 @@ case "${bundle}" in
     then
         appinstall 'Sqliteman'          'sqliteman'
     fi
+;;
+
+### JSON libraries =============================================================
+
+"dev/json")
+
+    appinstall 'JSON libraries'         'libjsoncpp-dev'
+
 ;;
 
 ### Network ====================================================================
@@ -470,13 +479,14 @@ case "${bundle}" in
     appinstall 'tshark'                 'tshark'
     appinstall 'curl'                   'curl'
     appinstall 'CLI web browsers'       'elinks w3m'
+    appinstall 'UPnP client'            'miniupnpc'
 
 ;;
 
 ### Command line tools for time sync ===========================================
 
 "cli/time")
-    
+
     appinstall 'NTP client'             'ntp'
 
 ;;
