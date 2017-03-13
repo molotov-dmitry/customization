@@ -116,9 +116,6 @@ function finish_chroot()
     reactivate "${ROOTFS_DIR}" "/usr/sbin/grub-probe"
 
     silent 'Removing D-Bus UUID' rm -f "${ROOTFS_DIR}/var/lib/dbus/machine-id"
-
-    silent 'Unmounting filesystems' chroot "${ROOTFS_DIR}" umount -l /proc /sys /dev/pts
-    silent 'Unmounting /dev' umount -l "${ROOTFS_DIR}/dev"
     
     silent 'Unmounting /dev/pts'  chroot "${ROOTFS_DIR}" umount -l "/dev/pts"  
     silent 'Unmounting /sys'      chroot "${ROOTFS_DIR}" umount -l "/sys"
