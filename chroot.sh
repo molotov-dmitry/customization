@@ -90,9 +90,9 @@ function start_chroot()
 
     silent 'Mounting /dev'      mount --bind /dev/ "${ROOTFS_DIR}/dev"
 
-    silent 'mounting /proc'     chroot "${ROOTFS_DIR}" mount none -t proc   "/proc"
-    silent 'mounting /sys'      chroot "${ROOTFS_DIR}" mount none -t sysfs  "/sys"
-    silent 'mounting /dev/pts'  chroot "${ROOTFS_DIR}" mount none -t devpts "/dev/pts"
+    silent 'Mounting /proc'     chroot "${ROOTFS_DIR}" mount none -t proc   "/proc"
+    silent 'Mounting /sys'      chroot "${ROOTFS_DIR}" mount none -t sysfs  "/sys"
+    silent 'Mounting /dev/pts'  chroot "${ROOTFS_DIR}" mount none -t devpts "/dev/pts"
 
     backup "${ROOTFS_DIR}" "/etc/fstab"
 
@@ -103,21 +103,11 @@ function start_chroot()
     deactivate "${ROOTFS_DIR}" "/sbin/initctl"
     deactivate "${ROOTFS_DIR}" "/usr/sbin/update-grub"
     deactivate "${ROOTFS_DIR}" "/usr/sbin/grub-probe"
-
-	#for flag in "reboot-required reboot-required.pkgs do-not-hibernate"
-    #do
-	#	backup "${ROOTFS_DIR}" "/var/run/${flag}"
-	#done
 }
 
 function finish_chroot()
 {
     ROOTFS_DIR="$1"
-
-	#for flag in "reboot-required reboot-required.pkgs do-not-hibernate"
-    #do
-	#	restore "${ROOTFS_DIR}" "/var/run/${flag}"
-	#done
 
     silent 'Clearing APT cache' chroot "${ROOTFS_DIR}" apt-get clean
 
@@ -129,6 +119,12 @@ function finish_chroot()
 
     silent 'Unmounting filesystems' chroot "${ROOTFS_DIR}" umount -l /proc /sys /dev/pts
     silent 'Unmounting /dev' umount -l "${ROOTFS_DIR}/dev"
+    
+    silent 'Unmounting /dev/pts'  chroot "${ROOTFS_DIR}" umount -l "/dev/pts"  
+    silent 'Unmounting /sys'      chroot "${ROOTFS_DIR}" umount -l "/sys"
+    silent 'Unmounting /proc'     chroot "${ROOTFS_DIR}" umount -l "/proc"
+
+    silent 'Unmounting /dev'      umount -l "${ROOTFS_DIR}/dev"
 
     restore "${ROOTFS_DIR}" "/etc/fstab"
     restore "${ROOTFS_DIR}" "/etc/resolv.conf"
@@ -136,9 +132,7 @@ function finish_chroot()
     silent 'Removing mtab' rm -f "${ROOTFS_DIR}/etc/mtab"
 
     clear_directory "${ROOTFS_DIR}" /tmp
-    #clear_directory "${ROOTFS_DIR}" /var/tmp
     clear_directory "${ROOTFS_DIR}" /var/crash
-    #clear_directory "${ROOTFS_DIR}" /var/cache
 }
 
 function chroot_rootfs()
