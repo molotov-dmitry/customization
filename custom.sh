@@ -179,6 +179,11 @@ res_dir="/media/documents/Distrib/OS/custom"
 common_file_path="${ROOT_PATH}/files"
 custom_file_path="${ROOT_PATH}/custom/files/${config}"
 
+if [[ "$3" == '--debug' ]]
+then
+    debug=y
+fi
+
 #### Checking parameters =======================================================
 
 ## Checking iso image file -----------------------------------------------------
@@ -198,6 +203,11 @@ checkfilemime 'user script'         "${ROOT_PATH}/custom/tools/${config}/user.sh
 
 echo "iso image:    ${iso_src}"
 echo "remaster dir: ${remaster_dir}"
+
+if [[ "$debug" == 'y' ]]
+then
+    echo 'DEBUG'
+fi
 
 ### Showing bundles ============================================================
 
@@ -285,6 +295,11 @@ chroot_rootfs "${rootfs_dir}" bash /tools/create.sh
 chroot_rootfs "${rootfs_dir}" bash /tools/config.sh
 chroot_rootfs "${rootfs_dir}" apt-get autoremove --yes --force-yes -qq
 chroot_rootfs "${rootfs_dir}" bash /tools/enable-startup.sh
+
+if [[ "$debug" == 'y' ]]
+then
+    chroot_rootfs "${rootfs_dir}" bash
+fi
 
 finish_chroot "${rootfs_dir}"
 
