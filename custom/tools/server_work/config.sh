@@ -31,7 +31,7 @@ bundle config 'server/smb'
 
 ### Gitlab ---------------------------------------------------------------------
 
-bundle config 'gitlab'
+#bundle config 'gitlab'
 
 ### IR emulator ================================================================
 

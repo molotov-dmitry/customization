@@ -20,4 +20,4 @@ fixpermissions '/media/documents' '1000'
 
 ### Installing and configuring Gitlab ==========================================
 
-bundle firstboot 'gitlab'
+#bundle firstboot 'gitlab'

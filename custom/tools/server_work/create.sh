@@ -25,7 +25,7 @@ appremove 'apt-listchanges' 'apt-listchanges'
 
 ## Update ----------------------------------------------------------------------
 
-changemirror  'mirror.yandex.ru'
+changemirror  'ftp.ru.debian.org'
 changerelease 'stretch'
 
 appupdate
@@ -62,6 +62,6 @@ bundle install 'vm'
 
 ## GitLab  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-bundle install 'gitlab'
+#bundle install 'gitlab'
 
 
