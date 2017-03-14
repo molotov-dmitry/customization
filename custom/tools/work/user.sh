@@ -12,7 +12,7 @@ ifnames=( $(ip link | grep '^[[:digit:]]*:' | cut -d ':' -f 2 | sed 's/^[ \t]*//
 ifname=${ifnames[0]}
 
 nmcli connection delete WiredConnection
-nmcli connection add con-name WiredConnection ifname ${ifname} type ethernet ip4 172.16.8.81/24 gw4 172.16.8.253
+nmcli connection add con-name WiredConnection ifname ${ifname} type ethernet ip4 172.16.8.92/24 gw4 172.16.8.253
 nmcli connection modify WiredConnection ipv4.dns "172.16.56.3 172.16.56.1"
 nmcli connection modify WiredConnection ipv4.ignore-auto-dns yes
 nmcli connection modify WiredConnection ipv6.method ignore
