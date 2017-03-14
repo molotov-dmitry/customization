@@ -3,6 +3,8 @@
 ROOT_PATH="$(cd "$(dirname "$0")" && pwd)"
 cd "${ROOT_PATH}" || exit 1
 
+shopt -s extglob
+
 clear
 clear
 
@@ -47,28 +49,6 @@ function checkfilemime()
     fi
 }
 
-function packroot()
-{
-    silentsudo 'Updating package list' bash -c "chroot "${rootfs_dir}" dpkg-query -W --showformat='${Package} ${Version}\n' > \"${iso_dir}/casper/filesystem.manifest\""
-
-    if [[ -e "${iso_dir}/casper/manifest.diff" ]]
-    then
-        silentsudo 'Getting versions from manifest' bash -c "cat \"${iso_dir}/casper/filesystem.manifest\" | cut -d ' ' -f 1 > \"${iso_dir}/filesystem.manifest.tmp\""
-        silentsudo 'Diff manifests'                 bash -c "diff --unchanged-group-format='' \"${iso_dir}/filesystem.manifest.tmp\" \"${iso_dir}/casper/manifest.diff\" > \"${iso_dir}/filesystem.manifest-desktop.tmp\""
-        silentsudo 'Building manifest desktop file' bash -c "chroot \"${rootfs_dir}\"  dpkg-query -W --showformat='${Package} ${Version}\n' $(cat "${iso_dir}/filesystem.manifest-desktop.tmp") | egrep '.+ .+' > \"${iso_dir}/casper/filesystem.manifest-desktop\""
-        silentsudo 'Removing temp files'            bash -c "rm \"${iso_dir}/filesystem.manifest.tmp\" \"${iso_dir}/filesystem.manifest-desktop.tmp\""
-    else
-        silentsudo 'Creating desktop manifest' cp -f "${iso_dir}/casper/filesystem.manifest" "${iso_dir}/casper/filesystem.manifest-desktop"
-    fi
-
-    if [[ -e "${iso_dir}/casper/filesystem.squashfs" ]]
-    then
-        silentsudo 'Removing old rootfs' rm -f "${iso_dir}/casper/filesystem.squashfs"
-    fi
-
-    silentsudo 'Packing rootfs' mksquashfs "${rootfs_dir}" "${iso_dir}/casper/filesystem.squashfs" || exit 1
-}
-
 function packiso()
 {
     iso_name="${config}-$1"
@@ -92,7 +72,7 @@ function packiso()
         -p "Dmitry Sorokin" -V "${iso_description}" \
         -no-emul-boot -boot-load-size 4 -boot-info-table \
         -cache-inodes -r -J -l \
-        -x "${iso_dir}"/casper/manifest.diff \
+        -x "${iso_dir}"/${livedir}/manifest.diff \
         -joliet-long \
         "${iso_dir}" || exit 1
 
@@ -150,26 +130,36 @@ then
     appinstall 'ISO tools' 'genisoimage' || exit 1
 fi
 
-### Check available ram ========================================================
-
-title 'Checking free RAM'
-
-freemem=$(cat /proc/meminfo | grep MemAvailable | cut -d ":" -f 2 | sed 's/[^0-9]//g')
-if [[ $freemem -gt 12*1024*1024 ]]
-then
-    msgdone '[use RAM]'
-    let useram=1
-else
-    msgwarn '[use HDD]'
-    let useram=0
-fi
-
-unset freemem
-
 ### Getting parameters =========================================================
 
-iso_src="$1"
-config="$2"
+configs="@($(ls -1 "${ROOT_PATH}/custom/tools" | tr '\n' '|' | sed 's/|$//'))"
+
+while [[ $# -gt 0 ]]
+do
+
+	case "$1" in
+
+	'--debug')
+		debug='y'
+	;;
+
+	'--ram')
+		useram='1'
+	;;
+
+	*.iso)
+		iso_src="$1"
+	;;
+
+	${configs})
+		config="$1"
+	;;
+
+	esac
+
+	shift
+
+done
 
 remaster_dir="/remaster/${config}"
 iso_dir="${remaster_dir}/remaster-iso"
@@ -179,10 +169,30 @@ res_dir="/media/documents/Distrib/OS/custom"
 common_file_path="${ROOT_PATH}/files"
 custom_file_path="${ROOT_PATH}/custom/files/${config}"
 
-if [[ "$3" == '--debug' ]]
+if isdebian
 then
-    debug=y
+    livedir='live'
+else
+    livedir='casper'
 fi
+
+### Check available ram ========================================================
+
+if [[ -z "${useram}" ]]
+then
+
+    freemem=$(cat /proc/meminfo | grep MemAvailable | cut -d ":" -f 2 | sed 's/[^0-9]//g')
+
+    if [[ $freemem -gt 12*1024*1024 ]]
+    then
+        let useram=1
+    else
+        let useram=0
+    fi
+
+fi
+
+unset freemem
 
 #### Checking parameters =======================================================
 
@@ -201,13 +211,28 @@ checkfilemime 'user script'         "${ROOT_PATH}/custom/tools/${config}/user.sh
 
 ### Showing parameters =========================================================
 
+echo
+
+echo "config:       ${config}"
 echo "iso image:    ${iso_src}"
 echo "remaster dir: ${remaster_dir}"
+echo "rootfs dir:   ${livedir}"
+
+echo -n "use ram:      "
+if [[ $useram -eq 1 ]]
+then
+	msgdone 'yes'
+else
+	msgwarn 'no'
+fi
 
 if [[ "$debug" == 'y' ]]
 then
-    echo 'DEBUG'
+	echo -n "debug:        "
+	msgwarn 'yes'
 fi
+
+read
 
 ### Showing bundles ============================================================
 
@@ -217,7 +242,14 @@ read
 
 ### Unpacking image ============================================================
 
-silentsudo '' umount "${remaster_dir}"
+while [[ -n "$(mount | grep /remaster)" ]]
+do
+	umountpath=$(mount  | grep /remaster | head -n1 | cut -d ' ' -f 3)
+	[[ -z "${umountpath}" ]] && break
+
+	silentsudo "unmounting ${umountpath}" umount -l "${umountpath}"
+done
+
 silentsudo 'Removing old CD'                rm -rf "${remaster_dir}"
 silentsudo 'Creating remaster directory'    mkdir -p "${remaster_dir}"
 
@@ -232,17 +264,12 @@ silentsudo '' umount /mnt
 silentsudo 'Mounting iso' mount -o loop "${iso_src}" /mnt || exit 1
 silentsudo 'Creating directory for image' mkdir -p "${iso_dir}" || exit 1
 
-silentsudo 'Unpacking iso'                  rsync --exclude=/casper/filesystem.squashfs -a /mnt/ "${iso_dir}/" || exit 1
+silentsudo 'Unpacking iso'                  rsync --exclude=/${livedir}/filesystem.squashfs -a /mnt/ "${iso_dir}/" || exit 1
 silentsudo 'Removing Win32 files'           rm -rf ${iso_dir}/*.exe ${iso_dir}/*.ini ${iso_dir}/*.inf ${iso_dir}/*.ico ${iso_dir}/*.bmp ${iso_dir}/programs ${iso_dir}/bin ${iso_dir}/disctree ${iso_dir}/pics
-
-if isdebian
-then
-    silentsudo '[DEB] Moving squashfs'      mv "${iso_dir}/live" "${iso_dir}/casper"
-fi
 
 ## Unpacking SquashFS ----------------------------------------------------------
 
-silentsudo 'Unpacking rootfs' unsquashfs -f -d "${rootfs_dir}" "/mnt/casper/filesystem.squashfs" || exit 1
+silentsudo 'Unpacking rootfs' unsquashfs -f -d "${rootfs_dir}" "/mnt/${livedir}/filesystem.squashfs" || exit 1
 
 ## -----------------------------------------------------------------------------
 
@@ -321,16 +348,32 @@ silentsudo 'Changing tools mode'            chmod -R 777 "${rootfs_dir}/tools"
 
 ## Packing image ===============================================================
 
-packroot
+## Pack rootfs -----------------------------------------------------------------
 
-if grep '^cifs-utils$' "${iso_dir}/casper/filesystem.manifest-remove" > /dev/null 2>&1
+silentsudo 'Updating package list' bash -c "chroot "${rootfs_dir}" dpkg-query -W --showformat='${Package} ${Version}\n' > \"${iso_dir}/${livedir}/filesystem.manifest\""
+
+if [[ -e "${iso_dir}/${livedir}/manifest.diff" ]]
 then
-    silentsudo 'Removing cifs-utils from remove manifest' sed -i '/^cifs-utils$/d' "${iso_dir}/casper/filesystem.manifest-remove"
+    silentsudo 'Getting versions from manifest' bash -c "cat \"${iso_dir}/${livedir}/filesystem.manifest\" | cut -d ' ' -f 1 > \"${iso_dir}/filesystem.manifest.tmp\""
+    silentsudo 'Diff manifests'                 bash -c "diff --unchanged-group-format='' \"${iso_dir}/filesystem.manifest.tmp\" \"${iso_dir}/${livedir}/manifest.diff\" > \"${iso_dir}/filesystem.manifest-desktop.tmp\""
+    silentsudo 'Building manifest desktop file' bash -c "chroot \"${rootfs_dir}\"  dpkg-query -W --showformat='${Package} ${Version}\n' $(cat "${iso_dir}/filesystem.manifest-desktop.tmp") | egrep '.+ .+' > \"${iso_dir}/${livedir}/filesystem.manifest-desktop\""
+    silentsudo 'Removing temp files'            bash -c "rm \"${iso_dir}/filesystem.manifest.tmp\" \"${iso_dir}/filesystem.manifest-desktop.tmp\""
+else
+   silentsudo 'Creating desktop manifest' cp -f "${iso_dir}/${livedir}/filesystem.manifest" "${iso_dir}/${livedir}/filesystem.manifest-desktop"
 fi
 
-if isdebian
+if [[ -e "${iso_dir}/${livedir}/filesystem.squashfs" ]]
 then
-    silentsudo '[DEB] Moving squashfs back' mv "${iso_dir}/casper" "${iso_dir}/live"
+    silentsudo 'Removing old rootfs' rm -f "${iso_dir}/${livedir}/filesystem.squashfs"
+fi
+
+silentsudo 'Packing rootfs' mksquashfs "${rootfs_dir}" "${iso_dir}/${livedir}/filesystem.squashfs" || exit 1
+
+## Modify package manifest -----------------------------------------------------
+
+if grep '^cifs-utils$' "${iso_dir}/${livedir}/filesystem.manifest-remove" > /dev/null 2>&1
+then
+    silentsudo 'Removing cifs-utils from remove manifest' sed -i '/^cifs-utils$/d' "${iso_dir}/${livedir}/filesystem.manifest-remove"
 fi
 
 ## Adding EFI x32 --------------------------------------------------------------
@@ -350,4 +393,3 @@ if [[ $useram -eq 1 ]]
 then
     silentsudo 'Unmounting remaster dir' umount -l "${remaster_dir}"
 fi
-
