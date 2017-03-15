@@ -482,6 +482,8 @@ case "${bundle}" in
 "cli/monitor")
 
     appinstall 'htop'                   'htop'
+    appinstall 'iotop'                  'iotop'
+    appinstall 'Net bandwidth monitor'  'speedometer'
     appinstall 'tmux'                   'tmux'
 
 ;;

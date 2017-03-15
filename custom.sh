@@ -137,27 +137,27 @@ configs="@($(ls -1 "${ROOT_PATH}/custom/tools" | tr '\n' '|' | sed 's/|$//'))"
 while [[ $# -gt 0 ]]
 do
 
-	case "$1" in
+    case "$1" in
 
-	'--debug')
-		debug='y'
-	;;
+    '--debug')
+        debug='y'
+    ;;
 
-	'--ram')
-		useram='1'
-	;;
+    '--ram')
+        useram='1'
+    ;;
 
-	*.iso)
-		iso_src="$1"
-	;;
+    *.iso)
+        iso_src="$1"
+    ;;
 
-	${configs})
-		config="$1"
-	;;
+    ${configs})
+        config="$1"
+    ;;
 
-	esac
+    esac
 
-	shift
+    shift
 
 done
 
@@ -221,15 +221,15 @@ echo "rootfs dir:   ${livedir}"
 echo -n "use ram:      "
 if [[ $useram -eq 1 ]]
 then
-	msgdone 'yes'
+    msgdone 'yes'
 else
-	msgwarn 'no'
+    msgwarn 'no'
 fi
 
 if [[ "$debug" == 'y' ]]
 then
-	echo -n "debug:        "
-	msgwarn 'yes'
+    echo -n "debug:        "
+    msgwarn 'yes'
 fi
 
 read
@@ -244,10 +244,10 @@ read
 
 while [[ -n "$(mount | grep /remaster)" ]]
 do
-	umountpath=$(mount  | grep /remaster | head -n1 | cut -d ' ' -f 3)
-	[[ -z "${umountpath}" ]] && break
+    umountpath=$(mount  | grep /remaster | head -n1 | cut -d ' ' -f 3)
+    [[ -z "${umountpath}" ]] && break
 
-	silentsudo "unmounting ${umountpath}" umount -l "${umountpath}"
+    silentsudo "unmounting ${umountpath}" umount -l "${umountpath}"
 done
 
 silentsudo 'Removing old CD'                rm -rf "${remaster_dir}"
