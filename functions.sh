@@ -338,8 +338,8 @@ function repoadd()
 {
     reponame="$1"
     repo="$2"
-    version="$4"
-    keyfile="$3"
+    version="$3"
+    keyfile="$4"
 
     title "Adding $reponame repository"
 
