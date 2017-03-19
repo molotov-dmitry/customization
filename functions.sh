@@ -334,6 +334,39 @@ function isppaadded()
     return 0
 }
 
+function repoadd()
+{
+    reponame="$1"
+    repo="$2"
+    version="$4"
+    keyfile="$3"
+
+    title "Adding $reponame repository"
+
+    sudo apt-key add "${ROOT_PATH}/files/${keyfile}" >/dev/null 2>&1
+    status=$?
+
+    if [[ $status -ne 0 ]]
+    then
+        msgfail
+        return $status
+    fi
+
+    sourceslist="deb http://${repo} ${version} main"
+
+    echo "${sourceslist}" | sudo tee "/etc/apt/sources.list.d/${reponame}-${version}.list" >/dev/null 2>&1
+    status=$?
+
+    if [[ $status -eq 0 ]]
+    then
+        msgdone
+    else
+        msgfail
+    fi
+
+    return $status
+}
+
 function debian_ppaadd()
 {
     reponame="$1"
