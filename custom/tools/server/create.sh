@@ -25,6 +25,7 @@ fi
 
 ## Add PPA`s -------------------------------------------------------------------
 
+repoadd 'plexmediaserver'           'shell.ninthgate.se/packages/debian' 'wheezy' 'plexmediaserver/shell.ninthgate.se.gpg.key'
 ppaadd  'Web Upd8'                  'nilarimogard' 'webupd8'
 
 ## Update ----------------------------------------------------------------------
