@@ -220,6 +220,7 @@ case "${bundle}" in
 
     appinstall 'Static analysis tools'  'cppcheck cppcheck-gui'
     appinstall 'Dynamic analysis tools' 'valgrind'
+    appinstall 'Function complexity'    'pmccabe'
 
 ;;
 
