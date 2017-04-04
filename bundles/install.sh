@@ -261,7 +261,7 @@ case "${bundle}" in
 "dev/qt")
 
     appinstall 'Qt SDK'                 'qml qtbase5-dev qtdeclarative5-dev qt5-doc'
-    appinstall 'Qt Libs'                'libqt5svg5 libqt5webkit5-dev'
+    appinstall 'Qt Libs'                'libqt5svg5 libqt5svg5-dev libqt5webkit5-dev'
     appinstall 'Qt IDE'                 'qtcreator'
 
 ;;
