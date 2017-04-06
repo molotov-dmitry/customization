@@ -270,23 +270,27 @@ case "${bundle}" in
 
     ## Gtk theme ---------------------------------------------------------------
 
-    if [[ "$(desktoptype)" == 'Unity' ]]
-    then
-        theme_name='Numix'
+    gtk_theme='NumixBlue'
+    wm_theme='Numix'
 
-    elif [[ "$(desktoptype)" == 'GNOME' && $(gnome-shell --version | cut -d '.' -f 2) -lt 20 ]]
-    then
-        theme_name='Paper'
+    gsettings set org.gnome.desktop.interface gtk-theme         "${gtk_theme}"
+    gsettings set org.gnome.desktop.wm.preferences theme        "${wm_theme}"
 
-    else
-        theme_name='Numix'
-    fi
+    #if [[ "$(desktoptype)" == 'Unity' ]]
+    #then
+    #    theme_name='Numix'
+    #elif [[ "$(desktoptype)" == 'GNOME' && $(gnome-shell --version | cut -d '.' -f 2) -lt 20 ]]
+    #then
+    #    theme_name='Paper'
+    #else
+    #    theme_name='Numix'
+    #fi
 
-    if [[ -n "${theme_name}" && "$2" != "tablet" ]]
-    then
-        gsettings set org.gnome.desktop.interface gtk-theme         "${theme_name}"
-        gsettings set org.gnome.desktop.wm.preferences theme        "${theme_name}"
-    fi
+    #if [[ -n "${theme_name}" && "$2" != "tablet" ]]
+    #then
+    #    gsettings set org.gnome.desktop.interface gtk-theme         "${theme_name}"
+    #    gsettings set org.gnome.desktop.wm.preferences theme        "${theme_name}"
+    #fi
 ;;
 
 ### Font =======================================================================
