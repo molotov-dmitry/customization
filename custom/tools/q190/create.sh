@@ -151,12 +151,7 @@ pushd /usr/bin/drivers
 
 silentsudo 'Cloning wi-fi driver'           git clone 'https://github.com/abperiasamy/rtl8812AU_8821AU_linux.git'
 
-pushd rtl8812AU_8821AU_linux
-
-silentsudo 'Building driver'                make -f Makefile.dkms install
+popd
 
 silentsudo 'blacklisting default driver'    bash -c 'echo blacklist rtl8188ee > /etc/modprobe.d/rtl8188ee.conf'
-
-popd
-popd
 
