@@ -485,6 +485,63 @@ case "${bundle}" in
 ;;
 
 ### ============================================================================
+### Optimizations ==============================================================
+### ============================================================================
+
+"optimize/chrome-ramdisk")
+
+    ### Save/restore script ----------------------------------------------------
+
+    mkdir -p "${HOME}/.bin"
+
+    echo "
+#!/bin/bash
+
+shopt -s dotglob
+cd ${HOME}/.config"'
+
+if [[ "$1" == "save" ]]
+then
+	mv chromium.tar chromium.tar.bak
+    rm chromium.tar
+
+    tar cpf chromium.tar chromium/
+
+elif [[ "$1" == "restore" ]]
+then
+    if [[ -f chromium.tar  ]]
+    then
+        find chromium -mindepth 1 -delete
+        tar xf chromium.tar
+    fi
+fi
+' > "${HOME}/.bin/chrome-ramdisk"
+
+    chmod +x "${HOME}/.bin/chrome-ramdisk"
+
+    ## User service ------------------------------------------------------------
+
+    mkdir -p "${HOME}/.config/systemd/user"
+
+    echo "
+[Unit]
+Description=Keep Chromium's RAM disk between power-offs
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=${HOME}/.bin/chrome-ramdisk restore
+ExecStop=${HOME}/.bin/chrome-ramdisk save
+
+[Install]
+WantedBy=default.target
+" > "${HOME}/.config/systemd/user/chromium-ramdisk.service"
+
+    systemctl --user enable chromium-ramdisk.service
+  
+;;
+
+### ============================================================================
 ### ============================================================================
 ### ============================================================================
 
