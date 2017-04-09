@@ -152,7 +152,7 @@ case "${bundle}" in
 
 "cli")
 
-    bash "${scriptpath}" 'cli/ttycolors'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'cli/ttycolors'
 
 ;;
 
