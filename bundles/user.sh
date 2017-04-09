@@ -488,6 +488,14 @@ case "${bundle}" in
 ### Optimizations ==============================================================
 ### ============================================================================
 
+"optimize")
+
+    bash "${scriptpath}" 'optimize/chrome-ramdisk'
+
+;;
+
+### Keep Chromium's RAM disk between power-offs ================================
+
 "optimize/chrome-ramdisk")
 
     ### Save/restore script ----------------------------------------------------
