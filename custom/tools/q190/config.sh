@@ -25,5 +25,5 @@ bundle config 'network'
 
 ## Other =======================================================================
 
-bundle prepare 'cli'
+bundle config 'cli'
 
