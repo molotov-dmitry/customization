@@ -514,10 +514,15 @@ cd ${HOME}/.config"'
 
 if [[ "$1" == "save" ]]
 then
-	mv chromium.tar chromium.tar.bak
-    rm chromium.tar
+    if [[ -d chromium ]]
+    then
+        if [[ -f chromium.tar ]]
+        then
+            mv -f chromium.tar chromium.tar.bak
+        fi
 
-    tar cpf chromium.tar chromium/
+        tar cpf chromium.tar chromium/
+    fi
 
 elif [[ "$1" == "restore" ]]
 then
@@ -542,8 +547,8 @@ Description=Keep Chromium's RAM disk between power-offs
 [Service]
 Type=oneshot
 RemainAfterExit=true
-ExecStart=${HOME}/.bin/chrome-ramdisk restore
-ExecStop=${HOME}/.bin/chrome-ramdisk save
+ExecStart=/bin/bash ${HOME}/.bin/chrome-ramdisk restore
+ExecStop=/bin/bash ${HOME}/.bin/chrome-ramdisk save
 
 [Install]
 WantedBy=default.target
