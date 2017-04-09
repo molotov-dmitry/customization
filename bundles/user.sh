@@ -34,6 +34,10 @@ case "${bundle}" in
     hideapp 'software-properties-gnome'
     hideapp 'software-properties-gtk'
 
+    ## File templates ----------------------------------------------------------
+
+    rsync -r "${ROOT_PATH}/files/template/" "$(xdg-user-dir TEMPLATES)/"
+
     ## Keyboard ----------------------------------------------------------------
 
     gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['<Shift>Alt_L']"
