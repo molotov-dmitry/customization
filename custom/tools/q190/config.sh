@@ -23,3 +23,7 @@ bundle config 'dev/build'
 
 bundle config 'network'
 
+## Other =======================================================================
+
+bundle prepare 'cli'
+
