@@ -51,7 +51,7 @@ bundle user 'cli'
 
 ## Optimizations ---------------------------------------------------------------
 
-bundle user "optimize/chrome-ramdisk"
+bundle user 'optimize'
 
 ### Directories ================================================================
 
