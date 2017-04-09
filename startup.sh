@@ -4,11 +4,6 @@ ROOT_PATH='/tools'
 
 . "${ROOT_PATH}/functions.sh"
 
-if [[ ! -e /tools/.firstboot ]]
-then
-    bash /tools/firstboot.sh 2>> /tools/firstboot.log && touch /tools/.firstboot
-fi
-
 for userinfo in $(cat /etc/passwd | grep -v nologin | grep -v /bin/false | grep -v /bin/sync | grep -v postgres | grep -v ftp | cut -d ':' -f 1,6)
 do
     user_name=$(echo "${userinfo}" | cut -d ':' -f 1)
@@ -36,4 +31,9 @@ fi
 
     fi
 done
+
+if [[ ! -e /tools/.firstboot ]]
+then
+    bash /tools/firstboot.sh 2>> /tools/firstboot.log && touch /tools/.firstboot
+fi
 
