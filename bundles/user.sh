@@ -36,6 +36,7 @@ case "${bundle}" in
 
     ## File templates ----------------------------------------------------------
 
+    xdg-user-dirs-update
     rsync -r "${ROOT_PATH}/files/template/" "$(xdg-user-dir TEMPLATES)/"
 
     ## Keyboard ----------------------------------------------------------------
@@ -82,6 +83,23 @@ case "${bundle}" in
     gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" background-transparency-percent 5
     gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" scrollbar-policy 'never'
     gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" allow-bold false
+
+    ## night light -------------------------------------------------------------
+
+    if [[ "$(desktoptype)" == 'GNOME' && $(gnome-shell --version | cut -d '.' -f 2) -ge 24 ]]
+    then
+
+        gsettings set org.gnome.settings-daemon.plugins.color active true
+        gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+        gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
+    else
+
+        hideapp 'redshift-gtk'
+
+        mkdir -p "${HOME/}.config/autostart/"
+        cp -rf "${ROOT_PATH}/files/redshift/redshift-gtk.desktop" "${HOME}/.config/autostart/"
+
+    fi
 
 ;;
 
@@ -495,6 +513,26 @@ case "${bundle}" in
 "optimize")
 
     bash "${scriptpath}" 'optimize/chrome-ramdisk'
+    bash "${scriptpath}" 'optimize/disable-tracker'
+;;
+
+### Disable Gnome tracker ======================================================
+
+"optimize/disable-tracker")
+
+    tracker daemon -t
+
+    mkdir -p "${HOME}/.config/autostart"
+    cd "${HOME}/.config/autostart"
+
+    cp  /etc/xdg/autostart/tracker-* ./
+
+    for FILE in tracker-*.desktop
+    do
+        echo 'Hidden=true' >> "$FILE"
+    done
+
+    rm -rf "${HOME}/.cache/tracker" "${HOME}/.local/share/tracker"
 
 ;;
 
