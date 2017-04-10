@@ -18,6 +18,7 @@ case "${bundle}" in
 "gnome")
 
     appinstall 'Language pack'	            'hyphen-ru mythes-ru hunspell-ru language-pack-gnome-ru language-pack-gnome-ru-base language-pack-ru language-pack-ru-base'
+    appinstall 'Redshift'                   'redshift-gtk'
 
 ;;
 

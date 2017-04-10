@@ -19,4 +19,6 @@ bundle config 'qt'
 
 bundle config 'dev'
 
+## Other -----------------------------------------------------------------------
 
+bundle config 'cli'
