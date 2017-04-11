@@ -96,10 +96,30 @@ case "${bundle}" in
 
         hideapp 'redshift-gtk'
 
-        mkdir -p "${HOME/}.config/autostart/"
+        mkdir -p "${HOME}.config/autostart/"
         cp -rf "${ROOT_PATH}/files/redshift/redshift-gtk.desktop" "${HOME}/.config/autostart/"
 
     fi
+
+;;
+
+### ============================================================================
+### Qt =========================================================================
+### ============================================================================
+
+"qt")
+
+    if ispkginstalled libqt5core5a
+    then
+        if [[ $(dpkg -s libqt5core5a | grep Version: | cut -d '.' -f 2) -ge 7 ]]
+        then # Qt version is 5.7 or higher
+            echo                                                    >> "${HOME}/.profile"
+            echo '# Use GTK+ 2 platformtheme for Qt applications'   >> "${HOME}/.profile"
+            echo 'export QT_QPA_PLATFORMTHEME=gtk2'                 >> "${HOME}/.profile"
+            echo                                                    >> "${HOME}/.profile"
+        fi
+    fi
+
 
 ;;
 

@@ -28,8 +28,15 @@ case "${bundle}" in
 
 "qt")
 
-    appinstall 'GTK2 theme for Qt5'         'libqt5libqgtk2'
-
+    if ispkginstalled libqt5core5a
+    then
+        if [[ $(dpkg -s libqt5core5a | grep Version: | cut -d '.' -f 2) -ge 7 ]]
+        then # Qt version is 5.7 or higher
+            appinstall 'GTK2 theme for Qt5'         'qt5-style-plugins'
+        else
+            appinstall 'GTK2 theme for Qt5'         'libqt5libqgtk2'
+        fi
+    fi
 ;;
 
 ### ============================================================================
