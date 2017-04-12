@@ -177,7 +177,17 @@ case "${bundle}" in
 
     if ispkginstalled gnome-shell
     then
-        echo 'export QT_QPA_PLATFORMTHEME=qt5gtk2' > /etc/X11/Xsession.d/100-qt5gtk2
+        if ispkginstalled 'libqt5libqgtk2'
+        then
+
+            echo 'export QT_QPA_PLATFORMTHEME=qt5gtk2' > /etc/X11/Xsession.d/100-qt5gtk2
+
+        elif ispkginstalled 'qt5-style-plugins'
+        then
+
+            echo 'export QT_QPA_PLATFORMTHEME=gtk2' > /etc/X11/Xsession.d/100-qt5gtk2
+
+        fi
     fi
 
 ;;
