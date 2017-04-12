@@ -161,7 +161,7 @@ do
 
 done
 
-remaster_dir="/remaster/${config}"
+remaster_dir="/remaster"
 iso_dir="${remaster_dir}/remaster-iso"
 rootfs_dir="${remaster_dir}/remaster-root"
 res_dir="/media/documents/Distrib/OS/custom"
@@ -328,6 +328,11 @@ then
     chroot_rootfs "${rootfs_dir}" bash
 fi
 
+if [[ $(lsof -t "${remaster_dir}" | wc -l) -gt 0 ]]
+then
+    silentsudo 'Killing remaining processes' kill $(lsof -t "${remaster_dir}")
+fi
+
 finish_chroot "${rootfs_dir}"
 
 silentsudo 'Removing create script'         rm -rf "${rootfs_dir}/tools/create.sh"
@@ -391,5 +396,6 @@ packiso "$(basename "${iso_src}")" "${config}"
 
 if [[ $useram -eq 1 ]]
 then
-    silentsudo 'Unmounting remaster dir' umount -l "${remaster_dir}"
+    silentsudo 'Unmounting remaster dir' umount "${remaster_dir}"
+    silentsudo 'Dropping cached memory' su -c 'echo 3 > /proc/sys/vm/drop_caches'
 fi
