@@ -22,11 +22,15 @@ do
     nmcli connection delete "${profile}"
 done
 
+### Add network shares ---------------------------------------------------------
+
+mkdir -p "${HOME}/.config/gtk-3.0/"
+
+echo 'smb://172.16.8.91/usr Dima'          >> "${HOME}/.config/gtk-3.0/bookmarks"
+echo 'smb://172.16.8.91/share2 Dima (Cub)' >> "${HOME}/.config/gtk-3.0/bookmarks"
+echo 'smb://172.16.8.21/share2 Cub'        >> "${HOME}/.config/gtk-3.0/bookmarks"
+
 ### Customization ==============================================================
-
-## Animations ------------------------------------------------------------------
-
-gsettings set org.gnome.desktop.interface enable-animations false
 
 ## Appearance ------------------------------------------------------------------
 
