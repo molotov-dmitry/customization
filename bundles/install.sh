@@ -18,7 +18,11 @@ case "${bundle}" in
 "gnome")
 
     appinstall 'Language pack'	            'hyphen-ru mythes-ru hunspell-ru language-pack-gnome-ru language-pack-gnome-ru-base language-pack-ru language-pack-ru-base'
-    appinstall 'Redshift'                   'redshift-gtk'
+
+    if ! ispkginstalled 'gnome-shell' || [[ $(gnome-shell --version | cut -d '.' -f 2) -lt 24 ]]
+    then
+        appinstall 'Redshift'               'redshift-gtk'
+    fi
 
 ;;
 
@@ -28,15 +32,8 @@ case "${bundle}" in
 
 "qt")
 
-    if ispkginstalled libqt5core5a
-    then
-        if [[ $(dpkg -s libqt5core5a | grep Version: | cut -d '.' -f 2) -ge 7 ]]
-        then # Qt version is 5.7 or higher
-            appinstall 'GTK2 theme for Qt5'         'qt5-style-plugins'
-        else
-            appinstall 'GTK2 theme for Qt5'         'libqt5libqgtk2'
-        fi
-    fi
+    appinstall 'GTK2 style for Qt5'         'qt5-style-plugins'
+    appinstall 'GTK2 theme for Qt5'         'libqt5libqgtk2'
 ;;
 
 ### ============================================================================
@@ -531,7 +528,7 @@ case "${bundle}" in
 
         if ispkgavailable 'xserver-xorg-input-vmmouse'
         then
-            appinstall 'VMWare mouse drivers' 'xserver-xorg-input-vmmouse'    
+            appinstall 'VMWare mouse drivers' 'xserver-xorg-input-vmmouse'
         fi
     fi
 
