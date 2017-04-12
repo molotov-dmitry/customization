@@ -52,8 +52,8 @@ function deactivate()
 
     if [[ -f "${dir}/${file}" ]]
     then
-		silent "Deactivating ${file}" chroot "${dir}" bash -c "dpkg-divert --local --rename --add \"${file}\" && ln -s /bin/true \"${file}\""
-	fi
+        silent "Deactivating ${file}" chroot "${dir}" bash -c "dpkg-divert --local --rename --add \"${file}\" && ln -s /bin/true \"${file}\""
+    fi
 
     return 0
 }
@@ -98,7 +98,7 @@ function start_chroot()
 
     copy_to_rootfs "${ROOTFS_DIR}" "/etc/resolv.conf"
 
-	silent 'Generating D-Bus UUID' chroot "${ROOTFS_DIR}" dbus-uuidgen --ensure
+    silent 'Generating D-Bus UUID' chroot "${ROOTFS_DIR}" dbus-uuidgen --ensure
 
     deactivate "${ROOTFS_DIR}" "/sbin/initctl"
     deactivate "${ROOTFS_DIR}" "/usr/sbin/update-grub"
@@ -116,12 +116,12 @@ function finish_chroot()
     reactivate "${ROOTFS_DIR}" "/usr/sbin/grub-probe"
 
     silent 'Removing D-Bus UUID' rm -f "${ROOTFS_DIR}/var/lib/dbus/machine-id"
-    
-    silent 'Unmounting /dev/pts'  chroot "${ROOTFS_DIR}" umount -l "/dev/pts"  
-    silent 'Unmounting /sys'      chroot "${ROOTFS_DIR}" umount -l "/sys"
-    silent 'Unmounting /proc'     chroot "${ROOTFS_DIR}" umount -l "/proc"
 
-    silent 'Unmounting /dev'      umount -l "${ROOTFS_DIR}/dev"
+    silent 'Unmounting /dev/pts'  chroot "${ROOTFS_DIR}" umount "/dev/pts"
+    silent 'Unmounting /sys'      chroot "${ROOTFS_DIR}" umount "/sys"
+    silent 'Unmounting /proc'     chroot "${ROOTFS_DIR}" umount "/proc"
+
+    silent 'Unmounting /dev'      umount "${ROOTFS_DIR}/dev"
 
     restore "${ROOTFS_DIR}" "/etc/fstab"
     restore "${ROOTFS_DIR}" "/etc/resolv.conf"
