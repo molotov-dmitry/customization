@@ -370,11 +370,11 @@ case "${bundle}" in
     hideapp 'easytag'
     hideapp 'mpv'
 
-    ## Media player gnome shell extension --------------------------------------
+    ## Media player indicator Gnome Shell extension ----------------------------
 
     if [[ "$(desktoptype)" == 'GNOME' ]]
     then
-        gsettingsadd org.gnome.shell enabled-extensions             'mediaplayer@patapon.info'
+        gsettingsadd org.gnome.shell enabled-extensions 'mediaplayer@patapon.info'
     fi
 
     ## rhythmbox ---------------------------------------------------------------
@@ -422,6 +422,23 @@ case "${bundle}" in
 
     mkdir -p "${HOME}/.config/mpv"
     cp -f "${ROOT_PATH}/files/mpv/mpv.conf" "${HOME}/.config/mpv/"
+
+    
+    ## Sound Input & Output Device Chooser Gnome Shell extension ---------------
+
+    if [[ "$(desktoptype)" == 'GNOME' ]]
+    then
+        gsettingsadd org.gnome.shell enabled-extensions 'sound-output-device-chooser@kgshank.net'
+    fi
+
+    dconf write /org/gnome/shell/extensions/sound-output-device-chooser/hide-on-single-device   true
+    dconf write /org/gnome/shell/extensions/sound-output-device-chooser/show-input-devices      false
+    dconf write /org/gnome/shell/extensions/sound-output-device-chooser/show-profiles           false
+    dconf write /org/gnome/shell/extensions/sound-output-device-chooser/show-output-devices     true
+    dconf write /org/gnome/shell/extensions/sound-output-device-chooser/hide-menu-icons         false
+    dconf write /org/gnome/shell/extensions/sound-output-device-chooser/icon-theme              "'monochrome'"
+    dconf write /org/gnome/shell/extensions/sound-output-device-chooser/show-input-slider       false
+
 ;;
 
 ### ============================================================================

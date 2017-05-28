@@ -401,7 +401,8 @@ case "${bundle}" in
 
     appinstall 'EasyTag'                'easytag'
 
-    gnomeshellextension 55              # Music player
+    gnomeshellextension 55              # Media player indicator
+    gnomeshellextension 906             # Sound Input & Output Device Chooser
 
 ;;
 
