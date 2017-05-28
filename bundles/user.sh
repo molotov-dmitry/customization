@@ -44,6 +44,10 @@ case "${bundle}" in
     gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['<Shift>Alt_L']"
     gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "['<Primary><Shift>Alt_L']"
 
+    ## Nautilus ----------------------------------------------------------------
+
+    gsettings set org.gnome.nautilus.preferences sort-directories-first     true
+
     ## gedit -------------------------------------------------------------------
 
     gsettings set org.gnome.gedit.preferences.editor use-default-font       true
