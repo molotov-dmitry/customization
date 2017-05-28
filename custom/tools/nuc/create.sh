@@ -96,6 +96,8 @@ bundle install 'dev/style'
 bundle install 'dev/doc'
 bundle install 'dev/qt'
 bundle install 'dev/db'
+bundle install 'dev/json'
+bundle install 'dev/net'
 
 ## VCS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
