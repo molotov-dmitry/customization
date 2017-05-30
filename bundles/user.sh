@@ -187,10 +187,22 @@ case "${bundle}" in
     mkdir -p "${HOME}/.config/QtProject"
     touch    "${HOME}/.config/QtProject/QtCreator.ini"
 
+    echo '[Core]'                           >> "${HOME}/.config/QtProject/QtCreator.ini"
+    echo 'CreatorTheme=flat-light'          >> "${HOME}/.config/QtProject/QtCreator.ini"
+    echo ''                                 >> "${HOME}/.config/QtProject/QtCreator.ini"
     echo '[Directories]'                    >> "${HOME}/.config/QtProject/QtCreator.ini"
     echo 'BuildDirectory.Template=build/%{CurrentProject:Name}/%{CurrentBuild:Name}'    >> "${HOME}/.config/QtProject/QtCreator.ini"
     echo "Projects=${HOME}/Projects"        >> "${HOME}/.config/QtProject/QtCreator.ini"
     echo 'UseProjectsDirectory=true'        >> "${HOME}/.config/QtProject/QtCreator.ini"
+    echo ''                                 >> "${HOME}/.config/QtProject/QtCreator.ini"
+    echo '[Plugins]'                        >> "${HOME}/.config/QtProject/QtCreator.ini"
+    echo 'ForceEnabled=Beautifier, Todo'    >> "${HOME}/.config/QtProject/QtCreator.ini"
+    echo 'Ignored=Android, Bazaar, CMakeProjectManager, CVS, ClearCase, CodePaster, FakeVim, GLSLEditor, Git, Mercurial, Perforce, PythonEditor, QbsProjectManager, QmakeAndroidSupport, QmlDesigner, QmlJSEditor, QmlJSTools, QmlProfiler, QmlProjectManager, TaskList' >> "${HOME}/.config/QtProject/QtCreator.ini"
+    echo ''                                 >> "${HOME}/.config/QtProject/QtCreator.ini"
+    echo '[Beautifier]'                     >> "${HOME}/.config/QtProject/QtCreator.ini"
+    echo 'artisticstyle\useCustomStyle=false' >> "${HOME}/.config/QtProject/QtCreator.ini"
+    echo 'artisticstyle\useHomeFile=true'   >> "${HOME}/.config/QtProject/QtCreator.ini"
+    echo 'artisticstyle\useOtherFiles=false' >> "${HOME}/.config/QtProject/QtCreator.ini"
     echo ''                                 >> "${HOME}/.config/QtProject/QtCreator.ini"
     echo '[TextEditor]'                     >> "${HOME}/.config/QtProject/QtCreator.ini"
     echo 'FontFamily=Ubuntu Mono'           >> "${HOME}/.config/QtProject/QtCreator.ini"
@@ -204,6 +216,12 @@ case "${bundle}" in
     echo '[textMarginSettings]'             >> "${HOME}/.config/QtProject/QtCreator.ini"
     echo 'MarginColumn=80'                  >> "${HOME}/.config/QtProject/QtCreator.ini"
     echo 'ShowMargin=true'                  >> "${HOME}/.config/QtProject/QtCreator.ini"
+
+
+    mkdir -p "${HOME}/.config/QtProject/qtcreator/styles"
+
+    cp -f "${ROOT_PATH}/files/qtcreator/material.xml" "${HOME}/.config/QtProject/qtcreator/styles/"
+
     ;;
 
 ### GTK SDK ====================================================================
@@ -427,7 +445,7 @@ case "${bundle}" in
     mkdir -p "${HOME}/.config/mpv"
     cp -f "${ROOT_PATH}/files/mpv/mpv.conf" "${HOME}/.config/mpv/"
 
-    
+
     ## Sound Input & Output Device Chooser Gnome Shell extension ---------------
 
     if [[ "$(desktoptype)" == 'GNOME' ]]
@@ -621,7 +639,7 @@ WantedBy=default.target
 " > "${HOME}/.config/systemd/user/chromium-ramdisk.service"
 
     systemctl --user enable chromium-ramdisk.service
-  
+
 ;;
 
 ### ============================================================================
