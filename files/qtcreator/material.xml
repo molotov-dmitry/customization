@@ -23,8 +23,8 @@
   <style name="Static" foreground="#7b1fa2"/>
   <style name="VirtualMethod" italic="true"/>
   <style name="Function"/>
-  <style name="Keyword" foreground="#e65100"/>
-  <style name="PrimitiveType" foreground="#e65100"/>
+  <style name="Keyword" foreground="#ff4e2b"/>
+  <style name="PrimitiveType" foreground="#ff4e2b"/>
   <style name="Operator"/>
   <style name="Preprocessor" foreground="#3f51b5"/>
   <style name="Label" foreground="#b71c1c"/>
