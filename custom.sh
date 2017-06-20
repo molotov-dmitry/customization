@@ -78,12 +78,12 @@ function packiso()
 
     silentsudo 'Making iso hybrid' isohybrid "${res_dir}/${iso_name}" || exit 1
 
-    if [[ -e "${res_dir}/${iso_name}.md5" ]]
+    if grep -sq "[ /]${iso_name}\$" "${res_dir}/MD5SUMS"
     then
-        silentsudo 'Removing old iso md5' rm -f "${res_dir}/${iso_name}.md5"
+        silentsudo 'Removing old iso md5' sed -i "/[ /]${iso_name}\$/d" "${res_dir}/MD5SUMS"
     fi
 
-    silentsudo 'Generating md5 for iso' bash -c "md5sum \"${res_dir}/${iso_name}\" > \"${res_dir}/${iso_name}.md5\""
+    silentsudo 'Generating md5 for iso' bash -c "md5sum \"${res_dir}/${iso_name}\" >> \"${res_dir}/MD5SUMS\""
 
     silentsudo 'Changing rights for iso' chmod -R a+rw "${res_dir}"
 }
@@ -198,7 +198,7 @@ unset freemem
 
 ## Checking iso image file -----------------------------------------------------
 
-checkfilemime 'image file' "${iso_src}" 'application/x-iso9660-image' 'iso image'
+#checkfilemime 'image file' "${iso_src}" 'application/x-iso9660-image' 'iso image'
 
 ## Checking config directory ---------------------------------------------------
 
