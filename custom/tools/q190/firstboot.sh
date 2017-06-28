@@ -13,6 +13,10 @@ silentsudo 'Building driver'                make -f Makefile.dkms install
 
 popd
 
+## Optimizations ---------------------------------------------------------------
+
+bundle firstboot 'optimize'
+
 ### Fix directory permissions ==================================================
 
 fixpermissions '/media/documents'

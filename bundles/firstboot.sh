@@ -58,11 +58,66 @@ case "${bundle}" in
 
 "dev/net")
 
-    for userinfo in $(cat /etc/passwd | grep -v nologin | grep -v /bin/false | grep -v /bin/sync | grep -v postgres | grep -v ftp | cut -d ':' -f 1,6)
+    for userinfo in $(cat /etc/passwd | grep -v '^root:' | grep -v nologin | grep -v /bin/false | grep -v /bin/sync | grep -v '^postgres:' | grep -v '^ftp' | cut -d ':' -f 1,6)
     do
         user_name=$(echo "${userinfo}" | cut -d ':' -f 1)
 
         usermod -a -G wireshark ${user_name}
+    done
+
+;;
+
+### ============================================================================
+### Optimizations ==============================================================
+### ============================================================================
+
+"optimize")
+
+    bash "${scriptpath}" 'optimize/tmpfs'
+    bash "${scriptpath}" 'optimize/chrome-ramdisk'
+;;
+
+### Mount directories with high I/O as tmpfs ===================================
+
+"optimize/tmpfs")
+
+    for userinfo in $(cat /etc/passwd | grep -v '^root:' | grep -v nologin | grep -v /bin/false | grep -v /bin/sync | grep -v '^postgres:' | grep -v '^ftp' | cut -d ':' -f 1,3,4,6)
+    do
+        user_name=$(echo "${userinfo}" | cut -d ':' -f 1)
+        user_id=$(echo "${userinfo}" | cut -d ':' -f 2)
+        user_group=$(echo "${userinfo}" | cut -d ':' -f 3)
+        user_home=$(echo "${userinfo}" | cut -d ':' -f 3)
+
+        ## Mount point ---------------------------------------------------------
+
+        sed "s/<USER>/${user_name}/g;s/<UID>/${user_id}/g;s/<GID>/${user_group}/g;s/<HOME>/${user_home}/g" "${ROOT_PATH}/files/chrome-ramdisk/cache-ramdisk.mount" > "/etc/systemd/system/cache-ramdisk-${user_name}.mount"
+        systemctl enable cache-ramdisk-${user_name}.mount
+
+    done
+
+;;
+
+### Keep Chromium's RAM disk between power-offs ================================
+
+"optimize/chrome-ramdisk")
+
+    for userinfo in $(cat /etc/passwd | grep -v '^root:' | grep -v nologin | grep -v /bin/false | grep -v /bin/sync | grep -v '^postgres:' | grep -v '^ftp' | cut -d ':' -f 1,3,4,6)
+    do
+        user_name=$(echo "${userinfo}" | cut -d ':' -f 1)
+        user_id=$(echo "${userinfo}" | cut -d ':' -f 2)
+        user_group=$(echo "${userinfo}" | cut -d ':' -f 3)
+        user_home=$(echo "${userinfo}" | cut -d ':' -f 3)
+
+        ## Mount point ---------------------------------------------------------
+
+        sed "s/<USER>/${user_name}/g;s/<UID>/${user_id}/g;s/<GID>/${user_group}/g;s/<HOME>/${user_home}/g" "${ROOT_PATH}/files/chrome-ramdisk/chrome-ramdisk.mount" > "/etc/systemd/system/chrome-ramdisk-${user_name}.mount"
+        systemctl enable chromium-ramdisk-${user_name}.mount
+
+        ## User service --------------------------------------------------------
+
+        sed "s/<USER>/${user_name}/g;s/<UID>/${user_id}/g;s/<GID>/${user_group}/g;s/<HOME>/${user_home}/g" "${ROOT_PATH}/files/chrome-ramdisk/chrome-ramdisk.service" > "/etc/systemd/system/chrome-ramdisk-${user_name}.service"        
+        systemctl enable chromium-ramdisk-${user_name}.service
+
     done
 
 ;;
