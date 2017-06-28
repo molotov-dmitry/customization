@@ -1,0 +1,40 @@
+
+#!/bin/bash
+
+shopt -s dotglob
+
+action="$1"
+homedir="$2"
+
+cd "${homedir}/.config" || exit 1
+
+if [[ "$1" == "save" ]]
+then
+    if [[ -d chromium ]]
+    then
+        if [[ -f chromium.tar ]]
+        then
+            mv -f chromium.tar chromium.tar.bak
+        fi
+
+        tar cpf chromium.tar chromium/
+
+        sync
+    fi
+
+elif [[ "$1" == "restore" ]]
+then
+    if [[ -f chromium.tar  ]]
+    then
+        find chromium -mindepth 1 -delete
+        tar xf chromium.tar
+
+        if [[ $? -ne 0 && -f chromium.tar.bak ]]
+        then
+            mv -f chromium.tar.bak chromium.tar
+            find chromium -mindepth 1 -delete
+            tar xf chromium.tar
+        fi
+    fi
+fi
+

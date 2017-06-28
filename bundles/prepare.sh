@@ -187,6 +187,32 @@ case "${bundle}" in
 ;;
 
 ### ============================================================================
+### Optimizations ==============================================================
+### ============================================================================
+
+"optimize")
+
+    bash "${scriptpath}" 'optimize/tmpfs'
+    bash "${scriptpath}" 'optimize/chrome-ramdisk'
+;;
+
+### Mount directories with high I/O as tmpfs ===================================
+
+"optimize/tmpfs")
+
+    silentsudo 'Copy tmpfs config' cp -rf "${ROOT_PATH}/files/tmpfs" "${rootfs_dir}/tools/files/"
+
+;;
+
+### Keep Chromium's RAM disk between power-offs ================================
+
+"optimize/chrome-ramdisk")
+
+    silentsudo 'Copy chrome-ramdisk config' cp -rf "${ROOT_PATH}/files/chrome-ramdisk" "${rootfs_dir}/tools/files/"
+
+;;
+
+### ============================================================================
 ### ============================================================================
 ### ============================================================================
 

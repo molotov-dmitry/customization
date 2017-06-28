@@ -1,0 +1,8 @@
+[Unit]
+Before=local-fs.target
+
+[Mount]
+What=tmpfs
+Where=<HOME>/.cache
+Type=tmpfs
+Options=noatime,nodiratime,nodev,nosuid,uid=1000,gid=1000,size=300M

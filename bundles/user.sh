@@ -558,7 +558,6 @@ case "${bundle}" in
 
 "optimize")
 
-    bash "${scriptpath}" 'optimize/chrome-ramdisk'
     bash "${scriptpath}" 'optimize/disable-tracker'
 ;;
 
@@ -579,66 +578,6 @@ case "${bundle}" in
     done
 
     rm -rf "${HOME}/.cache/tracker" "${HOME}/.local/share/tracker"
-
-;;
-
-### Keep Chromium's RAM disk between power-offs ================================
-
-"optimize/chrome-ramdisk")
-
-    ### Save/restore script ----------------------------------------------------
-
-    mkdir -p "${HOME}/.bin"
-
-    echo "
-#!/bin/bash
-
-shopt -s dotglob
-cd ${HOME}/.config"'
-
-if [[ "$1" == "save" ]]
-then
-    if [[ -d chromium ]]
-    then
-        if [[ -f chromium.tar ]]
-        then
-            mv -f chromium.tar chromium.tar.bak
-        fi
-
-        tar cpf chromium.tar chromium/
-    fi
-
-elif [[ "$1" == "restore" ]]
-then
-    if [[ -f chromium.tar  ]]
-    then
-        find chromium -mindepth 1 -delete
-        tar xf chromium.tar
-    fi
-fi
-' > "${HOME}/.bin/chrome-ramdisk"
-
-    chmod +x "${HOME}/.bin/chrome-ramdisk"
-
-    ## User service ------------------------------------------------------------
-
-    mkdir -p "${HOME}/.config/systemd/user"
-
-    echo "
-[Unit]
-Description=Keep Chromium's RAM disk between power-offs
-
-[Service]
-Type=oneshot
-RemainAfterExit=true
-ExecStart=/bin/bash ${HOME}/.bin/chrome-ramdisk restore
-ExecStop=/bin/bash ${HOME}/.bin/chrome-ramdisk save
-
-[Install]
-WantedBy=default.target
-" > "${HOME}/.config/systemd/user/chromium-ramdisk.service"
-
-    systemctl --user enable chromium-ramdisk.service
 
 ;;
 

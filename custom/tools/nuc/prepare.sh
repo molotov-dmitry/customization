@@ -10,3 +10,5 @@ bundle prepare 'network'
 bundle prepare 'network-remote'
 
 bundle prepare 'cli'
+
+bundle prepare 'optimize'

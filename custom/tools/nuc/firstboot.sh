@@ -10,6 +10,10 @@ cd "${ROOT_PATH}" || exit 1
 
 bundle firstboot 'dev'
 
+## Optimizations ---------------------------------------------------------------
+
+bundle firstboot 'optimize'
+
 ### Fix directory permissions ==================================================
 
 fixpermissions '/media/documents'
