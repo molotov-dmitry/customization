@@ -104,7 +104,7 @@ case "${bundle}" in
 
 "dev")
 
-    bash "${scriptpath}" 'dev/qt'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/qt'
 
 ;;
 
@@ -192,8 +192,8 @@ case "${bundle}" in
 
 "optimize")
 
-    bash "${scriptpath}" 'optimize/tmpfs'
-    bash "${scriptpath}" 'optimize/chrome-ramdisk'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'optimize/tmpfs'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'optimize/chrome-ramdisk'
 ;;
 
 ### Mount directories with high I/O as tmpfs ===================================
