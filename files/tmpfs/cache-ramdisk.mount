@@ -5,4 +5,4 @@ Before=local-fs.target
 What=tmpfs
 Where=<HOME>/.cache
 Type=tmpfs
-Options=noatime,nodiratime,nodev,nosuid,uid=1000,gid=1000,size=300M
+Options=noatime,nodiratime,nodev,nosuid,uid=<UID>,gid=<GID>,size=300M
