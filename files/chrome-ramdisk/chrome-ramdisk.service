@@ -5,12 +5,12 @@ RequiresMountsFor=<HOME>/.config/chromium
 [Service]
 User=<USER>
 Group=<USER>
-ExecStop=bash /tools/files/chrome-ramdisk/chrome-ramdisk save <HOME>
-ExecStart=bash /tools/files/chrome-ramdisk/chrome-ramdisk restore <HOME>
+ExecStop=/bin/bash /tools/files/chrome-ramdisk/chrome-ramdisk save <HOME>
+ExecStart=/bin/bash /tools/files/chrome-ramdisk/chrome-ramdisk restore <HOME>
 Type=oneshot
 RemainAfterExit=yes
-Requires=chrome-ramdisk-<USER>.mount
-After=chrome-ramdisk-<USER>.mount
+Requires=<MOUNT>
+After=<MOUNT>
 
 [Install]
 WantedBy=multi-user.target
