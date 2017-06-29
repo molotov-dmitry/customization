@@ -88,6 +88,8 @@ case "${bundle}" in
         user_group=$(echo "${userinfo}" | cut -d ':' -f 3)
         user_home=$(echo "${userinfo}" | cut -d ':' -f 4)
         mount_name=$(systemd-escape -p --suffix=mount "${user_home}/.cache")
+        safe_home=$(echo "${user_home}" | sed 's/\//\\\//g')
+        safe_mount=$(echo "${user_home}" | sed 's/\\/\\\\/g')
 
         ## make dir ------------------------------------------------------------
 
@@ -95,7 +97,7 @@ case "${bundle}" in
 
         ## Mount point ---------------------------------------------------------
 
-        sed "s/<USER>/${user_name}/g;s/<UID>/${user_id}/g;s/<GID>/${user_group}/g;s/<HOME>/${user_home}/g;s/<MOUNT>/${mount_name}/g" "${ROOT_PATH}/files/chrome-ramdisk/cache-ramdisk.mount" > "/etc/systemd/system/${mount_name}"
+        sed "s/<USER>/${user_name}/g;s/<UID>/${user_id}/g;s/<GID>/${user_group}/g;s/<HOME>/${safe_home}/g;s/<MOUNT>/${safe_mount}/g" "${ROOT_PATH}/files/chrome-ramdisk/cache-ramdisk.mount" > "/etc/systemd/system/${mount_name}"
         systemctl enable ${mount_name}
 
     done
@@ -113,6 +115,8 @@ case "${bundle}" in
         user_group=$(echo "${userinfo}" | cut -d ':' -f 3)
         user_home=$(echo "${userinfo}" | cut -d ':' -f 4)
         mount_name=$(systemd-escape -p --suffix=mount "${user_home}/.config/chromium")
+        safe_home=$(echo "${user_home}" | sed 's/\//\\\//g')
+        safe_mount=$(echo "${user_home}" | sed 's/\\/\\\\/g')
 
         ## make dir ------------------------------------------------------------
 
@@ -120,12 +124,12 @@ case "${bundle}" in
 
         ## Mount point ---------------------------------------------------------
 
-        sed "s/<USER>/${user_name}/g;s/<UID>/${user_id}/g;s/<GID>/${user_group}/g;s/<HOME>/${user_home}/g;s/<MOUNT>/${mount_name}/g" "${ROOT_PATH}/files/chrome-ramdisk/chrome-ramdisk.mount" > "/etc/systemd/system/${mount_name}"
+        sed "s/<USER>/${user_name}/g;s/<UID>/${user_id}/g;s/<GID>/${user_group}/g;s/<HOME>/${safe_home}/g;s/<MOUNT>/${safe_mount}/g" "${ROOT_PATH}/files/chrome-ramdisk/chrome-ramdisk.mount" > "/etc/systemd/system/${mount_name}"
         systemctl enable ${mount_name}
 
         ## User service --------------------------------------------------------
 
-        sed "s/<USER>/${user_name}/g;s/<UID>/${user_id}/g;s/<GID>/${user_group}/g;s/<HOME>/${user_home}/g;s/<MOUNT>/${mount_name}/g" "${ROOT_PATH}/files/chrome-ramdisk/chrome-ramdisk.service" > "/etc/systemd/system/chrome-ramdisk-${user_name}.service"        
+        sed "s/<USER>/${user_name}/g;s/<UID>/${user_id}/g;s/<GID>/${user_group}/g;s/<HOME>/${safe_home}/g;s/<MOUNT>/${safe_mount}/g" "${ROOT_PATH}/files/chrome-ramdisk/chrome-ramdisk.service" > "/etc/systemd/system/chrome-ramdisk-${user_name}.service"        
         systemctl enable chromium-ramdisk-${user_name}.service
 
     done
