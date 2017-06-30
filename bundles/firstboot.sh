@@ -136,12 +136,12 @@ case "${bundle}" in
         ## User service --------------------------------------------------------
 
         sed "s/<USER>/${user_name}/g;s/<UID>/${user_id}/g;s/<GID>/${user_group}/g;s/<HOME>/${safe_home}/g;s/<MOUNT>/${safe_mount}/g" "${ROOT_PATH}/files/chrome-ramdisk/chrome-ramdisk.service" > "/etc/systemd/system/chrome-ramdisk-${user_name}.service"        
-        systemctl enable chromium-ramdisk-${user_name}.service
+        systemctl enable chrome-ramdisk-${user_name}.service
 
         ## Clear and mount directory -------------------------------------------
 
         find "${user_home}/.config/chromium" -mindepth 1 -delete
-        systemctl start chromium-ramdisk-${user_name}.service
+        systemctl start chrome-ramdisk-${user_name}.service
 
     done
 
