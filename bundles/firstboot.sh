@@ -90,7 +90,7 @@ case "${bundle}" in
         mount_name=$(systemd-escape -p --suffix=mount "${user_home}/.cache")
 
         safe_home=$(echo "${user_home}" | sed 's/\//\\\//g')
-        safe_mount=$(echo "${mount_name}" | sed 's/\\/\\\\/g')
+        safe_mount=$(echo "${mount_name}" | sed 's/\\/\\\\\\/g')
 
         ## make dir ------------------------------------------------------------
 
@@ -122,7 +122,7 @@ case "${bundle}" in
         user_home=$(echo "${userinfo}" | cut -d ':' -f 4)
         mount_name=$(systemd-escape -p --suffix=mount "${user_home}/.config/chromium")
         safe_home=$(echo "${user_home}" | sed 's/\//\\\//g')
-        safe_mount=$(echo "${mount_name}" | sed 's/\\/\\\\/g')
+        safe_mount=$(echo "${mount_name}" | sed 's/\\/\\\\\\/g')
 
         ## make dir ------------------------------------------------------------
 
