@@ -101,6 +101,11 @@ case "${bundle}" in
         sed "s/<USER>/${user_name}/g;s/<UID>/${user_id}/g;s/<GID>/${user_group}/g;s/<HOME>/${safe_home}/g;s/<MOUNT>/${safe_mount}/g" "${ROOT_PATH}/files/tmpfs/cache-ramdisk.mount" > "/etc/systemd/system/${mount_name}"
         systemctl enable ${mount_name}
 
+        ## Clear and mount directory -------------------------------------------
+
+        rm -rf "${user_home}"/.cache/.*
+        systemctl start ${mount_name}
+
     done
 
 ;;
@@ -109,7 +114,7 @@ case "${bundle}" in
 
 "optimize/chrome-ramdisk")
 
-    for userinfo in $(cat /etc/passwd | grep -v '^root:' | grep -v nologin | grep -v /bin/false | grep -v /bin/sync | grep -v '^postgres:' | grep -v '^ftp' | cut -d ':' -f 1,3,4,6)
+    for userinfo in $(cat /etc/passwd | grep -v '^root:' | grep -v nologin | grep -v /bin/false | grep -v /bin/sync | grep -v '^postgres:' | grep -v '^ftp:' | cut -d ':' -f 1,3,4,6)
     do
         user_name=$(echo "${userinfo}" | cut -d ':' -f 1)
         user_id=$(echo "${userinfo}" | cut -d ':' -f 2)
@@ -132,6 +137,11 @@ case "${bundle}" in
 
         sed "s/<USER>/${user_name}/g;s/<UID>/${user_id}/g;s/<GID>/${user_group}/g;s/<HOME>/${safe_home}/g;s/<MOUNT>/${safe_mount}/g" "${ROOT_PATH}/files/chrome-ramdisk/chrome-ramdisk.service" > "/etc/systemd/system/chrome-ramdisk-${user_name}.service"        
         systemctl enable chromium-ramdisk-${user_name}.service
+
+        ## Clear and mount directory -------------------------------------------
+
+        rm -rf "${user_home}"/.config/chromium/*
+        systemctl start chromium-ramdisk-${user_name}.service
 
     done
 
