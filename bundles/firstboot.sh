@@ -103,7 +103,7 @@ case "${bundle}" in
 
         ## Clear and mount directory -------------------------------------------
 
-        rm -rf "${user_home}"/.cache/.*
+        find "${user_home}/.cache" -mindepth 1 -delete
         systemctl start ${mount_name}
 
     done
@@ -140,7 +140,7 @@ case "${bundle}" in
 
         ## Clear and mount directory -------------------------------------------
 
-        rm -rf "${user_home}"/.config/chromium/*
+        find "${user_home}/.config/chromium" -mindepth 1 -delete
         systemctl start chromium-ramdisk-${user_name}.service
 
     done
