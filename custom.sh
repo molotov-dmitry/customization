@@ -83,7 +83,7 @@ function packiso()
         silentsudo 'Removing old iso md5' sed -i "/[ /]${iso_name}\$/d" "${res_dir}/MD5SUMS"
     fi
 
-    silentsudo 'Generating md5 for iso' bash -c "md5sum \"${res_dir}/${iso_name}\" >> \"${res_dir}/MD5SUMS\""
+    silentsudo 'Generating md5 for iso' bash -c "md5sum \"${res_dir}/${iso_name}\" | sed 's/\/.*\///' >> \"${res_dir}/MD5SUMS\""
 
     silentsudo 'Changing rights for iso' chmod -R a+rw "${res_dir}"
 }
