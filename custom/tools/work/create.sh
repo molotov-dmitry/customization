@@ -91,6 +91,10 @@ bundle install 'qt'
 
 #appinstall 'Gnome Web' 'epiphany-browser'
 
+## Drivers - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+bundle install 'driver'
+
 ## Themes  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 bundle install 'appearance'
