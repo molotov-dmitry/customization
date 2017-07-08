@@ -51,7 +51,7 @@ case "${bundle}" in
 
 "driver/intel")
 
-    appinstall 'Intel microcode'            'intel-microcode'
+    appinstall 'Intel microcode'        'intel-microcode'
 
 ;;
 
@@ -59,8 +59,18 @@ case "${bundle}" in
 
 "driver/firmware")
 
-    appinstall 'Firmwares'                  'linux-firmware'
+    if [[ "$(lsb_release -si)" == "Ubuntu" ]]
+    then
 
+        appinstall 'Firmwares'          'linux-firmware'
+
+    elif [[ "$(lsb_release -si)" == "Debian" ]]
+    then
+
+        appinstall 'Firmwares'          'firmware-linux'
+
+    fi
+    
 ;;
 
 ### ============================================================================
@@ -330,7 +340,7 @@ case "${bundle}" in
     appinstall 'Postgres'               'postgresql-client libpq5 libpq-dev'
     appinstall 'SQLite'                 'sqlite libsqlite3-0 libsqlite3-dev'
 
-    if [[ "$(lsb_release -si)" == "Ubuntu" ]] && ispkginstalled
+    if [[ "$(lsb_release -si)" == "Ubuntu" ]] && ispkginstalled 'xorg'
     then
         appinstall 'Sqliteman'          'sqliteman'
     fi
