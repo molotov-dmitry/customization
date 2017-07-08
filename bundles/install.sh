@@ -214,6 +214,7 @@ case "${bundle}" in
 
     appinstall 'Build tools'            'build-essential unifdef'
     appinstall 'Multilib tools'         'gcc-multilib g++-multilib'
+    appinstall 'LLVM clang'             'llvm lldb clang'
     appinstall 'CMake'                  'cmake'
     appinstall 'Checkinstall'           'checkinstall'
 
@@ -233,7 +234,7 @@ case "${bundle}" in
 
 "dev/style")
 
-    appinstall 'Code beautifier'        'astyle'
+    appinstall 'Code beautifier'        'astyle clang-format'
 
 ;;
 
