@@ -372,7 +372,7 @@ then
     silentsudo 'Removing old rootfs' rm -f "${iso_dir}/${livedir}/filesystem.squashfs"
 fi
 
-silentsudo 'Packing rootfs' mksquashfs "${rootfs_dir}" "${iso_dir}/${livedir}/filesystem.squashfs" || exit 1
+silentsudo 'Packing rootfs' mksquashfs "${rootfs_dir}" "${iso_dir}/${livedir}/filesystem.squashfs" -comp xz || exit 1
 
 ## Modify package manifest -----------------------------------------------------
 
@@ -399,3 +399,8 @@ then
     silentsudo 'Unmounting remaster dir' umount "${remaster_dir}"
     silentsudo 'Dropping cached memory' su -c 'echo 3 > /proc/sys/vm/drop_caches'
 fi
+
+### Finish signal ==============================================================
+
+silent '' beep -f 3000 -l 125 -r 2 -d 125
+
