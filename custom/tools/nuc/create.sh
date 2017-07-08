@@ -84,6 +84,10 @@ bundle install 'gnome'
 
 bundle install 'qt'
 
+## Drivers - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+bundle install 'driver'
+
 ## Appearance  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 bundle install 'appearance'

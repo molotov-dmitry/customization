@@ -33,6 +33,10 @@ appupgrade
 
 ## Install ---------------------------------------------------------------------
 
+## Drivers - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+bundle install 'driver'
+
 ## Build tools - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 bundle install 'dev/build'

@@ -64,7 +64,7 @@ repoaddnonfree
 
 ppaadd  'Numix Project'             'numix'
 ppaadd  'Paper Themes (Daily)'      'snwh' 'pulp' 'xenial'
-#ppaadd  'LibreOffice'               'libreoffice'
+ppaadd  'LibreOffice'               'libreoffice'
 ppaadd  'Web Upd8'                  'nilarimogard' 'webupd8'
 ppaadd  'Purple VK plugin'          'purple-vk-plugin' 'dev'
 
@@ -74,6 +74,10 @@ appupdate
 appupgrade
 
 ## Install ---------------------------------------------------------------------
+
+## Drivers - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+bundle install 'driver'
 
 ## Gnome defaults  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -111,14 +115,14 @@ bundle install 'media-online'
 
 ## Graphic - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-#bundle install 'graphics'
+bundle install 'graphics'
 
 ## Other - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 bundle install 'archive'
 bundle install 'cli'
 
-#appinstall 'Iperf'                  'iperf iperf3'
+appinstall 'Iperf'                  'iperf iperf3'
 
 ## Modem - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

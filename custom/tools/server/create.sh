@@ -35,12 +35,24 @@ appupgrade
 
 ## Install ---------------------------------------------------------------------
 
+## Drivers - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+bundle install 'driver'
+
+## Build tools - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 bundle install 'dev/build'
 bundle install 'dev/db'
 
+## Server  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 bundle install 'server'
 
+## Console tools - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 bundle install 'vcs'
+
+## Console tools - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 bundle install 'cli'
 
