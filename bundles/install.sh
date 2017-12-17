@@ -17,6 +17,7 @@ case "${bundle}" in
 
 "gnome")
 
+    appinstall 'Gnome session'              'gnome-shell gnome-session'
     appinstall 'Language pack'	            'hyphen-ru mythes-ru hunspell-ru language-pack-gnome-ru language-pack-gnome-ru-base language-pack-ru language-pack-ru-base'
 
     if ! ispkginstalled 'gnome-shell' || [[ $(gnome-shell --version | cut -d '.' -f 2) -lt 24 ]]
@@ -33,7 +34,6 @@ case "${bundle}" in
 "qt")
 
     appinstall 'GTK2 style for Qt5'         'qt5-style-plugins'
-    appinstall 'GTK2 theme for Qt5'         'libqt5libqgtk2'
 ;;
 
 ### ============================================================================
@@ -358,7 +358,7 @@ case "${bundle}" in
 
 "dev/net")
 
-    silentsudo 'Wireshark fix'          sh -c 'echo wireshark-common wireshark-common/install-setuid boolean true | sudo debconf-set-selections'
+    silentsudo 'Wireshark fix'          sh -c 'echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections'
     appinstall 'Wireshark'              'wireshark-gtk'
 
 ;;
