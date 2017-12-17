@@ -9,9 +9,13 @@ cd "${ROOT_PATH}" || exit 1
 
 pushd /usr/bin/drivers/rtl8812AU_8821AU_linux
 
-silentsudo 'Building driver'                make -f Makefile.dkms install
+silentsudo 'Building driver' make -f Makefile.dkms install
 
 popd
+
+### Development ================================================================
+
+bundle firstboot 'dev'
 
 ## Optimizations ---------------------------------------------------------------
 

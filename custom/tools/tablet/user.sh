@@ -40,6 +40,10 @@ bundle user 'office'
 
 bundle user 'media'
 
+## Graphics --------------------------------------------------------------------
+
+bundle user 'graphics'
+
 ## Console ---------------------------------------------------------------------
 
 bundle user 'cli'

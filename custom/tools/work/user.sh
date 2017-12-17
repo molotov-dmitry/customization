@@ -13,7 +13,7 @@ ifname=${ifnames[0]}
 
 nmcli connection delete WiredConnection
 nmcli connection add con-name WiredConnection ifname ${ifname} type ethernet ip4 172.16.8.92/24 gw4 172.16.8.253
-nmcli connection modify WiredConnection ipv4.dns "172.16.56.3 172.16.56.1"
+nmcli connection modify WiredConnection ipv4.dns "172.16.56.14 172.16.56.10"
 nmcli connection modify WiredConnection ipv4.ignore-auto-dns yes
 nmcli connection modify WiredConnection ipv6.method ignore
 
@@ -32,35 +32,49 @@ echo 'smb://172.16.8.21/share2 Cub'        >> "${HOME}/.config/gtk-3.0/bookmarks
 
 ### Customization ==============================================================
 
+## Clear launcher --------------------------------------------------------------
+
+launcherclear
+
 ## Appearance ------------------------------------------------------------------
 
 bundle user 'appearance'
 
-## Wallpaper -------------------------------------------------------------------
-
 setwallpaper '#204a87'
-
-## Launcher applications -------------------------------------------------------
-
-launcherclear
 
 ### Application customization ==================================================
 
-## Gnome -----------------------------------------------------------------------
+## Gnome apps configuration ----------------------------------------------------
 
 bundle user 'gnome'
 
+## Network ---------------------------------------------------------------------
+
+bundle user 'network'
+bundle user 'network-remote'
+
 ## Development -----------------------------------------------------------------
 
-bundle user 'dev'
+bundle user 'dev/style'
+bundle user 'dev/qt'
+
+## Version control system ------------------------------------------------------
+
 bundle user 'vcs'
 
-## Office  ----------------------------------------------------------------
+## Office ----------------------------------------------------------------------
 
 bundle user 'office'
+
+## Multimedia ------------------------------------------------------------------
+
+bundle user 'media'
+
+## Graphics --------------------------------------------------------------------
+
+bundle user 'graphics'
 
 ## Console ---------------------------------------------------------------------
 
 bundle user 'cli'
-
 

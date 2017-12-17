@@ -5,6 +5,8 @@ cd "${ROOT_PATH}" || exit 1
 
 . "${ROOT_PATH}/functions.sh"
 
+sudo echo -n
+
 clear
 
 ### Test internet connection ===================================================
@@ -29,13 +31,13 @@ appremove 'Brasero'                 'brasero brasero-cdrkit brasero-common'
 
 appremove 'Simple Scanning Utility' 'simple-scan'
 appremove 'LibreOffice unused apps' 'libreoffice-draw libreoffice-impress libreoffice-math'
-#appremove 'Games'                   'gnome-mines gnome-sudoku gnome-mahjongg aisleriot'
+appremove 'Games'                   'gnome-mines gnome-sudoku gnome-mahjongg aisleriot'
 appremove 'Firefox Extensions'      'xul-ext-ubufox xul-ext-unity xul-ext-webaccounts xul-ext-websites-integration'
-#appremove 'Remote desktop client'   'remmina remmina-common remmina-plugin-rdp remmina-plugin-vnc'
 appremove 'Unity web browser'       'webbrowser-app'
 appremove 'Thunderbird mail client' 'thunderbird'
 appremove 'Onboard'                 'onboard'
 appremove 'Fcitx'                   'fcitx fcitx-bin fcitx-config-common fcitx-data fcitx-modules fcitx-frontend-all'
+appremove 'Mozc'                    'mozc-utils-gui'
 appremove 'Orca screen reader'      'gnome-orca'
 appremove 'X Diagnostic utility'    'xdiagnose'
 appremove 'Backup utility'          'deja-dup'
@@ -44,24 +46,17 @@ appremove 'Font viewer'             'gnome-font-viewer'
 appremove 'Symbols table'           'gucharmap'
 appremove 'xterm'                   'xterm'
 appremove 'Landscape'               'landscape-client-ui-install'
-appremove 'Evolution'               'evolution evolution-common evolution-plugins'
 appremove 'Dconf editor'            'dconf-editor'
-appremove 'Empathy'                 'empathy empathy-common'
 appremove 'Web camera'              'cheese'
-appremove 'Gnome applications'      'gnome-contacts gnome-weather gnome-documents gnome-maps'
 appremove 'Transmission'            'transmission-common transmission-gtk'
 appremove 'Rhythmbox'               'rhythmbox rhythmbox-data'
 appremove 'Totem'                   'totem totem-common'
-appremove 'Gnome Software'          'gnome-software gnome-software-common'
 appremove 'Gnome Music'             'gnome-music'
-appremove 'Gnome Calendar'          'gnome-calendar'
 appremove 'Gnome Photos'            'gnome-photos'
 appremove 'USB creator'             'usb-creator-gtk usb-creator-common'
 appremove 'AppArmor'                'apparmor apparmor-utils'
 appremove 'Apport'                  'apport apport-gtk'
-#appremove 'Firefox'                 'firefox firefox-locale-en firefox-locale-ru'
-#appremove 'Plymouth'                'plymouth'
-appremove 'Update manager'          'update-manager'
+appremove 'Ubuntu web launchers'    'ubuntu-web-launchers'
 
 ## Remove unused ---------------------------------------------------------------
 
@@ -70,6 +65,10 @@ silentsudo 'Removing unused packages' apt-get autoremove --yes --force-yes --pur
 ## Enable all package sources --------------------------------------------------
 
 repoaddnonfree
+
+## Change download mirror to Yandex --------------------------------------------
+
+changemirror 'mirror.yandex.ru'
 
 ## Add PPA`s -------------------------------------------------------------------
 
@@ -84,28 +83,36 @@ appupgrade
 
 ## Install ---------------------------------------------------------------------
 
-## Gnome - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+## Gnome defaults  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 bundle install 'gnome'
-bundle install 'qt'
 
-#appinstall 'Gnome Web' 'epiphany-browser'
+## Qt support  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+bundle install 'qt'
 
 ## Drivers - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 bundle install 'driver'
 
-## Themes  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+## Appearance  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 bundle install 'appearance'
 
-### VCS  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-bundle install 'vcs'
-
 ## Development - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-bundle install 'dev'
+bundle install 'dev/build'
+bundle install 'dev/analysis'
+bundle install 'dev/style'
+bundle install 'dev/doc'
+bundle install 'dev/qt'
+bundle install 'dev/db'
+bundle install 'dev/json'
+bundle install 'dev/net'
+
+## VCS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+bundle install 'vcs'
 
 ## Office  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -119,9 +126,5 @@ bundle install 'graphics'
 
 bundle install 'archive'
 bundle install 'cli'
-
-## VMWare tools  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-#bundle install 'vm'
 
 
