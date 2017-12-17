@@ -119,6 +119,7 @@ function finish_chroot()
 
     silent 'Unmounting /dev/pts'  chroot "${ROOTFS_DIR}" umount "/dev/pts"
     silent 'Unmounting /sys'      chroot "${ROOTFS_DIR}" umount "/sys"
+    silent 'Unmounting binfmt'    chroot "${ROOTFS_DIR}" umount "/proc/sys/fs/binfmt_misc"
     silent 'Unmounting /proc'     chroot "${ROOTFS_DIR}" umount "/proc"
 
     silent 'Unmounting /dev'      umount "${ROOTFS_DIR}/dev"
