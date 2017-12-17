@@ -12,6 +12,20 @@ scriptpath="${ROOT_PATH}/bundles/$(basename "$0")"
 case "${bundle}" in
 
 ### ============================================================================
+### Gnome ======================================================================
+### ============================================================================
+
+"gnome")
+
+    ## Cursor theme ------------------------------------------------------------
+
+    dgm3_theme='gnome-shell'
+
+    silent 'Set GDM3 theme' update-alternatives --set gdm3.css "/usr/share/gnome-shell/theme/${dgm3_theme}.css"
+
+;;
+
+### ============================================================================
 ### Development ================================================================
 ### ============================================================================
 
@@ -163,7 +177,7 @@ case "${bundle}" in
 
     cursor_theme='breeze_cursors'
 
-    update-alternatives --set x-cursor-theme "/etc/X11/cursors/${cursor_theme}.theme"
+    silent 'Set cursor theme' update-alternatives --set x-cursor-theme "/etc/X11/cursors/${cursor_theme}.theme"
 
 ;;
 
