@@ -373,6 +373,7 @@ function debian_ppaadd()
     author="$2"
     repo="$3"
     version="$4"
+    istrusted="$5"
 
     ppapage=$(wget -q -O - "https://launchpad.net/~${author}/+archive/ubuntu/${repo}")
 
@@ -393,6 +394,11 @@ function debian_ppaadd()
     if [[ -z "${links}" ]]
     then
         return 3
+    fi
+
+    if [[ -n "${istrusted}" ]]
+    then
+        links=$(echo "${links}" | sed 's/http:/[trusted=yes\] http:/g')
     fi
 
     versions=( $(echo "${ppapage}" | grep '<option' | grep '(' | cut -d '"' -f 2) )
@@ -458,13 +464,19 @@ function ppaadd()
     author="$2"
     repo="$3"
     release="$4"
+    istrusted="$5"
 
     if [[ -z "${repo}" ]]
     then
         repo='ppa'
     fi
 
-    title "Adding $reponame repository"
+    if [[ -n "${istrusted}" ]]
+    then
+        title "Adding trusted $reponame repository"
+    else
+        title "Adding $reponame repository"
+    fi
 
     if ! isppaadded "${author}" "${repo}"
     then
@@ -473,7 +485,7 @@ function ppaadd()
         #then
         #    sudo add-apt-repository --yes ppa:${author}/${repo} >/dev/null 2>&1
 		#else
-        debian_ppaadd "${reponame}" "${author}" "${repo}" "${release}"
+        debian_ppaadd "${reponame}" "${author}" "${repo}" "${release}" "${istrusted}"
         #fi
 
         if [[ $? -eq 0 ]]
