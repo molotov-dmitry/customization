@@ -44,9 +44,9 @@ case "${bundle}" in
     gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['<Shift>Alt_L']"
     gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "['<Primary><Shift>Alt_L']"
 
-    ## Nautilus ----------------------------------------------------------------
+    ## File chooser ------------------------------------------------------------
 
-    gsettings set org.gnome.nautilus.preferences sort-directories-first     true
+    gsettings set org.gtk.Settings.FileChooser sort-directories-first     true
 
     ## gedit -------------------------------------------------------------------
 
@@ -181,6 +181,10 @@ case "${bundle}" in
     ## launcher ----------------------------------------------------------------
 
     launcheradd 'qtcreator'
+
+    hideapp 'assistant-qt5'
+    hideapp 'designer-qt5'
+    hideapp 'linguist-qt5'
 
     ## Qt Creator --------------------------------------------------------------
 
@@ -328,22 +332,6 @@ case "${bundle}" in
 
     gsettings set org.gnome.desktop.interface gtk-theme         "${gtk_theme}"
     gsettings set org.gnome.desktop.wm.preferences theme        "${wm_theme}"
-
-    #if [[ "$(desktoptype)" == 'Unity' ]]
-    #then
-    #    theme_name='Numix'
-    #elif [[ "$(desktoptype)" == 'GNOME' && $(gnome-shell --version | cut -d '.' -f 2) -lt 20 ]]
-    #then
-    #    theme_name='Paper'
-    #else
-    #    theme_name='Numix'
-    #fi
-
-    #if [[ -n "${theme_name}" && "$2" != "tablet" ]]
-    #then
-    #    gsettings set org.gnome.desktop.interface gtk-theme         "${theme_name}"
-    #    gsettings set org.gnome.desktop.wm.preferences theme        "${theme_name}"
-    #fi
 ;;
 
 ### Font =======================================================================
@@ -532,6 +520,16 @@ case "${bundle}" in
 
     echo 'sftp://188.134.72.31:2222/media/documents SFTP' >> "${HOME}/.config/gtk-3.0/bookmarks"
     echo 'sftp://192.168.1.5/media/documents SFTP (LAN)' >> "${HOME}/.config/gtk-3.0/bookmarks"
+
+;;
+
+### ============================================================================
+### Graphic applications =======================================================
+### ============================================================================
+
+"graphics")
+
+    hideapp 'display-im6.q16'
 
 ;;
 
