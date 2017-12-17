@@ -38,6 +38,7 @@ appremove 'Unity web browser'       'webbrowser-app'
 appremove 'Thunderbird mail client' 'thunderbird'
 appremove 'Onboard'                 'onboard'
 appremove 'Fcitx'                   'fcitx fcitx-bin fcitx-config-common fcitx-data fcitx-modules fcitx-frontend-all'
+appremove 'Mozc'                    'mozc-utils-gui'
 appremove 'Orca screen reader'      'gnome-orca'
 appremove 'X Diagnostic utility'    'xdiagnose'
 appremove 'Backup utility'          'deja-dup'
@@ -51,6 +52,7 @@ appremove 'Transmission'            'transmission-common transmission-gtk'
 appremove 'Gnome Music'             'gnome-music'
 appremove 'AppArmor'                'apparmor apparmor-utils'
 appremove 'Apport'                  'apport apport-gtk'
+appremove 'Ubuntu web launchers'    'ubuntu-web-launchers'
 
 ## Remove unused ---------------------------------------------------------------
 
@@ -60,13 +62,17 @@ silentsudo 'Removing unused packages' apt-get autoremove --yes --force-yes --pur
 
 repoaddnonfree
 
+## Change download mirror to Yandex --------------------------------------------
+
+changemirror 'mirror.yandex.ru'
+
 ## Add PPA`s -------------------------------------------------------------------
 
 ppaadd  'Numix Project'             'numix'
 ppaadd  'Paper Themes (Daily)'      'snwh' 'pulp' 'xenial'
 ppaadd  'LibreOffice'               'libreoffice'
 ppaadd  'Web Upd8'                  'nilarimogard' 'webupd8'
-ppaadd  'Purple VK plugin'          'purple-vk-plugin' 'dev'
+ppaadd  'Purple VK plugin'          'purple-vk-plugin' 'dev' '' 'trusted'
 ppaadd  'Graphics Drivers'          'oibaf' 'graphics-drivers'
 
 ## Update ----------------------------------------------------------------------
