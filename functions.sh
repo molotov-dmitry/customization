@@ -220,7 +220,10 @@ function appinstall()
         msgwarn '[already installed]'
         return 0
     else
-        sudo apt-get install $installlist --yes --force-yes >/dev/null 2>&1
+        export DEBIAN_FRONTEND=noninteractive
+        export DEBIAN_PRIORITY=critical
+
+        sudo -E apt-get install $installlist -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" --yes --force-yes >/dev/null 2>&1
 
         if [[ $? -eq 0 ]]
         then
@@ -228,7 +231,18 @@ function appinstall()
             return 0
         else
             msgfail
-            return 1
+            title "Retrying installing $appname"
+
+            sudo -E apt-get install $installlist -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" --yes --force-yes >/dev/null 2>&1
+
+            if [[ $? -eq 0 ]]
+            then
+                msgdone
+                return 0
+            else
+                msgfail
+                return 1
+            fi
         fi
     fi
 }
@@ -295,7 +309,19 @@ function appupgrade()
         return 0
     else
         msgfail
-        return 1
+
+        title 'Retrying upgrading packages'
+
+        sudo apt-get upgrade --yes --force-yes >/dev/null 2>&1
+
+        if [[ $? -eq 0 ]]
+        then
+            msgdone
+            return 0
+        else
+            msgfail
+            return 1
+        fi
     fi
 }
 
