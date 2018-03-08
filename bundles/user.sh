@@ -191,38 +191,45 @@ case "${bundle}" in
     rm -rf   "${HOME}/.config/QtProject"
 
     mkdir -p "${HOME}/.config/QtProject"
-    touch    "${HOME}/.config/QtProject/QtCreator.ini"
 
-    echo '[Core]'                           >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo 'CreatorTheme=flat-light'          >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo ''                                 >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo '[Directories]'                    >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo 'BuildDirectory.Template=build/%{CurrentProject:Name}/%{CurrentBuild:Name}'    >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo "Projects=${HOME}/Projects"        >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo 'UseProjectsDirectory=true'        >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo ''                                 >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo '[Plugins]'                        >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo 'ForceEnabled=Beautifier, Todo'    >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo 'Ignored=Android, Bazaar, CMakeProjectManager, CVS, ClearCase, CodePaster, FakeVim, GLSLEditor, Git, Mercurial, Perforce, PythonEditor, QbsProjectManager, QmakeAndroidSupport, QmlDesigner, QmlJSEditor, QmlJSTools, QmlProfiler, QmlProjectManager, TaskList' >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo ''                                 >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo '[Beautifier]'                     >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo 'artisticstyle\useCustomStyle=false' >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo 'artisticstyle\useHomeFile=true'   >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo 'artisticstyle\useOtherFiles=false' >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo ''                                 >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo '[TextEditor]'                     >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo 'FontFamily=Ubuntu Mono'           >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo 'FontSize=12'                      >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo ''                                 >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo '[textDisplaySettings]'            >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo 'DisplayFileEncoding=true'         >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo 'CenterCursorOnScroll=true'        >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo 'HighlightCurrentLine2Key=true'    >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo ''                                 >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo '[textMarginSettings]'             >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo 'MarginColumn=80'                  >> "${HOME}/.config/QtProject/QtCreator.ini"
-    echo 'ShowMargin=true'                  >> "${HOME}/.config/QtProject/QtCreator.ini"
+    cat << EOF > "${HOME}/.config/QtProject/QtCreator.ini"
+[Core]
+CreatorTheme=flat-light
 
+[Directories]
+BuildDirectory.Template=build/%{CurrentProject:Name}/%{CurrentBuild:Name}
+Projects=${HOME}/Projects
+UseProjectsDirectory=true
+
+[Plugins]
+ForceEnabled=Beautifier, ClangCodeModel, Todo
+Ignored=Android, Bazaar, CMakeProjectManager, CVS, ClearCase, CodePaster, FakeVim, GLSLEditor, Git, Mercurial, Perforce, PythonEditor, QbsProjectManager, QmakeAndroidSupport, QmlDesigner, QmlJSEditor, QmlJSTools, QmlProfiler, QmlProjectManager, TaskList
+
+[Beautifier]
+artisticstyle\\useCustomStyle=false
+artisticstyle\\useHomeFile=true
+artisticstyle\\useOtherFiles=false
+
+[TextEditor]
+FontFamily=Ubuntu Mono
+FontSize=12
+
+[textDisplaySettings]
+DisplayFileEncoding=true
+CenterCursorOnScroll=true
+HighlightCurrentLine2Key=true
+
+[textMarginSettings]
+MarginColumn=80
+ShowMargin=true
+
+[CppTools]
+ClangDiagnosticConfig={f11d6a16-30e3-4e92-a9cb-e44b59cbbdf8}
+ClangDiagnosticConfigs\\1\\diagnosticOptions=-Weverything, -Wno-c++98-compat, -Wno-c++98-compat-pedantic, -Wno-unused-macros, -Wno-newline-eof, -Wno-exit-time-destructors, -Wno-global-constructors, -Wno-gnu-zero-variadic-macro-arguments, -Wno-documentation, -Wno-shadow, -Wno-missing-prototypes, -Wno-unknown-pragmas, -Wno-old-style-cast, -Wno-cast-align
+ClangDiagnosticConfigs\\1\\displayName=Custom
+ClangDiagnosticConfigs\\1\\id={f11d6a16-30e3-4e92-a9cb-e44b59cbbdf8}
+ClangDiagnosticConfigs\\size=1
+EOF
 
     mkdir -p "${HOME}/.config/QtProject/qtcreator/styles"
 
