@@ -180,7 +180,7 @@ case "${bundle}" in
 
     ## launcher ----------------------------------------------------------------
 
-    launcheradd 'qtcreator'
+    launcheradd 'org.qt-project.qtcreator'
 
     hideapp 'assistant-qt5'
     hideapp 'designer-qt5'
