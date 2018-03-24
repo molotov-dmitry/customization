@@ -23,7 +23,12 @@ bundle config 'qt'
 
 bundle config 'dev/build'
 
-## Other -----------------------------------------------------------------------
+## Network and communication ===================================================
+
+bundle config 'network/mail'
+bundle config 'network/chat'
+
+## Other =======================================================================
 
 bundle config 'cli'
 

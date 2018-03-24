@@ -33,6 +33,7 @@ appremove 'Simple Scanning Utility' 'simple-scan'
 appremove 'LibreOffice unused apps' 'libreoffice-draw libreoffice-impress libreoffice-math'
 appremove 'Games'                   'gnome-mines gnome-sudoku gnome-mahjongg aisleriot'
 appremove 'Firefox Extensions'      'xul-ext-ubufox xul-ext-unity xul-ext-webaccounts xul-ext-websites-integration'
+appremove 'Remote desktop client'   'remmina remmina-common remmina-plugin-rdp remmina-plugin-vnc'
 appremove 'Unity web browser'       'webbrowser-app'
 appremove 'Thunderbird mail client' 'thunderbird'
 appremove 'Onboard'                 'onboard'
@@ -75,6 +76,8 @@ changemirror 'mirror.yandex.ru'
 ppaadd  'Numix Project'             'numix'
 ppaadd  'Paper Themes (Daily)'      'snwh' 'pulp' 'xenial'
 ppaadd  'LibreOffice'               'libreoffice'
+ppaadd  'Web Upd8'                  'nilarimogard' 'webupd8' 'zesty'
+ppaadd  'Purple VK plugin'          'purple-vk-plugin' 'dev' '' 'trusted'
 
 ## Update ----------------------------------------------------------------------
 
@@ -114,6 +117,11 @@ bundle install 'dev/net'
 
 bundle install 'vcs'
 
+## Network - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+bundle install 'network/mail'
+bundle install 'network/chat'
+
 ## Office  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 bundle install 'office'
@@ -127,4 +135,5 @@ bundle install 'graphics'
 bundle install 'archive'
 bundle install 'cli'
 
+appinstall 'Iperf'                  'iperf iperf3'
 

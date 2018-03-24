@@ -148,20 +148,48 @@ case "${bundle}" in
 ;;
 
 ### ============================================================================
-### Network ====================================================================
+### Network and communication ==================================================
 ### ============================================================================
 
-### Network and communication ==================================================
-
 "network")
+
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/browser'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/mail'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/chat'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/services'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/remote'
+    
+;;
+
+### Browser ====================================================================
+
+"network/browser")
+
+;;
+
+### Mail =======================================================================
+
+"network/mail")
+
+;;
+
+### Chat =======================================================================
+
+"network/chat")
 
     silentsudo 'Copy Empathy theme and config' cp -rf "${ROOT_PATH}/files/empathy" "${rootfs_dir}/tools/files/"
 
 ;;
 
-### Network remote =============================================================
+### Online services ============================================================
 
-"network-remote")
+"network/services")
+
+;;
+
+### Remote clients =============================================================
+
+"network/remote")
 
     silentsudo 'Copy Transmission remote config' cp -rf "${ROOT_PATH}/files/transmission-remote-gtk" "${rootfs_dir}/tools/files/"
 

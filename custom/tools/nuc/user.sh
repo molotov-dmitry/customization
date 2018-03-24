@@ -26,7 +26,6 @@ bundle user 'gnome'
 ## Network ---------------------------------------------------------------------
 
 bundle user 'network'
-bundle user 'network-remote'
 
 ## Development -----------------------------------------------------------------
 

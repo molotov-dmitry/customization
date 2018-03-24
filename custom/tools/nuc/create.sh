@@ -116,7 +116,6 @@ bundle install 'vcs'
 ## Network - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 bundle install 'network'
-bundle install 'network-remote'
 
 ## Office  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
