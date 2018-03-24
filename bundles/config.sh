@@ -194,12 +194,12 @@ case "${bundle}" in
         if ispkginstalled 'libqt5libqgtk2'
         then
 
-            echo 'export QT_QPA_PLATFORMTHEME=qt5gtk2' > /etc/X11/Xsession.d/100-qt5gtk2
+            echo 'export QT_QPA_PLATFORMTHEME=qt5gtk2' >> /etc/environment
 
         elif ispkginstalled 'qt5-style-plugins'
         then
 
-            echo 'export QT_QPA_PLATFORMTHEME=gtk2' > /etc/X11/Xsession.d/100-qt5gtk2
+            echo 'export QT_QPA_PLATFORMTHEME=gtk2' >> /etc/environment
 
         fi
     fi
