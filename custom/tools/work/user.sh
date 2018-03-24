@@ -33,6 +33,11 @@ setwallpaper '#204a87'
 
 bundle user 'gnome'
 
+## Network ---------------------------------------------------------------------
+
+bundle user 'network/mail'
+bundle user 'network/chat'
+
 ## Development -----------------------------------------------------------------
 
 bundle user 'dev/style'

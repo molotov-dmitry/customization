@@ -71,7 +71,7 @@ changemirror 'mirror.yandex.ru'
 ppaadd  'Numix Project'             'numix'
 ppaadd  'Paper Themes (Daily)'      'snwh' 'pulp' 'xenial'
 ppaadd  'LibreOffice'               'libreoffice'
-ppaadd  'Web Upd8'                  'nilarimogard' 'webupd8'
+ppaadd  'Web Upd8'                  'nilarimogard' 'webupd8' 'zesty'
 ppaadd  'Purple VK plugin'          'purple-vk-plugin' 'dev' '' 'trusted'
 ppaadd  'Graphics Drivers'          'oibaf' 'graphics-drivers'
 
@@ -105,7 +105,6 @@ bundle install 'vcs'
 ## Network - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 bundle install 'network'
-bundle install 'network-remote'
 
 ## Office  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

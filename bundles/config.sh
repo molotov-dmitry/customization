@@ -212,6 +212,30 @@ case "${bundle}" in
 
 "network")
 
+    bash "${scriptpath}" 'network/browser'
+    bash "${scriptpath}" 'network/mail'
+    bash "${scriptpath}" 'network/chat'
+    bash "${scriptpath}" 'network/services'
+    bash "${scriptpath}" 'network/remote'
+    
+;;
+
+### Browser ====================================================================
+
+"network/browser")
+
+;;
+
+### Mail =======================================================================
+
+"network/mail")
+
+;;
+
+### Chat =======================================================================
+
+"network/chat")
+
     ## Empathy -----------------------------------------------------------------
 
     mkdir -p '/usr/share/adium/message-styles'
@@ -225,6 +249,18 @@ case "${bundle}" in
         bash '/usr/share/adium/message-styles/material.AdiumMessageStyle/Contents/Resources/create.sh' "${colorname}" "${colorvalue}"
 
     done < '/usr/share/adium/message-styles/material.AdiumMessageStyle/Contents/Resources/colorlist'
+
+;;
+
+### Online services ============================================================
+
+"network/services")
+
+;;
+
+### Remote clients =============================================================
+
+"network/remote")
 
 ;;
 

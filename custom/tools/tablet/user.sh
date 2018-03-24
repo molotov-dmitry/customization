@@ -13,7 +13,7 @@ launcherclear
 
 ## Appearance ------------------------------------------------------------------
 
-bundle user 'appearance' 'tablet'
+bundle user 'appearance'
 
 setwallpaper '#204a87'
 
@@ -26,7 +26,6 @@ bundle user 'gnome'
 ## Network ---------------------------------------------------------------------
 
 bundle user 'network'
-bundle user 'network-remote'
 
 ## Version control system ------------------------------------------------------
 
@@ -47,6 +46,10 @@ bundle user 'graphics'
 ## Console ---------------------------------------------------------------------
 
 bundle user 'cli'
+
+## Optimizations ---------------------------------------------------------------
+
+bundle user 'optimize'
 
 ### Directories ================================================================
 

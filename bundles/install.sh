@@ -454,25 +454,57 @@ case "${bundle}" in
 ;;
 
 ### ============================================================================
-### Network ====================================================================
+### Network and communication ==================================================
 ### ============================================================================
-
-### Network and communication applications =====================================
 
 "network")
 
+    bash "${scriptpath}" 'network/browser'
+    bash "${scriptpath}" 'network/mail'
+    bash "${scriptpath}" 'network/chat'
+    bash "${scriptpath}" 'network/services'
+    bash "${scriptpath}" 'network/remote'
+    
+;;
+
+### Browser ====================================================================
+
+"network/browser")
+
     appinstall 'Chromium browser'       'chromium-browser chromium-browser-l10n'
+
+;;
+
+### Mail =======================================================================
+
+"network/mail")
+
+    appinstall 'Evolution mail client'  'evolution evolution-data-server evolution-data-server-online-accounts'
+
+;;
+
+### Chat =======================================================================
+
+"network/chat")
+
     appinstall 'Empathy'                'empathy telepathy-haze'
     appinstall 'Telegram protocol'      'telegram-purple'
     appinstall 'VK protocol'            'purple-vk-plugin'
+
+;;
+
+### Online services ============================================================
+
+"network/services")
+
     appinstall 'Gnome Maps'             'gnome-maps'
     appinstall 'Gnome Weather'          'gnome-weather'
 
 ;;
 
-### Network remote =============================================================
+### Remote clients =============================================================
 
-"network-remote")
+"network/remote")
 
     appinstall 'Transmission remote'    'transmission-remote-gtk'
     debinstall 'EiskaltDC++ Remote Qt'  'eiskaltdcpp-remote-qt' '27' 'amd64'
