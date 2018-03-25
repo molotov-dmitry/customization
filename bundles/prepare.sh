@@ -156,6 +156,7 @@ case "${bundle}" in
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/browser'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/mail'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/chat'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/office'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/services'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/remote'
     
@@ -178,6 +179,12 @@ case "${bundle}" in
 "network/chat")
 
     silentsudo 'Copy Empathy theme and config' cp -rf "${ROOT_PATH}/files/empathy" "${rootfs_dir}/tools/files/"
+
+;;
+
+### Office =====================================================================
+
+"network/office")
 
 ;;
 

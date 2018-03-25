@@ -462,6 +462,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'network/browser'
     bash "${scriptpath}" 'network/mail'
     bash "${scriptpath}" 'network/chat'
+    bash "${scriptpath}" 'network/office'
     bash "${scriptpath}" 'network/services'
     bash "${scriptpath}" 'network/remote'
     
@@ -490,6 +491,14 @@ case "${bundle}" in
     appinstall 'Empathy'                'empathy telepathy-haze'
     appinstall 'Telegram protocol'      'telegram-purple'
     appinstall 'VK protocol'            'purple-vk-plugin'
+
+;;
+
+### Office =====================================================================
+
+"network/office")
+
+    appinstall 'Gnome documents'        'gnome-documents'
 
 ;;
 

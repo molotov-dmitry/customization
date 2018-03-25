@@ -469,6 +469,7 @@ EOF
     bash "${scriptpath}" 'network/browser'
     bash "${scriptpath}" 'network/mail'
     bash "${scriptpath}" 'network/chat'
+    bash "${scriptpath}" 'network/office'
     bash "${scriptpath}" 'network/services'
     bash "${scriptpath}" 'network/remote'
     
@@ -506,6 +507,12 @@ EOF
     gsettings set org.gnome.Empathy.ui show-groups              true
 
     gsettings set org.gnome.Empathy.conversation spell-checker-languages 'en,ru'
+
+;;
+
+### Office =====================================================================
+
+"network/office")
 
 ;;
 
