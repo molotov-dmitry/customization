@@ -15,6 +15,3 @@ launcherclear
 
 setwallpaper '#204a87'
 
-### Directories ================================================================
-
-bash "${ROOT_PATH}/folders.sh"
