@@ -504,8 +504,8 @@ function ppaadd()
         title "Adding $reponame repository"
     fi
 
-    if ! isppaadded "${author}" "${repo}"
-    then
+    #if ! isppaadded "${author}" "${repo}"
+    #then
 
         #if [[ "$(lsb_release -si)" == "Ubuntu" ]]
         #then
@@ -522,10 +522,10 @@ function ppaadd()
             msgfail
             return 1
         fi
-    else
-        msgwarn '[already added]'
-        return 0
-    fi
+    #else
+        #msgwarn '[already added]'
+        #return 0
+    #fi
 }
 
 function changemirror()
@@ -717,6 +717,11 @@ function bundle()
 
     case "${command}" in
 
+    "repo")
+        bash "${ROOT_PATH}/bundles/repo.sh" $@
+        return $?
+    ;;
+
     "install")
         bash "${ROOT_PATH}/bundles/install.sh" $@
         return $?
@@ -754,76 +759,87 @@ function bundle()
 function bundlelist()
 {
     echo
-    echo "Checking bundles:"
+    title "Checking bundles:"
 
-    for category in prepare install config firstboot user
+    action=install
+    bundle_list=$(grep '^[ \t]*"[a-z,/-]*")' "${ROOT_PATH}/bundles/${action}.sh" | cut -d '"' -f 2)
+
+    ### Check all actions have same bundles ====================================
+
+    for action in prepare config firstboot user
     do
 
-        custom_tool="${category}"
-        [[ "${custom_tool}" == 'install' ]] && custom_tool='create'
+        bundle_list_action=$(grep '^[ \t]*"[a-z,/-]*")' "${ROOT_PATH}/bundles/${action}.sh" | cut -d '"' -f 2)
 
-        echo
-        msginfo "${category}:"
+        if ! diff <(echo "${bundle_list}") <(echo "${bundle_list_action}")
+        then
+            msgfail "bundle ${action} differs from install"
+            return 1
+        fi
 
-        ## Check for unused bundles
-
-        bundle_list=$(grep '^[ \t]*"[a-z,/-]*")' "${ROOT_PATH}/bundles/${category}.sh" | cut -d '"' -f 2)
-        bundle_used=$(grep "^[ \t]*bundle[ \t]*${category}" "${ROOT_PATH}/custom/tools/${config}/${custom_tool}.sh" | sed "s/^[ \t]*bundle[ \t]*${category}[ \t]*//" | cut -d ' ' -f 1 | tr -d " '")
-
-        for bundle in ${bundle_list}
-        do
-            bundlelevel=$(echo "${bundle}" | grep -o '/' | wc -l)
-
-            for i in $(seq 1 ${bundlelevel})
-            do
-                echo -n ' '
-            done
-
-            if [[ -n "$(echo "${bundle_used}" | grep "^${bundle}$")" ]]
-            then
-                msgdone " + ${bundle}"
-            else
-
-                if [[ ${bundlelevel} -gt 0 ]]
-                then
-                    for i in $(seq 1 $((bundlelevel+1)) )
-                    do
-                        if [[ ${i} -eq $((bundlelevel+1)) ]]
-                        then
-                            msgwarn " - ${bundle}"
-                            break
-                        fi
-
-                        bundle_parent=$(echo ${bundle} | cut -d '/' -f 1-${i})
-
-                        if [[ -n "$(echo "${bundle_used}" | grep "^${bundle_parent}$")" ]]
-                        then
-                            msgdone " + ${bundle}"
-                            break;
-                        fi
-                    done
-                else
-                    msgwarn " - ${bundle}"
-                fi
-                
-                
-            fi
-
-            #exit 1
-        done
-
-        ## Check for wrong bundles
-
-        for bundle in ${bundle_used}
-        do
-            if [[ -z "$(echo "${bundle_list}" | grep "^${bundle}$")" ]]
-            then
-                msgfail " ! ${bundle}"
-            fi
-        done
     done
 
-    echo
+    msgdone
+
+    ### Print used bundles =====================================================
+
+    echo "Used bundles:"
+
+    bundle_used=$(cat "${ROOT_PATH}/custom/tools/${config}.bundle" | sed '/^[[:space:]]*$/d' | sed '/^[[:space:]]*\#$/d' )
+
+    for bundle in ${bundle_list}
+    do
+        bundlelevel=$(echo "${bundle}" | grep -o '/' | wc -l)
+
+        for i in $(seq 1 ${bundlelevel})
+        do
+            echo -n ' '
+        done
+
+        if [[ -n "$(echo "${bundle_used}" | grep "^${bundle}$")" ]]
+        then
+            msgdone " + ${bundle}"
+        else
+
+            if [[ ${bundlelevel} -gt 0 ]]
+            then
+                for i in $(seq 1 $((bundlelevel+1)) )
+                do
+                    if [[ ${i} -eq $((bundlelevel+1)) ]]
+                    then
+                        msgwarn " - ${bundle}"
+                        break
+                    fi
+
+                    bundle_parent=$(echo ${bundle} | cut -d '/' -f 1-${i})
+
+                    if [[ -n "$(echo "${bundle_used}" | grep "^${bundle_parent}$")" ]]
+                    then
+                        msgdone " + ${bundle}"
+                        break;
+                    fi
+                done
+            else
+                msgwarn " - ${bundle}"
+            fi
+            
+            
+        fi
+    done
+
+    ## Check for wrong bundles =================================================
+
+    for bundle in ${bundle_used}
+    do
+        if [[ -z "$(echo "${bundle_list}" | grep "^${bundle}$")" ]]
+        then
+            msgfail " ! ${bundle}"
+        fi
+    done
+
+    #### =======================================================================
+
+    return 0
 }
 
 ### SystemD service functions ==================================================

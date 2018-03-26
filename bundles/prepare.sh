@@ -25,17 +25,57 @@ case "${bundle}" in
 ;;
 
 ### ============================================================================
+### Qt =========================================================================
+### ============================================================================
+
+"qt")
+
+;;
+
+### ============================================================================
+### Drivers ====================================================================
+### ============================================================================
+
+"driver")
+
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'driver/intel'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'driver/firmware'
+
+;;
+
+### Intel drivers ==============================================================
+
+"driver/intel")
+
+;;
+
+### Firmwares ==================================================================
+
+"driver/firmware")
+
+;;
+
+### ============================================================================
 ### Server =====================================================================
 ### ============================================================================
 
 "server")
 
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/ssh'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/ftp'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/smb'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/svn'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/db'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/iperf'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/media'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/download'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/proxy'
+
+;;
+
+### OpenSSH server =============================================================
+
+"server/ssh")
 
 ;;
 
@@ -61,6 +101,26 @@ case "${bundle}" in
 
     silentsudo "Copy svnserve unit" cp -rf "${ROOT_PATH}/files/svnserve" "${rootfs_dir}/tools/files/"
     
+;;
+
+### DB server ==================================================================
+
+"server/db")
+
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/db/postgres'
+
+;;
+
+### Postgres -------------------------------------------------------------------
+
+"server/db/postgres")
+
+;;
+
+### Iperf server ===============================================================
+
+"server/iperf")
+
 ;;
 
 ### Media server ===============================================================
@@ -94,7 +154,13 @@ case "${bundle}" in
 
     ## Squid3 ------------------------------------------------------------------
 
-    silentsudo 'Copy Transmission config'   cp -rf "${ROOT_PATH}/files/squid3" "${rootfs_dir}/tools/files/"
+    silentsudo 'Copy Squid config'          cp -rf "${ROOT_PATH}/files/squid3" "${rootfs_dir}/tools/files/"
+
+;;
+
+### GitLab =====================================================================
+
+"gitlab")
 
 ;;
 
@@ -104,11 +170,58 @@ case "${bundle}" in
 
 "dev")
 
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/build'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/analysis'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/style'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/doc'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/x11'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/opengl'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/qt'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/gtk'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/gnome'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/db'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/json'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/net'
 
 ;;
 
 ### Build tools ================================================================
+
+"dev/build")
+
+;;
+
+### Code analysis tools ========================================================
+
+"dev/analysis")
+
+;;
+
+### Code formatting ============================================================
+
+"dev/style")
+
+;;
+
+### Documentation tools ========================================================
+
+"dev/doc")
+
+;;
+
+### X11 SDK ====================================================================
+
+"dev/x11")
+
+;;
+
+### OpenGL SDK =================================================================
+
+"dev/opengl")
+
+;;
+
+### Qt SDK =====================================================================
 
 "dev/qt")
 
@@ -118,9 +231,75 @@ case "${bundle}" in
 
 ;;
 
+### KDE SDK ====================================================================
+
+"dev/kde")
+
+;;
+
+### GTK SDK ====================================================================
+
+"dev/gtk")
+
+;;
+
+### Gnome SDK ==================================================================
+
+"dev/gnome")
+
+;;
+
+### Database ===================================================================
+
+"dev/db")
+
+;;
+
+### JSON libraries =============================================================
+
+"dev/json")
+
+;;
+
+### Network ====================================================================
+
+"dev/net")
+
+;;
 
 ### ============================================================================
-### Office =====================================================================
+### Version control system =====================================================
+### ============================================================================
+
+"vcs")
+
+;;
+
+### ============================================================================
+### Appearance =================================================================
+### ============================================================================
+
+"appearance")
+
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'appearance/themes'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'appearance/fonts'
+
+;;
+
+### Desktop theme ==============================================================
+
+"appearance/themes")
+
+;;
+
+### System fonts ===============================================================
+
+"appearance/fonts")
+
+;;
+
+### ============================================================================
+### Office applications ========================================================
 ### ============================================================================
 
 "office")
@@ -135,6 +314,8 @@ case "${bundle}" in
 ### Multimedia applications ====================================================
 ### ============================================================================
 
+### Local music/video  =========================================================
+
 "media")
 
     ## Rhythmbox ---------------------------------------------------------------
@@ -144,6 +325,12 @@ case "${bundle}" in
     ## MPV ---------------------------------------------------------------------
 
     silentsudo 'Copy MPV config' cp -rf "${ROOT_PATH}/files/mpv" "${rootfs_dir}/tools/files/"
+
+;;
+
+### Online video ===============================================================
+
+"media-online")
 
 ;;
 
@@ -204,16 +391,60 @@ case "${bundle}" in
 ;;
 
 ### ============================================================================
+### Graphic applications =======================================================
+### ============================================================================
+
+"graphics")
+
+;;
+
+### ============================================================================
+### Compressing applications ===================================================
+### ============================================================================
+
+"archive")
+
+;;
+
+### ============================================================================
 ### Command line ===============================================================
 ### ============================================================================
 
 "cli")
 
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'cli/files'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'cli/monitor'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'cli/net'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'cli/time'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'cli/ttycolors'
 
 ;;
 
 ### Command line file manager applications =====================================
+
+"cli/files")
+
+;;
+
+### Command line monitor applications ==========================================
+
+"cli/monitor")
+
+;;
+
+### Command line network applications ==========================================
+
+"cli/net")
+
+;;
+
+### Command line tools for time sync ===========================================
+
+"cli/time")
+
+;;
+
+### TTY colors =================================================================
 
 "cli/ttycolors")
 
@@ -229,6 +460,7 @@ case "${bundle}" in
 
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'optimize/tmpfs'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'optimize/chrome-ramdisk'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'optimize/disable-tracker'
 ;;
 
 ### Mount directories with high I/O as tmpfs ===================================
@@ -244,6 +476,20 @@ case "${bundle}" in
 "optimize/chrome-ramdisk")
 
     silentsudo 'Copy chrome-ramdisk config' cp -rf "${ROOT_PATH}/files/chrome-ramdisk" "${rootfs_dir}/tools/files/"
+
+;;
+
+### Disable Gnome tracker ======================================================
+
+"optimize/disable-tracker")
+
+;;
+
+### ============================================================================
+### Virtual machine tools ======================================================
+### ============================================================================
+
+"vm")
 
 ;;
 

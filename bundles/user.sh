@@ -119,12 +119,99 @@ case "${bundle}" in
 ;;
 
 ### ============================================================================
+### Qt =========================================================================
+### ============================================================================
+
+"qt")
+
+;;
+
+### ============================================================================
+### Drivers ====================================================================
+### ============================================================================
+
+"driver")
+
+    bash "${scriptpath}" 'driver/intel'
+    bash "${scriptpath}" 'driver/firmware'
+
+;;
+
+### Intel drivers ==============================================================
+
+"driver/intel")
+
+;;
+
+### Firmwares ==================================================================
+
+"driver/firmware")
+ 
+;;
+
+### ============================================================================
 ### Server =====================================================================
 ### ============================================================================
 
 "server")
 
+    bash "${scriptpath}" 'server/ssh'
+    bash "${scriptpath}" 'server/ftp'
+    bash "${scriptpath}" 'server/smb'
+    bash "${scriptpath}" 'server/svn'
+    bash "${scriptpath}" 'server/db'
+    bash "${scriptpath}" 'server/iperf'
+    bash "${scriptpath}" 'server/media'
     bash "${scriptpath}" 'server/download'
+    bash "${scriptpath}" 'server/proxy'
+
+;;
+
+### OpenSSH server =============================================================
+
+"server/ssh")
+
+;;
+
+### FTP server =================================================================
+
+"server/ftp")
+
+;;
+
+### SMB server =================================================================
+
+"server/smb")
+
+;;
+
+### SVN server =================================================================
+
+"server/svn")
+
+;;
+
+### DB server ==================================================================
+
+"server/db")
+
+;;
+
+### Postgres -------------------------------------------------------------------
+
+"server/db/postgres")
+
+;;
+
+### Iperf server ===============================================================
+
+"server/iperf")
+
+;;
+
+### Media server ===============================================================
+
+"server/media")
 
 ;;
 
@@ -132,7 +219,19 @@ case "${bundle}" in
 
 "server/download")
 
-   echo "alias ytpl='youtube-dl -o \"%(playlist_index)02d. %(title)s.%(ext)s\"'" >> ~/.bash_aliases
+    echo "alias ytpl='youtube-dl -o \"%(playlist_index)02d. %(title)s.%(ext)s\"'" >> ~/.bash_aliases
+
+;;
+
+### Proxy server ===============================================================
+
+"server/proxy")
+
+;;
+
+### GitLab =====================================================================
+
+"gitlab")
 
 ;;
 
@@ -142,10 +241,31 @@ case "${bundle}" in
 
 "dev")
 
+    bash "${scriptpath}" 'dev/build'
+    bash "${scriptpath}" 'dev/analysis'
     bash "${scriptpath}" 'dev/style'
+    bash "${scriptpath}" 'dev/doc'
+    bash "${scriptpath}" 'dev/x11'
+    bash "${scriptpath}" 'dev/opengl'
     bash "${scriptpath}" 'dev/qt'
     bash "${scriptpath}" 'dev/gtk'
     bash "${scriptpath}" 'dev/gnome'
+    bash "${scriptpath}" 'dev/db'
+    bash "${scriptpath}" 'dev/json'
+    bash "${scriptpath}" 'dev/net'
+
+;;
+
+### Build tools ================================================================
+
+"dev/build")
+
+;;
+
+### Code analysis tools ========================================================
+
+"dev/analysis")
+
 ;;
 
 ### Code formatting ============================================================
@@ -171,6 +291,23 @@ case "${bundle}" in
     echo '--pad-header'             >> "${HOME}/.astylerc"
     echo '--align-pointer=type'     >> "${HOME}/.astylerc"
     echo '--align-reference=type'   >> "${HOME}/.astylerc"
+;;
+
+### Documentation tools ========================================================
+
+"dev/doc")
+
+;;
+
+### X11 SDK ====================================================================
+
+"dev/x11")
+
+;;
+
+### OpenGL SDK =================================================================
+
+"dev/opengl")
 
 ;;
 
@@ -235,7 +372,13 @@ EOF
 
     cp -f "${ROOT_PATH}/files/qtcreator/material.xml" "${HOME}/.config/QtProject/qtcreator/styles/"
 
-    ;;
+;;
+
+### KDE SDK ====================================================================
+
+"dev/kde")
+
+;;
 
 ### GTK SDK ====================================================================
 
@@ -243,7 +386,7 @@ EOF
 
     ## launcher ----------------------------------------------------------------
 
-    #launcheradd 'anjuta'
+    launcheradd 'anjuta'
 
 ;;
 
@@ -253,7 +396,7 @@ EOF
 
     ## launcher ----------------------------------------------------------------
 
-    #launcheradd 'org.gnome.Builder'
+    launcheradd 'org.gnome.Builder'
 
     ## gnome builder -----------------------------------------------------------
 
@@ -285,6 +428,25 @@ EOF
         gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ auto-indent             true
         gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ overwrite-braces        true
     done
+
+;;
+
+### Database ===================================================================
+
+"dev/db")
+
+;;
+
+### JSON libraries =============================================================
+
+"dev/json")
+
+;;
+
+### Network ====================================================================
+
+"dev/net")
+
 ;;
 
 ### Version control system =====================================================
@@ -302,14 +464,12 @@ EOF
 
 "appearance")
 
-    shift
-
-    bash "${scriptpath}" 'appearance/themes' "$@"
-    bash "${scriptpath}" 'appearance/fonts'  "$@"
+    bash "${scriptpath}" 'appearance/themes'
+    bash "${scriptpath}" 'appearance/fonts'
 
 ;;
 
-### Themes =====================================================================
+### Desktop theme ==============================================================
 
 "appearance/themes")
 
@@ -341,7 +501,7 @@ EOF
     gsettings set org.gnome.desktop.wm.preferences theme        "${wm_theme}"
 ;;
 
-### Font =======================================================================
+### System fonts ===============================================================
 
 "appearance/fonts")
 
@@ -352,7 +512,7 @@ EOF
 ;;
 
 ### ============================================================================
-### Office =====================================================================
+### Office applications ========================================================
 ### ============================================================================
 
 "office")
@@ -376,11 +536,12 @@ EOF
 ### Multimedia applications ====================================================
 ### ============================================================================
 
+### Local music/video  =========================================================
+
 "media")
 
     ## launcher ----------------------------------------------------------------
 
-    #launcheradd 'kodi'
     launcheradd 'rhythmbox'
     launcheradd 'totem'
 
@@ -460,6 +621,12 @@ EOF
 
 ;;
 
+### Online video ===============================================================
+
+"media-online")
+
+;;
+
 ### ============================================================================
 ### Network and communication ==================================================
 ### ============================================================================
@@ -520,8 +687,6 @@ EOF
 
 "network/services")
 
-
-
 ;;
 
 ### Remote clients =============================================================
@@ -578,12 +743,24 @@ EOF
 ;;
 
 ### ============================================================================
+### Compressing applications ===================================================
+### ============================================================================
+
+"archive")
+
+;;
+
+### ============================================================================
 ### Command line ===============================================================
 ### ============================================================================
 
 "cli")
 
     bash "${scriptpath}" 'cli/files'
+    bash "${scriptpath}" 'cli/monitor'
+    bash "${scriptpath}" 'cli/net'
+    bash "${scriptpath}" 'cli/time'
+    bash "${scriptpath}" 'cli/ttycolors'
 
 ;;
 
@@ -596,13 +773,51 @@ EOF
 
 ;;
 
+### Command line monitor applications ==========================================
+
+"cli/monitor")
+
+;;
+
+### Command line network applications ==========================================
+
+"cli/net")
+
+;;
+
+### Command line tools for time sync ===========================================
+
+"cli/time")
+
+;;
+
+### TTY colors =================================================================
+
+"cli/ttycolors")
+
+;;
+
 ### ============================================================================
 ### Optimizations ==============================================================
 ### ============================================================================
 
 "optimize")
 
+    bash "${scriptpath}" 'optimize/tmpfs'
+    bash "${scriptpath}" 'optimize/chrome-ramdisk'
     bash "${scriptpath}" 'optimize/disable-tracker'
+;;
+
+### Mount directories with high I/O as tmpfs ===================================
+
+"optimize/tmpfs")
+
+;;
+
+### Keep Chromium's RAM disk between power-offs ================================
+
+"optimize/chrome-ramdisk")
+
 ;;
 
 ### Disable Gnome tracker ======================================================
@@ -622,6 +837,14 @@ EOF
     done
 
     rm -rf "${HOME}/.cache/tracker" "${HOME}/.local/share/tracker"
+
+;;
+
+### ============================================================================
+### Virtual machine tools ======================================================
+### ============================================================================
+
+"vm")
 
 ;;
 
