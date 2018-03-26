@@ -223,7 +223,7 @@ function appinstall()
         export DEBIAN_FRONTEND=noninteractive
         export DEBIAN_PRIORITY=critical
 
-        sudo -E apt-get install $installlist -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" --yes --force-yes >/dev/null 2>&1
+        sudo -E apt-get install $installlist -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" --yes --force-yes --no-install-recommends >/dev/null 2>&1
 
         if [[ $? -eq 0 ]]
         then
@@ -233,7 +233,7 @@ function appinstall()
             msgfail
             title "Retrying installing $appname"
 
-            sudo -E apt-get install $installlist -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" --yes --force-yes >/dev/null 2>&1
+            sudo -E apt-get install $installlist -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" --yes --force-yes --no-install-recommends >/dev/null 2>&1
 
             if [[ $? -eq 0 ]]
             then
