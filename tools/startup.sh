@@ -21,8 +21,12 @@ do
 if [[ -f /tools/user.sh && ! -e "${HOME}/.config/.firstboot" ]]
 then
     mkdir -p "${HOME}"/.config
+
     bash /tools/user.sh
-    echo "$?" > "${HOME}"/.config/.firstboot
+    echo "$?" >  "${HOME}"/.config/.firstboot
+
+    bash /tools/bundle.sh user user
+    echo "$?" >> "${HOME}"/.config/.firstboot
 fi
 
 ' >> "${user_dir}"/.profile
@@ -34,6 +38,10 @@ done
 
 if [[ ! -e /tools/.firstboot ]]
 then
-    bash /tools/firstboot.sh 2>> /tools/firstboot.log && touch /tools/.firstboot
+    bash /tools/firstboot.sh 2>> /tools/firstboot.log
+    echo "$?" >  /tools/.firstboot
+
+    bash /tools/bundle.sh firstboot firstboot 2>> /tools/firstboot.log
+    echo "$?" >> /tools/.firstboot
 fi
 

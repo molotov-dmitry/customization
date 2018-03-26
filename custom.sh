@@ -9,84 +9,9 @@ clear
 clear
 
 . "${ROOT_PATH}/functions.sh"
-. "${ROOT_PATH}/chroot.sh"
-
-#### functions =================================================================
-
-function isdebian()
-{
-    if [[ "$(basename "${iso_src}")" == debian* ]]
-    then
-        return 0
-    else
-        return 1
-    fi
-}
-
-function checkfilemime()
-{
-    filetitle="$1"
-    filename="$2"
-    mimetype="$3"
-    filetype="$4"
-
-    title "Checking ${filetitle}"
-
-    if ! test -f "${filename}"
-    then
-        msgfail '[file not found]'
-        exit 1
-    fi
-
-    filemime=$(file -b --mime-type "${filename}")
-
-    if [[ "${filemime}" == "${mimetype}" ]]
-    then
-        msgdone
-    else
-        msgfail "[not an ${filetype}]"
-        exit 1
-    fi
-}
-
-function packiso()
-{
-    iso_name="${config}-$1"
-    iso_description="$2"
-
-    silentsudo 'calculating md5' find "${iso_dir}/" -type f -print0 \
-        | grep --null-data -v -E '/isolinux/isolinux.bin|/isolinux/boot.cat|/md5sum.txt|/.checksum.md5|/manifest.diff' \
-        | xargs -0 md5sum 2>/dev/null \
-        | sed "s/$(safestring "${iso_dir}")/\./g" || exit 1
-
-    silentsudo 'Making dir for iso' mkdir -p "${res_dir}"
-
-    if [[ -e "${res_dir}/${iso_name}" ]]
-    then
-        silentsudo 'Removing old iso' rm -f "${res_dir}/${iso_name}"
-    fi
-
-    silentsudo 'Generating iso' genisoimage -o "${res_dir}/${iso_name}" \
-        -b "isolinux/isolinux.bin" \
-        -c "isolinux/boot.cat" \
-        -p "Dmitry Sorokin" -V "${iso_description}" \
-        -no-emul-boot -boot-load-size 4 -boot-info-table \
-        -cache-inodes -r -J -l \
-        -x "${iso_dir}"/${livedir}/manifest.diff \
-        -joliet-long \
-        "${iso_dir}" || exit 1
-
-    silentsudo 'Making iso hybrid' isohybrid "${res_dir}/${iso_name}" || exit 1
-
-    if grep -sq "[ /]${iso_name}\$" "${res_dir}/MD5SUMS"
-    then
-        silentsudo 'Removing old iso md5' sed -i "/[ /]${iso_name}\$/d" "${res_dir}/MD5SUMS"
-    fi
-
-    silentsudo 'Generating md5 for iso' bash -c "md5sum \"${res_dir}/${iso_name}\" | sed 's/\/.*\///' >> \"${res_dir}/MD5SUMS\""
-
-    silentsudo 'Changing rights for iso' chmod -R a+rw "${res_dir}"
-}
+. "${ROOT_PATH}/tools/chroot.sh"
+. "${ROOT_PATH}/tools/check.sh"
+. "${ROOT_PATH}/tools/pack.sh"
 
 #### ===========================================================================
 #### ===========================================================================
@@ -202,12 +127,12 @@ unset freemem
 
 ## Checking config directory ---------------------------------------------------
 
-checkfilemime 'functions script'    "${ROOT_PATH}/functions.sh" 'text/x-shellscript' 'shell script'
-checkfilemime 'folders script'      "${ROOT_PATH}/folders.sh"   'text/x-shellscript' 'shell script'
+checkfilemime 'functions script'    "${ROOT_PATH}/functions.sh" 'text/x-shellscript'    'shell script'
+checkfilemime 'folders script'      "${ROOT_PATH}/tools/folders.sh"                     'text/x-shellscript' 'shell script'
 
-checkfilemime 'create script'       "${ROOT_PATH}/custom/tools/${config}/create.sh"  'text/x-shellscript' 'shell script'
-checkfilemime 'config script'       "${ROOT_PATH}/custom/tools/${config}/config.sh"  'text/x-shellscript' 'shell script'
-checkfilemime 'user script'         "${ROOT_PATH}/custom/tools/${config}/user.sh"    'text/x-shellscript' 'shell script'
+checkfilemime 'create script'       "${ROOT_PATH}/custom/tools/${config}/create.sh"     'text/x-shellscript' 'shell script'
+checkfilemime 'config script'       "${ROOT_PATH}/custom/tools/${config}/config.sh"     'text/x-shellscript' 'shell script'
+checkfilemime 'user script'         "${ROOT_PATH}/custom/tools/${config}/user.sh"       'text/x-shellscript' 'shell script'
 
 ### Showing parameters =========================================================
 
@@ -240,7 +165,7 @@ bundlelist
 
 read
 
-### Unpacking image ============================================================
+### Unpack image ===============================================================
 
 while [[ -n "$(mount | grep /remaster)" ]]
 do
@@ -291,16 +216,24 @@ fi
 silentsudo 'Removing Tools dir'             rm -rf   "${rootfs_dir}/tools" || exit 1
 silentsudo 'Creating Tools dir'             mkdir -p "${rootfs_dir}/tools" || exit 1
 silentsudo 'Creating Files dir'             mkdir -p "${rootfs_dir}/tools/files" || exit 1
+silentsudo 'Creating Bundle dir'            mkdir -p "${rootfs_dir}/tools/custom/tools" || exit 1
 
 silentsudo 'Copying functions script'       cp -f "${ROOT_PATH}/functions.sh" "${rootfs_dir}/tools/" || exit 1
-silentsudo 'Copying folders script'         cp -f "${ROOT_PATH}/folders.sh"   "${rootfs_dir}/tools/" || exit 1
+silentsudo 'Copying folders script'         cp -f "${ROOT_PATH}/tools/folders.sh"   "${rootfs_dir}/tools/" || exit 1
+silentsudo 'Copying bundle script'          cp -f "${ROOT_PATH}/tools/bundle.sh" "${rootfs_dir}/tools/" || exit 1
+silentsudo 'Copying remove script'          cp -f "${ROOT_PATH}/tools/remove.sh" "${rootfs_dir}/tools/" || exit 1
+silentsudo 'Copying mirror script'          cp -f "${ROOT_PATH}/tools/mirror.sh" "${rootfs_dir}/tools/" || exit 1
 
+silentsudo 'Copying repo script'            cp -f "${ROOT_PATH}/custom/tools/${config}/repo.sh" "${rootfs_dir}/tools/" || exit 1
 silentsudo 'Copying create script'          cp -f "${ROOT_PATH}/custom/tools/${config}/create.sh" "${rootfs_dir}/tools/" || exit 1
 silentsudo 'Copying config script'          cp -f "${ROOT_PATH}/custom/tools/${config}/config.sh" "${rootfs_dir}/tools/" || exit 1
 
-silentsudo 'Copying usersboot script'       cp -f "${ROOT_PATH}/startup.sh" "${rootfs_dir}/tools/" || exit 1
+silentsudo 'Copying usersboot script'       cp -f "${ROOT_PATH}/tools/startup.sh" "${rootfs_dir}/tools/" || exit 1
 
 silentsudo 'Copying bundle scripts'         cp -rf "${ROOT_PATH}/bundles" "${rootfs_dir}/tools/" || exit 1
+silentsudo 'Copying bundles list'           cp -f "${ROOT_PATH}/custom/tools/${config}.bundle" "${rootfs_dir}/tools/custom/tools/" || exit 1
+silentsudo 'Copying bundles list'           cp -f "${ROOT_PATH}/custom/tools/${config}.bundle" "${rootfs_dir}/tools/custom/tools/firstboot.bundle" || exit 1
+silentsudo 'Copying bundles list'           cp -f "${ROOT_PATH}/custom/tools/${config}.bundle" "${rootfs_dir}/tools/custom/tools/user.bundle" || exit 1
 
 silentsudo 'Copying firstboot service'      cp -f "${ROOT_PATH}/files/startup/custom-startup.service" "${rootfs_dir}/tools/files" || exit 1
 silentsudo 'Copying firstboot service'      cp -f "${ROOT_PATH}/files/startup/enable-startup.sh" "${rootfs_dir}/tools" || exit 1
@@ -310,6 +243,7 @@ silentsudo 'Copying firstboot service'      cp -f "${ROOT_PATH}/files/startup/en
 if test -f "${ROOT_PATH}/custom/tools/${config}/prepare.sh"
 then
     . "${ROOT_PATH}/custom/tools/${config}/prepare.sh"
+    . "${ROOT_PATH}/tools/bundle.sh" prepare "${config}"
 else
    msgwarn '[no prepare script]'
 fi
@@ -318,9 +252,20 @@ fi
 
 start_chroot "${rootfs_dir}"
 
+chroot_rootfs "${rootfs_dir}" bash /tools/remove.sh
+
+chroot_rootfs "${rootfs_dir}" bash /tools/repo.sh
+chroot_rootfs "${rootfs_dir}" bash /tools/bundle.sh repo "${config}"
+chroot_rootfs "${rootfs_dir}" bash /tools/mirror.sh
+
 chroot_rootfs "${rootfs_dir}" bash /tools/create.sh
+chroot_rootfs "${rootfs_dir}" bash /tools/bundle.sh install "${config}"
+
 chroot_rootfs "${rootfs_dir}" bash /tools/config.sh
-chroot_rootfs "${rootfs_dir}" apt-get autoremove --yes --force-yes -qq
+chroot_rootfs "${rootfs_dir}" bash /tools/bundle.sh config "${config}"
+
+chroot_rootfs "${rootfs_dir}" apt-get autoremove --yes -qq || exit 1
+
 chroot_rootfs "${rootfs_dir}" bash /tools/enable-startup.sh
 
 if [[ "$debug" == 'y' ]]
@@ -335,9 +280,16 @@ fi
 
 finish_chroot "${rootfs_dir}"
 
+## Clean up after chroot step --------------------------------------------------
+
+silentsudo 'Removing remove script'         rm -rf "${rootfs_dir}/tools/remove.sh"
+silentsudo 'Removing repo script'           rm -rf "${rootfs_dir}/tools/repo.sh"
+silentsudo 'Removing mirror script'         rm -rf "${rootfs_dir}/tools/mirror.sh"
 silentsudo 'Removing create script'         rm -rf "${rootfs_dir}/tools/create.sh"
-silentsudo 'Removing config script'         rm -rf "${rootfs_dir}/tools/create.sh"
+silentsudo 'Removing config script'         rm -rf "${rootfs_dir}/tools/config.sh"
 silentsudo 'Removing statrup gen script'    rm -rf "${rootfs_dir}/tools/enable-startup.sh"
+
+silentsudo 'Removing bundle list'           rm -f  "${rootfs_dir}/tools/custom/tools/${config}.bundle"
 
 ## Copying first boot script ---------------------------------------------------
 
