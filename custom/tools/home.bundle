@@ -1,6 +1,8 @@
 gnome
 qt
 
+driver
+
 dev/build
 dev/analysis
 dev/style
@@ -25,3 +27,4 @@ cli
 
 optimize
 
+folders
