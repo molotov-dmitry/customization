@@ -23,39 +23,4 @@ launcherclear
 
 ## Appearance ------------------------------------------------------------------
 
-bundle user 'appearance'
-
 setwallpaper '#204a87'
-
-### Application customization ==================================================
-
-## Gnome apps configuration ----------------------------------------------------
-
-bundle user 'gnome'
-
-## Network ---------------------------------------------------------------------
-
-bundle user 'network/mail'
-bundle user 'network/chat'
-
-## Development -----------------------------------------------------------------
-
-bundle user 'dev/style'
-bundle user 'dev/qt'
-
-## Version control system ------------------------------------------------------
-
-bundle user 'vcs'
-
-## Office ----------------------------------------------------------------------
-
-bundle user 'office'
-
-## Graphics --------------------------------------------------------------------
-
-bundle user 'graphics'
-
-## Console ---------------------------------------------------------------------
-
-bundle user 'cli'
-
