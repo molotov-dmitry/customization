@@ -12,6 +12,8 @@ dev/db
 dev/json
 dev/net
 
+server/ssh
+
 vcs
 
 appearance
@@ -23,7 +25,5 @@ graphics
 archive
 
 cli
-
-optimize
 
 folders
