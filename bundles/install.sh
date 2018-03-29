@@ -480,7 +480,7 @@ case "${bundle}" in
 
 "network/mail")
 
-    appinstall 'Evolution mail client'  'evolution evolution-data-server evolution-data-server-online-accounts'
+    appinstall 'Evolution mail client'  'evolution evolution-data-server evolution-data-server-online-accounts evolution-ews'
 
 ;;
 
@@ -585,6 +585,7 @@ case "${bundle}" in
     appinstall 'CLI web browsers'       'elinks w3m'
     appinstall 'UPnP client'            'miniupnpc'
     appinstall 'Network tools'          'net-tools'
+    appinstall 'Iperf'                  'iperf iperf3'
 
 ;;
 
