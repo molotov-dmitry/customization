@@ -20,6 +20,3 @@ silentsudo 'Creating incomplete direcrory'  mkdir -p /media/documents/Downloads/
 
 fixpermissions '/media/documents' 1000
 
-### Bundles ====================================================================
-
-bundle firstboot 'server'
