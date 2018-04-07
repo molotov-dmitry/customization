@@ -1,9 +1,5 @@
 #!/bin/bash
 
-### Bundles ====================================================================
-
-bundle prepare 'server'
-
 ### Copy network config ========================================================
 
 sudo mkdir -p "${rootfs_dir}/etc/network/interfaces.d"
