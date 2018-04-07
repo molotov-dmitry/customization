@@ -236,7 +236,10 @@ case "${bundle}" in
 
 "dev/build")
 
-    silentsudo 'Ptrace fix'             sed -i 's/[ \t]*kernel.yama.ptrace_scope[ \t]*=[ \t]*1/kernel.yama.ptrace_scope = 0/' /etc/sysctl.d/10-ptrace.conf
+    if [[ -f /etc/sysctl.d/10-ptrace.conf ]]
+    then
+        silentsudo 'Ptrace fix'             sed -i 's/[ \t]*kernel.yama.ptrace_scope[ \t]*=[ \t]*1/kernel.yama.ptrace_scope = 0/' /etc/sysctl.d/10-ptrace.conf
+    fi
 
 ;;
 
