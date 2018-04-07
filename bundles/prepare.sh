@@ -100,7 +100,7 @@ case "${bundle}" in
 "server/svn")
 
     silentsudo "Copy svnserve unit" cp -rf "${ROOT_PATH}/files/svnserve" "${rootfs_dir}/tools/files/"
-    
+
 ;;
 
 ### DB server ==================================================================
@@ -133,8 +133,6 @@ case "${bundle}" in
 
     ## Plex Media Server -------------------------------------------------------
 
-    debprepare 'Plex Media Server' 'plexmediaserver' '1.3.4.3285-b46e0ea' 'amd64'
-    
     silentsudo 'Copy Plex config' cp -rf "${ROOT_PATH}/files/plexmediaserver"   "${rootfs_dir}/tools/files/"
 
 ;;
