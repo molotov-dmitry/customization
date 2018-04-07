@@ -42,3 +42,8 @@ appremove 'Ubuntu web launchers'    'ubuntu-web-launchers'
 
 silentsudo 'Removing unused packages' apt-get autoremove --yes --force-yes --purge
 
+## Install ---------------------------------------------------------------------
+
+appinstall 'LSB release'            'lsb-release'
+appinstall 'Base'                   'less mount grep sed'
+silent     'Fix sudo install'       apt-mark manual sudo
