@@ -72,6 +72,10 @@ do
         useram='1'
     ;;
 
+    '--fast')
+        fastcomp='1'
+    ;;
+
     *.iso)
         iso_src="$1"
     ;;
@@ -99,6 +103,13 @@ then
     livedir='live'
 else
     livedir='casper'
+fi
+
+if [[ ${fastcomp} -eq 0 ]]
+then
+    comp=xz
+else
+    comp=gzip
 fi
 
 ### Check available ram ========================================================
@@ -157,6 +168,8 @@ then
     msgwarn 'yes'
 fi
 
+echo "compress:     ${comp}"
+
 read
 
 ### Showing bundles ============================================================
@@ -206,9 +219,14 @@ silentsudo 'Unmounting iso' umount /mnt
 
 silentsudo 'Setting default language'       sh -c "echo ru > \"${iso_dir}\"/isolinux/lang"
 
-if [[ -e "${rootfs_dir}/etc/udev/rules.d/80-net-setup-link.rules" || -e /lib/udev/rules.d/80-net-setup-link.rules ]]
+if isdebian
 then
-    silentsudo 'Disabling the assignment of fixed interface names' ln -sf /dev/null "${rootfs_dir}/etc/udev/rules.d/80-net-setup-link.rules"
+        silentsudo '[DEB] Disabling fixed interface names' ln -sf /dev/null "${rootfs_dir}/etc/systemd/network/99-default.link"
+else
+    if [[ -e "${rootfs_dir}/etc/udev/rules.d/80-net-setup-link.rules" || -e /lib/udev/rules.d/80-net-setup-link.rules ]]
+    then
+        silentsudo 'Disabling fixed interface names' ln -sf /dev/null "${rootfs_dir}/etc/udev/rules.d/80-net-setup-link.rules"
+    fi
 fi
 
 ## Preparing customization scripts ---------------------------------------------
@@ -325,9 +343,14 @@ then
 fi
 
 #silentsudo 'Packing rootfs' mksquashfs "${rootfs_dir}" "${iso_dir}/${livedir}/filesystem.squashfs" -comp xz || exit 1
-mksquashfs "${rootfs_dir}" "${iso_dir}/${livedir}/filesystem.squashfs" -comp xz || exit 1
+mksquashfs "${rootfs_dir}" "${iso_dir}/${livedir}/filesystem.squashfs" -comp ${comp} || exit 1
 
 ## Modify package manifest -----------------------------------------------------
+
+if grep '^sudo$' "${iso_dir}/${livedir}/filesystem.manifest-remove" > /dev/null 2>&1
+then
+    silentsudo 'Removing sudo from remove manifest'       sed -i '/^sudo$/d' "${iso_dir}/${livedir}/filesystem.manifest-remove"
+fi
 
 if grep '^cifs-utils$' "${iso_dir}/${livedir}/filesystem.manifest-remove" > /dev/null 2>&1
 then
