@@ -111,6 +111,8 @@ case "${bundle}" in
 
 "server/media")
 
+    repoadd 'plexmediaserver' 'downloads.plex.tv/repo/deb' 'public' 'plexmediaserver/PlexSign.key'
+
 ;;
 
 ### Download server ============================================================
