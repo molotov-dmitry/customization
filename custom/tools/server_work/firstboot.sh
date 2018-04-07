@@ -18,6 +18,3 @@ echo '//172.16.8.21/share2 /media/cub cifs guest,user=root,uid=1000,forceuid,gid
 
 fixpermissions '/media/documents' '1000'
 
-### Installing and configuring Gitlab ==========================================
-
-#bundle firstboot 'gitlab'
