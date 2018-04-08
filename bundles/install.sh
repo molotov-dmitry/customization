@@ -342,7 +342,7 @@ case "${bundle}" in
 
     if [[ "$(lsb_release -si)" == "Ubuntu" ]] && ispkginstalled 'xorg'
     then
-        appinstall 'Sqliteman'          'sqliteman'
+        appinstall 'Sqlite gui'         'sqlitebrowser'
     fi
 ;;
 
