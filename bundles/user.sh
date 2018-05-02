@@ -44,6 +44,8 @@ case "${bundle}" in
     gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['<Shift>Alt_L']"
     gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "['<Primary><Shift>Alt_L']"
 
+    gsettings set org.gnome.desktop.wm.keybindings show-desktop "['<Super>d']"
+
     ## File chooser ------------------------------------------------------------
 
     gsettings set org.gtk.Settings.FileChooser sort-directories-first     true
