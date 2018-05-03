@@ -488,7 +488,7 @@ case "${bundle}" in
 
 "network/chat")
 
-    appinstall 'Empathy'                'empathy telepathy-haze'
+    appinstall 'Empathy'                'empathy telepathy-haze telepathy-accounts-signon telepathy-gabble'
     appinstall 'Telegram protocol'      'telegram-purple'
     appinstall 'VK protocol'            'purple-vk-plugin'
 
