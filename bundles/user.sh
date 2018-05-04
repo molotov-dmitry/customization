@@ -114,9 +114,14 @@ case "${bundle}" in
 
     fi
 
+    ## enable app indicators ---------------------------------------------------
+
+    gsettingsadd org.gnome.shell enabled-extensions 'ubuntu-appindicators@ubuntu.com'
+
     ## aliases -----------------------------------------------------------------
 
     echo alias highlight=\'grep --color=always -z\' >> ~/.bash_aliases
+    echo alias ddusb=\'dd bs=2M status=progress oflag=sync\' >> ~/.bash_aliases
 
 ;;
 
@@ -324,6 +329,10 @@ case "${bundle}" in
     hideapp 'assistant-qt5'
     hideapp 'designer-qt5'
     hideapp 'linguist-qt5'
+
+    ## Mime type ---------------------------------------------------------------
+
+    mimeregister 'application/vnd.nokia.qt.qmakeprofile' 'org.qt-project.qtcreator.desktop'
 
     ## Qt Creator --------------------------------------------------------------
 
@@ -666,16 +675,27 @@ EOF
 
     ## Empathy -----------------------------------------------------------------
 
+    #mkdir -p "${HOME}/.config/autostart"
+    #cp -f "${ROOT_PATH}/files/empathy/empathy.desktop" "${HOME}/.config/autostart/"
+
+    #gsettings set org.gnome.Empathy.conversation theme          'material'
+    #gsettings set org.gnome.Empathy.conversation theme-variant  'Green'
+    #gsettings set org.gnome.Empathy.conversation adium-path     '/usr/share/adium/message-styles/material.AdiumMessageStyle'
+
+    #gsettings set org.gnome.Empathy.ui show-groups              true
+
+    #gsettings set org.gnome.Empathy.conversation spell-checker-languages 'en,ru'
+
+    ## Pidgin ------------------------------------------------------------------
+
     mkdir -p "${HOME}/.config/autostart"
-    cp -f "${ROOT_PATH}/files/empathy/empathy.desktop" "${HOME}/.config/autostart/"
+    cp -f "${ROOT_PATH}/files/pidgin/pidgin.desktop" "${HOME}/.config/autostart/"
 
-    gsettings set org.gnome.Empathy.conversation theme          'material'
-    gsettings set org.gnome.Empathy.conversation theme-variant  'Green'
-    gsettings set org.gnome.Empathy.conversation adium-path     '/usr/share/adium/message-styles/material.AdiumMessageStyle'
+    mkdir -p "${HOME}/.purple"
 
-    gsettings set org.gnome.Empathy.ui show-groups              true
+    cp -f "${ROOT_PATH}/files/pidgin/prefs.xml" "${HOME}/.purple/"
 
-    gsettings set org.gnome.Empathy.conversation spell-checker-languages 'en,ru'
+    cp -f "${ROOT_PATH}/files/pidgin/themes/"* "${HOME}/.purple/themes"
 
 ;;
 

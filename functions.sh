@@ -1006,6 +1006,25 @@ function launcheradd()
     fi
 }
 
+### Register MIME types ========================================================
+
+function mimeregister()
+{
+    mime="$1"
+    app="$2"
+
+    if ! grep -F '[Added Associations]' "${HOME}/.config/mimeapps.list" 1>/dev/null 2>/dev/null
+    then
+        mkdir -p "${HOME}/.config"
+
+        echo '[Added Associations]' > "${HOME}/.config/mimeapps.list"
+    fi
+
+    sed -i "/^$(safestring "${mime}")=/d" "${HOME}/.config/mimeapps.list"
+
+    echo "${mime}=${app};" >> "${HOME}/.config/mimeapps.list"
+}
+
 ### Wallpaper ==================================================================
 
 function setwallpaper()

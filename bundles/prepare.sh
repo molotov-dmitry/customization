@@ -363,7 +363,9 @@ case "${bundle}" in
 
 "network/chat")
 
-    silentsudo 'Copy Empathy theme and config' cp -rf "${ROOT_PATH}/files/empathy" "${rootfs_dir}/tools/files/"
+    #silentsudo 'Copy Empathy theme and config' cp -rf "${ROOT_PATH}/files/empathy" "${rootfs_dir}/tools/files/"
+
+    silentsudo 'Copy Pidgin theme and config' cp -rf "${ROOT_PATH}/files/pidgin" "${rootfs_dir}/tools/files/"
 
 ;;
 

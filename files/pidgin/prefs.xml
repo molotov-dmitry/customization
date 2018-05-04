@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<pref version='1' name='/'>
+	<pref name='plugins'>
+		<pref name='gtk'>
+			<pref name='X11'>
+				<pref name='notify'>
+					<pref name='type_im' type='bool' value='1'/>
+					<pref name='type_chat' type='bool' value='0'/>
+					<pref name='type_focused' type='bool' value='0'/>
+					<pref name='method_string' type='bool' value='0'/>
+					<pref name='title_string' type='string' value='(*)'/>
+					<pref name='method_urgent' type='bool' value='1'/>
+					<pref name='method_count' type='bool' value='0'/>
+					<pref name='notify_focus' type='bool' value='1'/>
+					<pref name='notify_click' type='bool' value='1'/>
+					<pref name='notify_type' type='bool' value='1'/>
+					<pref name='notify_send' type='bool' value='1'/>
+					<pref name='notify_switch' type='bool' value='1'/>
+					<pref name='type_im_sys' type='bool' value='0'/>
+					<pref name='type_chat_nick' type='bool' value='0'/>
+					<pref name='type_chat_sys' type='bool' value='0'/>
+					<pref name='method_count_xprop' type='bool' value='0'/>
+					<pref name='method_raise' type='bool' value='0'/>
+					<pref name='method_present' type='bool' value='0'/>
+				</pref>
+				<pref name='gestures'>
+					<pref name='visual' type='bool' value='0'/>
+				</pref>
+			</pref>
+			<pref name='unity'>
+				<pref name='launcher_count' type='int' value='2'/>
+				<pref name='messaging_menu_text' type='int' value='0'/>
+				<pref name='alert_chat_nick' type='bool' value='1'/>
+			</pref>
+			<pref name='libnotify'>
+				<pref name='blocked_nicks' type='stringlist'>
+					<item value='NickServ'/>
+					<item value='ChanServ'/>
+					<item value='MsgServ'/>
+					<item value='freenode-connect'/>
+				</pref>
+				<pref name='newmsg' type='bool' value='1'/>
+				<pref name='blocked' type='bool' value='1'/>
+				<pref name='newconvonly' type='bool' value='0'/>
+				<pref name='signon' type='bool' value='0'/>
+				<pref name='signoff' type='bool' value='0'/>
+				<pref name='only_available' type='bool' value='0'/>
+				<pref name='auto_loaded' type='bool' value='1'/>
+			</pref>
+		</pref>
+	</pref>
+	<pref name='pidgin'>
+		<pref name='plugins'>
+			<pref name='loaded' type='pathlist'>
+				<item value='/usr/lib/pidgin/history.so'/>
+				<item value='/usr/lib/purple-2/pidgin-libnotify.so'/>
+				<item value='/usr/lib/purple-2/ssl-nss.so'/>
+				<item value='/usr/lib/purple-2/ssl.so'/>
+				<item value='/usr/lib/pidgin/indicator.so'/>
+				<item value='/usr/lib/pidgin/unity.so'/>
+			</pref>
+		</pref>
+		<pref name='status'>
+			<pref name='icon-theme' type='string' value='numix-square'/>
+			<pref name='icon-theme-dir' type='path' value='/home/dmitry/.purple/themes/numix-square/purple/status-icon'/>
+			<pref name='dialog'>
+				<pref name='width' type='int' value='550'/>
+				<pref name='height' type='int' value='250'/>
+			</pref>
+		</pref>
+	</pref>
+</pref>
