@@ -38,6 +38,10 @@ case "${bundle}" in
 
     gsettings set org.gnome.desktop.background show-desktop-icons false
 
+    ## Enable hot corners ------------------------------------------------------
+
+    gsettings set org.gnome.shell enable-hot-corners true
+
     ## File templates ----------------------------------------------------------
 
     xdg-user-dirs-update
@@ -52,7 +56,7 @@ case "${bundle}" in
 
     ## File chooser ------------------------------------------------------------
 
-    gsettings set org.gtk.Settings.FileChooser sort-directories-first     true
+    gsettings set org.gtk.Settings.FileChooser sort-directories-first       true
 
     ## gedit -------------------------------------------------------------------
 
