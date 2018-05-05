@@ -34,6 +34,10 @@ case "${bundle}" in
     hideapp 'software-properties-gnome'
     hideapp 'software-properties-gtk'
 
+    ## Hide desktop icons ------------------------------------------------------
+
+    gsettings set org.gnome.desktop.background show-desktop-icons false
+
     ## File templates ----------------------------------------------------------
 
     xdg-user-dirs-update
@@ -80,7 +84,7 @@ case "${bundle}" in
 
     gsettings set org.gnome.Terminal.Legacy.Settings default-show-menubar false
 
-    if [[ "$(desktoptype)" == 'GNOME' ]]
+    if [[ "$(systemtype)" == 'GNOME' ]]
     then
         gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'dark'
     fi
@@ -99,7 +103,7 @@ case "${bundle}" in
 
     fi
 
-    if [[ "$(desktoptype)" == 'GNOME' && $(gnome-shell --version | cut -d '.' -f 2) -ge 24 ]]
+    if [[ "$(systemtype)" == 'GNOME' && $(gnome-shell --version | cut -d '.' -f 2) -ge 24 ]]
     then
 
         gsettings set org.gnome.settings-daemon.plugins.color active true
@@ -339,48 +343,9 @@ case "${bundle}" in
     rm -rf   "${HOME}/.config/QtProject"
 
     mkdir -p "${HOME}/.config/QtProject"
-
-    cat << EOF > "${HOME}/.config/QtProject/QtCreator.ini"
-[Core]
-CreatorTheme=flat-light
-
-[Directories]
-BuildDirectory.Template=build/%{CurrentProject:Name}/%{CurrentBuild:Name}
-Projects=${HOME}/Projects
-UseProjectsDirectory=true
-
-[Plugins]
-ForceEnabled=Beautifier, ClangCodeModel, Todo
-Ignored=Android, Bazaar, CMakeProjectManager, CVS, ClearCase, CodePaster, FakeVim, GLSLEditor, Git, Mercurial, Perforce, PythonEditor, QbsProjectManager, QmakeAndroidSupport, QmlDesigner, QmlJSEditor, QmlJSTools, QmlProfiler, QmlProjectManager, TaskList
-
-[Beautifier]
-artisticstyle\\useCustomStyle=false
-artisticstyle\\useHomeFile=true
-artisticstyle\\useOtherFiles=false
-
-[TextEditor]
-FontFamily=Ubuntu Mono
-FontSize=12
-
-[textDisplaySettings]
-DisplayFileEncoding=true
-CenterCursorOnScroll=true
-HighlightCurrentLine2Key=true
-
-[textMarginSettings]
-MarginColumn=80
-ShowMargin=true
-
-[CppTools]
-ClangDiagnosticConfig={f11d6a16-30e3-4e92-a9cb-e44b59cbbdf8}
-ClangDiagnosticConfigs\\1\\diagnosticOptions=-Weverything, -Wno-c++98-compat, -Wno-c++98-compat-pedantic, -Wno-unused-macros, -Wno-newline-eof, -Wno-exit-time-destructors, -Wno-global-constructors, -Wno-gnu-zero-variadic-macro-arguments, -Wno-documentation, -Wno-shadow, -Wno-missing-prototypes, -Wno-unknown-pragmas, -Wno-old-style-cast, -Wno-cast-align
-ClangDiagnosticConfigs\\1\\displayName=Custom
-ClangDiagnosticConfigs\\1\\id={f11d6a16-30e3-4e92-a9cb-e44b59cbbdf8}
-ClangDiagnosticConfigs\\size=1
-EOF
+    sed "s/{HOME}/$(safestring "${HOME}")/g" "${ROOT_PATH}/files/qtcreator/QtCreator.ini" > "${HOME}/.config/QtProject/QtCreator.ini"
 
     mkdir -p "${HOME}/.config/QtProject/qtcreator/styles"
-
     cp -f "${ROOT_PATH}/files/qtcreator/material.xml" "${HOME}/.config/QtProject/qtcreator/styles/"
 
 ;;
@@ -486,14 +451,7 @@ EOF
 
     ## Icon theme --------------------------------------------------------------
 
-    if [[ "$(desktoptype)" == 'Unity' ]]
-    then
-        icon_theme='Numix-Circle'
-
-    elif [[ "$(desktoptype)" == 'GNOME' ]]
-    then
-        icon_theme='Paper'
-    fi
+    icon_theme='Paper'
 
     gsettings set org.gnome.desktop.interface icon-theme "${icon_theme}"
 
@@ -563,7 +521,7 @@ EOF
 
     ## Media player indicator Gnome Shell extension ----------------------------
 
-    if [[ "$(desktoptype)" == 'GNOME' ]]
+    if [[ "$(systemtype)" == 'GNOME' ]]
     then
         gsettingsadd org.gnome.shell enabled-extensions 'mediaplayer@patapon.info'
     fi
@@ -617,7 +575,7 @@ EOF
 
     ## Sound Input & Output Device Chooser Gnome Shell extension ---------------
 
-    if [[ "$(desktoptype)" == 'GNOME' ]]
+    if [[ "$(systemtype)" == 'GNOME' ]]
     then
         gsettingsadd org.gnome.shell enabled-extensions 'sound-output-device-chooser@kgshank.net'
     fi
