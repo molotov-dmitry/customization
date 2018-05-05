@@ -385,6 +385,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'network/browser'
     bash "${scriptpath}" 'network/mail'
     bash "${scriptpath}" 'network/chat'
+    bash "${scriptpath}" 'network/chat-extra'
     bash "${scriptpath}" 'network/office'
     bash "${scriptpath}" 'network/services'
     bash "${scriptpath}" 'network/remote'
@@ -420,6 +421,12 @@ case "${bundle}" in
     #    bash '/usr/share/adium/message-styles/material.AdiumMessageStyle/Contents/Resources/create.sh' "${colorname}" "${colorvalue}"
 
     #done < '/usr/share/adium/message-styles/material.AdiumMessageStyle/Contents/Resources/colorlist'
+
+;;
+
+### Chat extra protocols =======================================================
+
+"network/chat-extra")
 
 ;;
 
