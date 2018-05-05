@@ -1046,7 +1046,7 @@ function setwallpaper()
             gsettings set org.gnome.desktop.background picture-options  'none'
             gsettings set org.gnome.desktop.background picture-uri      ''
 
-        elif [[ "${XDG_CURRENT_DESKTOP}" == 'GNOME' ]]
+        elif [[ "${XDG_CURRENT_DESKTOP}" == 'GNOME' || "${XDG_CURRENT_DESKTOP}" == 'ubuntu:GNOME' ]]
         then
             gsettings set org.gnome.desktop.background primary-color    "${wallpaper}"
             gsettings set org.gnome.desktop.background secondary-color  "${wallpaper}"
