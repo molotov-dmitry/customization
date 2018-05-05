@@ -465,6 +465,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'network/browser'
     bash "${scriptpath}" 'network/mail'
     bash "${scriptpath}" 'network/chat'
+    bash "${scriptpath}" 'network/chat-extra'
     bash "${scriptpath}" 'network/office'
     bash "${scriptpath}" 'network/services'
     bash "${scriptpath}" 'network/remote'
@@ -493,7 +494,15 @@ case "${bundle}" in
 
     #appinstall 'Empathy'                'empathy telepathy-haze telepathy-accounts-signon telepathy-gabble'
     appinstall 'Pidgin'                 'pidgin pidgin-libnotify pidgin-indicator'
-    appinstall 'Telegram protocol'      'telegram-purple'
+
+;;
+
+### Chat extra protocols =======================================================
+
+"network/chat-extra")
+
+    appinstall 'Telegram client'        'telegram-desktop'
+    #appinstall 'Telegram protocol'      'telegram-purple'
     appinstall 'VK protocol'            'purple-vk-plugin'
 
 ;;

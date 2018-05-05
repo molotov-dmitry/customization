@@ -609,6 +609,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'network/browser'
     bash "${scriptpath}" 'network/mail'
     bash "${scriptpath}" 'network/chat'
+    bash "${scriptpath}" 'network/chat-extra'
     bash "${scriptpath}" 'network/office'
     bash "${scriptpath}" 'network/services'
     bash "${scriptpath}" 'network/remote'
@@ -658,6 +659,15 @@ case "${bundle}" in
     sed "s/{HOME}/$(safestring "${HOME}")/g" "${ROOT_PATH}/files/pidgin/prefs.xml" > "${HOME}/.purple/prefs.xml"
 
     cp -rf "${ROOT_PATH}/files/pidgin/themes/"* "${HOME}/.purple/themes"
+
+;;
+
+### Chat extra protocols =======================================================
+
+"network/chat-extra")
+
+    mkdir -p "${HOME}/.config/autostart"
+    cp -f "${ROOT_PATH}/files/telegram/telegramdesktop.desktop" "${HOME}/.config/autostart/"
 
 ;;
 

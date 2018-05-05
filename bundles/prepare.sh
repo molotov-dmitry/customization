@@ -341,6 +341,7 @@ case "${bundle}" in
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/browser'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/mail'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/chat'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/chat-extra'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/office'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/services'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/remote'
@@ -366,6 +367,14 @@ case "${bundle}" in
     #silentsudo 'Copy Empathy theme and config' cp -rf "${ROOT_PATH}/files/empathy" "${rootfs_dir}/tools/files/"
 
     silentsudo 'Copy Pidgin theme and config' cp -rf "${ROOT_PATH}/files/pidgin" "${rootfs_dir}/tools/files/"
+
+;;
+
+### Chat extra protocols =======================================================
+
+"network/chat-extra")
+
+    silentsudo 'Copy Telegram files' cp -rf "${ROOT_PATH}/files/telegram" "${rootfs_dir}/tools/files/"
 
 ;;
 
