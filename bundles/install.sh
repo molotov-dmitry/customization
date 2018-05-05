@@ -26,6 +26,8 @@ case "${bundle}" in
         appinstall 'Redshift'               'redshift-gtk'
     fi
 
+    gnomeshellextension 112                 # Remove Accessibility
+
 ;;
 
 ### ============================================================================

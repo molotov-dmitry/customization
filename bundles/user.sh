@@ -126,6 +126,10 @@ case "${bundle}" in
 
     gsettingsadd org.gnome.shell enabled-extensions 'ubuntu-appindicators@ubuntu.com'
 
+    ## remove accessibility icon -----------------------------------------------
+
+    gsettingsadd org.gnome.shell enabled-extensions 'removeaccesibility@lomegor'
+
     ## aliases -----------------------------------------------------------------
 
     echo alias highlight=\'grep --color=always -z\' >> ~/.bash_aliases
