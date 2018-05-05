@@ -951,10 +951,7 @@ function hideapp()
 
 function launcherclear()
 {
-    if [[ "${XDG_CURRENT_DESKTOP}" == 'Unity' ]]
-    then
-        gsettings set com.canonical.Unity.Launcher favorites '[]'
-    elif [[ "${XDG_CURRENT_DESKTOP}" == 'GNOME' ]]
+    if [[ "$(systemtype)" == 'GNOME' ]]
     then
         gsettings set org.gnome.shell favorite-apps '[]'
     fi
@@ -1000,10 +997,7 @@ function launcheradd()
 {
     application="$1"
 
-    if [[ "${XDG_CURRENT_DESKTOP}" == 'Unity' ]]
-    then
-        launcheradd_var "$application" 'com.canonical.Unity.Launcher' 'favorites'
-    elif [[ "${XDG_CURRENT_DESKTOP}" == 'GNOME' ]]
+    if [[ "$(systemtype)" == 'GNOME' ]]
     then
         launcheradd_var "$application" 'org.gnome.shell' 'favorite-apps'
     fi
@@ -1036,17 +1030,7 @@ function setwallpaper()
 
     if [[ "${wallpaper:0:1}" == '#' && ${#wallpaper} -eq 7 ]]
     then
-        if [[ "${XDG_CURRENT_DESKTOP}" == 'Unity' ]]
-        then
-            r=${wallpaper:1:2}
-            g=${wallpaper:3:2}
-            b=${wallpaper:5:2}
-
-            gsettings set org.gnome.desktop.background primary-color    "#${r}${r}${g}${g}${b}${b}"
-            gsettings set org.gnome.desktop.background picture-options  'none'
-            gsettings set org.gnome.desktop.background picture-uri      ''
-
-        elif [[ "${XDG_CURRENT_DESKTOP}" == 'GNOME' || "${XDG_CURRENT_DESKTOP}" == 'ubuntu:GNOME' ]]
+        if [[ "$(systemtype)" == 'GNOME' ]]
         then
             gsettings set org.gnome.desktop.background primary-color    "${wallpaper}"
             gsettings set org.gnome.desktop.background secondary-color  "${wallpaper}"
