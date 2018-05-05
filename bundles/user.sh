@@ -567,7 +567,7 @@ case "${bundle}" in
     gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'replaygain'
     gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'rb'
     gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'power-manager'
-    gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'notification'
+    #gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'notification'
     gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'mpris'
     gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'mmkeys'
     gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'grilo'
