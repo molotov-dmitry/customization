@@ -342,7 +342,6 @@ then
     silentsudo 'Removing old rootfs' rm -f "${iso_dir}/${livedir}/filesystem.squashfs"
 fi
 
-#silentsudo 'Packing rootfs' mksquashfs "${rootfs_dir}" "${iso_dir}/${livedir}/filesystem.squashfs" -comp xz || exit 1
 mksquashfs "${rootfs_dir}" "${iso_dir}/${livedir}/filesystem.squashfs" -comp ${comp} || exit 1
 
 ## Modify package manifest -----------------------------------------------------

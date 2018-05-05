@@ -878,6 +878,9 @@ function systemtype()
     elif [[ "${XDG_CURRENT_DESKTOP}" == 'GNOME' ]]
     then
         echo 'GNOME'
+    elif [[ "${XDG_CURRENT_DESKTOP}" == 'ubuntu:GNOME' ]]
+    then
+        echo 'GNOME'
     elif [[ "${XDG_CURRENT_DESKTOP}" == 'KDE' ]]
     then
         echo 'KDE'
