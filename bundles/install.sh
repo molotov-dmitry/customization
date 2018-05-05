@@ -440,6 +440,8 @@ case "${bundle}" in
 
     appinstall 'EasyTag'                'easytag'
 
+    appinstall 'Shotwell'               'shotwell'
+
     gnomeshellextension 55              # Media player indicator
     gnomeshellextension 906             # Sound Input & Output Device Chooser
 

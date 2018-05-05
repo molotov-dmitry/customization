@@ -38,6 +38,12 @@ appremove 'AppArmor'                'apparmor apparmor-utils'
 appremove 'Apport'                  'apport apport-gtk'
 appremove 'Ubuntu web launchers'    'ubuntu-web-launchers'
 
+appremove 'Rhythmbox'               'rhythmbox rhythmbox-data'
+appremove 'Totem'                   'totem totem-common'
+appremove 'Shotwell'                'shotwell shotwell-common'
+appremove 'Cheese'                  'cheese'
+appremove 'Gnome TODO'              'gnome-todo'
+
 ## Remove unused ---------------------------------------------------------------
 
 silentsudo 'Removing unused packages' apt-get autoremove --yes --force-yes --purge

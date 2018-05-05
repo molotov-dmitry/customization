@@ -650,7 +650,7 @@ EOF
     bash "${scriptpath}" 'network/office'
     bash "${scriptpath}" 'network/services'
     bash "${scriptpath}" 'network/remote'
-    
+
 ;;
 
 ### Browser ====================================================================
@@ -665,7 +665,7 @@ EOF
 
 "network/mail")
 
-    
+
 
 ;;
 
@@ -691,11 +691,11 @@ EOF
     mkdir -p "${HOME}/.config/autostart"
     cp -f "${ROOT_PATH}/files/pidgin/pidgin.desktop" "${HOME}/.config/autostart/"
 
-    mkdir -p "${HOME}/.purple"
+    mkdir -p "${HOME}/.purple/themes"
 
-    cp -f "${ROOT_PATH}/files/pidgin/prefs.xml" "${HOME}/.purple/"
+    sed "s/{HOME}/$(safestring "${HOME}")/g" "${ROOT_PATH}/files/pidgin/prefs.xml" > "${HOME}/.purple/prefs.xml"
 
-    cp -f "${ROOT_PATH}/files/pidgin/themes/"* "${HOME}/.purple/themes"
+    cp -rf "${ROOT_PATH}/files/pidgin/themes/"* "${HOME}/.purple/themes"
 
 ;;
 
