@@ -442,6 +442,7 @@ case "${bundle}" in
 
     appinstall 'EasyTag'                'easytag'
 
+    appinstall 'Gnome Photos'           'gnome-photos'
     appinstall 'Shotwell'               'shotwell'
 
     gnomeshellextension 55              # Media player indicator
