@@ -905,15 +905,20 @@ function gsettingsadd()
     setting="$2"
     value="$3"
 
-    valuelist=$(gsettings get $category $setting | sed "s/\['//g" | sed "s/'\]//g" | sed "s/'\, '/\n/g")
+    valuelist=$(gsettings get $category $setting | sed "s/\['//g" | sed "s/'\]//g" | sed "s/'\, '/\n/g" | sed '/@as \[\]/d')
 
     if [[ -n "$(echo "${valuelist}" | grep ^${value}$)" ]]
     then
         return 0
     fi
 
-    valuelist="${valuelist}
-${value}"
+    if [[ -n "${valuelist}" ]]
+    then
+        valuelist="${valuelist}
+"
+    fi
+
+    valuelist="${valuelist}${value}"
 
     newvalue="[$(echo "$valuelist" | sed "s/^/'/;s/$/'/" | tr '\n' '\t' | sed 's/\t$//' | sed 's/\t/, /g')]"
 
@@ -1000,6 +1005,27 @@ function launcheradd()
     if [[ "$(systemtype)" == 'GNOME' ]]
     then
         launcheradd_var "$application" 'org.gnome.shell' 'favorite-apps'
+    fi
+}
+
+### Custom keybindings =========================================================
+
+function addkeybinding()
+{
+    name="$1"
+    command="$2"
+    binding="$3"
+
+    if [[ "$(systemtype)" == 'GNOME' ]]
+    then
+        cmd="$(echo "${command}" | md5sum | cut -d ' ' -f 1)"
+        path="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/${cmd}/"
+
+        gsettings set "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:${path}" name    "${name}"
+        gsettings set "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:${path}" command "${command}"
+        gsettings set "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:${path}" binding "${binding}"
+
+        gsettingsadd org.gnome.settings-daemon.plugins.media-keys custom-keybindings "${path}"
     fi
 }
 
