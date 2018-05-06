@@ -54,6 +54,9 @@ case "${bundle}" in
 
     gsettings set org.gnome.desktop.wm.keybindings show-desktop "['<Super>d']"
 
+    addkeybinding 'System Monitor' 'gnome-system-monitor' '<Ctrl><Shift>Escape'
+    addkeybinding 'File Manager'   'nautilus -w'          '<Super>E'
+
     ## File chooser ------------------------------------------------------------
 
     gsettings set org.gtk.Settings.FileChooser sort-directories-first       true
