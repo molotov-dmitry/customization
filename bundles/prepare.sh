@@ -19,8 +19,9 @@ case "${bundle}" in
 
 "gnome")
 
-    silentsudo "Copy templates" cp -rf "${ROOT_PATH}/files/template" "${rootfs_dir}/tools/files/"
-    silentsudo "Copy redshift config" cp -rf "${ROOT_PATH}/files/redshift" "${rootfs_dir}/tools/files/"
+    silentsudo "Copy templates"         cp -rf "${ROOT_PATH}/files/template" "${rootfs_dir}/tools/files/"
+    silentsudo "Copy redshift config"   cp -rf "${ROOT_PATH}/files/redshift" "${rootfs_dir}/tools/files/"
+    silentsudo 'Copy gnome files'       cp -rf "${ROOT_PATH}/files/gnome"    "${rootfs_dir}/tools/files/"
 
 ;;
 
