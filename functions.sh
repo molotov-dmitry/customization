@@ -1048,6 +1048,22 @@ function mimeregister()
     echo "${mime}=${app};" >> "${HOME}/.config/mimeapps.list"
 }
 
+### Add bookmark ===============================================================
+
+function addbookmark()
+{
+    path="$1"
+    name="$2"
+
+    mkdir -p "${HOME}/.config/gtk-3.0/"
+
+    touch "${HOME}/.config/gtk-3.0/bookmarks"
+
+    sed -i "/$(safestring "${path} ")/d" "${HOME}/.config/gtk-3.0/bookmarks"
+
+    echo "${path} ${name}" >> "${HOME}/.config/gtk-3.0/bookmarks"
+}
+
 ### Wallpaper ==================================================================
 
 function setwallpaper()
