@@ -11,9 +11,9 @@ cd "${ROOT_PATH}" || exit 1
 
 mkdir -p "${HOME}/.config/gtk-3.0/"
 
-echo 'smb://172.16.8.91/usr Dima'          >> "${HOME}/.config/gtk-3.0/bookmarks"
-echo 'smb://172.16.8.91/share2 Dima (Cub)' >> "${HOME}/.config/gtk-3.0/bookmarks"
-echo 'smb://172.16.8.21/share2 Cub'        >> "${HOME}/.config/gtk-3.0/bookmarks"
+addbookmark 'smb://172.16.8.21/share2'  'KUB'
+addbookmark 'smb://172.16.8.203'        'NAS'
+addbookmark 'smb://data.rczifort.local' 'DATA'
 
 ### Customization ==============================================================
 
