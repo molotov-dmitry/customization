@@ -57,6 +57,18 @@ case "${bundle}" in
     addkeybinding 'System Monitor' 'gnome-system-monitor' '<Ctrl><Shift>Escape'
     addkeybinding 'File Manager'   'nautilus -w'          '<Super>E'
 
+    ## Nautilus keybindings ----------------------------------------------------
+
+    mkdir -p "${HOME}/.local/share/nautilus/scripts"
+    mkdir -p "${HOME}/.config/nautilus"
+    touch "${HOME}/.config/nautilus/scripts-accels"
+
+    cp -f "${ROOT_PATH}/files/gnome/terminal.sh" "${HOME}/.local/share/nautilus/scripts/terminal.sh"
+    chmod +x "${HOME}/.local/share/nautilus/scripts/terminal.sh"
+
+    sed -i '/^F4 /d' "${HOME}/.config/nautilus/scripts-accels"
+    echo 'F4 terminal.sh' >> "${HOME}/.config/nautilus/scripts-accels"
+
     ## File chooser ------------------------------------------------------------
 
     gsettings set org.gtk.Settings.FileChooser sort-directories-first       true
