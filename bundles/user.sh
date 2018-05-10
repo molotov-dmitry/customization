@@ -66,8 +66,14 @@ case "${bundle}" in
     cp -f "${ROOT_PATH}/files/gnome/terminal.sh" "${HOME}/.local/share/nautilus/scripts/terminal.sh"
     chmod +x "${HOME}/.local/share/nautilus/scripts/terminal.sh"
 
+    cp -f "${ROOT_PATH}/files/gnome/compress.sh" "${HOME}/.local/share/nautilus/scripts/compress.sh"
+    chmod +x "${HOME}/.local/share/nautilus/scripts/compress.sh"
+
     sed -i '/^F4 /d' "${HOME}/.config/nautilus/scripts-accels"
     echo 'F4 terminal.sh' >> "${HOME}/.config/nautilus/scripts-accels"
+
+    sed -i '/^F7 /d' "${HOME}/.config/nautilus/scripts-accels"
+    echo 'F7 compress.sh' >> "${HOME}/.config/nautilus/scripts-accels"
 
     ## File chooser ------------------------------------------------------------
 
