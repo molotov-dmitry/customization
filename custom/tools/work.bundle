@@ -11,6 +11,7 @@ dev/qt
 dev/db
 dev/json
 dev/net
+dev/ti
 
 server/ssh
 
