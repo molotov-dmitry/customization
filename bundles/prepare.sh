@@ -71,6 +71,7 @@ case "${bundle}" in
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/media'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/download'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/proxy'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/ti'
 
 ;;
 
@@ -263,6 +264,15 @@ case "${bundle}" in
 ### Network ====================================================================
 
 "dev/net")
+
+;;
+
+### TI TMS320C64XX =============================================================
+
+"dev/ti")
+
+    silentsudo 'Create TI toolchain folder' mkdir -p "${rootfs_dir}/opt/TI"
+    silentsudo 'Extract TI toolchain'       tar xf "${ROOT_PATH}/files/ti/C6000CGT6.0.11.tar.xz" -C "${rootfs_dir}/opt/TI/"
 
 ;;
 

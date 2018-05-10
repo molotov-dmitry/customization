@@ -245,6 +245,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'dev/db'
     bash "${scriptpath}" 'dev/json'
     bash "${scriptpath}" 'dev/net'
+    bash "${scriptpath}" 'dev/ti'
 
 ;;
 
@@ -363,6 +364,12 @@ case "${bundle}" in
 
     silentsudo 'Wireshark fix'          sh -c 'echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections'
     appinstall 'Wireshark'              'wireshark-gtk'
+
+;;
+
+### TI TMS320C64XX =============================================================
+
+"dev/ti")
 
 ;;
 

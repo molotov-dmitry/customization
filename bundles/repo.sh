@@ -151,6 +151,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'dev/db'
     bash "${scriptpath}" 'dev/json'
     bash "${scriptpath}" 'dev/net'
+    bash "${scriptpath}" 'dev/ti'
 
 ;;
 
@@ -229,6 +230,12 @@ case "${bundle}" in
 ### Network ====================================================================
 
 "dev/net")
+
+;;
+
+### TI TMS320C64XX =============================================================
+
+"dev/ti")
 
 ;;
 

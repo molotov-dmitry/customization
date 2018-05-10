@@ -229,6 +229,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'dev/db'
     bash "${scriptpath}" 'dev/json'
     bash "${scriptpath}" 'dev/net'
+    bash "${scriptpath}" 'dev/ti'
 
 ;;
 
@@ -312,6 +313,15 @@ case "${bundle}" in
 ### Network ====================================================================
 
 "dev/net")
+
+;;
+
+### TI TMS320C64XX =============================================================
+
+"dev/ti")
+
+    sed -i 's/PATH="\([^"]*\)"/PATH="\1:\/opt\/TI\/C6000CGT6.0.11\/"/' /etc/environment
+    echo 'export C6X_C_DIR="/opt/TI/C6000CGT6.0.11/include"' >> /etc/environment
 
 ;;
 
