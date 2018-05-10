@@ -320,7 +320,7 @@ case "${bundle}" in
 
 "dev/ti")
 
-    sed -i 's/PATH="\([^"]*\)"/PATH="\1:\/opt\/TI\/C6000CGT6.0.11\/"/' /etc/environment
+    sed -i 's/PATH="\([^"]*\)"/PATH="\1:\/opt\/TI\/C6000CGT6.0.11\/bin"/' /etc/environment
     echo 'export C6X_C_DIR="/opt/TI/C6000CGT6.0.11/include"' >> /etc/environment
 
 ;;
