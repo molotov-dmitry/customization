@@ -154,7 +154,7 @@ case "${bundle}" in
     ## aliases -----------------------------------------------------------------
 
     echo alias highlight=\'grep --color=always -z\' >> ~/.bash_aliases
-    echo alias ddusb=\'dd bs=2M status=progress oflag=sync\' >> ~/.bash_aliases
+    echo -e "\nfunction ddusb()\n{\n    sudo dd if=\"\$1\" of=\"\$2\" bs=2M status=progress oflag=sync\n}\n\n" >> ~/.bash_aliases
 
 ;;
 
