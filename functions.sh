@@ -762,14 +762,14 @@ function bundlelist()
     title "Checking bundles:"
 
     action=install
-    bundle_list=$(grep '^[ \t]*"[a-z,/-]*")' "${ROOT_PATH}/bundles/${action}.sh" | cut -d '"' -f 2)
+    bundle_list=$(grep '^[ \t]*"[a-z0-9,/-]*")' "${ROOT_PATH}/bundles/${action}.sh" | cut -d '"' -f 2)
 
     ### Check all actions have same bundles ====================================
 
     for action in prepare config firstboot user
     do
 
-        bundle_list_action=$(grep '^[ \t]*"[a-z,/-]*")' "${ROOT_PATH}/bundles/${action}.sh" | cut -d '"' -f 2)
+        bundle_list_action=$(grep '^[ \t]*"[a-z0-9,/-]*")' "${ROOT_PATH}/bundles/${action}.sh" | cut -d '"' -f 2)
 
         if ! diff <(echo "${bundle_list}") <(echo "${bundle_list_action}")
         then
