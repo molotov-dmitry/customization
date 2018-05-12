@@ -240,6 +240,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'dev/x11'
     bash "${scriptpath}" 'dev/opengl'
     bash "${scriptpath}" 'dev/qt'
+    bash "${scriptpath}" 'dev/qt4'
     bash "${scriptpath}" 'dev/gtk'
     bash "${scriptpath}" 'dev/gnome'
     bash "${scriptpath}" 'dev/db'
@@ -310,6 +311,14 @@ case "${bundle}" in
     appinstall 'Qt SDK'                 'qml qtbase5-dev qtdeclarative5-dev qt5-doc'
     appinstall 'Qt Libs'                'libqt5svg5 libqt5svg5-dev libqt5webkit5-dev'
     appinstall 'Qt IDE'                 'qtcreator'
+
+;;
+
+### Qt4 SDK ====================================================================
+
+"dev/qt4")
+
+    appinstall 'Qt4 SDK'                'qt4-dev-tools libqt4-qt3support'
 
 ;;
 
