@@ -8,6 +8,7 @@ dev/analysis
 dev/style
 dev/doc
 dev/qt
+dev/qt4
 dev/db
 dev/json
 dev/net
