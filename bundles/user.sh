@@ -288,6 +288,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'dev/x11'
     bash "${scriptpath}" 'dev/opengl'
     bash "${scriptpath}" 'dev/qt'
+    bash "${scriptpath}" 'dev/qt4'
     bash "${scriptpath}" 'dev/gtk'
     bash "${scriptpath}" 'dev/gnome'
     bash "${scriptpath}" 'dev/db'
@@ -377,6 +378,16 @@ case "${bundle}" in
 
     mkdir -p "${HOME}/.config/QtProject/qtcreator/styles"
     cp -f "${ROOT_PATH}/files/qtcreator/material.xml" "${HOME}/.config/QtProject/qtcreator/styles/"
+
+;;
+
+### Qt4 SDK ====================================================================
+
+"dev/qt4")
+
+    hideapp 'assistant-qt4'
+    hideapp 'designer-qt4'
+    hideapp 'linguist-qt4'
 
 ;;
 

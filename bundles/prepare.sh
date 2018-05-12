@@ -177,6 +177,7 @@ case "${bundle}" in
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/x11'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/opengl'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/qt'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/qt4'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/gtk'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/gnome'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/db'
@@ -228,6 +229,12 @@ case "${bundle}" in
     ## Qt Creator --------------------------------------------------------------
 
     silentsudo 'Copy QtCreator config' cp -rf "${ROOT_PATH}/files/qtcreator" "${rootfs_dir}/tools/files/"
+
+;;
+
+### Qt4 SDK ====================================================================
+
+"dev/qt4")
 
 ;;
 

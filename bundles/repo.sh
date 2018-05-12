@@ -146,6 +146,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'dev/x11'
     bash "${scriptpath}" 'dev/opengl'
     bash "${scriptpath}" 'dev/qt'
+    bash "${scriptpath}" 'dev/qt4'
     bash "${scriptpath}" 'dev/gtk'
     bash "${scriptpath}" 'dev/gnome'
     bash "${scriptpath}" 'dev/db'
@@ -194,6 +195,12 @@ case "${bundle}" in
 ### Qt SDK =====================================================================
 
 "dev/qt")
+
+;;
+
+### Qt4 SDK ====================================================================
+
+"dev/qt4")
 
 ;;
 
