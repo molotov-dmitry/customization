@@ -320,9 +320,13 @@ case "${bundle}" in
 
 "office")
 
-    ## Libreoffice  ------------------------------------------------------------
+    ## LibreOffice -------------------------------------------------------------
 
     silentsudo 'Copy Libreoffice config' cp -rf "${ROOT_PATH}/files/libreoffice" "${rootfs_dir}/tools/files/"
+
+    ## OnlyOffice --------------------------------------------------------------
+
+    silentsudo 'Copy OnlyOffice config' cp -rf "${ROOT_PATH}/files/onlyoffice" "${rootfs_dir}/tools/files/"
 
 ;;
 
