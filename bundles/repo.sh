@@ -287,6 +287,7 @@ case "${bundle}" in
 "office")
 
     ppaadd  'LibreOffice'               'libreoffice'
+    repoadd 'OnlyOffice'                'download.onlyoffice.com/repo/debian' 'squeeze' 'onlyoffice/OnlyOffice.key'
 
 ;;
 
