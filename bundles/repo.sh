@@ -270,7 +270,7 @@ case "${bundle}" in
 "appearance/themes")
 
     ppaadd  'Numix Project'             'numix'
-    ppaadd  'Paper Themes (Daily)'      'snwh' 'pulp' 'zesty'
+    ppaadd  'Paper Themes (Daily)'      'snwh'
 
 ;;
 
