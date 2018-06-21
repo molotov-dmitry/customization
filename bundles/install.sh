@@ -414,7 +414,8 @@ case "${bundle}" in
 "appearance/themes")
 
     appinstall 'Numix theme'            'numix-icon-theme-circle numix-gtk-theme numix-blue-gtk-theme'
-    appinstall 'Paper theme'            'paper-gtk-theme paper-icon-theme'
+    appinstall 'Paper theme'            'paper-icon-theme'
+    appinstall 'Suru theme'             'suru-icon-set'
     appinstall 'Breeze theme'           'breeze-cursor-theme breeze-icon-theme'
     appinstall 'Oxygen cursors'         'oxygen-cursor-theme oxygen-cursor-theme-extra'
 
