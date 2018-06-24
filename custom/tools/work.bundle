@@ -15,6 +15,7 @@ dev/net
 dev/ti
 
 server/ssh
+server/smb
 
 vcs
 
