@@ -129,7 +129,7 @@ case "${bundle}" in
 
 "server/smb")
 
-    appinstall 'Samba'                  'cifs-utils samba'
+    appinstall 'Samba'                  'cifs-utils samba winbind'
 
 ;;
 
