@@ -131,16 +131,12 @@ function ispkgavailable()
 {
     app="$1"
 
-    apt-cache show "$app" >/dev/null 2>&1
-
-    return $?
-
-#    if [[ -n "$(apt-cache search "$app" | cut -d ' ' -f 1 | grep "^$app$")" ]]
-#    then
-#        return 0
-#    else
-#        return 1
-#    fi
+    if [[ -n "$(apt-cache pkgnames | grep "^$app$")" ]]
+    then
+        return 0
+    else
+        return 1
+    fi
 }
 
 function debprepare()
