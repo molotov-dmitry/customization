@@ -225,22 +225,22 @@ function appinstall()
             let required=1
         fi
 
-        if ispkginstalled "${app}"
+        if ispkginstalled "${appname}"
         then
             continue
             #
         fi
 
-        if ispkgavailable "${app}"
+        if ispkgavailable "${appname}"
         then
-            installlist="${installlist} ${app}"
+            installlist="${installlist} ${appname}"
         #
         elif [[ $required -gt 0 ]]
         then
-            missinglist="${installlist} ${app}"
+            missinglist="${missinglist} ${appname}"
         #
         else
-            skippedlist="${installlist} ${app}"
+            skippedlist="${skippedlist} ${appname}"
         #
         fi
 
