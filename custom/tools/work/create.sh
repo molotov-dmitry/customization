@@ -8,4 +8,10 @@ cd "${ROOT_PATH}" || exit 1
 ### ============================================================================
 
 appinstall 'RDP server' 'vino'
-appinstall 'RDP client' 'remmina remmina-plugin-vnc remmina-plugin-rdp'
+
+if [[ "$(lsb_release -si) $(lsb_release -sc)" == 'Debian stretch' ]]
+then
+    appinstall 'RDP client' 'vinagre'
+else
+    appinstall 'RDP client' 'remmina remmina-plugin-vnc remmina-plugin-rdp'
+fi
