@@ -131,12 +131,16 @@ function ispkgavailable()
 {
     app="$1"
 
-    if [[ -n "$(apt-cache search "$app" | cut -d ' ' -f 1 | grep "^$app$")" ]]
-    then
-        return 0
-    else
-        return 1
-    fi
+    apt-cache show "$app" >/dev/null 2>&1
+
+    return $?
+
+#    if [[ -n "$(apt-cache search "$app" | cut -d ' ' -f 1 | grep "^$app$")" ]]
+#    then
+#        return 0
+#    else
+#        return 1
+#    fi
 }
 
 function debprepare()
@@ -207,17 +211,50 @@ function appinstall()
 
     installlist=""
 
+    missinglist=""
+    skippedlist=""
+
     for app in ${applist}
     do
-        if ! ispkginstalled "${app}"
+        if [[ "$app" == "["*"]" ]]
+        then
+            appname=${app:1:-1}
+            let required=0
+        else
+            appname=$app
+            let required=1
+        fi
+
+        if ispkginstalled "${app}"
+        then
+            continue
+            #
+        fi
+
+        if ispkgavailable "${app}"
         then
             installlist="${installlist} ${app}"
+        #
+        elif [[ $required -gt 0 ]]
+        then
+            missinglist="${installlist} ${app}"
+        #
+        else
+            skippedlist="${installlist} ${app}"
+        #
         fi
+
     done
+
+    if [[ -n "${missinglist}" ]]
+    then
+        msgfail "[missing ${missinglist}]"
+        return 1
+    fi
 
     if [[ -z "${installlist}" ]]
     then
-        msgwarn '[already installed]'
+        msgwarn '[installed]'
         return 0
     else
         export DEBIAN_FRONTEND=noninteractive
@@ -227,7 +264,13 @@ function appinstall()
 
         if [[ $? -eq 0 ]]
         then
-            msgdone
+            if [[ -z "${skippedlist}" ]]
+            then
+                msgdone
+            else
+                msgwarn "[missing ${skippedlist}]"
+            fi
+
             return 0
         else
             msgfail
@@ -237,7 +280,13 @@ function appinstall()
 
             if [[ $? -eq 0 ]]
             then
-                msgdone
+                if [[ -z "${skippedlist}" ]]
+                then
+                    msgdone
+                else
+                    msgwarn "[missing ${skippedlist}]"
+                fi
+
                 return 0
             else
                 msgfail

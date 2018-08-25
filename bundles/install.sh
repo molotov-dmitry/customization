@@ -506,7 +506,7 @@ case "${bundle}" in
 
 "network/mail")
 
-    appinstall 'Evolution mail client'  'evolution evolution-data-server evolution-data-server-online-accounts evolution-ews'
+    appinstall 'Evolution mail client'  'evolution evolution-data-server [evolution-data-server-online-accounts] evolution-ews'
 
 ;;
 
@@ -515,7 +515,8 @@ case "${bundle}" in
 "network/chat")
 
     #appinstall 'Empathy'                'empathy telepathy-haze telepathy-accounts-signon telepathy-gabble'
-    appinstall 'Pidgin'                 'pidgin pidgin-libnotify pidgin-indicator'
+
+    appinstall 'Pidgin'                 'pidgin pidgin-libnotify [pidgin-indicator]'
 
 ;;
 
