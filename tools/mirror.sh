@@ -19,3 +19,11 @@ changemirror 'mirror.yandex.ru'
 
 appupdate
 appupgrade
+
+## Install additional packages -------------------------------------------------
+
+appinstall 'LSB release'            'lsb-release'
+appinstall 'Base'                   'less mount grep sed'
+appinstall 'Dir manager'            'dirmngr'
+
+silent     'Fix sudo install'       apt-mark manual sudo
