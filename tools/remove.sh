@@ -47,11 +47,3 @@ appremove 'Gnome TODO'              'gnome-todo'
 ## Remove unused ---------------------------------------------------------------
 
 silentsudo 'Removing unused packages' apt-get autoremove --yes --force-yes --purge
-
-## Install ---------------------------------------------------------------------
-
-appinstall 'LSB release'            'lsb-release'
-appinstall 'Base'                   'less mount grep sed'
-appinstall 'Dir manager'            'dirmngr'
-
-silent     'Fix sudo install'       apt-mark manual sudo
