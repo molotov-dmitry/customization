@@ -286,8 +286,12 @@ case "${bundle}" in
 
 "office")
 
-    ppaadd  'LibreOffice'               'libreoffice'
-    repoadd 'OnlyOffice'                'download.onlyoffice.com/repo/debian' 'squeeze' 'onlyoffice/OnlyOffice.key'
+    if [[ "$(lsb_release -si)" == "Ubuntu" ]]
+    then
+        ppaadd  'LibreOffice' 'libreoffice'
+    fi
+
+    repoadd 'OnlyOffice' 'download.onlyoffice.com/repo/debian' 'squeeze' 'onlyoffice/OnlyOffice.key'
 
 ;;
 
@@ -305,8 +309,12 @@ case "${bundle}" in
 
 "media-online")
 
-    ppaadd  'Web Upd8'                  'nilarimogard' 'webupd8' 'zesty'
-    ppaadd  'Web Upd8'                  'nilarimogard' 'webupd8'
+    ppaadd  'Web Upd8' 'nilarimogard' 'webupd8' 'zesty'
+
+    if [[ "$(lsb_release -si)" == "Ubuntu" ]]
+    then
+        ppaadd  'Web Upd8' 'nilarimogard' 'webupd8'
+    fi
 
 ;;
 
@@ -342,15 +350,20 @@ case "${bundle}" in
 
 "network/chat")
 
-    ppaadd  'Web Upd8'                  'nilarimogard'     'webupd8' 'zesty'
-    ppaadd  'Web Upd8'                  'nilarimogard'     'webupd8'
-    ppaadd  'Purple VK plugin'          'purple-vk-plugin' 'dev'     ''      'trusted'
-
 ;;
 
 ### Chat extra protocols =======================================================
 
 "network/chat-extra")
+
+    ppaadd  'Web Upd8' 'nilarimogard' 'webupd8' 'zesty'
+
+    if [[ "$(lsb_release -si)" == "Ubuntu" ]]
+    then
+        ppaadd  'Web Upd8' 'nilarimogard' 'webupd8'
+    fi
+
+    ppaadd  'Purple VK plugin' 'purple-vk-plugin' 'dev' '' 'trusted'
 
 ;;
 
