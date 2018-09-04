@@ -459,6 +459,8 @@ case "${bundle}" in
     appinstall 'Totem video player'     'totem'
     appinstall 'MPV Player'             'mpv gnome-mpv'
 
+    appinstall 'DLNA support'           'dleyna-server dleyna-renderer'
+
     appinstall 'EasyTag'                'easytag'
 
     appinstall 'Gnome Photos'           'gnome-photos'
