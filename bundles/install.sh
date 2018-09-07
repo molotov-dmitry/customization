@@ -20,6 +20,7 @@ case "${bundle}" in
     appinstall 'Gnome session'              'gnome-shell gnome-session'
     appinstall 'Language pack'	            'hyphen-ru mythes-ru hunspell-ru [language-pack-gnome-ru] [language-pack-gnome-ru-base] [language-pack-ru] [language-pack-ru-base]'
     appinstall 'Base applications'          'gnome-calculator gnome-system-monitor gnome-characters'
+    appinstall 'Tweak tool'                 'gnome-tweak-tool'
 
     if ! ispkginstalled 'gnome-shell' || [[ $(gnome-shell --version | cut -d '.' -f 2) -lt 24 ]]
     then
