@@ -229,6 +229,11 @@ else
     fi
 fi
 
+if [[ -e "${rootfs_dir}/etc/apt/sources.list.d/base.list" && ! -e "${rootfs_dir}/etc/apt/sources.list" ]]
+then
+	silentsudo 'Move sources.list' mv "${rootfs_dir}/etc/apt/sources.list.d/base.list" "${rootfs_dir}/etc/apt/sources.list"
+fi
+
 ## Preparing customization scripts ---------------------------------------------
 
 silentsudo 'Removing Tools dir'             rm -rf   "${rootfs_dir}/tools" || exit 1
