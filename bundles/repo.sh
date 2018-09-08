@@ -316,6 +316,8 @@ case "${bundle}" in
         ppaadd  'Web Upd8' 'nilarimogard' 'webupd8'
     fi
 
+    ppaadd  'Ubuntu Handbook' 'ubuntuhandbook1' 'apps'  # For GNOME Twitch
+
 ;;
 
 ### ============================================================================
