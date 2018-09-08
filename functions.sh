@@ -460,7 +460,7 @@ function debian_ppaadd()
         return 2
     fi
 
-    links=$(echo "${ppapage}" | grep -B1 'YOUR_UBUNTU_VERSION' | grep '^deb' | sed 's/<\/a>.*//' | sed 's/<.*>//')
+    links=$(echo "${ppapage}" | grep '<span id="series-deb' | grep '^deb' | sed 's/<\/a>.*//' | sed 's/<.*>//')
 
     if [[ -z "${links}" ]]
     then
@@ -472,8 +472,10 @@ function debian_ppaadd()
         links=$(echo "${links}" | sed 's/http:/[trusted=yes\] http:/g')
     fi
 
-    versions=( $(echo "${ppapage}" | grep '<option' | grep '(' | cut -d '"' -f 2) )
-    release_dates=( $(echo "${ppapage}" | grep '<option' | grep '(' | sed 's/.*(//g;s/).*//g') )
+    version_options=$(echo "${ppapage}" | grep '<option value="[^"]')
+
+    versions=( $(echo "${version_options}" | cut -d '"' -f 2) )
+    release_dates=( $(echo "${version_options}" | sed 's/[^(]*//' | sed 's/(//' | sed 's/).*//' | sed 's/^$/00.00/') )
 
     version_count=${#versions[@]}
 
@@ -505,7 +507,7 @@ function debian_ppaadd()
 
     if [[ -z "${version}" ]]
     then
-        version="${versions[-1]}"
+        version="${versions[0]}"
     fi
 
     if [[ -z "${version}" ]]
