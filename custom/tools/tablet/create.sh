@@ -23,6 +23,8 @@ fi
 
 ### Applications ===============================================================
 
+appinstall 'Git' 'git'
+
 ## Modem - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 appinstall 'Modem tools' 'libmbim-utils libqmi-utils minicom'

@@ -42,6 +42,7 @@ fi
 ## Wi-Fi -----------------------------------------------------------------------
 
 appinstall 'DKMS'                           'dkms'
+appinstall 'Git'                            'git'
 
 pushd /usr/bin/drivers
 
