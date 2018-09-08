@@ -76,6 +76,10 @@ do
         fastcomp='1'
     ;;
 
+    '--test')
+        nobuild='y'
+    ;;
+
     *.iso)
         iso_src="$1"
     ;;
@@ -165,6 +169,12 @@ fi
 if [[ "$debug" == 'y' ]]
 then
     echo -n "debug:        "
+    msgwarn 'yes'
+fi
+
+if [[ "$nobuild" == 'y' ]]
+then
+    echo -n "skip mkfs:    "
     msgwarn 'yes'
 fi
 
@@ -328,49 +338,55 @@ silentsudo 'Changing tools mode'            chmod -R 777 "${rootfs_dir}/tools"
 
 ## Packing image ===============================================================
 
-## Pack rootfs -----------------------------------------------------------------
-
-silentsudo 'Updating package list' bash -c "chroot "${rootfs_dir}" dpkg-query -W --showformat='${Package} ${Version}\n' > \"${iso_dir}/${livedir}/filesystem.manifest\""
-
-if [[ -e "${iso_dir}/${livedir}/manifest.diff" ]]
+if [[ "$nobuild" != 'y' ]]
 then
-    silentsudo 'Getting versions from manifest' bash -c "cat \"${iso_dir}/${livedir}/filesystem.manifest\" | cut -d ' ' -f 1 > \"${iso_dir}/filesystem.manifest.tmp\""
-    silentsudo 'Diff manifests'                 bash -c "diff --unchanged-group-format='' \"${iso_dir}/filesystem.manifest.tmp\" \"${iso_dir}/${livedir}/manifest.diff\" > \"${iso_dir}/filesystem.manifest-desktop.tmp\""
-    silentsudo 'Building manifest desktop file' bash -c "chroot \"${rootfs_dir}\"  dpkg-query -W --showformat='${Package} ${Version}\n' $(cat "${iso_dir}/filesystem.manifest-desktop.tmp") | egrep '.+ .+' > \"${iso_dir}/${livedir}/filesystem.manifest-desktop\""
-    silentsudo 'Removing temp files'            bash -c "rm \"${iso_dir}/filesystem.manifest.tmp\" \"${iso_dir}/filesystem.manifest-desktop.tmp\""
-else
-   silentsudo 'Creating desktop manifest' cp -f "${iso_dir}/${livedir}/filesystem.manifest" "${iso_dir}/${livedir}/filesystem.manifest-desktop"
-fi
 
-if [[ -e "${iso_dir}/${livedir}/filesystem.squashfs" ]]
-then
+    ## Pack rootfs -------------------------------------------------------------
+
+    silentsudo 'Updating package list' bash -c "chroot "${rootfs_dir}" dpkg-query -W --showformat='${Package} ${Version}\n' > \"${iso_dir}/${livedir}/filesystem.manifest\""
+
+    if [[ -e "${iso_dir}/${livedir}/manifest.diff" ]]
+    then
+        silentsudo 'Getting versions from manifest' bash -c "cat \"${iso_dir}/${livedir}/filesystem.manifest\" | cut -d ' ' -f 1 > \"${iso_dir}/filesystem.manifest.tmp\""
+        silentsudo 'Diff manifests'                 bash -c "diff --unchanged-group-format='' \"${iso_dir}/filesystem.manifest.tmp\" \"${iso_dir}/${livedir}/manifest.diff\" > \"${iso_dir}/filesystem.manifest-desktop.tmp\""
+        silentsudo 'Building manifest desktop file' bash -c "chroot \"${rootfs_dir}\"  dpkg-query -W --showformat='${Package} ${Version}\n' $(cat "${iso_dir}/filesystem.manifest-desktop.tmp") | egrep '.+ .+' > \"${iso_dir}/${livedir}/filesystem.manifest-desktop\""
+        silentsudo 'Removing temp files'            bash -c "rm \"${iso_dir}/filesystem.manifest.tmp\" \"${iso_dir}/filesystem.manifest-desktop.tmp\""
+    else
+        silentsudo 'Creating desktop manifest' cp -f "${iso_dir}/${livedir}/filesystem.manifest" "${iso_dir}/${livedir}/filesystem.manifest-desktop"
+    fi
+
+    if [[ -e "${iso_dir}/${livedir}/filesystem.squashfs" ]]
+    then
     silentsudo 'Removing old rootfs' rm -f "${iso_dir}/${livedir}/filesystem.squashfs"
+    fi
+
+
+    mksquashfs "${rootfs_dir}" "${iso_dir}/${livedir}/filesystem.squashfs" -comp ${comp} || exit 1
+
+    ## Modify package manifest -------------------------------------------------
+
+    if grep '^sudo$' "${iso_dir}/${livedir}/filesystem.manifest-remove" > /dev/null 2>&1
+    then
+        silentsudo 'Removing sudo from remove manifest'       sed -i '/^sudo$/d' "${iso_dir}/${livedir}/filesystem.manifest-remove"
+    fi
+
+    if grep '^cifs-utils$' "${iso_dir}/${livedir}/filesystem.manifest-remove" > /dev/null 2>&1
+    then
+        silentsudo 'Removing cifs-utils from remove manifest' sed -i '/^cifs-utils$/d' "${iso_dir}/${livedir}/filesystem.manifest-remove"
+    fi
+
+    ## Adding EFI x32 ----------------------------------------------------------
+
+    if test -d "${iso_dir}/EFI/BOOT" && ! isdebian
+    then
+        silentsudo 'Getting EFI 32 image'       wget https://github.com/jfwells/linux-asus-t100ta/raw/master/boot/bootia32.efi -O "${iso_dir}/EFI/BOOT/bootia32.efi"
+    fi
+
+    ## Packing ISO -------------------------------------------------------------
+
+    packiso "$(basename "${iso_src}")" "${config}"
+
 fi
-
-mksquashfs "${rootfs_dir}" "${iso_dir}/${livedir}/filesystem.squashfs" -comp ${comp} || exit 1
-
-## Modify package manifest -----------------------------------------------------
-
-if grep '^sudo$' "${iso_dir}/${livedir}/filesystem.manifest-remove" > /dev/null 2>&1
-then
-    silentsudo 'Removing sudo from remove manifest'       sed -i '/^sudo$/d' "${iso_dir}/${livedir}/filesystem.manifest-remove"
-fi
-
-if grep '^cifs-utils$' "${iso_dir}/${livedir}/filesystem.manifest-remove" > /dev/null 2>&1
-then
-    silentsudo 'Removing cifs-utils from remove manifest' sed -i '/^cifs-utils$/d' "${iso_dir}/${livedir}/filesystem.manifest-remove"
-fi
-
-## Adding EFI x32 --------------------------------------------------------------
-
-if test -d "${iso_dir}/EFI/BOOT" && ! isdebian
-then
-    silentsudo 'Getting EFI 32 image'       wget https://github.com/jfwells/linux-asus-t100ta/raw/master/boot/bootia32.efi -O "${iso_dir}/EFI/BOOT/bootia32.efi"
-fi
-
-## Packing ISO -----------------------------------------------------------------
-
-packiso "$(basename "${iso_src}")" "${config}"
 
 ### Unmounting remaster dir ====================================================
 
