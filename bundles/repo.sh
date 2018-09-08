@@ -309,7 +309,7 @@ case "${bundle}" in
 
 "media-online")
 
-    ppaadd  'Web Upd8' 'nilarimogard' 'webupd8' 'zesty'
+    ppaadd  'Web Upd8' 'nilarimogard' 'webupd8' 'artful' # For youtube-dl
 
     if [[ "$(lsb_release -si)" == "Ubuntu" ]]
     then
@@ -356,7 +356,7 @@ case "${bundle}" in
 
 "network/chat-extra")
 
-    ppaadd  'Web Upd8' 'nilarimogard' 'webupd8' 'zesty'
+    ppaadd  'Web Upd8' 'nilarimogard' 'webupd8' 'bionic'    # For telegram-purple
 
     if [[ "$(lsb_release -si)" == "Ubuntu" ]]
     then
