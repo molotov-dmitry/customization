@@ -288,10 +288,10 @@ case "${bundle}" in
 
     if [[ "$(lsb_release -si)" == "Ubuntu" ]]
     then
-        ppaadd  'LibreOffice' 'libreoffice'
+        ppaadd 'LibreOffice' 'libreoffice'
     fi
 
-    repoadd 'OnlyOffice' 'download.onlyoffice.com/repo/debian' 'squeeze' 'onlyoffice/OnlyOffice.key'
+    #repoadd 'OnlyOffice' 'download.onlyoffice.com/repo/debian' 'squeeze' 'onlyoffice/OnlyOffice.key'
 
 ;;
 

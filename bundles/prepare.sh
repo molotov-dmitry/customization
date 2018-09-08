@@ -326,7 +326,7 @@ case "${bundle}" in
 
     ## OnlyOffice --------------------------------------------------------------
 
-    silentsudo 'Copy OnlyOffice config' cp -rf "${ROOT_PATH}/files/onlyoffice" "${rootfs_dir}/tools/files/"
+    #silentsudo 'Copy OnlyOffice config' cp -rf "${ROOT_PATH}/files/onlyoffice" "${rootfs_dir}/tools/files/"
 
 ;;
 

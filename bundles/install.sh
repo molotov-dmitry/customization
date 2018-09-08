@@ -440,7 +440,7 @@ case "${bundle}" in
 "office")
 
     appinstall 'LibreOffice'            'libreoffice-calc libreoffice-writer libreoffice-pdfimport libreoffice-gtk2 libreoffice-gnome libreoffice-style-breeze libreoffice-l10n-ru libreoffice-help-ru'
-    appinstall 'OnlyOffice'             'onlyoffice-desktopeditors'
+    #appinstall 'OnlyOffice'             'onlyoffice-desktopeditors'
     appinstall 'Document viewer'        'evince'
 
 ;;
