@@ -356,6 +356,7 @@ case "${bundle}" in
 
 "network/chat-extra")
 
+    ppaadd  'Web Upd8' 'nilarimogard' 'webupd8' 'zesty'     # For pidgin-indicator
     ppaadd  'Web Upd8' 'nilarimogard' 'webupd8' 'bionic'    # For telegram-purple
 
     if [[ "$(lsb_release -si)" == "Ubuntu" ]]
