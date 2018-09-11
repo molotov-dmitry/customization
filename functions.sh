@@ -464,7 +464,18 @@ function ppaadd()
 
     ### Download PPA page ======================================================
 
-    ppapage=$(wget -q -O - "https://launchpad.net/~${author}/+archive/ubuntu/${repo}")
+    for i in $(seq 1 3)
+    do
+        ppapage=$(wget -q -O - "https://launchpad.net/~${author}/+archive/ubuntu/${repo}")
+
+        if [[ -n "${ppapage}" ]]
+        then
+            break
+        fi
+
+        sleep 1
+
+    done
 
     if [[ -z "${ppapage}" ]]
     then
