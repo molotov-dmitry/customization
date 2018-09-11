@@ -414,6 +414,7 @@ case "${bundle}" in
 
 "appearance/themes")
 
+    appinstall 'Adwaita theme'          'gnome-themes-standard'
     appinstall 'Numix theme'            'numix-icon-theme-circle numix-gtk-theme numix-blue-gtk-theme'
     appinstall 'Paper theme'            'paper-icon-theme'
     appinstall 'Suru theme'             'suru-icon-set'
