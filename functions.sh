@@ -438,7 +438,7 @@ function repoadd()
     return $status
 }
 
-function debian_ppaadd()
+function ppaadd()
 {
     reponame="$1"
     author="$2"
@@ -446,31 +446,60 @@ function debian_ppaadd()
     version="$4"
     istrusted="$5"
 
+    ### Set default repo name, if not set ======================================
+
+    if [[ -z "${repo}" ]]
+    then
+        repo='ppa'
+    fi
+
+    ### Print information ======================================================
+
+    if [[ -n "${istrusted}" ]]
+    then
+        title "Adding trusted $reponame repository"
+    else
+        title "Adding $reponame repository"
+    fi
+
+    ### Download PPA page ======================================================
+
     ppapage=$(wget -q -O - "https://launchpad.net/~${author}/+archive/ubuntu/${repo}")
 
     if [[ -z "${ppapage}" ]]
     then
+        msgfail '[download page]'
         return 1
     fi
+
+    ### Get key ================================================================
 
     recvkey=$(echo "${ppapage}" | grep '<code>' | sed 's/.*<code>//' | sed 's/<\/code>.*//' | cut -d '/' -f 2)
 
     if [[ -z "${recvkey}" ]]
     then
+        msgfail '[key]'
         return 2
     fi
+
+    ### Get repo links =========================================================
 
     links=$(echo "${ppapage}" | grep '<span id="series-deb' | grep '^deb' | sed 's/<\/a>.*//' | sed 's/<.*>//')
 
     if [[ -z "${links}" ]]
     then
+        msgfail '[links]'
         return 3
     fi
+
+    ### Set repo as trusted, if flag set =======================================
 
     if [[ -n "${istrusted}" ]]
     then
         links=$(echo "${links}" | sed 's/http:/[trusted=yes\] http:/g')
     fi
+
+    ### Get versions ===========================================================
 
     version_options=$(echo "${ppapage}" | grep '<option value="[^"]')
 
@@ -478,6 +507,8 @@ function debian_ppaadd()
     release_dates=( $(echo "${version_options}" | sed 's/[^(]*//' | sed 's/(//' | sed 's/).*//' | sed 's/^$/00.00/') )
 
     version_count=${#versions[@]}
+
+    ### Find current release ---------------------------------------------------
 
     if [[ -z "${version}" ]]
     then
@@ -490,6 +521,8 @@ function debian_ppaadd()
             fi
         done
     fi
+
+    ### Find most recent release -----------------------------------------------
 
     if [[ -z "${version}" ]]
     then
@@ -505,15 +538,22 @@ function debian_ppaadd()
         done
     fi
 
+    ### Use first release ------------------------------------------------------
+
     if [[ -z "${version}" ]]
     then
         version="${versions[0]}"
     fi
 
+    ### Release not found ------------------------------------------------------
+
     if [[ -z "${version}" ]]
     then
+        msgfail '[no release]'
         return 4
     fi
+
+    ### Add key server =========================================================
 
     keyserver=$(echo "${ppapage}" | grep -A2 'Signing key' | grep 'http' | cut -d '"' -f 2 | cut -d ':' -f 2 | cut -d '/' -f 3)
 
@@ -521,58 +561,25 @@ function debian_ppaadd()
 
     if [[ $? -ne 0 ]]
     then
-        return 1
+        msgfail '[recv key]'
+        return 5
     fi
+
+    ### Add repo ===============================================================
 
     sourceslist="$(echo "${links}" | sed "s/$/ ${version} main/")"
 
     echo "${sourceslist}" | sudo tee "/etc/apt/sources.list.d/${author}-${repo}-${version}.list" >/dev/null 2>&1
 
-    return $?
-}
-
-function ppaadd()
-{
-    reponame="$1"
-    author="$2"
-    repo="$3"
-    release="$4"
-    istrusted="$5"
-
-    if [[ -z "${repo}" ]]
+    if [[ $? -ne 0 ]]
     then
-        repo='ppa'
+        msgfail '[add repo]'
+        return 6
     fi
 
-    if [[ -n "${istrusted}" ]]
-    then
-        title "Adding trusted $reponame repository"
-    else
-        title "Adding $reponame repository"
-    fi
+    ### ========================================================================
 
-    #if ! isppaadded "${author}" "${repo}"
-    #then
-
-        #if [[ "$(lsb_release -si)" == "Ubuntu" ]]
-        #then
-        #    sudo add-apt-repository --yes ppa:${author}/${repo} >/dev/null 2>&1
-		#else
-        debian_ppaadd "${reponame}" "${author}" "${repo}" "${release}" "${istrusted}"
-        #fi
-
-        if [[ $? -eq 0 ]]
-        then
-            msgdone
-            return 0
-        else
-            msgfail
-            return 1
-        fi
-    #else
-        #msgwarn '[already added]'
-        #return 0
-    #fi
+    return 0
 }
 
 function changemirror()
