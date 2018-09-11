@@ -42,6 +42,10 @@ case "${bundle}" in
 
     gsettings set org.gnome.shell enable-hot-corners true
 
+    ## Disable modal dialogs attach --------------------------------------------
+
+    gsettings set org.gnome.shell.overrides attach-modal-dialogs false
+
     ## File templates ----------------------------------------------------------
 
     xdg-user-dirs-update
@@ -478,7 +482,7 @@ case "${bundle}" in
 
     ## svn color side-by-side diff alias ---------------------------------------
 
-    echo alias svndiff=\'svn --diff-cmd "colordiff" --extensions '"-y -W $(( $(tput cols) - 2 ))"' diff\' >> ~/.bash_aliases
+    echo alias svndiff=\'svn --diff-cmd "colordiff" diff\' >> ~/.bash_aliases
 ;;
 
 ### ============================================================================
@@ -510,11 +514,11 @@ case "${bundle}" in
 
     ## Gtk theme ---------------------------------------------------------------
 
-    gtk_theme='NumixBlue'
-    wm_theme='Numix'
+    gtk_theme='Adwaita'
+    wm_theme='Adwaita'
 
-    gsettings set org.gnome.desktop.interface gtk-theme         "${gtk_theme}"
-    gsettings set org.gnome.desktop.wm.preferences theme        "${wm_theme}"
+    gsettings set org.gnome.desktop.interface gtk-theme     "${gtk_theme}"
+    gsettings set org.gnome.desktop.wm.preferences theme    "${wm_theme}"
 ;;
 
 ### System fonts ===============================================================
