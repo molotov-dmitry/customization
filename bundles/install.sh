@@ -418,7 +418,6 @@ case "${bundle}" in
     appinstall 'Paper theme'            'paper-icon-theme'
     appinstall 'Suru theme'             'suru-icon-set'
     appinstall 'Breeze theme'           'breeze-cursor-theme breeze-icon-theme'
-    appinstall 'Oxygen cursors'         'oxygen-cursor-theme oxygen-cursor-theme-extra'
 
 ;;
 
