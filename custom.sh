@@ -255,6 +255,7 @@ silentsudo 'Copying functions script'       cp -f "${ROOT_PATH}/functions.sh" "$
 silentsudo 'Copying folders script'         cp -f "${ROOT_PATH}/tools/folders.sh"   "${rootfs_dir}/tools/" || exit 1
 silentsudo 'Copying bundle script'          cp -f "${ROOT_PATH}/tools/bundle.sh" "${rootfs_dir}/tools/" || exit 1
 silentsudo 'Copying remove script'          cp -f "${ROOT_PATH}/tools/remove.sh" "${rootfs_dir}/tools/" || exit 1
+silentsudo 'Copying prepare script'         cp -f "${ROOT_PATH}/tools/prepare.sh" "${rootfs_dir}/tools/" || exit 1
 silentsudo 'Copying mirror script'          cp -f "${ROOT_PATH}/tools/mirror.sh" "${rootfs_dir}/tools/" || exit 1
 
 silentsudo 'Copying repo script'            cp -f "${ROOT_PATH}/custom/tools/${config}/repo.sh" "${rootfs_dir}/tools/" || exit 1
@@ -286,6 +287,7 @@ fi
 start_chroot "${rootfs_dir}"
 
 chroot_rootfs "${rootfs_dir}" bash /tools/remove.sh
+chroot_rootfs "${rootfs_dir}" bash /tools/prepare.sh
 
 chroot_rootfs "${rootfs_dir}" bash /tools/repo.sh
 chroot_rootfs "${rootfs_dir}" bash /tools/bundle.sh repo "${config}"
@@ -316,6 +318,7 @@ finish_chroot "${rootfs_dir}"
 ## Clean up after chroot step --------------------------------------------------
 
 silentsudo 'Removing remove script'         rm -rf "${rootfs_dir}/tools/remove.sh"
+silentsudo 'Removing prepare script'        rm -rf "${rootfs_dir}/tools/prepare.sh"
 silentsudo 'Removing repo script'           rm -rf "${rootfs_dir}/tools/repo.sh"
 silentsudo 'Removing mirror script'         rm -rf "${rootfs_dir}/tools/mirror.sh"
 silentsudo 'Removing create script'         rm -rf "${rootfs_dir}/tools/create.sh"

@@ -53,6 +53,7 @@ DISTFILES += \
     tools/folders.sh \
     tools/mirror.sh \
     tools/pack.sh \
+    tools/prepare.sh \
     tools/remove.sh \
     tools/startup.sh \
     custom.sh \
