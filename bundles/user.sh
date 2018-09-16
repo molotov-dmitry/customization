@@ -63,21 +63,8 @@ case "${bundle}" in
 
     ## Nautilus keybindings ----------------------------------------------------
 
-    mkdir -p "${HOME}/.local/share/nautilus/scripts"
-    mkdir -p "${HOME}/.config/nautilus"
-    touch "${HOME}/.config/nautilus/scripts-accels"
-
-    cp -f "${ROOT_PATH}/files/gnome/terminal.sh" "${HOME}/.local/share/nautilus/scripts/terminal.sh"
-    chmod +x "${HOME}/.local/share/nautilus/scripts/terminal.sh"
-
-    cp -f "${ROOT_PATH}/files/gnome/compress.sh" "${HOME}/.local/share/nautilus/scripts/compress.sh"
-    chmod +x "${HOME}/.local/share/nautilus/scripts/compress.sh"
-
-    sed -i '/^F4 /d' "${HOME}/.config/nautilus/scripts-accels"
-    echo 'F4 terminal.sh' >> "${HOME}/.config/nautilus/scripts-accels"
-
-    sed -i '/^F7 /d' "${HOME}/.config/nautilus/scripts-accels"
-    echo 'F7 compress.sh' >> "${HOME}/.config/nautilus/scripts-accels"
+    addscenario 'terminal' 'F4' 'x-terminal-emulator'
+    addscenario 'compress' 'F7' '[[ $# -gt 0 ]] && file-roller -d $@'
 
     ## File chooser ------------------------------------------------------------
 
@@ -494,6 +481,11 @@ case "${bundle}" in
         gsettings set org.gnome.meld style-scheme       'kate'
         gsettings set org.gnome.meld show-line-numbers  true
         gsettings set org.gnome.meld indent-width       4
+    fi
+
+    if ispkginstalled 'meld' && ispkginstalled 'nautilus'
+    then
+        addscenario 'compare' 'F3' 'svn info && meld .'
     fi
 
 ;;
