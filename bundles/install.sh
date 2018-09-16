@@ -514,7 +514,7 @@ case "${bundle}" in
 
 "network/mail")
 
-    appinstall 'Evolution mail client'  'evolution evolution-data-server [evolution-data-server-online-accounts] evolution-ews'
+    appinstall 'Evolution mail client'  'evolution evolution-data-server evolution-ews'
 
 ;;
 
