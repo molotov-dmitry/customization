@@ -397,6 +397,11 @@ case "${bundle}" in
         appinstall 'RabbitVCS'          'rabbitvcs-core rabbitvcs-nautilus'
     fi
 
+    if ispkginstalled 'xorg'
+    then
+        appinstall 'Meld diff tool'     'meld'
+    fi
+
 ;;
 
 ### ============================================================================

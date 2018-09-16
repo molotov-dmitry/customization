@@ -485,6 +485,17 @@ case "${bundle}" in
     ## svn color side-by-side diff alias ---------------------------------------
 
     echo alias svndiff=\'svn --diff-cmd "colordiff" diff\' >> ~/.bash_aliases
+
+    ## Meld --------------------------------------------------------------------
+
+    if ispkginstalled 'meld'
+    then
+        gsettings set org.gnome.meld highlight-syntax   true
+        gsettings set org.gnome.meld style-scheme       'kate'
+        gsettings set org.gnome.meld show-line-numbers  true
+        gsettings set org.gnome.meld indent-width       4
+    fi
+
 ;;
 
 ### ============================================================================
