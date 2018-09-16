@@ -1127,6 +1127,27 @@ function addkeybinding()
     fi
 }
 
+function addscenario()
+{
+    name="$1"
+    binding="$2"
+    command="$3"
+
+    if ispkginstalled 'nautilus'
+    then
+        mkdir -p "${HOME}/.local/share/nautilus/scripts"
+        mkdir -p "${HOME}/.config/nautilus"
+        touch    "${HOME}/.config/nautilus/scripts-accels"
+
+        echo -e '#!/bin/bash\n' >  "${HOME}/.local/share/nautilus/scripts/${name}.sh"
+        echo -e "${command}\n"  >> "${HOME}/.local/share/nautilus/scripts/${name}.sh"
+        chmod +x                   "${HOME}/.local/share/nautilus/scripts/${name}.sh"
+
+        sed -i "/^${binding} /d"        "${HOME}/.config/nautilus/scripts-accels"
+        echo "${binding} ${name}.sh" >> "${HOME}/.config/nautilus/scripts-accels"
+    fi
+}
+
 ### Register MIME types ========================================================
 
 function mimeregister()
