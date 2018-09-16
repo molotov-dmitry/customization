@@ -57,6 +57,8 @@ cd UCM
 
 silentsudo 'Installing configs'         cp -rf ./ /usr/share/alsa/ucm/
 
+silentsudo 'Blacklist audio module'     sh -c "echo 'blacklist snd_hdmi_lpe_audio' > /etc/modprobe.d/blacklist-snd-hdmi-lpe-audio.conf"
+
 ## Bluetooth -------------------------------------------------------------------
 
 cd /usr/bin/drivers
