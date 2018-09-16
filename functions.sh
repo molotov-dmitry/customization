@@ -996,6 +996,37 @@ function gsettingsadd()
 
 ### Application menu functions =================================================
 
+function changeapp()
+{
+    app="$1"
+
+    shift
+
+    ### Copy application =======================================================
+
+    mkdir -p "${HOME}/.local/share/applications/"
+
+    cp -f "/usr/share/applications/${app}.desktop" "${HOME}/.local/share/applications/${app}.desktop"
+
+    ### Update parameters ======================================================
+
+    while [[ $# -ge 2 ]]
+    do
+        parameter="$1"
+        value="$2"
+
+        shift
+        shift
+
+        sed -i "/^${parameter}=/d" "${HOME}/.local/share/applications/${app}.desktop"
+        echo "${parameter}=${value}" >> "${HOME}/.local/share/applications/${app}.desktop"
+    done
+
+    ### ========================================================================
+
+    return 0
+}
+
 function hideapp()
 {
     app="$1"
