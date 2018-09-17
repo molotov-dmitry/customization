@@ -38,5 +38,5 @@ function packiso()
 
     silentsudo 'Changing rights for iso' chmod -R a+rw "${res_dir}"
 
-    silentduso 'Generating revision for iso' bash -c "echo \"$(svnversion) ${ison-name}\" >> \"${res_dir}/REV\""
+    silentsudo 'Generating revision for iso' bash -c "echo \"$(svnversion) ${ison-name}\" >> \"${res_dir}/REV\""
 }

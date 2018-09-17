@@ -14,3 +14,9 @@ appupdate
 ## Install additional packages -------------------------------------------------
 
 appinstall 'Dir manager'            'dirmngr'
+
+appinstall 'LSB release'            'lsb-release'
+appinstall 'Base'                   'less mount grep sed'
+appinstall 'Bash completion'        'bash-completion'
+
+silent     'Fix sudo install'       apt-mark manual sudo
