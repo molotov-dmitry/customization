@@ -310,7 +310,7 @@ function appremove()
 
     if [[ -z "${remlist}" ]]
     then
-        msgwarn '[already removed]'
+        msgwarn '[removed]'
         return 0
     else
         sudo apt-get purge ${remlist} --yes --force-yes --purge >/dev/null 2>&1
