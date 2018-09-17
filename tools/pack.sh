@@ -37,4 +37,6 @@ function packiso()
     silentsudo 'Generating md5 for iso' bash -c "md5sum \"${res_dir}/${iso_name}\" | sed 's/\/.*\///' >> \"${res_dir}/MD5SUMS\""
 
     silentsudo 'Changing rights for iso' chmod -R a+rw "${res_dir}"
+
+    silentduso 'Generating revision for iso' bash -c "echo \"$(svnversion) ${ison-name}\" >> \"${res_dir}/REV\""
 }
