@@ -9,9 +9,14 @@ dev/style
 dev/doc
 dev/man
 dev/qt
+dev/qt4
 dev/db
 dev/json
 dev/net
+dev/ti
+
+server/ssh
+server/smb
 
 vcs
 
