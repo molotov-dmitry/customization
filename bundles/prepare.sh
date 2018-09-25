@@ -173,6 +173,7 @@ case "${bundle}" in
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/analysis'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/style'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/doc'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/man'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/x11'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/opengl'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/qt'
@@ -206,6 +207,12 @@ case "${bundle}" in
 ### Documentation tools ========================================================
 
 "dev/doc")
+
+;;
+
+### Documentation and references ===============================================
+
+"dev/man")
 
 ;;
 
