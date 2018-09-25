@@ -221,6 +221,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'dev/analysis'
     bash "${scriptpath}" 'dev/style'
     bash "${scriptpath}" 'dev/doc'
+    bash "${scriptpath}" 'dev/man'
     bash "${scriptpath}" 'dev/x11'
     bash "${scriptpath}" 'dev/opengl'
     bash "${scriptpath}" 'dev/qt'
@@ -260,6 +261,12 @@ case "${bundle}" in
 ### Documentation tools ========================================================
 
 "dev/doc")
+
+;;
+
+### Documentation and references ===============================================
+
+"dev/man")
 
 ;;
 
