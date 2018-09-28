@@ -179,6 +179,8 @@ case "${bundle}" in
 "server/download")
 
     appinstall 'Youtube downloader'     'youtube-dl'
+    silentsudo 'Download youtube-dl'    wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
+    silentsudo 'Setup youtube-dl'       chmod a+rx /usr/local/bin/youtube-dl
     appinstall 'Transmission'           'transmission-daemon'
     appinstall 'EiskaltDC++'            'eiskaltdcpp-daemon'
 
@@ -491,6 +493,9 @@ case "${bundle}" in
 "media-online")
 
     appinstall 'Youtube downloader'     'youtube-dl'
+    silentsudo 'Download youtube-dl'    wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
+    silentsudo 'Setup youtube-dl'       chmod a+rx /usr/local/bin/youtube-dl
+
     appinstall 'Gnome Twitch app'       'gnome-twitch gnome-twitch-player-backend-mpv-opengl'
 
 ;;
