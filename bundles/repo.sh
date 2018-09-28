@@ -316,8 +316,6 @@ case "${bundle}" in
 
 "media-online")
 
-    ppaadd  'Web Upd8' 'nilarimogard' 'webupd8' 'artful' # For youtube-dl
-
     if [[ "$(lsb_release -si)" == "Ubuntu" ]]
     then
         ppaadd  'Web Upd8' 'nilarimogard' 'webupd8'
