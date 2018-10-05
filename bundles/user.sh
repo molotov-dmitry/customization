@@ -78,7 +78,7 @@ case "${bundle}" in
     gsettings set org.gnome.gedit.preferences.editor highlight-current-line true
     gsettings set org.gnome.gedit.preferences.editor bracket-matching       true
 
-    gsettings set org.gnome.gedit.preferences.editor insert-spaces          true
+    gsettings set org.gnome.gedit.preferences.editor insert-spaces          false
     gsettings set org.gnome.gedit.preferences.editor tabs-size              4
 
     gsettings set org.gnome.gedit.preferences.editor display-right-margin   true
