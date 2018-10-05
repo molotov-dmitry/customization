@@ -477,9 +477,16 @@ case "${bundle}" in
 
 "vcs")
 
-    ## svn color side-by-side diff alias ---------------------------------------
+    ## SVN color side-by-side diff alias ---------------------------------------
 
     echo alias svndiff=\'svn --diff-cmd "colordiff" diff\' >> ~/.bash_aliases
+
+    ## SVN working copy clean function -----------------------------------------
+
+    if [[ -z "$(grep 'svnclean()' ~/.bash_aliases)" ]]
+    then
+        echo -e "\nfunction svnclean()\n{\n    svn st \$@ --no-ignore | grep '^?\\|^I' | sed 's/^.[ ]*//' | tr '\\\\n' '\\\\0' | xargs -0 rm -rf\n}\n\n" >> ~/.bash_aliases
+    fi
 
     ## Meld --------------------------------------------------------------------
 
