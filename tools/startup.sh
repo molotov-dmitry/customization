@@ -27,8 +27,6 @@ then
 
     bash /tools/bundle.sh user user
     echo "$?" >> "${HOME}"/.config/.firstboot
-
-    xhost && nautilus --version && notify-send -i info "Nautilus hotkeys" "F7 - compress\nF3 - compare\nF4 - terminal"
 fi
 
 ' >> "${user_dir}"/.profile
