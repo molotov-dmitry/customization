@@ -1,9 +1,12 @@
 #!/bin/bash
 
-ROOT_PATH="$(cd "$(dirname "$0")" && pwd)"
-cd "${ROOT_PATH}" || exit 1
+cat << EOF >> /etc/hosts
+172.16.56.14    rczifort.local
+172.16.56.15    redmine.rczifort.local
+172.16.56.16    chat.rczifort.local
+172.16.56.17    ex01.rczifort.local
+172.16.56.22    git.rczifort.local
+172.16.56.23    data.rczifort.local
 
-. "${ROOT_PATH}/functions.sh"
-
-
+EOF
 
