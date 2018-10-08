@@ -435,6 +435,7 @@ case "${bundle}" in
     appinstall 'Paper theme'            'paper-icon-theme'
     appinstall 'Suru theme'             'suru-icon-set'
     appinstall 'Breeze theme'           'breeze-cursor-theme breeze-icon-theme'
+    appinstall 'Canta theme'            'canta-themes canta-icons'
 
 ;;
 
