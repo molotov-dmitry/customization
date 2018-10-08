@@ -278,6 +278,8 @@ case "${bundle}" in
 
     ppaadd  'Numix Project'             'numix'
     ppaadd  'Paper Themes (Daily)'      'snwh'
+    ppaadd  'Noobslab Themes'           'noobslab' 'themes'
+    ppaadd  'Noobslab Icons'            'noobslab' 'icons'
 
 ;;
 
