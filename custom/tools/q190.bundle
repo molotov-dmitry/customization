@@ -29,6 +29,8 @@ network
 graphics
 archive
 
+vm-host
+
 cli
 
 optimize
