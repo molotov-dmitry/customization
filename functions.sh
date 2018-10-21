@@ -1132,6 +1132,7 @@ function addscenario()
     name="$1"
     binding="$2"
     command="$3"
+    fixpwd="$4"
 
     if ispkginstalled 'nautilus'
     then
@@ -1140,6 +1141,12 @@ function addscenario()
         touch    "${HOME}/.config/nautilus/scripts-accels"
 
         echo -e '#!/bin/bash\n' >  "${HOME}/.local/share/nautilus/scripts/${name}.sh"
+
+        if [[ -n "${fixpwd}" ]]
+        then
+            echo -e 'cd "$(echo "$NAUTILUS_SCRIPT_CURRENT_URI" | sed "s/^file:\/\///")"\n' >> "${HOME}/.local/share/nautilus/scripts/${name}.sh"
+        fi
+
         echo -e "${command}\n"  >> "${HOME}/.local/share/nautilus/scripts/${name}.sh"
         chmod +x                   "${HOME}/.local/share/nautilus/scripts/${name}.sh"
 
