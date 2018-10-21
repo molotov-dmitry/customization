@@ -1,110 +1,53 @@
 #!/bin/bash
 
-ROOT_PATH="$(cd "$(dirname "$0")" && pwd)"
-cd "${ROOT_PATH}" || exit 1
+### Constants ==================================================================
 
-. "${ROOT_PATH}/functions.sh"
+readonly target_disk="/media/documents/$USER"
 
+readonly target_dir=( "Downloads" "Documents" "Music" "Images"   "Video"  "Templates" "Projects"         )
+readonly source_dir=( ""          ""          ""      ""         ""       ""          "${HOME}/Projects" )
+readonly source_xdg=( "DOWNLOAD"  "DOCUMENTS" "MUSIC" "PICTURES" "VIDEOS" "TEMPLATES" ""                 )
 
-
-### Директория, в которой находятся каталоги с документами
-readonly target_disk='/media/documents'
-
-
-### Имена целевых директорий
-target_dir=( "Downloads" "Documents" "Music" "Images" "Video" "Templates" "Projects" )
-
-### Имена исходных директорий
-source_dir=( "" "" "" "" "" "" "${HOME}/Projects" )
-
-### Имена исходных директорий, берущихся из файла XDG user dirs
-source_xdg=( "DOWNLOAD" "DOCUMENTS" "MUSIC" "PICTURES" "VIDEOS" "TEMPLATES" "" )
-
-### Количество директорий
 let DIR_COUNT=${#target_dir[@]}
 
+### Check destination directory exist ==========================================
 
-### Проверка директории
+[[ -d "${target_disk}" ]] || exit 1
 
-title "Checking destination folder"
-
-
-if [[ -d "${target_disk}" ]]
-then
-    msgdone
-else
-    msgfail
-    exit 1
-fi
+#### Create directories ========================================================
 
 for (( index=0; index<${DIR_COUNT}; index++ ))
 do
-    src_dir="${source_dir[$index]}"
     dst_dir="${target_disk}/${target_dir[$index]}"
-    name_dir="${target_dir[$index]}"
 
-    title "checking ${name_dir} destination folder"
-
-    if test -d "${dst_dir}"
+    if ! test -d "${dst_dir}"
     then
-        msgdone
-    else
-        msgwarn '[missing]'
-
-        title "creating ${name_dir} destination folder"
-
         mkdir -p "${dst_dir}"
 
-        if test -d "${dst_dir}"
-        then
-            msgdone
-        else
-            msgfail
-            exit 1
-        fi
+        [[ -d "${dst_dir}" ]] || exit 2
     fi
 done
 
-echo
+#### Move and link 
 
 for (( index=0; index<${DIR_COUNT}; index++ ))
 do
-    src_dir=""
-
-    if [[ -n "${source_xdg[$index]}" ]]
-    then
-        src_dir=$(eval echo $(grep "XDG_${source_xdg[$index]}_DIR" ~/.config/user-dirs.dirs | cut -d '"' -f 2))
-        if [[ -n "${src_dir}" ]]
-        then    
-            source_dir[$index]="${src_dir}"
-        fi
-    fi
-
-    echo "${index}: ${source_dir[$index]} -> ${target_disk}/${target_dir[$index]}"
-done
-
-echo
-
-for (( index=0; index<${DIR_COUNT}; index++ ))
-do
+	dst_dir="${target_disk}/${target_dir[$index]}"
     src_dir="${source_dir[$index]}"
-    dst_dir="${target_disk}/${target_dir[$index]}"
-    name_dir="${target_dir[$index]}"
 
-    if test -L "${src_dir}"
+    if [[ -z "$src_dir" ]]
     then
-        silent "unlinking ${name_dir}" unlink "${src_dir}"
+        src_dir=$(eval echo $(grep "XDG_${source_xdg[$index]}_DIR" "$HOME/.config/user-dirs.dirs" | cut -d '"' -f 2))
     fi
 
-    if test -d "${src_dir}"
-    then
-        silent "moving ${name_dir} to destination" find "${src_dir}/" -mindepth 1 -maxdepth 1 -exec mv -b -f -t "${dst_dir}/" {} +
-    fi
+	test -n "${src_dir}" || continue
 
-    if test -e "${src_dir}"
-    then
-        silent 'removing source folder' rm -rf "${src_dir}"
-    fi
+	test -L "${src_dir}" && [[ "$(readlink -f "${src_dir}")" == "$(readlink -f "${dst_dir}")" ]] && continue
 
-    silent "linking ${name_dir}" ln -s "${dst_dir}" "${src_dir}"
+	test -d "${src_dir}" && find "${src_dir}/" -mindepth 1 -maxdepth 1 -exec mv -b -f -t "${dst_dir}/" {} +
+	test -L "${src_dir}" && unlink "${src_dir}"
+	test -e "${src_dir}" && rm -rf "${src_dir}"
+
+	ln -s "${dst_dir}" "${src_dir}"
+
 done
