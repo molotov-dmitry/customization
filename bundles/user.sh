@@ -63,7 +63,7 @@ case "${bundle}" in
 
     ## Nautilus keybindings ----------------------------------------------------
 
-    addscenario 'terminal' 'F4' 'x-terminal-emulator'
+    addscenario 'terminal' 'F4' 'cd "$(echo "$NAUTILUS_SCRIPT_CURRENT_URI" | sed "s/^file:\/\///")"; x-terminal-emulator'
     addscenario 'compress' 'F7' '[[ $# -gt 0 ]] && file-roller -d $@'
 
     ## File chooser ------------------------------------------------------------
