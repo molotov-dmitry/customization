@@ -251,20 +251,21 @@ silentsudo 'Creating Tools dir'             mkdir -p "${rootfs_dir}/tools" || ex
 silentsudo 'Creating Files dir'             mkdir -p "${rootfs_dir}/tools/files" || exit 1
 silentsudo 'Creating Bundle dir'            mkdir -p "${rootfs_dir}/tools/custom/tools" || exit 1
 
-silentsudo 'Copying functions script'       cp -f "${ROOT_PATH}/functions.sh" "${rootfs_dir}/tools/" || exit 1
-silentsudo 'Copying folders script'         cp -f "${ROOT_PATH}/tools/folders.sh"   "${rootfs_dir}/tools/" || exit 1
-silentsudo 'Copying bundle script'          cp -f "${ROOT_PATH}/tools/bundle.sh" "${rootfs_dir}/tools/" || exit 1
-silentsudo 'Copying remove script'          cp -f "${ROOT_PATH}/tools/remove.sh" "${rootfs_dir}/tools/" || exit 1
+silentsudo 'Copying functions script'       cp -f "${ROOT_PATH}/functions.sh"     "${rootfs_dir}/tools/" || exit 1
+silentsudo 'Copying folders script'         cp -f "${ROOT_PATH}/tools/folders.sh" "${rootfs_dir}/tools/" || exit 1
+silentsudo 'Copying bundle script'          cp -f "${ROOT_PATH}/tools/bundle.sh"  "${rootfs_dir}/tools/" || exit 1
+silentsudo 'Copying remove script'          cp -f "${ROOT_PATH}/tools/remove.sh"  "${rootfs_dir}/tools/" || exit 1
 silentsudo 'Copying prepare script'         cp -f "${ROOT_PATH}/tools/prepare.sh" "${rootfs_dir}/tools/" || exit 1
-silentsudo 'Copying mirror script'          cp -f "${ROOT_PATH}/tools/mirror.sh" "${rootfs_dir}/tools/" || exit 1
+silentsudo 'Copying mirror script'          cp -f "${ROOT_PATH}/tools/mirror.sh"  "${rootfs_dir}/tools/" || exit 1
 
-silentsudo 'Copying repo script'            cp -f "${ROOT_PATH}/custom/tools/${config}/repo.sh" "${rootfs_dir}/tools/" || exit 1
+silentsudo 'Copying repo script'            cp -f "${ROOT_PATH}/custom/tools/${config}/repo.sh"   "${rootfs_dir}/tools/" || exit 1
 silentsudo 'Copying create script'          cp -f "${ROOT_PATH}/custom/tools/${config}/create.sh" "${rootfs_dir}/tools/" || exit 1
 silentsudo 'Copying config script'          cp -f "${ROOT_PATH}/custom/tools/${config}/config.sh" "${rootfs_dir}/tools/" || exit 1
 
 silentsudo 'Copying usersboot script'       cp -f "${ROOT_PATH}/tools/startup.sh" "${rootfs_dir}/tools/" || exit 1
 
 silentsudo 'Copying bundle scripts'         cp -rf "${ROOT_PATH}/bundles" "${rootfs_dir}/tools/" || exit 1
+
 silentsudo 'Copying bundles list'           cp -f "${ROOT_PATH}/custom/tools/${config}.bundle" "${rootfs_dir}/tools/custom/tools/" || exit 1
 silentsudo 'Copying bundles list'           cp -f "${ROOT_PATH}/custom/tools/${config}.bundle" "${rootfs_dir}/tools/custom/tools/firstboot.bundle" || exit 1
 silentsudo 'Copying bundles list'           cp -f "${ROOT_PATH}/custom/tools/${config}.bundle" "${rootfs_dir}/tools/custom/tools/user.bundle" || exit 1
