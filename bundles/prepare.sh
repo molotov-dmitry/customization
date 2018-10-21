@@ -534,7 +534,31 @@ case "${bundle}" in
 ### Virtual machine tools ======================================================
 ### ============================================================================
 
-"vm")
+"vm-guest")
+
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'vm-guest/vmware'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'vm-guest/vbox'
+;;
+
+"vm-guest/vmware")
+
+;;
+
+"vm-guest/vbox")
+
+;;
+
+### ============================================================================
+### Virtual machine host tools =================================================
+### ============================================================================
+
+"vm-host")
+
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'vm-host/vbox'
+
+;;
+
+"vm-host/vbox")
 
 ;;
 
