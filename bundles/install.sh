@@ -456,7 +456,7 @@ case "${bundle}" in
 
 "office")
 
-    appinstall 'LibreOffice'            'libreoffice-calc libreoffice-writer libreoffice-pdfimport libreoffice-gtk2 libreoffice-gnome libreoffice-style-breeze libreoffice-l10n-ru libreoffice-help-ru'
+    appinstall 'LibreOffice'            'libreoffice-calc libreoffice-writer libreoffice-pdfimport libreoffice-gtk3 libreoffice-gnome libreoffice-style-breeze libreoffice-l10n-ru libreoffice-help-ru'
     #appinstall 'OnlyOffice'             'onlyoffice-desktopeditors'
     appinstall 'Document viewer'        'evince'
 
@@ -703,19 +703,49 @@ case "${bundle}" in
 ### Virtual machine tools ======================================================
 ### ============================================================================
 
-"vm")
+"vm-guest")
+
+    bash "${scriptpath}" 'vm-guest/vmware'
+    bash "${scriptpath}" 'vm-guest/vbox'
+;;
+
+"vm-guest/vmware")
 
     appinstall 'VMWare tools'   'open-vm-tools'
 
     if ispkginstalled 'xorg'
     then
-        appinstall 'VMWare Xorg drivers' 'xserver-xorg-video-vmware xauth xdg-utils'
-
-        if ispkgavailable 'xserver-xorg-input-vmmouse'
-        then
-            appinstall 'VMWare mouse drivers' 'xserver-xorg-input-vmmouse'
-        fi
+        appinstall 'VMWare Xorg drivers' 'xserver-xorg-video-vmware [xserver-xorg-input-vmmouse] xauth xdg-utils'
     fi
+
+;;
+
+"vm-guest/vbox")
+
+    appinstall 'VirtualBox tools' 'virtualbox-guest-utils'
+
+    if ispkginstalled 'xorg'
+    then
+        appinstall 'VirtualBox X11 tools' 'virtualbox-guest-x11'
+    fi
+
+;;
+
+### ============================================================================
+### Virtual machine host tools =================================================
+### ============================================================================
+
+"vm-host")
+
+    bash "${scriptpath}" 'vm-host/vbox'
+
+;;
+
+"vm-host/vbox")
+
+    silentsudo 'Accept Oracle EULA' sh -c 'echo virtualbox-ext-pack virtualbox-ext-pack/license boolean true | sudo debconf-set-selections'
+
+    appinstall 'VirtualBox' 'virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso'
 
 ;;
 

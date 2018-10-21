@@ -548,7 +548,38 @@ case "${bundle}" in
 ### Virtual machine tools ======================================================
 ### ============================================================================
 
-"vm")
+"vm-guest")
+
+    bash "${scriptpath}" 'vm-guest/vmware'
+    bash "${scriptpath}" 'vm-guest/vbox'
+;;
+
+"vm-guest/vmware")
+
+;;
+
+"vm-guest/vbox")
+
+;;
+
+### ============================================================================
+### Virtual machine host tools =================================================
+### ============================================================================
+
+"vm-host")
+
+    bash "${scriptpath}" 'vm-host/vbox'
+
+;;
+
+"vm-host/vbox")
+
+    for userinfo in $(cat /etc/passwd | grep -v '^root:' | grep -v nologin | grep -v /bin/false | grep -v /bin/sync | grep -v '^postgres:' | grep -v '^ftp' | cut -d ':' -f 1,6)
+    do
+        user_name=$(echo "${userinfo}" | cut -d ':' -f 1)
+
+        usermod -a -G vboxusers ${user_name}
+    done
 
 ;;
 
