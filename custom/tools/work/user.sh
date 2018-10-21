@@ -19,6 +19,10 @@ addbookmark 'smb://data.rczifort.local' 'DATA'
 
 ### Customization ==============================================================
 
+## Make GIT accept self-signed certificate -------------------------------------
+
+git config --global http.sslVerify false
+
 ## Clear launcher --------------------------------------------------------------
 
 launcherclear
