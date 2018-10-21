@@ -743,9 +743,9 @@ case "${bundle}" in
 
 "vm-host/vbox")
 
-    silentsudo 'Accept Oracle EULA' sh -c 'echo virtualbox-ext-pack virtualbox-ext-pack/license boolean true | sudo debconf-set-selections'
+    silentsudo 'Accepting Oracle EULA' sh -c 'echo virtualbox-ext-pack virtualbox-ext-pack/license boolean true | sudo debconf-set-selections'
 
-    appinstall 'VirtualBox' 'virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso'
+    appinstall 'VirtualBox' 'virtualbox virtualbox-qt virtualbox-ext-pack virtualbox-guest-additions-iso'
 
 ;;
 
