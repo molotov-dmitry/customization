@@ -1213,6 +1213,7 @@ function fixpermissions()
 {
     mountpoint="$1"
     userid="$2"
+    username="$3"
 
     title "Fixing permissions for ${mountpoint}"
 
@@ -1221,13 +1222,14 @@ function fixpermissions()
     fstype=$(grep "${mountpointsafe}" /etc/fstab | grep -v '^#' | sed "s/.*${mountpointsafe}[ \t]*//" | sed 's/[ \t].*//')
 
     [[ -z "${userid}" ]] && userid=$(id -u)
-    plugdevgroup=$(grep plugdev /etc/group | cut -d ':' -f 3)
+    [[ -z "${username}" ]] && username=$(id -nu)
 
+    plugdevgroup=$(grep plugdev /etc/group | cut -d ':' -f 3)
     [[ -z "${plugdevgroup}" ]] && plugdevgroup=$(id -g)
 
     case "${fstype}" in
     "ntfs")
-        silentsudo '' sed -i "s/${mountpointsafe}[ \t]*${fstype}[ \t]*defaults[^ \t]*/${mountpointsafe}\t${fstype}\tdefaults,umask=000,uid=${userid},gid=${plugdevgroup}/" /etc/fstab
+        silentsudo '' sed -i "s/${mountpointsafe}[ \t]*${fstype}[ \t]*defaults[^ \t]*/${mountpointsafe}\t${fstype}\tdefaults,umask=000,uid=${plugdevgroup},gid=${plugdevgroup}/" /etc/fstab
 
         if [[ $? -eq 0 ]]
         then
@@ -1239,8 +1241,8 @@ function fixpermissions()
         fi
     ;;
     "ext4")
-        silentsudo '' chown -R ${userid}:${userid} "${mountpoint}"
-        silentsudo '' chmod -R a=rwx "${mountpoint}"
+        silentsudo '' chown -R ${userid}:${userid} "${mountpoint}/${username}"
+        silentsudo '' chmod -R 0744 "${mountpoint}"
 
         if [[ $? -eq 0 ]]
         then

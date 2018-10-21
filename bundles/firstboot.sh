@@ -453,7 +453,16 @@ case "${bundle}" in
 
 "folders")
 
-    fixpermissions '/media/documents'
+    for userinfo in $(cat /etc/passwd | grep -v '^root:' | grep -v nologin | grep -v /bin/false | grep -v /bin/sync | grep -v '^postgres:' | grep -v '^ftp' | cut -d ':' -f 1,3,4,6)
+    do
+        user_name=$(echo "${userinfo}" | cut -d ':' -f 1)
+        user_id=$(echo "${userinfo}" | cut -d ':' -f 2)
+
+        mkdir -p "/media/documents/${user_name}"
+        chown -R "${user_name}:${user_name}" "/media/documents/${user_name}"
+
+        fixpermissions "/media/documents/" "${user_id}"
+    done
 
 ;;
 
