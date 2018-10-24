@@ -1144,7 +1144,7 @@ function addscenario()
 
         if [[ -n "${fixpwd}" ]]
         then
-            echo -e 'cd "$(echo "$NAUTILUS_SCRIPT_CURRENT_URI" | sed "s/^file:\/\///")"\n' >> "${HOME}/.local/share/nautilus/scripts/${name}.sh"
+            echo -e 'cd "$(echo "$NAUTILUS_SCRIPT_CURRENT_URI" | sed "s@+@ @g;s@%@\\\\\\\\x@g" | xargs -0 printf "%b" | sed "s/^file:\/\///")"\n' >> "${HOME}/.local/share/nautilus/scripts/${name}.sh"
         fi
 
         echo -e "${command}\n"  >> "${HOME}/.local/share/nautilus/scripts/${name}.sh"
