@@ -33,6 +33,10 @@ case "${bundle}" in
 
 "driver")
 
+    bash "${scriptpath}" 'driver/intel'
+    bash "${scriptpath}" 'driver/firmware'
+    bash "${scriptpath}" 'driver/fs'
+
 ;;
 
 ### Intel drivers ==============================================================
@@ -44,6 +48,12 @@ case "${bundle}" in
 ### Firmwares ==================================================================
 
 "driver/firmware")
+
+;;
+
+### Filesystems support ========================================================
+
+"driver/fs")
 
 ;;
 

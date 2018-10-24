@@ -48,6 +48,7 @@ case "${bundle}" in
 
     bash "${scriptpath}" 'driver/intel'
     bash "${scriptpath}" 'driver/firmware'
+    bash "${scriptpath}" 'driver/fs'
 
 ;;
 
@@ -74,6 +75,14 @@ case "${bundle}" in
         appinstall 'Firmwares'          'firmware-linux'
 
     fi
+
+;;
+
+### Filesystems support ========================================================
+
+"driver/fs")
+
+    appinstall 'exFAT support'  'exfat-fuse exfat-utils'
 
 ;;
 

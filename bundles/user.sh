@@ -165,6 +165,7 @@ case "${bundle}" in
 
     bash "${scriptpath}" 'driver/intel'
     bash "${scriptpath}" 'driver/firmware'
+    bash "${scriptpath}" 'driver/fs'
 
 ;;
 
@@ -177,6 +178,12 @@ case "${bundle}" in
 ### Firmwares ==================================================================
 
 "driver/firmware")
+
+;;
+
+### Filesystems support ========================================================
+
+"driver/fs")
 
 ;;
 
