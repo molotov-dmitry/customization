@@ -80,6 +80,10 @@ do
         nobuild='y'
     ;;
 
+    '--quiet')
+        nobeep='y'
+    ;;
+
     *.iso)
         iso_src="$1"
     ;;
@@ -175,6 +179,12 @@ fi
 if [[ "$nobuild" == 'y' ]]
 then
     echo -n "skip mkfs:    "
+    msgwarn 'yes'
+fi
+
+if [[ "$nobeep" == 'y' ]]
+then
+    echo -n "no beep:      "
     msgwarn 'yes'
 fi
 
@@ -402,5 +412,8 @@ fi
 
 ### Finish signal ==============================================================
 
-silent '' beep -f 2050 -r 2 -d 100 -l 30
+if [[ "$nobeep" != 'y' ]]
+then
+    silent '' beep -f 2050 -r 2 -d 100 -l 30
+fi
 
