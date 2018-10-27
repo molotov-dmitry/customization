@@ -182,7 +182,7 @@ function debinstall()
             msgdone
             return 0
         else
-            sudo apt-get install -f --yes --force-yes >/dev/null 2>&1
+            sudo apt-get DEBIAN_FRONTEND=noninteractive install -f --yes --force-yes >/dev/null 2>&1
 
             if [[ $? -eq 0 ]] && ispkginstalled "${debname}"
             then
@@ -256,7 +256,7 @@ function appinstall()
         export DEBIAN_FRONTEND=noninteractive
         export DEBIAN_PRIORITY=critical
 
-        sudo -E apt-get install $installlist -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" --yes --force-yes --no-install-recommends >/dev/null 2>&1
+        sudo -E DEBIAN_FRONTEND=noninteractive apt-get install $installlist -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" --yes --force-yes --no-install-recommends >/dev/null 2>&1
 
         if [[ $? -eq 0 ]]
         then
@@ -272,7 +272,7 @@ function appinstall()
             msgfail
             title "Retrying installing $appname"
 
-            sudo -E apt-get install $installlist -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" --yes --force-yes --no-install-recommends >/dev/null 2>&1
+            sudo -E DEBIAN_FRONTEND=noninteractive apt-get install $installlist -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" --yes --force-yes --no-install-recommends >/dev/null 2>&1
 
             if [[ $? -eq 0 ]]
             then
@@ -346,7 +346,7 @@ function appupgrade()
 {
     title 'Upgrading packages'
 
-    sudo apt-get upgrade --yes --force-yes >/dev/null 2>&1
+    sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade --yes --force-yes >/dev/null 2>&1
 
     if [[ $? -eq 0 ]]
     then
@@ -357,7 +357,7 @@ function appupgrade()
 
         title 'Retrying upgrading packages'
 
-        sudo apt-get upgrade --yes --force-yes >/dev/null 2>&1
+        sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade --yes --force-yes >/dev/null 2>&1
 
         if [[ $? -eq 0 ]]
         then
@@ -374,7 +374,7 @@ function appdistupgrade()
 {
     title 'Upgrading distributive'
 
-    sudo apt-get dist-upgrade --yes --force-yes >/dev/null 2>&1
+    sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade --yes --force-yes >/dev/null 2>&1
 
     if [[ $? -eq 0 ]]
     then
