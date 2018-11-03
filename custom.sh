@@ -84,6 +84,10 @@ do
         nobeep='y'
     ;;
 
+    '--no-progress')
+        noprogress='y'
+    ;;
+
     *.iso)
         iso_src="$1"
     ;;
@@ -185,6 +189,12 @@ fi
 if [[ "$nobeep" == 'y' ]]
 then
     echo -n "no beep:      "
+    msgwarn 'yes'
+fi
+
+if [[ "$noprogress" == 'y' ]]
+then
+    echo -n "no progress:  "
     msgwarn 'yes'
 fi
 
@@ -371,11 +381,15 @@ then
 
     if [[ -e "${iso_dir}/${livedir}/filesystem.squashfs" ]]
     then
-    silentsudo 'Removing old rootfs' rm -f "${iso_dir}/${livedir}/filesystem.squashfs"
+        silentsudo 'Removing old rootfs' rm -f "${iso_dir}/${livedir}/filesystem.squashfs"
     fi
 
-
-    mksquashfs "${rootfs_dir}" "${iso_dir}/${livedir}/filesystem.squashfs" -comp ${comp} || exit 1
+    if [[ "$noprogress" != 'y' ]]
+    then
+        silent 'build rootfs' mksquashfs "${rootfs_dir}" "${iso_dir}/${livedir}/filesystem.squashfs" -comp ${comp} || exit 1
+    else
+        mksquashfs "${rootfs_dir}" "${iso_dir}/${livedir}/filesystem.squashfs" -comp ${comp} || exit 1
+    fi
 
     ## Modify package manifest -------------------------------------------------
 
