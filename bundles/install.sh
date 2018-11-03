@@ -188,8 +188,8 @@ case "${bundle}" in
 "server/download")
 
     appinstall 'Youtube downloader'     'youtube-dl'
-    silentsudo 'Download youtube-dl'    wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
-    silentsudo 'Setup youtube-dl'       chmod a+rx /usr/local/bin/youtube-dl
+    silent 'Download youtube-dl'    wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
+    silent 'Setup youtube-dl'       chmod a+rx /usr/local/bin/youtube-dl
     appinstall 'Transmission'           'transmission-daemon'
     appinstall 'EiskaltDC++'            'eiskaltdcpp-daemon'
 
@@ -213,25 +213,25 @@ case "${bundle}" in
 
     pushd "${rootfs_dir}/tools/packages" > /dev/null
 
-    silentsudo 'Download Gitlab package' apt-get download gitlab
+    silent 'Download Gitlab package' apt-get download gitlab
 
     pkgname=$(ls gitlab_*.deb | sed 's/^gitlab/gitlab-stub/' | sed 's/_.*_/_current_/')
 
-    silentsudo '' mkdir -p gitlab-stub/DEBIAN
-    silentsudo 'Extracting package info' dpkg -e gitlab*.deb gitlab-stub/DEBIAN
+    silent '' mkdir -p gitlab-stub/DEBIAN
+    silent 'Extracting package info' dpkg -e gitlab*.deb gitlab-stub/DEBIAN
 
     pushd gitlab-stub/DEBIAN > /dev/null
 
-    silentsudo 'Remove all info but control' find . -mindepth 1 ! -name 'control' -exec rm -rf {} +
-    silentsudo 'Replacing package name' sed -i 's/^Package: gitlab/Package: gitlab-stub/' control
+    silent 'Remove all info but control' find . -mindepth 1 ! -name 'control' -exec rm -rf {} +
+    silent 'Replacing package name' sed -i 's/^Package: gitlab/Package: gitlab-stub/' control
 
     popd > /dev/null
 
-    silentsudo '' chmod -R 0755 gitlab-stub
-    silentsudo 'Creating Gitlab stub package' fakeroot dpkg-deb --build gitlab-stub
-    silentsudo 'Changing stub package name' mv gitlab-stub.deb "${pkgname}"
+    silent '' chmod -R 0755 gitlab-stub
+    silent 'Creating Gitlab stub package' fakeroot dpkg-deb --build gitlab-stub
+    silent 'Changing stub package name' mv gitlab-stub.deb "${pkgname}"
 
-    silentsudo 'Removing temp files' rm -rf gitlab-stub
+    silent 'Removing temp files' rm -rf gitlab-stub
 
     popd > /dev/null
 
@@ -393,7 +393,7 @@ case "${bundle}" in
 
 "dev/net")
 
-    silentsudo 'Wireshark fix'          sh -c 'echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections'
+    silent 'Wireshark fix'          sh -c 'echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections'
     appinstall 'Wireshark'              'wireshark-gtk'
 
 ;;
@@ -452,7 +452,7 @@ case "${bundle}" in
 
 "appearance/fonts")
 
-    silentsudo 'Accepting EULA license' sh -c 'echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections'
+    silent 'Accepting EULA license' sh -c 'echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections'
     appinstall 'MS TTF core fonts'      'ttf-mscorefonts-installer'
     appinstall 'Noto fonts'             'fonts-noto'
     appinstall 'Linux Libertine fonst'  'fonts-linuxlibertine'
@@ -503,8 +503,8 @@ case "${bundle}" in
 "media-online")
 
     appinstall 'Youtube downloader'     'youtube-dl'
-    silentsudo 'Download youtube-dl'    wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
-    silentsudo 'Setup youtube-dl'       chmod a+rx /usr/local/bin/youtube-dl
+    silent 'Download youtube-dl'    wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
+    silent 'Setup youtube-dl'       chmod a+rx /usr/local/bin/youtube-dl
 
     appinstall 'Gnome Twitch app'       'gnome-twitch gnome-twitch-player-backend-mpv-opengl'
 
@@ -647,7 +647,7 @@ case "${bundle}" in
 
 "cli/net")
 
-    silentsudo 'Wireshark fix'          sh -c 'echo wireshark-common wireshark-common/install-setuid boolean true | sudo debconf-set-selections'
+    silent 'Wireshark fix'          sh -c 'echo wireshark-common wireshark-common/install-setuid boolean true | debconf-set-selections'
     appinstall 'tshark'                 'tshark'
     appinstall 'curl'                   'curl'
     appinstall 'CLI web browsers'       'elinks w3m'
@@ -752,7 +752,7 @@ case "${bundle}" in
 
 "vm-host/vbox")
 
-    silentsudo 'Accepting Oracle EULA' sh -c 'echo virtualbox-ext-pack virtualbox-ext-pack/license boolean true | sudo debconf-set-selections'
+    silent 'Accepting Oracle EULA' sh -c 'echo virtualbox-ext-pack virtualbox-ext-pack/license boolean true | debconf-set-selections'
 
     appinstall 'VirtualBox' 'virtualbox virtualbox-qt virtualbox-ext-pack virtualbox-guest-additions-iso'
 

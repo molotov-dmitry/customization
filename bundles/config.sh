@@ -102,9 +102,9 @@ case "${bundle}" in
 
 "server/ssh")
 
-    silentsudo 'Configuring Open SSH' touch /etc/ssh/sshd_config
-    silentsudo 'Configuring Open SSH' sed -i '/^ClientAliveInterval/d;/^ClientAliveCountMax/d' /etc/ssh/sshd_config
-    silentsudo 'Configuring Open SSH' bash -c 'echo -e "\nClientAliveInterval 300\nClientAliveCountMax 2" >> /etc/ssh/sshd_config'
+    silent 'Configuring Open SSH' touch /etc/ssh/sshd_config
+    silent 'Configuring Open SSH' sed -i '/^ClientAliveInterval/d;/^ClientAliveCountMax/d' /etc/ssh/sshd_config
+    silent 'Configuring Open SSH' bash -c 'echo -e "\nClientAliveInterval 300\nClientAliveCountMax 2" >> /etc/ssh/sshd_config'
 
 ;;
 
@@ -112,7 +112,7 @@ case "${bundle}" in
 
 "server/ftp")
 
-    silentsudo 'Configuring vsftpd'     cp -f "${ROOT_PATH}/files/vsftpd/vsftpd.conf" '/etc/'
+    silent 'Configuring vsftpd'     cp -f "${ROOT_PATH}/files/vsftpd/vsftpd.conf" '/etc/'
 
 ;;
 
@@ -120,8 +120,8 @@ case "${bundle}" in
 
 "server/smb")
 
-    silentsudo 'Creating Samba config dir'      mkdir -p '/etc/samba'
-    silentsudo 'Configuring Samba'              cp -f "${ROOT_PATH}/files/samba/smb.conf" '/etc/samba/'
+    silent 'Creating Samba config dir'      mkdir -p '/etc/samba'
+    silent 'Configuring Samba'              cp -f "${ROOT_PATH}/files/samba/smb.conf" '/etc/samba/'
 
 ;;
 
@@ -159,18 +159,18 @@ case "${bundle}" in
 
     ## MiniDLNA ----------------------------------------------------------------
 
-    silentsudo 'Inotyfy max watchs fix' bash -c 'echo -e "fs.inotify.max_user_watches = 100000" > /etc/sysctl.d/90-inotify.conf'
-    silentsudo 'Inotify max watchs fix' sysctl fs.inotify.max_user_watches=100000
+    silent 'Inotyfy max watchs fix' bash -c 'echo -e "fs.inotify.max_user_watches = 100000" > /etc/sysctl.d/90-inotify.conf'
+    silent 'Inotify max watchs fix' sysctl fs.inotify.max_user_watches=100000
 
-    silentsudo 'Configuring MiniDLNA'   sudo cp -f "${ROOT_PATH}/files/minidlna/minidlna.conf" '/etc/'
+    silent 'Configuring MiniDLNA'   cp -f "${ROOT_PATH}/files/minidlna/minidlna.conf" '/etc/'
 
     ## Plex Media Server -------------------------------------------------------
 
-    silentsudo 'Creating Plex config dir'   mkdir -p '/var/lib/plexmediaserver/Library/Application Support/Plex Media Server'
-    silentsudo 'Configuring Plex'           sudo cp -f "${ROOT_PATH}/files/plexmediaserver/Preferences.xml" '/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/'
-    silentsudo 'Changing Plex config owner' chown -R plex:plex '/var/lib/plexmediaserver'
+    silent 'Creating Plex config dir'   mkdir -p '/var/lib/plexmediaserver/Library/Application Support/Plex Media Server'
+    silent 'Configuring Plex'           cp -f "${ROOT_PATH}/files/plexmediaserver/Preferences.xml" '/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/'
+    silent 'Changing Plex config owner' chown -R plex:plex '/var/lib/plexmediaserver'
 
-    silentsudo 'Modify firstboot script'    sed -i 's/^After=/After=plexmediaserver.service /' '/tools/files/custom-startup.service'
+    silent 'Modify firstboot script'    sed -i 's/^After=/After=plexmediaserver.service /' '/tools/files/custom-startup.service'
 
 ;;
 
@@ -180,14 +180,14 @@ case "${bundle}" in
 
     ## Transmission ------------------------------------------------------------
 
-    silentsudo 'Creating Transmission config dir' mkdir -p '/etc/transmission-daemon'
-    silentsudo 'Configuring Transmission'   cp -f "${ROOT_PATH}/files/transmission/settings.json" '/etc/transmission-daemon/'
+    silent 'Creating Transmission config dir' mkdir -p '/etc/transmission-daemon'
+    silent 'Configuring Transmission'   cp -f "${ROOT_PATH}/files/transmission/settings.json" '/etc/transmission-daemon/'
 
     ## EiskaltDC++ -------------------------------------------------------------
 
-    silentsudo 'Creating EiskaltDC++ config dir' mkdir -p '/etc/eiskaltdcpp'
-    silentsudo 'Configuring EiskaltDC++'        cp -f "${ROOT_PATH}/files/eiskaltdcpp/DCPlusPlus.xml" '/etc/eiskaltdcpp/'
-    silentsudo 'Configuring EiskaltDC++ Hubs'   cp -f "${ROOT_PATH}/files/eiskaltdcpp/Favorites.xml" '/etc/eiskaltdcpp/'
+    silent 'Creating EiskaltDC++ config dir' mkdir -p '/etc/eiskaltdcpp'
+    silent 'Configuring EiskaltDC++'        cp -f "${ROOT_PATH}/files/eiskaltdcpp/DCPlusPlus.xml" '/etc/eiskaltdcpp/'
+    silent 'Configuring EiskaltDC++ Hubs'   cp -f "${ROOT_PATH}/files/eiskaltdcpp/Favorites.xml" '/etc/eiskaltdcpp/'
 
     addservice 'EiskaltDC++' 'eiskaltdcpp' 'eiskaltdcpp'
 
@@ -199,9 +199,9 @@ case "${bundle}" in
 
     ## Squid3 ------------------------------------------------------------------
 
-    silentsudo 'Creating Squid3 config dir' mkdir -p '/etc/squid3'
-    silentsudo 'Configuring Squid3'         cp -f "${ROOT_PATH}/files/squid3/squid.conf" '/etc/squid3/'
-    silentsudo 'Creating Squid3 users list' touch '/etc/squid3/internet_users'
+    silent 'Creating Squid3 config dir' mkdir -p '/etc/squid3'
+    silent 'Configuring Squid3'         cp -f "${ROOT_PATH}/files/squid3/squid.conf" '/etc/squid3/'
+    silent 'Creating Squid3 users list' touch '/etc/squid3/internet_users'
 
 ;;
 
@@ -211,10 +211,10 @@ case "${bundle}" in
 
     if [[ -d /etc/nginx/sites-enabled/default ]]
     then
-        silentsudo 'Removing default nginx site' rm /etc/nginx/sites-enabled/default
+        silent 'Removing default nginx site' rm /etc/nginx/sites-enabled/default
     fi
 
-    silentsudo 'Modify firstboot script'    sed -i 's/^After=/After=postgresql.service /' '/tools/files/custom-startup.service'
+    silent 'Modify firstboot script'    sed -i 's/^After=/After=postgresql.service /' '/tools/files/custom-startup.service'
 
 ;;
 
@@ -248,7 +248,7 @@ case "${bundle}" in
 
     if [[ -f /etc/sysctl.d/10-ptrace.conf ]]
     then
-        silentsudo 'Ptrace fix'             sed -i 's/[ \t]*kernel.yama.ptrace_scope[ \t]*=[ \t]*1/kernel.yama.ptrace_scope = 0/' /etc/sysctl.d/10-ptrace.conf
+        silent 'Ptrace fix'             sed -i 's/[ \t]*kernel.yama.ptrace_scope[ \t]*=[ \t]*1/kernel.yama.ptrace_scope = 0/' /etc/sysctl.d/10-ptrace.conf
     fi
 
 ;;
@@ -541,8 +541,8 @@ case "${bundle}" in
 
 "cli/ttycolors")
 
-    silentsudo '' mkdir -p /etc/profile.d
-    silentsudo 'Copy TTY colors config' cp -f "${ROOT_PATH}/files/tty/colors.sh" '/etc/profile.d/'
+    silent '' mkdir -p /etc/profile.d
+    silent 'Copy TTY colors config' cp -f "${ROOT_PATH}/files/tty/colors.sh" '/etc/profile.d/'
 
 ;;
 

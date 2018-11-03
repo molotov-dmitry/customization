@@ -112,7 +112,7 @@ function debconfselect()
     selection="$2"
     value="$3"
 
-    sh -c "echo ${package} ${selection} select ${value} | sudo debconf-set-selections"
+    sh -c "echo ${package} ${selection} select ${value} | debconf-set-selections"
 }
 
 function ispkginstalled()
@@ -150,7 +150,7 @@ function debprepare()
 
     mkdir -p "${rootfs_dir}/tools/packages"
 
-    silentsudo "Copy ${appname} package" cp -f "${debpath}" "${rootfs_dir}/tools/packages/"
+    silent "Copy ${appname} package" cp -f "${debpath}" "${rootfs_dir}/tools/packages/"
 }
 
 function debinstall()
@@ -175,14 +175,14 @@ function debinstall()
 
     if ! ispkginstalled "${debname}"
     then
-        sudo dpkg -i "${debpath}" >/dev/null 2>&1
+        dpkg -i "${debpath}" >/dev/null 2>&1
 
         if [[ $? -eq 0 ]]
         then
             msgdone
             return 0
         else
-            sudo apt-get DEBIAN_FRONTEND=noninteractive install -f --yes --force-yes >/dev/null 2>&1
+            DEBIAN_FRONTEND=noninteractive apt-get install -f --yes --force-yes >/dev/null 2>&1
 
             if [[ $? -eq 0 ]] && ispkginstalled "${debname}"
             then
@@ -256,7 +256,7 @@ function appinstall()
         export DEBIAN_FRONTEND=noninteractive
         export DEBIAN_PRIORITY=critical
 
-        sudo -E DEBIAN_FRONTEND=noninteractive apt-get install $installlist -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" --yes --force-yes --no-install-recommends >/dev/null 2>&1
+        DEBIAN_FRONTEND=noninteractive apt-get install $installlist -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" --yes --force-yes --no-install-recommends >/dev/null 2>&1
 
         if [[ $? -eq 0 ]]
         then
@@ -272,7 +272,7 @@ function appinstall()
             msgfail
             title "Retrying installing $appname"
 
-            sudo -E DEBIAN_FRONTEND=noninteractive apt-get install $installlist -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" --yes --force-yes --no-install-recommends >/dev/null 2>&1
+            DEBIAN_FRONTEND=noninteractive apt-get install $installlist -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" --yes --force-yes --no-install-recommends >/dev/null 2>&1
 
             if [[ $? -eq 0 ]]
             then
@@ -313,7 +313,7 @@ function appremove()
         msgwarn '[removed]'
         return 0
     else
-        sudo apt-get purge ${remlist} --yes --force-yes --purge >/dev/null 2>&1
+        apt-get purge ${remlist} --yes --force-yes --purge >/dev/null 2>&1
 
         if [[ $? -eq 0 ]]
         then
@@ -330,7 +330,7 @@ function appupdate()
 {
     title 'Updating package list'
 
-    sudo apt-get update >/dev/null 2>&1
+    apt-get update >/dev/null 2>&1
 
     if [[ $? -eq 0 ]]
     then
@@ -346,7 +346,7 @@ function appupgrade()
 {
     title 'Upgrading packages'
 
-    sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade --yes --force-yes >/dev/null 2>&1
+    DEBIAN_FRONTEND=noninteractive apt-get upgrade --yes --force-yes >/dev/null 2>&1
 
     if [[ $? -eq 0 ]]
     then
@@ -357,7 +357,7 @@ function appupgrade()
 
         title 'Retrying upgrading packages'
 
-        sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade --yes --force-yes >/dev/null 2>&1
+        DEBIAN_FRONTEND=noninteractive apt-get upgrade --yes --force-yes >/dev/null 2>&1
 
         if [[ $? -eq 0 ]]
         then
@@ -374,7 +374,7 @@ function appdistupgrade()
 {
     title 'Upgrading distributive'
 
-    sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade --yes --force-yes >/dev/null 2>&1
+    DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade --yes --force-yes >/dev/null 2>&1
 
     if [[ $? -eq 0 ]]
     then
@@ -414,7 +414,7 @@ function repoadd()
 
     title "Adding $reponame repository"
 
-    sudo apt-key add "${ROOT_PATH}/files/${keyfile}" >/dev/null 2>&1
+    apt-key add "${ROOT_PATH}/files/${keyfile}" >/dev/null 2>&1
     status=$?
 
     if [[ $status -ne 0 ]]
@@ -425,7 +425,7 @@ function repoadd()
 
     sourceslist="deb http://${repo} ${version} main"
 
-    echo "${sourceslist}" | sudo tee "/etc/apt/sources.list.d/${reponame}-${version}.list" >/dev/null 2>&1
+    echo "${sourceslist}" > "/etc/apt/sources.list.d/${reponame}-${version}.list"
     status=$?
 
     if [[ $status -eq 0 ]]
@@ -568,7 +568,7 @@ function ppaadd()
 
     keyserver=$(echo "${ppapage}" | grep -A2 'Signing key' | grep 'http' | cut -d '"' -f 2 | cut -d ':' -f 2 | cut -d '/' -f 3)
 
-    sudo apt-key adv --keyserver $keyserver --recv $recvkey >/dev/null 2>&1
+    apt-key adv --keyserver $keyserver --recv $recvkey >/dev/null 2>&1
 
     if [[ $? -ne 0 ]]
     then
@@ -580,7 +580,7 @@ function ppaadd()
 
     sourceslist="$(echo "${links}" | sed "s/$/ ${version} main/")"
 
-    echo "${sourceslist}" | sudo tee "/etc/apt/sources.list.d/${author}-${repo}-${version}.list" >/dev/null 2>&1
+    echo "${sourceslist}" > "/etc/apt/sources.list.d/${author}-${repo}-${version}.list"
 
     if [[ $? -ne 0 ]]
     then
@@ -614,7 +614,7 @@ function changemirror()
         return 2
     fi
 
-    silentsudo "Changing mirror '${current_mirror}' to '${mirror}'" sed -i "s/${current_mirror}/${mirror}/g" /etc/apt/sources.list
+    silent "Changing mirror '${current_mirror}' to '${mirror}'" sed -i "s/${current_mirror}/${mirror}/g" /etc/apt/sources.list
 
     return $?
 }
@@ -638,7 +638,7 @@ function changerelease()
         return 2
     fi
 
-    silentsudo "Changing release '${current_release}' to '${release}'" sed -i "s/${current_release}/${release}/g" /etc/apt/sources.list
+    silent "Changing release '${current_release}' to '${release}'" sed -i "s/${current_release}/${release}/g" /etc/apt/sources.list
 
     return $?
 }
@@ -647,13 +647,13 @@ function repoaddnonfree()
 {
     if [[ "$(lsb_release -si)" == "Ubuntu" ]]
     then
-        silentsudo 'Enabling universe source'   add-apt-repository universe
-        silentsudo 'Enabling multiverse source' add-apt-repository multiverse
+        silent 'Enabling universe source'   add-apt-repository universe
+        silent 'Enabling multiverse source' add-apt-repository multiverse
 
     elif [[ "$(lsb_release -si)" == "Debian" ]]
     then
-        silentsudo 'Clear sources.list'         sed -i 's/ contrib//g;s/ non-free//g' /etc/apt/sources.list
-        silentsudo 'Enabling contrib/non-free'  sed -i 's/main[  ]*$/main contrib non-free/g' /etc/apt/sources.list
+        silent 'Clear sources.list'         sed -i 's/ contrib//g;s/ non-free//g' /etc/apt/sources.list
+        silent 'Enabling contrib/non-free'  sed -i 's/main[  ]*$/main contrib non-free/g' /etc/apt/sources.list
 
     fi
 }
@@ -693,42 +693,42 @@ function gnomeshellextension()
         return 1
     fi
 
-    sudo wget -O /tmp/extension.zip "https://extensions.gnome.org/${ext_durl}" >/dev/null 2>&1
+    wget -O /tmp/extension.zip "https://extensions.gnome.org/${ext_durl}" >/dev/null 2>&1
     if [[ $? -ne 0 ]]
     then
         msgfail
         return 1
     fi
 
-    sudo rm -rf "/usr/share/gnome-shell/extensions/${ext_uuid}"
+    rm -rf "/usr/share/gnome-shell/extensions/${ext_uuid}"
     if [[ $? -ne 0 ]]
     then
         msgfail '[remove dir]'
         return 1
     fi
 
-    sudo mkdir -p "/usr/share/gnome-shell/extensions/${ext_uuid}"
+    mkdir -p "/usr/share/gnome-shell/extensions/${ext_uuid}"
     if [[ $? -ne 0 ]]
     then
         msgfail '[create dir]'
         return 1
     fi
 
-    sudo unzip /tmp/extension.zip -d "/usr/share/gnome-shell/extensions/${ext_uuid}" >/dev/null 2>&1
+    unzip /tmp/extension.zip -d "/usr/share/gnome-shell/extensions/${ext_uuid}" >/dev/null 2>&1
     if [[ $? -ne 0 ]]
     then
         msgfail '[unzip]'
         return 1
     fi
 
-    sudo chmod -R a+r "/usr/share/gnome-shell/extensions/${ext_uuid}" >/dev/null 2>&1
+    chmod -R a+r "/usr/share/gnome-shell/extensions/${ext_uuid}" >/dev/null 2>&1
     if [[ $? -ne 0 ]]
     then
         msgfail '[chmod]'
         return 1
     fi
 
-    sudo rm -f /tmp/extension.zip
+    rm -f /tmp/extension.zip
 
     msgdone
     return 0
@@ -917,12 +917,12 @@ function addservice
     srvname="$2"
     srvpath="$3"
 
-    silentsudo "Creating ${srvdesc} service"   cp -f "${ROOT_PATH}/files/${srvpath}/${srvname}.service" '/etc/systemd/system/' || return 1
+    silent "Creating ${srvdesc} service"   cp -f "${ROOT_PATH}/files/${srvpath}/${srvname}.service" '/etc/systemd/system/' || return 1
 
     for target in $(grep WantedBy "/etc/systemd/system/${srvname}.service" | cut -d '=' -f 2 | tr ' ' '\n')
     do
-        silentsudo " Creating ${target//.*} target" mkdir -p "/etc/systemd/system/${target}.wants"
-        silentsudo " Enabling ${srvdesc} for ${target//.target}" ln -s "/etc/systemd/system/${srvname}.service" "/etc/systemd/system/${target}.wants/${srvname}.service" || return 1
+        silent " Creating ${target//.*} target" mkdir -p "/etc/systemd/system/${target}.wants"
+        silent " Enabling ${srvdesc} for ${target//.target}" ln -s "/etc/systemd/system/${srvname}.service" "/etc/systemd/system/${target}.wants/${srvname}.service" || return 1
     done
 
     return 0
@@ -1236,7 +1236,7 @@ function fixpermissions()
 
     case "${fstype}" in
     "ntfs")
-        silentsudo '' sed -i "s/${mountpointsafe}[ \t]*${fstype}[ \t]*defaults[^ \t]*/${mountpointsafe}\t${fstype}\tdefaults,umask=000,uid=${plugdevgroup},gid=${plugdevgroup}/" /etc/fstab
+        silent '' sed -i "s/${mountpointsafe}[ \t]*${fstype}[ \t]*defaults[^ \t]*/${mountpointsafe}\t${fstype}\tdefaults,umask=000,uid=${plugdevgroup},gid=${plugdevgroup}/" /etc/fstab
 
         if [[ $? -eq 0 ]]
         then
@@ -1248,8 +1248,8 @@ function fixpermissions()
         fi
     ;;
     "ext4")
-        silentsudo '' chown -R ${userid}:${userid} "${mountpoint}/${username}"
-        silentsudo '' chmod -R 0744 "${mountpoint}"
+        silent '' chown -R ${userid}:${userid} "${mountpoint}/${username}"
+        silent '' chmod -R 0744 "${mountpoint}"
 
         if [[ $? -eq 0 ]]
         then

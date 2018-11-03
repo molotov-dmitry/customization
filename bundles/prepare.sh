@@ -19,8 +19,8 @@ case "${bundle}" in
 
 "gnome")
 
-    silentsudo "Copy templates"         cp -rf "${ROOT_PATH}/files/template" "${rootfs_dir}/tools/files/"
-    silentsudo "Copy redshift config"   cp -rf "${ROOT_PATH}/files/redshift" "${rootfs_dir}/tools/files/"
+    silent "Copy templates"         cp -rf "${ROOT_PATH}/files/template" "${rootfs_dir}/tools/files/"
+    silent "Copy redshift config"   cp -rf "${ROOT_PATH}/files/redshift" "${rootfs_dir}/tools/files/"
 
 ;;
 
@@ -91,7 +91,7 @@ case "${bundle}" in
 
 "server/ftp")
 
-    silentsudo "Copy vsftpd config" cp -rf "${ROOT_PATH}/files/vsftpd" "${rootfs_dir}/tools/files/"
+    silent "Copy vsftpd config" cp -rf "${ROOT_PATH}/files/vsftpd" "${rootfs_dir}/tools/files/"
 
 ;;
 
@@ -99,7 +99,7 @@ case "${bundle}" in
 
 "server/smb")
 
-    silentsudo 'Copy Samba config'  cp -rf "${ROOT_PATH}/files/samba"           "${rootfs_dir}/tools/files/"
+    silent 'Copy Samba config'  cp -rf "${ROOT_PATH}/files/samba"           "${rootfs_dir}/tools/files/"
 
 ;;
 
@@ -107,7 +107,7 @@ case "${bundle}" in
 
 "server/svn")
 
-    silentsudo "Copy svnserve unit" cp -rf "${ROOT_PATH}/files/svnserve" "${rootfs_dir}/tools/files/"
+    silent "Copy svnserve unit" cp -rf "${ROOT_PATH}/files/svnserve" "${rootfs_dir}/tools/files/"
 
 ;;
 
@@ -137,11 +137,11 @@ case "${bundle}" in
 
      ## MiniDLNA ----------------------------------------------------------------
 
-    silentsudo 'Copy MiniDLNA config' cp -rf "${ROOT_PATH}/files/minidlna"          "${rootfs_dir}/tools/files/"
+    silent 'Copy MiniDLNA config' cp -rf "${ROOT_PATH}/files/minidlna"          "${rootfs_dir}/tools/files/"
 
     ## Plex Media Server -------------------------------------------------------
 
-    silentsudo 'Copy Plex config' cp -rf "${ROOT_PATH}/files/plexmediaserver"   "${rootfs_dir}/tools/files/"
+    silent 'Copy Plex config' cp -rf "${ROOT_PATH}/files/plexmediaserver"   "${rootfs_dir}/tools/files/"
 
 ;;
 
@@ -149,8 +149,8 @@ case "${bundle}" in
 
 "server/download")
 
-    silentsudo 'Copy Transmission config'   cp -rf "${ROOT_PATH}/files/transmission" "${rootfs_dir}/tools/files/"
-    silentsudo 'Copy EiskaltDC++ config'    cp -rf "${ROOT_PATH}/files/eiskaltdcpp"  "${rootfs_dir}/tools/files/"
+    silent 'Copy Transmission config'   cp -rf "${ROOT_PATH}/files/transmission" "${rootfs_dir}/tools/files/"
+    silent 'Copy EiskaltDC++ config'    cp -rf "${ROOT_PATH}/files/eiskaltdcpp"  "${rootfs_dir}/tools/files/"
 
 ;;
 
@@ -160,7 +160,7 @@ case "${bundle}" in
 
     ## Squid3 ------------------------------------------------------------------
 
-    silentsudo 'Copy Squid config'          cp -rf "${ROOT_PATH}/files/squid3" "${rootfs_dir}/tools/files/"
+    silent 'Copy Squid config'          cp -rf "${ROOT_PATH}/files/squid3" "${rootfs_dir}/tools/files/"
 
 ;;
 
@@ -241,7 +241,7 @@ case "${bundle}" in
 
     ## Qt Creator --------------------------------------------------------------
 
-    silentsudo 'Copy QtCreator config' cp -rf "${ROOT_PATH}/files/qtcreator" "${rootfs_dir}/tools/files/"
+    silent 'Copy QtCreator config' cp -rf "${ROOT_PATH}/files/qtcreator" "${rootfs_dir}/tools/files/"
 
 ;;
 
@@ -291,8 +291,8 @@ case "${bundle}" in
 
 "dev/ti")
 
-    silentsudo 'Create TI toolchain folder' mkdir -p "${rootfs_dir}/opt/TI"
-    silentsudo 'Extract TI toolchain'       tar xf "${ROOT_PATH}/files/ti/C6000CGT6.0.11.tar.xz" -C "${rootfs_dir}/opt/TI/"
+    silent 'Create TI toolchain folder' mkdir -p "${rootfs_dir}/opt/TI"
+    silent 'Extract TI toolchain'       tar xf "${ROOT_PATH}/files/ti/C6000CGT6.0.11.tar.xz" -C "${rootfs_dir}/opt/TI/"
 
 ;;
 
@@ -335,11 +335,11 @@ case "${bundle}" in
 
     ## LibreOffice -------------------------------------------------------------
 
-    silentsudo 'Copy Libreoffice config' cp -rf "${ROOT_PATH}/files/libreoffice" "${rootfs_dir}/tools/files/"
+    silent 'Copy Libreoffice config' cp -rf "${ROOT_PATH}/files/libreoffice" "${rootfs_dir}/tools/files/"
 
     ## OnlyOffice --------------------------------------------------------------
 
-    #silentsudo 'Copy OnlyOffice config' cp -rf "${ROOT_PATH}/files/onlyoffice" "${rootfs_dir}/tools/files/"
+    #silent 'Copy OnlyOffice config' cp -rf "${ROOT_PATH}/files/onlyoffice" "${rootfs_dir}/tools/files/"
 
 ;;
 
@@ -353,11 +353,11 @@ case "${bundle}" in
 
     ## Rhythmbox ---------------------------------------------------------------
 
-    silentsudo 'Copy Rhythmbox radio database' cp -rf "${ROOT_PATH}/files/rhythmbox" "${rootfs_dir}/tools/files/"
+    silent 'Copy Rhythmbox radio database' cp -rf "${ROOT_PATH}/files/rhythmbox" "${rootfs_dir}/tools/files/"
 
     ## MPV ---------------------------------------------------------------------
 
-    silentsudo 'Copy MPV config' cp -rf "${ROOT_PATH}/files/mpv" "${rootfs_dir}/tools/files/"
+    silent 'Copy MPV config' cp -rf "${ROOT_PATH}/files/mpv" "${rootfs_dir}/tools/files/"
 
 ;;
 
@@ -399,9 +399,9 @@ case "${bundle}" in
 
 "network/chat")
 
-    #silentsudo 'Copy Empathy theme and config' cp -rf "${ROOT_PATH}/files/empathy" "${rootfs_dir}/tools/files/"
+    #silent 'Copy Empathy theme and config' cp -rf "${ROOT_PATH}/files/empathy" "${rootfs_dir}/tools/files/"
 
-    silentsudo 'Copy Pidgin theme and config' cp -rf "${ROOT_PATH}/files/pidgin" "${rootfs_dir}/tools/files/"
+    silent 'Copy Pidgin theme and config' cp -rf "${ROOT_PATH}/files/pidgin" "${rootfs_dir}/tools/files/"
 
 ;;
 
@@ -409,7 +409,7 @@ case "${bundle}" in
 
 "network/chat-extra")
 
-    silentsudo 'Copy Telegram files' cp -rf "${ROOT_PATH}/files/telegram" "${rootfs_dir}/tools/files/"
+    silent 'Copy Telegram files' cp -rf "${ROOT_PATH}/files/telegram" "${rootfs_dir}/tools/files/"
 
 ;;
 
@@ -429,7 +429,7 @@ case "${bundle}" in
 
 "network/remote")
 
-    silentsudo 'Copy Transmission remote config' cp -rf "${ROOT_PATH}/files/transmission-remote-gtk" "${rootfs_dir}/tools/files/"
+    silent 'Copy Transmission remote config' cp -rf "${ROOT_PATH}/files/transmission-remote-gtk" "${rootfs_dir}/tools/files/"
 
     debprepare 'EiskaltDC++ Remote Qt' 'eiskaltdcpp-remote-qt' '27' 'amd64'
 ;;
@@ -492,7 +492,7 @@ case "${bundle}" in
 
 "cli/ttycolors")
 
-    silentsudo 'Copy TTY colors config' cp -rf "${ROOT_PATH}/files/tty" "${rootfs_dir}/tools/files/"
+    silent 'Copy TTY colors config' cp -rf "${ROOT_PATH}/files/tty" "${rootfs_dir}/tools/files/"
 
 ;;
 
@@ -519,7 +519,7 @@ case "${bundle}" in
 
 "optimize/tmpfs")
 
-    silentsudo 'Copy tmpfs config' cp -rf "${ROOT_PATH}/files/tmpfs" "${rootfs_dir}/tools/files/"
+    silent 'Copy tmpfs config' cp -rf "${ROOT_PATH}/files/tmpfs" "${rootfs_dir}/tools/files/"
 
 ;;
 
@@ -527,7 +527,7 @@ case "${bundle}" in
 
 "optimize/chrome-ramdisk")
 
-    silentsudo 'Copy chrome-ramdisk config' cp -rf "${ROOT_PATH}/files/chrome-ramdisk" "${rootfs_dir}/tools/files/"
+    silent 'Copy chrome-ramdisk config' cp -rf "${ROOT_PATH}/files/chrome-ramdisk" "${rootfs_dir}/tools/files/"
 
 ;;
 
