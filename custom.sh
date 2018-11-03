@@ -384,7 +384,7 @@ then
         silent 'Removing old rootfs' rm -f "${iso_dir}/${livedir}/filesystem.squashfs"
     fi
 
-    if [[ "$noprogress" != 'y' ]]
+    if [[ "$noprogress" == 'y' ]]
     then
         silent 'build rootfs' mksquashfs "${rootfs_dir}" "${iso_dir}/${livedir}/filesystem.squashfs" -comp ${comp} || exit 1
     else
