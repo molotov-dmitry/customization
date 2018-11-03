@@ -5,8 +5,6 @@ cd "${ROOT_PATH}" || exit 1
 
 . "${ROOT_PATH}/functions.sh"
 
-sudo echo -n
-
 ### Add samba shares to fstab ==================================================
 
 sed -i '/[ \t]cifs[ \t]/d' /etc/fstab

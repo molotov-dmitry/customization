@@ -46,4 +46,4 @@ appremove 'Gnome TODO'              'gnome-todo'
 
 ## Remove unused ---------------------------------------------------------------
 
-silentsudo 'Removing unused packages' apt-get autoremove --yes --force-yes --purge
+silent 'Removing unused packages' apt-get autoremove --yes --force-yes --purge
