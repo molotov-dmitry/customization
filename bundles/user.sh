@@ -17,12 +17,12 @@ case "${bundle}" in
 
 "gnome")
 
-    ## launcher ----------------------------------------------------------------
+    ## launcher ================================================================
 
     launcheradd 'nautilus'
     launcheradd 'gnome-terminal'
 
-    ## hide apps from application menu -----------------------------------------
+    ## hide apps from application menu =========================================
 
     hideapp 'ipython'
     hideapp 'im-config'
@@ -34,24 +34,38 @@ case "${bundle}" in
     hideapp 'software-properties-gnome'
     hideapp 'software-properties-gtk'
 
-    ## Hide desktop icons ------------------------------------------------------
+    ## Gnome desktop ===========================================================
 
-    gsettings set org.gnome.desktop.background show-desktop-icons false
+    if ispkginstalled gnome-shell
+    then
 
-    ## Enable hot corners ------------------------------------------------------
+        ## Hide desktop icons --------------------------------------------------
 
-    gsettings set org.gnome.shell enable-hot-corners true
+        gsettings set org.gnome.desktop.background show-desktop-icons false
 
-    ## Disable modal dialogs attach --------------------------------------------
+    fi
 
-    gsettings set org.gnome.shell.overrides attach-modal-dialogs false
+    ## Gnome shell =============================================================
 
-    ## File templates ----------------------------------------------------------
+    if ispkginstalled gnome-shell
+    then
+
+        ## Enable hot corners --------------------------------------------------
+
+        gsettings set org.gnome.shell enable-hot-corners true
+
+        ## Disable modal dialogs attach ----------------------------------------
+
+        gsettings set org.gnome.shell.overrides attach-modal-dialogs false
+
+    fi
+
+    ## File templates ==========================================================
 
     xdg-user-dirs-update
     rsync -r "${ROOT_PATH}/files/template/" "$(xdg-user-dir TEMPLATES)/"
 
-    ## Keyboard ----------------------------------------------------------------
+    ## Keyboard ================================================================
 
     gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['<Shift>Alt_L']"
     gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "['<Primary><Shift>Alt_L']"
@@ -61,56 +75,69 @@ case "${bundle}" in
     addkeybinding 'System Monitor' 'gnome-system-monitor' '<Ctrl><Shift>Escape'
     addkeybinding 'File Manager'   'nautilus -w'          '<Super>E'
 
-    ## Nautilus keybindings ----------------------------------------------------
+    ## File manager keybindings ================================================
 
     addscenario 'terminal' 'F4' 'x-terminal-emulator' --fixpwd
     addscenario 'compress' 'F7' '[[ $# -gt 0 ]] && file-roller -d $@'
 
-    ## File chooser ------------------------------------------------------------
+    ## File chooser ============================================================
 
     gsettings set org.gtk.Settings.FileChooser sort-directories-first       true
 
-    ## gedit -------------------------------------------------------------------
+    ## gedit ===================================================================
 
-    gsettings set org.gnome.gedit.preferences.editor use-default-font       true
+    editors=()
 
-    gsettings set org.gnome.gedit.preferences.editor display-line-numbers   true
-    gsettings set org.gnome.gedit.preferences.editor highlight-current-line true
-    gsettings set org.gnome.gedit.preferences.editor bracket-matching       true
+    ispkginstalled gedit && editors+='gnome.gedit'
+    ispkginstalled xed   && editors+='x.editor'
 
-    gsettings set org.gnome.gedit.preferences.editor insert-spaces          false
-    gsettings set org.gnome.gedit.preferences.editor tabs-size              4
+    for editor in "${editors[@]}"
+    do
+        gsettings set org.${editor}.preferences.editor use-default-font       true
 
-    gsettings set org.gnome.gedit.preferences.editor display-right-margin   true
-    gsettings set org.gnome.gedit.preferences.editor right-margin-position  80
+        gsettings set org.${editor}.preferences.editor display-line-numbers   true
+        gsettings set org.${editor}.preferences.editor highlight-current-line true
+        gsettings set org.${editor}.preferences.editor bracket-matching       true
 
-    gsettings set org.gnome.gedit.preferences.editor syntax-highlighting    true
+        gsettings set org.${editor}.preferences.editor insert-spaces          false
+        gsettings set org.${editor}.preferences.editor tabs-size              4
 
-    gsettings set org.gnome.gedit.preferences.editor scheme                 'kate'
+        gsettings set org.${editor}.preferences.editor display-right-margin   true
+        gsettings set org.${editor}.preferences.editor right-margin-position  80
 
-    gsettings set org.gnome.gedit.preferences.editor wrap-mode              'none'
+        gsettings set org.${editor}.preferences.editor syntax-highlighting    true
 
-    gsettings set org.gnome.gedit.preferences.editor display-overview-map   true
+        gsettings set org.${editor}.preferences.editor scheme                 'kate'
 
-    gsettings set org.gnome.gedit.plugins active-plugins "['changecase', 'filebrowser', 'time', 'zeitgeistplugin', 'docinfo']"
+        gsettings set org.${editor}.preferences.editor wrap-mode              'none'
+
+        gsettings set org.${editor}.preferences.editor display-overview-map   true
+
+        gsettings set org.${editor}.plugins active-plugins "['changecase', 'filebrowser', 'time', 'zeitgeistplugin', 'docinfo']"
+    done
+
+    unset editors
 
     ## gnome-terminal ----------------------------------------------------------
 
-    term_profile=$(gsettings get org.gnome.Terminal.ProfilesList default | cut -d "'" -f 2)
-
-    gsettings set org.gnome.Terminal.Legacy.Settings default-show-menubar false
-
-    if [[ "$(systemtype)" == 'GNOME' ]]
+    if ispkginstalled gnome-terminal
     then
-        gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'dark'
+        term_profile=$(gsettings get org.gnome.Terminal.ProfilesList default | cut -d "'" -f 2)
+
+        gsettings set org.gnome.Terminal.Legacy.Settings default-show-menubar false
+
+        if [[ "$(systemtype)" == 'GNOME' ]]
+        then
+            gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'dark'
+        fi
+
+        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" use-transparent-background true
+        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" background-transparency-percent 5
+        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" scrollbar-policy 'never'
+        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" allow-bold false
     fi
 
-    gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" use-transparent-background true
-    gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" background-transparency-percent 5
-    gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" scrollbar-policy 'never'
-    gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" allow-bold false
-
-    ## night light -------------------------------------------------------------
+    ## night light =============================================================
 
     if ispkginstalled 'redshift-gtk'
     then
@@ -119,7 +146,7 @@ case "${bundle}" in
 
     fi
 
-    if [[ "$(systemtype)" == 'GNOME' && $(gnome-shell --version | cut -d '.' -f 2) -ge 24 ]]
+    if ispkginstalled gnome-shell && [[ $(gnome-shell --version | cut -d '.' -f 2) -ge 24 ]]
     then
 
         gsettings set org.gnome.settings-daemon.plugins.color active true
@@ -134,17 +161,44 @@ case "${bundle}" in
 
     fi
 
-    ## enable app indicators ---------------------------------------------------
+    ## Gnome shell extensions ==================================================
 
-    gsettingsadd org.gnome.shell enabled-extensions 'ubuntu-appindicators@ubuntu.com'
+    if ispkginstalled gnome-shell
+    then
 
-    ## remove accessibility icon -----------------------------------------------
+        ## enable app indicators -----------------------------------------------
 
-    gsettingsadd org.gnome.shell enabled-extensions 'removeaccesibility@lomegor'
+        gsettingsadd org.gnome.shell enabled-extensions 'ubuntu-appindicators@ubuntu.com'
 
-    ## aliases -----------------------------------------------------------------
+        ## remove accessibility icon -------------------------------------------
+
+        gsettingsadd org.gnome.shell enabled-extensions 'removeaccesibility@lomegor'
+
+    fi
+
+    ## Cinnamon desktop ========================================================
+
+    if ispkginstalled nemo
+    then
+
+        ## Hide desktop icons --------------------------------------------------
+
+        gsettings set org.nemo.desktop desktop-layout 'false::false'
+
+    fi
+
+    ## Disable Nemo plugins ====================================================
+
+    if ispkginstalled nemo
+    then
+        gsettingsadd org.nemo.plugins disabled-actions    'add-desklets.nemo_action'
+        gsettingsadd org.nemo.plugins disabled-extensions 'ChangeColorFolder+NemoPython'
+    fi
+
+    ## aliases =================================================================
 
     echo alias highlight=\'grep --color=always -z\' >> ~/.bash_aliases
+
     echo -e "\nfunction ddusb()\n{\n    sudo dd if=\"\$1\" of=\"\$2\" bs=2M status=progress oflag=sync\n}\n\n" >> ~/.bash_aliases
 
 ;;
@@ -509,7 +563,7 @@ case "${bundle}" in
 
     ## Meld --------------------------------------------------------------------
 
-    if ispkginstalled 'meld'
+    if ispkginstalled meld
     then
         gsettings set org.gnome.meld highlight-syntax   true
         gsettings set org.gnome.meld style-scheme       'kate'
@@ -519,7 +573,7 @@ case "${bundle}" in
 
     if ispkginstalled 'meld' && ispkginstalled 'nautilus'
     then
-        addscenario 'compare' 'F3' '[[ $# -eq 0 ]] && svn info && meld .\n[[ $# -eq 1 ]] && svn info "$1" && meld "$1"\n[[ $# -gt 1 ]] && meld $@'
+        addscenario 'compare' 'F3' '[[ $# -eq 0 ]] && ( svn info || git status ) && meld .\n[[ $# -eq 1 ]] && ( svn info "$1" || ( cd "$1" && git status ) ) && meld "$1"\n[[ $# -gt 1 ]] && meld $@'
     fi
 
 ;;
@@ -539,35 +593,51 @@ case "${bundle}" in
 
 "appearance/themes")
 
-    ## Icon theme --------------------------------------------------------------
-
     icon_theme='Paper'
-
-    gsettings set org.gnome.desktop.interface icon-theme "${icon_theme}"
-
-    ## Cursor theme ------------------------------------------------------------
-
     cursor_theme='breeze_cursors'
-
-    gsettings set org.gnome.desktop.interface cursor-theme "${cursor_theme}"
-
-    ## Gtk theme ---------------------------------------------------------------
-
     gtk_theme='Adwaita'
     wm_theme='Adwaita'
 
-    gsettings set org.gnome.desktop.interface gtk-theme     "${gtk_theme}"
-    gsettings set org.gnome.desktop.wm.preferences theme    "${wm_theme}"
+
+    if ispkginstalled gnome-shell
+    then
+        gsettings set org.gnome.desktop.interface icon-theme    "${icon_theme}"
+        gsettings set org.gnome.desktop.interface cursor-theme  "${cursor_theme}"
+        gsettings set org.gnome.desktop.interface gtk-theme     "${gtk_theme}"
+        gsettings set org.gnome.desktop.wm.preferences theme    "${wm_theme}"
+    fi
+
+    if ispkginstalled cinnamon
+    then
+        gsettings set org.cinnamon.desktop.interface icon-theme     "${icon_theme}"
+        gsettings set org.cinnamon.desktop.interface cursor-theme   "${cursor_theme}"
+        gsettings set org.cinnamon.desktop.interface gtk-theme      "${gtk_theme}"
+        gsettings set org.cinnamon.desktop.wm.preferences theme     "${wm_theme}"
+        gsettings set org.cinnamon.theme name                       'Mint-Y-Dark'
+    fi
 ;;
 
 ### System fonts ===============================================================
 
 "appearance/fonts")
 
-    gsettings set org.gnome.desktop.interface font-name             'Ubuntu 10'
-    gsettings set org.gnome.desktop.interface document-font-name    'Linux Libertine O 12'
-    gsettings set org.gnome.desktop.interface monospace-font-name   'Ubuntu Mono 12'
-    gsettings set org.gnome.desktop.wm.preferences titlebar-font    'Ubuntu 10'
+    if ispkginstalled gnome-shell
+    then
+        gsettings set org.gnome.desktop.interface font-name             'Ubuntu 10'
+        gsettings set org.gnome.desktop.interface document-font-name    'Linux Libertine O 12'
+        gsettings set org.gnome.desktop.interface monospace-font-name   'Ubuntu Mono 12'
+        gsettings set org.gnome.desktop.wm.preferences titlebar-font    'Ubuntu 10'
+    fi
+
+    if ispkginstalled cinnamon
+    then
+        gsettings set org.cinnamon.desktop.interface font-name          'Ubuntu 10'
+        gsettings set org.gnome.desktop.interface document-font-name    'Linux Libertine O 12'
+        gsettings set org.gnome.desktop.interface monospace-font-name   'Ubuntu Mono 12'
+        gsettings set org.cinnamon.desktop.wm.preferences titlebar-font 'Ubuntu 10'
+        gsettings set org.nemo.desktop font                             'Ubuntu 10'
+    fi
+
 ;;
 
 ### ============================================================================
@@ -602,7 +672,7 @@ case "${bundle}" in
     ## launcher ----------------------------------------------------------------
 
     launcheradd 'rhythmbox'
-    launcheradd 'totem'
+    #launcheradd 'totem'
 
     ## hide apps from application menu -----------------------------------------
 
@@ -724,7 +794,7 @@ case "${bundle}" in
 
     ## Launcher ----------------------------------------------------------------
 
-    launcheradd 'pidgin'
+    #launcheradd 'pidgin'
 
     ## Empathy -----------------------------------------------------------------
 
