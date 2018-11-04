@@ -1054,9 +1054,14 @@ function hideapp()
 
 function launcherclear()
 {
-    if [[ "$(systemtype)" == 'GNOME' ]]
+    if ispkginstalled gnome-shell
     then
         gsettings set org.gnome.shell favorite-apps '[]'
+    fi
+
+    if ispkginstalled cinnamon
+    then
+        gsettings set org.cinnamon favorite-apps '[]'
     fi
 }
 
@@ -1100,9 +1105,14 @@ function launcheradd()
 {
     application="$1"
 
-    if [[ "$(systemtype)" == 'GNOME' ]]
+    if ispkginstalled gnome-shell
     then
         launcheradd_var "$application" 'org.gnome.shell' 'favorite-apps'
+    fi
+
+    if ispkginstalled cinnamon
+    then
+        launcheradd_var "$application" 'org.cinnamon' 'favorite-apps'
     fi
 }
 
