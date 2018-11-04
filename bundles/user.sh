@@ -492,7 +492,19 @@ case "${bundle}" in
 
     if [[ -z "$(grep 'svnclean()' ~/.bash_aliases)" ]]
     then
-        echo -e "\nfunction svnclean()\n{\n    svn st \$@ --no-ignore | grep '^?\\|^I' | sed 's/^.[ ]*//' | tr '\\\\n' '\\\\0' | xargs -0 rm -rf\n}\n\n" >> ~/.bash_aliases
+        echo -e "\nfunction svnclean()\n{\n    svn st \"\$@\" --no-ignore | grep '^?\\|^I' | sed 's/^.[ ]*//' | tr '\\\\n' '\\\\0' | xargs -0 rm -rf\n}\n\n" >> ~/.bash_aliases
+    fi
+
+    ## Git revision number -----------------------------------------------------
+
+    if [[ -z "$(grep 'gitversion()' ~/.bash_aliases)" ]]
+    then
+        echo -e "\nfunction gitversion()\n{\n    git log --pretty=format:'%h' \"\$@\" | wc -l\n}\n\n" >> ~/.bash_aliases
+    fi
+
+    if [[ -z "$(grep 'githash()' ~/.bash_aliases)" ]]
+    then
+        echo -e "\nfunction githash()\n{\n    git rev-parse --short HEAD \"\$@\"\n}\n\n" >> ~/.bash_aliases
     fi
 
     ## Meld --------------------------------------------------------------------
