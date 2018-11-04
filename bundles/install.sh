@@ -17,7 +17,11 @@ case "${bundle}" in
 
 "gnome")
 
-    appinstall 'Gnome session'              'gnome-shell gnome-session'
+    if ispkginstalled ubuntu-session
+    then
+        appinstall 'Gnome session'              'gnome-shell gnome-session'
+    fi
+
     appinstall 'Language pack'	            'hyphen-ru mythes-ru hunspell-ru [language-pack-gnome-ru] [language-pack-gnome-ru-base] [language-pack-ru] [language-pack-ru-base]'
     appinstall 'Base applications'          'gnome-calculator gnome-system-monitor gnome-characters'
     appinstall 'Tweak tool'                 'gnome-tweak-tool'
@@ -503,8 +507,8 @@ case "${bundle}" in
 "media-online")
 
     appinstall 'Youtube downloader'     'youtube-dl'
-    silent 'Download youtube-dl'    wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
-    silent 'Setup youtube-dl'       chmod a+rx /usr/local/bin/youtube-dl
+    silent     'Download youtube-dl'    wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
+    silent     'Setup youtube-dl'       chmod a+rx /usr/local/bin/youtube-dl
 
     appinstall 'Gnome Twitch app'       'gnome-twitch gnome-twitch-player-backend-mpv-opengl'
 
@@ -752,7 +756,7 @@ case "${bundle}" in
 
 "vm-host/vbox")
 
-    silent 'Accepting Oracle EULA' sh -c 'echo virtualbox-ext-pack virtualbox-ext-pack/license boolean true | debconf-set-selections'
+    silent     'Accepting Oracle EULA' sh -c 'echo virtualbox-ext-pack virtualbox-ext-pack/license boolean true | debconf-set-selections'
 
     appinstall 'VirtualBox' 'virtualbox virtualbox-qt virtualbox-ext-pack virtualbox-guest-additions-iso'
 
