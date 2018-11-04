@@ -41,7 +41,7 @@ function packiso()
         silent 'Removing old iso revision' sed -i "/[ /]${iso_name}\$/d" "${res_dir}/REV"
     fi
 
-    silent 'Generating revision for iso' bash -c "echo \"$(svnversion) ${iso_name}\" >> \"${res_dir}/REV\""
+    silent 'Generating revision for iso' bash -c "echo \"$(git rev-parse --short HEAD) ${iso_name}\" >> \"${res_dir}/REV\""
 
     silent 'Changing rights for iso' chmod -R a+rw "${res_dir}"
 }
