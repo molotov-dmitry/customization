@@ -1,0 +1,7 @@
+auto eth0
+allow-hotplug eth0
+iface eth0 inet static
+    address 172.16.8.0
+    netmask 255.255.255.0
+    gateway 172.16.8.253
+    dns-nameservers 172.16.56.14 172.16.56.10
