@@ -461,6 +461,16 @@ case "${bundle}" in
     appinstall 'Noto fonts'             'fonts-noto'
     appinstall 'Linux Libertine fonst'  'fonts-linuxlibertine'
 
+    silent      'Download Google Sans'  wget -qq 'https://drive.google.com/uc?export=download&id=1x674A9kbK9t1Ur49DOf3Zj4b-aErTWqd' -O /usr/local/share/fonts/google-sans-font.zip
+    silent      'Unpack Google Sans'    unzip -j /usr/local/share/fonts/google-sans-font.zip -d /usr/local/share/fonts/google-sans-font
+    silent      ''                      rm -f    /usr/local/share/fonts/google-sans-font.zip
+
+    silent      ''                      chown root:staff /usr/local/share/fonts/google-sans-font -R
+    silent      ''                      chmod 644        /usr/local/share/fonts/google-sans-font/* -R
+    silent      ''                      chmod 755        /usr/local/share/fonts/google-sans-font
+
+    silent      'Update font cache'     fc-cache -fv
+
 ;;
 
 ### ============================================================================
