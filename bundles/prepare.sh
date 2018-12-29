@@ -40,6 +40,7 @@ case "${bundle}" in
 
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'driver/intel'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'driver/firmware'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'driver/wifi'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'driver/fs'
 
 ;;
@@ -53,6 +54,12 @@ case "${bundle}" in
 ### Firmwares ==================================================================
 
 "driver/firmware")
+
+;;
+
+### Wi-Fi drivers ==============================================================
+
+"driver/wifi")
 
 ;;
 
