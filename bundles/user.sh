@@ -761,6 +761,8 @@ case "${bundle}" in
 
 "media-online")
 
+    echo "alias ytmp3='youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0'" >> ~/.bash_aliases
+
 ;;
 
 ### ============================================================================
