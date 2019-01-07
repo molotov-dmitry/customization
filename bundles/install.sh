@@ -200,7 +200,7 @@ case "${bundle}" in
 
 "server/download")
 
-    appinstall 'Youtube downloader'     'youtube-dl'
+    appinstall 'Youtube downloader'     'youtube-dl ffmpeg phantomjs'
     silent 'Download youtube-dl'    wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
     silent 'Setup youtube-dl'       chmod a+rx /usr/local/bin/youtube-dl
     appinstall 'Transmission'           'transmission-daemon'
@@ -525,7 +525,7 @@ case "${bundle}" in
 
 "media-online")
 
-    appinstall 'Youtube downloader'     'youtube-dl'
+    appinstall 'Youtube downloader'     'youtube-dl ffmpeg phantomjs'
     silent     'Download youtube-dl'    wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
     silent     'Setup youtube-dl'       chmod a+rx /usr/local/bin/youtube-dl
 
