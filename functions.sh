@@ -1163,6 +1163,26 @@ function addscenario()
         sed -i "/^${binding} /d"        "${HOME}/.config/nautilus/scripts-accels"
         echo "${binding} ${name}.sh" >> "${HOME}/.config/nautilus/scripts-accels"
     fi
+
+    if ispkginstalled 'nemo'
+    then
+        mkdir -p "${HOME}/.local/share/nemo/scripts"
+        mkdir -p "${HOME}/.config/nemo"
+        touch    "${HOME}/.config/nemo/scripts-accels"
+
+        echo -e '#!/bin/bash\n' >  "${HOME}/.local/share/nemo/scripts/${name}.sh"
+
+        if [[ -n "${fixpwd}" ]]
+        then
+            echo -e 'cd "$(echo "$NEMO_SCRIPT_CURRENT_URI" | sed "s@+@ @g;s@%@\\\\\\\\x@g" | xargs -0 printf "%b" | sed "s/^file:\/\///")"\n' >> "${HOME}/.local/share/nemo/scripts/${name}.sh"
+        fi
+
+        echo -e "${command}\n"  >> "${HOME}/.local/share/nemo/scripts/${name}.sh"
+        chmod +x                   "${HOME}/.local/share/nemo/scripts/${name}.sh"
+
+        sed -i "/^${binding} /d"        "${HOME}/.config/nemo/scripts-accels"
+        echo "${binding} ${name}.sh" >> "${HOME}/.config/nemo/scripts-accels"
+    fi
 }
 
 ### Register MIME types ========================================================
