@@ -286,6 +286,7 @@ case "${bundle}" in
     appinstall 'LLVM clang'             'llvm lldb clang'
     appinstall 'CMake'                  'cmake'
     appinstall 'Checkinstall'           'checkinstall'
+    appinstall 'CRLF to LF'             'dos2unix'
 
 ;;
 
