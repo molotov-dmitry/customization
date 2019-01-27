@@ -22,6 +22,8 @@ case "${bundle}" in
         appinstall 'Gnome session'              'gnome-shell gnome-session'
     fi
 
+    appinstall 'Nautilus'                   'nautilus nautilus-extension-gnome-terminal nautilus-sendto nautilus-share'
+
     appinstall 'Language pack'	            'hyphen-ru mythes-ru hunspell-ru [language-pack-gnome-ru] [language-pack-gnome-ru-base] [language-pack-ru] [language-pack-ru-base]'
     appinstall 'Base applications'          'gnome-calculator gnome-system-monitor gnome-characters'
     appinstall 'Tweak tool'                 'gnome-tweak-tool'
