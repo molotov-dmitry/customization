@@ -1187,21 +1187,43 @@ function addscenario()
 
 ### Register MIME types ========================================================
 
+function addconfigline()
+{
+    key="$1"
+    value="$2"
+    section="$3"
+    file="$4"
+
+    if ! grep -F "[${section}]" "$file" 1>/dev/null 2>/dev/null
+    then
+        mkdir -p "$(dirname "$file")"
+
+        echo >> "$file"
+
+        echo "[${section}]" >> "$file"
+    fi
+
+    sed -i "/^[[:space:]]*\[${section}\][[:space:]]*$/,/^[[:space:]]*\[.*/{/^[[:space:]]*$(safestring "${key}")[[:space:]]*=/d}" "$file"
+
+    sed -i "/\[${section}\]/a $(safestring "${key}=${value}")" "$file"
+
+    [[ -n "$(tail -c1 "${file}")" ]] && echo >> "${file}"
+}
+
 function mimeregister()
 {
     mime="$1"
     app="$2"
 
-    if ! grep -F '[Added Associations]' "${HOME}/.config/mimeapps.list" 1>/dev/null 2>/dev/null
-    then
-        mkdir -p "${HOME}/.config"
+    addconfigline "${mime}" "${app};" 'Added Associations' "${HOME}/.config/mimeapps.list"
+}
 
-        echo '[Added Associations]' > "${HOME}/.config/mimeapps.list"
-    fi
+function setdefaultapp()
+{
+    mime="$1"
+    app="$2"
 
-    sed -i "/^$(safestring "${mime}")=/d" "${HOME}/.config/mimeapps.list"
-
-    echo "${mime}=${app};" >> "${HOME}/.config/mimeapps.list"
+    addconfigline "${mime}" "${app}" 'Default Applications' "${HOME}/.config/mimeapps.list"
 }
 
 ### Add bookmark ===============================================================
