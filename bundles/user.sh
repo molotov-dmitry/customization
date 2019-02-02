@@ -185,16 +185,38 @@ case "${bundle}" in
 
     ## Cinnamon desktop ========================================================
 
+    ## Set custom start menu icon ----------------------------------------------
+
+    if ispkginstalled cinnamon
+    then
+        mkdir -p "${HOME}/.cinnamon/configs/menu@cinnamon.org"
+        tmpf=$(mktemp --tmpdir=$(dirname "${HOME}/.cinnamon/configs/menu@cinnamon.org/1.json") -t)
+        touch "${HOME}/.cinnamon/configs/menu@cinnamon.org/1.json"
+        jq '."menu-custom"."value" = true' "${HOME}/.cinnamon/configs/menu@cinnamon.org/1.json" > "${tmpf}"
+        mv -f "${tmpf}" "${HOME}/.cinnamon/configs/menu@cinnamon.org/1.json"
+    fi
+
+    ## Clear launcher ----------------------------------------------------------
+
+    if ispkginstalled cinnamon
+    then
+        mkdir -p "${HOME}/.cinnamon/configs/grouped-window-list@cinnamon.org"
+        touch "${HOME}/.cinnamon/configs/grouped-window-list@cinnamon.org/3.json"
+        tmpf=$(mktemp --tmpdir=$(dirname "${HOME}/.cinnamon/configs/grouped-window-list@cinnamon.org/3.json") -t)
+        jq '."pinned-apps"."value" = []' "${HOME}/.cinnamon/configs/grouped-window-list@cinnamon.org/3.json" > "${tmpf}"
+        mv -f "${tmpf}" "${HOME}/.cinnamon/configs/grouped-window-list@cinnamon.org/3.json"
+    fi
+
+    ## Hide desktop icons ------------------------------------------------------
+
     if ispkginstalled nemo
     then
-
-        ## Hide desktop icons --------------------------------------------------
 
         gsettings set org.nemo.desktop desktop-layout 'false::false'
 
     fi
 
-    ## Disable Nemo plugins ====================================================
+    ## Disable Nemo plugins ----------------------------------------------------
 
     if ispkginstalled nemo
     then
@@ -202,7 +224,7 @@ case "${bundle}" in
         gsettingsadd org.nemo.plugins disabled-extensions 'ChangeColorFolder+NemoPython'
     fi
 
-    ## Set Nautilus as default file manager ====================================
+    ## Set Nautilus as default file manager ------------------------------------
 
     if ispkginstalled nemo && ispkginstalled nautilus
     then
@@ -210,7 +232,7 @@ case "${bundle}" in
         setdefaultapp   'inode/directory' 'nautilus-folder-handler.desktop'
     fi
 
-    ## aliases =================================================================
+    ## Aliases =================================================================
 
     echo alias highlight=\'grep --color=always -z\' >> ~/.bash_aliases
 

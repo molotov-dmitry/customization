@@ -33,6 +33,11 @@ case "${bundle}" in
         appinstall 'Redshift'               'redshift-gtk'
     fi
 
+    if ispkginstalled cinnamon
+    then
+        appinstall 'JSON editor'            'jq'
+    fi
+
     gnomeshellextension 112                 # Remove Accessibility
 
 ;;
