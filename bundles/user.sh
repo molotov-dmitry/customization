@@ -195,6 +195,14 @@ case "${bundle}" in
         gsettingsadd org.nemo.plugins disabled-extensions 'ChangeColorFolder+NemoPython'
     fi
 
+    ## Set Nautilus as default file manager ====================================
+
+    if ispkginstalled nemo && ispkginstalled nautilus
+    then
+        mimeregister    'inode/directory' 'nautilus-folder-handler.desktop'
+        setdefaultapp   'inode/directory' 'nautilus-folder-handler.desktop'
+    fi
+
     ## aliases =================================================================
 
     echo alias highlight=\'grep --color=always -z\' >> ~/.bash_aliases
