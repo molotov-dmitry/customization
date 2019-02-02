@@ -195,7 +195,7 @@ case "${bundle}" in
         [[ ! -f "${cfgfile}" ]] && echo '{}' > "${cfgfile}"
 
         tmpf=$(mktemp --tmpdir=$(dirname "${cfgfile}") -t)
-        jq '."pinned-apps"."value" = []' "${cfgfile}" > "${tmpf}"
+        jq '."menu-custom"."value" = true' "${cfgfile}" > "${tmpf}"
         mv -f "${tmpf}" "${cfgfile}"
 
         unset tmpf
