@@ -111,7 +111,14 @@ case "${bundle}" in
 
         gsettings set org.${editor}.preferences.editor wrap-mode              'none'
 
-        gsettings set org.${editor}.preferences.editor display-overview-map   true
+        if [[ "$editor" == 'gnome.gedit' ]]
+        then
+            gsettings set org.${editor}.preferences.editor display-overview-map   true
+
+        elif [[ "$editor" == 'x.editor' ]]
+        then
+            gsettings set org.x.editor.preferences.ui minimap-visible true
+        fi
 
         gsettings set org.${editor}.plugins active-plugins "['changecase', 'filebrowser', 'time', 'zeitgeistplugin', 'docinfo']"
     done
@@ -193,6 +200,13 @@ case "${bundle}" in
     then
         gsettingsadd org.nemo.plugins disabled-actions    'add-desklets.nemo_action'
         gsettingsadd org.nemo.plugins disabled-extensions 'ChangeColorFolder+NemoPython'
+    fi
+
+    ## Set Nautilus as default file manager for Cinnamon =======================
+
+    if [[ "${XDG_CURRENT_DESKTOP}" == 'X-Cinnamon' ]]
+    then
+
     fi
 
     ## aliases =================================================================
