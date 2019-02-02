@@ -189,22 +189,34 @@ case "${bundle}" in
 
     if ispkginstalled cinnamon
     then
-        mkdir -p "${HOME}/.cinnamon/configs/menu@cinnamon.org"
-        tmpf=$(mktemp --tmpdir=$(dirname "${HOME}/.cinnamon/configs/menu@cinnamon.org/1.json") -t)
-        touch "${HOME}/.cinnamon/configs/menu@cinnamon.org/1.json"
-        jq '."menu-custom"."value" = true' "${HOME}/.cinnamon/configs/menu@cinnamon.org/1.json" > "${tmpf}"
-        mv -f "${tmpf}" "${HOME}/.cinnamon/configs/menu@cinnamon.org/1.json"
+        cfgfile="${HOME}/.cinnamon/configs/menu@cinnamon.org/1.json"
+
+        mkdir -p "$(dirname "${cfgfile}")"
+        [[ ! -f "${cfgfile}" ]] && echo '{}' > "${cfgfile}"
+
+        tmpf=$(mktemp --tmpdir=$(dirname "${cfgfile}") -t)
+        jq '."pinned-apps"."value" = []' "${cfgfile}" > "${tmpf}"
+        mv -f "${tmpf}" "${cfgfile}"
+
+        unset tmpf
+        unset cfgfile
     fi
 
     ## Clear launcher ----------------------------------------------------------
 
     if ispkginstalled cinnamon
     then
-        mkdir -p "${HOME}/.cinnamon/configs/grouped-window-list@cinnamon.org"
-        touch "${HOME}/.cinnamon/configs/grouped-window-list@cinnamon.org/3.json"
-        tmpf=$(mktemp --tmpdir=$(dirname "${HOME}/.cinnamon/configs/grouped-window-list@cinnamon.org/3.json") -t)
-        jq '."pinned-apps"."value" = []' "${HOME}/.cinnamon/configs/grouped-window-list@cinnamon.org/3.json" > "${tmpf}"
-        mv -f "${tmpf}" "${HOME}/.cinnamon/configs/grouped-window-list@cinnamon.org/3.json"
+        cfgfile="${HOME}/.cinnamon/configs/grouped-window-list@cinnamon.org/3.json"
+
+        mkdir -p "$(dirname "${cfgfile}")"
+        [[ ! -f "${cfgfile}" ]] && echo '{}' > "${cfgfile}"
+
+        tmpf=$(mktemp --tmpdir=$(dirname "${cfgfile}") -t)
+        jq '."pinned-apps"."value" = []' "${cfgfile}" > "${tmpf}"
+        mv -f "${tmpf}" "${cfgfile}"
+
+        unset tmpf
+        unset cfgfile
     fi
 
     ## Hide desktop icons ------------------------------------------------------
