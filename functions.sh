@@ -1262,21 +1262,21 @@ function setwallpaper()
             gsettings set org.gnome.desktop.background picture-uri          'file:////usr/share/gnome-control-center/pixmaps/noise-texture-light.png'
         fi
 
-    elif test -f "${wallapper}"
+    elif test -f "${wallpaper}"
     then
         if [[ "$(systemtype)" == 'GNOME' ]]
         then
             gsettings set org.gnome.desktop.background secondary-color  '#000000'
             gsettings set org.gnome.desktop.background primary-color    '#000000'
             gsettings set org.gnome.desktop.background picture-options  'zoom'
-            gsettings set org.gnome.desktop.background picture-uri      "file://${wallapper}"
+            gsettings set org.gnome.desktop.background picture-uri      "file://${wallpaper}"
 
         elif [[ "$(systemtype)" == 'Cinnamon' ]]
         then
             gsettings set org.cinnamon.desktop.background secondary-color   '#000000'
             gsettings set org.cinnamon.desktop.background primary-color     '#000000'
             gsettings set org.cinnamon.desktop.background picture-options   'zoom'
-            gsettings set org.cinnamon.desktop.background picture-uri       "file://${wallapper}"
+            gsettings set org.cinnamon.desktop.background picture-uri       "file://${wallpaper}"
 
         fi
 
@@ -1298,14 +1298,14 @@ function setlockscreen()
             gsettings set org.gnome.desktop.screensaver picture-uri         'file:////usr/share/gnome-control-center/pixmaps/noise-texture-light.png'
         fi
 
-    elif test -f "${wallapper}"
+    elif test -f "${wallpaper}"
     then
         if [[ "$(systemtype)" == 'GNOME' ]]
         then
             gsettings set org.gnome.desktop.screensaver secondary-color '#000000'
             gsettings set org.gnome.desktop.screensaver primary-color   '#000000'
             gsettings set org.gnome.desktop.screensaver picture-options 'zoom'
-            gsettings set org.gnome.desktop.screensaver picture-uri     "file://${wallapper}"
+            gsettings set org.gnome.desktop.screensaver picture-uri     "file://${wallpaper}"
         fi
 
     fi
