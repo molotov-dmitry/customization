@@ -1148,7 +1148,7 @@ function addkeybinding()
         gsettings set "org.cinnamon.desktop.keybindings.custom-keybinding:${path}" command "${command}"
         gsettings set "org.cinnamon.desktop.keybindings.custom-keybinding:${path}" binding "['${binding}']"
 
-        gsettingsadd org.cinnamon.desktop.keybindings custom-list "${path}"
+        gsettingsadd org.cinnamon.desktop.keybindings custom-list "${cmd}"
     fi
 }
 
