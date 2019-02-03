@@ -617,6 +617,10 @@ case "${bundle}" in
         echo -e "\nfunction githash()\n{\n    git rev-parse --short HEAD \"\$@\"\n}\n\n" >> ~/.bash_aliases
     fi
 
+    ## Make git save credentials by default ------------------------------------
+
+    git config --global credential.helper store
+
     ## Meld --------------------------------------------------------------------
 
     if ispkginstalled meld
@@ -642,6 +646,7 @@ case "${bundle}" in
 
     bash "${scriptpath}" 'appearance/themes'
     bash "${scriptpath}" 'appearance/fonts'
+    bash "${scriptpath}" 'appearance/wallpaper'
 
 ;;
 
@@ -692,6 +697,24 @@ case "${bundle}" in
         gsettings set org.gnome.desktop.interface monospace-font-name   'Ubuntu Mono 12'
         gsettings set org.cinnamon.desktop.wm.preferences titlebar-font 'Ubuntu 10'
         gsettings set org.nemo.desktop font                             'Ubuntu 10'
+    fi
+
+;;
+
+### Wallpaper ==================================================================
+
+"appearance/wallpaper")
+
+    if test -f '/usr/share/backgrounds/linuxmint-tessa/skunze_beach.jpg'
+    then
+        ( sleep 20 ; setwallpaper '/usr/share/backgrounds/linuxmint-tessa/skunze_beach.jpg' ) &
+    else
+        ( sleep 20 ; setwallpaper '#204a87' ) &
+    fi
+
+    if test -f '/usr/share/backgrounds/Milky_Way_before_the_dawn_by_Tomas_Sobek.jpg'
+    then
+        ( sleep 20 ; setlockscreen '/usr/share/backgrounds/Milky_Way_before_the_dawn_by_Tomas_Sobek.jpg' ) &
     fi
 
 ;;

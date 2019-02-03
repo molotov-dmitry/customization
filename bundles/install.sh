@@ -454,6 +454,7 @@ case "${bundle}" in
 
     bash "${scriptpath}" 'appearance/themes'
     bash "${scriptpath}" 'appearance/fonts'
+    bash "${scriptpath}" 'appearance/wallpaper'
 
 ;;
 
@@ -488,6 +489,12 @@ case "${bundle}" in
     silent      ''                      chmod 755        /usr/local/share/fonts/google-sans-font
 
     silent      'Update font cache'     fc-cache -fv
+
+;;
+
+### Wallpaper ==================================================================
+
+"appearance/wallpaper")
 
 ;;
 

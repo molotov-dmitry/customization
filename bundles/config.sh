@@ -369,6 +369,7 @@ case "${bundle}" in
 
     bash "${scriptpath}" 'appearance/themes'
     bash "${scriptpath}" 'appearance/fonts'
+    bash "${scriptpath}" 'appearance/wallpaper'
 
 ;;
 
@@ -391,6 +392,12 @@ case "${bundle}" in
 ### System fonts ===============================================================
 
 "appearance/fonts")
+
+;;
+
+### Wallpaper ==================================================================
+
+"appearance/wallpaper")
 
 ;;
 

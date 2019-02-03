@@ -9,8 +9,6 @@ cd "${ROOT_PATH}" || exit 1
 
 ### Add network shares ---------------------------------------------------------
 
-mkdir -p "${HOME}/.config/gtk-3.0/"
-
 addbookmark 'sftp://188.134.72.31:2222/media/documents' 'AHOME'
 
 addbookmark 'smb://172.16.8.21/share2'  'KUB'
@@ -19,25 +17,10 @@ addbookmark 'smb://data.rczifort.local' 'DATA'
 
 ### Customization ==============================================================
 
-## Make GIT accept self-signed certificate -------------------------------------
+## Make Git accept self-signed certificate -------------------------------------
 
 git config --global http.sslVerify false
 
 ## Clear launcher --------------------------------------------------------------
 
 launcherclear
-
-## Appearance ------------------------------------------------------------------
-
-if test -f '/usr/share/backgrounds/linuxmint-tessa/skunze_beach.jpg'
-then
-    setwallpaper '/usr/share/backgrounds/linuxmint-tessa/skunze_beach.jpg'
-else
-    setwallpaper '#204a87'
-fi
-
-if test -f '/usr/share/backgrounds/Milky_Way_before_the_dawn_by_Tomas_Sobek.jpg'
-then
-    setlockscreen '/usr/share/backgrounds/Milky_Way_before_the_dawn_by_Tomas_Sobek.jpg'
-fi
-
