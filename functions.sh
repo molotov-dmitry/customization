@@ -948,6 +948,9 @@ function systemtype()
     elif [[ "${XDG_CURRENT_DESKTOP}" == 'ubuntu:GNOME' ]]
     then
         echo 'GNOME'
+    elif [[ "${XDG_CURRENT_DESKTOP}" == 'X-Cinnamon' ]]
+    then
+        echo 'Cinnamon'
     elif [[ "${XDG_CURRENT_DESKTOP}" == 'KDE' ]]
     then
         echo 'KDE'
@@ -1252,17 +1255,59 @@ function setwallpaper()
     then
         if [[ "$(systemtype)" == 'GNOME' ]]
         then
-            gsettings set org.gnome.desktop.background primary-color    "${wallpaper}"
-            gsettings set org.gnome.desktop.background secondary-color  "${wallpaper}"
-            gsettings set org.gnome.desktop.background color-shading-type 'solid'
-            gsettings set org.gnome.desktop.background picture-options  'wallpaper'
-            gsettings set org.gnome.desktop.background picture-uri      'file:////usr/share/gnome-control-center/pixmaps/noise-texture-light.png'
+            gsettings set org.gnome.desktop.background primary-color        "${wallpaper}"
+            gsettings set org.gnome.desktop.background secondary-color      "${wallpaper}"
+            gsettings set org.gnome.desktop.background color-shading-type   'solid'
+            gsettings set org.gnome.desktop.background picture-options      'wallpaper'
+            gsettings set org.gnome.desktop.background picture-uri          'file:////usr/share/gnome-control-center/pixmaps/noise-texture-light.png'
         fi
 
     elif test -f "${wallapper}"
     then
-        gsettings set org.gnome.desktop.background picture-options      'zoom'
-        gsettings set org.gnome.desktop.background picture-uri          "${wallapper}"
+        if [[ "$(systemtype)" == 'GNOME' ]]
+        then
+            gsettings set org.gnome.desktop.background secondary-color  '#000000'
+            gsettings set org.gnome.desktop.background primary-color    '#000000'
+            gsettings set org.gnome.desktop.background picture-options  'zoom'
+            gsettings set org.gnome.desktop.background picture-uri      "file://${wallapper}"
+
+        elif [[ "$(systemtype)" == 'Cinnamon' ]]
+        then
+            gsettings set org.cinnamon.desktop.background secondary-color   '#000000'
+            gsettings set org.cinnamon.desktop.background primary-color     '#000000'
+            gsettings set org.cinnamon.desktop.background picture-options   'zoom'
+            gsettings set org.cinnamon.desktop.background picture-uri       "file://${wallapper}"
+
+        fi
+
+    fi
+}
+
+function setlockscreen()
+{
+    wallpaper="$1"
+
+    if [[ "${wallpaper:0:1}" == '#' && ${#wallpaper} -eq 7 ]]
+    then
+        if [[ "$(systemtype)" == 'GNOME' ]]
+        then
+            gsettings set org.gnome.desktop.screensaver primary-color       "${wallpaper}"
+            gsettings set org.gnome.desktop.screensaver secondary-color     "${wallpaper}"
+            gsettings set org.gnome.desktop.screensaver color-shading-type  'solid'
+            gsettings set org.gnome.desktop.screensaver picture-options     'wallpaper'
+            gsettings set org.gnome.desktop.screensaver picture-uri         'file:////usr/share/gnome-control-center/pixmaps/noise-texture-light.png'
+        fi
+
+    elif test -f "${wallapper}"
+    then
+        if [[ "$(systemtype)" == 'GNOME' ]]
+        then
+            gsettings set org.gnome.desktop.screensaver secondary-color '#000000'
+            gsettings set org.gnome.desktop.screensaver primary-color   '#000000'
+            gsettings set org.gnome.desktop.screensaver picture-options 'zoom'
+            gsettings set org.gnome.desktop.screensaver picture-uri     "file://${wallapper}"
+        fi
+
     fi
 }
 
