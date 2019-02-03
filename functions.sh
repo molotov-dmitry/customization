@@ -1127,7 +1127,7 @@ function addkeybinding()
     command="$2"
     binding="$3"
 
-    if [[ "$(systemtype)" == 'GNOME' ]]
+    if ispkginstalled gnome-shell
     then
         cmd="$(echo "${command}" | md5sum | cut -d ' ' -f 1)"
         path="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/${cmd}/"
@@ -1253,7 +1253,7 @@ function setwallpaper()
 
     if [[ "${wallpaper:0:1}" == '#' && ${#wallpaper} -eq 7 ]]
     then
-        if [[ "$(systemtype)" == 'GNOME' ]]
+        if ispkginstalled gnome-shell
         then
             gsettings set org.gnome.desktop.background primary-color        "${wallpaper}"
             gsettings set org.gnome.desktop.background secondary-color      "${wallpaper}"
@@ -1264,14 +1264,15 @@ function setwallpaper()
 
     elif test -f "${wallpaper}"
     then
-        if [[ "$(systemtype)" == 'GNOME' ]]
+        if ispkginstalled gnome-shell
         then
             gsettings set org.gnome.desktop.background secondary-color  '#000000'
             gsettings set org.gnome.desktop.background primary-color    '#000000'
             gsettings set org.gnome.desktop.background picture-options  'zoom'
             gsettings set org.gnome.desktop.background picture-uri      "file://${wallpaper}"
+        fi
 
-        elif [[ "$(systemtype)" == 'Cinnamon' ]]
+        if ispkginstalled cinnamon
         then
             gsettings set org.cinnamon.desktop.background secondary-color   '#000000'
             gsettings set org.cinnamon.desktop.background primary-color     '#000000'
@@ -1289,7 +1290,7 @@ function setlockscreen()
 
     if [[ "${wallpaper:0:1}" == '#' && ${#wallpaper} -eq 7 ]]
     then
-        if [[ "$(systemtype)" == 'GNOME' ]]
+        if ispkginstalled gnome-shell
         then
             gsettings set org.gnome.desktop.screensaver primary-color       "${wallpaper}"
             gsettings set org.gnome.desktop.screensaver secondary-color     "${wallpaper}"
@@ -1300,7 +1301,7 @@ function setlockscreen()
 
     elif test -f "${wallpaper}"
     then
-        if [[ "$(systemtype)" == 'GNOME' ]]
+        if ispkginstalled gnome-shell
         then
             gsettings set org.gnome.desktop.screensaver secondary-color '#000000'
             gsettings set org.gnome.desktop.screensaver primary-color   '#000000'

@@ -756,7 +756,7 @@ case "${bundle}" in
 
     ## Media player indicator Gnome Shell extension ----------------------------
 
-    if [[ "$(systemtype)" == 'GNOME' ]]
+    if ispkginstalled gnome-shell
     then
         gsettingsadd org.gnome.shell enabled-extensions 'mediaplayer@patapon.info'
     fi
@@ -810,7 +810,7 @@ case "${bundle}" in
 
     ## Sound Input & Output Device Chooser Gnome Shell extension ---------------
 
-    if [[ "$(systemtype)" == 'GNOME' ]]
+    if ispkginstalled gnome-shell
     then
         gsettingsadd org.gnome.shell enabled-extensions 'sound-output-device-chooser@kgshank.net'
     fi
