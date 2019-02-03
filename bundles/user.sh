@@ -240,6 +240,21 @@ case "${bundle}" in
         setdefaultapp   'inode/directory' 'nautilus-folder-handler.desktop'
     fi
 
+    ## Use text instead of layout flags ----------------------------------------
+
+    if ispkginstalled cinnamon
+    then
+        gsettings set org.cinnamon.desktop.interface keyboard-layout-show-flags false
+        gsettings set org.cinnamon.desktop.interface keyboard-layout-use-upper  true
+    fi
+
+    ## Setup hot corners -------------------------------------------------------
+
+    if ispkginstalled cinnamon
+    then
+        gsettings set org.cinnamon hotcorner-layout  "['scale:true:0', 'scale:false:0', 'scale:false:0', 'desktop:true:700']"
+    fi
+
     ## Aliases =================================================================
 
     echo alias highlight=\'grep --color=always -z\' >> ~/.bash_aliases
