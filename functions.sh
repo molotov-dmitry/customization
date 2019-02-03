@@ -1138,6 +1138,18 @@ function addkeybinding()
 
         gsettingsadd org.gnome.settings-daemon.plugins.media-keys custom-keybindings "${path}"
     fi
+
+    if ispkginstalled cinnamon
+    then
+        cmd="$(echo "${command}" | md5sum | cut -d ' ' -f 1)"
+        path="/org/cinnamon/desktop/keybindings/custom-keybindings/${cmd}/"
+
+        gsettings set "org.cinnamon.desktop.keybindings.custom-keybinding:${path}" name    "${name}"
+        gsettings set "org.cinnamon.desktop.keybindings.custom-keybinding:${path}" command "${command}"
+        gsettings set "org.cinnamon.desktop.keybindings.custom-keybinding:${path}" binding "['${binding}']"
+
+        gsettingsadd org.cinnamon.desktop.keybindings custom-list "${path}"
+    fi
 }
 
 function addscenario()
