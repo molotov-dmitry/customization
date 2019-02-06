@@ -13,9 +13,9 @@ mkdir -p "${HOME}/.config/gtk-3.0/"
 
 addbookmark 'sftp://188.134.72.31:2222/media/documents' 'AHOME'
 
-addbookmark 'smb://172.16.8.21/share2'  'KUB'
-addbookmark 'smb://172.16.8.203'        'NAS'
-addbookmark 'smb://data.rczifort.local' 'DATA'
+addbookmark 'smb://172.16.8.21/share2'         'KUB'
+addbookmark 'smb://172.16.8.203'               'NAS'
+addbookmark 'smb://data.rczifort.local/shares' 'RCZIFORT'
 
 ### Customization ==============================================================
 
