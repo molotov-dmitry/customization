@@ -424,7 +424,7 @@ case "${bundle}" in
 
 "dev/net")
 
-    appinstall 'ARPing'                 'arping'
+    appinstall 'ARPing'                 'iputils-arping'
     silent     'Wireshark fix'          sh -c 'echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections'
     appinstall 'Wireshark'              'wireshark-gtk'
 
