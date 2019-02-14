@@ -60,6 +60,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'driver/intel'
     bash "${scriptpath}" 'driver/firmware'
     bash "${scriptpath}" 'driver/wifi'
+    bash "${scriptpath}" 'driver/printer'
     bash "${scriptpath}" 'driver/fs'
 
 ;;
@@ -94,7 +95,15 @@ case "${bundle}" in
 
 "driver/wifi")
 
-    appinstall 'rtl8812au driver' 'rtl8812au-dkms'
+    #appinstall 'rtl8812au driver' 'rtl8812au-dkms'
+
+;;
+
+### Printer drivers and PPDs ===================================================
+
+"driver/printer")
+
+    appinstall 'HP PPD files'   'hpijs-ppds'
 
 ;;
 
@@ -415,6 +424,7 @@ case "${bundle}" in
 
 "dev/net")
 
+    appinstall 'ARPing'                 'arping'
     silent     'Wireshark fix'          sh -c 'echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections'
     appinstall 'Wireshark'              'wireshark-gtk'
 
@@ -562,7 +572,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'network/office'
     bash "${scriptpath}" 'network/services'
     bash "${scriptpath}" 'network/remote'
-    
+
 ;;
 
 ### Browser ====================================================================

@@ -59,6 +59,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'driver/intel'
     bash "${scriptpath}" 'driver/firmware'
     bash "${scriptpath}" 'driver/wifi'
+    bash "${scriptpath}" 'driver/printer'
     bash "${scriptpath}" 'driver/fs'
 
 ;;
@@ -78,6 +79,12 @@ case "${bundle}" in
 ### Wi-Fi drivers ==============================================================
 
 "driver/wifi")
+
+;;
+
+### Printer drivers and PPDs ===================================================
+
+"driver/printer")
 
 ;;
 
