@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 
 ROOT_PATH="$(cd "$(dirname "$0")/.." && pwd)"
 cd "${ROOT_PATH}" || exit 1
@@ -19,7 +19,7 @@ case "${bundle}" in
 
     if ispkginstalled ubuntu-session
     then
-        appinstall 'Gnome session'              'gnome-shell gnome-session'
+        appinstall 'Gnome session'          'gnome-shell gnome-session'
     fi
 
     appinstall 'Nautilus'                   'nautilus nautilus-extension-gnome-terminal nautilus-sendto nautilus-share'
@@ -208,8 +208,8 @@ case "${bundle}" in
 "server/download")
 
     appinstall 'Youtube downloader'     'youtube-dl ffmpeg phantomjs'
-    silent 'Download youtube-dl'    wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
-    silent 'Setup youtube-dl'       chmod a+rx /usr/local/bin/youtube-dl
+    silent 'Download youtube-dl'        wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
+    silent 'Setup youtube-dl'           chmod a+rx /usr/local/bin/youtube-dl
     appinstall 'Transmission'           'transmission-daemon'
     appinstall 'EiskaltDC++'            'eiskaltdcpp-daemon'
 
@@ -437,6 +437,7 @@ case "${bundle}" in
     if ispkginstalled nautilus
     then
         appinstall 'RabbitVCS'          'rabbitvcs-core rabbitvcs-nautilus'
+        silent     'Patch RabbitVCS'    patch '/usr/lib/python2.7/dist-packages/rabbitvcs/vcs/svn/__init__.py' "${rootfs_dir}/tools/files/rabbitvcs/rabbitvcs.patch"
     fi
 
     if ispkginstalled 'xorg'
@@ -475,7 +476,7 @@ case "${bundle}" in
 
 "appearance/fonts")
 
-    silent 'Accepting EULA license' sh -c 'echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections'
+    silent 'Accepting EULA license'     sh -c 'echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections'
     appinstall 'MS TTF core fonts'      'ttf-mscorefonts-installer'
     appinstall 'Noto fonts'             'fonts-noto'
     appinstall 'Linux Libertine fonst'  'fonts-linuxlibertine'
@@ -686,7 +687,7 @@ case "${bundle}" in
 
 "cli/net")
 
-    silent 'Wireshark fix'          sh -c 'echo wireshark-common wireshark-common/install-setuid boolean true | debconf-set-selections'
+    silent 'Wireshark fix'              sh -c 'echo wireshark-common wireshark-common/install-setuid boolean true | debconf-set-selections'
     appinstall 'tshark'                 'tshark'
     appinstall 'curl'                   'curl'
     appinstall 'CLI web browsers'       'elinks w3m'

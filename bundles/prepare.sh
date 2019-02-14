@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 
 ROOT_PATH="$(cd "$(dirname "$0")/.." && pwd)"
 cd "${ROOT_PATH}" || exit 1
@@ -308,6 +308,8 @@ case "${bundle}" in
 ### ============================================================================
 
 "vcs")
+
+    silent "Copy RabbitVCS folder"      cp -rf "${ROOT_PATH}/files/rabbitvcs" "${rootfs_dir}/tools/files/"
 
 ;;
 
