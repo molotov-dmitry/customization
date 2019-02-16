@@ -57,6 +57,10 @@ case "${bundle}" in
 
 "driver/wifi")
 
+    pushd /usr/bin/drivers/rtl8812AU_8821AU_linux
+    #make -f Makefile.dkms install
+    popd
+
 ;;
 
 ### Printer drivers and PPDs ===================================================
