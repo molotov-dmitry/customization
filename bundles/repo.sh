@@ -407,7 +407,8 @@ case "${bundle}" in
 
     ppaadd  'Purple VK plugin' 'purple-vk-plugin' 'dev' '' 'trusted'
 
-    repoadd 'VK' 'https://desktop.userapi.com/debian/' 'stable' 'master' 'vk/vk.gpg'
+    repoadd 'vk' 'https://desktop.userapi.com/debian/' 'stable' 'master' 'vk/vk.gpg'
+    silent  'Move VK repo' mv '/etc/apt/sources.list.d/vk-stable.list' '/etc/apt/sources.list.d/vk.list'
 
 ;;
 
