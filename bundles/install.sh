@@ -607,6 +607,8 @@ case "${bundle}" in
 "network/chat-extra")
 
     appinstall 'Telegram client'        'telegram-desktop'
+    appinstall 'VK client'              'vk'
+
     appinstall 'Telegram protocol'      'telegram-purple'
     appinstall 'VK protocol'            'purple-vk-plugin'
 

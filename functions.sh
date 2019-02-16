@@ -410,7 +410,8 @@ function repoadd()
     reponame="$1"
     repo="$2"
     version="$3"
-    keyfile="$4"
+    sections="$4"
+    keyfile="$5"
 
     title "Adding $reponame repository"
 
@@ -423,7 +424,17 @@ function repoadd()
         return $status
     fi
 
-    sourceslist="deb http://${repo} ${version} main"
+    if [[ -z "${sections}" ]]
+    then
+        sections='main'
+    fi
+
+    if [[ -z "$(echo "${repo}" | grep '^[a-zA-Z]*://')" ]]
+    then
+        repo="http://${repo}"
+    fi
+
+    sourceslist="deb ${repo} ${version} ${sections}"
 
     echo "${sourceslist}" > "/etc/apt/sources.list.d/${reponame}-${version}.list"
     status=$?

@@ -433,6 +433,7 @@ case "${bundle}" in
 "network/chat-extra")
 
     silent 'Copy Telegram files' cp -rf "${ROOT_PATH}/files/telegram" "${rootfs_dir}/tools/files/"
+    silent 'Copy VK files'       cp -rf "${ROOT_PATH}/files/vk"       "${rootfs_dir}/tools/files/"
 
 ;;
 

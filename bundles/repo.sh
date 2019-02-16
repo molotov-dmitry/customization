@@ -135,7 +135,7 @@ case "${bundle}" in
 
 "server/media")
 
-    repoadd 'plexmediaserver' 'downloads.plex.tv/repo/deb' 'public' 'plexmediaserver/PlexSign.key'
+    repoadd 'plexmediaserver' 'downloads.plex.tv/repo/deb' 'public' 'main' 'plexmediaserver/PlexSign.key'
 
 ;;
 
@@ -331,7 +331,7 @@ case "${bundle}" in
         ppaadd 'LibreOffice' 'libreoffice'
     fi
 
-    #repoadd 'OnlyOffice' 'download.onlyoffice.com/repo/debian' 'squeeze' 'onlyoffice/OnlyOffice.key'
+    #repoadd 'OnlyOffice' 'download.onlyoffice.com/repo/debian' 'squeeze' 'main' 'onlyoffice/OnlyOffice.key'
 
 ;;
 
@@ -406,6 +406,8 @@ case "${bundle}" in
     fi
 
     ppaadd  'Purple VK plugin' 'purple-vk-plugin' 'dev' '' 'trusted'
+
+    repoadd 'VK' 'https://desktop.userapi.com/debian/' 'stable' 'master' 'vk/vk.gpg'
 
 ;;
 

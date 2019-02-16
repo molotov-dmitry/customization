@@ -926,7 +926,10 @@ case "${bundle}" in
 "network/chat-extra")
 
     mkdir -p "${HOME}/.config/autostart"
+
     cp -f "${ROOT_PATH}/files/telegram/telegramdesktop.desktop" "${HOME}/.config/autostart/"
+
+    cp -f '/usr/share/applications/vk.desktop' "${HOME}/.config/autostart/"
 
 ;;
 
