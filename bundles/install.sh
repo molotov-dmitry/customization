@@ -413,7 +413,7 @@ case "${bundle}" in
     appinstall 'Postgres'               'postgresql-client libpq5 libpq-dev'
     appinstall 'SQLite'                 'sqlite libsqlite3-0 libsqlite3-dev'
 
-    if [[ "$(lsb_release -si)" == "Ubuntu" ]] && ispkginstalled 'xorg'
+    if ispkginstalled 'xorg'
     then
         appinstall 'Sqlite gui'         'sqlitebrowser'
     fi
