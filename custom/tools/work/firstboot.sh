@@ -1,5 +1,7 @@
 #!/bin/bash
 
+### Setup DNS names ============================================================
+
 cat << EOF >> /etc/hosts
 172.16.56.14    rczifort.local
 172.16.56.15    redmine.rczifort.local
@@ -10,3 +12,8 @@ cat << EOF >> /etc/hosts
 
 EOF
 
+### Install Wi-Fi driver =======================================================
+
+pushd /usr/bin/drivers/rtl8812AU_8821AU_linux
+make -f Makefile.dkms install
+popd

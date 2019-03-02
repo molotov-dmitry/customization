@@ -95,15 +95,6 @@ case "${bundle}" in
 
 "driver/wifi")
 
-    appinstall 'DKMS'              'dkms [linux-headers-generic]'
-    appinstall 'Git'               'git'
-
-    mkdir -p /usr/bin/drivers
-
-    pushd /usr/bin/drivers
-    silentsudo 'Cloning wi-fi driver'           git clone 'https://github.com/abperiasamy/rtl8812AU_8821AU_linux.git'
-    popd
-
 ;;
 
 ### Printer drivers and PPDs ===================================================
