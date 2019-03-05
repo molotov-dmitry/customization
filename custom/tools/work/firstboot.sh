@@ -14,6 +14,6 @@ EOF
 
 ### Install Wi-Fi driver =======================================================
 
-pushd /usr/bin/drivers/rtl8812AU_8821AU_linux
+pushd /usr/bin/drivers/rtl8812AU_8821AU_linux > /dev/null
 make -f Makefile.dkms install
-popd
+popd > /dev/null

@@ -23,6 +23,24 @@ appinstall 'Git'               'git'
 
 mkdir -p /usr/bin/drivers
 
-pushd /usr/bin/drivers
+pushd /usr/bin/drivers > /dev/null
 silentsudo 'Cloning wi-fi driver'           git clone 'https://github.com/abperiasamy/rtl8812AU_8821AU_linux.git'
-popd
+popd > /dev/null
+
+### Report builder =============================================================
+
+appinstall 'Git'                'git'
+appinstall 'Qt build tools'     'qtbase5-dev'
+
+pushd /tmp > /dev/null
+
+silentsudo 'Cloning Work Report'    git clone 'https://github.com/molotov-dmitry/work-report.git'
+
+pushd work-report > /dev/null
+
+silentsudo 'Prepare Work Report'    qmake -qt=qt5 work-report.pro
+silentsudo 'Build Work Report'      make -j $(nproc)
+silentsudo 'Install Work Report'    bash install.sh
+
+popd > /dev/null
+popd > /dev/null
