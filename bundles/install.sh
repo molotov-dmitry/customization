@@ -453,6 +453,11 @@ case "${bundle}" in
         appinstall 'Meld diff tool'     'meld'
     fi
 
+    if ispkginstalled 'xorg'
+    then
+        appinstall 'Git repo viewer'    'gitg'
+    fi
+
 ;;
 
 ### ============================================================================
