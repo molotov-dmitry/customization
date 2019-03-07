@@ -647,7 +647,7 @@ function changemirror()
 
 
 
-        mirrors_ubuntu==$(grep '^deb' /etc/apt/sources.list.d/official-package-repositories.list | grep -v 'id:linuxmint_main' | grep -v 'partner' | sed -r 's/[[:blank:]]*deb(\-src)?[[:blank:]]*//' | cut -d ' ' -f 1 | sed 's/.*:\/\///' | cut -d '/' -f 1 | uniq)
+        mirrors_ubuntu=$(grep '^deb' /etc/apt/sources.list.d/official-package-repositories.list | grep -v 'id:linuxmint_main' | grep -v 'partner' | sed -r 's/[[:blank:]]*deb(\-src)?[[:blank:]]*//' | cut -d ' ' -f 1 | sed 's/.*:\/\///' | cut -d '/' -f 1 | uniq)
 
         for mirror_ubuntu in ${mirrors_ubuntu}
         do
