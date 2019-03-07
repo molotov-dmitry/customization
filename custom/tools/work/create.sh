@@ -30,7 +30,7 @@ popd > /dev/null
 ### Report builder =============================================================
 
 appinstall 'Git'                'git'
-appinstall 'Qt build tools'     'qtbase5-dev'
+appinstall 'Build tools'        'g++ qtbase5-dev'
 
 pushd /tmp > /dev/null
 
