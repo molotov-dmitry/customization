@@ -609,7 +609,6 @@ function ppaadd()
 function changemirror()
 {
     mirror="$1"
-    current_mirror=$(cat /etc/apt/sources.list | grep '^deb' | grep -v updates | grep -v 'backports' | sed -r 's/[[:blank:]]*deb(\-src)?[[:blank:]]*//' | cut -d ' ' -f 1 | sed 's/.*:\/\///' | cut -d '/' -f 1 | head -n1)
 
     if [[ -z "${mirror}" ]]
     then
@@ -618,16 +617,45 @@ function changemirror()
         return 1
     fi
 
-    if [[ -z "${current_mirror}" ]]
+    if [[ "$(lsb_release -si)" == "Ubuntu" ]]
     then
-        title 'Changing mirror'
-        msgfail
-        return 2
+        current_mirror=$(cat /etc/apt/sources.list | grep '^deb' | grep -v updates | grep -v 'backports' | sed -r 's/[[:blank:]]*deb(\-src)?[[:blank:]]*//' | cut -d ' ' -f 1 | sed 's/.*:\/\///' | cut -d '/' -f 1 | head -n1)
+
+        if [[ -z "${current_mirror}" ]]
+        then
+            title 'Changing mirror'
+            msgfail
+            return 2
+        fi
+
+        silent "Changing mirror '${current_mirror}' to '${mirror}'" sed -i "s/${current_mirror}/${mirror}/g" /etc/apt/sources.list
+
+        return $?
+
+    elif [[ "$(lsb_release -si)" == "LinuxMint" ]]
+    then
+        mirror_mint=$(grep '^deb' /etc/apt/sources.list.d/official-package-repositories.list | grep 'id:linuxmint_main' | sed -r 's/[[:blank:]]*deb(\-src)?[[:blank:]]*//' | cut -d ' ' -f 1 | sed 's/.*:\/\///' | cut -d '/' -f 1 | head -n1)
+
+        if [[ -z "${mirror_mint}" ]]
+        then
+            title 'Changing mirror'
+            msgfail
+            return 2
+        fi
+
+        silent "Changing mirror '${mirror_mint}' to '${mirror}'" sed -i "s/${mirror_mint}/${mirror}/g" /etc/apt/sources.list.d/official-package-repositories.list
+
+        mirrors_ubuntu==$(grep '^deb' /etc/apt/sources.list.d/official-package-repositories.list | grep -v 'id:linuxmint_main' | grep -v 'partner' | sed -r 's/[[:blank:]]*deb(\-src)?[[:blank:]]*//' | cut -d ' ' -f 1 | sed 's/.*:\/\///' | cut -d '/' -f 1)
+
+        for mirror_ubuntu in ${mirrors_ubuntu}
+        do
+            silent "Changing mirror '${mirror_ubuntu}' to '${mirror}'" sed -i "s/${mirror_ubuntu}/${mirror}/g" /etc/apt/sources.list.d/official-package-repositories.list
+        done
+
+        return $?
+
     fi
 
-    silent "Changing mirror '${current_mirror}' to '${mirror}'" sed -i "s/${current_mirror}/${mirror}/g" /etc/apt/sources.list
-
-    return $?
 }
 
 function changerelease()
