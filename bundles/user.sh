@@ -695,8 +695,8 @@ case "${bundle}" in
     then
         gsettings set org.cinnamon.desktop.interface icon-theme     "${icon_theme}"
         gsettings set org.cinnamon.desktop.interface cursor-theme   "${cursor_theme}"
-        gsettings set org.cinnamon.desktop.interface gtk-theme      "${gtk_theme}"
-        gsettings set org.cinnamon.desktop.wm.preferences theme     "${wm_theme}"
+        #gsettings set org.cinnamon.desktop.interface gtk-theme      "${gtk_theme}"
+        #gsettings set org.cinnamon.desktop.wm.preferences theme     "${wm_theme}"
         gsettings set org.cinnamon.theme name                       'Mint-Y-Dark'
     fi
 ;;
