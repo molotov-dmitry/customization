@@ -120,7 +120,7 @@ function finish_chroot()
     silent 'Unmounting /dev/pts'  chroot "${ROOTFS_DIR}" umount "/dev/pts"
     silent 'Unmounting /sys'      chroot "${ROOTFS_DIR}" umount "/sys"
 
-    if [[ -n $(mount | grep "${ROOTFS_DIR}/proc/sys/fs/binfmt_misc" ]]
+    if [[ -n "$(mount | grep "${ROOTFS_DIR}/proc/sys/fs/binfmt_misc")" ]]
     then
         silent 'Unmounting binfmt'    chroot "${ROOTFS_DIR}" umount "/proc/sys/fs/binfmt_misc"
     fi
