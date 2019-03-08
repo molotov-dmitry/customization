@@ -17,11 +17,14 @@ case "${bundle}" in
 
 "gnome")
 
-    ## Cursor theme ------------------------------------------------------------
+    ## GDM3 theme --------------------------------------------------------------
 
-    dgm3_theme='gnome-shell'
+    if [[ "$(lsb_release -si)" == "Ubuntu" ]]
+    then
+        gdm3_theme='gnome-shell'
 
-    silent 'Set GDM3 theme' update-alternatives --set gdm3.css "/usr/share/gnome-shell/theme/${dgm3_theme}.css"
+        silent 'Set GDM3 theme' update-alternatives --set gdm3.css "/usr/share/gnome-shell/theme/${gdm3_theme}.css"
+    fi
 
 ;;
 
@@ -386,7 +389,10 @@ case "${bundle}" in
 
     ## Grub theme --------------------------------------------------------------
 
-    silent 'Set Grub theme' sed -i 's/44,0,30,0/55,71,79,0/' /usr/share/plymouth/themes/default.grub
+    if [[ "$(lsb_release -si)" == "Ubuntu" ]]
+    then
+        silent 'Set Grub theme' sed -i 's/44,0,30,0/55,71,79,0/' /usr/share/plymouth/themes/default.grub
+    fi
 
     ## Cursor theme ------------------------------------------------------------
 
