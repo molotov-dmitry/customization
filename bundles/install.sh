@@ -38,7 +38,10 @@ case "${bundle}" in
         appinstall 'JSON editor'            'jq'
     fi
 
-    gnomeshellextension 112                 # Remove Accessibility
+    if ispkginstalled gnome-shell
+    then
+        gnomeshellextension 112             # Remove Accessibility
+    fi
 
 ;;
 
@@ -548,8 +551,11 @@ case "${bundle}" in
     appinstall 'Gnome Photos'           'gnome-photos'
     appinstall 'Shotwell'               'shotwell'
 
-    gnomeshellextension 55              # Media player indicator
-    gnomeshellextension 906             # Sound Input & Output Device Chooser
+    if ispkginstalled gnome-shell
+    then
+        gnomeshellextension 55              # Media player indicator
+        gnomeshellextension 906             # Sound Input & Output Device Chooser
+    fi
 
 ;;
 
