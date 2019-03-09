@@ -12,15 +12,17 @@ scriptpath="${ROOT_PATH}/bundles/$(basename "$0")"
 case "${bundle}" in
 
 ### ============================================================================
-### Gnome ======================================================================
+### DM =========================================================================
 ### ============================================================================
+
+### Gnome ======================================================================
 
 "gnome")
 
     ## launcher ================================================================
 
-    launcheradd 'nautilus'
-    launcheradd 'gnome-terminal'
+    launcheradd 'org.gnome.Nautilus'
+    launcheradd 'org.gnome.Terminal'
 
     ## hide apps from application menu =========================================
 
@@ -179,58 +181,61 @@ case "${bundle}" in
 
     fi
 
-    ## Cinnamon desktop ========================================================
+    ## Aliases =================================================================
+
+    echo alias highlight=\'grep --color=always -z\' >> ~/.bash_aliases
+
+    echo -e "\nfunction ddusb()\n{\n    sudo dd if=\"\$1\" of=\"\$2\" bs=2M status=progress oflag=sync\n}\n\n" >> ~/.bash_aliases
+
+;;
+
+### Cinnamon ===================================================================
+
+"cinnamon")
+
+    ## Hide Nemo if Nautilus installed -----------------------------------------
+
+    if ispkginstalled nemo && ispkginstalled nautilus
+    then
+        hideapp 'nemo'
+    fi
 
     ## Set custom start menu icon ----------------------------------------------
 
-    if ispkginstalled cinnamon
-    then
-        cfgfile="${HOME}/.cinnamon/configs/menu@cinnamon.org/1.json"
+    cfgfile="${HOME}/.cinnamon/configs/menu@cinnamon.org/1.json"
 
-        mkdir -p "$(dirname "${cfgfile}")"
-        [[ ! -f "${cfgfile}" ]] && echo '{}' > "${cfgfile}"
+    mkdir -p "$(dirname "${cfgfile}")"
+    [[ ! -f "${cfgfile}" ]] && echo '{}' > "${cfgfile}"
 
-        tmpf=$(mktemp --tmpdir=$(dirname "${cfgfile}") -t)
-        jq '."menu-custom"."value" = true' "${cfgfile}" > "${tmpf}"
-        mv -f "${tmpf}" "${cfgfile}"
+    tmpf=$(mktemp --tmpdir=$(dirname "${cfgfile}") -t)
+    jq '."menu-custom"."value" = true' "${cfgfile}" > "${tmpf}"
+    mv -f "${tmpf}" "${cfgfile}"
 
-        unset tmpf
-        unset cfgfile
-    fi
+    unset tmpf
+    unset cfgfile
 
     ## Clear launcher ----------------------------------------------------------
 
-    if ispkginstalled cinnamon
-    then
-        cfgfile="${HOME}/.cinnamon/configs/grouped-window-list@cinnamon.org/3.json"
+    cfgfile="${HOME}/.cinnamon/configs/grouped-window-list@cinnamon.org/3.json"
 
-        mkdir -p "$(dirname "${cfgfile}")"
-        [[ ! -f "${cfgfile}" ]] && echo '{}' > "${cfgfile}"
+    mkdir -p "$(dirname "${cfgfile}")"
+    [[ ! -f "${cfgfile}" ]] && echo '{}' > "${cfgfile}"
 
-        tmpf=$(mktemp --tmpdir=$(dirname "${cfgfile}") -t)
-        jq '."pinned-apps"."value" = []' "${cfgfile}" > "${tmpf}"
-        mv -f "${tmpf}" "${cfgfile}"
+    tmpf=$(mktemp --tmpdir=$(dirname "${cfgfile}") -t)
+    jq '."pinned-apps"."value" = []' "${cfgfile}" > "${tmpf}"
+    mv -f "${tmpf}" "${cfgfile}"
 
-        unset tmpf
-        unset cfgfile
-    fi
+    unset tmpf
+    unset cfgfile
 
     ## Hide desktop icons ------------------------------------------------------
 
-    if ispkginstalled nemo
-    then
-
-        gsettings set org.nemo.desktop desktop-layout 'false::false'
-
-    fi
+    gsettings set org.nemo.desktop desktop-layout 'false::false'
 
     ## Disable Nemo plugins ----------------------------------------------------
 
-    if ispkginstalled nemo
-    then
-        gsettingsadd org.nemo.plugins disabled-actions    'add-desklets.nemo_action'
-        gsettingsadd org.nemo.plugins disabled-extensions 'ChangeColorFolder+NemoPython'
-    fi
+    gsettingsadd org.nemo.plugins disabled-actions    'add-desklets.nemo_action'
+    gsettingsadd org.nemo.plugins disabled-extensions 'ChangeColorFolder+NemoPython'
 
     ## Set Nautilus as default file manager ------------------------------------
 
@@ -242,24 +247,12 @@ case "${bundle}" in
 
     ## Use text instead of layout flags ----------------------------------------
 
-    if ispkginstalled cinnamon
-    then
-        gsettings set org.cinnamon.desktop.interface keyboard-layout-show-flags false
-        gsettings set org.cinnamon.desktop.interface keyboard-layout-use-upper  true
-    fi
+    gsettings set org.cinnamon.desktop.interface keyboard-layout-show-flags false
+    gsettings set org.cinnamon.desktop.interface keyboard-layout-use-upper  true
 
     ## Setup hot corners -------------------------------------------------------
 
-    if ispkginstalled cinnamon
-    then
-        gsettings set org.cinnamon hotcorner-layout  "['scale:true:0', 'scale:false:0', 'scale:false:0', 'desktop:true:700']"
-    fi
-
-    ## Aliases =================================================================
-
-    echo alias highlight=\'grep --color=always -z\' >> ~/.bash_aliases
-
-    echo -e "\nfunction ddusb()\n{\n    sudo dd if=\"\$1\" of=\"\$2\" bs=2M status=progress oflag=sync\n}\n\n" >> ~/.bash_aliases
+    gsettings set org.cinnamon hotcorner-layout  "['scale:true:0', 'scale:false:0', 'scale:false:0', 'desktop:true:700']"
 
 ;;
 
@@ -774,7 +767,7 @@ case "${bundle}" in
     ## launcher ----------------------------------------------------------------
 
     launcheradd 'rhythmbox'
-    #launcheradd 'totem'
+    #launcheradd 'org.gnome.Totem'
 
     ## hide apps from application menu -----------------------------------------
 

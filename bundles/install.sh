@@ -12,15 +12,16 @@ scriptpath="${ROOT_PATH}/bundles/$(basename "$0")"
 case "${bundle}" in
 
 ### ============================================================================
-### Gnome ======================================================================
+### DM =========================================================================
 ### ============================================================================
+
+### Gnome ======================================================================
 
 "gnome")
 
     if ispkginstalled ubuntu-session
     then
         appinstall 'Gnome session'          'gnome-shell gnome-session'
-        appinstall 'Cinnamon'               'cinnamon cinnamon-session cinnamon-screensaver cinnamon-l10n'
     fi
 
     appinstall 'Nautilus'                   'nautilus nautilus-extension-gnome-terminal nautilus-sendto nautilus-share'
@@ -29,21 +30,20 @@ case "${bundle}" in
     appinstall 'Base applications'          'gnome-calculator gnome-system-monitor gnome-characters'
     appinstall 'Tweak tool'                 'gnome-tweak-tool'
 
-    if ! ispkginstalled 'gnome-shell' || ispkginstalled 'cinnamon'
-    then
-        appinstall 'Redshift'               'redshift-gtk'
-    fi
-
-    if ispkginstalled cinnamon
-    then
-        appinstall 'JSON editor'            'jq'
-    fi
-
     if ispkginstalled gnome-shell
     then
         gnomeshellextension 112             # Remove Accessibility
     fi
 
+;;
+
+### Cinnamon ===================================================================
+
+"cinnamon")
+
+    appinstall 'Cinnamon'               'cinnamon cinnamon-session cinnamon-screensaver cinnamon-l10n'
+    appinstall 'JSON editor'            'jq'
+    appinstall 'Redshift'               'redshift-gtk'
 ;;
 
 ### ============================================================================
