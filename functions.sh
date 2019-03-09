@@ -1369,9 +1369,9 @@ function bgdescr()
 {
     local dm_installed=()
 
-    ispkginstalled gnome-shell && dm_installed+='gnome'
-    ispkginstalled cinnamon    && dm_installed+='cinnamon'
-    ispkginstalled mate        && dm_installed+='mate'
+    ispkginstalled gnome-shell && dm_installed+=( 'gnome' )
+    ispkginstalled cinnamon    && dm_installed+=( 'cinnamon' )
+    ispkginstalled mate        && dm_installed+=( 'mate' )
 
     local root_bg_dir="$1"
     local root_bg_name="${root_bg_dir//\//-}"

@@ -90,8 +90,8 @@ case "${bundle}" in
 
     editors=()
 
-    ispkginstalled gedit && editors+='gnome.gedit'
-    ispkginstalled xed   && editors+='x.editor'
+    ispkginstalled gedit && editors+=( 'gnome.gedit' )
+    ispkginstalled xed   && editors+=( 'x.editor' )
 
     for editor in "${editors[@]}"
     do
