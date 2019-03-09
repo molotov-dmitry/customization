@@ -1365,6 +1365,56 @@ function setlockscreen()
     fi
 }
 
+function bgdescr()
+{
+    local dm_installed=()
+
+    ispkginstalled gnome-shell && dm_installed+='gnome'
+    ispkginstalled cinnamon    && dm_installed+='cinnamon'
+    ispkginstalled mate        && dm_installed+='mate'
+
+    local root_bg_dir="$1"
+    local root_bg_name="${root_bg_dir//\//-}"
+
+    pushd "/usr/share/backgrounds/${root_bg_dir}/" > /dev/null
+
+    for dm in "${dm_installed[@]}"
+    do
+
+        cat > "/usr/share/${dm}-background-properties/${root_bg_name}.xml" << _EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE wallpapers SYSTEM "${dm}-wp-list.dtd">
+<wallpapers>
+_EOF
+
+        for bg in *
+        do
+
+            local bg_name="${bg//_/\ }"
+            local bg_name="$(echo "${bg_name%.*}" | tr "[A-Z]" "[a-z]" | sed "s/\( \|^\)\(.\)/\1\u\2/g" )"
+
+            cat >> "/usr/share/${dm}-background-properties/${root_bg_name}.xml" << _EOF
+ <wallpaper>
+     <name>${bg_name}</name>
+     <filename>/usr/share/backgrounds/${root_bg_dir}/${bg}</filename>
+     <options>zoom</options>
+     <pcolor>#000000</pcolor>
+     <scolor>#000000</scolor>
+     <shade_type>solid</shade_type>
+ </wallpaper>
+_EOF
+
+        done
+
+        cat >> "/usr/share/${dm}-background-properties/${root_bg_name}.xml" << _EOF
+</wallpapers>
+_EOF
+
+    done
+
+    popd > /dev/null
+}
+
 ### File system ================================================================
 
 function fixpermissions()

@@ -357,6 +357,8 @@ case "${bundle}" in
 
 "appearance/wallpaper")
 
+    silent "Copy backgrounds"   cp -rf "${ROOT_PATH}/files/backgrounds" "${rootfs_dir}/tools/files/"
+
 ;;
 
 ### ============================================================================

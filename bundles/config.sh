@@ -420,6 +420,12 @@ case "${bundle}" in
 
 "appearance/wallpaper")
 
+    silent 'Creating backgrounds dir'   mkdir -p /usr/share/backgrounds/custom
+    silent 'Copying backgrounds'        tar -xf backgrounds.tar.xz -C /usr/share/backgrounds/custom
+
+    bgdescr 'custom/backgrounds'
+    bgdescr 'custom/lock'
+
 ;;
 
 ### ============================================================================

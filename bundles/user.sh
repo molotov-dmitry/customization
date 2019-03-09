@@ -721,16 +721,16 @@ case "${bundle}" in
 
 "appearance/wallpaper")
 
-    if test -f '/usr/share/backgrounds/linuxmint-tessa/skunze_beach.jpg'
+    if test -f '/usr/share/backgrounds/custom/backgrounds/skunze_beach.jpg'
     then
-        ( sleep 20 ; setwallpaper '/usr/share/backgrounds/linuxmint-tessa/skunze_beach.jpg' ) &
+        ( sleep 20 ; setwallpaper '/usr/share/backgrounds/custom/backgrounds/skunze_beach.jpg' ) &
     else
         ( sleep 20 ; setwallpaper '#204a87' ) &
     fi
 
-    if test -f '/usr/share/backgrounds/Milky_Way_before_the_dawn_by_Tomas_Sobek.jpg'
+    if test -f '/usr/share/backgrounds/custom/lock/stars.jpg'
     then
-        ( sleep 20 ; setlockscreen '/usr/share/backgrounds/Milky_Way_before_the_dawn_by_Tomas_Sobek.jpg' ) &
+        ( sleep 20 ; setlockscreen '/usr/share/backgrounds/custom/lock/stars.jpg' ) &
     fi
 
 ;;
