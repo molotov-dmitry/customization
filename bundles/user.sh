@@ -149,7 +149,7 @@ case "${bundle}" in
 
     fi
 
-    if ispkginstalled gnome-shell && [[ $(gnome-shell --version | cut -d '.' -f 2) -ge 24 ]]
+    if ispkginstalled gnome-shell && ! ( ispkginstalled 'cinnamon' && ispkginstalled 'redshift-gtk' ) ]]
     then
 
         gsettings set org.gnome.settings-daemon.plugins.color active true

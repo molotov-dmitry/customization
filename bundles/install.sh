@@ -20,6 +20,7 @@ case "${bundle}" in
     if ispkginstalled ubuntu-session
     then
         appinstall 'Gnome session'          'gnome-shell gnome-session'
+        appinstall 'Cinnamon'               'cinnamon cinnamon-session cinnamon-screensaver cinnamon-l10n'
     fi
 
     appinstall 'Nautilus'                   'nautilus nautilus-extension-gnome-terminal nautilus-sendto nautilus-share'
@@ -28,7 +29,7 @@ case "${bundle}" in
     appinstall 'Base applications'          'gnome-calculator gnome-system-monitor gnome-characters'
     appinstall 'Tweak tool'                 'gnome-tweak-tool'
 
-    if ! ispkginstalled 'gnome-shell' || [[ $(gnome-shell --version | cut -d '.' -f 2) -lt 24 ]]
+    if ! ispkginstalled 'gnome-shell' || ispkginstalled 'cinnamon'
     then
         appinstall 'Redshift'               'redshift-gtk'
     fi
@@ -487,6 +488,24 @@ case "${bundle}" in
     appinstall 'Canta theme'            'canta-themes canta-icons'
     appinstall 'Papirus theme'          'papirus-icon-theme'
     appinstall 'Oranchelo theme'        'oranchelo-icon-theme'
+
+    if ! ispkgavailable mint-themes
+    then
+        appinstall 'Build utilities'        'git make ruby-sass'
+
+        pushd /tmp > /dev/null
+
+        silent 'Cloning Mint Themes repo'   git clone --depth 1 https://github.com/linuxmint/mint-themes.git
+
+        pushd mint-themes > /dev/null
+
+        silent 'Generating Mint Themes'     make
+        silent 'Installing Mint Themes'     cp -rf usr/share/themes/* /usr/share/themes/
+
+        popd > /dev/null
+        popd > /dev/null
+
+    fi
 
 ;;
 
