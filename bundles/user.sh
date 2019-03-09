@@ -144,26 +144,12 @@ case "${bundle}" in
 
     ## night light =============================================================
 
-    if ispkginstalled 'redshift-gtk'
+    if ispkginstalled gnome-shell
     then
 
-        hideapp 'redshift-gtk'
-
-    fi
-
-    if ispkginstalled gnome-shell && ! ( ispkginstalled 'cinnamon' && ispkginstalled 'redshift-gtk' )
-    then
-
-        gsettings set org.gnome.settings-daemon.plugins.color active true
-        gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+        gsettings set org.gnome.settings-daemon.plugins.color active                         true
+        gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled            true
         gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
-
-    elif ispkginstalled 'redshift-gtk'
-    then
-
-        mkdir -p "${HOME}/.config/autostart/"
-        cp -rf "${ROOT_PATH}/files/redshift/redshift-gtk.desktop" "${HOME}/.config/autostart/"
-
     fi
 
     ## Gnome shell extensions ==================================================
@@ -198,6 +184,13 @@ case "${bundle}" in
     if ispkginstalled nemo && ispkginstalled nautilus
     then
         hideapp 'nemo'
+    fi
+
+    ## Hide redshift launcher --------------------------------------------------
+
+    if ispkginstalled 'redshift-gtk'
+    then
+        hideapp 'redshift-gtk'
     fi
 
     ## Set custom start menu icon ----------------------------------------------
@@ -253,6 +246,16 @@ case "${bundle}" in
     ## Setup hot corners -------------------------------------------------------
 
     gsettings set org.cinnamon hotcorner-layout  "['scale:true:0', 'scale:false:0', 'scale:false:0', 'desktop:true:700']"
+
+    ## Setup night light -------------------------------------------------------
+
+    if ispkginstalled 'redshift-gtk'
+    then
+
+        mkdir -p "${HOME}/.config/autostart/"
+        cp -rf "${ROOT_PATH}/files/redshift/redshift-gtk.desktop" "${HOME}/.config/autostart/"
+
+    fi
 
 ;;
 
