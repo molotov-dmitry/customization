@@ -149,7 +149,7 @@ case "${bundle}" in
 
     fi
 
-    if ispkginstalled gnome-shell && ! ( ispkginstalled 'cinnamon' && ispkginstalled 'redshift-gtk' ) ]]
+    if ispkginstalled gnome-shell && ! ( ispkginstalled 'cinnamon' && ispkginstalled 'redshift-gtk' )
     then
 
         gsettings set org.gnome.settings-daemon.plugins.color active true
@@ -159,7 +159,7 @@ case "${bundle}" in
     elif ispkginstalled 'redshift-gtk'
     then
 
-        mkdir -p "${HOME}.config/autostart/"
+        mkdir -p "${HOME}/.config/autostart/"
         cp -rf "${ROOT_PATH}/files/redshift/redshift-gtk.desktop" "${HOME}/.config/autostart/"
 
     fi
