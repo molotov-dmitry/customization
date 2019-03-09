@@ -1381,6 +1381,8 @@ function bgdescr()
     for dm in "${dm_installed[@]}"
     do
 
+        mkdir -p "/usr/share/${dm}-background-properties"
+
         cat > "/usr/share/${dm}-background-properties/${root_bg_name}.xml" << _EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE wallpapers SYSTEM "${dm}-wp-list.dtd">
