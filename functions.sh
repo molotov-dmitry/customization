@@ -688,8 +688,8 @@ function repoaddnonfree()
 {
     if [[ "$(lsb_release -si)" == "Ubuntu" ]]
     then
-        silent 'Enabling universe source'   add-apt-repository universe
-        silent 'Enabling multiverse source' add-apt-repository multiverse
+        silent 'Clear sources.list'             sed -i 's/ restricted//g;s/ universe//g;s/ multiverse//g'   /etc/apt/sources.list
+        silent 'Enabling universe/multiverse'   sed -i 's/main[  ]*$/main restricted universe multiverse/g' /etc/apt/sources.list
 
     elif [[ "$(lsb_release -si)" == "Debian" ]]
     then

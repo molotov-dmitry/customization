@@ -359,12 +359,7 @@ case "${bundle}" in
 
 "media-online")
 
-    if [[ "$(lsb_release -si)" == "Ubuntu" ]]
-    then
-        ppaadd  'Web Upd8' 'nilarimogard' 'webupd8'
-    fi
-
-    ppaadd  'Ubuntu Handbook' 'ubuntuhandbook1' 'apps'  # For GNOME Twitch
+    #ppaadd  'Ubuntu Handbook' 'ubuntuhandbook1' 'apps'  # For GNOME Twitch
 
 ;;
 
@@ -407,15 +402,6 @@ case "${bundle}" in
 ### Chat extra protocols =======================================================
 
 "network/chat-extra")
-
-    ppaadd  'Web Upd8' 'nilarimogard' 'webupd8' 'bionic'    # For telegram-purple
-
-    if [[ "$(lsb_release -si)" == "Ubuntu" ]]
-    then
-        ppaadd  'Web Upd8' 'nilarimogard' 'webupd8'
-    fi
-
-    ppaadd  'Purple VK plugin' 'purple-vk-plugin' 'dev' '' 'trusted'
 
     repoadd 'vk' 'https://desktop.userapi.com/debian/' 'stable' 'master' 'vk/vk.gpg'
     silent  'Move VK repo' mv '/etc/apt/sources.list.d/vk-stable.list' '/etc/apt/sources.list.d/vk.list'
