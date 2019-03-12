@@ -495,7 +495,8 @@ case "${bundle}" in
 
         pushd /tmp > /dev/null
 
-        silent 'Cloning Mint Themes repo'   git clone --depth 1 https://github.com/linuxmint/mint-themes.git
+        silent 'Cloning Mint Themes repo'   git clone https://github.com/linuxmint/mint-themes.git
+        silent 'Checkout version 1.7.8'     git checkout 9e29e3dbbe3df8e6f9eb88ae85b1955509d4a2f3
 
         pushd mint-themes > /dev/null
 
@@ -505,6 +506,8 @@ case "${bundle}" in
         popd > /dev/null
         popd > /dev/null
 
+        silent 'Removing Mint Themes repo'  rm -rf /tmp/mint-themes
+
     fi
 
 ;;
@@ -513,7 +516,8 @@ case "${bundle}" in
 
 "appearance/fonts")
 
-    silent 'Accepting EULA license'     sh -c 'echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections'
+    silent     'Accepting EULA license' sh -c 'echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections'
+
     appinstall 'MS TTF core fonts'      'ttf-mscorefonts-installer'
     appinstall 'Noto fonts'             'fonts-noto'
     appinstall 'Linux Libertine fonst'  'fonts-linuxlibertine'
@@ -572,8 +576,8 @@ case "${bundle}" in
 
     if ispkginstalled gnome-shell
     then
-        gnomeshellextension 55              # Media player indicator
-        gnomeshellextension 906             # Sound Input & Output Device Chooser
+        gnomeshellextension 55          # Media player indicator
+        gnomeshellextension 906         # Sound Input & Output Device Chooser
     fi
 
 ;;
@@ -586,7 +590,7 @@ case "${bundle}" in
     silent     'Download youtube-dl'    wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
     silent     'Setup youtube-dl'       chmod a+rx /usr/local/bin/youtube-dl
 
-    #appinstall 'Gnome Twitch app'       'gnome-twitch gnome-twitch-player-backend-mpv-opengl'
+    #appinstall 'Gnome Twitch app'      'gnome-twitch gnome-twitch-player-backend-mpv-opengl'
 
 ;;
 
