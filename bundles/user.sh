@@ -209,6 +209,20 @@ case "${bundle}" in
 
     ## Clear launcher ----------------------------------------------------------
 
+    cfgfile="${HOME}/.cinnamon/configs/panel-launchers@cinnamon.org/3.json"
+
+    mkdir -p "$(dirname "${cfgfile}")"
+    [[ ! -f "${cfgfile}" ]] && echo '{}' > "${cfgfile}"
+
+    tmpf=$(mktemp --tmpdir=$(dirname "${cfgfile}") -t)
+    jq '."launcherList"."value" = []' "${cfgfile}" > "${tmpf}"
+    mv -f "${tmpf}" "${cfgfile}"
+
+    unset tmpf
+    unset cfgfile
+
+    ## Clear grouped window list pinned applications ---------------------------
+
     cfgfile="${HOME}/.cinnamon/configs/grouped-window-list@cinnamon.org/3.json"
 
     mkdir -p "$(dirname "${cfgfile}")"
@@ -691,8 +705,9 @@ case "${bundle}" in
     then
         gsettings set org.cinnamon.desktop.interface icon-theme     "${icon_theme}"
         gsettings set org.cinnamon.desktop.interface cursor-theme   "${cursor_theme}"
-        #gsettings set org.cinnamon.desktop.interface gtk-theme      "${gtk_theme}"
-        #gsettings set org.cinnamon.desktop.wm.preferences theme     "${wm_theme}"
+
+        gsettings set org.cinnamon.desktop.interface gtk-theme      'Mint-Y-Darker'
+        gsettings set org.cinnamon.desktop.wm.preferences theme     'Mint-Y-Dark'
         gsettings set org.cinnamon.theme name                       'Mint-Y-Dark'
     fi
 ;;
