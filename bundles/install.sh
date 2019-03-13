@@ -496,10 +496,10 @@ case "${bundle}" in
         pushd /tmp > /dev/null
 
         silent 'Cloning Mint Themes repo'   git clone https://github.com/linuxmint/mint-themes.git
-        silent 'Checkout version 1.7.8'     git checkout 9e29e3dbbe3df8e6f9eb88ae85b1955509d4a2f3
 
         pushd mint-themes > /dev/null
 
+        silent 'Checkout version 1.7.8'     git checkout 9e29e3dbbe3df8e6f9eb88ae85b1955509d4a2f3
         silent 'Generating Mint Themes'     make
         silent 'Installing Mint Themes'     cp -rf usr/share/themes/* /usr/share/themes/
 
