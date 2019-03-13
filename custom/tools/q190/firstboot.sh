@@ -1,5 +1,7 @@
 #!/bin/bash
 
+### Setup DNS names ============================================================
+
 cat << EOF >> /etc/hosts
 172.16.56.14    rczifort.local
 172.16.56.15    redmine.rczifort.local
