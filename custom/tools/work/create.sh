@@ -18,19 +18,14 @@ fi
 
 ### Wi-Fi driver ===============================================================
 
-appinstall 'DKMS'              'dkms [linux-headers-generic]'
-appinstall 'Git'               'git'
-
-mkdir -p /usr/bin/drivers
-
-pushd /usr/bin/drivers > /dev/null
-silentsudo 'Cloning wi-fi driver'           git clone 'https://github.com/abperiasamy/rtl8812AU_8821AU_linux.git'
-popd > /dev/null
+appinstall 'DKMS'                   'dkms [linux-headers-generic]'
+appinstall 'Git'                    'git'
+silentsudo 'Cloning wi-fi driver'   git clone --depth 1 'https://github.com/gordboy/rtl8812au.git' /usr/src/rtl8812au-5.2.20
 
 ### Report builder =============================================================
 
-appinstall 'Git'                'git'
-appinstall 'Build tools'        'g++ qtbase5-dev'
+appinstall 'Git'                    'git'
+appinstall 'Build tools'            'g++ qtbase5-dev'
 
 pushd /tmp > /dev/null
 
