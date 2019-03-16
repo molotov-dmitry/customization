@@ -248,8 +248,8 @@ case "${bundle}" in
 
     if ispkginstalled nemo && ispkginstalled nautilus
     then
-        mimeregister    'inode/directory' 'nautilus-folder-handler.desktop'
-        setdefaultapp   'inode/directory' 'nautilus-folder-handler.desktop'
+        mimeregister    'inode/directory' 'org.gnome.Nautilus.desktop'
+        setdefaultapp   'inode/directory' 'org.gnome.Nautilus.desktop'
     fi
 
     ## Use text instead of layout flags ----------------------------------------
