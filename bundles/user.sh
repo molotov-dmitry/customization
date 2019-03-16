@@ -718,19 +718,19 @@ case "${bundle}" in
 
     if ispkginstalled gnome-shell
     then
-        gsettings set org.gnome.desktop.interface font-name             'Ubuntu 10'
+        gsettings set org.gnome.desktop.interface font-name             'Google Sans 10'
         gsettings set org.gnome.desktop.interface document-font-name    'Linux Libertine O 12'
         gsettings set org.gnome.desktop.interface monospace-font-name   'Ubuntu Mono 12'
-        gsettings set org.gnome.desktop.wm.preferences titlebar-font    'Ubuntu 10'
+        gsettings set org.gnome.desktop.wm.preferences titlebar-font    'Google Sans 10'
     fi
 
     if ispkginstalled cinnamon
     then
-        gsettings set org.cinnamon.desktop.interface font-name          'Ubuntu 10'
+        gsettings set org.cinnamon.desktop.interface font-name          'Google Sans 10'
         gsettings set org.gnome.desktop.interface document-font-name    'Linux Libertine O 12'
         gsettings set org.gnome.desktop.interface monospace-font-name   'Ubuntu Mono 12'
-        gsettings set org.cinnamon.desktop.wm.preferences titlebar-font 'Ubuntu 10'
-        gsettings set org.nemo.desktop font                             'Ubuntu 10'
+        gsettings set org.cinnamon.desktop.wm.preferences titlebar-font 'Google Sans 10'
+        gsettings set org.nemo.desktop font                             'Google Sans 10'
     fi
 
 ;;
