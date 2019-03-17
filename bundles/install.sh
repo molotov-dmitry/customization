@@ -517,8 +517,10 @@ case "${bundle}" in
 "appearance/fonts")
 
     silent     'Accepting EULA license' sh -c 'echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections'
-
     appinstall 'MS TTF core fonts'      'ttf-mscorefonts-installer'
+    silent     'Change fonts repo'      sed -i 's#http://downloads.sourceforge.net/corefonts#https://github.com/pushcx/corefonts/raw/master#g' /usr/share/package-data-downloads/ttf-mscorefonts-installer
+    silent     'Re-download fonts'      /usr/lib/update-notifier/package-data-downloader
+
     appinstall 'Noto fonts'             'fonts-noto'
     appinstall 'Linux Libertine fonst'  'fonts-linuxlibertine'
 
