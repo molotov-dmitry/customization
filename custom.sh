@@ -88,6 +88,10 @@ do
         noprogress='y'
     ;;
 
+    '--notify')
+        notify='y'
+    ;;
+
     *.iso)
         iso_src="$1"
     ;;
@@ -422,6 +426,13 @@ if [[ $useram -eq 1 ]]
 then
     silent 'Unmounting remaster dir' umount "${remaster_dir}"
     silent 'Dropping cached memory' su -c 'echo 3 > /proc/sys/vm/drop_caches'
+fi
+
+### Send notify ================================================================
+
+if [[ "$notify" == 'y' ]]
+then
+    echo "dialog-info:${config}-$(basename "${iso_src}") build completed" | nc -b -w1 -u 255.255.255.255 14993
 fi
 
 ### Finish signal ==============================================================
