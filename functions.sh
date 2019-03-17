@@ -1088,8 +1088,8 @@ function hideapp()
     mkdir -p "${HOME}/.local/share/applications/"
 
     cp -f "/usr/share/applications/${app}.desktop" "${HOME}/.local/share/applications/${app}.desktop"
-    sed -i '/^NoDisplay=/d' "${HOME}/.local/share/applications/${app}.desktop"
-    echo 'NoDisplay=true' >> "${HOME}/.local/share/applications/${app}.desktop"
+
+    addconfigline 'NoDisplay' 'true' 'Desktop Entry' "${HOME}/.local/share/applications/${app}.desktop"
 
     return 0
 }
