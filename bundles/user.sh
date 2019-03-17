@@ -30,11 +30,13 @@ case "${bundle}" in
     hideapp 'im-config'
     hideapp 'gparted'
     hideapp 'gnome-control-center'
-    hideapp 'gnome-tweak-tool'
     hideapp 'gnome-session-properties'
+    hideapp 'gnome-language-selector'
     hideapp 'software-properties-drivers'
     hideapp 'software-properties-gnome'
     hideapp 'software-properties-gtk'
+    hideapp 'software-properties-livepatch'
+    hideapp 'org.gnome.PowerStats'
 
     ## Gnome desktop ===========================================================
 
