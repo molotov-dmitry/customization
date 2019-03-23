@@ -38,8 +38,12 @@ done
 
 if [[ ! -e /tools/.firstboot ]]
 then
-    bash /tools/firstboot.sh 2>> /tools/firstboot.log
+
+    setcap cap_net_raw+ep $(which ping)
     echo "$?" >  /tools/.firstboot
+
+    bash /tools/firstboot.sh 2>> /tools/firstboot.log
+    echo "$?" >> /tools/.firstboot
 
     bash /tools/bundle.sh firstboot firstboot 2>> /tools/firstboot.log
     echo "$?" >> /tools/.firstboot
