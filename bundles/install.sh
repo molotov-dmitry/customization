@@ -564,6 +564,7 @@ case "${bundle}" in
 
     appinstall 'Restricted extras'      'ubuntu-restricted-extras'
     appinstall 'VA API drivers'         'va-driver-all gstreamer1.0-vaapi'
+    appinstall 'Multimedia codecs'      'gstreamer1.0-plugins-bad gstreamer1.0-libav'
 
     appinstall 'Rhythmbox'              'rhythmbox rhythmbox-plugins'
     appinstall 'Totem video player'     'totem'
