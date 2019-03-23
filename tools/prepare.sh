@@ -24,3 +24,7 @@ silent     'Fix sudo install'       apt-mark manual sudo
 ### Configuration ==============================================================
 
 silent      'Disable lid close suspend' sed -i 's/[#]\?[[:blank:]]*HandleLidSwitch\([[:blank:]]*\)=\([[:blank:]]*\).*/HandleLidSwitch\1=\2ignore/' /etc/systemd/logind.conf
+
+### Allow ping to be executed by any user ======================================
+
+silent      'Set ping capabilities'     setcap cap_net_raw+ep $(which ping)
