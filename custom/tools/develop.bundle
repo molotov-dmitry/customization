@@ -1,4 +1,5 @@
 gnome
+cinnamon
 qt
 
 driver
@@ -23,6 +24,7 @@ vcs
 appearance
 
 office
+network/chat
 graphics
 archive
 
