@@ -47,6 +47,8 @@ appremove 'Gnome TODO'              'gnome-todo'
 appremove 'HexChat'                 'hexchat hexchat-common'
 appremove 'Tomboy'                  'tomboy'
 
+appremove 'Unattended upgrades'     'unattended-upgrades'
+
 ## Remove unused ---------------------------------------------------------------
 
 silent 'Removing unused packages' apt-get autoremove --yes --force-yes --purge
