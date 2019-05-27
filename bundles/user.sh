@@ -794,11 +794,11 @@ case "${bundle}" in
     hideapp 'easytag'
     hideapp 'mpv'
 
-    ## Media player indicator Gnome Shell extension ----------------------------
+    ## A simple MPRIS indicator button Gnome Shell extension -------------------
 
     if ispkginstalled gnome-shell
     then
-        gsettingsadd org.gnome.shell enabled-extensions 'mediaplayer@patapon.info'
+        gsettingsadd org.gnome.shell enabled-extensions 'mprisindicatorbutton@JasonLG1979.github.io'
     fi
 
     ## rhythmbox ---------------------------------------------------------------
