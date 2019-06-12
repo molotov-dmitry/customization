@@ -16,6 +16,10 @@ else
     appinstall 'RDP client' 'remmina remmina-plugin-vnc remmina-plugin-rdp remmina-plugin-xdmcp'
 fi
 
+### CD burning =================================================================
+
+appinstall 'Xorriso'                'xorriso'
+
 ### Wi-Fi driver ===============================================================
 
 appinstall 'DKMS'                   'dkms [linux-headers-generic]'
