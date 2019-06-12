@@ -13,7 +13,7 @@ if [[ "$(lsb_release -si) $(lsb_release -sc)" == 'Debian stretch' ]]
 then
     appinstall 'RDP client' 'vinagre'
 else
-    appinstall 'RDP client' 'remmina remmina-plugin-vnc remmina-plugin-rdp'
+    appinstall 'RDP client' 'remmina remmina-plugin-vnc remmina-plugin-rdp remmina-plugin-xdmcp'
 fi
 
 ### Wi-Fi driver ===============================================================
