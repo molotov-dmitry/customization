@@ -617,8 +617,12 @@ case "${bundle}" in
 
 "network/browser")
 
-    #appinstall 'Chromium browser'       'chromium-browser chromium-browser-l10n'
     appinstall 'Google Chrome'          'google-chrome-stable'
+
+    if ispkginstalled gnome-shell
+    then
+        appinstall 'Chrome Gnome Shell' 'chrome-gnome-shell'
+    fi
 
 ;;
 
