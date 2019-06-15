@@ -617,7 +617,8 @@ case "${bundle}" in
 
 "network/browser")
 
-    appinstall 'Chromium browser'       'chromium-browser chromium-browser-l10n'
+    #appinstall 'Chromium browser'       'chromium-browser chromium-browser-l10n'
+    appinstall 'Google Chrome'          'google-chrome-stable'
 
 ;;
 

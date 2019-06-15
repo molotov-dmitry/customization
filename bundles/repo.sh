@@ -383,6 +383,8 @@ case "${bundle}" in
 
 "network/browser")
 
+    repoadd 'Google Chrome' 'http://dl.google.com/linux/chrome/deb/' 'stable' 'main' 'chrome/google.key' 'arch=amd64'
+
 ;;
 
 ### Mail =======================================================================

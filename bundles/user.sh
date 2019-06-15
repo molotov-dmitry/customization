@@ -893,7 +893,7 @@ case "${bundle}" in
 
 "network/browser")
 
-    launcheradd 'chromium-browser'
+    launcheradd 'google-chrome'
 
 ;;
 

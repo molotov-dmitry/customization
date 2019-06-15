@@ -421,6 +421,13 @@ case "${bundle}" in
 
 "network/browser")
 
+    silent 'Copy Chrome files' cp -rf "${ROOT_PATH}/files/chrome" "${rootfs_dir}/tools/files/"
+
+    cat > "/etc/default/google-chrome" << '_EOF'
+repo_add_once="false"
+repo_reenable_on_distupgrade="false"
+_EOF
+
 ;;
 
 ### Mail =======================================================================
