@@ -43,3 +43,19 @@ silentsudo 'Install Work Report'    bash install.sh
 
 popd > /dev/null
 popd > /dev/null
+
+### Network switcher ===========================================================
+
+appinstall 'Git'                    'git'
+
+pushd /tmp > /dev/null
+
+silentsudo 'Cloning Network Switcher'   git clone 'https://github.com/molotov-dmitry/network-switch.git'
+
+pushd network-switch > /dev/null
+
+mkdir -p /usr/local/bin
+silentsudo 'Install Network Switcher'   install network-switch.sh /usr/local/bin/network-switch
+
+popd > /dev/null
+popd > /dev/null
