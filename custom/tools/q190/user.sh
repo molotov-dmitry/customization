@@ -17,6 +17,28 @@ addbookmark 'smb://172.16.8.21/share2'         'KUB'
 addbookmark 'smb://172.16.8.203'               'NAS'
 addbookmark 'smb://data.rczifort.local/shares' 'RCZIFORT'
 
+### Add network switch =========================================================
+
+if [[ $UID -eq 1000 ]]
+then
+    nettype=eth
+else
+    nettype=wifi
+fi
+
+cat > "${HOME}/.config/autostart" << _EOF
+[Desktop Entry]
+Version=1.0
+Name=Network switcher
+Comment=Network switcher
+Exec=network-switch ${nettype}
+Terminal=false
+Type=Application
+Categories=Network
+_EOF
+
+unset nettype
+
 ### Customization ==============================================================
 
 ## Clear launcher --------------------------------------------------------------
