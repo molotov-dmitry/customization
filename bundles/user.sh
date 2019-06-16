@@ -472,6 +472,28 @@ case "${bundle}" in
     echo '--pad-header'             >> "${HOME}/.astylerc"
     echo '--align-pointer=type'     >> "${HOME}/.astylerc"
     echo '--align-reference=type'   >> "${HOME}/.astylerc"
+
+    ## UTF-8 BOM ---------------------------------------------------------------
+
+    cat >> "${HOME}/.bash_aliases" << '_EOF'
+function utf8bom()
+{
+for file in "$@"
+do
+    if test -s "${file}"
+    then
+        [[ $(cut -z -b1-3 "${file}" | hexdump -v -e '/1 "%02X"') == 'EFBBBF00' ]] || sed -i '1s/^/\xef\xbb\xbf/' "${file}" || exit $?
+    elif test -w $file
+    then
+        echo -en "\xef\xbb\xbf" > "${file}"
+    else
+        exit 1
+    fi
+done
+}
+
+_EOF
+
 ;;
 
 ### Documentation tools ========================================================
