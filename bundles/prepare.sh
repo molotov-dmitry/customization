@@ -423,10 +423,10 @@ case "${bundle}" in
 
     silent 'Copy Chrome files' cp -rf "${ROOT_PATH}/files/chrome" "${rootfs_dir}/tools/files/"
 
-    cat > "/etc/default/google-chrome" << '_EOF'
-repo_add_once="false"
-repo_reenable_on_distupgrade="false"
-_EOF
+    mkdir -p "${rootfs_dir}/etc/default"
+
+    echo 'repo_add_once="false"'                >  "${rootfs_dir}/etc/default/google-chrome"
+    echo 'repo_reenable_on_distupgrade="false"' >> "${rootfs_dir}/etc/default/google-chrome"
 
 ;;
 
