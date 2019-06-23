@@ -432,7 +432,7 @@ fi
 
 if [[ "$notify" == 'y' ]]
 then
-    echo "dialog-info:${config}-$(basename "${iso_src}") build completed" | nc -b -w1 -u 255.255.255.255 14993
+    echo "media-optical:${config}-$(basename "${iso_src}") build completed" | nc -b -w1 -u 255.255.255.255 14993
 fi
 
 ### Finish signal ==============================================================
