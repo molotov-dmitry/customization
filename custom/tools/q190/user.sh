@@ -26,7 +26,9 @@ else
     nettype=wifi
 fi
 
-cat > "${HOME}/.config/autostart" << _EOF
+mkdir -p "${HOME}/.config/autostart"
+
+cat > "${HOME}/.config/autostart/network-switch.desktop" << _EOF
 [Desktop Entry]
 Version=1.0
 Name=Network switcher
