@@ -488,6 +488,8 @@ case "${bundle}" in
     appinstall 'Canta theme'            'canta-themes canta-icons'
     appinstall 'Papirus theme'          'papirus-icon-theme'
     appinstall 'Oranchelo theme'        'oranchelo-icon-theme'
+    appinstall 'Arc theme'              'arc-theme'
+    appinstall 'Adapta theme'           'adapta-gtk-theme'
 
     if ! ispkgavailable mint-themes
     then
@@ -523,6 +525,7 @@ case "${bundle}" in
 
     appinstall 'Noto fonts'             'fonts-noto'
     appinstall 'Linux Libertine fonst'  'fonts-linuxlibertine'
+    appinstall 'Roboto fonts'           'fonts-roboto fonts-roboto-unhinted'
 
     silent      'Download Google Sans'  wget -qq 'https://drive.google.com/uc?export=download&id=1x674A9kbK9t1Ur49DOf3Zj4b-aErTWqd' -O /usr/local/share/fonts/google-sans-font.zip
     silent      'Unpack Google Sans'    unzip -j /usr/local/share/fonts/google-sans-font.zip -d /usr/local/share/fonts/google-sans-font
