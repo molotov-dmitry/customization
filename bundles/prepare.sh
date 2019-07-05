@@ -314,8 +314,15 @@ case "${bundle}" in
 
 "dev/ti")
 
+    ## Code Generation Tools ---------------------------------------------------
+
     silent 'Create TI toolchain folder' mkdir -p "${rootfs_dir}/opt/TI"
     silent 'Extract TI toolchain'       tar xf "${ROOT_PATH}/files/ti/C6000CGT6.0.11.tar.xz" -C "${rootfs_dir}/opt/TI/"
+
+    ## CCS Project editor ------------------------------------------------------
+
+    mkdir -p "${rootfs_dir}/usr/local/share/mime/packages"
+    silent 'Install CCS project MIME info' cp "${ROOT_PATH}/files/ti/text-x-ccs-pjt.xml" "${rootfs_dir}/usr/local/share/mime/packages/"
 
 ;;
 

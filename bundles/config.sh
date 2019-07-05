@@ -369,6 +369,8 @@ case "${bundle}" in
     sed -i 's/PATH="\([^"]*\)"/PATH="\1:\/opt\/TI\/C6000CGT6.0.11\/bin"/' /etc/environment
     echo 'export C6X_C_DIR="/opt/TI/C6000CGT6.0.11/include"' >> /etc/environment
 
+    silent 'Update MIME info'       update-mime-database /usr/local/share/mime
+
 ;;
 
 ### ============================================================================
