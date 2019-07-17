@@ -501,7 +501,7 @@ case "${bundle}" in
 
         pushd mint-themes > /dev/null
 
-        silent 'Checkout version 1.7.8'     git checkout 9e29e3dbbe3df8e6f9eb88ae85b1955509d4a2f3
+        silent 'Checkout version 1.8.1'     git checkout 05c533c447fe9396b917416782c3ef1a94401e20
         silent 'Generating Mint Themes'     make
         silent 'Installing Mint Themes'     cp -rf usr/share/themes/* /usr/share/themes/
 
