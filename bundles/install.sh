@@ -501,9 +501,17 @@ case "${bundle}" in
 
         pushd mint-themes > /dev/null
 
-        silent 'Checkout version 1.8.1'     git checkout 05c533c447fe9396b917416782c3ef1a94401e20
+        last_commit=$(git log --no-decorate --pretty=oneline | grep -E '^[[:xdigit:]]{40} [[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$' | head -n1)
+        last_ver="${last_commit##* }"
+        last_hash="${last_commit%% *}"
+
+        silent "Checkout version $last_ver" git checkout $last_hash
         silent 'Generating Mint Themes'     make
         silent 'Installing Mint Themes'     cp -rf usr/share/themes/* /usr/share/themes/
+
+        unset last_hash
+        unset last_ver
+        unset last_commit
 
         popd > /dev/null
         popd > /dev/null
