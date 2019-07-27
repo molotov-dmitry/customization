@@ -26,7 +26,7 @@ case "${bundle}" in
 
     appinstall 'Nautilus'                   'nautilus nautilus-extension-gnome-terminal nautilus-sendto nautilus-share'
 
-    appinstall 'Language pack'	            'hyphen-ru mythes-ru hunspell-ru [language-pack-gnome-ru] [language-pack-gnome-ru-base] [language-pack-ru] [language-pack-ru-base]'
+    appinstall 'Language pack'              'hyphen-ru mythes-ru hunspell-ru [language-pack-gnome-ru] [language-pack-gnome-ru-base] [language-pack-ru] [language-pack-ru-base]'
     appinstall 'Base applications'          'gnome-calculator gnome-system-monitor gnome-characters'
     appinstall 'Tweak tool'                 'gnome-tweak-tool'
 
@@ -364,7 +364,11 @@ case "${bundle}" in
 
     appinstall 'Qt SDK'                 'qml qtbase5-dev qtdeclarative5-dev qt5-doc'
     appinstall 'Qt Libs'                'libqt5svg5 libqt5svg5-dev libqt5webkit5-dev libqt5charts5-dev libqt5xmlpatterns5-dev libqt5x11extras5-dev libqt5serialport5-dev'
-    appinstall 'Qt IDE'                 'qtcreator'
+
+    if ispkginstalled 'xorg'
+    then
+        appinstall 'Qt IDE'             'qtcreator'
+    fi
 
 ;;
 
@@ -389,7 +393,11 @@ case "${bundle}" in
 
     appinstall 'GTK+ SDK'               'libgtk-3-dev libgtkmm-3.0-dev libtool libtool-bin'
     appinstall 'GTK+ Libs'              'libgtksourceview-3.0-dev libgtksourceview-3.0-1 libgtksourceviewmm-3.0-0v5 libgtksourceview-3.0-dev libpeas-1.0-0 libpeas-dev libgit2-glib-1.0-dev libgit2-glib-1.0-0'
-    appinstall 'GTK+ IDE'               'anjuta glade'
+
+    if ispkginstalled 'xorg'
+    then
+        appinstall 'GTK+ IDE'           'anjuta glade'
+    fi
 
 ;;
 
@@ -397,7 +405,10 @@ case "${bundle}" in
 
 "dev/gnome")
 
-    appinstall 'GNOME IDE'              'gnome-builder'
+    if ispkginstalled 'xorg'
+    then
+        appinstall 'GNOME IDE'          'gnome-builder'
+    fi
 
 ;;
 
