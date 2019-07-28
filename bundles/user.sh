@@ -532,30 +532,34 @@ _EOF
 
 "dev/qt")
 
-    ## launcher ----------------------------------------------------------------
+    if ispkginstalled 'qtcreator'
+    then
 
-    launcheradd 'org.qt-project.qtcreator'
+        ## launcher ------------------------------------------------------------
 
-    changeapp 'org.qt-project.qtcreator' 'StartupWMClass' 'qtcreator'
+        launcheradd 'org.qt-project.qtcreator'
 
-    hideapp 'assistant-qt5'
-    hideapp 'designer-qt5'
-    hideapp 'linguist-qt5'
+        changeapp 'org.qt-project.qtcreator' 'StartupWMClass' 'qtcreator'
 
-    ## Mime type ---------------------------------------------------------------
+        hideapp 'assistant-qt5'
+        hideapp 'designer-qt5'
+        hideapp 'linguist-qt5'
 
-    mimeregister 'application/vnd.nokia.qt.qmakeprofile' 'org.qt-project.qtcreator.desktop'
+        ## Mime type -----------------------------------------------------------
 
-    ## Qt Creator --------------------------------------------------------------
+        mimeregister 'application/vnd.nokia.qt.qmakeprofile' 'org.qt-project.qtcreator.desktop'
 
-    rm -rf   "${HOME}/.config/QtProject"
+        ## Qt Creator ----------------------------------------------------------
 
-    mkdir -p "${HOME}/.config/QtProject"
-    sed "s/{HOME}/$(safestring "${HOME}")/g" "${ROOT_PATH}/files/qtcreator/QtCreator.ini" > "${HOME}/.config/QtProject/QtCreator.ini"
+        rm -rf   "${HOME}/.config/QtProject"
 
-    mkdir -p "${HOME}/.config/QtProject/qtcreator/styles"
-    cp -f "${ROOT_PATH}/files/qtcreator/material.xml"      "${HOME}/.config/QtProject/qtcreator/styles/"
-    cp -f "${ROOT_PATH}/files/qtcreator/material_dark.xml" "${HOME}/.config/QtProject/qtcreator/styles/"
+        mkdir -p "${HOME}/.config/QtProject"
+        sed "s/{HOME}/$(safestring "${HOME}")/g" "${ROOT_PATH}/files/qtcreator/QtCreator.ini" > "${HOME}/.config/QtProject/QtCreator.ini"
+
+        mkdir -p "${HOME}/.config/QtProject/qtcreator/styles"
+        cp -f "${ROOT_PATH}/files/qtcreator/material.xml"      "${HOME}/.config/QtProject/qtcreator/styles/"
+        cp -f "${ROOT_PATH}/files/qtcreator/material_dark.xml" "${HOME}/.config/QtProject/qtcreator/styles/"
+    fi
 
 ;;
 
@@ -563,9 +567,12 @@ _EOF
 
 "dev/qt4")
 
-    hideapp 'assistant-qt4'
-    hideapp 'designer-qt4'
-    hideapp 'linguist-qt4'
+    if ispkginstalled 'qtcreator'
+    then
+        hideapp 'assistant-qt4'
+        hideapp 'designer-qt4'
+        hideapp 'linguist-qt4'
+    fi
 
 ;;
 
@@ -581,7 +588,10 @@ _EOF
 
     ## launcher ----------------------------------------------------------------
 
-    launcheradd 'anjuta'
+    if ispkginstalled 'anjuta'
+    then
+        launcheradd 'anjuta'
+    fi
 
 ;;
 
@@ -589,40 +599,44 @@ _EOF
 
 "dev/gnome")
 
-    ## launcher ----------------------------------------------------------------
+    if ispkginstalled 'gnome-builder'
+    then
 
-    launcheradd 'org.gnome.Builder'
+        ## launcher ------------------------------------------------------------
 
-    ## gnome builder -----------------------------------------------------------
+        launcheradd 'org.gnome.Builder'
 
-    gsettings set org.gnome.builder.editor show-map                         true
-    gsettings set org.gnome.builder.editor font-name                        'Ubuntu Mono 12'
+        ## gnome builder -------------------------------------------------------
 
-    for lang in awk c changelog cmake cpp cpphdr css csv desktop diff dosbatch dot gdb-log html ini java js json markdown pascal php sh sql vala xml yaml
-    do
-        gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ indent-width            -1
-        gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ show-right-margin       true
-        gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ right-margin-position   80
-        gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ insert-spaces-instead-of-tabs true
-        gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ tab-width               4
-        gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ trim-trailing-whitespace true
-        gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ insert-matching-brace   true
-        gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ auto-indent             true
-        gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ overwrite-braces        true
-    done
+        gsettings set org.gnome.builder.editor show-map                         true
+        gsettings set org.gnome.builder.editor font-name                        'Ubuntu Mono 12'
 
-    for lang in makefile
-    do
-        gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ indent-width            -1
-        gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ show-right-margin       true
-        gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ right-margin-position   80
-        gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ insert-spaces-instead-of-tabs false
-        gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ tab-width               4
-        gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ trim-trailing-whitespace true
-        gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ insert-matching-brace   true
-        gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ auto-indent             true
-        gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ overwrite-braces        true
-    done
+        for lang in awk c changelog cmake cpp cpphdr css csv desktop diff dosbatch dot gdb-log html ini java js json markdown pascal php sh sql vala xml yaml
+        do
+            gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ indent-width            -1
+            gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ show-right-margin       true
+            gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ right-margin-position   80
+            gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ insert-spaces-instead-of-tabs true
+            gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ tab-width               4
+            gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ trim-trailing-whitespace true
+            gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ insert-matching-brace   true
+            gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ auto-indent             true
+            gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ overwrite-braces        true
+        done
+
+        for lang in makefile
+        do
+            gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ indent-width            -1
+            gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ show-right-margin       true
+            gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ right-margin-position   80
+            gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ insert-spaces-instead-of-tabs false
+            gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ tab-width               4
+            gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ trim-trailing-whitespace true
+            gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ insert-matching-brace   true
+            gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ auto-indent             true
+            gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ overwrite-braces        true
+        done
+    fi
 
 ;;
 
@@ -683,7 +697,7 @@ _EOF
 
     ## Meld --------------------------------------------------------------------
 
-    if ispkginstalled meld
+    if ispkginstalled 'meld'
     then
         gsettings set org.gnome.meld highlight-syntax   true
         gsettings set org.gnome.meld style-scheme       'kate'
