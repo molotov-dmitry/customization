@@ -100,7 +100,6 @@ case "${bundle}" in
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/media'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/download'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/proxy'
-    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/ti'
 
 ;;
 
@@ -213,6 +212,7 @@ case "${bundle}" in
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/db'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/json'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/net'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/ti'
 
 ;;
 
