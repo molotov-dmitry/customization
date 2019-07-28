@@ -64,4 +64,11 @@ DISTFILES += \
     custom/tools/server.bundle \
     custom/tools/server_work.bundle \
     custom/tools/tablet.bundle \
-    custom/tools/work.bundle
+    custom/tools/work.bundle \
+    custom/tools/cli/config.sh \
+    custom/tools/cli/create.sh \
+    custom/tools/cli/firstboot.sh \
+    custom/tools/cli/prepare.sh \
+    custom/tools/cli/repo.sh \
+    custom/tools/cli/user.sh \
+    custom/tools/cli.bundle
