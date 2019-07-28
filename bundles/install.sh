@@ -354,7 +354,7 @@ case "${bundle}" in
 
 "dev/opengl")
 
-    appinstall 'OpenGL sdk'             'freeglut3 freeglut3-dev libglew1.10 libglew-dbg libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev'
+    appinstall 'OpenGL sdk'             'freeglut3 freeglut3-dev libglew-dev libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev'
 
 ;;
 
@@ -363,7 +363,7 @@ case "${bundle}" in
 "dev/qt")
 
     appinstall 'Qt SDK'                 'qml qtbase5-dev qtdeclarative5-dev qt5-doc'
-    appinstall 'Qt Libs'                'libqt5svg5 libqt5svg5-dev libqt5webkit5-dev libqt5charts5-dev libqt5xmlpatterns5-dev libqt5x11extras5-dev libqt5serialport5-dev'
+    appinstall 'Qt Libs'                'libqt5svg5 libqt5svg5-dev libqt5webkit5-dev libqt5charts5-dev libqt5xmlpatterns5-dev libqt5x11extras5-dev libqt5serialport5-dev libqt5sql5-sqlite'
 
     if ispkginstalled 'xorg'
     then
@@ -417,7 +417,7 @@ case "${bundle}" in
 "dev/db")
 
     appinstall 'Postgres'               'postgresql-client libpq5 libpq-dev'
-    appinstall 'SQLite'                 'sqlite libsqlite3-0 libsqlite3-dev'
+    appinstall 'SQLite'                 'sqlite3 libsqlite3-0 libsqlite3-dev'
 
     if ispkginstalled 'xorg'
     then
