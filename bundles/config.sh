@@ -366,8 +366,10 @@ case "${bundle}" in
 
 "dev/ti")
 
-    echo 'PATH="${PATH}:/opt/TI/C6000CGT6.0.11/bin"'         >> /etc/environment
-    echo 'export C6X_C_DIR="/opt/TI/C6000CGT6.0.11/include"' >> /etc/environment
+    mkdir -p /etc/profile.d
+
+    echo 'export PATH="${PATH}:/opt/TI/C6000CGT6.0.11/bin"'  >  /etc/profile.d/ti-c6x.sh
+    echo 'export C6X_C_DIR="/opt/TI/C6000CGT6.0.11/include"' >> /etc/profile.d/ti-c6x.sh
 
     silent 'Update MIME info'       update-mime-database /usr/local/share/mime
 
