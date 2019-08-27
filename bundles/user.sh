@@ -557,8 +557,14 @@ _EOF
         sed "s/{HOME}/$(safestring "${HOME}")/g" "${ROOT_PATH}/files/qtcreator/QtCreator.ini" > "${HOME}/.config/QtProject/QtCreator.ini"
 
         mkdir -p "${HOME}/.config/QtProject/qtcreator/styles"
-        cp -f "${ROOT_PATH}/files/qtcreator/material.xml"      "${HOME}/.config/QtProject/qtcreator/styles/"
+        cp -f "${ROOT_PATH}/files/qtcreator/material.xml" "${HOME}/.config/QtProject/qtcreator/styles/"
         cp -f "${ROOT_PATH}/files/qtcreator/material_dark.xml" "${HOME}/.config/QtProject/qtcreator/styles/"
+
+        mkdir -p "${HOME}/.config/QtProject/qtcreator/snippets"
+        cp -f "${ROOT_PATH}/files/qtcreator/snippets.xml" "${HOME}/.config/QtProject/qtcreator/snippets/"
+
+        mkdir -p "${HOME}/.config/QtProject/qtcreator/codestyles/Cpp"
+        cp -f "${ROOT_PATH}/files/qtcreator/allman.xml" "${HOME}/.config/QtProject/qtcreator/codestyles/Cpp"
     fi
 
 ;;
