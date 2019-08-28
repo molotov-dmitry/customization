@@ -614,6 +614,7 @@ _EOF
 
         ## gnome builder -------------------------------------------------------
 
+        gsettings set org.gnome.builder        follow-night-light               true
         gsettings set org.gnome.builder.editor show-map                         true
         gsettings set org.gnome.builder.editor font-name                        'Ubuntu Mono 12'
 
