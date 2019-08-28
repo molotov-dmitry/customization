@@ -713,6 +713,7 @@ function gnomeshellextension()
 {
     extid="$1"
     shellver=$(dpkg-query -W -f='${Version}\n' gnome-shell | cut -d '.' -f 1-2)
+    shellver="${shellver%%.*}.$(( ${shellver##*.} - ${shellver##*.} % 2 ))"
 
     if [[ -z "${shellver}" ]]
     then
