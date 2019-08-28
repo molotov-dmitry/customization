@@ -11,6 +11,7 @@ dev/doc
 dev/man
 dev/qt
 dev/qt4
+dev/gnome
 dev/db
 dev/json
 dev/net

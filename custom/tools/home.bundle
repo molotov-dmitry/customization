@@ -9,6 +9,7 @@ dev/style
 dev/doc
 dev/man
 dev/qt
+dev/gnome
 dev/db
 dev/json
 dev/net
