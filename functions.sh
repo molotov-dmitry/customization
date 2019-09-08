@@ -139,6 +139,13 @@ function ispkgavailable()
     fi
 }
 
+function pkgversion()
+{
+    app="$1"
+
+    LC_ALL=C dpkg -s "${app}" 2>/dev/null | grep '^Version:' | cut -d ' ' -f 2-
+}
+
 function debprepare()
 {
     appname="$1"
