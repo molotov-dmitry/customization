@@ -460,7 +460,11 @@ case "${bundle}" in
     if ispkginstalled nautilus
     then
         appinstall 'RabbitVCS'          'rabbitvcs-core rabbitvcs-nautilus'
-        silent     'Patch RabbitVCS'    patch '/usr/lib/python2.7/dist-packages/rabbitvcs/vcs/svn/__init__.py' "${rootfs_dir}/tools/files/rabbitvcs/rabbitvcs.patch"
+
+        if [[ "$(pkgversion 'rabbitvcs-core')" == '0.16-1.1' ]]
+        then
+            silent 'Patch RabbitVCS'    patch '/usr/lib/python2.7/dist-packages/rabbitvcs/vcs/svn/__init__.py' "${rootfs_dir}/tools/files/rabbitvcs/rabbitvcs.patch"
+        fi
     fi
 
     if ispkginstalled 'xorg'
