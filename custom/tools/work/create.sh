@@ -59,3 +59,14 @@ silentsudo 'Install Network Switcher'   install network-switch.sh /usr/local/bin
 
 popd > /dev/null
 popd > /dev/null
+
+### LDAP user configuration script =============================================
+
+appinstall 'LDAP utilities'         'ldap-utils'
+
+appinstall 'Git'                    'git'
+
+silent 'Cloning LDAP user config'   git clone --depth 1 'https://github.com/molotov-dmitry/work-user-ldap-config.git' /tmp/work-user-ldap-config
+silent 'Install LDAP user config'   make -C /tmp/work-user-ldap-config install desktop-skel
+
+rm -rf /tmp/work-user-ldap-config
