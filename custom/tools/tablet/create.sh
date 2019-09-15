@@ -47,7 +47,7 @@ fi
 
 cd /usr/bin/drivers
 
-silent 'Cloning audio configs'      git clone https://github.com/plbossart/UCM.git
+silent 'Cloning audio configs'      git clone --depth 1 https://github.com/plbossart/UCM.git
 
 cd UCM
 
@@ -59,7 +59,7 @@ silent 'Blacklist audio module'     sh -c "echo 'blacklist snd_hdmi_lpe_audio' >
 
 cd /usr/bin/drivers
 
-silent 'Cloning bluetooth driver'   git clone https://github.com/lwfinger/rtl8723bs_bt.git
+silent 'Cloning bluetooth driver'   git --depth 1 clone https://github.com/lwfinger/rtl8723bs_bt.git
 
 cd rtl8723bs_bt
 
