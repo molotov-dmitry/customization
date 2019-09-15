@@ -71,4 +71,11 @@ DISTFILES += \
     custom/tools/cli/prepare.sh \
     custom/tools/cli/repo.sh \
     custom/tools/cli/user.sh \
-    custom/tools/cli.bundle
+    custom/tools/cli.bundle \
+    custom/tools/develop/config.sh \
+    custom/tools/develop/create.sh \
+    custom/tools/develop/firstboot.sh \
+    custom/tools/develop/prepare.sh \
+    custom/tools/develop/repo.sh \
+    custom/tools/develop/user.sh \
+    custom/tools/develop.bundle
