@@ -38,7 +38,7 @@ silent 'Cloning Work Report'        git clone --depth 1 'https://github.com/molo
 pushd work-report > /dev/null
 
 silent 'Prepare Work Report'        qmake -qt=qt5 work-report.pro
-silents'Build Work Report'          make -j $(nproc)
+silent 'Build Work Report'          make -j $(nproc)
 silent 'Install Work Report'        bash install.sh
 
 popd > /dev/null
