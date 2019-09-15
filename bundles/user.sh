@@ -612,6 +612,11 @@ _EOF
 
         launcheradd 'org.gnome.Builder'
 
+        ## Register mimetypes --------------------------------------------------
+
+        mimeregister 'text/x-makefile'           'org.gnome.Builder.desktop'
+        mimeregister 'application/x-shellscript' 'org.gnome.Builder.desktop'
+
         ## gnome builder -------------------------------------------------------
 
         gsettings set org.gnome.builder        follow-night-light               true
