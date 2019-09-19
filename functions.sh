@@ -2,10 +2,10 @@
 
 ### constants ==================================================================
 
-readonly CL_RED='\e[91m'
-readonly CL_YELLOW='\e[93m'
-readonly CL_GREEN='\e[92m'
-readonly CL_BLUE='\e[94m'
+readonly CL_RED='\e[31m'
+readonly CL_YELLOW='\e[33m'
+readonly CL_GREEN='\e[32m'
+readonly CL_BLUE='\e[34m'
 
 readonly TITLE_LENGTH=50
 readonly SPACE_CHAR='.'
