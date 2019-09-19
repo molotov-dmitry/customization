@@ -72,6 +72,10 @@ do
         useram='1'
     ;;
 
+    '--noram')
+        useram='0'
+    ;;
+
     '--fast')
         fastcomp='1'
     ;;
