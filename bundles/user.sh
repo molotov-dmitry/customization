@@ -195,6 +195,14 @@ case "${bundle}" in
         hideapp 'redshift-gtk'
     fi
 
+    ## Keyboard layout ---------------------------------------------------------
+
+    gsettingsclear org.gnome.desktop.input-sources xkb-options
+
+    gsettingsadd org.gnome.desktop.input-sources xkb-options 'grp_led:scroll'
+    gsettingsadd org.gnome.desktop.input-sources xkb-options 'terminate:ctrl_alt_bksp'
+    gsettingsadd org.gnome.desktop.input-sources xkb-options 'grp:alt_shift_toggle'
+
     ## Set custom start menu icon ----------------------------------------------
 
     cfgfile="${HOME}/.cinnamon/configs/menu@cinnamon.org/1.json"
