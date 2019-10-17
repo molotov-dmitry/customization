@@ -461,29 +461,11 @@ case "${bundle}" in
 
 "dev/style")
 
-    ## Astyle ------------------------------------------------------------------
-
-    rm -f "${HOME}/.astylerc"
-    touch "${HOME}/.astylerc"
-
-    echo '--style=allman'           >> "${HOME}/.astylerc"
-    echo '--add-brackets'           >> "${HOME}/.astylerc"
-    echo '--break-one-line-headers' >> "${HOME}/.astylerc"
-    echo '--convert-tabs'           >> "${HOME}/.astylerc"
-    echo '--indent=spaces=4'        >> "${HOME}/.astylerc"
-    echo '--indent-namespaces'      >> "${HOME}/.astylerc"
-    echo '--indent-preproc-define'  >> "${HOME}/.astylerc"
-    echo '--indent-col1-comments'   >> "${HOME}/.astylerc"
-    echo '--unpad-paren'            >> "${HOME}/.astylerc"
-    echo '--pad-oper'               >> "${HOME}/.astylerc"
-    echo '--pad-comma'              >> "${HOME}/.astylerc"
-    echo '--pad-header'             >> "${HOME}/.astylerc"
-    echo '--align-pointer=type'     >> "${HOME}/.astylerc"
-    echo '--align-reference=type'   >> "${HOME}/.astylerc"
-
     ## UTF-8 BOM ---------------------------------------------------------------
 
-    cat >> "${HOME}/.bash_aliases" << '_EOF'
+    if ! test -f "${HOME}/.bash_aliases" || ! grep -F 'utf8bom()' "${HOME}/.bash_aliases"
+    then
+        cat >> "${HOME}/.bash_aliases" << '_EOF'
 function utf8bom()
 {
 for file in "$@"
@@ -509,6 +491,8 @@ done
 }
 
 _EOF
+
+    fi
 
 ;;
 

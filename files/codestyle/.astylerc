@@ -1,0 +1,14 @@
+--style=allman
+--add-brackets
+--break-one-line-headers
+--convert-tabs
+--indent=spaces=4
+--indent-namespaces
+--indent-preproc-define
+--indent-col1-comments
+--unpad-paren
+--pad-oper
+--pad-comma
+--pad-header
+--align-pointer=type
+--align-reference=type
