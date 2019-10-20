@@ -232,7 +232,7 @@ case "${bundle}" in
 
 "dev/style")
 
-    mkdir "${rootfs_dir}/etc/skel"
+    mkdir -p "${rootfs_dir}/etc/skel"
 
     silent 'Copy astyle config'       cp -rf "${ROOT_PATH}/files/codestyle/.astylerc" "${rootfs_dir}/etc/skel/"
     silent 'Copy clang-format config' cp -rf "${ROOT_PATH}/files/codestyle/.clang-format" "${rootfs_dir}/etc/skel/"
