@@ -987,6 +987,16 @@ function addservice
 
 ### Desktop environment detection functions ====================================
 
+function havegraphics()
+{
+    if ispkginstalled 'xserver-xorg'
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
 function desktoptype()
 {
     echo "${XDG_CURRENT_DESKTOP}"
