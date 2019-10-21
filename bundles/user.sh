@@ -711,7 +711,7 @@ _EOF
 
     if ispkginstalled 'meld' && ispkginstalled 'nautilus'
     then
-        addscenario 'compare' 'F3' '[[ $# -eq 0 ]] && ( svn info || git status ) && meld .\n[[ $# -eq 1 ]] && ( svn info "$1" || ( cd "$1" && git status ) ) && meld "$1"\n[[ $# -gt 1 ]] && meld $@'
+        addscenario 'compare' 'F3' '[[ $# -eq 0 ]] && ( svn info || git status ) && meld .\n[[ $# -eq 1 ]] && ( svn info "$1" || ( cd "$1" && git status ) ) && meld "$1"\n[[ $# -gt 1 ]] && meld "$@"'
     fi
 
     if ispkginstalled 'gitg' && ispkginstalled 'nautilus'
