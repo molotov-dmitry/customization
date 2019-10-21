@@ -30,6 +30,8 @@ case "${bundle}" in
     appinstall 'Base applications'          'gnome-calculator gnome-system-monitor gnome-characters'
     appinstall 'Tweak tool'                 'gnome-tweak-tool'
 
+    appinstall 'Gnome appindicator support' 'gnome-shell-extension-appindicator'
+
     if ispkginstalled gnome-shell
     then
         gnomeshellextension 112             # Remove Accessibility
