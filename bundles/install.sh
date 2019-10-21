@@ -556,7 +556,7 @@ case "${bundle}" in
     appinstall 'Linux Libertine fonst'  'fonts-linuxlibertine'
     appinstall 'Roboto fonts'           'fonts-roboto fonts-roboto-unhinted'
 
-    if isdebian
+    if [[ "$(lsb_release -si)" == "Debian" ]]
     then
         appinstall 'Ubuntu fonts'       'ttf-ubuntu-font-family'
     fi
