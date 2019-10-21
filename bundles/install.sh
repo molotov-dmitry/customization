@@ -498,7 +498,7 @@ case "${bundle}" in
 "appearance/themes")
 
     appinstall 'Adwaita theme'          'gnome-themes-standard'
-    appinstall 'Numix theme'            'numix-icon-theme-circle numix-gtk-theme numix-blue-gtk-theme'
+    appinstall 'Numix theme'            'numix-icon-theme-circle numix-gtk-theme [numix-blue-gtk-theme]'
     appinstall 'Paper theme'            'paper-icon-theme'
     appinstall 'Suru theme'             'suru-icon-set'
     appinstall 'Breeze theme'           'breeze-cursor-theme breeze-icon-theme'
@@ -677,7 +677,7 @@ case "${bundle}" in
 
     #appinstall 'Empathy'                'empathy telepathy-haze telepathy-accounts-signon telepathy-gabble'
 
-    appinstall 'Pidgin'                 'pidgin pidgin-libnotify [pidgin-indicator]'
+    appinstall 'Pidgin'                 'pidgin [pidgin-libnotify] [pidgin-indicator]'
 
 ;;
 
