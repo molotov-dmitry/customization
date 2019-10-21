@@ -49,6 +49,8 @@ appremove 'Totem'                   'totem totem-common'
 appremove 'Shotwell'                'shotwell shotwell-common'
 appremove 'Cheese'                  'cheese'
 appremove 'Gnome TODO'              'gnome-todo'
+appremove 'Gnome Weather'           'gnome-weather'
+appremove 'Gnome Maps'              'gnome-maps'
 
 appremove 'HexChat'                 'hexchat hexchat-common'
 appremove 'Tomboy'                  'tomboy'
