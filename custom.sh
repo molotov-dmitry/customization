@@ -272,6 +272,22 @@ then
 	silent 'Move sources.list' mv "${rootfs_dir}/etc/apt/sources.list.d/base.list" "${rootfs_dir}/etc/apt/sources.list"
 fi
 
+## Preparing user customization script -----------------------------------------
+
+title 'Creating user configuration script directory'
+
+mkdir -p "${rootfs_dir}/etc/usercustom.d" || exit 1
+
+cat >> "${rootfs_dir}/etc/skel/.profile" << "_EOF" || exit 1
+
+for f in /etc/usercustom.d/*
+do
+    test -f "$f" && source "$f"
+done
+_EOF
+
+msgdone
+
 ## Preparing customization scripts ---------------------------------------------
 
 silent 'Removing Tools dir'             rm -rf   "${rootfs_dir}/tools" || exit 1

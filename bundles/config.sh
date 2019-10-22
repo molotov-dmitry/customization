@@ -66,7 +66,7 @@ case "${bundle}" in
 
     ## Qt5 GTK2 theme ----------------------------------------------------------
 
-    cat >> /etc/profile.d/50-qt-qpa-platformtheme-gtk2.sh << "_EOF"
+    cat >> /etc/usercustom.d/50-qt-qpa-platformtheme-gtk2.sh << "_EOF"
 case "${XDG_CURRENT_DESKTOP}" in
 
 'Unity' | 'Gnome' | 'ubuntu:GNOME' | 'X-Cinnamon')
@@ -386,10 +386,8 @@ _EOF
 
 "dev/ti")
 
-    mkdir -p /etc/profile.d
-
-    echo 'export PATH="${PATH}:/opt/TI/C6000CGT6.0.11/bin"'  >  /etc/profile.d/ti-c6x.sh
-    echo 'export C6X_C_DIR="/opt/TI/C6000CGT6.0.11/include"' >> /etc/profile.d/ti-c6x.sh
+    echo 'export PATH="${PATH}:/opt/TI/C6000CGT6.0.11/bin"'  >  /etc/usercustom.d/ti-c6x.sh
+    echo 'export C6X_C_DIR="/opt/TI/C6000CGT6.0.11/include"' >> /etc/usercustom.d/ti-c6x.sh
 
     silent 'Update MIME info'       update-mime-database /usr/local/share/mime
 
