@@ -12,17 +12,47 @@ scriptpath="${ROOT_PATH}/bundles/$(basename "$0")"
 case "${bundle}" in
 
 ### ============================================================================
-### DM =========================================================================
+### Base system ================================================================
 ### ============================================================================
 
-### Gnome ======================================================================
+### Base system ================================================================
 
-"gnome")
+"base")
+
+    ## Aliases =================================================================
+
+    echo alias highlight=\'grep --color=always -z\' >> ~/.bash_aliases
+
+    echo -e "\nfunction ddusb()\n{\n    sudo dd if=\"\$1\" of=\"\$2\" bs=2M status=progress oflag=sync\n}\n\n" >> ~/.bash_aliases
+
+;;
+
+### Base GUI ===================================================================
+
+"gui")
+
+    ## File templates ==========================================================
+
+    xdg-user-dirs-update
+    rsync -r "${ROOT_PATH}/files/template/" "$(xdg-user-dir TEMPLATES)/"
+
+;;
+
+### GTK-based GUI ==============================================================
+
+"gtk")
 
     ## launcher ================================================================
 
-    launcheradd 'org.gnome.Nautilus'
-    launcheradd 'org.gnome.Terminal'
+    if ispkginstalled nautilus
+    then
+        launcheradd 'org.gnome.Nautilus'
+    fi
+
+    if ispkginstalled gnome-terminal
+    then
+        launcheradd 'org.gnome.Terminal'
+    fi
 
     ## hide apps from application menu =========================================
 
@@ -37,37 +67,14 @@ case "${bundle}" in
     hideapp 'software-properties-gtk'
     hideapp 'software-properties-livepatch'
     hideapp 'org.gnome.PowerStats'
+    hideapp 'redshift-gtk'
 
-    ## Gnome desktop ===========================================================
+    ## Hide Nemo if Nautilus installed -----------------------------------------
 
-    if ispkginstalled gnome-shell
+    if ispkginstalled nemo && ispkginstalled nautilus
     then
-
-        ## Hide desktop icons --------------------------------------------------
-
-        gsettings set org.gnome.desktop.background show-desktop-icons false
-
+        hideapp 'nemo'
     fi
-
-    ## Gnome shell =============================================================
-
-    if ispkginstalled gnome-shell
-    then
-
-        ## Enable hot corners --------------------------------------------------
-
-        gsettings set org.gnome.shell enable-hot-corners true
-
-        ## Disable modal dialogs attach ----------------------------------------
-
-        gsettings set org.gnome.shell.overrides attach-modal-dialogs false
-
-    fi
-
-    ## File templates ==========================================================
-
-    xdg-user-dirs-update
-    rsync -r "${ROOT_PATH}/files/template/" "$(xdg-user-dir TEMPLATES)/"
 
     ## Keyboard ================================================================
 
@@ -88,7 +95,7 @@ case "${bundle}" in
 
     gsettings set org.gtk.Settings.FileChooser sort-directories-first       true
 
-    ## gedit ===================================================================
+    ## Text editors ============================================================
 
     editors=()
 
@@ -144,11 +151,49 @@ case "${bundle}" in
         gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" allow-bold false
     fi
 
+    ## Setup night light -------------------------------------------------------
+
+    if ispkginstalled 'redshift-gtk'
+    then
+
+        mkdir -p "${HOME}/.config/autostart/"
+        cp -rf "${ROOT_PATH}/files/redshift/redshift-gtk.desktop" "${HOME}/.config/autostart/"
+
+    fi
+
+;;
+
+### ============================================================================
+### DM =========================================================================
+### ============================================================================
+
+### Gnome ======================================================================
+
+"gnome")
+
+    ## Gnome desktop ===========================================================
+
+    if ispkginstalled gnome-shell
+    then
+        ## Hide desktop icons --------------------------------------------------
+        gsettings set org.gnome.desktop.background show-desktop-icons false
+    fi
+
+    ## Gnome shell =============================================================
+
+    if ispkginstalled gnome-shell
+    then
+        ## Enable hot corners --------------------------------------------------
+        gsettings set org.gnome.shell enable-hot-corners true
+
+        ## Disable modal dialogs attach ----------------------------------------
+        gsettings set org.gnome.shell.overrides attach-modal-dialogs false
+    fi
+
     ## night light =============================================================
 
     if ispkginstalled gnome-shell
     then
-
         gsettings set org.gnome.settings-daemon.plugins.color active                         true
         gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled            true
         gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
@@ -158,42 +203,19 @@ case "${bundle}" in
 
     if ispkginstalled gnome-shell
     then
-
         ## enable app indicators -----------------------------------------------
-
         gsettingsadd org.gnome.shell enabled-extensions 'ubuntu-appindicators@ubuntu.com'
 
         ## remove accessibility icon -------------------------------------------
-
         gsettingsadd org.gnome.shell enabled-extensions 'removeaccesibility@lomegor'
 
     fi
-
-    ## Aliases =================================================================
-
-    echo alias highlight=\'grep --color=always -z\' >> ~/.bash_aliases
-
-    echo -e "\nfunction ddusb()\n{\n    sudo dd if=\"\$1\" of=\"\$2\" bs=2M status=progress oflag=sync\n}\n\n" >> ~/.bash_aliases
 
 ;;
 
 ### Cinnamon ===================================================================
 
 "cinnamon")
-
-    ## Hide Nemo if Nautilus installed -----------------------------------------
-
-    if ispkginstalled nemo && ispkginstalled nautilus
-    then
-        hideapp 'nemo'
-    fi
-
-    ## Hide redshift launcher --------------------------------------------------
-
-    if ispkginstalled 'redshift-gtk'
-    then
-        hideapp 'redshift-gtk'
-    fi
 
     ## Keyboard layout ---------------------------------------------------------
 
@@ -270,16 +292,6 @@ case "${bundle}" in
     ## Setup hot corners -------------------------------------------------------
 
     gsettings set org.cinnamon hotcorner-layout  "['scale:true:0', 'scale:false:0', 'scale:false:0', 'desktop:true:700']"
-
-    ## Setup night light -------------------------------------------------------
-
-    if ispkginstalled 'redshift-gtk'
-    then
-
-        mkdir -p "${HOME}/.config/autostart/"
-        cp -rf "${ROOT_PATH}/files/redshift/redshift-gtk.desktop" "${HOME}/.config/autostart/"
-
-    fi
 
 ;;
 

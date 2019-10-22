@@ -12,6 +12,30 @@ scriptpath="${ROOT_PATH}/bundles/$(basename "$0")"
 case "${bundle}" in
 
 ### ============================================================================
+### Base system ================================================================
+### ============================================================================
+
+### Base system ================================================================
+
+"base")
+
+;;
+
+### Base GUI ===================================================================
+
+"gui")
+
+    appinstall 'Language pack'              'hyphen-ru mythes-ru hunspell-ru [language-pack-gnome-ru] [language-pack-gnome-ru-base] [language-pack-ru] [language-pack-ru-base]'
+
+;;
+
+### GTK-based GUI ==============================================================
+
+"gtk")
+
+;;
+
+### ============================================================================
 ### DM =========================================================================
 ### ============================================================================
 
@@ -26,7 +50,6 @@ case "${bundle}" in
 
     appinstall 'Nautilus'                   'nautilus nautilus-extension-gnome-terminal nautilus-sendto nautilus-share'
 
-    appinstall 'Language pack'              'hyphen-ru mythes-ru hunspell-ru [language-pack-gnome-ru] [language-pack-gnome-ru-base] [language-pack-ru] [language-pack-ru-base]'
     appinstall 'Base applications'          'gnome-calculator gnome-system-monitor gnome-characters'
     appinstall 'Tweak tool'                 'gnome-tweak-tool'
 
@@ -43,6 +66,7 @@ case "${bundle}" in
 
 "cinnamon")
 
+    appinstall 'Nautilus'               'nautilus nautilus-extension-gnome-terminal nautilus-sendto nautilus-share'
     appinstall 'Cinnamon'               'cinnamon cinnamon-session cinnamon-screensaver cinnamon-l10n'
     appinstall 'JSON editor'            'jq'
     appinstall 'Redshift'               'redshift-gtk'
