@@ -66,20 +66,18 @@ case "${bundle}" in
 
     ## Qt5 GTK2 theme ----------------------------------------------------------
 
-    if ispkginstalled gnome-shell
-    then
-        if ispkginstalled 'libqt5libqgtk2'
-        then
+    cat >> /etc/profile.d/50-qt-qpa-platformtheme-gtk2.sh << "_EOF"
+case "${XDG_CURRENT_DESKTOP}" in
 
-            echo 'export QT_QPA_PLATFORMTHEME=qt5gtk2' >> /etc/environment
+'Unity' | 'Gnome' | 'ubuntu:GNOME' | 'X-Cinnamon')
 
-        elif ispkginstalled 'qt5-style-plugins'
-        then
+    export QT_QPA_PLATFORMTHEME=gtk2
 
-            echo 'export QT_QPA_PLATFORMTHEME=gtk2' >> /etc/environment
+;;
 
-        fi
-    fi
+true
+
+_EOF
 
 ;;
 
