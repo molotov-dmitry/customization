@@ -219,11 +219,12 @@ case "${bundle}" in
 
     ## Keyboard layout ---------------------------------------------------------
 
-    gsettingsclear org.gnome.desktop.input-sources xkb-options
+    gsettingsclear org.gnome.libgnomekbd.keyboard options
 
-    gsettingsadd org.gnome.desktop.input-sources xkb-options 'grp_led:scroll'
-    gsettingsadd org.gnome.desktop.input-sources xkb-options 'terminate:ctrl_alt_bksp'
-    gsettingsadd org.gnome.desktop.input-sources xkb-options 'grp:alt_shift_toggle'
+    gsettingsadd org.gnome.libgnomekbd.keyboard options 'terminate\tterminate:ctrl_alt_bksp'
+    gsettingsadd org.gnome.libgnomekbd.keyboard options 'grp\tgrp:alt_shift_toggle'
+    gsettingsadd org.gnome.libgnomekbd.keyboard options 'grp\tgrp:win_space_toggle'
+    gsettingsadd org.gnome.libgnomekbd.keyboard options 'grp_led\tgrp_led:scroll'
 
     ## Set custom start menu icon ----------------------------------------------
 
