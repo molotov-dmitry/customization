@@ -507,7 +507,7 @@ case "${bundle}" in
         then
             silent 'Patch RabbitVCS'    patch '/usr/lib/python2.7/dist-packages/rabbitvcs/vcs/svn/__init__.py' "${rootfs_dir}/tools/files/rabbitvcs/rabbitvcs.patch"
 
-        else if [[ "$(pkgversion 'rabbitvcs-core')" == '0.17.1-2' ]]
+        elif [[ "$(pkgversion 'rabbitvcs-core')" == '0.17.1-2' ]]
         then
             appinstall 'RabbitVCS dependencies' 'python-tk'
 
