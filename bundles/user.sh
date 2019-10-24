@@ -156,7 +156,7 @@ case "${bundle}" in
 
     ## Setup night light -------------------------------------------------------
 
-    if ispkginstalled 'redshift-gtk'
+    if ispkginstalled redshift-gtk
     then
 
         mkdir -p "${HOME}/.config/autostart/"
