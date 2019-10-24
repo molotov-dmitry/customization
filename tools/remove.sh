@@ -12,10 +12,11 @@ cd "${ROOT_PATH}" || exit 1
 appremove 'Apt listchanges'         'apt-listchanges'
 
 appremove 'Brasero'                 'brasero brasero-cdrkit brasero-common'
+appremove 'K3b'                     'k3b k3b-data'
 
-appremove 'Simple Scanning Utility' 'simple-scan'
+appremove 'Scanning Utilities'      'simple-scan skanlite'
 appremove 'LibreOffice unused apps' 'libreoffice-draw libreoffice-impress libreoffice-math'
-appremove 'Games'                   'gnome-mines gnome-sudoku gnome-mahjongg aisleriot gnome-klotski gnome-chess five-or-more four-in-a-row gnome-nibbles hitori iagno lightsoff quadrapassel gnome-robots swell-foop tali gnome-taquin gnome-tetravex'
+appremove 'Games'                   'gnome-mines gnome-sudoku gnome-mahjongg aisleriot gnome-klotski gnome-chess five-or-more four-in-a-row gnome-nibbles hitori iagno lightsoff quadrapassel gnome-robots swell-foop tali gnome-taquin gnome-tetravex kpat ksudoku kmahjongg kmines'
 appremove 'Firefox Extensions'      'xul-ext-ubufox xul-ext-unity xul-ext-webaccounts xul-ext-websites-integration'
 appremove 'Remote desktop client'   'remmina remmina-common remmina-plugin-rdp remmina-plugin-vnc'
 appremove 'Unity web browser'       'webbrowser-app'
@@ -46,6 +47,8 @@ appremove 'Ubuntu web launchers'    'ubuntu-web-launchers'
 
 appremove 'Rhythmbox'               'rhythmbox rhythmbox-data'
 appremove 'Totem'                   'totem totem-common'
+appremove 'VLC'                     'vlc vlc-bin vlc-data'
+appremove 'Cantata music player'    'cantata'
 appremove 'Shotwell'                'shotwell shotwell-common'
 appremove 'Cheese'                  'cheese'
 appremove 'Gnome TODO'              'gnome-todo'
