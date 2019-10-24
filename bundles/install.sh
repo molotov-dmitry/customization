@@ -520,12 +520,12 @@ case "${bundle}" in
         fi
     fi
 
-    if havegraphics
+    if gnomebased
     then
         appinstall 'Meld diff tool'     'meld'
     fi
 
-    if havegraphics
+    if gnomebased
     then
         appinstall 'Git repo viewer'    'gitg'
     fi
@@ -586,6 +586,10 @@ case "${bundle}" in
 
         silent 'Removing Mint Themes repo'  rm -rf /tmp/mint-themes
 
+    else
+
+        appinstall 'Mint themes'            'mint-themes'
+
     fi
 
 ;;
@@ -636,9 +640,21 @@ case "${bundle}" in
 
 "office")
 
-    appinstall 'LibreOffice'            'libreoffice-calc libreoffice-writer libreoffice-gtk3 libreoffice-gnome libreoffice-style-breeze libreoffice-l10n-ru libreoffice-help-ru'
-    #appinstall 'OnlyOffice'             'onlyoffice-desktopeditors'
-    appinstall 'Document viewer'        'evince'
+    if gnomebased
+    then
+        appinstall 'LibreOffice'        'libreoffice-calc libreoffice-writer libreoffice-gtk3 libreoffice-gnome libreoffice-style-breeze libreoffice-l10n-ru libreoffice-help-ru'
+        appinstall 'Document viewer'    'evince'
+
+    elif kdebased
+    then
+        appinstall 'LibreOffice'        'libreoffice-calc libreoffice-writer libreoffice-qt5 libreoffice-kde5 libreoffice-style-breeze libreoffice-l10n-ru libreoffice-help-ru'
+        appinstall 'Document viewer'    'okular'
+    fi
+
+    #if havegraphics
+    #then
+        #appinstall 'OnlyOffice'         'onlyoffice-desktopeditors'
+    #fi
 
 ;;
 
@@ -681,7 +697,10 @@ case "${bundle}" in
     silent     'Download youtube-dl'    wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
     silent     'Setup youtube-dl'       chmod a+rx /usr/local/bin/youtube-dl
 
-    #appinstall 'Gnome Twitch app'      'gnome-twitch gnome-twitch-player-backend-mpv-opengl'
+    #if gnomebased
+    #then
+        #appinstall 'Gnome Twitch app'  'gnome-twitch gnome-twitch-player-backend-mpv-opengl'
+    #fi
 
 ;;
 
@@ -718,7 +737,10 @@ case "${bundle}" in
 
 "network/mail")
 
-    appinstall 'Evolution mail client'  'evolution evolution-data-server evolution-ews'
+    if gnomebased
+    then
+        appinstall 'Evolution mail client'  'evolution evolution-data-server evolution-ews'
+    fi
 
 ;;
 
@@ -726,9 +748,11 @@ case "${bundle}" in
 
 "network/chat")
 
-    #appinstall 'Empathy'                'empathy telepathy-haze telepathy-accounts-signon telepathy-gabble'
-
-    appinstall 'Pidgin'                 'pidgin [pidgin-libnotify] [pidgin-indicator]'
+    if gnomebased
+    then
+        #appinstall 'Empathy'            'empathy telepathy-haze telepathy-accounts-signon telepathy-gabble'
+        appinstall 'Pidgin'             'pidgin [pidgin-libnotify] [pidgin-indicator]'
+    fi
 
 ;;
 
@@ -745,7 +769,10 @@ case "${bundle}" in
 
 "network/office")
 
-    appinstall 'Gnome documents'        'gnome-documents'
+    if gnomebased
+    then
+        appinstall 'Gnome documents'    'gnome-documents'
+    fi
 
 ;;
 
@@ -753,8 +780,11 @@ case "${bundle}" in
 
 "network/services")
 
-    appinstall 'Gnome Maps'             'gnome-maps'
-    appinstall 'Gnome Weather'          'gnome-weather'
+    if gnomebased
+    then
+        appinstall 'Gnome Maps'             'gnome-maps'
+        appinstall 'Gnome Weather'          'gnome-weather'
+    fi
 
 ;;
 
@@ -762,7 +792,11 @@ case "${bundle}" in
 
 "network/remote")
 
-    appinstall 'Transmission remote'    'transmission-remote-gtk'
+    if gnomebased
+    then
+        appinstall 'Transmission remote'    'transmission-remote-gtk'
+    fi
+
     #debinstall 'EiskaltDC++ Remote Qt'  'eiskaltdcpp-remote-qt' '27' 'amd64'
 
 ;;
