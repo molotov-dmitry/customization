@@ -997,6 +997,26 @@ function havegraphics()
     fi
 }
 
+function gnomebased()
+{
+    if ispkginstalled 'gnome-shell' || ispkginstalled 'cinnamon'
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
+function kdebased()
+{
+    if ispkginstalled 'plasma-desktop'
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
 function desktoptype()
 {
     echo "${XDG_CURRENT_DESKTOP}"
