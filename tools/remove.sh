@@ -21,6 +21,7 @@ appremove 'Firefox Extensions'      'xul-ext-ubufox xul-ext-unity xul-ext-webacc
 appremove 'Remote desktop client'   'remmina remmina-common remmina-plugin-rdp remmina-plugin-vnc'
 appremove 'Unity web browser'       'webbrowser-app'
 appremove 'Thunderbird mail client' 'thunderbird'
+appremove 'KDE PIM'                 'kmail kontact korganizer ktnef kaddressbook knotes'
 appremove 'Onboard'                 'onboard'
 appremove 'Fcitx'                   'fcitx fcitx-bin fcitx-config-common fcitx-data fcitx-modules fcitx-frontend-all'
 appremove 'Mozc'                    'mozc-utils-gui'
@@ -39,23 +40,30 @@ appremove 'Terminals'               'xterm xiterm+thai mlterm mlterm-common mlte
 appremove 'Landscape'               'landscape-client-ui-install'
 appremove 'Dconf editor'            'dconf-editor'
 appremove 'Transmission'            'transmission-common transmission-gtk'
-appremove 'Gnome Music'             'gnome-music'
-appremove 'Sound recorder'          'gnome-sound-recorder'
+appremove 'KTorrent'                'ktorrent ktorrent-data'
+
 appremove 'AppArmor'                'apparmor apparmor-utils'
 appremove 'Apport'                  'apport apport-gtk'
+
 appremove 'Ubuntu web launchers'    'ubuntu-web-launchers'
 
 appremove 'Rhythmbox'               'rhythmbox rhythmbox-data'
+appremove 'Gnome Music'             'gnome-music'
 appremove 'Totem'                   'totem totem-common'
 appremove 'VLC'                     'vlc vlc-bin vlc-data'
 appremove 'Cantata music player'    'cantata'
+appremove 'MPD'                     'mpd'
 appremove 'Shotwell'                'shotwell shotwell-common'
 appremove 'Cheese'                  'cheese'
+
+appremove 'Sound recorder'          'gnome-sound-recorder'
 appremove 'Gnome TODO'              'gnome-todo'
 appremove 'Gnome Weather'           'gnome-weather'
 appremove 'Gnome Maps'              'gnome-maps'
 
 appremove 'HexChat'                 'hexchat hexchat-common'
+appremove 'Akregator'               'akregator'
+appremove 'Konversation IRC client' 'konversation konversation-data'
 appremove 'Tomboy'                  'tomboy'
 
 appremove 'Unattended upgrades'     'unattended-upgrades'
