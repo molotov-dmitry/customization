@@ -510,18 +510,20 @@ _EOF
 
     ## Empathy -----------------------------------------------------------------
 
-    #mkdir -p '/usr/share/adium/message-styles'
-    #cp -rf "${ROOT_PATH}/files/empathy/material.AdiumMessageStyle" '/usr/share/adium/message-styles/'
+    if ispkginstalled empathy
+    then
+        mkdir -p '/usr/share/adium/message-styles'
+        cp -rf "${ROOT_PATH}/files/empathy/material.AdiumMessageStyle" '/usr/share/adium/message-styles/'
 
-    #while read color
-    #do
-    #    colorvalue=$(echo "${color}" | cut -d ' ' -f 1)
-    #    colorname=$(echo "${color}" | cut -d ' ' -f 2-)
+        while read color
+        do
+            colorvalue=$(echo "${color}" | cut -d ' ' -f 1)
+            colorname=$(echo "${color}" | cut -d ' ' -f 2-)
 
-    #    bash '/usr/share/adium/message-styles/material.AdiumMessageStyle/Contents/Resources/create.sh' "${colorname}" "${colorvalue}"
+            bash '/usr/share/adium/message-styles/material.AdiumMessageStyle/Contents/Resources/create.sh' "${colorname}" "${colorvalue}"
 
-    #done < '/usr/share/adium/message-styles/material.AdiumMessageStyle/Contents/Resources/colorlist'
-
+        done < '/usr/share/adium/message-styles/material.AdiumMessageStyle/Contents/Resources/colorlist'
+    fi
 ;;
 
 ### Chat extra protocols =======================================================

@@ -847,8 +847,10 @@ _EOF
 
     ## launcher ----------------------------------------------------------------
 
-    launcheradd 'rhythmbox'
-    #launcheradd 'org.gnome.Totem'
+    if ispkginstalled rhythmbox
+    then
+        launcheradd 'rhythmbox'
+    fi
 
     ## hide apps from application menu -----------------------------------------
 
@@ -864,49 +866,55 @@ _EOF
 
     ## rhythmbox ---------------------------------------------------------------
 
-    mkdir -p "${HOME}/.local/share/rhythmbox"
-    cp -f "${ROOT_PATH}/files/rhythmbox/rhythmdb.xml" "${HOME}/.local/share/rhythmbox/"
+    if ispkginstalled rhythmbox
+    then
+        mkdir -p "${HOME}/.local/share/rhythmbox"
+        cp -f "${ROOT_PATH}/files/rhythmbox/rhythmdb.xml" "${HOME}/.local/share/rhythmbox/"
 
-    gsettingsclear org.gnome.rhythmbox.plugins seen-plugins
+        gsettingsclear org.gnome.rhythmbox.plugins seen-plugins
 
-    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'soundcloud'
-    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'sendto'
-    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'replaygain'
-    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'rbzeitgeist'
-    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'rblirc'
-    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'rb'
-    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'pythonconsole'
-    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'notification'
-    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'mtpdevice'
-    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'mpris'
-    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'magnatune'
-    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'lyrics'
-    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'ipod'
-    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'im-status'
-    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'grilo'
-    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'fmradio'
-    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'dbus-media-server'
-    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'daap'
-    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'audioscrobbler'
-    gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'artsearch'
+        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'soundcloud'
+        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'sendto'
+        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'replaygain'
+        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'rbzeitgeist'
+        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'rblirc'
+        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'rb'
+        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'pythonconsole'
+        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'notification'
+        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'mtpdevice'
+        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'mpris'
+        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'magnatune'
+        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'lyrics'
+        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'ipod'
+        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'im-status'
+        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'grilo'
+        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'fmradio'
+        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'dbus-media-server'
+        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'daap'
+        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'audioscrobbler'
+        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'artsearch'
 
-    gsettingsclear org.gnome.rhythmbox.plugins active-plugins
+        gsettingsclear org.gnome.rhythmbox.plugins active-plugins
 
-    gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'replaygain'
-    gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'rb'
-    gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'power-manager'
-    #gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'notification'
-    gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'mpris'
-    gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'mmkeys'
-    gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'grilo'
-    gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'generic-player'
+        gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'replaygain'
+        gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'rb'
+        gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'power-manager'
+        #gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'notification'
+        gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'mpris'
+        gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'mmkeys'
+        gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'grilo'
+        gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'generic-player'
 
-    gsettings set org.gnome.rhythmbox.plugins.iradio initial-stations-loaded true
+        gsettings set org.gnome.rhythmbox.plugins.iradio initial-stations-loaded true
+    fi
 
     ## MPV ---------------------------------------------------------------------
 
-    mkdir -p "${HOME}/.config/mpv"
-    cp -f "${ROOT_PATH}/files/mpv/mpv.conf" "${HOME}/.config/mpv/"
+    if ispkginstalled mpv
+    then
+        mkdir -p "${HOME}/.config/mpv"
+        cp -f "${ROOT_PATH}/files/mpv/mpv.conf" "${HOME}/.config/mpv/"
+    fi
 
 
     ## Sound Input & Output Device Chooser Gnome Shell extension ---------------
@@ -914,15 +922,15 @@ _EOF
     if ispkginstalled gnome-shell
     then
         gsettingsadd org.gnome.shell enabled-extensions 'sound-output-device-chooser@kgshank.net'
-    fi
 
-    dconf write /org/gnome/shell/extensions/sound-output-device-chooser/hide-on-single-device   true
-    dconf write /org/gnome/shell/extensions/sound-output-device-chooser/show-input-devices      false
-    dconf write /org/gnome/shell/extensions/sound-output-device-chooser/show-profiles           false
-    dconf write /org/gnome/shell/extensions/sound-output-device-chooser/show-output-devices     true
-    dconf write /org/gnome/shell/extensions/sound-output-device-chooser/hide-menu-icons         false
-    dconf write /org/gnome/shell/extensions/sound-output-device-chooser/icon-theme              "'monochrome'"
-    dconf write /org/gnome/shell/extensions/sound-output-device-chooser/show-input-slider       false
+        dconf write /org/gnome/shell/extensions/sound-output-device-chooser/hide-on-single-device   true
+        dconf write /org/gnome/shell/extensions/sound-output-device-chooser/show-input-devices      false
+        dconf write /org/gnome/shell/extensions/sound-output-device-chooser/show-profiles           false
+        dconf write /org/gnome/shell/extensions/sound-output-device-chooser/show-output-devices     true
+        dconf write /org/gnome/shell/extensions/sound-output-device-chooser/hide-menu-icons         false
+        dconf write /org/gnome/shell/extensions/sound-output-device-chooser/icon-theme              "'monochrome'"
+        dconf write /org/gnome/shell/extensions/sound-output-device-chooser/show-input-slider       false
+    fi
 
 ;;
 
@@ -954,7 +962,10 @@ _EOF
 
 "network/browser")
 
-    launcheradd 'google-chrome'
+    if ispkginstalled google-chrome-stable
+    then
+        launcheradd 'google-chrome'
+    fi
 
 ;;
 
@@ -962,7 +973,10 @@ _EOF
 
 "network/mail")
 
-    launcheradd 'org.gnome.Evolution'
+    if ispkginstalled
+    then
+        launcheradd 'org.gnome.Evolution'
+    fi
 
 ;;
 
@@ -970,33 +984,36 @@ _EOF
 
 "network/chat")
 
-    ## Launcher ----------------------------------------------------------------
-
-    #launcheradd 'pidgin'
 
     ## Empathy -----------------------------------------------------------------
 
-    #mkdir -p "${HOME}/.config/autostart"
-    #cp -f "${ROOT_PATH}/files/empathy/empathy.desktop" "${HOME}/.config/autostart/"
+    if ispkginstalled empathy
+    then
+        mkdir -p "${HOME}/.config/autostart"
+        cp -f "${ROOT_PATH}/files/empathy/empathy.desktop" "${HOME}/.config/autostart/"
 
-    #gsettings set org.gnome.Empathy.conversation theme          'material'
-    #gsettings set org.gnome.Empathy.conversation theme-variant  'Green'
-    #gsettings set org.gnome.Empathy.conversation adium-path     '/usr/share/adium/message-styles/material.AdiumMessageStyle'
+        gsettings set org.gnome.Empathy.conversation theme          'material'
+        gsettings set org.gnome.Empathy.conversation theme-variant  'Green'
+        gsettings set org.gnome.Empathy.conversation adium-path     '/usr/share/adium/message-styles/material.AdiumMessageStyle'
 
-    #gsettings set org.gnome.Empathy.ui show-groups              true
+        gsettings set org.gnome.Empathy.ui show-groups              true
 
-    #gsettings set org.gnome.Empathy.conversation spell-checker-languages 'en,ru'
+        gsettings set org.gnome.Empathy.conversation spell-checker-languages 'en,ru'
+    fi
 
     ## Pidgin ------------------------------------------------------------------
 
-    mkdir -p "${HOME}/.config/autostart"
-    cp -f "${ROOT_PATH}/files/pidgin/pidgin.desktop" "${HOME}/.config/autostart/"
+    if ispkginstalled pidgin
+    then
+        mkdir -p "${HOME}/.config/autostart"
+        cp -f "${ROOT_PATH}/files/pidgin/pidgin.desktop" "${HOME}/.config/autostart/"
 
-    mkdir -p "${HOME}/.purple/themes"
+        mkdir -p "${HOME}/.purple/themes"
 
-    sed "s/{HOME}/$(safestring "${HOME}")/g" "${ROOT_PATH}/files/pidgin/prefs.xml" > "${HOME}/.purple/prefs.xml"
+        sed "s/{HOME}/$(safestring "${HOME}")/g" "${ROOT_PATH}/files/pidgin/prefs.xml" > "${HOME}/.purple/prefs.xml"
 
-    cp -rf "${ROOT_PATH}/files/pidgin/themes/"* "${HOME}/.purple/themes"
+        cp -rf "${ROOT_PATH}/files/pidgin/themes/"* "${HOME}/.purple/themes"
+    fi
 
 ;;
 
@@ -1030,33 +1047,42 @@ _EOF
 
     ## Transmission Remote -----------------------------------------------------
 
-    mkdir -p "${HOME}/.config/transmission-remote-gtk/"
-    cp -rf "${ROOT_PATH}/files/transmission-remote-gtk/config.json" "${HOME}/.config/transmission-remote-gtk/"
+if ispkginstalled empathy
+then
+
+    if ispkginstalled transmission-remote-gtk
+    then
+        mkdir -p "${HOME}/.config/transmission-remote-gtk/"
+        cp -rf "${ROOT_PATH}/files/transmission-remote-gtk/config.json" "${HOME}/.config/transmission-remote-gtk/"
+    fi
 
     ## EiskaltDC++ Remote ------------------------------------------------------
 
-    #eiskaltdcpp-remote-qt-config --server-ip '188.134.72.31'
+    if ispkginstalled eiskaltdcpp-remote-qt
+    then
+        eiskaltdcpp-remote-qt-config --server-ip '188.134.72.31'
 
-    #eiskaltdcpp-remote-qt-config --clear-directory
+        eiskaltdcpp-remote-qt-config --clear-directory
 
-    #eiskaltdcpp-remote-qt-config --add-directory /media/documents/Video/Фильмы
-    #eiskaltdcpp-remote-qt-config --add-directory /media/documents/Video/Youtube
-    #eiskaltdcpp-remote-qt-config --add-directory /media/documents/Video/Аниме
-    #eiskaltdcpp-remote-qt-config --add-directory /media/documents/Video/Мультфильмы
-    #eiskaltdcpp-remote-qt-config --add-directory /media/documents/Books
-    #eiskaltdcpp-remote-qt-config --add-directory /media/documents/Documents
-    #eiskaltdcpp-remote-qt-config --add-directory /media/documents/Music
-    #eiskaltdcpp-remote-qt-config --add-directory /media/documents/Downloads
-    #eiskaltdcpp-remote-qt-config --add-directory /media/documents/Images
-    #eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib
-    #eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Драйверы
-    #eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Игры
-    #eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/OS
-    #eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Утилиты
-    #eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Сеть
-    #eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Медиа
+        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Video/Фильмы
+        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Video/Youtube
+        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Video/Аниме
+        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Video/Мультфильмы
+        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Books
+        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Documents
+        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Music
+        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Downloads
+        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Images
+        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib
+        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Драйверы
+        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Игры
+        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/OS
+        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Утилиты
+        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Сеть
+        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Медиа
 
-    #eiskaltdcpp-remote-qt-config --last-directory /media/documents/Downloads
+        eiskaltdcpp-remote-qt-config --last-directory /media/documents/Downloads
+    fi
 
     ## Bookmarks for SFTP ------------------------------------------------------
 
@@ -1169,19 +1195,22 @@ _EOF
 
 "optimize/disable-tracker")
 
-    tracker daemon -t
+    if ispkginstalled tracker
+    then
+        tracker daemon -t
 
-    mkdir -p "${HOME}/.config/autostart"
-    cd "${HOME}/.config/autostart"
+        mkdir -p "${HOME}/.config/autostart"
+        cd "${HOME}/.config/autostart"
 
-    cp  /etc/xdg/autostart/tracker-* ./
+        cp  /etc/xdg/autostart/tracker-* ./
 
-    for FILE in tracker-*.desktop
-    do
-        echo 'Hidden=true' >> "$FILE"
-    done
+        for FILE in tracker-*.desktop
+        do
+            echo 'Hidden=true' >> "$FILE"
+        done
 
-    rm -rf "${HOME}/.cache/tracker" "${HOME}/.local/share/tracker"
+        rm -rf "${HOME}/.cache/tracker" "${HOME}/.local/share/tracker"
+    fi
 
 ;;
 
