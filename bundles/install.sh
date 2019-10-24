@@ -43,6 +43,9 @@ case "${bundle}" in
 
 "gnome")
 
+    if gnomebased
+    then
+
     if ispkginstalled ubuntu-session
     then
         appinstall 'Gnome session'          'gnome-shell gnome-session'
@@ -60,16 +63,23 @@ case "${bundle}" in
         gnomeshellextension 112             # Remove Accessibility
     fi
 
+    fi
+
 ;;
 
 ### Cinnamon ===================================================================
 
 "cinnamon")
 
+    if gnomebased
+    then
+
     appinstall 'Nautilus'               'nautilus nautilus-extension-gnome-terminal nautilus-sendto nautilus-share'
     appinstall 'Cinnamon'               'cinnamon cinnamon-session cinnamon-screensaver cinnamon-l10n'
     appinstall 'JSON editor'            'jq'
     appinstall 'Redshift'               'redshift-gtk'
+
+    fi
 ;;
 
 ### ============================================================================
