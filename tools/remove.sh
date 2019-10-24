@@ -62,4 +62,4 @@ appremove 'Unattended upgrades'     'unattended-upgrades'
 
 ## Remove unused ---------------------------------------------------------------
 
-silent 'Removing unused packages' apt-get autoremove --yes --force-yes --purge
+silent 'Removing unused packages' apt autoremove --yes --force-yes --purge

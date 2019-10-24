@@ -280,7 +280,7 @@ case "${bundle}" in
 
     pushd "${rootfs_dir}/tools/packages" > /dev/null
 
-    silent 'Download Gitlab package' apt-get download gitlab
+    silent 'Download Gitlab package' apt download gitlab
 
     pkgname=$(ls gitlab_*.deb | sed 's/^gitlab/gitlab-stub/' | sed 's/_.*_/_current_/')
 

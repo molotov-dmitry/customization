@@ -189,7 +189,7 @@ function debinstall()
             msgdone
             return 0
         else
-            DEBIAN_FRONTEND=noninteractive apt-get install -f --yes --force-yes >/dev/null 2>&1
+            DEBIAN_FRONTEND=noninteractive apt install -f --yes --force-yes >/dev/null 2>&1
 
             if [[ $? -eq 0 ]] && ispkginstalled "${debname}"
             then
@@ -263,7 +263,7 @@ function appinstall()
         export DEBIAN_FRONTEND=noninteractive
         export DEBIAN_PRIORITY=critical
 
-        DEBIAN_FRONTEND=noninteractive apt-get install $installlist -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" --yes --force-yes --no-install-recommends >/dev/null 2>&1
+        DEBIAN_FRONTEND=noninteractive apt install $installlist -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" --yes --force-yes --no-install-recommends >/dev/null 2>&1
 
         if [[ $? -eq 0 ]]
         then
@@ -279,7 +279,7 @@ function appinstall()
             msgfail
             title "Retrying installing $appname"
 
-            DEBIAN_FRONTEND=noninteractive apt-get install $installlist -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" --yes --force-yes --no-install-recommends >/dev/null 2>&1
+            DEBIAN_FRONTEND=noninteractive apt install $installlist -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" --yes --force-yes --no-install-recommends >/dev/null 2>&1
 
             if [[ $? -eq 0 ]]
             then
@@ -320,7 +320,7 @@ function appremove()
         msgwarn '[removed]'
         return 0
     else
-        apt-get purge ${remlist} --yes --force-yes --purge >/dev/null 2>&1
+        apt purge ${remlist} --yes --force-yes --purge >/dev/null 2>&1
 
         if [[ $? -eq 0 ]]
         then
@@ -337,7 +337,7 @@ function appupdate()
 {
     title 'Updating package list'
 
-    apt-get update >/dev/null 2>&1
+    apt update >/dev/null 2>&1
 
     if [[ $? -eq 0 ]]
     then
@@ -353,7 +353,7 @@ function appupgrade()
 {
     title 'Upgrading packages'
 
-    DEBIAN_FRONTEND=noninteractive apt-get upgrade --yes --force-yes >/dev/null 2>&1
+    DEBIAN_FRONTEND=noninteractive apt upgrade --yes --force-yes >/dev/null 2>&1
 
     if [[ $? -eq 0 ]]
     then
@@ -364,7 +364,7 @@ function appupgrade()
 
         title 'Retrying upgrading packages'
 
-        DEBIAN_FRONTEND=noninteractive apt-get upgrade --yes --force-yes >/dev/null 2>&1
+        DEBIAN_FRONTEND=noninteractive apt upgrade --yes --force-yes >/dev/null 2>&1
 
         if [[ $? -eq 0 ]]
         then
@@ -381,7 +381,7 @@ function appdistupgrade()
 {
     title 'Upgrading distributive'
 
-    DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade --yes --force-yes >/dev/null 2>&1
+    DEBIAN_FRONTEND=noninteractive apt dist-upgrade --yes --force-yes >/dev/null 2>&1
 
     if [[ $? -eq 0 ]]
     then

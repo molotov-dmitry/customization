@@ -109,7 +109,7 @@ function finish_chroot()
 {
     ROOTFS_DIR="$1"
 
-    silent 'Clearing APT cache' chroot "${ROOTFS_DIR}" apt-get clean
+    silent 'Clearing APT cache' chroot "${ROOTFS_DIR}" apt clean
 
     reactivate "${ROOTFS_DIR}" "/sbin/initctl"
     reactivate "${ROOTFS_DIR}" "/usr/sbin/update-grub"

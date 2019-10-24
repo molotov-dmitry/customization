@@ -328,7 +328,7 @@ chroot_rootfs "${rootfs_dir}" bash /tools/bundle.sh install "${config}"
 chroot_rootfs "${rootfs_dir}" bash /tools/config.sh
 chroot_rootfs "${rootfs_dir}" bash /tools/bundle.sh config "${config}"
 
-chroot_rootfs "${rootfs_dir}" apt-get autoremove --yes -qq || exit 1
+chroot_rootfs "${rootfs_dir}" apt autoremove --yes --force-yes --purge -qq || exit 1
 
 chroot_rootfs "${rootfs_dir}" bash /tools/enable-startup.sh
 
