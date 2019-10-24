@@ -1068,9 +1068,6 @@ _EOF
 
     ## Transmission Remote -----------------------------------------------------
 
-if ispkginstalled empathy
-then
-
     if ispkginstalled transmission-remote-gtk
     then
         mkdir -p "${HOME}/.config/transmission-remote-gtk/"
