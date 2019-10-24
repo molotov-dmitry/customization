@@ -43,7 +43,7 @@ case "${bundle}" in
 
     ## GDM3 theme --------------------------------------------------------------
 
-    if [[ "$(lsb_release -si)" == "Ubuntu" ]]
+    if [[ "$(lsb_release -si)" == "Ubuntu" ]] && ispkginstalled gdm3
     then
         gdm3_theme='gnome-shell'
 
