@@ -791,6 +791,98 @@ function gnomeshellextension()
     return 0
 }
 
+### Git install functions ======================================================
+
+function gitinstall()
+{
+    local description="$1"
+    local repourl="$2"
+    local type="$3"
+
+    local reponame="${description,,}"
+    reponame="${reponame// /-}-git"
+
+    shift
+    shift
+    shift
+
+    unset packages_to_remove
+    local -a packages_to_remove
+
+    if ! ispkginstalled git
+    then
+        appinstall 'Git (tmp)' git || return 1
+        packages_to_remove+=('git')
+    fi
+
+    if ! ispkginstalled make
+    then
+        appinstall 'Make (tmp)' make || return 1
+        packages_to_remove+=('make')
+    fi
+
+    if [[ "${type,,}" == 'qt5' ]] && ! ispkginstalled qtbase5-dev
+    then
+        appinstall 'Qt5 dev tools (tmp)' qtbase5-dev || return 1
+        packages_to_remove+=('qtbase5-dev')
+    fi
+
+    if [[ "${type,,}" == 'qt4' ]] && ! ispkginstalled qt4-dev-tools
+    then
+        appinstall 'Qt4 dev tools (tmp)' qt4-dev-tools || return 1
+        packages_to_remove+=('qt4-dev-tools')
+    fi
+
+    while [[ $# -gt 0 ]]
+    do
+        if ! ispkginstalled "$1"
+        then
+            appinstall "$1 (tmp)" "$1" || return 1
+            packages_to_remove+=("$1")
+        fi
+
+        shift
+    done
+
+    if [[ -d "/tmp/${reponame}" ]]
+    then
+        silent "Removing $description directory" rm -rf "/tmp/${reponame}" || return 1
+    fi
+
+    silent "Cloning $description" git clone --recurse-submodules -j$(nproc) --depth 1 "$repourl" "/tmp/${reponame}" || return 1
+
+    pushd "/tmp/${reponame}" > /dev/null || return 1
+
+    case "${type,,}" in
+    'make')
+        ;;
+    'qt5')
+        silent "Preparing $description" qmake -qt=qt5 || return 1
+        ;;
+    'qt4')
+        silent "Preparing $description" qmake -qt=qt4 || return 1
+        ;;
+    *)
+        silent "Preparing $description" false || return 1
+        ;;
+    esac
+
+    silent "Building $description" make -j $(nproc) || return 1
+
+    silent "Installing $description" make install || return 1
+
+    popd  > /dev/null || return 1
+
+    silent "Cleaning $description" rm -rf "/tmp/${reponame}" || return 1
+
+    if [ ${#packages_to_remove[@]} -gt 0 ]
+    then
+        appremove 'tmp packages' "${packages_to_remove[@]}"
+    fi
+
+    return 0
+}
+
 ### Silent exec functions ======================================================
 
 function silent()
