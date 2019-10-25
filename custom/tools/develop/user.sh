@@ -9,8 +9,6 @@ cd "${ROOT_PATH}" || exit 1
 
 ### Add network shares ---------------------------------------------------------
 
-mkdir -p "${HOME}/.config/gtk-3.0/"
-
 addbookmark 'sftp://188.134.72.31:2222/media/documents' 'AHOME'
 
 addbookmark 'smb://172.16.8.21/share2'         'KUB'
