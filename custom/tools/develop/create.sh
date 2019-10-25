@@ -7,13 +7,16 @@ cd "${ROOT_PATH}" || exit 1
 
 ### ============================================================================
 
-appinstall 'RDP server' 'vino'
-
-if [[ "$(lsb_release -si) $(lsb_release -sc)" == 'Debian stretch' ]]
+if gnomebased
 then
-    appinstall 'RDP client' 'vinagre'
-else
+    appinstall 'RDP server' 'vino'
     appinstall 'RDP client' 'remmina remmina-plugin-vnc remmina-plugin-rdp remmina-plugin-xdmcp'
+fi
+
+if kdebased
+then
+    appinstall 'RDP server' 'krfb'
+    appinstall 'RDP client' 'krdc freerdp2-x11'
 fi
 
 ### Network switcher ===========================================================
