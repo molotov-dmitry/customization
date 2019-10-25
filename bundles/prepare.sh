@@ -450,6 +450,7 @@ case "${bundle}" in
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/office'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/services'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/remote'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/remotedesktop'
     
 ;;
 
@@ -510,6 +511,12 @@ case "${bundle}" in
     silent 'Copy Transmission remote config' cp -rf "${ROOT_PATH}/files/transmission-remote-gtk" "${rootfs_dir}/tools/files/"
 
     #debprepare 'EiskaltDC++ Remote Qt' 'eiskaltdcpp-remote-qt' '27' 'amd64'
+;;
+
+### Remote desktop =============================================================
+
+"network/remotedesktop")
+
 ;;
 
 ### ============================================================================

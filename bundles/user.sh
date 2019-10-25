@@ -976,6 +976,7 @@ _EOF
     bash "${scriptpath}" 'network/office'
     bash "${scriptpath}" 'network/services'
     bash "${scriptpath}" 'network/remote'
+    bash "${scriptpath}" 'network/remotedesktop'
 
 ;;
 
@@ -1106,6 +1107,12 @@ _EOF
 
     addbookmark 'sftp://188.134.72.31:2222/media/documents' 'SFTP'
     addbookmark 'sftp://192.168.1.5/media/documents'        'SFTP (LAN)'
+
+;;
+
+### Remote desktop =============================================================
+
+"network/remotedesktop")
 
 ;;
 

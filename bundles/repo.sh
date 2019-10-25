@@ -398,6 +398,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'network/office'
     bash "${scriptpath}" 'network/services'
     bash "${scriptpath}" 'network/remote'
+    bash "${scriptpath}" 'network/remotedesktop'
     
 ;;
 
@@ -447,6 +448,12 @@ case "${bundle}" in
 ### Remote clients =============================================================
 
 "network/remote")
+
+;;
+
+### Remote desktop =============================================================
+
+"network/remotedesktop")
 
 ;;
 

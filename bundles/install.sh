@@ -727,6 +727,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'network/office'
     bash "${scriptpath}" 'network/services'
     bash "${scriptpath}" 'network/remote'
+    bash "${scriptpath}" 'network/remotedesktop'
 
 ;;
 
@@ -808,6 +809,24 @@ case "${bundle}" in
     fi
 
     #debinstall 'EiskaltDC++ Remote Qt'  'eiskaltdcpp-remote-qt' '27' 'amd64'
+
+;;
+
+### Remote desktop =============================================================
+
+"network/remotedesktop")
+
+    if gnomebased
+    then
+        appinstall 'RDP server' 'vino'
+        appinstall 'RDP client' 'remmina remmina-plugin-vnc remmina-plugin-rdp remmina-plugin-xdmcp'
+    fi
+
+    if kdebased
+    then
+        appinstall 'RDP server' 'krfb'
+        appinstall 'RDP client' 'krdc freerdp2-x11'
+    fi
 
 ;;
 

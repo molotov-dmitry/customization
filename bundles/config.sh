@@ -489,6 +489,7 @@ _EOF
     bash "${scriptpath}" 'network/office'
     bash "${scriptpath}" 'network/services'
     bash "${scriptpath}" 'network/remote'
+    bash "${scriptpath}" 'network/remotedesktop'
     
 ;;
 
@@ -547,6 +548,12 @@ _EOF
 ### Remote clients =============================================================
 
 "network/remote")
+
+;;
+
+### Remote desktop =============================================================
+
+"network/remotedesktop")
 
 ;;
 
