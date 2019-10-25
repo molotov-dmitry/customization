@@ -57,11 +57,4 @@ silent 'Blacklist audio module'     sh -c "echo 'blacklist snd_hdmi_lpe_audio' >
 
 ## Bluetooth -------------------------------------------------------------------
 
-cd /usr/bin/drivers
-
-silent 'Cloning bluetooth driver'   git --depth 1 clone https://github.com/lwfinger/rtl8723bs_bt.git
-
-cd rtl8723bs_bt
-
-silent 'Building bluetooth driver'  make
-silent 'Installing bluetooth driver' make install
+gitinstall 'Bluetooth driver'       'https://github.com/lwfinger/rtl8723bs_bt.git' make

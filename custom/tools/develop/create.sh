@@ -7,29 +7,10 @@ cd "${ROOT_PATH}" || exit 1
 
 ### Network switcher ===========================================================
 
-appinstall 'Git'                    'git'
-
-pushd /tmp > /dev/null
-
-silent 'Cloning Network Switcher'   git clone --depth 1 'https://github.com/molotov-dmitry/network-switch.git'
-
-pushd network-switch > /dev/null
-
-mkdir -p /usr/local/bin
-silent 'Install Network Switcher'   install network-switch.sh /usr/local/bin/network-switch
-
-popd > /dev/null
-popd > /dev/null
-
-rm -rf /tmp/network-switch
+gitinstall 'Network Switcher'       'https://github.com/molotov-dmitry/network-switch.git' make
 
 ### LDAP user configuration script =============================================
 
 appinstall 'LDAP utilities'         'ldap-utils'
+gitinstall 'LDAP user config'       'https://github.com/molotov-dmitry/work-user-ldap-config.git' make
 
-appinstall 'Git'                    'git'
-
-silent 'Cloning LDAP user config'   git clone --depth 1 'https://github.com/molotov-dmitry/work-user-ldap-config.git' /tmp/work-user-ldap-config
-silent 'Install LDAP user config'   make -C /tmp/work-user-ldap-config install desktop-skel
-
-rm -rf /tmp/work-user-ldap-config

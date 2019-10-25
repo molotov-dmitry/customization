@@ -487,16 +487,7 @@ case "${bundle}" in
     then
         appinstall 'Build utilities' 'git make qtbase5-dev-tools'
 
-        silent 'Cloning CCS pjt editor' git clone 'https://github.com/molotov-dmitry/ccs-pjt-editor-qt.git' /tmp/ccs-pjt-editor-qt
-
-        if pushd /tmp/ccs-pjt-editor-qt > /dev/null
-        then
-            silent 'Updating CCS pjt editor'    git submodule update --init
-            silent 'Preparing CCS pjt editor'   qmake -qt=qt5
-            silent 'Building CCS pjt editor'    make -j $(nproc)
-            silent 'Installing CCS pjt editor'  make install
-            popd > /dev/null
-        fi
+        gitinstall 'CCS project editor' 'https://github.com/molotov-dmitry/ccs-pjt-editor-qt' qt5 g++
     fi
 
 ;;
