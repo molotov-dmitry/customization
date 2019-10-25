@@ -5,20 +5,6 @@ cd "${ROOT_PATH}" || exit 1
 
 . "${ROOT_PATH}/functions.sh"
 
-### ============================================================================
-
-if gnomebased
-then
-    appinstall 'RDP server' 'vino'
-    appinstall 'RDP client' 'remmina remmina-plugin-vnc remmina-plugin-rdp remmina-plugin-xdmcp'
-fi
-
-if kdebased
-then
-    appinstall 'RDP server' 'krfb'
-    appinstall 'RDP client' 'krdc freerdp2-x11'
-fi
-
 ### Network switcher ===========================================================
 
 appinstall 'Git'                    'git'
