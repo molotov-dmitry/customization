@@ -475,7 +475,13 @@ case "${bundle}" in
 
     appinstall 'ARPing'                 'iputils-arping'
     silent     'Wireshark fix'          sh -c 'echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections'
-    appinstall 'Wireshark'              'wireshark-gtk'
+
+    if gnomebased
+    then
+        appinstall 'Wireshark'          'wireshark-gtk'
+    else
+        appinstall 'Wireshark'          'wireshark-qt'
+    fi
 
 ;;
 
@@ -485,8 +491,6 @@ case "${bundle}" in
 
     if havegraphics
     then
-        appinstall 'Build utilities' 'git make qtbase5-dev-tools'
-
         gitinstall 'CCS project editor' 'https://github.com/molotov-dmitry/ccs-pjt-editor-qt' qt5 g++
     fi
 
@@ -524,11 +528,19 @@ case "${bundle}" in
     if gnomebased
     then
         appinstall 'Meld diff tool'     'meld'
+
+        appinstall 'Git repo viewer'    'gitg'
     fi
 
-    if gnomebased
+    if kdebased
     then
-        appinstall 'Git repo viewer'    'gitg'
+        appinstall 'Kompare diff tool'  'kompare'
+        appinstall 'KDE SVN'            'kdesvn'
+
+        if ispkginstalled dolphin
+        then
+            appinstall 'Dolphin plugins'    'dolphin-plugins'
+        fi
     fi
 
 ;;
@@ -671,16 +683,21 @@ case "${bundle}" in
     appinstall 'VA API drivers'         'va-driver-all gstreamer1.0-vaapi'
     appinstall 'Multimedia codecs'      'gstreamer1.0-plugins-bad gstreamer1.0-libav'
 
-    appinstall 'Rhythmbox'              'rhythmbox rhythmbox-plugins'
-    appinstall 'Totem video player'     'totem'
-    appinstall 'MPV Player'             'mpv gnome-mpv'
+    appinstall 'MPV Player'             'mpv'
 
-    appinstall 'DLNA support'           'dleyna-server [dleyna-renderer]'
+    if gnomebased
+    then
+        appinstall 'Rhythmbox'              'rhythmbox rhythmbox-plugins'
+        appinstall 'Totem video player'     'totem'
+        appinstall 'MPV Gnome GUI'          'gnome-mpv'
 
-    appinstall 'EasyTag'                'easytag'
+        appinstall 'DLNA support'           'dleyna-server [dleyna-renderer]'
 
-    appinstall 'Gnome Photos'           'gnome-photos'
-    appinstall 'Shotwell'               'shotwell'
+        appinstall 'EasyTag'                'easytag'
+
+        appinstall 'Gnome Photos'           'gnome-photos'
+        appinstall 'Shotwell'               'shotwell'
+    fi
 
     if ispkginstalled gnome-shell
     then
@@ -733,6 +750,11 @@ case "${bundle}" in
         appinstall 'Chrome Gnome Shell' 'chrome-gnome-shell'
     fi
 
+    if ispkginstalled plasma-desktop
+    then
+        appinstall 'Chrome Plasma'      'plasma-browser-integration'
+    fi
+
 ;;
 
 ### Mail =======================================================================
@@ -742,6 +764,11 @@ case "${bundle}" in
     if gnomebased
     then
         appinstall 'Evolution mail client'  'evolution evolution-data-server evolution-ews'
+    fi
+
+    if kdebased
+    then
+        appinstall 'KDE PIM'                'kmail kontact korganizer ktnef kaddressbook kmailtransport-akonadi'
     fi
 
 ;;
@@ -756,6 +783,10 @@ case "${bundle}" in
         appinstall 'Pidgin'             'pidgin [pidgin-libnotify] [pidgin-indicator]'
     fi
 
+    if kdebased
+    then
+        appinstall 'Kopete'             'kopete'
+    fi
 ;;
 
 ### Chat extra protocols =======================================================
@@ -797,6 +828,11 @@ case "${bundle}" in
     if gnomebased
     then
         appinstall 'Transmission remote'    'transmission-remote-gtk'
+    fi
+
+    if kdebased
+    then
+        appinstall 'Transmission Qt'        'transmission-qt'
     fi
 
     #debinstall 'EiskaltDC++ Remote Qt'  'eiskaltdcpp-remote-qt' '27' 'amd64'
