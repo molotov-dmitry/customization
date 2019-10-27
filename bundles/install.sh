@@ -699,6 +699,14 @@ case "${bundle}" in
         appinstall 'Shotwell'               'shotwell'
     fi
 
+    if kdebased
+    then
+        appinstall 'Clementine'             'clementine'
+        appinstall 'Kaffeine media player'  'kaffeine'
+
+        appinstall 'Kid3'                   'kid3'
+    fi
+
     if ispkginstalled gnome-shell
     then
         gnomeshellextension 1379        # A simple MPRIS indicator button
