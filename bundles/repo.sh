@@ -53,6 +53,11 @@ case "${bundle}" in
 
 "kde")
 
+    if kdebased
+    then
+        ppaadd 'Kubuntu backports'      'kubuntu-ppa' 'backports'
+    fi
+
 ;;
 
 ### ============================================================================
