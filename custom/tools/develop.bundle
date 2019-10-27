@@ -2,6 +2,7 @@ base
 gui
 gtk
 gnome
+kde
 cinnamon
 qt
 

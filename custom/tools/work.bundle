@@ -3,6 +3,7 @@ gui
 gtk
 gnome
 cinnamon
+kde
 qt
 
 driver
