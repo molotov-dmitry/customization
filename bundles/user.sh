@@ -326,6 +326,11 @@ case "${bundle}" in
         usercopy 'konsole'
     fi
 
+    if ispkginstalled kate
+    then
+        usercopy 'kate'
+    fi
+
 ;;
 
 ### ============================================================================

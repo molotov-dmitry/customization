@@ -62,6 +62,7 @@ case "${bundle}" in
 "kde")
 
     preparefiles 'Konsole' 'konsole'
+    preparefiles 'Kate'    'kate'
 
 ;;
 
