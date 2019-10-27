@@ -1267,6 +1267,11 @@ function launcherclear()
     then
         gsettings set org.cinnamon favorite-apps '[]'
     fi
+
+    if kdebased
+    then
+        sqlite3 "${HOME}/.local/share/kactivitymanagerd/resources/database" "DELETE FROM ResourceLink WHERE usedActivity = ':global' AND initiatingAgent = 'org.kde.plasma.favorites.applications'"
+    fi
 }
 
 function launcheradd_var()
@@ -1317,6 +1322,11 @@ function launcheradd()
     if ispkginstalled cinnamon
     then
         launcheradd_var "$application" 'org.cinnamon' 'favorite-apps'
+    fi
+
+    if kdebased
+    then
+        sqlite3 "${HOME}/.local/share/kactivitymanagerd/resources/database" "INSERT INTO ResourceLink(usedActivity, initiatingAgent, targettedResource) VALUES(':global', 'org.kde.plasma.favorites.applications', '${application}.desktop')"
     fi
 }
 
