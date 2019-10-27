@@ -821,6 +821,14 @@ _EOF
         gsettings set org.cinnamon.desktop.wm.preferences theme     'Mint-Y-Dark'
         gsettings set org.cinnamon.theme name                       'Mint-Y-Dark'
     fi
+
+    if kdebased
+    then
+        for file in "${HOME}/.config/kdeglobals" "${HOME}/.kde/share/config/kdeglobals"
+        do
+            addconfigline 'Theme' "${icon_theme}" 'Icons' "$file"
+        done
+    fi
 ;;
 
 ### System fonts ===============================================================
