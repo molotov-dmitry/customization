@@ -768,7 +768,7 @@ case "${bundle}" in
 
     if kdebased
     then
-        appinstall 'KDE PIM'                'kmail kontact korganizer ktnef kaddressbook kmailtransport-akonadi'
+        appinstall 'KDE PIM'                'kmail kontact korganizer ktnef kaddressbook kmailtransport-akonadi accountwizard'
     fi
 
 ;;
