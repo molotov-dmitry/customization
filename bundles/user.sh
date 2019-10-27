@@ -321,10 +321,21 @@ case "${bundle}" in
 
 "kde")
 
+    ## KDE ---------------------------------------------------------------------
+
+    if kdebased
+    then
+        usercopy 'kde'
+    fi
+
+    ## Konsole -----------------------------------------------------------------
+
     if ispkginstalled konsole
     then
         usercopy 'konsole'
     fi
+
+    ## Kate --------------------------------------------------------------------
 
     if ispkginstalled kate
     then
