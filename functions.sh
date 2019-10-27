@@ -119,6 +119,13 @@ function preparefiles()
     silent "Copy $name files" cp -rf "${ROOT_PATH}/files/$dir" "${rootfs_dir}/tools/files/"
 }
 
+functions usercopy()
+{
+    local dir="$1"
+
+    cp -rf "${ROOT_PATH}/files/${dir}/." "${HOME}/"
+}
+
 ### Packages ===================================================================
 
 function debconfselect()
