@@ -827,22 +827,58 @@ _EOF
 
 "appearance/fonts")
 
+    font_ui='Google Sans'
+    font_doc='Linux Libertine O'
+    font_fixed='Ubuntu Mono'
+
+    font_ui_size='10'
+    font_doc_size='12'
+    font_fixed_size='12'
+
     if ispkginstalled gnome-shell
     then
-        gsettings set org.gnome.desktop.interface font-name             'Google Sans 10'
-        gsettings set org.gnome.desktop.interface document-font-name    'Linux Libertine O 12'
-        gsettings set org.gnome.desktop.interface monospace-font-name   'Ubuntu Mono 12'
-        gsettings set org.gnome.desktop.wm.preferences titlebar-font    'Google Sans 10'
+        gsettings set org.gnome.desktop.interface font-name             "${font_ui} {font_ui_size}"
+        gsettings set org.gnome.desktop.interface document-font-name    "${font_doc} {font_doc_size}"
+        gsettings set org.gnome.desktop.interface monospace-font-name   "${font_fixed} {font_fixed_size}"
+        gsettings set org.gnome.desktop.wm.preferences titlebar-font    "${font_ui} {font_ui_size}"
     fi
 
     if ispkginstalled cinnamon
     then
-        gsettings set org.cinnamon.desktop.interface font-name          'Google Sans 10'
-        gsettings set org.gnome.desktop.interface document-font-name    'Linux Libertine O 12'
-        gsettings set org.gnome.desktop.interface monospace-font-name   'Ubuntu Mono 12'
-        gsettings set org.cinnamon.desktop.wm.preferences titlebar-font 'Google Sans 10'
-        gsettings set org.nemo.desktop font                             'Google Sans 10'
+        gsettings set org.cinnamon.desktop.interface font-name          "${font_ui} {font_ui_size}"
+        gsettings set org.gnome.desktop.interface document-font-name    "${font_doc} {font_doc_size}"
+        gsettings set org.gnome.desktop.interface monospace-font-name   "${font_fixed} {font_fixed_size}"
+        gsettings set org.cinnamon.desktop.wm.preferences titlebar-font "${font_ui} {font_ui_size}"
+        gsettings set org.nemo.desktop font                             "${font_ui} {font_ui_size}"
     fi
+
+    if kdebased
+    then
+        font_options="-1,5,50,0,0,0,0,0,Regular"
+
+        addconfigline 'XftHintStyle' 'hintslight' 'General' "${HOME}/.config/kdeglobals"
+        addconfigline 'XftSubPixel'  ''           'General' "${HOME}/.config/kdeglobals"
+
+        addconfigline 'fixed' "${font_fixed},${font_fixed_size},${font_options}" 'General' "${HOME}/.config/kdeglobals"
+
+        for file in "${HOME}/.config/kdeglobals" "${HOME}/.kde/share/config/kdeglobals"
+        do
+            for font in font menuFont smallestReadableFont toolBarFont
+            do
+                addconfigline "$font" "${font_ui},${font_ui_size},${font_options}" 'General' "$file"
+            done
+        done
+
+        unset font_options
+    fi
+
+    unset font_ui
+    unset font_doc
+    unset font_fixed
+
+    unset font_ui_size
+    unset font_doc_size
+    unset font_fixed_size
 
 ;;
 
