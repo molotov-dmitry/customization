@@ -119,7 +119,7 @@ function preparefiles()
     silent "Copy $name files" cp -rf "${ROOT_PATH}/files/$dir" "${rootfs_dir}/tools/files/"
 }
 
-functions usercopy()
+function usercopy()
 {
     local dir="$1"
 
