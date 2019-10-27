@@ -104,6 +104,21 @@ function conntest()
     fi
 }
 
+### Preparing files ============================================================
+
+function preparefiles()
+{
+    local name="$1"
+    local dir="$2"
+
+    if [[ -z "$dir" ]]
+    then
+        dir="${name,,}"
+    fi
+
+    silent "Copy $name files" cp -rf "${ROOT_PATH}/files/$dir" "${rootfs_dir}/tools/files/"
+}
+
 ### Packages ===================================================================
 
 function debconfselect()

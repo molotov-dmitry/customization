@@ -27,7 +27,7 @@ case "${bundle}" in
 
 "gui")
 
-    silent "Copy templates"         cp -rf "${ROOT_PATH}/files/template" "${rootfs_dir}/tools/files/"
+    preparefiles 'templates' 'template'
 
 ;;
 
@@ -53,7 +53,7 @@ case "${bundle}" in
 
 "cinnamon")
 
-    silent "Copy redshift config"   cp -rf "${ROOT_PATH}/files/redshift" "${rootfs_dir}/tools/files/"
+    preparefiles 'Redshift' 'redshift'
 
 ;;
 
@@ -137,7 +137,7 @@ case "${bundle}" in
 
 "server/ftp")
 
-    silent "Copy vsftpd config" cp -rf "${ROOT_PATH}/files/vsftpd" "${rootfs_dir}/tools/files/"
+    preparefiles 'Vsftpd' 'vsftpd'
 
 ;;
 
@@ -145,7 +145,7 @@ case "${bundle}" in
 
 "server/smb")
 
-    silent 'Copy Samba config'  cp -rf "${ROOT_PATH}/files/samba"           "${rootfs_dir}/tools/files/"
+    preparefiles 'Samba' 'samba'
 
 ;;
 
@@ -153,7 +153,7 @@ case "${bundle}" in
 
 "server/svn")
 
-    silent "Copy svnserve unit" cp -rf "${ROOT_PATH}/files/svnserve" "${rootfs_dir}/tools/files/"
+    preparefiles 'Svnserve' 'svnserve'
 
 ;;
 
@@ -181,13 +181,13 @@ case "${bundle}" in
 
 "server/media")
 
-     ## MiniDLNA ----------------------------------------------------------------
+    ## MiniDLNA ----------------------------------------------------------------
 
-    silent 'Copy MiniDLNA config' cp -rf "${ROOT_PATH}/files/minidlna"          "${rootfs_dir}/tools/files/"
+    preparefiles 'MiniDLNA' 'minidlna'
 
     ## Plex Media Server -------------------------------------------------------
 
-    silent 'Copy Plex config' cp -rf "${ROOT_PATH}/files/plexmediaserver"   "${rootfs_dir}/tools/files/"
+    preparefiles 'Plex media server' 'plexmediaserver'
 
 ;;
 
@@ -195,8 +195,13 @@ case "${bundle}" in
 
 "server/download")
 
-    silent 'Copy Transmission config'   cp -rf "${ROOT_PATH}/files/transmission" "${rootfs_dir}/tools/files/"
-    #silent 'Copy EiskaltDC++ config'    cp -rf "${ROOT_PATH}/files/eiskaltdcpp"  "${rootfs_dir}/tools/files/"
+    ## Transmission ------------------------------------------------------------
+
+    preparefiles 'Transmission' 'transmission'
+
+    ## EsikaltDC++ -------------------------------------------------------------
+
+    preparefiles 'EiskaltDC++' 'eiskaltdcpp'
 
 ;;
 
@@ -206,7 +211,7 @@ case "${bundle}" in
 
     ## Squid3 ------------------------------------------------------------------
 
-    silent 'Copy Squid config'          cp -rf "${ROOT_PATH}/files/squid3" "${rootfs_dir}/tools/files/"
+    preparefiles 'Squid3' 'squid3'
 
 ;;
 
@@ -258,7 +263,7 @@ case "${bundle}" in
 
     mkdir -p "${rootfs_dir}/etc/skel"
 
-    silent 'Copy astyle config'       cp -rf "${ROOT_PATH}/files/codestyle/.astylerc" "${rootfs_dir}/etc/skel/"
+    silent 'Copy astyle config'       cp -rf "${ROOT_PATH}/files/codestyle/.astylerc"     "${rootfs_dir}/etc/skel/"
     silent 'Copy clang-format config' cp -rf "${ROOT_PATH}/files/codestyle/.clang-format" "${rootfs_dir}/etc/skel/"
 
 ;;
@@ -293,7 +298,7 @@ case "${bundle}" in
 
     ## Qt Creator --------------------------------------------------------------
 
-    silent 'Copy QtCreator config' cp -rf "${ROOT_PATH}/files/qtcreator" "${rootfs_dir}/tools/files/"
+    preparefiles 'QtCreator' 'qtcreator'
 
 ;;
 
@@ -361,7 +366,7 @@ case "${bundle}" in
 
 "vcs")
 
-    silent "Copy RabbitVCS folder"      cp -rf "${ROOT_PATH}/files/rabbitvcs" "${rootfs_dir}/tools/files/"
+    preparefiles 'RabbitVCS' 'rabbitvcs'
 
 ;;
 
@@ -393,7 +398,7 @@ case "${bundle}" in
 
 "appearance/wallpaper")
 
-    silent "Copy backgrounds"   cp -rf "${ROOT_PATH}/files/backgrounds" "${rootfs_dir}/tools/files/"
+    preparefiles 'Backgrounds' 'backgrounds'
 
 ;;
 
@@ -405,7 +410,7 @@ case "${bundle}" in
 
     ## LibreOffice -------------------------------------------------------------
 
-    silent 'Copy Libreoffice config' cp -rf "${ROOT_PATH}/files/libreoffice" "${rootfs_dir}/tools/files/"
+    preparefiles 'LibreOffice' 'libreoffice'
 
     ## OnlyOffice --------------------------------------------------------------
 
@@ -423,11 +428,11 @@ case "${bundle}" in
 
     ## Rhythmbox ---------------------------------------------------------------
 
-    silent 'Copy Rhythmbox radio database' cp -rf "${ROOT_PATH}/files/rhythmbox" "${rootfs_dir}/tools/files/"
+    preparefiles 'Rhythmbox' 'rhythmbox'
 
     ## MPV ---------------------------------------------------------------------
 
-    silent 'Copy MPV config' cp -rf "${ROOT_PATH}/files/mpv" "${rootfs_dir}/tools/files/"
+    preparefiles 'MPV' 'mpv'
 
 ;;
 
@@ -458,7 +463,7 @@ case "${bundle}" in
 
 "network/browser")
 
-    silent 'Copy Chrome files' cp -rf "${ROOT_PATH}/files/chrome" "${rootfs_dir}/tools/files/"
+    preparefiles 'Chrome' 'chrome'
 
     mkdir -p "${rootfs_dir}/etc/default"
 
@@ -477,9 +482,13 @@ case "${bundle}" in
 
 "network/chat")
 
-    #silent 'Copy Empathy theme and config' cp -rf "${ROOT_PATH}/files/empathy" "${rootfs_dir}/tools/files/"
+    ## Empathy -----------------------------------------------------------------
 
-    silent 'Copy Pidgin theme and config' cp -rf "${ROOT_PATH}/files/pidgin" "${rootfs_dir}/tools/files/"
+    preparefiles 'Empathy' 'empathy'
+
+    ## Pidgin ------------------------------------------------------------------
+
+    preparefiles 'Pidgin' 'pidgin'
 
 ;;
 
@@ -487,8 +496,13 @@ case "${bundle}" in
 
 "network/chat-extra")
 
-    silent 'Copy Telegram files' cp -rf "${ROOT_PATH}/files/telegram" "${rootfs_dir}/tools/files/"
-    silent 'Copy VK files'       cp -rf "${ROOT_PATH}/files/vk"       "${rootfs_dir}/tools/files/"
+    ## Telegram ----------------------------------------------------------------
+
+    preparefiles 'Telegram' 'telegram'
+
+    ## VK ----------------------------------------------------------------------
+
+    preparefiles 'VK' 'vk'
 
 ;;
 
@@ -508,7 +522,7 @@ case "${bundle}" in
 
 "network/remote")
 
-    silent 'Copy Transmission remote config' cp -rf "${ROOT_PATH}/files/transmission-remote-gtk" "${rootfs_dir}/tools/files/"
+    preparefiles 'Transmission remote' 'transmission-remote-gtk'
 
     #debprepare 'EiskaltDC++ Remote Qt' 'eiskaltdcpp-remote-qt' '27' 'amd64'
 ;;
@@ -577,7 +591,7 @@ case "${bundle}" in
 
 "cli/ttycolors")
 
-    silent 'Copy TTY colors config' cp -rf "${ROOT_PATH}/files/tty" "${rootfs_dir}/tools/files/"
+    preparefiles 'TTY colors' 'tty'
 
 ;;
 
@@ -604,7 +618,7 @@ case "${bundle}" in
 
 "optimize/tmpfs")
 
-    silent 'Copy tmpfs config' cp -rf "${ROOT_PATH}/files/tmpfs" "${rootfs_dir}/tools/files/"
+    preparefiles 'tmpfs' 'tmpfs'
 
 ;;
 
@@ -612,7 +626,7 @@ case "${bundle}" in
 
 "optimize/chrome-ramdisk")
 
-    silent 'Copy chrome-ramdisk config' cp -rf "${ROOT_PATH}/files/chrome-ramdisk" "${rootfs_dir}/tools/files/"
+    preparefiles 'chrome-ramdisk' 'chrome-ramdisk'
 
 ;;
 
