@@ -321,6 +321,11 @@ case "${bundle}" in
 
 "kde")
 
+    if ispkginstalled konsole
+    then
+        usercopy 'konsole'
+    fi
+
 ;;
 
 ### ============================================================================

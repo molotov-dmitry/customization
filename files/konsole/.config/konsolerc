@@ -1,0 +1,17 @@
+[Desktop Entry]
+DefaultProfile=Default.profile
+
+[Favorite Profiles]
+Favorites=Default.profile,KOI8-R.profile
+
+[KonsoleWindow]
+ShowMenuBarByDefault=false
+
+[MainWindow]
+MenuBar=Disabled
+ToolBarsMovable=Disabled
+
+[TabBar]
+CloseTabOnMiddleMouseButton=true
+ExpandTabWidth=true
+TabBarPosition=Top
