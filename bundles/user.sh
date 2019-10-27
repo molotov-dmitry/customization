@@ -1045,9 +1045,15 @@ _EOF
 
     mkdir -p "${HOME}/.config/autostart"
 
-    cp -f "${ROOT_PATH}/files/telegram/telegramdesktop.desktop" "${HOME}/.config/autostart/"
+    if ispkginstalled telegram-desktop
+    then
+        cp -f "${ROOT_PATH}/files/telegram/telegramdesktop.desktop" "${HOME}/.config/autostart/"
+    fi
 
-    cp -f '/usr/share/applications/vk.desktop' "${HOME}/.config/autostart/"
+    if ispkginstalled vk
+    then
+        cp -f '/usr/share/applications/vk.desktop' "${HOME}/.config/autostart/"
+    fi
 
 ;;
 
