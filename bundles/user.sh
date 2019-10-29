@@ -321,26 +321,33 @@ case "${bundle}" in
 
 "kde")
 
-    ## KDE ---------------------------------------------------------------------
+    ## KDE =====================================================================
 
     if kdebased
     then
         usercopy 'kde'
+
+        ## Keyboard ------------------------------------------------------------
+
+        addkeybinding 'System Monitor' 'ksysguard'        '<Ctrl><Shift>Escape'
+        addkeybinding 'File Manager'   'dolphin'          '<Super>E'
     fi
 
-    ## Konsole -----------------------------------------------------------------
+    ## Konsole =================================================================
 
     if ispkginstalled konsole
     then
         usercopy 'konsole'
     fi
 
-    ## Kate --------------------------------------------------------------------
+    ## Kate ====================================================================
 
     if ispkginstalled kate
     then
         usercopy 'kate'
     fi
+
+
 
 ;;
 
