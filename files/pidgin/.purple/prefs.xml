@@ -63,7 +63,7 @@
 		</pref>
 		<pref name='status'>
 			<pref name='icon-theme' type='string' value='numix-square'/>
-			<pref name='icon-theme-dir' type='path' value='{HOME}/.purple/themes/numix-square/purple/status-icon'/>
+			<pref name='icon-theme-dir' type='path' value='<<HOME>>/.purple/themes/numix-square/purple/status-icon'/>
 			<pref name='dialog'>
 				<pref name='width' type='int' value='550'/>
 				<pref name='height' type='int' value='250'/>

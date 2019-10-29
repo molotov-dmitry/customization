@@ -604,20 +604,9 @@ _EOF
 
         ## Qt Creator ----------------------------------------------------------
 
-        rm -rf   "${HOME}/.config/QtProject"
+        rm -rf "${HOME}/.config/QtProject"
+        usercopy 'qtcreator' --replace '.config/QtProject/QtCreator.ini'
 
-        mkdir -p "${HOME}/.config/QtProject"
-        sed "s/{HOME}/$(safestring "${HOME}")/g" "${ROOT_PATH}/files/qtcreator/QtCreator.ini" > "${HOME}/.config/QtProject/QtCreator.ini"
-
-        mkdir -p "${HOME}/.config/QtProject/qtcreator/styles"
-        cp -f "${ROOT_PATH}/files/qtcreator/material.xml" "${HOME}/.config/QtProject/qtcreator/styles/"
-        cp -f "${ROOT_PATH}/files/qtcreator/material_dark.xml" "${HOME}/.config/QtProject/qtcreator/styles/"
-
-        mkdir -p "${HOME}/.config/QtProject/qtcreator/snippets"
-        cp -f "${ROOT_PATH}/files/qtcreator/snippets.xml" "${HOME}/.config/QtProject/qtcreator/snippets/"
-
-        mkdir -p "${HOME}/.config/QtProject/qtcreator/codestyles/Cpp"
-        cp -f "${ROOT_PATH}/files/qtcreator/allman.xml" "${HOME}/.config/QtProject/qtcreator/codestyles/Cpp"
     fi
 
 ;;
@@ -1097,14 +1086,7 @@ _EOF
 
     if ispkginstalled pidgin
     then
-        mkdir -p "${HOME}/.config/autostart"
-        cp -f "${ROOT_PATH}/files/pidgin/pidgin.desktop" "${HOME}/.config/autostart/"
-
-        mkdir -p "${HOME}/.purple/themes"
-
-        sed "s/{HOME}/$(safestring "${HOME}")/g" "${ROOT_PATH}/files/pidgin/prefs.xml" > "${HOME}/.purple/prefs.xml"
-
-        cp -rf "${ROOT_PATH}/files/pidgin/themes/"* "${HOME}/.purple/themes"
+        usercopy 'pidgin' --replace '.config/prefs.xml'
     fi
 
 ;;

@@ -122,8 +122,20 @@ function preparefiles()
 function usercopy()
 {
     local dir="$1"
+    local need_repalce="$2"
+
+    shift
+    shift
 
     cp -rf "${ROOT_PATH}/files/${dir}/." "${HOME}/"
+
+    if [[ "$need_repalce" == "--replace" ]]
+    then
+        for file in "$@"
+        do
+            sed -i "s/<<HOME>>/$(safestring "${HOME}")/g" "${HOME}/${file}"
+        done
+    fi
 }
 
 ### Packages ===================================================================
