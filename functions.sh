@@ -1411,10 +1411,10 @@ function addkeybinding()
 
 function addscenario()
 {
-    name="$1"
-    binding="$2"
-    command="$3"
-    fixpwd="$4"
+    local name="$1"
+    local binding="$2"
+    local command="$3"
+    local fixpwd="$4"
 
     if ispkginstalled 'nautilus'
     then
@@ -1454,6 +1454,35 @@ function addscenario()
 
         sed -i "/^${binding} /d"        "${HOME}/.config/nemo/scripts-accels"
         echo "${binding} ${name}.sh" >> "${HOME}/.config/nemo/scripts-accels"
+    fi
+}
+
+function addkdescenario()
+{
+    local name="$1"
+    local binding="$2"
+    local command="$3"
+    local icon="$4"
+    local mimetype="$5"
+
+    if ispkginstalled 'dolphin'
+    then
+        mkdir -p "${HOME}/.local/share/kservices5"
+
+cat >> "${HOME}/.local/share/kservices5/${name}.desktop" << _EOF
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+MimeType=${mimetype};
+Actions=action${name};
+
+[Desktop Action action${name}]
+Exec=${command}
+Icon=${icon}
+
+Name=${name}
+_EOF
+
     fi
 }
 
