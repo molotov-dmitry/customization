@@ -764,21 +764,19 @@ _EOF
         gsettings set org.gnome.meld style-scheme       'kate'
         gsettings set org.gnome.meld show-line-numbers  true
         gsettings set org.gnome.meld indent-width       4
-    fi
 
-    if ispkginstalled 'meld' && ispkginstalled 'nautilus'
-    then
         addscenario 'compare' 'F3' '[[ $# -eq 0 ]] && ( svn info || git status ) && meld .\n[[ $# -eq 1 ]] && ( svn info "$1" || ( cd "$1" && git status ) ) && meld "$1"\n[[ $# -gt 1 ]] && meld "$@"'
+        addkdescenario 'compare' 'F3' 'meld %F' 'meld' 'all/allfiles'
     fi
 
-    if ispkginstalled 'gitg' && ispkginstalled 'nautilus'
-    then
-        addscenario 'gitg' '<Ctrl>F3' '[[ $# -eq 0 ]] && ( git status ) && gitg .\n[[ $# -eq 1 ]] && ( cd "$1" && git status ) && gitg "$1"'
-    fi
+    ## Gitg --------------------------------------------------------------------
 
     if ispkginstalled 'gitg'
     then
         addkeybinding 'Gitg' 'gitg' '<Ctrl><Alt>G'
+
+        addscenario 'gitg' '<Ctrl>F3' '[[ $# -eq 0 ]] && ( git status ) && gitg .\n[[ $# -eq 1 ]] && ( cd "$1" && git status ) && gitg "$1"'
+        addkdescenario 'gitg' '<Ctrl>F3' 'gitg %f' 'gitg' 'inode/directory'
     fi
 
 ;;
