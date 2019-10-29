@@ -1378,32 +1378,33 @@ function addkeybinding()
     if kdebased
     then
         local kdebinding="$(echo "${binding}" | sed 's/Escape/Esc/g' | sed 's/<Super>/<Meta>/g' | tr '>' '+' | tr -d '<')"
-        local lastaction="$(grep '^\[Data_[[:digit:]]*\]$' .config/khotkeysrc | cut -d '_' -f 2 | cut -d ']' -f 1 | sort -g | tail -n1)"
+        local lastaction="$(grep '^\[Data_[[:digit:]]*\]$' "${HOME}/.config/khotkeysrc" | cut -d '_' -f 2 | cut -d ']' -f 1 | sort -g | tail -n1)"
         let lastaction++
         local uuid="$(uuidgen)"
 
-        addconfigline 'Type'    'SIMPLE_ACTION_DATA'    "Data_${lastaction}"
-        addconfigline 'Enabled' 'true'                  "Data_${lastaction}"
-        addconfigline 'Name'    "$name"                 "Data_${lastaction}"
-        addconfigline 'Comment' "$name"                 "Data_${lastaction}"
+        addconfigline 'Type'    'SIMPLE_ACTION_DATA'    "Data_${lastaction}" "${HOME}/.config/khotkeysrc"
+        addconfigline 'Enabled' 'true'                  "Data_${lastaction}" "${HOME}/.config/khotkeysrc"
+        addconfigline 'Name'    "$name"                 "Data_${lastaction}" "${HOME}/.config/khotkeysrc"
+        addconfigline 'Comment' "$name"                 "Data_${lastaction}" "${HOME}/.config/khotkeysrc"
 
-        addconfigline 'ActionsCount' '1'                "Data_${lastaction}Actions"
+        addconfigline 'ActionsCount' '1'                "Data_${lastaction}Actions" "${HOME}/.config/khotkeysrc"
 
-        addconfigline 'Type'       'COMMAND_URL'        "Data_${lastaction}Actions0"
-        addconfigline 'CommandURL' "${command}"         "Data_${lastaction}Actions0"
+        addconfigline 'Type'       'COMMAND_URL'        "Data_${lastaction}Actions0" "${HOME}/.config/khotkeysrc"
+        addconfigline 'CommandURL' "${command}"         "Data_${lastaction}Actions0" "${HOME}/.config/khotkeysrc"
 
-        addconfigline 'ConditionsCount' '0'             "Data_${lastaction}Conditions"
-        addconfigline 'Comment'         ''              "Data_${lastaction}Conditions"
+        addconfigline 'ConditionsCount' '0'             "Data_${lastaction}Conditions" "${HOME}/.config/khotkeysrc"
+        addconfigline 'Comment'         ''              "Data_${lastaction}Conditions" "${HOME}/.config/khotkeysrc"
 
-        addconfigline 'TriggersCount' '1'               "Data_${lastaction}Triggers"
-        addconfigline 'Comment'       'Simple_action'   "Data_${lastaction}Triggers"
+        addconfigline 'TriggersCount' '1'               "Data_${lastaction}Triggers" "${HOME}/.config/khotkeysrc"
+        addconfigline 'Comment'       'Simple_action'   "Data_${lastaction}Triggers" "${HOME}/.config/khotkeysrc"
 
-        addconfigline 'Uuid' "{${uuid}}"                "Data_${lastaction}Triggers0"
-        addconfigline 'Type' 'SHORTCUT'                 "Data_${lastaction}Triggers0"
-        addconfigline 'Key'  "${kdebinding}"            "Data_${lastaction}Triggers0"
+        addconfigline 'Uuid' "{${uuid}}"                "Data_${lastaction}Triggers0" "${HOME}/.config/khotkeysrc"
+        addconfigline 'Type' 'SHORTCUT'                 "Data_${lastaction}Triggers0" "${HOME}/.config/khotkeysrc"
+        addconfigline 'Key'  "${kdebinding}"            "Data_${lastaction}Triggers0" "${HOME}/.config/khotkeysrc"
 
+        addconfigline 'DataCount' ${lastaction}         'Data' "${HOME}/.config/khotkeysrc"
 
-        addconfigline "{${uuid}}" "${kdebinding},none,${name}" "khotkeys"
+        addconfigline "{${uuid}}" "${kdebinding},none,${name}" "khotkeys" "${HOME}/.config/kglobalshortcutsrc"
 
     fi
 }
