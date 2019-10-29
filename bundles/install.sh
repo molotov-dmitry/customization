@@ -791,16 +791,17 @@ case "${bundle}" in
 
 "network/chat")
 
-    if gnomebased
-    then
+    #if gnomebased
+    #then
         #appinstall 'Empathy'            'empathy telepathy-haze telepathy-accounts-signon telepathy-gabble'
-        appinstall 'Pidgin'             'pidgin [pidgin-libnotify] [pidgin-indicator]'
-    fi
+    #fi
 
-    if kdebased
-    then
-        appinstall 'Kopete'             'kopete'
-    fi
+    #if kdebased
+    #then
+        #appinstall 'Kopete'             'kopete'
+    #fi
+
+    appinstall 'Pidgin'             'pidgin [pidgin-libnotify] [pidgin-indicator]'
 ;;
 
 ### Chat extra protocols =======================================================

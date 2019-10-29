@@ -1077,7 +1077,6 @@ _EOF
 
 "network/chat")
 
-
     ## Empathy -----------------------------------------------------------------
 
     if ispkginstalled empathy
