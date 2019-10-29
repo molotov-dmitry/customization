@@ -776,6 +776,11 @@ _EOF
         addscenario 'gitg' '<Ctrl>F3' '[[ $# -eq 0 ]] && ( git status ) && gitg .\n[[ $# -eq 1 ]] && ( cd "$1" && git status ) && gitg "$1"'
     fi
 
+    if ispkginstalled 'gitg'
+    then
+        addkeybinding 'Gitg' 'gitg' '<Ctrl><Alt>G'
+    fi
+
 ;;
 
 ### ============================================================================
