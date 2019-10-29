@@ -531,12 +531,9 @@ case "${bundle}" in
         fi
     fi
 
-    if gnomebased
-    then
-        appinstall 'Meld diff tool'     'meld'
+    appinstall 'Meld diff tool'     'meld'
 
-        appinstall 'Git repo viewer'    'gitg'
-    fi
+    appinstall 'Git repo viewer'    'gitg'
 
     if kdebased
     then
