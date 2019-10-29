@@ -1096,7 +1096,7 @@ _EOF
 
     if ispkginstalled pidgin
     then
-        usercopy 'pidgin' --replace '.config/prefs.xml'
+        usercopy 'pidgin' --replace '.purple/prefs.xml'
     fi
 
 ;;
