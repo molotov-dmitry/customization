@@ -1346,9 +1346,10 @@ function launcheradd()
 
 function addkeybinding()
 {
-    name="$1"
-    command="$2"
-    binding="$3"
+    local name="$1"
+    local command="$2"
+    local binding="$3"
+
 
     if ispkginstalled gnome-shell
     then
@@ -1372,6 +1373,38 @@ function addkeybinding()
         gsettings set "org.cinnamon.desktop.keybindings.custom-keybinding:${path}" binding "['${binding}']"
 
         gsettingsadd org.cinnamon.desktop.keybindings custom-list "${cmd}"
+    fi
+
+    if kdebased
+    then
+        local kdebinding="$(echo "${binding}" | sed 's/Escape/Esc/g' | sed 's/<Super>/<Meta>/g' | tr '>' '+' | tr -d '<')"
+        local lastaction="$(grep '^\[Data_[[:digit:]]*\]$' .config/khotkeysrc | cut -d '_' -f 2 | cut -d ']' -f 1 | sort -g | tail -n1)"
+        let lastaction++
+        local uuid="$(uuidgen)"
+
+        addconfigline 'Type'    'SIMPLE_ACTION_DATA'    "Data_${lastaction}"
+        addconfigline 'Enabled' 'true'                  "Data_${lastaction}"
+        addconfigline 'Name'    "$name"                 "Data_${lastaction}"
+        addconfigline 'Comment' "$name"                 "Data_${lastaction}"
+
+        addconfigline 'ActionsCount' '1'                "Data_${lastaction}Actions"
+
+        addconfigline 'Type'       'COMMAND_URL'        "Data_${lastaction}Actions0"
+        addconfigline 'CommandURL' "${command}"         "Data_${lastaction}Actions0"
+
+        addconfigline 'ConditionsCount' '0'             "Data_${lastaction}Conditions"
+        addconfigline 'Comment'         ''              "Data_${lastaction}Conditions"
+
+        addconfigline 'TriggersCount' '1'               "Data_${lastaction}Triggers"
+        addconfigline 'Comment'       'Simple_action'   "Data_${lastaction}Triggers"
+
+        addconfigline 'Uuid' "{${uuid}}"                "Data_${lastaction}Triggers0"
+        addconfigline 'Type' 'SHORTCUT'                 "Data_${lastaction}Triggers0"
+        addconfigline 'Key'  "${kdebinding}"            "Data_${lastaction}Triggers0"
+
+
+        addconfigline "{${uuid}}" "${kdebinding},none,${name}" "khotkeys"
+
     fi
 }
 
