@@ -879,10 +879,24 @@ function gitinstall()
 
     while [[ $# -gt 0 ]]
     do
-        if ! ispkginstalled "$1"
+        local needremove=1
+        local pkgname="$1"
+
+        if [[ "${pkgname:0:1}" == '!' ]]
         then
-            appinstall "$1 (tmp)" "$1" || return 1
-            packages_to_remove+=("$1")
+            pkgname="${pkgname:1}"
+            needremove=0
+        fi
+
+        if ! ispkginstalled "$pkgname"
+        then
+            if [[ $needremove -ne 0 ]]
+            then
+                appinstall "$pkgname (tmp)" "$pkgname" || return 1
+                packages_to_remove+=("$pkgname")
+            else
+                appinstall "$pkgname" "$pkgname" || return 1
+            fi
         fi
 
         shift
