@@ -25,5 +25,4 @@ gitinstall 'Network Switcher'       'https://github.com/molotov-dmitry/network-s
 
 ### LDAP user configuration script =============================================
 
-appinstall 'LDAP utilities'         'ldap-utils'
-gitinstall 'LDAP user config'       'https://github.com/molotov-dmitry/work-user-ldap-config.git' make '!jq'
+gitinstall 'LDAP user config'       'https://github.com/molotov-dmitry/work-user-ldap-config.git' make '!jq' '!ldap-utils'
