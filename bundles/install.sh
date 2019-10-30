@@ -1041,6 +1041,28 @@ case "${bundle}" in
 ;;
 
 ### ============================================================================
+### Work =======================================================================
+### ============================================================================
+
+"work")
+
+    ### Network switcher =======================================================
+
+    gitinstall 'Network Switcher'       'https://github.com/molotov-dmitry/network-switch.git' make
+
+    ### LDAP user configuration script =========================================
+
+    gitinstall 'LDAP user config'       'https://github.com/molotov-dmitry/work-user-ldap-config.git' make '!jq' '!ldap-utils'
+
+    ### Gnome shell extensions =================================================
+
+    if ispkginstalled gnome-shell
+    then
+        gnomeshellextension 7               # Removable Drive Menu
+    fi
+;;
+
+### ============================================================================
 ### ============================================================================
 ### ============================================================================
 
