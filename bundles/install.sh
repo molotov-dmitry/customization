@@ -61,6 +61,7 @@ case "${bundle}" in
     if ispkginstalled gnome-shell
     then
         gnomeshellextension 112             # Remove Accessibility
+        gnomeshellextension 800             # Remove Dropdown Arrows
     fi
 
     fi
