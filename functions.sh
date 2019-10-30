@@ -867,6 +867,16 @@ function gitinstall()
         packages_to_remove+=('qt4-dev-tools')
     fi
 
+    case "${type,,}" in
+    'cpp'|'c++'|'qt5'|'qt4')
+        if ! ispkginstalled g++
+        then
+            appinstall 'g++ (tmp)' g++ || return 1
+            packages_to_remove+=('g++')
+        fi
+        ;;
+    esac
+
     while [[ $# -gt 0 ]]
     do
         if ! ispkginstalled "$1"
@@ -888,7 +898,7 @@ function gitinstall()
     pushd "/tmp/${reponame}" > /dev/null || return 1
 
     case "${type,,}" in
-    'make')
+    'make'|'cpp'|'c++')
         ;;
     'qt5')
         silent "Preparing $description" qmake -qt=qt5 || return 1
