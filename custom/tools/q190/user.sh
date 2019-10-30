@@ -5,6 +5,13 @@ cd "${ROOT_PATH}" || exit 1
 
 . "${ROOT_PATH}/functions.sh"
 
+### Gnome shell extensions =====================================================
+
+if ispkginstalled gnome-shell
+then
+    gnomeshellextension 7               # Removable Drive Menu
+fi
+
 ### User network configuration =================================================
 
 ### Add network shares ---------------------------------------------------------
