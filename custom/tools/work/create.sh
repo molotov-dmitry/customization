@@ -15,14 +15,6 @@ appinstall 'DKMS'                   'dkms [linux-headers-generic]'
 appinstall 'Git'                    'git'
 silent     'Cloning wi-fi driver'   git clone --depth 1 'https://github.com/gordboy/rtl8812au.git' /usr/src/rtl8812au-5.2.20
 
-### Report builder =============================================================
+### Report builder =========================================================
 
 gitinstall 'Work report'            'https://github.com/molotov-dmitry/work-report.git' qt5
-
-### Network switcher ===========================================================
-
-gitinstall 'Network Switcher'       'https://github.com/molotov-dmitry/network-switch.git' make
-
-### LDAP user configuration script =============================================
-
-gitinstall 'LDAP user config'       'https://github.com/molotov-dmitry/work-user-ldap-config.git' make '!jq' '!ldap-utils'
