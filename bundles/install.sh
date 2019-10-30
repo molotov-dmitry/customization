@@ -498,7 +498,7 @@ case "${bundle}" in
 
     if havegraphics
     then
-        gitinstall 'CCS project editor' 'https://github.com/molotov-dmitry/ccs-pjt-editor-qt' qt5 g++
+        gitinstall 'CCS project editor' 'https://github.com/molotov-dmitry/ccs-pjt-editor-qt' qt5
     fi
 
 ;;
