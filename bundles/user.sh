@@ -844,19 +844,19 @@ _EOF
 
     if ispkginstalled gnome-shell
     then
-        gsettings set org.gnome.desktop.interface font-name             "${font_ui} {font_ui_size}"
-        gsettings set org.gnome.desktop.interface document-font-name    "${font_doc} {font_doc_size}"
-        gsettings set org.gnome.desktop.interface monospace-font-name   "${font_fixed} {font_fixed_size}"
-        gsettings set org.gnome.desktop.wm.preferences titlebar-font    "${font_ui} {font_ui_size}"
+        gsettings set org.gnome.desktop.interface font-name             "${font_ui} ${font_ui_size}"
+        gsettings set org.gnome.desktop.interface document-font-name    "${font_doc} ${font_doc_size}"
+        gsettings set org.gnome.desktop.interface monospace-font-name   "${font_fixed} ${font_fixed_size}"
+        gsettings set org.gnome.desktop.wm.preferences titlebar-font    "${font_ui} ${font_ui_size}"
     fi
 
     if ispkginstalled cinnamon
     then
-        gsettings set org.cinnamon.desktop.interface font-name          "${font_ui} {font_ui_size}"
-        gsettings set org.gnome.desktop.interface document-font-name    "${font_doc} {font_doc_size}"
-        gsettings set org.gnome.desktop.interface monospace-font-name   "${font_fixed} {font_fixed_size}"
-        gsettings set org.cinnamon.desktop.wm.preferences titlebar-font "${font_ui} {font_ui_size}"
-        gsettings set org.nemo.desktop font                             "${font_ui} {font_ui_size}"
+        gsettings set org.cinnamon.desktop.interface font-name          "${font_ui} ${font_ui_size}"
+        gsettings set org.gnome.desktop.interface document-font-name    "${font_doc} ${font_doc_size}"
+        gsettings set org.gnome.desktop.interface monospace-font-name   "${font_fixed} ${font_fixed_size}"
+        gsettings set org.cinnamon.desktop.wm.preferences titlebar-font "${font_ui} ${font_ui_size}"
+        gsettings set org.nemo.desktop font                             "${font_ui} ${font_ui_size}"
     fi
 
     if kdebased
