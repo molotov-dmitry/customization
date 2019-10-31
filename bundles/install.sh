@@ -383,6 +383,12 @@ case "${bundle}" in
 
     appinstall 'References'             'manpages-posix-dev manpages-dev'
 
+    if gnomebased
+    then
+        appinstall 'Devhelp'            'devhelp'
+        appinstall 'References HTML'    'cppreference-doc-en-html'
+    fi
+
 ;;
 
 ### X11 SDK ====================================================================
