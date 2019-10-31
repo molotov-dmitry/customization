@@ -69,5 +69,8 @@
 				<pref name='height' type='int' value='250'/>
 			</pref>
 		</pref>
+		<pref name='accounts'>
+			<pref name='buddyicon' type='path' value='<<HOME>>/.face'/>
+		</pref>
 	</pref>
 </pref>
