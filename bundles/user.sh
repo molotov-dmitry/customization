@@ -19,6 +19,10 @@ case "${bundle}" in
 
 "base")
 
+    ## Remove annoying sudo banner =============================================
+
+    touch "${HOME}/.sudo_as_admin_successful"
+
     ## Aliases =================================================================
 
     echo alias highlight=\'grep --color=always -z\' >> ~/.bash_aliases
