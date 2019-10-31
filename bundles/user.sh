@@ -23,6 +23,10 @@ case "${bundle}" in
 
     touch "${HOME}/.sudo_as_admin_successful"
 
+    ## Hide info documentation browser =========================================
+
+    hideapp 'info'
+
     ## Aliases =================================================================
 
     echo alias highlight=\'grep --color=always -z\' >> ~/.bash_aliases
@@ -657,6 +661,10 @@ _EOF
 ### Gnome SDK ==================================================================
 
 "dev/gnome")
+
+    ## Hide Sysprof ============================================================
+
+    hideapp 'org.gnome.Sysprof2'
 
     if ispkginstalled 'gnome-builder'
     then
