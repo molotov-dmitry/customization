@@ -666,6 +666,8 @@ _EOF
 
     hideapp 'org.gnome.Sysprof2'
 
+    ## Gnome Builder ===========================================================
+
     if ispkginstalled 'gnome-builder'
     then
 
@@ -1234,6 +1236,11 @@ _EOF
 
     hideapp 'mc'
     hideapp 'mcedit'
+
+    if [[ -n "$(which nano)" ]]
+    then
+        echo "SELECTED_EDITOR=\"$(which nano)\"" > "${HOME}/.selected_editor"
+    fi
 
 ;;
 
