@@ -221,11 +221,14 @@ case "${bundle}" in
 
     if ispkginstalled gnome-shell
     then
-        ## enable app indicators -----------------------------------------------
+        ## Enable app indicators -----------------------------------------------
         gsettingsadd org.gnome.shell enabled-extensions 'ubuntu-appindicators@ubuntu.com'
 
-        ## remove accessibility icon -------------------------------------------
+        ## Remove accessibility icon -------------------------------------------
         gsettingsadd org.gnome.shell enabled-extensions 'removeaccesibility@lomegor'
+
+        ## Remove Dropdown Arrows ----------------------------------------------
+        gsettingsadd org.gnome.shell enabled-extensions 'remove-dropdown-arrows@mpdeimos.com'
 
     fi
 
@@ -1379,6 +1382,13 @@ _EOF
     ## Make Git accept self-signed certificate ---------------------------------
 
     git config --global http.sslVerify false
+
+    ### Gnome shell extensions =================================================
+
+    if ispkginstalled gnome-shell
+    then
+        gsettingsadd org.gnome.shell enabled-extensions 'drive-menu@gnome-shell-extensions.gcampax.github.com'
+    fi
 
 ;;
 
