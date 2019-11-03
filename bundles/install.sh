@@ -504,7 +504,7 @@ case "${bundle}" in
 
     if havegraphics
     then
-        gitinstall 'CCS project editor' 'https://github.com/molotov-dmitry/ccs-pjt-editor-qt' qt5
+        appinstall 'CCS project editor' 'ccs-pjt-editor-qt'
     fi
 
 ;;
@@ -1054,11 +1054,11 @@ case "${bundle}" in
 
     ### Network switcher =======================================================
 
-    gitinstall 'Network Switcher'       'https://github.com/molotov-dmitry/network-switch.git' make
+    appinstall 'Network Switcher'       'network-switch'
 
     ### LDAP user configuration script =========================================
 
-    gitinstall 'LDAP user config'       'https://github.com/molotov-dmitry/work-user-ldap-config.git' make '!jq' '!ldap-utils'
+    appinstall 'LDAP user config'       'user-ldap-config'
 
     ### Gnome shell extensions =================================================
 

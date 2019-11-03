@@ -17,4 +17,4 @@ silent     'Cloning wi-fi driver'   git clone --depth 1 'https://github.com/gord
 
 ### Report builder =========================================================
 
-gitinstall 'Work report'            'https://github.com/molotov-dmitry/work-report.git' qt5
+appinstall 'Work report'            'work-report report-builder'
