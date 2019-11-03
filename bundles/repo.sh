@@ -19,6 +19,8 @@ case "${bundle}" in
 
 "base")
 
+    repoadd 'AHome' '188.134.72.31:8191' 'ahome' 'contrib' 'ahome/ahome.gpg'
+
 ;;
 
 ### Base GUI ===================================================================

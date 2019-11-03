@@ -21,6 +21,8 @@ case "${bundle}" in
 
 "base")
 
+    preparefiles 'AHome' 'ahome'
+
 ;;
 
 ### Base GUI ===================================================================
