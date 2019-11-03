@@ -758,7 +758,7 @@ _EOF
 
     if [[ -z "$(grep 'gitversion()' ~/.bash_aliases)" ]]
     then
-        echo -e "\nfunction gitversion()\n{\n    git log --pretty=format:'%h' \"\$@\" | wc -l\n}\n\n" >> ~/.bash_aliases
+        echo -e "\nfunction gitversion()\n{\n    git log --pretty=format:'%h' \"\$@\" | wc -w\n}\n\n" >> ~/.bash_aliases
     fi
 
     if [[ -z "$(grep 'githash()' ~/.bash_aliases)" ]]
