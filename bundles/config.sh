@@ -73,9 +73,9 @@ case "${bundle}" in
     ## Qt5 GTK2 theme ----------------------------------------------------------
 
     cat >> /etc/profile.d/50-qt-qpa-platformtheme-gtk2.sh << "_EOF"
-case "${XDG_CURRENT_DESKTOP}" in
+case "${XDG_CURRENT_DESKTOP,,}" in
 
-'Unity' | 'Gnome' | 'ubuntu:GNOME' | 'X-Cinnamon')
+'unity' | 'gnome' | 'ubuntu:gnome' | 'x-cinnamon')
 
     export QT_QPA_PLATFORMTHEME=gtk2
 
