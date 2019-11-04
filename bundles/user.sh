@@ -202,7 +202,7 @@ case "${bundle}" in
     if ispkginstalled gnome-shell
     then
         ## Enable hot corners --------------------------------------------------
-        gsettings set org.gnome.shell enable-hot-corners true
+        gsettings set org.gnome.desktop.interface enable-hot-corners true
 
         ## Disable modal dialogs attach ----------------------------------------
         gsettings set org.gnome.shell.overrides attach-modal-dialogs false
