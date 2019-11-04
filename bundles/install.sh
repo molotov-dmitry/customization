@@ -56,6 +56,8 @@ case "${bundle}" in
     appinstall 'Base applications'          'gnome-calculator gnome-system-monitor gnome-characters'
     appinstall 'Tweak tool'                 'gnome-tweak-tool'
 
+    appinstall 'Text scale configuration'   'text-scale-config'
+
     appinstall 'Gnome appindicator support' 'gnome-shell-extension-appindicator'
 
     if ispkginstalled gnome-shell
