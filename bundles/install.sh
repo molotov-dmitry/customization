@@ -617,6 +617,11 @@ case "${bundle}" in
 
     fi
 
+    if ispkgavailable plymouth-theme-spinner
+    then
+        appinstall 'Spinner plymouth theme' 'plymouth-theme-spinner'
+    fi
+
 ;;
 
 ### System fonts ===============================================================
