@@ -1369,6 +1369,19 @@ _EOF
 
     ### User network configuration =============================================
 
+    ### Configure network connections ------------------------------------------
+
+    if ispkginstalled network-manager
+    then
+        while read uuid
+        do
+            nmcli connection del uuid "${uuid}"
+
+        done < <(nmcli --fields=UUID,TYPE connection  show | grep 'ethernet[[:space:]]*' | cut -d ' ' -f 1)
+
+        nmcli connection add type ethernet con-name "RCZIFORT (DHCP)" ifname '' ipv4.method auto ipv6.method ignore ipv4.dns "172.16.56.14 172.16.56.10"
+    fi
+
     ### Add network shares -----------------------------------------------------
 
     addbookmark 'sftp://188.134.72.31:2222/media/documents' 'AHOME'
