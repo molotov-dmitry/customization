@@ -1059,6 +1059,10 @@ case "${bundle}" in
 
 "work")
 
+    ### Plymouth theme =========================================================
+
+    appinstall 'RCZI plymouth theme'    plymouth-theme-rczi
+
     ### Network switcher =======================================================
 
     appinstall 'Network Switcher'       'network-switch'
