@@ -956,7 +956,7 @@ case "${bundle}" in
 
 "cli/time")
 
-    appinstall 'NTP client'             'ntp'
+    #appinstall 'NTP client'             'ntp'
 
 ;;
 
