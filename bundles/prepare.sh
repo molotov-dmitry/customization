@@ -21,7 +21,13 @@ case "${bundle}" in
 
 "base")
 
+    ## Repository key ----------------------------------------------------------
+
     preparefiles 'AHome' 'ahome'
+
+    ## Grub --------------------------------------------------------------------
+
+    silent 'Copy GRUB files' cp -rf "${ROOT_PATH}/files/grub/." "${rootfs_dir}/"
 
 ;;
 
