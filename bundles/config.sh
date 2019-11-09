@@ -425,13 +425,6 @@ _EOF
 
 "appearance/themes")
 
-    ## Grub theme --------------------------------------------------------------
-
-    if [[ "$(lsb_release -si)" == "Ubuntu" ]]
-    then
-        silent 'Set Grub theme' sed -i 's/44,0,30,0/55,71,79,0/' /usr/share/plymouth/themes/default.grub
-    fi
-
     ## Cursor theme ------------------------------------------------------------
 
     cursor_theme='breeze_cursors'
