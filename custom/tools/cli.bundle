@@ -5,7 +5,6 @@ driver
 dev
 
 server/ssh
-server/smb
 
 vcs
 
