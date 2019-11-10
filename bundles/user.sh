@@ -1379,7 +1379,12 @@ _EOF
 
         done < <(nmcli --fields=UUID,TYPE connection  show | grep 'ethernet[[:space:]]*' | cut -d ' ' -f 1)
 
-        nmcli connection add type ethernet con-name "RCZIFORT (DHCP)" ifname '' ipv4.method auto ipv6.method ignore ipv4.dns "172.16.56.14 172.16.56.10"
+        nmcli conn add type ethernet con-name "RCZIFORT (DHCP)" \
+                       ifname '' ipv4.method auto \
+                       ipv4.dns "172.16.56.14 172.16.56.10" \
+                       ipv6.method ignore 2>/dev/null \
+            || echo "Failed to add network connection" >&2
+
     fi
 
     ### Add network shares -----------------------------------------------------
