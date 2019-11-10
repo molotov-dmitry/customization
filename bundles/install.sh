@@ -890,7 +890,7 @@ case "${bundle}" in
 "graphics")
 
     appinstall 'GIMP'                   'gimp gimp-help-ru'
-    appinstall 'Imagemagick'            'imagemagick'
+    appinstall 'Imagemagick'            'imagemagick librsvg2-bin'
 
 ;;
 
