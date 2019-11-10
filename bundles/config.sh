@@ -418,6 +418,7 @@ _EOF
     bash "${scriptpath}" 'appearance/themes'
     bash "${scriptpath}" 'appearance/fonts'
     bash "${scriptpath}" 'appearance/wallpaper'
+    bash "${scriptpath}" 'appearance/avatar'
 
 ;;
 
@@ -448,6 +449,12 @@ _EOF
 
     bgdescr 'custom/backgrounds'
     bgdescr 'custom/lock'
+
+;;
+
+### User avatar ================================================================
+
+"appearance/avatar")
 
 ;;
 

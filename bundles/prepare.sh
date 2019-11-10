@@ -397,6 +397,7 @@ case "${bundle}" in
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'appearance/themes'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'appearance/fonts'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'appearance/wallpaper'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'appearance/avatar'
 
 ;;
 
@@ -417,6 +418,12 @@ case "${bundle}" in
 "appearance/wallpaper")
 
     preparefiles 'Backgrounds' 'backgrounds'
+
+;;
+
+### User avatar ================================================================
+
+"appearance/avatar")
 
 ;;
 
