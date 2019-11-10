@@ -374,6 +374,54 @@ case "${bundle}" in
 
 "appearance/avatar")
 
+while read userinfo
+do
+    user_name="$(echo "${userinfo}" | cut -d ':' -f 1)"
+    user_id="$(echo "${userinfo}" | cut -d ':' -f 3)"
+    user_group="$(echo "${userinfo}" | cut -d ':' -f 4)"
+    user_comment="$(echo "${userinfo}" | cut -d ':' -f 5)"
+    user_home="$(echo "${userinfo}" | cut -d ':' -f 6)"
+
+    if [[ ${user_id} -lt 1000 || ${user_id} -ge 60000 || -z "${user_home}" ]]
+    then
+        continue
+    fi
+
+    ## Generate avatar if not exists -------------------------------------------
+
+    if which convert >/dev/null && which rsvg-convert >/dev/null
+    then
+        USER_NAME_LETTER=${user_comment:0:1}
+
+        AVATAR_COLORS=('D32F2F' 'B71C1C' 'AD1457' 'EC407A' 'AB47BC' '6A1B9A' 'AA00FF' '5E35B1' '3F51B5' '1565C0' '0091EA' '00838F' '00897B' '388E3C' '558B2F' 'E65100' 'BF360C' '795548' '607D8B')
+        AVATAR_COLORS_COUNT=${#AVATAR_COLORS[@]}
+        INDEX=$(( (RANDOM * RANDOM + RANDOM) % AVATAR_COLORS_COUNT ))
+
+        bgcolor="#${AVATAR_COLORS[$INDEX]}"
+        fgfont="Arial"
+
+        cat << _EOF | convert -density 1200 -resize 512x512 - "png:${user_home}/.face"
+<svg width="1000" height="1000">
+    <circle cx="500" cy="500" r="400" fill="${bgcolor}" />
+    <text x="50%" y="50%" text-anchor="middle" fill="white" font-size="500px" font-family="${fgfont}" dy=".3em">${USER_NAME_LETTER}</text>
+</svg>
+_EOF
+
+        chown "${user_name}:${user_name}" "${user_home}/.face"
+    fi
+
+    ## Configure account icon --------------------------------------------------
+
+    echo mkdir -p '/var/lib/AccountsService/icons/'
+
+    echo cp -f "${user_home}/.face" "/var/lib/AccountsService/icons/${user_name}"
+
+    echo addconfigline Icon "/var/lib/AccountsService/icons/${user_name}" User "/var/lib/AccountsService/users/${user_name}"
+
+    ## -------------------------------------------------------------------------
+
+done < /etc/passwd
+
 ;;
 
 ### ============================================================================
