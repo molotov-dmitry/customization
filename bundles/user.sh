@@ -175,6 +175,10 @@ case "${bundle}" in
 
     fi
 
+    ## Lock screen orientation -------------------------------------------------
+
+    gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true
+
     ## =========================================================================
 
     fi
