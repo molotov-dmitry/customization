@@ -231,7 +231,7 @@ silent 'Creating remaster directory'    mkdir -p "${remaster_dir}"
 
 if [[ $useram -eq 1 ]]
 then
-    silent 'Creating TMPFS for remaster' mount -t ramfs -o size=12G ramfs "${remaster_dir}"
+    silent 'Creating TMPFS for remaster' mount -t tmpfs -o size=12G tmpfs "${remaster_dir}"
 fi
 
 ## Unpacking ISO ---------------------------------------------------------------
