@@ -680,10 +680,6 @@ _EOF
     if ispkginstalled 'gnome-builder'
     then
 
-        ## launcher ------------------------------------------------------------
-
-        launcheradd 'org.gnome.Builder'
-
         ## Register mimetypes --------------------------------------------------
 
         mimeregister 'text/x-makefile'           'org.gnome.Builder.desktop'
