@@ -31,14 +31,12 @@ case "${bundle}" in
 
     silent 'Copy GRUB files' cp -rf "${ROOT_PATH}/files/grub/." "${rootfs_dir}/"
 
-    ## disable Plymouth --------------------------------------------------------
+    ## Disable Plymouth --------------------------------------------------------
 
-    if [[ "$(lsb_release -sd)" == 'Ubuntu 19.10' ]]
+    if [[ "$(chroot "${rootfs_dir}" lsb_release -sd)" == 'Ubuntu 19.10' ]]
     then
         silent 'Disable Plymouth' cp -rf "${ROOT_PATH}/files/fix/plymouth/." "${rootfs_dir}/"
     fi
-
-
 
 ;;
 
