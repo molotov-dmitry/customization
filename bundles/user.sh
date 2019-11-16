@@ -156,6 +156,7 @@ case "${bundle}" in
         term_profile=$(gsettings get org.gnome.Terminal.ProfilesList default | cut -d "'" -f 2)
 
         gsettings set org.gnome.Terminal.Legacy.Settings default-show-menubar false
+        gsettings set org.gnome.Terminal.Legacy.Settings menu-accelerator-enabled false
         gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'dark'
 
         gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" use-transparent-background true
