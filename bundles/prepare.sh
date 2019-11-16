@@ -21,13 +21,24 @@ case "${bundle}" in
 
 "base")
 
-    ## Repository key ----------------------------------------------------------
+    ## Repository key ==========================================================
 
     preparefiles 'AHome' 'ahome'
 
-    ## Grub --------------------------------------------------------------------
+    ## Grub ====================================================================
+
+    ## Theme -------------------------------------------------------------------
 
     silent 'Copy GRUB files' cp -rf "${ROOT_PATH}/files/grub/." "${rootfs_dir}/"
+
+    ## disable Plymouth --------------------------------------------------------
+
+    if [[ "$(lsb_release -sd)" == 'Ubuntu 19.10' ]]
+    then
+        silent 'Disable Plymouth' cp -rf "${ROOT_PATH}/files/fix/plymouth/." "${rootfs_dir}/"
+    fi
+
+
 
 ;;
 
