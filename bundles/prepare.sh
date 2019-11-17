@@ -426,8 +426,6 @@ case "${bundle}" in
 
 "appearance/wallpaper")
 
-    preparefiles 'Backgrounds' 'backgrounds'
-
 ;;
 
 ### User avatar ================================================================

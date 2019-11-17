@@ -913,16 +913,23 @@ _EOF
 
 "appearance/wallpaper")
 
-    if test -f '/usr/share/backgrounds/custom/backgrounds/skunze_beach.jpg'
+    if ispkginstalled gnome-shell
     then
-        ( sleep 20 ; setwallpaper '/usr/share/backgrounds/custom/backgrounds/skunze_beach.jpg' ) &
-    else
-        ( sleep 20 ; setwallpaper '#204a87' ) &
-    fi
+        gsettings set org.gnome.desktop.background secondary-color      '#000000'
+        gsettings set org.gnome.desktop.background primary-color        '#000000'
+        gsettings set org.gnome.desktop.background picture-options      'zoom'
+        gsettings set org.gnome.desktop.background color-shading-type   'solid'
+        gsettings set org.gnome.desktop.background draw-background      true
+        gsettings set org.gnome.desktop.background picture-opacity      100
+        gsettings set org.gnome.desktop.background picture-uri          'file:///usr/share/backgrounds/custom/custom.xml'
 
-    if test -f '/usr/share/backgrounds/custom/lock/stars.jpg'
-    then
-        ( sleep 20 ; setlockscreen '/usr/share/backgrounds/custom/lock/stars.jpg' ) &
+        gsettings set org.gnome.desktop.screensaver secondary-color      '#000000'
+        gsettings set org.gnome.desktop.screensaver primary-color        '#000000'
+        gsettings set org.gnome.desktop.screensaver picture-options      'zoom'
+        gsettings set org.gnome.desktop.screensaver color-shading-type   'solid'
+        gsettings set org.gnome.desktop.screensaver picture-opacity      100
+        gsettings set org.gnome.desktop.screensaver picture-uri          'file:///usr/share/backgrounds/night/night.xml'
+
     fi
 
 ;;

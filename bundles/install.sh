@@ -664,6 +664,8 @@ case "${bundle}" in
 
 "appearance/wallpaper")
 
+    appinstall  'Backgrounds'           'backgrounds-custom backgrounds-night'
+
 ;;
 
 ### User avatar ================================================================
