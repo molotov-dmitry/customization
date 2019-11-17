@@ -583,7 +583,7 @@ case "${bundle}" in
     appinstall 'Canta theme'            'canta-themes canta-icons'
     appinstall 'Papirus theme'          'papirus-icon-theme'
     appinstall 'Oranchelo theme'        'oranchelo-icon-theme'
-    appinstall 'Arc theme'              'arc-theme'
+    appinstall 'Arc theme'              'arc-theme [arc-solid-theme]'
     appinstall 'Adapta theme'           'adapta-gtk-theme'
 
     if ! ispkgavailable mint-themes

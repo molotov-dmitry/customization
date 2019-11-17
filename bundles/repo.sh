@@ -351,6 +351,7 @@ case "${bundle}" in
     ppaadd  'Noobslab Icons'            'noobslab'  'icons'
     ppaadd  'Oranchelo Icon Theme'      'oranchelo' 'oranchelo-icon-theme'
     ppaadd  'Papirus Icon Theme'        'papirus'   'papirus'
+    ppaadd  'Arc Theme'                 'fossfreedom' 'arc-gtk-theme-daily'
 
 ;;
 
