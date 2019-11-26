@@ -505,6 +505,8 @@ case "${bundle}" in
 
 "dev/ti")
 
+    appinstall 'TI Code Generation Tools'   'ti-cgt'
+
     if havegraphics
     then
         appinstall 'CCS project editor' 'ccs-pjt-editor-qt'

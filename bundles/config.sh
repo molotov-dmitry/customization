@@ -394,9 +394,6 @@ _EOF
 
 "dev/ti")
 
-    echo 'export PATH="${PATH}:/opt/TI/C6000CGT6.0.11/bin"'  >  /etc/profile.d/ti-c6x.sh
-    echo 'export C6X_C_DIR="/opt/TI/C6000CGT6.0.11/include"' >> /etc/profile.d/ti-c6x.sh
-
     silent 'Update MIME info'       update-mime-database /usr/local/share/mime
 
 ;;
