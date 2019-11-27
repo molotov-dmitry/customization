@@ -375,11 +375,6 @@ case "${bundle}" in
 
 "dev/ti")
 
-    ## CCS Project editor ------------------------------------------------------
-
-    mkdir -p "${rootfs_dir}/usr/local/share/mime/packages"
-    silent 'Install CCS project MIME info' cp "${ROOT_PATH}/files/ti/text-x-ccs-pjt.xml" "${rootfs_dir}/usr/local/share/mime/packages/"
-
 ;;
 
 ### ============================================================================

@@ -394,8 +394,6 @@ _EOF
 
 "dev/ti")
 
-    silent 'Update MIME info'       update-mime-database /usr/local/share/mime
-
 ;;
 
 ### ============================================================================
