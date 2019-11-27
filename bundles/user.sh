@@ -984,8 +984,7 @@ _EOF
 
     if ispkginstalled rhythmbox
     then
-        mkdir -p "${HOME}/.local/share/rhythmbox"
-        cp -f "${ROOT_PATH}/files/rhythmbox/rhythmdb.xml" "${HOME}/.local/share/rhythmbox/"
+        usercopy 'rhythmbox'
 
         gsettingsclear org.gnome.rhythmbox.plugins seen-plugins
 
@@ -1028,8 +1027,7 @@ _EOF
 
     if ispkginstalled mpv
     then
-        mkdir -p "${HOME}/.config/mpv"
-        cp -f "${ROOT_PATH}/files/mpv/mpv.conf" "${HOME}/.config/mpv/"
+        usercopy 'mpv'
     fi
 
 
