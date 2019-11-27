@@ -70,7 +70,7 @@ case "${bundle}" in
 
 "cinnamon")
 
-    preparefiles 'Redshift' 'redshift'
+    preparefiles 'Redshift' 'redshift-gtk'
 
 ;;
 

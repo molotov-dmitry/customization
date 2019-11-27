@@ -169,10 +169,7 @@ case "${bundle}" in
 
     if ispkginstalled redshift-gtk
     then
-
-        mkdir -p "${HOME}/.config/autostart/"
-        cp -rf "${ROOT_PATH}/files/redshift/redshift-gtk.desktop" "${HOME}/.config/autostart/"
-
+        usercopy 'redshift-gtk'
     fi
 
     ## Lock screen orientation -------------------------------------------------
