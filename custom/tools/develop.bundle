@@ -39,5 +39,4 @@ cli
 
 folders
 
-optimize/tmpfs
 optimize/disable-tracker
