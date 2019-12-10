@@ -13,7 +13,7 @@ appinstall 'Xorriso'                'xorriso'
 
 appinstall 'DKMS'                   'dkms [linux-headers-generic]'
 appinstall 'Git'                    'git'
-silent     'Cloning wi-fi driver'   git clone --depth 1 'https://github.com/gordboy/rtl8812au.git' /usr/src/rtl8812au-5.2.20
+silent     'Cloning wi-fi driver'   git clone --depth 1 'https://github.com/gordboy/rtl8812au-5.6.4.2.git' /usr/src/rtl8812au-5.6.4.2
 
 ### Report builder =========================================================
 
