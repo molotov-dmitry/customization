@@ -611,7 +611,7 @@ case "${bundle}" in
     fi
 
     appinstall 'Noto fonts'             'fonts-noto'
-    appinstall 'Linux Libertine fonst'  'fonts-linuxlibertine'
+    appinstall 'Linux Libertine fonts'  'fonts-linuxlibertine'
     appinstall 'Roboto fonts'           'fonts-roboto fonts-roboto-unhinted'
 
     if [[ "$(lsb_release -si)" == "Debian" ]]
@@ -619,7 +619,7 @@ case "${bundle}" in
         appinstall 'Ubuntu fonts'       'ttf-ubuntu-font-family'
     fi
 
-    appinstall 'Fira code fonts'        'fonts-firacode'
+    appinstall 'Fira Code fonts'        'fonts-firacode'
 
     silent      'Download Google Sans'  wget -qq 'https://drive.google.com/uc?export=download&id=1x674A9kbK9t1Ur49DOf3Zj4b-aErTWqd' -O /usr/local/share/fonts/google-sans-font.zip
     silent      'Unpack Google Sans'    unzip -j /usr/local/share/fonts/google-sans-font.zip -d /usr/local/share/fonts/google-sans-font
