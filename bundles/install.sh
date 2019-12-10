@@ -621,6 +621,7 @@ case "${bundle}" in
 
     appinstall 'Fira Code fonts'        'fonts-firacode'
 
+    appinstall 'Hack fonts'             'fonts-hack'
 
     appinstall 'Google Sans fonts'      'fonts-google-sans'
 
