@@ -588,38 +588,7 @@ case "${bundle}" in
     appinstall 'Arc theme'              'arc-theme [arc-solid-theme]'
     appinstall 'Adapta theme'           'adapta-gtk-theme'
 
-    if ! ispkgavailable mint-themes
-    then
-        appinstall 'Build utilities'        'git make ruby-sass'
-
-        pushd /tmp > /dev/null
-
-        silent 'Cloning Mint Themes repo'   git clone https://github.com/linuxmint/mint-themes.git
-
-        pushd mint-themes > /dev/null
-
-        last_commit=$(git log --no-decorate --pretty=oneline | grep -E '^[[:xdigit:]]{40} [[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$' | head -n1)
-        last_ver="${last_commit##* }"
-        last_hash="${last_commit%% *}"
-
-        silent "Checkout version $last_ver" git checkout $last_hash
-        silent 'Generating Mint Themes'     make
-        silent 'Installing Mint Themes'     cp -rf usr/share/themes/* /usr/share/themes/
-
-        unset last_hash
-        unset last_ver
-        unset last_commit
-
-        popd > /dev/null
-        popd > /dev/null
-
-        silent 'Removing Mint Themes repo'  rm -rf /tmp/mint-themes
-
-    else
-
-        appinstall 'Mint themes'            'mint-themes'
-
-    fi
+    appinstall 'Mint themes'            'mint-themes'
 
     if ispkgavailable plymouth-theme-spinner
     then
