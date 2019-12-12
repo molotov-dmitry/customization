@@ -521,6 +521,7 @@ case "${bundle}" in
 "vcs")
 
     appinstall 'VCS'                    'git subversion colordiff'
+    appinstall 'Git flow'               'git-flow'
 
     if ispkginstalled nautilus
     then
