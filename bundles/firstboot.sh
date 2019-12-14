@@ -587,7 +587,7 @@ done < /etc/passwd
         mkdir -p "/media/documents/${user_name}"
         chown -R "${user_name}:${user_name}" "/media/documents/${user_name}"
 
-        fixpermissions "/media/documents/" "${user_id}"
+        fixpermissions "/media/documents" "${user_id}"
     done
 
 ;;
