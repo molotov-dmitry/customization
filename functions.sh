@@ -752,9 +752,11 @@ function repoaddnonfree()
 
 function gnomeshellextension()
 {
-    extid="$1"
-    shellver=$(dpkg-query -W -f='${Version}\n' gnome-shell | cut -d '.' -f 1-2)
-    shellver="${shellver%%.*}.$(( ${shellver##*.} - ${shellver##*.} % 2 ))"
+    local server='https://extensions.gnome.org'
+    local installdir='/usr/share/gnome-shell/extensions'
+    local extid="$1"
+    local shellver=$(dpkg-query -W -f='${Version}\n' gnome-shell | cut -d '.' -f 1-2)
+    local shellver="${shellver%%.*}.$(( ${shellver##*.} - ${shellver##*.} % 2 ))"
 
     if [[ -z "${shellver}" ]]
     then
@@ -763,7 +765,7 @@ function gnomeshellextension()
         return 1
     fi
 
-    extinfo=$(wget "https://extensions.gnome.org/extension-info/?pk=${extid}&shell_version=${shellver}" -q -O - | tr '{' '\n' | tail -n1 | sed 's/.*}}//')
+    local extinfo=$(wget "${server}/extension-info/?pk=${extid}&shell_version=${shellver}" -q -O -)
 
     if [[ $? -ne 0 ]]
     then
@@ -772,56 +774,77 @@ function gnomeshellextension()
         return 1
     fi
 
-    ext_name=$(echo "${extinfo}" | sed 's/.*"name":[ ]*//' | cut -d '"' -f 2)
-    ext_uuid=$(echo "${extinfo}" | sed 's/.*"uuid":[ ]*//' | cut -d '"' -f 2)
-    ext_durl=$(echo "${extinfo}" | sed 's/.*"download_url":[ ]*//' | cut -d '"' -f 2)
+    unset packages_to_remove
+    local -a packages_to_remove
+
+    if ! ispkginstalled jq
+    then
+        appinstall 'JSON processor (tmp)' git || return 1
+        packages_to_remove+=('jq')
+    fi
+
+    local ext_name=$(echo "${extinfo}" | jq -r '.name')
+    local ext_uuid=$(echo "${extinfo}" | jq -r '.uuid')
+    local ext_durl=$(echo "${extinfo}" | jq -r '.download_url')
 
     title "Downloading ${ext_name}"
 
     if [[ -z "${ext_uuid}" || -z "${ext_durl}" ]]
     then
         msgfail
+        appremove 'tmp packages' "${packages_to_remove[@]}"
         return 1
     fi
 
-    wget -O /tmp/extension.zip "https://extensions.gnome.org/${ext_durl}" >/dev/null 2>&1
-    if [[ $? -ne 0 ]]
+    if ! wget -O /tmp/extension.zip "https://extensions.gnome.org/${ext_durl}" >/dev/null 2>&1
     then
         msgfail
+        appremove 'tmp packages' "${packages_to_remove[@]}"
         return 1
     fi
 
-    rm -rf "/usr/share/gnome-shell/extensions/${ext_uuid}"
-    if [[ $? -ne 0 ]]
+    if ! rm -rf "${installdir}/${ext_uuid}"
     then
         msgfail '[remove dir]'
+        appremove 'tmp packages' "${packages_to_remove[@]}"
+        rm -f /tmp/extension.zip
         return 1
     fi
 
-    mkdir -p "/usr/share/gnome-shell/extensions/${ext_uuid}"
-    if [[ $? -ne 0 ]]
+
+    if ! mkdir -p "${installdir}/${ext_uuid}"
     then
         msgfail '[create dir]'
+        appremove 'tmp packages' "${packages_to_remove[@]}"
+        rm -f /tmp/extension.zip
         return 1
     fi
 
-    unzip /tmp/extension.zip -d "/usr/share/gnome-shell/extensions/${ext_uuid}" >/dev/null 2>&1
-    if [[ $? -ne 0 ]]
+
+    if ! unzip /tmp/extension.zip -d "${installdir}/${ext_uuid}" >/dev/null 2>&1
     then
         msgfail '[unzip]'
-        return 1
-    fi
-
-    chmod -R a+r "/usr/share/gnome-shell/extensions/${ext_uuid}" >/dev/null 2>&1
-    if [[ $? -ne 0 ]]
-    then
-        msgfail '[chmod]'
+        appremove 'tmp packages' "${packages_to_remove[@]}"
+        rm -f /tmp/extension.zip
         return 1
     fi
 
     rm -f /tmp/extension.zip
 
+    if ! chmod -R a+r "${installdir}/${ext_uuid}" >/dev/null 2>&1
+    then
+        msgfail '[chmod]'
+        appremove 'tmp packages' "${packages_to_remove[@]}"
+        return 1
+    fi
+
     msgdone
+
+    if [ ${#packages_to_remove[@]} -gt 0 ]
+    then
+        appremove 'tmp packages' "${packages_to_remove[@]}"
+    fi
+
     return 0
 }
 
