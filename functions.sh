@@ -779,7 +779,7 @@ function gnomeshellextension()
 
     if ! ispkginstalled jq
     then
-        appinstall 'JSON processor (tmp)' git || return 1
+        appinstall 'JSON processor (tmp)' jq || return 1
         packages_to_remove+=('jq')
     fi
 
