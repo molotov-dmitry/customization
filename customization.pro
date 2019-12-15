@@ -7,32 +7,14 @@ DISTFILES += \
     bundles/user.sh \
     custom.sh \
     custom/tools/cli.bundle \
-    custom/tools/cli/config.sh \
-    custom/tools/cli/create.sh \
-    custom/tools/cli/firstboot.sh \
-    custom/tools/cli/prepare.sh \
-    custom/tools/cli/repo.sh \
     custom/tools/cli/user.sh \
     custom/tools/develop.bundle \
-    custom/tools/develop/config.sh \
     custom/tools/develop/create.sh \
-    custom/tools/develop/firstboot.sh \
-    custom/tools/develop/prepare.sh \
-    custom/tools/develop/repo.sh \
     custom/tools/develop/user.sh \
     custom/tools/home.bundle \
-    custom/tools/home/config.sh \
     custom/tools/home/create.sh \
-    custom/tools/home/firstboot.sh \
-    custom/tools/home/prepare.sh \
-    custom/tools/home/repo.sh \
     custom/tools/home/user.sh \
     custom/tools/media.bundle \
-    custom/tools/media/config.sh \
-    custom/tools/media/create.sh \
-    custom/tools/media/firstboot.sh \
-    custom/tools/media/prepare.sh \
-    custom/tools/media/repo.sh \
     custom/tools/media/user.sh \
     custom/tools/nuc.bundle \
     custom/tools/nuc/config.sh \
@@ -42,39 +24,21 @@ DISTFILES += \
     custom/tools/nuc/repo.sh \
     custom/tools/nuc/user.sh \
     custom/tools/q190.bundle \
-    custom/tools/q190/config.sh \
-    custom/tools/q190/create.sh \
-    custom/tools/q190/firstboot.sh \
-    custom/tools/q190/prepare.sh \
-    custom/tools/q190/repo.sh \
     custom/tools/q190/user.sh \
     custom/tools/server.bundle \
-    custom/tools/server/config.sh \
     custom/tools/server/create.sh \
     custom/tools/server/firstboot.sh \
     custom/tools/server/prepare.sh \
-    custom/tools/server/repo.sh \
-    custom/tools/server/user.sh \
     custom/tools/server_work.bundle \
-    custom/tools/server_work/config.sh \
-    custom/tools/server_work/create.sh \
     custom/tools/server_work/firstboot.sh \
     custom/tools/server_work/prepare.sh \
-    custom/tools/server_work/repo.sh \
-    custom/tools/server_work/user.sh \
     custom/tools/tablet.bundle \
-    custom/tools/tablet/config.sh \
     custom/tools/tablet/create.sh \
-    custom/tools/tablet/firstboot.sh \
-    custom/tools/tablet/prepare.sh \
-    custom/tools/tablet/repo.sh \
     custom/tools/tablet/user.sh \
     custom/tools/work.bundle \
     custom/tools/work/config.sh \
     custom/tools/work/create.sh \
     custom/tools/work/firstboot.sh \
-    custom/tools/work/prepare.sh \
-    custom/tools/work/repo.sh \
     custom/tools/work/user.sh \
     functions.sh \
     tools/bundle.sh \

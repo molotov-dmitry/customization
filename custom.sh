@@ -13,6 +13,42 @@ clear
 . "${ROOT_PATH}/tools/check.sh"
 . "${ROOT_PATH}/tools/pack.sh"
 
+#### Functions =================================================================
+
+placescript()
+{
+    local name="$1"
+    local sourcefile="${ROOT_PATH}/custom/tools/${config}/${name}.sh"
+    local destfile="${rootfs_dir}/tools/${name}.sh"
+
+    title "Copy ${name} script"
+
+    if [[ -f "${sourcefile}" ]]
+    then
+        cp -f "${sourcefile}" "${destfile}" >/dev/null 2>/dev/null
+        local result=$?
+
+        if [[ $result -eq 0 ]]
+        then
+            msgdone
+        else
+            msgfail
+        fi
+    else
+        touch "${destfile}" >/dev/null 2>/dev/null
+        local result=$?
+
+        if [[ $result -eq 0 ]]
+        then
+            msgwarn '[missing]'
+        else
+            msgfail
+        fi
+    fi
+
+    return $result
+}
+
 #### ===========================================================================
 #### ===========================================================================
 #### ===========================================================================
@@ -150,21 +186,6 @@ fi
 
 unset freemem
 
-#### Checking parameters =======================================================
-
-## Checking iso image file -----------------------------------------------------
-
-#checkfilemime 'image file' "${iso_src}" 'application/x-iso9660-image' 'iso image'
-
-## Checking config directory ---------------------------------------------------
-
-checkfilemime 'functions script'    "${ROOT_PATH}/functions.sh" 'text/x-shellscript'    'shell script'
-checkfilemime 'folders script'      "${ROOT_PATH}/tools/folders.sh"                     'text/x-shellscript' 'shell script'
-
-checkfilemime 'create script'       "${ROOT_PATH}/custom/tools/${config}/create.sh"     'text/x-shellscript' 'shell script'
-checkfilemime 'config script'       "${ROOT_PATH}/custom/tools/${config}/config.sh"     'text/x-shellscript' 'shell script'
-checkfilemime 'user script'         "${ROOT_PATH}/custom/tools/${config}/user.sh"       'text/x-shellscript' 'shell script'
-
 ### Showing parameters =========================================================
 
 echo
@@ -259,7 +280,7 @@ silent 'Setting default language'       sh -c "echo ru > \"${iso_dir}\"/isolinux
 
 if isdebian
 then
-        silent '[DEB] Disabling fixed interface names' ln -sf /dev/null "${rootfs_dir}/etc/systemd/network/99-default.link"
+    silent '[DEB] Disabling fixed interface names' ln -sf /dev/null "${rootfs_dir}/etc/systemd/network/99-default.link"
 else
     if [[ -e "${rootfs_dir}/etc/udev/rules.d/80-net-setup-link.rules" || -e /lib/udev/rules.d/80-net-setup-link.rules ]]
     then
@@ -269,7 +290,7 @@ fi
 
 if [[ -e "${rootfs_dir}/etc/apt/sources.list.d/base.list" && ! -e "${rootfs_dir}/etc/apt/sources.list" ]]
 then
-	silent 'Move sources.list' mv "${rootfs_dir}/etc/apt/sources.list.d/base.list" "${rootfs_dir}/etc/apt/sources.list"
+    silent 'Move sources.list' mv "${rootfs_dir}/etc/apt/sources.list.d/base.list" "${rootfs_dir}/etc/apt/sources.list"
 fi
 
 ## Preparing customization scripts ---------------------------------------------
@@ -286,9 +307,9 @@ silent 'Copying remove script'          cp -f "${ROOT_PATH}/tools/remove.sh"  "$
 silent 'Copying prepare script'         cp -f "${ROOT_PATH}/tools/prepare.sh" "${rootfs_dir}/tools/" || exit 1
 silent 'Copying mirror script'          cp -f "${ROOT_PATH}/tools/mirror.sh"  "${rootfs_dir}/tools/" || exit 1
 
-silent 'Copying repo script'            cp -f "${ROOT_PATH}/custom/tools/${config}/repo.sh"   "${rootfs_dir}/tools/" || exit 1
-silent 'Copying create script'          cp -f "${ROOT_PATH}/custom/tools/${config}/create.sh" "${rootfs_dir}/tools/" || exit 1
-silent 'Copying config script'          cp -f "${ROOT_PATH}/custom/tools/${config}/config.sh" "${rootfs_dir}/tools/" || exit 1
+placescript 'repo'
+placescript 'create'
+placescript 'config'
 
 silent 'Copying usersboot script'       cp -f "${ROOT_PATH}/tools/startup.sh" "${rootfs_dir}/tools/" || exit 1
 
@@ -306,10 +327,12 @@ silent 'Copying firstboot service'      cp -f "${ROOT_PATH}/files/startup/enable
 if test -f "${ROOT_PATH}/custom/tools/${config}/prepare.sh"
 then
     . "${ROOT_PATH}/custom/tools/${config}/prepare.sh"
-    . "${ROOT_PATH}/tools/bundle.sh" prepare "${config}"
 else
-   msgwarn '[no prepare script]'
+    title 'Launching prepare script'
+    msgwarn '[missing]'
 fi
+
+. "${ROOT_PATH}/tools/bundle.sh" prepare "${config}"
 
 ## Executing create script -----------------------------------------------------
 
@@ -328,7 +351,7 @@ chroot_rootfs "${rootfs_dir}" bash /tools/bundle.sh install "${config}"
 chroot_rootfs "${rootfs_dir}" bash /tools/config.sh
 chroot_rootfs "${rootfs_dir}" bash /tools/bundle.sh config "${config}"
 
-chroot_rootfs "${rootfs_dir}" apt autoremove --yes --force-yes --purge -qq || exit 1
+chroot_rootfs "${rootfs_dir}" apt autoremove --yes --allow-downgrades --allow-remove-essential --purge -qq || exit 1
 
 chroot_rootfs "${rootfs_dir}" bash /tools/enable-startup.sh
 
@@ -358,11 +381,11 @@ silent 'Removing bundle list'           rm -f  "${rootfs_dir}/tools/custom/tools
 
 ## Copying first boot script ---------------------------------------------------
 
-silent 'Copying first boot script'      cp -f "${ROOT_PATH}/custom/tools/${config}/firstboot.sh" "${rootfs_dir}/tools/"
+placescript 'firstboot'
 
 ## Copying user script ---------------------------------------------------------
 
-silent 'Copying user script'            cp -f "${ROOT_PATH}/custom/tools/${config}/user.sh" "${rootfs_dir}/tools/"
+placescript 'user'
 
 ## Finalizing customization ----------------------------------------------------
 
