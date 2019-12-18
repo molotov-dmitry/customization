@@ -20,7 +20,7 @@ do
         config="$(echo "${line:1}" | cut -d ' ' -f 1)"
         parameters="$(echo "${line:1}" | cut -s -d ' ' -f 2-)"
 
-        /usr/bin/yes | /bin/bash custom.sh "/media/documents/Distrib/OS/$iso" "$config" --ram --quiet --fast --no-progress --notify $parameters | tee "logs/${config}-${iso}.txt"
+        /usr/bin/yes | /bin/bash custom.sh "/media/documents/Distrib/OS/$iso" "$config" --ram --quiet --no-progress --notify $parameters "$@" | tee "logs/${config}-${iso}.txt"
     else
         if [ -z "${line##*\=*}" ]
 	then
