@@ -58,7 +58,7 @@ placescript()
 if [[ $(id -u) -ne 0 ]]
 then
     echo 'Launching as root'
-    sudo bash $0 $@
+    sudo bash $0 "$@"
     exit $?
 fi
 

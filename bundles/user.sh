@@ -102,7 +102,7 @@ case "${bundle}" in
     ## File manager keybindings ================================================
 
     addscenario 'terminal' 'F4' 'x-terminal-emulator' --fixpwd
-    addscenario 'compress' 'F7' '[[ $# -gt 0 ]] && file-roller -d $@'
+    addscenario 'compress' 'F7' '[[ $# -gt 0 ]] && file-roller -d "$@"'
 
     ## File chooser ============================================================
 

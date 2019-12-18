@@ -1015,32 +1015,32 @@ function bundle()
     case "${command}" in
 
     "repo")
-        bash "${ROOT_PATH}/bundles/repo.sh" $@
+        bash "${ROOT_PATH}/bundles/repo.sh" "$@"
         return $?
     ;;
 
     "install")
-        bash "${ROOT_PATH}/bundles/install.sh" $@
+        bash "${ROOT_PATH}/bundles/install.sh" "$@"
         return $?
     ;;
 
     "prepare")
-        bash "${ROOT_PATH}/bundles/prepare.sh" "${config}" "${rootfs_dir}" $@
+        bash "${ROOT_PATH}/bundles/prepare.sh" "${config}" "${rootfs_dir}" "$@"
         return $?
     ;;
 
     "config")
-        bash "${ROOT_PATH}/bundles/config.sh" $@
+        bash "${ROOT_PATH}/bundles/config.sh" "$@"
         return $?
     ;;
 
     "firstboot")
-        bash "${ROOT_PATH}/bundles/firstboot.sh" $@
+        bash "${ROOT_PATH}/bundles/firstboot.sh" "$@"
         return $?
     ;;
 
     "user")
-        bash "${ROOT_PATH}/bundles/user.sh" $@
+        bash "${ROOT_PATH}/bundles/user.sh" "$@"
         return $?
     ;;
 

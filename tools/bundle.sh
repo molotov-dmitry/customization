@@ -30,7 +30,7 @@ while read -r bundle
 do
     [[ -z "${bundle}" || "$bundle" == '#'* ]] && continue
 
-    bundle ${action} ${bundle}
+    bundle ${action} ${bundle} "$@"
 
 done < "$filename"
 
