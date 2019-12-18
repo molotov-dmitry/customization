@@ -2,6 +2,8 @@
 
 action="$1"
 
+shift
+
 #### Load functions ============================================================
 
 if [[ "${action}" != "prepare" ]]
@@ -12,7 +14,9 @@ then
 
     . "${ROOT_PATH}/functions.sh"
 
-    config="$2"
+    config="$1"
+
+    shift
 
 fi
 

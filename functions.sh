@@ -1008,7 +1008,7 @@ function silentsudo()
 
 function bundle()
 {
-    command="$1"
+    local command="$1"
 
     shift
 
