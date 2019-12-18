@@ -293,6 +293,13 @@ then
     silent 'Move sources.list' mv "${rootfs_dir}/etc/apt/sources.list.d/base.list" "${rootfs_dir}/etc/apt/sources.list"
 fi
 
+## Copy user files =============================================================
+
+if [[ -d "${ROOT_PATH}/custom/files/${config}" ]]
+then
+    silent 'Copy config specific files' cp -rf "${ROOT_PATH}/custom/files/${config}/." "${rootfs_dir}/"
+fi
+
 ## Preparing customization scripts ---------------------------------------------
 
 silent 'Removing Tools dir'             rm -rf   "${rootfs_dir}/tools" || exit 1
