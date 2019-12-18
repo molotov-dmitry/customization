@@ -1149,10 +1149,16 @@ function addservice
 
     silent "Creating ${srvdesc} service"   cp -f "${ROOT_PATH}/files/${srvpath}/${srvname}.service" '/etc/systemd/system/' || return 1
 
-    for target in $(grep WantedBy "/etc/systemd/system/${srvname}.service" | cut -d '=' -f 2 | tr ' ' '\n')
+    for target in $(grep '^WantedBy' "/etc/systemd/system/${srvname}.service" | cut -d '=' -f 2 | tr ' ' '\n')
     do
         silent " Creating ${target//.*} target" mkdir -p "/etc/systemd/system/${target}.wants"
         silent " Enabling ${srvdesc} for ${target//.target}" ln -s "/etc/systemd/system/${srvname}.service" "/etc/systemd/system/${target}.wants/${srvname}.service" || return 1
+    done
+
+    for target in $(grep '^RequiredBy' "/etc/systemd/system/${srvname}.service" | cut -d '=' -f 2 | tr ' ' '\n')
+    do
+        silent " Creating ${target//.*} target" mkdir -p "/etc/systemd/system/${target}.requires"
+        silent " Enabling ${srvdesc} for ${target//.target}" ln -s "/etc/systemd/system/${srvname}.service" "/etc/systemd/system/${target}.requires/${srvname}.service" || return 1
     done
 
     return 0
