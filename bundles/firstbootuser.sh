@@ -7,6 +7,15 @@ cd "${ROOT_PATH}" || exit 1
 
 bundle="$1"
 
+user_name="$2"
+user_id="$3"
+user_group="$4"
+user_comment="$5"
+user_home="$6"
+user_login="$7"
+
+shift
+
 scriptpath="${ROOT_PATH}/bundles/$(basename "$0")"
 
 case "${bundle}" in
@@ -69,11 +78,11 @@ case "${bundle}" in
 
 "driver")
 
-    bash "${scriptpath}" 'driver/intel'
-    bash "${scriptpath}" 'driver/firmware'
-    bash "${scriptpath}" 'driver/wifi'
-    bash "${scriptpath}" 'driver/printer'
-    bash "${scriptpath}" 'driver/fs'
+    bash "${scriptpath}" 'driver/intel' "$@"
+    bash "${scriptpath}" 'driver/firmware' "$@"
+    bash "${scriptpath}" 'driver/wifi' "$@"
+    bash "${scriptpath}" 'driver/printer' "$@"
+    bash "${scriptpath}" 'driver/fs' "$@"
 
 ;;
 
@@ -113,15 +122,15 @@ case "${bundle}" in
 
 "server")
 
-    bash "${scriptpath}" 'server/ssh'
-    bash "${scriptpath}" 'server/ftp'
-    bash "${scriptpath}" 'server/smb'
-    bash "${scriptpath}" 'server/svn'
-    bash "${scriptpath}" 'server/db'
-    bash "${scriptpath}" 'server/iperf'
-    bash "${scriptpath}" 'server/media'
-    bash "${scriptpath}" 'server/download'
-    bash "${scriptpath}" 'server/proxy'
+    bash "${scriptpath}" 'server/ssh' "$@"
+    bash "${scriptpath}" 'server/ftp' "$@"
+    bash "${scriptpath}" 'server/smb' "$@"
+    bash "${scriptpath}" 'server/svn' "$@"
+    bash "${scriptpath}" 'server/db' "$@"
+    bash "${scriptpath}" 'server/iperf' "$@"
+    bash "${scriptpath}" 'server/media' "$@"
+    bash "${scriptpath}" 'server/download' "$@"
+    bash "${scriptpath}" 'server/proxy' "$@"
 
 ;;
 
@@ -171,11 +180,6 @@ case "${bundle}" in
 
 "server/media")
 
-    sleep 30
-
-    su -c 'export LD_LIBRARY_PATH=/usr/lib/plexmediaserver; /usr/lib/plexmediaserver/Plex\ Media\ Scanner -n "Музыка" --type 8 --location "/media/documents/Music"' - plex
-    su -c 'export LD_LIBRARY_PATH=/usr/lib/plexmediaserver; /usr/lib/plexmediaserver/Plex\ Media\ Scanner -n "Видео" --type 1 --location "/media/documents/Video"' - plex
-
 ;;
 
 ### Download server ============================================================
@@ -194,13 +198,6 @@ case "${bundle}" in
 
 "gitlab")
 
-    debconfselect 'gitlab' 'gitlab/ssl'         'false'
-    debconfselect 'gitlab' 'gitlab/letsencrypt' 'false'
-    debconfselect 'gitlab' 'gitlab/fqdn'        'gitlab.local'
-
-    #debinstall 'Gitlab' 'gitlab' '' 'all'
-    #appremove  'Gitlab stub' 'gitlab-stub'
-
 ;;
 
 ### ============================================================================
@@ -209,21 +206,21 @@ case "${bundle}" in
 
 "dev")
 
-    bash "${scriptpath}" 'dev/build'
-    bash "${scriptpath}" 'dev/analysis'
-    bash "${scriptpath}" 'dev/style'
-    bash "${scriptpath}" 'dev/doc'
-    bash "${scriptpath}" 'dev/man'
-    bash "${scriptpath}" 'dev/x11'
-    bash "${scriptpath}" 'dev/opengl'
-    bash "${scriptpath}" 'dev/qt'
-    bash "${scriptpath}" 'dev/qt4'
-    bash "${scriptpath}" 'dev/gtk'
-    bash "${scriptpath}" 'dev/gnome'
-    bash "${scriptpath}" 'dev/db'
-    bash "${scriptpath}" 'dev/json'
-    bash "${scriptpath}" 'dev/net'
-    bash "${scriptpath}" 'dev/ti'
+    bash "${scriptpath}" 'dev/build' "$@"
+    bash "${scriptpath}" 'dev/analysis' "$@"
+    bash "${scriptpath}" 'dev/style' "$@"
+    bash "${scriptpath}" 'dev/doc' "$@"
+    bash "${scriptpath}" 'dev/man' "$@"
+    bash "${scriptpath}" 'dev/x11' "$@"
+    bash "${scriptpath}" 'dev/opengl' "$@"
+    bash "${scriptpath}" 'dev/qt' "$@"
+    bash "${scriptpath}" 'dev/qt4' "$@"
+    bash "${scriptpath}" 'dev/gtk' "$@"
+    bash "${scriptpath}" 'dev/gnome' "$@"
+    bash "${scriptpath}" 'dev/db' "$@"
+    bash "${scriptpath}" 'dev/json' "$@"
+    bash "${scriptpath}" 'dev/net' "$@"
+    bash "${scriptpath}" 'dev/ti' "$@"
 
 ;;
 
@@ -315,6 +312,8 @@ case "${bundle}" in
 
 "dev/net")
 
+    usermod -a -G wireshark "${user_name}"
+
 ;;
 
 ### TI TMS320C64XX =============================================================
@@ -338,10 +337,10 @@ case "${bundle}" in
 
 "appearance")
 
-    bash "${scriptpath}" 'appearance/themes'
-    bash "${scriptpath}" 'appearance/fonts'
-    bash "${scriptpath}" 'appearance/wallpaper'
-    bash "${scriptpath}" 'appearance/avatar'
+    bash "${scriptpath}" 'appearance/themes' "$@"
+    bash "${scriptpath}" 'appearance/fonts' "$@"
+    bash "${scriptpath}" 'appearance/wallpaper' "$@"
+    bash "${scriptpath}" 'appearance/avatar' "$@"
 
 ;;
 
@@ -366,6 +365,52 @@ case "${bundle}" in
 ### User avatar ================================================================
 
 "appearance/avatar")
+
+    ## Generate avatar if not exists -------------------------------------------
+
+    if which rsvg-convert >/dev/null
+    then
+        USER_NAME_LETTER=${user_comment:0:1}
+
+        AVATAR_COLORS=('D32F2F' 'B71C1C' 'AD1457' 'EC407A' 'AB47BC' '6A1B9A' 'AA00FF' '5E35B1' '3F51B5' '1565C0' '0091EA' '00838F' '00897B' '388E3C' '558B2F' 'E65100' 'BF360C' '795548' '607D8B')
+        AVATAR_COLORS_COUNT=${#AVATAR_COLORS[@]}
+        INDEX=$(( (RANDOM * RANDOM + RANDOM) % AVATAR_COLORS_COUNT ))
+
+        bgcolor="#${AVATAR_COLORS[$INDEX]}"
+        fgfont="Arial"
+
+        if [[ "gpqy" == *"${USER_NAME_LETTER}"* || "аруцд" == *"${USER_NAME_LETTER}"* ]]
+        then
+            dy=25
+        elif [[ "У"  == *"${USER_NAME_LETTER}"* ]]
+        then
+            dy=40
+        elif [[ "${USER_NAME_LETTER}" == "${USER_NAME_LETTER^^}" && "Д" != *"${USER_NAME_LETTER}"* ]]
+        then
+            dy=35
+        else
+            dy=30
+        fi
+
+        cat << _EOF | rsvg-convert -w 512 -h 512 -f png -o "${user_home}/.face"
+<svg width="1000" height="1000">
+  <circle cx="500" cy="500" r="400" fill="${bgcolor}" />
+  <text x="50%" y="50%" text-anchor="middle" fill="white" font-size="500px" dy="0.${dy}em" font-family="${fgfont}">${USER_NAME_LETTER}</text>
+</svg>
+_EOF
+
+        chown "${user_name}:${user_name}" "${user_home}/.face"
+    fi
+
+    ## Configure account icon --------------------------------------------------
+
+    echo mkdir -p '/var/lib/AccountsService/icons/'
+
+    cp -f "${user_home}/.face" "/var/lib/AccountsService/icons/${user_name}"
+
+    addconfigline Icon "/var/lib/AccountsService/icons/${user_name}" User "/var/lib/AccountsService/users/${user_name}"
+
+    ## -------------------------------------------------------------------------
 
 ;;
 
@@ -399,15 +444,15 @@ case "${bundle}" in
 
 "network")
 
-    bash "${scriptpath}" 'network/browser'
-    bash "${scriptpath}" 'network/mail'
-    bash "${scriptpath}" 'network/chat'
-    bash "${scriptpath}" 'network/chat-extra'
-    bash "${scriptpath}" 'network/office'
-    bash "${scriptpath}" 'network/services'
-    bash "${scriptpath}" 'network/remote'
-    bash "${scriptpath}" 'network/remotedesktop'
-    
+    bash "${scriptpath}" 'network/browser' "$@"
+    bash "${scriptpath}" 'network/mail' "$@"
+    bash "${scriptpath}" 'network/chat' "$@"
+    bash "${scriptpath}" 'network/chat-extra' "$@"
+    bash "${scriptpath}" 'network/office' "$@"
+    bash "${scriptpath}" 'network/services' "$@"
+    bash "${scriptpath}" 'network/remote' "$@"
+    bash "${scriptpath}" 'network/remotedesktop' "$@"
+
 ;;
 
 ### Browser ====================================================================
@@ -480,11 +525,11 @@ case "${bundle}" in
 
 "cli")
 
-    bash "${scriptpath}" 'cli/files'
-    bash "${scriptpath}" 'cli/monitor'
-    bash "${scriptpath}" 'cli/net'
-    bash "${scriptpath}" 'cli/time'
-    bash "${scriptpath}" 'cli/ttycolors'
+    bash "${scriptpath}" 'cli/files' "$@"
+    bash "${scriptpath}" 'cli/monitor' "$@"
+    bash "${scriptpath}" 'cli/net' "$@"
+    bash "${scriptpath}" 'cli/time' "$@"
+    bash "${scriptpath}" 'cli/ttycolors' "$@"
 
 ;;
 
@@ -524,6 +569,11 @@ case "${bundle}" in
 
 "folders")
 
+    mkdir -p "/media/documents/${user_name}"
+    chown -R "${user_name}:${user_name}" "/media/documents/${user_name}"
+
+    fixpermissions "/media/documents" "${user_id}"
+
 ;;
 
 ### ============================================================================
@@ -532,20 +582,62 @@ case "${bundle}" in
 
 "optimize")
 
-    bash "${scriptpath}" 'optimize/tmpfs'
-    bash "${scriptpath}" 'optimize/chrome-ramdisk'
-    bash "${scriptpath}" 'optimize/disable-tracker'
+    bash "${scriptpath}" 'optimize/tmpfs' "$@"
+    bash "${scriptpath}" 'optimize/chrome-ramdisk' "$@"
+    bash "${scriptpath}" 'optimize/disable-tracker' "$@"
 ;;
 
 ### Mount directories with high I/O as tmpfs ===================================
 
 "optimize/tmpfs")
 
+    mount_name=$(systemd-escape -p --suffix=mount "${user_home}/.cache")
+
+    safe_home=$(echo "${user_home}" | sed 's/\//\\\//g')
+    safe_mount=$(echo "${mount_name}" | sed 's/\\/\\\\\\/g')
+
+    ## make dir ----------------------------------------------------------------
+
+    sudo -u ${user_name} mkdir -p "${user_home}/.cache"
+
+    ## Mount point -------------------------------------------------------------
+
+    sed "s/<USER>/${user_name}/g;s/<UID>/${user_id}/g;s/<GID>/${user_group}/g;s/<HOME>/${safe_home}/g;s/<MOUNT>/${safe_mount}/g" "${ROOT_PATH}/files/tmpfs/cache-ramdisk.mount" > "/etc/systemd/system/${mount_name}"
+    systemctl enable ${mount_name}
+
+    ## Clear and mount directory -----------------------------------------------
+
+    find "${user_home}/.cache" -mindepth 1 -delete
+    systemctl start ${mount_name}
+
 ;;
 
 ### Keep Chromium's RAM disk between power-offs ================================
 
 "optimize/chrome-ramdisk")
+
+    mount_name=$(systemd-escape -p --suffix=mount "${user_home}/.config/chromium")
+    safe_home=$(echo "${user_home}" | sed 's/\//\\\//g')
+    safe_mount=$(echo "${mount_name}" | sed 's/\\/\\\\\\/g')
+
+    ## make dir ----------------------------------------------------------------
+
+    sudo -u ${user_name} mkdir -p "${user_home}/.config/chromium"
+
+    ## Mount point -------------------------------------------------------------
+
+    sed "s/<USER>/${user_name}/g;s/<UID>/${user_id}/g;s/<GID>/${user_group}/g;s/<HOME>/${safe_home}/g;s/<MOUNT>/${safe_mount}/g" "${ROOT_PATH}/files/chrome-ramdisk/chrome-ramdisk.mount" > "/etc/systemd/system/${mount_name}"
+    systemctl enable ${mount_name}
+
+    ## User service ------------------------------------------------------------
+
+    sed "s/<USER>/${user_name}/g;s/<UID>/${user_id}/g;s/<GID>/${user_group}/g;s/<HOME>/${safe_home}/g;s/<MOUNT>/${safe_mount}/g" "${ROOT_PATH}/files/chrome-ramdisk/chrome-ramdisk.service" > "/etc/systemd/system/chrome-ramdisk-${user_name}.service"
+    systemctl enable chrome-ramdisk-${user_name}.service
+
+    ## Clear and mount directory -----------------------------------------------
+
+    find "${user_home}/.config/chromium" -mindepth 1 -delete
+    systemctl start chrome-ramdisk-${user_name}.service
 
 ;;
 
@@ -561,8 +653,8 @@ case "${bundle}" in
 
 "vm-guest")
 
-    bash "${scriptpath}" 'vm-guest/vmware'
-    bash "${scriptpath}" 'vm-guest/vbox'
+    bash "${scriptpath}" 'vm-guest/vmware' "$@"
+    bash "${scriptpath}" 'vm-guest/vbox' "$@"
 ;;
 
 "vm-guest/vmware")
@@ -579,11 +671,13 @@ case "${bundle}" in
 
 "vm-host")
 
-    bash "${scriptpath}" 'vm-host/vbox'
+    bash "${scriptpath}" 'vm-host/vbox' "$@"
 
 ;;
 
 "vm-host/vbox")
+
+    usermod -a -G vboxusers ${user_name}
 
 ;;
 
@@ -592,18 +686,6 @@ case "${bundle}" in
 ### ============================================================================
 
 "work")
-
-    ### Setup DNS names ========================================================
-
-    cat << _EOF >> /etc/hosts
-172.16.56.14    rczifort.local
-172.16.56.15    redmine.rczifort.local
-172.16.56.16    chat.rczifort.local
-172.16.56.17    ex01.rczifort.local
-172.16.56.22    git.rczifort.local
-172.16.56.23    data.rczifort.local
-
-_EOF
 
 ;;
 

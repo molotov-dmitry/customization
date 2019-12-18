@@ -49,4 +49,8 @@ DISTFILES += \
     tools/pack.sh \
     tools/prepare.sh \
     tools/remove.sh \
-    tools/startup.sh
+    tools/startup.sh \
+    bundles/firstbootuser.sh \
+    files/startup/99-firstlogin.sh \
+    files/startup/enable-startup.sh \
+    files/startup/custom-startup.service

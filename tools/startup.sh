@@ -1,46 +1,41 @@
 #!/bin/bash
 
-ROOT_PATH='/tools'
-
-. "${ROOT_PATH}/functions.sh"
-
-for userinfo in $(cat /etc/passwd | grep -v nologin | grep -v /bin/false | grep -v /bin/sync | grep -v postgres | grep -v ftp | cut -d ':' -f 1,6)
+while read userinfo
 do
-    user_name=$(echo "${userinfo}" | cut -d ':' -f 1)
-    user_dir=$(echo "${userinfo}" | cut -d ':' -f 2)
+    user_name="$(echo "${userinfo}" | cut -d ':' -f 1)"
+    user_id="$(echo "${userinfo}" | cut -d ':' -f 3)"
+    user_group="$(echo "${userinfo}" | cut -d ':' -f 4)"
+    user_comment="$(echo "${userinfo}" | cut -d ':' -f 5)"
+    user_home="$(echo "${userinfo}" | cut -d ':' -f 6)"
+    user_login="$(echo "${userinfo}" | cut -d ':' -f 7)"
 
-    [[ -z "${user_name}" ]] && continue
-    [[ -z "${user_dir}" ]] && continue
+    echo "${userinfo}: name:[${user_name}] id:[${user_id}] group:[${user_group}] comment:[${user_comment}] home:[${user_home}] login:[${user_login}]" >> /tools/firstboot.log
 
-    cd "${user_dir}" || continue
-
-    if [[ -z "$(grep /tools/user.sh "${user_dir}"/.profile)" ]]
+    if [[ ${user_id} -lt 999 || ${user_id} -ge 60000 || -z "${user_home}" || "$(basename "${user_login}")" == 'nologin' ]]
     then
-        echo '
-
-if [[ -f /tools/user.sh && ! -e "${HOME}/.config/.firstboot" ]]
-then
-    mkdir -p "${HOME}"/.config
-
-    bash /tools/user.sh
-    echo "$?" >  "${HOME}"/.config/.firstboot
-
-    bash /tools/bundle.sh user user
-    echo "$?" >> "${HOME}"/.config/.firstboot
-fi
-
-' >> "${user_dir}"/.profile
-
-    chown "${user_name}" "${user_dir}"/.profile
-
+        continue
     fi
-done
+
+    if [[ -n "$(grep "^${user_id}$" /tools/.firstbootuser)" ]]
+    then
+        continue
+    fi
+
+    bash /tools/firstboot.sh 2>> /tools/firstboot.log
+    echo "${user_id}: $?" >> /tools/.firstboot
+
+    bash /tools/bundle.sh firstbootuser firstbootuser "${user_name}" "${user_id}" "${user_group}" "${user_comment}" "${user_home}" "${user_login}" 2>> /tools/firstbootuser.log
+    echo "${user_id}: $?" >> /tools/.firstboot
+
+    echo "${user_id}" >> /tools/.firstbootuser
+
+done < /etc/passwd
 
 if [[ ! -e /tools/.firstboot ]]
 then
 
     setcap cap_net_raw+ep $(which ping)
-    echo "$?" >  /tools/.firstboot
+    echo "$?" >>  /tools/.firstboot
 
     bash /tools/firstboot.sh 2>> /tools/firstboot.log
     echo "$?" >> /tools/.firstboot

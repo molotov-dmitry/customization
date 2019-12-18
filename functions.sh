@@ -1039,6 +1039,11 @@ function bundle()
         return $?
     ;;
 
+    "firstbootuser")
+        bash "${ROOT_PATH}/bundles/firstbootuser.sh"  "$@"
+        return $?
+    ;;
+
     "user")
         bash "${ROOT_PATH}/bundles/user.sh" "$@"
         return $?

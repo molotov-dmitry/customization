@@ -317,6 +317,7 @@ silent 'Copying bundle scripts'         cp -rf "${ROOT_PATH}/bundles" "${rootfs_
 
 silent 'Copying bundles list'           cp -f "${ROOT_PATH}/custom/tools/${config}.bundle" "${rootfs_dir}/tools/custom/tools/" || exit 1
 silent 'Copying bundles list'           cp -f "${ROOT_PATH}/custom/tools/${config}.bundle" "${rootfs_dir}/tools/custom/tools/firstboot.bundle" || exit 1
+silent 'Copying bundles list'           cp -f "${ROOT_PATH}/custom/tools/${config}.bundle" "${rootfs_dir}/tools/custom/tools/firstbootuser.bundle" || exit 1
 silent 'Copying bundles list'           cp -f "${ROOT_PATH}/custom/tools/${config}.bundle" "${rootfs_dir}/tools/custom/tools/user.bundle" || exit 1
 
 silent 'Copying firstboot service'      cp -f "${ROOT_PATH}/files/startup/custom-startup.service" "${rootfs_dir}/tools/files" || exit 1
@@ -382,8 +383,12 @@ silent 'Removing bundle list'           rm -f  "${rootfs_dir}/tools/custom/tools
 ## Copying first boot script ---------------------------------------------------
 
 placescript 'firstboot'
+placescript 'firstbootuser'
 
 ## Copying user script ---------------------------------------------------------
+
+silent '' mkdir -p "${rootfs_dir}/etc/profile.d" || exit 1
+silent 'Copy user first login script' cp -f "${ROOT_PATH}/files/startup/99-firstlogin.sh" "${rootfs_dir}/etc/profile.d/" || exit 1
 
 placescript 'user'
 
