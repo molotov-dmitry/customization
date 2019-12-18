@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=firefox -new-window http://redmine.rczifort.local/redmine
+Name=Redmine
+GenericName=Redmine
+Icon=redmine
+Terminal=false
+Categories=Development;Network
+

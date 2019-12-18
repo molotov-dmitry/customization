@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=firefox -new-window https://ex01.rczifort.local
+Name=Outlook
+GenericName=Outlook
+Icon=ms-outlook
+Terminal=false
+Categories=Network;Email;Office
+

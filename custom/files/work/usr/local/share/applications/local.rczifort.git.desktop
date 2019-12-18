@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=firefox -new-window https://git.rczifort.local/
+Name=GitLab
+GenericName=GitLab
+Icon=gitlab
+Terminal=false
+Categories=Development;Network
+
