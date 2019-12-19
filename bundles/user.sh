@@ -1088,7 +1088,7 @@ _EOF
 
 "network/mail")
 
-    if ispkginstalled
+    if ispkginstalled evolution
     then
         launcheradd 'org.gnome.Evolution'
     fi
