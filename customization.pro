@@ -51,4 +51,6 @@ DISTFILES += \
     bundles/firstbootuser.sh \
     files/startup/99-firstlogin.sh \
     files/startup/enable-startup.sh \
-    files/startup/custom-startup.service
+    files/startup/custom-startup.service \
+    custom/tools/device.bundle \
+    custom/tools/test.bundle
