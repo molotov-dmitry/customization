@@ -28,10 +28,8 @@ DISTFILES += \
     custom/tools/server.bundle \
     custom/tools/server/create.sh \
     custom/tools/server/firstboot.sh \
-    custom/tools/server/prepare.sh \
     custom/tools/server_work.bundle \
     custom/tools/server_work/firstboot.sh \
-    custom/tools/server_work/prepare.sh \
     custom/tools/tablet.bundle \
     custom/tools/tablet/create.sh \
     custom/tools/tablet/user.sh \
