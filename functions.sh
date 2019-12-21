@@ -1790,3 +1790,54 @@ function kernelversion()
     return 0;
 }
 
+kernellist()
+{
+    local kerneltype=any
+
+    for var in "$@"
+    do
+        case "$var" in
+        '--with-headers')
+            kerneltype=with-headers
+            ;;
+        '--dkms')
+            kerneltype=dkms
+            ;;
+        *)
+            echo "Unknown option ${var}" >&2
+            ;;
+        esac
+    done
+
+
+    local kernelpackages="$(dpkg -l | grep 'ii[[:space:]]\+linux-image-' | \
+                                awk '{print $2}' | \
+                                cut -d '-' -f 3- | \
+                                grep -v '^generic$')"
+
+    local -a result
+
+    for kernel in $kernelpackages
+    do
+
+        case "$kerneltype" in
+        'with-headers')
+            test -d "/usr/src/linux-headers-$kernel"
+            ;;
+        'dkms')
+            test -f "/usr/src/linux-headers-$kernel/.config"
+            ;;
+        *)
+            true
+            ;;
+        esac
+
+        if [[ $? -eq 0 ]]
+        then
+            result+=( "$kernel" )
+        fi
+
+    done
+
+    echo ${result[*]}
+}
