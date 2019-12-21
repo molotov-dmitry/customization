@@ -9,6 +9,8 @@ cd "${ROOT_PATH}" || exit 1
 
 ## Remove ----------------------------------------------------------------------
 
+appremove 'OEM kernel headers'      'linux-headers-oem linux-headers-4.15.0-1050-oem linux-oem-headers-4.15.0-1050'
+
 appremove 'Apt listchanges'         'apt-listchanges'
 
 appremove 'Brasero'                 'brasero brasero-cdrkit brasero-common'
