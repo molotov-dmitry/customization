@@ -242,94 +242,86 @@ function debinstall()
 
 function appinstall()
 {
-    appname="$1"
-    applist="$2"
+    local appname="$1"
+    local applist="$2"
+
+    local -a installlist
+
+    local -a missinglist
+    local -a skippedlist
+
     title "Installing $appname"
-
-    installlist=""
-
-    missinglist=""
-    skippedlist=""
 
     for app in ${applist}
     do
         if [[ "$app" == "["*"]" ]]
         then
-            appname=${app:1:-1}
-            let required=0
+            local pkgname=${app:1:-1}
+            local required=0
         else
-            appname=$app
-            let required=1
+            local pkgname=$app
+            local required=1
         fi
 
-        if ispkginstalled "${appname}"
+        if ispkginstalled "${pkgname}"
         then
             continue
-            #
         fi
 
-        if ispkgavailable "${appname}"
+        if ispkgavailable "${pkgname}"
         then
-            installlist="${installlist} ${appname}"
+            installlist+=("${pkgname}")
         #
         elif [[ $required -gt 0 ]]
         then
-            missinglist="${missinglist} ${appname}"
-        #
+            missinglist+=("${pkgname}")
         else
-            skippedlist="${skippedlist} ${appname}"
-        #
+            skippedlist+=("${pkgname}")
         fi
 
     done
 
-    if [[ -n "${missinglist}" ]]
+    if [[ "${#missinglist[@]}" -gt 0 ]]
     then
-        msgfail "[missing ${missinglist}]"
+        msgfail "[missing ${missinglist[*]}]"
         return 1
     fi
 
-    if [[ -z "${installlist}" ]]
+    if [[ "${#installlist[@]}" -eq 0 ]]
     then
-        msgwarn '[installed]'
-        return 0
-    else
-        export DEBIAN_FRONTEND=noninteractive
-        export DEBIAN_PRIORITY=critical
-
-        DEBIAN_FRONTEND=noninteractive apt install $installlist -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" --yes --force-yes --no-install-recommends >/dev/null 2>&1
-
-        if [[ $? -eq 0 ]]
+        if [[ "${#skippedlist[@]}" -eq 0 ]]
         then
-            if [[ -z "${skippedlist}" ]]
-            then
-                msgdone
-            else
-                msgwarn "[missing ${skippedlist}]"
-            fi
-
+            msgwarn '[installed]'
             return 0
         else
-            msgfail
-            title "Retrying installing $appname"
+            msgwarn "[missing ${skippedlist[*]}]"
+        fi
+    else
+        for (( i = 0; i < 2; i++ ))
+        do
+            export DEBIAN_FRONTEND=noninteractive
+            export DEBIAN_PRIORITY=critical
 
-            DEBIAN_FRONTEND=noninteractive apt install $installlist -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" --yes --force-yes --no-install-recommends >/dev/null 2>&1
+            DEBIAN_FRONTEND=noninteractive apt install "${installlist[@]}" \
+                -o "Dpkg::Options::=--force-confdef" \
+                -o "Dpkg::Options::=--force-confold" \
+                --yes --force-yes --no-install-recommends >/dev/null 2>&1
 
             if [[ $? -eq 0 ]]
             then
-                if [[ -z "${skippedlist}" ]]
+                if [[ "${#skippedlist[@]}" -eq 0 ]]
                 then
                     msgdone
                 else
-                    msgwarn "[missing ${skippedlist}]"
+                    msgwarn "[missing ${skippedlist[*]}]"
                 fi
 
                 return 0
-            else
-                msgfail
-                return 1
             fi
-        fi
+        done
+
+        msgfail
+        return 1
     fi
 }
 
