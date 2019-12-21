@@ -36,7 +36,6 @@ DISTFILES += \
     custom/tools/work.bundle \
     custom/tools/work/config.sh \
     custom/tools/work/create.sh \
-    custom/tools/work/firstboot.sh \
     custom/tools/work/user.sh \
     functions.sh \
     tools/bundle.sh \
@@ -53,4 +52,5 @@ DISTFILES += \
     files/startup/enable-startup.sh \
     files/startup/custom-startup.service \
     custom/tools/device.bundle \
-    custom/tools/test.bundle
+    custom/tools/test.bundle \
+    tools/afterbuild.sh
