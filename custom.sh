@@ -359,7 +359,7 @@ chroot_rootfs "${rootfs_dir}" bash /tools/bundle.sh install "${config}"
 chroot_rootfs "${rootfs_dir}" bash /tools/config.sh
 chroot_rootfs "${rootfs_dir}" bash /tools/bundle.sh config "${config}"
 
-chroot_rootfs "${rootfs_dir}" apt autoremove --yes --allow-downgrades --allow-remove-essential --purge -qq || exit 1
+chroot_rootfs "${rootfs_dir}" apt autoremove --yes --allow-downgrades --allow-remove-essential --purge -qq
 
 chroot_rootfs "${rootfs_dir}" bash /tools/enable-startup.sh
 
