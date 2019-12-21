@@ -1841,3 +1841,30 @@ kernellist()
 
     echo ${result[*]}
 }
+
+dkmsinstall()
+{
+    local -a modules=( $(find /var/lib/dkms -mindepth 1 -maxdepth 1 -type d -exec basename {} \;) )
+    local modules_count=${#modules[@]}
+
+    local -a kernels=( $(kernellist --dkms) )
+    local kernels_count=${#kernels[@]}
+
+    for (( m = 0; m < modules_count; m++))
+    do
+        for (( k = 0; k < kernels_count; k++ ))
+        do
+            local -a versions=( $(find "/var/lib/dkms/${modules[$m]}" -mindepth 2 -maxdepth 2 -name 'source' -exec dirname {} \;  | xargs basename -a) )
+            local versions_count=${#versions[@]}
+
+            for (( v = 0; v < versions_count; v++))
+            do
+                if [[ -z "$(dkms status "${modules[$m]}/${versions[$v]}" -k "${kernels[$k]}" | grep ': installed$')" ]]
+                then
+                    silent "Build ${modules[$m]} v${versions[$v]} for ${kernels[$k]}" dkms build "${modules[$m]}/${versions[$v]}" -k "${kernels[$k]}"
+                    silent "Install ${modules[$m]} v${versions[$v]} for ${kernels[$k]}" dkms install "${modules[$m]}/${versions[$v]}" -k "${kernels[$k]}"
+                fi
+            done
+        done
+    done
+}
