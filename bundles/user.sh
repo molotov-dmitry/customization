@@ -108,6 +108,13 @@ case "${bundle}" in
 
     gsettings set org.gtk.Settings.FileChooser sort-directories-first       true
 
+    ## Set Nautilus default icon size ==========================================
+
+    if ispkginstalled nautilus
+    then
+        gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
+    fi
+
     ## Text editors ============================================================
 
     editors=()
