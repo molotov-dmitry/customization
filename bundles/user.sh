@@ -219,6 +219,10 @@ case "${bundle}" in
         gsettings set org.gnome.shell.overrides attach-modal-dialogs false
     fi
 
+    ## Location services =======================================================
+
+    gsettings set org.gnome.system.location enabled true
+
     ## night light =============================================================
 
     if ispkginstalled gnome-shell
