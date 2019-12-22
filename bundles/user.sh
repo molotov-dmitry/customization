@@ -936,6 +936,22 @@ _EOF
 
     fi
 
+    if ispkginstalled cinnamon
+    then
+        gsettings set org.cinnamon.desktop.background secondary-color    '#000000'
+        gsettings set org.cinnamon.desktop.background primary-color      '#000000'
+        gsettings set org.cinnamon.desktop.background picture-options    'zoom'
+        gsettings set org.cinnamon.desktop.background color-shading-type 'solid'
+        gsettings set org.cinnamon.desktop.background picture-opacity    100
+        gsettings set org.cinnamon.desktop.background picture-uri        'file:///usr/share/backgrounds/custom/skunze_beach.jpg'
+
+        gsettings set org.cinnamon.desktop.background.slideshow delay             30
+        gsettings set org.cinnamon.desktop.background.slideshow random-order      true
+        gsettings set org.cinnamon.desktop.background.slideshow slideshow-paused  false
+        gsettings set org.cinnamon.desktop.background.slideshow image-source      'xml:///usr/share/gnome-background-properties/custom.xml'
+        gsettings set org.cinnamon.desktop.background.slideshow slideshow-enabled true
+    fi
+
 ;;
 
 ### User avatar ================================================================
