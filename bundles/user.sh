@@ -844,9 +844,9 @@ _EOF
         gsettings set org.cinnamon.desktop.interface icon-theme     "${icon_theme}"
         gsettings set org.cinnamon.desktop.interface cursor-theme   "${cursor_theme}"
 
-        gsettings set org.cinnamon.desktop.interface gtk-theme      'Mint-Y-Darker'
+        gsettings set org.cinnamon.desktop.interface gtk-theme      'Mint-Y-Darker-Aqua'
         gsettings set org.cinnamon.desktop.wm.preferences theme     'Mint-Y-Dark'
-        gsettings set org.cinnamon.theme name                       'Mint-Y-Dark'
+        gsettings set org.cinnamon.theme name                       'Mint-Y-Aqua'
     fi
 
     if kdebased
