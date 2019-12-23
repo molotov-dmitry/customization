@@ -4,9 +4,16 @@
 
 readonly target_disk="/media/documents/$USER"
 
-readonly target_dir=( "Downloads" "Documents" "Music" "Images"   "Video"  "Templates" "Projects"         )
-readonly source_dir=( ""          ""          ""      ""         ""       ""          "${HOME}/Projects" )
-readonly source_xdg=( "DOWNLOAD"  "DOCUMENTS" "MUSIC" "PICTURES" "VIDEOS" "TEMPLATES" ""                 )
+declare -a target_dir=( "Downloads" "Documents" "Music" "Images"   "Video"  "Templates" "Projects"         )
+declare -a source_dir=( ""          ""          ""      ""         ""       ""          "${HOME}/Projects" )
+declare -a source_xdg=( "DOWNLOAD"  "DOCUMENTS" "MUSIC" "PICTURES" "VIDEOS" "TEMPLATES" ""                 )
+
+if dpkg -s virtualbox >/dev/null 2>&1
+then
+    target_dir+=( "VM" )
+    source_dir+=( "${HOME}/VirtualBox VMs" )
+    source_xdg+=( "" )
+fi
 
 let DIR_COUNT=${#target_dir[@]}
 
@@ -16,7 +23,7 @@ let DIR_COUNT=${#target_dir[@]}
 
 #### Create directories ========================================================
 
-for (( index=0; index<${DIR_COUNT}; index++ ))
+for (( index = 0; index < DIR_COUNT; index++ ))
 do
     dst_dir="${target_disk}/${target_dir[$index]}"
 
@@ -28,9 +35,9 @@ do
     fi
 done
 
-#### Move and link 
+#### Move and link =============================================================
 
-for (( index=0; index<${DIR_COUNT}; index++ ))
+for (( index = 0; index < DIR_COUNT; index++ ))
 do
 	dst_dir="${target_disk}/${target_dir[$index]}"
     src_dir="${source_dir[$index]}"
@@ -51,3 +58,4 @@ do
 	ln -s "${dst_dir}" "${src_dir}"
 
 done
+
