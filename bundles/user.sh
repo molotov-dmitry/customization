@@ -695,9 +695,10 @@ _EOF
 
         ## gnome builder -------------------------------------------------------
 
-        gsettings set org.gnome.builder        follow-night-light               true
-        gsettings set org.gnome.builder.editor show-map                         true
-        gsettings set org.gnome.builder.editor font-name                        'Ubuntu Mono 12'
+        gsettings set org.gnome.builder        follow-night-light   false
+        gsettings set org.gnome.builder        night-mode           false
+        gsettings set org.gnome.builder.editor show-map             true
+        gsettings set org.gnome.builder.editor font-name            'Fira Code 12'
 
         for lang in awk c changelog cmake cpp cpphdr css csv desktop diff dosbatch dot gdb-log html ini java js json markdown pascal php sh sql vala xml yaml
         do
