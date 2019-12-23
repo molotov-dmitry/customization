@@ -33,6 +33,8 @@ case "${bundle}" in
 
 "gtk")
 
+    appinstall 'GTK+ modules' 'libcanberra-gtk-module libgail-common appmenu-gtk2-module'
+
 ;;
 
 ### ============================================================================
@@ -98,11 +100,6 @@ case "${bundle}" in
 "qt")
 
     appinstall 'GTK2 style for Qt5'         'qt5-style-plugins'
-
-    if gnomebased
-    then
-        appinstall 'GtkMenuShell D-Bus exporter' 'appmenu-gtk2-module'
-    fi
 ;;
 
 ### ============================================================================
