@@ -1401,17 +1401,14 @@ _EOF
 
 "work")
 
-    ### User network configuration =============================================
+    ## User network configuration ==============================================
 
-    ### Configure network connections ------------------------------------------
+    ## Configure network connections -------------------------------------------
 
     if ispkginstalled network-manager
     then
-        while read uuid
-        do
-            nmcli connection del uuid "${uuid}"
 
-        done < <(nmcli --fields=UUID,TYPE connection  show | grep 'ethernet[[:space:]]*' | cut -d ' ' -f 1)
+        uuidstoremove="$(nmcli --fields=UUID,TYPE connection show | grep 'ethernet[[:space:]]*' | cut -d ' ' -f 1)"
 
         nmcli conn add type ethernet con-name "RCZIFORT (DHCP)" \
                        ifname '' ipv4.method auto \
@@ -1419,9 +1416,17 @@ _EOF
                        ipv6.method ignore 2>/dev/null \
             || echo "Failed to add network connection" >&2
 
+        while read uuid
+        do
+            [[ -z "${uuid}" ]] && continue
+
+            nmcli connection del uuid "${uuid}" 2>/dev/null
+
+        done <<< "${uuidstoremove}"
+
     fi
 
-    ### Add network shares -----------------------------------------------------
+    ## Add network shares ------------------------------------------------------
 
     addbookmark 'sftp://188.134.72.31:2222/media/documents' 'AHOME'
 
@@ -1429,13 +1434,13 @@ _EOF
     addbookmark 'smb://172.16.8.203'               'NAS'
     addbookmark 'smb://data.rczifort.local/shares' 'RCZIFORT'
 
-    ### Customization ==========================================================
+    ## Customization ===========================================================
 
     ## Make Git accept self-signed certificate ---------------------------------
 
     git config --global http.sslVerify false
 
-    ### Gnome shell extensions =================================================
+    ## Gnome shell extensions ==================================================
 
     if ispkginstalled gnome-shell
     then
