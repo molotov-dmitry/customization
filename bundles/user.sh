@@ -166,6 +166,7 @@ case "${bundle}" in
         gsettings set org.gnome.Terminal.Legacy.Settings menu-accelerator-enabled false
         gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'dark'
 
+        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" visible-name 'UTF-8'
         gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" use-transparent-background true
         gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" background-transparency-percent 5
         gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" scrollbar-policy 'never'
