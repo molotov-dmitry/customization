@@ -19,6 +19,8 @@ do
         continue
     fi
 
+    mkdir -p /tools/status/
+
     bash /tools/firstboot.sh 1>> /tools/status/firstboot.log 2>&1
     echo "${user_id}: $?" >> /tools/status/.firstboot
 
@@ -31,6 +33,8 @@ done < /etc/passwd
 
 if [[ -z "$(grep "^system$" /tools/status/.completed)" ]]
 then
+
+    mkdir -p /tools/status/
 
     setcap cap_net_raw+ep $(which ping)
     echo "system: $?" >>  /tools/status/.firstboot
