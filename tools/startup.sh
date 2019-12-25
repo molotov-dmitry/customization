@@ -14,29 +14,33 @@ do
         continue
     fi
 
-    if [[ -n "$(grep "^${user_id}$" /tools/.firstbootuser)" ]]
+    if [[ -n "$(grep "^${user_id}$" /tools/status/.completed)" ]]
     then
         continue
     fi
 
-    bash /tools/firstboot.sh 1>> /tools/firstboot.log 2>&1
-    echo "${user_id}: $?" >> /tools/.firstboot
+    bash /tools/firstboot.sh 1>> /tools/status/firstboot.log 2>&1
+    echo "${user_id}: $?" >> /tools/status/.firstboot
 
-    bash /tools/bundle.sh firstbootuser firstbootuser "${user_name}" "${user_id}" "${user_group}" "${user_comment}" "${user_home}" "${user_login}" 1>> /tools/firstboot.log 2>&1
-    echo "${user_id}: $?" >> /tools/.firstboot
+    bash /tools/bundle.sh firstbootuser firstbootuser "${user_name}" "${user_id}" "${user_group}" "${user_comment}" "${user_home}" "${user_login}" 1>> /tools/status/firstboot.log 2>&1
+    echo "${user_id}: $?" >> /tools/status/.firstboot
+
+    echo "${user_id}" >> /tools/status/.completed
 
 done < /etc/passwd
 
-if [[ ! -e /tools/.firstboot ]]
+if [[ -z "$(grep "^system$" /tools/status/.completed)" ]]
 then
 
     setcap cap_net_raw+ep $(which ping)
-    echo "$?" >>  /tools/.firstboot
+    echo "system: $?" >>  /tools/status/.firstboot
 
-    bash /tools/firstboot.sh 1>> /tools/firstboot.log 2>&1
-    echo "$?" >> /tools/.firstboot
+    bash /tools/firstboot.sh 1>> /tools/status/firstboot.log 2>&1
+    echo "system: $?" >> /tools/status/.firstboot
 
-    bash /tools/bundle.sh firstboot firstboot 1>> /tools/firstboot.log 2>&1
-    echo "$?" >> /tools/.firstboot
+    bash /tools/bundle.sh firstboot firstboot 1>> /tools/status/firstboot.log 2>&1
+    echo "system: $?" >> /tools/status/.firstboot
+
+    echo 'system' >> /tools/status/.completed
 fi
 
