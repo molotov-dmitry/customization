@@ -1,5 +1,5 @@
 
-if [ -r /tools/user.sh ] && [ ! -e "${HOME}/.config/.firstboot" ] && [ -e "/tools/.firstboot" ] && [ -n "${-##*c*}" ]
+if [ -r /tools/user.sh ] && [ ! -e "${HOME}/.config/.firstboot" ] && [ -e "/tools/status/.completed" ] && [ -n "${-##*c*}" ]
 then
     mkdir -p "${HOME}/.config"
 
