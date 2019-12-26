@@ -709,7 +709,8 @@ _EOF
 
 "work")
 
-    lpadmin -p 'HP_Laserjet_1320' -L 'Комната 8' -E \
+    silent 'Adding network printer' lpadmin -p 'HP_Laserjet_1320' \
+        -L 'Комната 8' -E \
         -v 'socket://172.16.8.200:9100' \
         -m 'foomatic-db-compressed-ppds:0/ppd/foomatic-ppd/Generic-PCL_5e_Printer-hpijs-pcl5e.ppd'
 
