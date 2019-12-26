@@ -1435,6 +1435,18 @@ _EOF
     addbookmark 'smb://172.16.8.203'               'NAS'
     addbookmark 'smb://data.rczifort.local/shares' 'RCZIFORT'
 
+    ## Add network printer -----------------------------------------------------
+
+    if ispkginstalled cups-client
+    then
+        if [[ -z "$(lpstat -v ' socket://172.16.8.200:9100$')" ]]
+        then
+            lpadmin -p 'HP_Laserjet_1320' -L 'Комната 8' -E \
+                -v 'socket://172.16.8.200:9100' \
+                -m 'foomatic-db-compressed-ppds:0/ppd/foomatic-ppd/Generic-PCL_5e_Printer-hpijs-pcl5e.ppd'
+        fi
+    fi
+
     ## Customization ===========================================================
 
     ## Make Git accept self-signed certificate ---------------------------------
