@@ -771,7 +771,7 @@ case "${bundle}" in
 
     if gnomebased
     then
-        appinstall 'Evolution mail client'  'evolution evolution-data-server evolution-ews'
+        appinstall 'Evolution mail client'  'evolution evolution-data-server evolution-ews evolution-plugins'
     fi
 
     if kdebased

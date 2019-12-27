@@ -1120,6 +1120,15 @@ _EOF
     if ispkginstalled evolution
     then
         launcheradd 'org.gnome.Evolution'
+
+        gsettingsclear org.gnome.evolution disabled-eplugins
+
+        for plugin in plugin.templates face plugin.mailToTask save_calendar plugin.preferPlain attachment-reminder email-custom-header
+        do
+            gsettingsadd org.gnome.evolution disabled-eplugins "$plugin"
+        done
+
+        gsettingsadd org.gnome.evolution disabled-eplugins org.gnome.plugin.mailing-list.actions
     fi
 
 ;;
