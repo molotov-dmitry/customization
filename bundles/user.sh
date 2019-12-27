@@ -1123,12 +1123,12 @@ _EOF
 
         gsettingsclear org.gnome.evolution disabled-eplugins
 
-        for plugin in plugin.templates face plugin.mailToTask save_calendar plugin.preferPlain attachment-reminder email-custom-header
+        for plugin in plugin.dbx.import bbdb plugin.templates face plugin.mailToTask save_calendar plugin.preferPlain attachment-reminder email-custom-header
         do
-            gsettingsadd org.gnome.evolution disabled-eplugins "$plugin"
+            gsettingsadd org.gnome.evolution disabled-eplugins "org.gnome.evolution.$plugin"
         done
 
-        gsettingsadd org.gnome.evolution disabled-eplugins org.gnome.plugin.mailing-list.actions
+        gsettingsadd org.gnome.evolution disabled-eplugins 'org.gnome.plugin.mailing-list.actions'
     fi
 
 ;;
