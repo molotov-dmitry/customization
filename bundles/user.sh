@@ -1461,6 +1461,13 @@ _EOF
 
     ## Customization ===========================================================
 
+    ## Generate SSH private and public key pair --------------------------------
+
+    if [[ ! -f "${HOME}/.ssh/id_rsa" ]]
+    then
+        ssh-keygen -q -t rsa -N '' -f "${HOME}/.ssh/id_rsa" 2>/dev/null <<< y >/dev/null
+    fi
+
     ## Make Git accept self-signed certificate ---------------------------------
 
     git config --global http.sslVerify false
