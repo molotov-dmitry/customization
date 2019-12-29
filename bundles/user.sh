@@ -866,7 +866,7 @@ _EOF
 
     font_ui='Google Sans'
     font_doc='Linux Libertine O'
-    font_fixed='Ubuntu Mono'
+    font_fixed='Fira Code'
 
     font_ui_size='10'
     font_doc_size='12'
