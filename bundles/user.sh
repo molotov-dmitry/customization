@@ -1131,6 +1131,8 @@ _EOF
 
         usercopy 'evolution'
 
+        gsettings set org.gnome.evolution.mail mark-seen-timeout 750
+
         gsettingsclear org.gnome.evolution disabled-eplugins
 
         for plugin in plugin.dbx.import bbdb plugin.templates face plugin.mailToTask save_calendar plugin.preferPlain attachment-reminder email-custom-header
