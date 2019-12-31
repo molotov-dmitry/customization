@@ -6,3 +6,5 @@ cd "${ROOT_PATH}" || exit 1
 . "${ROOT_PATH}/functions.sh"
 
 appinstall 'Notify server' 'notify-server'
+
+gnomeshellextension 1319        # GSConnect
