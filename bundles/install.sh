@@ -33,7 +33,7 @@ case "${bundle}" in
 
 "gtk")
 
-    appinstall 'GTK+ modules' 'libcanberra-gtk-module libgail-common appmenu-gtk2-module'
+    appinstall 'GTK+ modules' 'libcanberra-gtk-module libgail-common appmenu-gtk2-module appmenu-gtk3-module'
 
 ;;
 
