@@ -1083,6 +1083,13 @@ _EOF
         dconf write /org/gnome/shell/extensions/sound-output-device-chooser/show-input-slider       false
     fi
 
+    ## Caffeine ----------------------------------------------------------------
+
+    if ispkginstalled gnome-shell
+    then
+        gsettingsadd org.gnome.shell enabled-extensions 'caffeine@patapon.info'
+    fi
+
 ;;
 
 ### Online video ===============================================================

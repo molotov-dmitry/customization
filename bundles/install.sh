@@ -711,6 +711,7 @@ case "${bundle}" in
     then
         gnomeshellextension 1379        # A simple MPRIS indicator button
         gnomeshellextension 906         # Sound Input & Output Device Chooser
+        gnomeshellextension 517         # Caffeine
     fi
 
 ;;
