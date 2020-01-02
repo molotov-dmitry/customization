@@ -1089,7 +1089,8 @@ _EOF
     then
         gsettingsadd org.gnome.shell enabled-extensions 'caffeine@patapon.info'
 
-        gsettings set org.gnome.shell.extensions.caffeine show-indicator false
+        gsettings set org.gnome.shell.extensions.caffeine show-indicator     false
+        gsettings set org.gnome.shell.extensions.caffeine show-notifications false
     fi
 
 ;;
