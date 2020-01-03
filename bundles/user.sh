@@ -1222,8 +1222,7 @@ _EOF
 
     if ispkginstalled transmission-remote-gtk
     then
-        mkdir -p "${HOME}/.config/transmission-remote-gtk/"
-        cp -rf "${ROOT_PATH}/files/transmission-remote-gtk/config.json" "${HOME}/.config/transmission-remote-gtk/"
+        usercopy 'transmission-remote-gtk'
     fi
 
     ## EiskaltDC++ Remote ------------------------------------------------------
