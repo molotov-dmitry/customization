@@ -1558,7 +1558,10 @@ function addconfigline()
 
     sed -i "/\[${section}\]/a $(safestring "${key}=${value}")" "$file"
 
-    [[ -n "$(tail -c1 "${file}")" ]] && echo >> "${file}"
+    if [[ -n "$(tail -c1 "${file}")" ]]
+    then
+        echo >> "${file}"
+    fi
 }
 
 function mimeregister()
