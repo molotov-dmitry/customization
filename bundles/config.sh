@@ -25,6 +25,11 @@ case "${bundle}" in
 
 "gui")
 
+    if ispkginstalled gdm3
+    then
+        silent 'Modify firstboot script'    addconfigline 'Before' 'gdm.service' 'Unit' '/etc/systemd/system/custom-startup.service.d/before-gdm.conf'
+    fi
+
 ;;
 
 ### GTK-based GUI ==============================================================
@@ -223,7 +228,7 @@ _EOF
     silent 'Configuring Plex'           cp -f "${ROOT_PATH}/files/plexmediaserver/Preferences.xml" '/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/'
     silent 'Changing Plex config owner' chown -R plex:plex '/var/lib/plexmediaserver'
 
-    silent 'Modify firstboot script'    sed -i 's/^After=/After=plexmediaserver.service /' '/tools/files/custom-startup.service'
+    silent 'Modify firstboot script'    addconfigline 'After' 'plexmediaserver.service' 'Unit' '/etc/systemd/system/custom-startup.service.d/after-plexmediaserver.conf'
 
 ;;
 
@@ -267,7 +272,7 @@ _EOF
         silent 'Removing default nginx site' rm /etc/nginx/sites-enabled/default
     fi
 
-    silent 'Modify firstboot script'    sed -i 's/^After=/After=postgresql.service /' '/tools/files/custom-startup.service'
+    silent 'Modify firstboot script'    addconfigline 'After' 'postgresql.service' 'Unit' '/etc/systemd/system/custom-startup.service.d/after-postgresql.conf'
 
 ;;
 
