@@ -529,22 +529,6 @@ case "${bundle}" in
     if ispkginstalled nautilus
     then
         appinstall 'RabbitVCS'          'rabbitvcs-core rabbitvcs-nautilus'
-
-        if [[ "$(pkgversion 'rabbitvcs-core')" == '0.16-1.1' ]]
-        then
-            silent 'Patch RabbitVCS'    patch '/usr/lib/python2.7/dist-packages/rabbitvcs/vcs/svn/__init__.py' "${rootfs_dir}/tools/files/rabbitvcs/rabbitvcs.patch"
-
-        elif [[ "$(pkgversion 'rabbitvcs-core')" == '0.17.1-2' ]]
-        then
-            appinstall 'RabbitVCS dependencies' 'python-tk'
-
-            for pkg in core nautilus
-            do
-                silent "Downloading RabbitVCS $pkg" wget "http://mirror.yandex.ru/debian/pool/main/r/rabbitvcs/rabbitvcs-${pkg}_0.17.1-3_all.deb" -O "/tmp/rabbitvcs-${pkg}_0.17.1-3_all.deb"
-                silent "Installing RabbitVCS $pkg"  dpkg -i "/tmp/rabbitvcs-${pkg}_0.17.1-3_all.deb"
-            done
-
-        fi
     fi
 
     appinstall 'Meld diff tool'     'meld'
