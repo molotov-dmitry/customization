@@ -30,6 +30,11 @@ case "${bundle}" in
         silent 'Modify firstboot script'    addconfigline 'Before' 'gdm.service' 'Unit' '/etc/systemd/system/custom-startup.service.d/before-gdm.conf'
     fi
 
+    if ispkginstalled sddm
+    then
+        silent 'Modify firstboot script'    addconfigline 'Before' 'sddm.service' 'Unit' '/etc/systemd/system/custom-startup.service.d/before-sddm.conf'
+    fi
+
 ;;
 
 ### GTK-based GUI ==============================================================
