@@ -1192,7 +1192,7 @@ _EOF
 
     if ispkginstalled telegram-desktop
     then
-        cp -f "${ROOT_PATH}/files/telegram/telegramdesktop.desktop" "${HOME}/.config/autostart/"
+        usercopy 'telegram'
     fi
 
     if ispkginstalled vk
