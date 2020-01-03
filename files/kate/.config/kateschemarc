@@ -2,5 +2,5 @@
 update_info=fonts_kate.upd:Plasma_Fonts_Kate
 
 [Normal]
-Font=Ubuntu Mono,12,-1,5,50,0,0,0,0,0,Regular
+Font=Fira Code,12,-1,5,50,0,0,0,0,0,Regular
 dummy=prevent-empty-group
