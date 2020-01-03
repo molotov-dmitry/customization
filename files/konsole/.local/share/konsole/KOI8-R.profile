@@ -3,4 +3,4 @@ DefaultEncoding=KOI8-R
 
 [General]
 Name=KOI8-R
-Parent=Default.profile
+Parent=UTF-8.profile

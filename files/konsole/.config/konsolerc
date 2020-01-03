@@ -1,8 +1,8 @@
 [Desktop Entry]
-DefaultProfile=Default.profile
+DefaultProfile=UTF-8.profile
 
 [Favorite Profiles]
-Favorites=Default.profile,KOI8-R.profile
+Favorites=UTF-8.profile,KOI8-R.profile
 
 [KonsoleWindow]
 ShowMenuBarByDefault=false
