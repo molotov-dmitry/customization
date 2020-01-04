@@ -685,7 +685,8 @@ case "${bundle}" in
 
     if kdebased
     then
-        appinstall 'Clementine'             'clementine'
+        #appinstall 'Clementine'             'clementine'
+        appinstall 'Elisa music player'     'elisa'
         appinstall 'Kaffeine media player'  'kaffeine'
 
         appinstall 'Kid3'                   'kid3'
