@@ -1093,6 +1093,10 @@ _EOF
         gsettings set org.gnome.shell.extensions.caffeine show-notifications false
     fi
 
+    ## Clementine --------------------------------------------------------------
+
+    usercopy 'clementine'
+
 ;;
 
 ### Online video ===============================================================

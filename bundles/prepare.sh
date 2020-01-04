@@ -454,6 +454,10 @@ case "${bundle}" in
 
     preparefiles 'MPV' 'mpv'
 
+    ## Clementine --------------------------------------------------------------
+
+    preparefiles 'Clementine' 'clementine'
+
 ;;
 
 ### Online video ===============================================================
