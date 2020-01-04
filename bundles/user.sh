@@ -691,6 +691,7 @@ _EOF
     ## Hide Sysprof ============================================================
 
     hideapp 'org.gnome.Sysprof2'
+    hideapp 'org.gnome.Sysprof3'
 
     ## Gnome Builder ===========================================================
 
