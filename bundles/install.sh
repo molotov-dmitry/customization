@@ -756,7 +756,7 @@ case "${bundle}" in
 
     if gnomebased
     then
-        appinstall 'Evolution mail client'  'evolution evolution-data-server evolution-ews evolution-plugins'
+        appinstall 'Geary mail client'      'geary'
     fi
 
     if kdebased
@@ -1045,6 +1045,15 @@ case "${bundle}" in
     then
         gnomeshellextension 7               # Removable Drive Menu
     fi
+;;
+
+"work-mail")
+
+    if gnomebased
+    then
+        appinstall 'Evolution mail client'  'evolution evolution-data-server evolution-ews evolution-plugins'
+    fi
+
 ;;
 
 ### ============================================================================

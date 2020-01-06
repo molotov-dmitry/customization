@@ -500,9 +500,9 @@ case "${bundle}" in
 
 "network/mail")
 
-    ## Empathy -----------------------------------------------------------------
+    ## Geary -------------------------------------------------------------------
 
-    preparefiles 'Evolution' 'evolution'
+    preparefiles 'Geary' 'geary'
 
 ;;
 
@@ -703,6 +703,14 @@ case "${bundle}" in
 "work")
 
     cp -rf "${ROOT_PATH}/files/work/."     "${rootfs_dir}/"
+
+;;
+
+"work-mail")
+
+    ## Evolution ---------------------------------------------------------------
+
+    preparefiles 'Evolution' 'evolution'
 
 ;;
 

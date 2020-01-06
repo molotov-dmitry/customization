@@ -22,6 +22,7 @@ dev/net
 dev/ti
 
 work
+work-mail
 
 server/ssh
 server/smb
@@ -31,7 +32,6 @@ vcs
 appearance
 
 office
-network/mail
 network/chat
 network/remotedesktop
 graphics

@@ -1140,22 +1140,15 @@ _EOF
 
 "network/mail")
 
-    if ispkginstalled evolution
+    if ispkginstalled geary
     then
-        launcheradd 'org.gnome.Evolution'
 
-        usercopy 'evolution'
+        if ! ispkginstalled evolution
+        then
+            launcheradd 'org.gnome.Geary.desktop'
+        fi
 
-        gsettings set org.gnome.evolution.mail mark-seen-timeout 750
-
-        gsettingsclear org.gnome.evolution disabled-eplugins
-
-        for plugin in plugin.dbx.import bbdb plugin.templates face plugin.mailToTask save_calendar plugin.preferPlain attachment-reminder email-custom-header
-        do
-            gsettingsadd org.gnome.evolution disabled-eplugins "org.gnome.evolution.$plugin"
-        done
-
-        gsettingsadd org.gnome.evolution disabled-eplugins 'org.gnome.plugin.mailing-list.actions'
+        usercopy 'geary'
     fi
 
 ;;
@@ -1503,6 +1496,33 @@ _EOF
     if ispkginstalled gnome-shell
     then
         gsettingsadd org.gnome.shell enabled-extensions 'drive-menu@gnome-shell-extensions.gcampax.github.com'
+    fi
+
+;;
+
+"work-mail")
+
+    ## Evolution ---------------------------------------------------------------
+
+    if ispkginstalled evolution
+    then
+        if ! ispkginstalled geary
+        then
+            launcheradd 'org.gnome.Evolution'
+        fi
+
+        usercopy 'evolution'
+
+        gsettings set org.gnome.evolution.mail mark-seen-timeout 750
+
+        gsettingsclear org.gnome.evolution disabled-eplugins
+
+        for plugin in plugin.dbx.import bbdb plugin.templates face plugin.mailToTask save_calendar plugin.preferPlain attachment-reminder email-custom-header
+        do
+            gsettingsadd org.gnome.evolution disabled-eplugins "org.gnome.evolution.$plugin"
+        done
+
+        gsettingsadd org.gnome.evolution disabled-eplugins 'org.gnome.plugin.mailing-list.actions'
     fi
 
 ;;
