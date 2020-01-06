@@ -7,16 +7,18 @@ cd "${ROOT_PATH}" || exit 1
 
 ### Add network switch =========================================================
 
-if [[ $UID -eq 1000 ]]
+if ispkginstalled network-switch
 then
-    nettype=eth
-else
-    nettype=wifi
-fi
+    if [[ $UID -eq 1000 ]]
+    then
+        nettype=eth
+    else
+        nettype=wifi
+    fi
 
-mkdir -p "${HOME}/.config/autostart"
+    mkdir -p "${HOME}/.config/autostart"
 
-cat > "${HOME}/.config/autostart/network-switch.desktop" << _EOF
+    cat > "${HOME}/.config/autostart/network-switch.desktop" << _EOF
 [Desktop Entry]
 Version=1.0
 Name=Network switcher
@@ -27,7 +29,8 @@ Type=Application
 Categories=Network
 _EOF
 
-unset nettype
+    unset nettype
+fi
 
 ### Customization ==============================================================
 
@@ -35,4 +38,11 @@ unset nettype
 
 launcherclear
 
+## Add mail client -------------------------------------------------------------
 
+if [[ $UID -eq 1000 ]]
+then
+    launcheradd 'org.gnome.Evolution'
+else
+    launcheradd 'org.gnome.Geary.desktop'
+fi
