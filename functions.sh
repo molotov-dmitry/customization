@@ -1316,6 +1316,13 @@ function hideapp()
     return 0
 }
 
+ishidden()
+{
+    app="$1"
+
+    grep '^[[:space:]]*NoDisplay[[:space:]]*=[[:space:]]*true[[:space:]]*$' "${HOME}/.local/share/applications/${app}.desktop" 2>/dev/null
+}
+
 ### Launcher functions =========================================================
 
 function launcherclear()
