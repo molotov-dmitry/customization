@@ -38,11 +38,22 @@ fi
 
 launcherclear
 
-## Add mail client -------------------------------------------------------------
+## Hide unused applications ----------------------------------------------------
 
 if [[ $UID -eq 1000 ]]
 then
-    launcheradd 'org.gnome.Evolution'
+    hideapp 'org.gnome.Geary'
+    hideapp 'io.github.GnomeMpv'
+    hideapp 'io.github.TransmissionRemoteGtk'
+    hideapp 'mpv'
+    hideapp 'org.gnome.Maps'
+    hideapp 'org.gnome.Totem'
+    hideapp 'org.gnome.Weather'
+    hideapp 'rhythmbox'
+    hideapp 'telegramdesktop'
 else
-    launcheradd 'org.gnome.Geary'
+    hideapp 'org.gnome.Evolution'
+    hideapp 'local.rczifort.ex01'
+    hideapp 'local.rczifort.git'
+    hideapp 'local.rczifort.redmine'
 fi
