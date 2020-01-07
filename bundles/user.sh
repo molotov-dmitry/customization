@@ -1145,7 +1145,7 @@ _EOF
     if ispkginstalled geary
     then
 
-        if ! ispkginstalled evolution
+        if ! ishidded 'org.gnome.Geary'
         then
             launcheradd 'org.gnome.Geary'
         fi
@@ -1190,12 +1190,12 @@ _EOF
 
     mkdir -p "${HOME}/.config/autostart"
 
-    if ispkginstalled telegram-desktop
+    if ispkginstalled telegram-desktop && ! ishidded telegramdesktop
     then
         usercopy 'telegram'
     fi
 
-    if ispkginstalled vk
+    if ispkginstalled vk && ! ishidded vk
     then
         cp -f '/usr/share/applications/vk.desktop' "${HOME}/.config/autostart/"
     fi
@@ -1508,7 +1508,7 @@ _EOF
 
     if ispkginstalled evolution
     then
-        if ! ispkginstalled geary
+        if ! ishidded 'org.gnome.Evolution'
         then
             launcheradd 'org.gnome.Evolution'
         fi
