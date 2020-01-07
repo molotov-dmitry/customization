@@ -1011,13 +1011,6 @@ _EOF
     hideapp 'easytag'
     hideapp 'mpv'
 
-    ## A simple MPRIS indicator button Gnome Shell extension -------------------
-
-    if ispkginstalled gnome-shell
-    then
-        gsettingsadd org.gnome.shell enabled-extensions 'mprisindicatorbutton@JasonLG1979.github.io'
-    fi
-
     ## rhythmbox ---------------------------------------------------------------
 
     if ispkginstalled rhythmbox
@@ -1073,6 +1066,13 @@ _EOF
     if ispkginstalled clementine
     then
         usercopy 'clementine'
+    fi
+
+    ## A simple MPRIS indicator button Gnome Shell extension -------------------
+
+    if ispkginstalled gnome-shell
+    then
+        gsettingsadd org.gnome.shell enabled-extensions 'mprisindicatorbutton@JasonLG1979.github.io'
     fi
 
     ## Sound Input & Output Device Chooser Gnome Shell extension ---------------
