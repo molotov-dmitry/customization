@@ -1145,7 +1145,7 @@ _EOF
 
         if ! ispkginstalled evolution
         then
-            launcheradd 'org.gnome.Geary.desktop'
+            launcheradd 'org.gnome.Geary'
         fi
 
         usercopy 'geary'

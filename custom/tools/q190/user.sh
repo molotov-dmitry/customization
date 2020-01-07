@@ -44,5 +44,5 @@ if [[ $UID -eq 1000 ]]
 then
     launcheradd 'org.gnome.Evolution'
 else
-    launcheradd 'org.gnome.Geary.desktop'
+    launcheradd 'org.gnome.Geary'
 fi
