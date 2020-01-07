@@ -1068,6 +1068,12 @@ _EOF
         usercopy 'mpv'
     fi
 
+    ## Clementine --------------------------------------------------------------
+
+    if ispkginstalled clementine
+    then
+        usercopy 'clementine'
+    fi
 
     ## Sound Input & Output Device Chooser Gnome Shell extension ---------------
 
@@ -1093,10 +1099,6 @@ _EOF
         dconf write /org/gnome/shell/extensions/caffeine/show-indicator     false
         dconf write /org/gnome/shell/extensions/caffeine/show-notifications false
     fi
-
-    ## Clementine --------------------------------------------------------------
-
-    usercopy 'clementine'
 
 ;;
 
