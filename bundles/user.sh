@@ -1148,9 +1148,9 @@ _EOF
         if ! ishidden 'org.gnome.Geary'
         then
             launcheradd 'org.gnome.Geary'
-        fi
 
-        usercopy 'geary'
+            usercopy 'geary'
+        fi
     fi
 
 ;;
