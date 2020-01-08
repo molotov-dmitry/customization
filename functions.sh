@@ -1295,21 +1295,37 @@ function changeapp()
 
 function hideapp()
 {
-    app="$1"
+    local app="$1"
 
-    if [[ ! -f "/usr/share/applications/${app}.desktop" ]]
+    local apppath=""
+
+    if [[ -f "/usr/share/applications/${app}.desktop" ]]
     then
+        apppath='/usr/share/applications'
+
+    elif [[ -f "/usr/local/share/applications/${app}.desktop" ]]
+    then
+        apppath='/usr/local/share/applications'
+
+    elif [[ -f "${HOME}/.local/share/applications/${app}.desktop" ]]
+    then
+        apppath="${HOME}/.local/share/applications"
+
+    else
         return 0
     fi
 
-    if grep '^NoDisplay=true$' "/usr/share/applications/${app}.desktop"
+    if grep '^[[:space:]]*NoDisplay[[:space:]]*=[[:space:]]*true[[:space:]]*$' "${apppath}/${app}.desktop" 2>/dev/null
     then
         return 0
     fi
 
     mkdir -p "${HOME}/.local/share/applications/"
 
-    cp -f "/usr/share/applications/${app}.desktop" "${HOME}/.local/share/applications/${app}.desktop"
+    if [[ "${apppath}" != "${HOME}/.local/share/applications" ]]
+    then
+        cp -f "${apppath}/${app}.desktop" "${HOME}/.local/share/applications/${app}.desktop"
+    fi
 
     addconfigline 'NoDisplay' 'true' 'Desktop Entry' "${HOME}/.local/share/applications/${app}.desktop"
 
@@ -1318,7 +1334,7 @@ function hideapp()
 
 ishidden()
 {
-    app="$1"
+    local app="$1"
 
     grep '^[[:space:]]*NoDisplay[[:space:]]*=[[:space:]]*true[[:space:]]*$' "${HOME}/.local/share/applications/${app}.desktop" 2>/dev/null
 }
