@@ -38,6 +38,14 @@ fi
 
 launcherclear
 
+## Disable LDAP user configuration for non-RCZI users --------------------------
+
+if [[ $UID -ne 1000 ]]
+then
+    mkdir -p "${HOME}/.config/user-ldap-config"
+    echo "autostart=false" > "${HOME}/.config/user-ldap-config/setup-done"
+fi
+
 ## Hide unused applications ----------------------------------------------------
 
 if [[ $UID -eq 1000 ]]
