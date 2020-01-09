@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Application
-Exec=firefox -new-window https://ex01.rczifort.local
+Exec=falkon https://ex01.rczifort.local
 Name=Outlook
 GenericName=Outlook
 Icon=ms-outlook
 Terminal=false
 Categories=Network;Email;Office
-NotShowIn=GNOME;LXDE;MATE;XFCE;Cinnamon;X-Cinnamon;Pantheon;KDE;LXQt
+OnlyShowIn=KDE;LXQt
 

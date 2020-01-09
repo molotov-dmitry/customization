@@ -1045,6 +1045,18 @@ case "${bundle}" in
     then
         gnomeshellextension 7               # Removable Drive Menu
     fi
+
+    ### Browser ================================================================
+
+    if gnomebased
+    then
+        appinstall 'Epiphany web browser'   'epiphany-browser'
+    fi
+
+    if kdebased
+    then
+        appinstall 'Falkon web browser'     'falkon'
+    fi
 ;;
 
 "work-mail")
