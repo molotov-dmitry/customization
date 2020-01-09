@@ -1001,7 +1001,7 @@ _EOF
 
     ## launcher ----------------------------------------------------------------
 
-    if ispkginstalled rhythmbox
+    if ispkginstalled rhythmbox && ! ishidden 'rhythmbox'
     then
         launcheradd 'rhythmbox'
     fi
