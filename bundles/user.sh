@@ -192,6 +192,10 @@ case "${bundle}" in
 
     gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true
 
+    ## Window control buttons --------------------------------------------------
+
+    gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
+
     ## =========================================================================
 
     fi
