@@ -1066,6 +1066,12 @@ case "${bundle}" in
         appinstall 'Evolution mail client'  'evolution evolution-data-server evolution-ews evolution-plugins'
     fi
 
+    if kdebased
+    then
+        appinstall 'KDE PIM'                'kmail kontact korganizer ktnef kaddressbook kmailtransport-akonadi accountwizard'
+    fi
+
+
 ;;
 
 ### ============================================================================
