@@ -1500,6 +1500,22 @@ _EOF
         gsettingsadd org.gnome.shell enabled-extensions 'drive-menu@gnome-shell-extensions.gcampax.github.com'
     fi
 
+    ## Crerate RCZI web services group =========================================
+
+    if ispkginstalled gnome-shell
+    then
+        gsettingsadd org.gnome.desktop.app-folders folder-children 'RcziWeb'
+        gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/RcziWeb/ name 'RCZI Web Services'
+
+        for site in git ex01 redmine
+        do
+            for type in '' '-gnome' '-kde'
+            do
+                gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/RcziWeb/ apps "local.rczifort.${site}${type}.desktop"
+            done
+        done
+    fi
+
 ;;
 
 "work-mail")
