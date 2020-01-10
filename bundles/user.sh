@@ -1495,7 +1495,8 @@ _EOF
 
     ## Make Git accept self-signed certificate ---------------------------------
 
-    git config --global http.sslVerify false
+    git config --global http.https://git.rczifort.local.sslVerify false
+    git config --global http.https://172.16.56.22.sslVerify       false
 
     ## Gnome shell extensions ==================================================
 
