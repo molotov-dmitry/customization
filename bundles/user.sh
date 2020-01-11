@@ -1514,7 +1514,6 @@ _EOF
 
     ## Crerate RCZI web services group =========================================
 
-    hideapp org.gnome.Epiphany
     if ispkginstalled gnome-shell
     then
         gsettingsadd org.gnome.desktop.app-folders folder-children 'RcziWeb'
