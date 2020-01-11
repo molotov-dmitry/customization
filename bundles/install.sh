@@ -1052,11 +1052,6 @@ case "${bundle}" in
     then
         appinstall 'Epiphany web browser'   'epiphany-browser'
     fi
-
-    if kdebased
-    then
-        appinstall 'Falkon web browser'     'falkon'
-    fi
 ;;
 
 "work-mail")

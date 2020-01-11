@@ -6,5 +6,5 @@ GenericName=Redmine
 Icon=redmine
 Terminal=false
 Categories=Development;Network
-NotShowIn=GNOME;LXDE;MATE;XFCE;Cinnamon;X-Cinnamon;Pantheon;KDE;LXQt
+NotShowIn=GNOME;LXDE;MATE;XFCE;Cinnamon;X-Cinnamon;Pantheon
 

@@ -1515,8 +1515,6 @@ _EOF
     ## Crerate RCZI web services group =========================================
 
     hideapp org.gnome.Epiphany
-    hideapp org.kde.falkon
-
     if ispkginstalled gnome-shell
     then
         gsettingsadd org.gnome.desktop.app-folders folder-children 'RcziWeb'
@@ -1524,7 +1522,7 @@ _EOF
 
         for site in git ex01 redmine
         do
-            for type in '' '-gnome' '-kde'
+            for type in '' '-gnome'
             do
                 gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/RcziWeb/ apps "local.rczifort.${site}${type}.desktop"
             done

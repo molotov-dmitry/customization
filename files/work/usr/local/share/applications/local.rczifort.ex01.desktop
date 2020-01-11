@@ -6,5 +6,5 @@ GenericName=Outlook
 Icon=ms-outlook
 Terminal=false
 Categories=Network;Email;Office
-NotShowIn=GNOME;LXDE;MATE;XFCE;Cinnamon;X-Cinnamon;Pantheon;KDE;LXQt
+NotShowIn=GNOME;LXDE;MATE;XFCE;Cinnamon;X-Cinnamon;Pantheon
 
