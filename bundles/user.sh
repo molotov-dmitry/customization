@@ -1153,6 +1153,8 @@ _EOF
         then
             launcheradd 'org.gnome.Geary'
 
+            setdefaultapp 'x-scheme-handler/mailto' 'org.gnome.Geary.desktop'
+
             usercopy 'geary'
         fi
     fi
@@ -1539,6 +1541,8 @@ _EOF
         if ! ishidden 'org.gnome.Evolution'
         then
             launcheradd 'org.gnome.Evolution'
+
+            setdefaultapp 'x-scheme-handler/mailto' 'org.gnome.Evolution.desktop'
         fi
 
         usercopy 'evolution'
