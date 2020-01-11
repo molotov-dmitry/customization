@@ -260,6 +260,13 @@ case "${bundle}" in
 
     gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
 
+    ## Remove mounts from dash panel -------------------------------------------
+
+    if gsettings writeable org.gnome.shell.extensions.dash-to-dock show-mounts 1>/dev/null 2>/dev/null
+    then
+        gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts false
+    fi
+
     ## =========================================================================
 
     fi
