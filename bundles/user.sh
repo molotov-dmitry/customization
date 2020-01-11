@@ -1438,6 +1438,9 @@ _EOF
 
 "work")
 
+    if [[ -f "${HOME}/.config/is-work-account" ]]
+    then
+
     ## User network configuration ==============================================
 
     ## Configure network connections -------------------------------------------
@@ -1535,6 +1538,10 @@ _EOF
                 gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/RcziWeb/ apps "local.rczifort.${site}${type}.desktop"
             done
         done
+    fi
+
+    ## =========================================================================
+
     fi
 
 ;;

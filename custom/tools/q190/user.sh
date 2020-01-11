@@ -5,11 +5,19 @@ cd "${ROOT_PATH}" || exit 1
 
 . "${ROOT_PATH}/functions.sh"
 
+## Set first created user as work account ======================================
+
+if [[ $UID -eq 1000 ]]
+then
+    mkdir -p "${HOME}/.config"
+    touch    "${HOME}/.config/is-work-account"
+fi
+
 ### Add network switch =========================================================
 
 if ispkginstalled network-switch
 then
-    if [[ $UID -eq 1000 ]]
+    if [[ -f "${HOME}/.config/is-work-account" ]]
     then
         nettype=eth
     else
@@ -40,7 +48,7 @@ launcherclear
 
 ## Disable LDAP user configuration for non-RCZI users --------------------------
 
-if [[ $UID -ne 1000 ]]
+if [[ ! -f "${HOME}/.config/is-work-account" ]]
 then
     mkdir -p "${HOME}/.config/user-ldap-config"
     echo "autostart=false" > "${HOME}/.config/user-ldap-config/setup-done"
@@ -48,7 +56,7 @@ fi
 
 ## Hide unused applications ----------------------------------------------------
 
-if [[ $UID -eq 1000 ]]
+if [[ -f "${HOME}/.config/is-work-account" ]]
 then
     hideapp 'org.gnome.Geary'
     hideapp 'io.github.GnomeMpv'
@@ -64,4 +72,7 @@ else
     hideapp 'local.rczifort.ex01'
     hideapp 'local.rczifort.git'
     hideapp 'local.rczifort.redmine'
+    hideapp 'local.rczifort.ex01-gnome'
+    hideapp 'local.rczifort.git-gnome'
+    hideapp 'local.rczifort.redmine-gnome'
 fi
