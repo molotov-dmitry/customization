@@ -524,6 +524,8 @@ case "${bundle}" in
 
 "folders")
 
+    sed -i 's/\(\/media\/documents[[:space:]]\+[^[:space:]]\+[[:space:]]\+\)defaults\([[:space:]]\+\)/\1defaults,x-gvfs-hide\2/' /etc/fstab
+
 ;;
 
 ### ============================================================================
