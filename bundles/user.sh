@@ -262,7 +262,7 @@ case "${bundle}" in
 
     ## Remove mounts from dash panel -------------------------------------------
 
-    if gsettings writeable org.gnome.shell.extensions.dash-to-dock show-mounts 1>/dev/null 2>/dev/null
+    if gsettings writable org.gnome.shell.extensions.dash-to-dock show-mounts 1>/dev/null 2>/dev/null
     then
         gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts false
     fi
