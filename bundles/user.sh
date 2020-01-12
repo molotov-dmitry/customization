@@ -1510,6 +1510,22 @@ _EOF
     git config --global http.https://git.rczifort.local.sslVerify false
     git config --global http.https://172.16.56.22.sslVerify       false
 
+    ## Add KOI8-R terminal profile ---------------------------------------------
+
+    if ispkginstalled gnome-terminal
+    then
+        newprofileid="$(uuidgen)"
+
+        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${newprofileid}/" visible-name 'KOI8-R'
+        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${newprofileid}/" encoding 'KOI8-R'
+        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${newprofileid}/" use-transparent-background true
+        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${newprofileid}/" background-transparency-percent 5
+        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${newprofileid}/" scrollbar-policy 'never'
+        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${newprofileid}/" allow-bold false
+
+        gsettingsadd org.gnome.Terminal.ProfilesList list "${newprofileid}"
+    fi
+
     ## Gnome shell extensions ==================================================
 
     if ispkginstalled gnome-shell
