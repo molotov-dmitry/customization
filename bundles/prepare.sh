@@ -62,7 +62,7 @@ case "${bundle}" in
 
 "gnome")
 
-
+    silent 'Copy Gnome files' cp -rf "${ROOT_PATH}/files/gnome/." "${rootfs_dir}/"
 
 ;;
 

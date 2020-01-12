@@ -209,6 +209,25 @@ case "${bundle}" in
     if gnomebased
     then
 
+    ## Crerate utilities launcher group ========================================
+
+    if ispkginstalled gnome-shell
+    then
+        gsettingsadd org.gnome.desktop.app-folders folder-children 'Utils'
+        gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ name 'Utils.directory'
+        gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ translate true
+
+        for app in Characters FileRoller DiskUtility Devhelp Screenshot baobab seahorse.Application Software tweaks
+        do
+            gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ apps "org.gnome.${app}.desktop"
+        done
+
+        for app in htop update-manager usb-creator-gtk gnome-system-monitor ubiquity gnome-nettool yelp
+        do
+            gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ apps "${app}.desktop"
+        done
+    fi
+
     ## Gnome desktop ===========================================================
 
     if ispkginstalled gnome-shell

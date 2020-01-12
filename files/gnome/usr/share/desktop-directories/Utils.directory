@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Utilities
+Name[ru]=Утилиты
+Comment=Utilities
+Comment[ru]=Утилиты
+Icon=applications-accessories
+Type=Directory
+X-Ubuntu-Gettext-Domain=gnome-menus-3.0
+
