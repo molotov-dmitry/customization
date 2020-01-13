@@ -1582,14 +1582,7 @@ _EOF
     then
         gsettingsadd org.gnome.desktop.app-folders folder-children 'RcziWeb'
         gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/RcziWeb/ name 'RCZI Web Services'
-
-        for site in git ex01 redmine
-        do
-            for type in '' '-gnome'
-            do
-                gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/RcziWeb/ apps "local.rczifort.${site}${type}.desktop"
-            done
-        done
+        gsettingsadd  org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/RcziWeb/ categories "X-WEB-RCZI"
     fi
 
     ## =========================================================================

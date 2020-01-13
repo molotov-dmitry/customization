@@ -74,7 +74,4 @@ else
     hideapp 'local.rczifort.ex01'
     hideapp 'local.rczifort.git'
     hideapp 'local.rczifort.redmine'
-    hideapp 'local.rczifort.ex01-gnome'
-    hideapp 'local.rczifort.git-gnome'
-    hideapp 'local.rczifort.redmine-gnome'
 fi

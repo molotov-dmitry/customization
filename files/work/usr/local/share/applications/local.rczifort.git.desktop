@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Application
-Exec=firefox -new-window https://git.rczifort.local/
+Exec=xdg-open https://git.rczifort.local/
 Name=GitLab
 GenericName=GitLab
+Keywords=Git;GitLab
 Icon=gitlab
 Terminal=false
-Categories=Development;Network
-NotShowIn=GNOME;LXDE;MATE;XFCE;Cinnamon;X-Cinnamon;Pantheon
+Categories=Development;Network;X-WEB-RCZI
 

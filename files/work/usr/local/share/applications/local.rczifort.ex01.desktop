@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Application
-Exec=firefox -new-window https://ex01.rczifort.local
-Name=Outlook
-GenericName=Outlook
+Exec=xdg-open https://ex01.rczifort.local
+Name=Exchange
+GenericName=Exchange
+Keywords=Outlook;Exchange;Ex01
 Icon=ms-outlook
 Terminal=false
-Categories=Network;Email;Office
-NotShowIn=GNOME;LXDE;MATE;XFCE;Cinnamon;X-Cinnamon;Pantheon
+Categories=Network;Email;Office;X-WEB-RCZI
 

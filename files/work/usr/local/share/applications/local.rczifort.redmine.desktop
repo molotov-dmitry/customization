@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Application
-Exec=firefox -new-window http://redmine.rczifort.local/redmine
+Exec=xdg-open http://redmine.rczifort.local/redmine
 Name=Redmine
 GenericName=Redmine
+Keywords=Redmine;Bug;Bugtracker;Issue;Issues
 Icon=redmine
 Terminal=false
-Categories=Development;Network
-NotShowIn=GNOME;LXDE;MATE;XFCE;Cinnamon;X-Cinnamon;Pantheon
+Categories=Development;Network;X-WEB-RCZI
 
