@@ -1492,6 +1492,13 @@ _EOF
 
     fi
 
+    ## Network switcher hotkey -------------------------------------------------
+
+    if ispkginstalled network-switch
+    then
+        addkeybinding 'Switch network' 'network-switch' '<Ctrl><Alt>N'
+    fi
+
     ## Add network shares ------------------------------------------------------
 
     addbookmark 'sftp://188.134.72.31:2222/media/documents' 'AHOME'
