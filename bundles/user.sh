@@ -1287,8 +1287,11 @@ _EOF
 
     ## Bookmarks for SFTP ------------------------------------------------------
 
-    addbookmark 'sftp://188.134.72.31:2222/media/documents' 'SFTP'
-    addbookmark 'sftp://192.168.1.5/media/documents'        'SFTP (LAN)'
+    if [[ ! -f "${HOME}/.config/is-work-account" ]]
+    then
+        addbookmark 'sftp://188.134.72.31:2222/media/documents' 'AHOME'
+        addbookmark 'sftp://192.168.1.5/media/documents'        'AHOME (LAN)'
+    fi
 
 ;;
 
