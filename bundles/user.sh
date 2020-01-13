@@ -1511,7 +1511,7 @@ _EOF
 
     if ispkginstalled cups-client
     then
-        if [[ -z "$(lpstat -v ' socket://172.16.8.200:9100$')" ]]
+        if [[ -z "$(lpstat -v | grep ' socket://172.16.8.200:9100$')" ]]
         then
             lpadmin -p 'HP_Laserjet_1320' -D 'HP LaserJet 1320' -L 'Комната 8' \
                 -E -v 'socket://172.16.8.200:9100' \
