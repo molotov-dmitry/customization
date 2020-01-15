@@ -1562,11 +1562,20 @@ _EOF
         gsettingsadd org.gnome.shell enabled-extensions 'drive-menu@gnome-shell-extensions.gcampax.github.com'
     fi
 
-    ## Configure Epiphany user agent ===========================================
+    ## Configure Epiphany ======================================================
+
+    ## Set user agent ----------------------------------------------------------
 
     if ispkginstalled epiphany-browser
     then
         dconf write /org/gnome/epiphany/web/user-agent "'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0'"
+    fi
+
+    ## Configure encodings -----------------------------------------------------
+
+    for encoding in 'KOI8-R' 'IBM866' 'windows-1251' 'UTF-8'
+    then
+        gsettingsadd org.gnome.Epiphany.state recent-encodings "${encoding}"
     fi
 
     ## Set Epiphany as default web browser =====================================
