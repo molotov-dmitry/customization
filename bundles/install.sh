@@ -613,6 +613,8 @@ case "${bundle}" in
 
     appinstall 'Google Sans fonts'      'fonts-google-sans'
 
+    appinstall 'JetBrains Mono fonts'   'fonts-jetbrains-mono'
+
 ;;
 
 ### Wallpaper ==================================================================
