@@ -578,6 +578,11 @@ case "${bundle}" in
 
     appinstall 'Mint themes'            'mint-themes'
 
+    if ispkgavailable yaru-theme-icon
+    then
+        appinstall 'Yaru theme'         'yaru-theme-icon yaru-material-icon-theme [yaru-theme-gtk]'
+    fi
+
     if ispkgavailable plymouth-theme-spinner
     then
         appinstall 'Spinner plymouth theme' 'plymouth-theme-spinner'
