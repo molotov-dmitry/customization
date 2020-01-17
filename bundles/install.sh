@@ -1034,6 +1034,10 @@ case "${bundle}" in
 
 "work")
 
+    ### Root CA Certificate ====================================================
+
+    appinstall 'RCZI Root CA cert'      'ca-rczifort'
+
     ### Plymouth theme =========================================================
 
     appinstall 'RCZI plymouth theme'    plymouth-theme-rczi
