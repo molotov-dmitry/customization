@@ -1564,26 +1564,35 @@ _EOF
 
     ## Configure Epiphany ======================================================
 
-    ## Set user agent ----------------------------------------------------------
-
     if ispkginstalled epiphany-browser
     then
+
+        ## Set user agent ------------------------------------------------------
+
         dconf write /org/gnome/epiphany/web/user-agent "'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0'"
+
+        ## Disable safe browsing and ad blocking -------------------------------
+
+        dconf write /org/gnome/epiphany/web/enable-adblock       false
+        dconf write /org/gnome/epiphany/web/enable-safe-browsing false
+
+        ## Configure encodings -------------------------------------------------
+
+        for encoding in 'KOI8-R' 'IBM866' 'windows-1251' 'UTF-8'
+        then
+            gsettingsadd org.gnome.Epiphany.state recent-encodings "${encoding}"
+        fi
+
+        ## Set Epiphany as default web browser =================================
+
+        setdefaultapp   'text/html'              'org.gnome.Epiphany.desktop'
+        setdefaultapp   'application/xhtml+xml'  'org.gnome.Epiphany.desktop'
+        setdefaultapp   'x-scheme-handler/http'  'org.gnome.Epiphany.desktop'
+        setdefaultapp   'x-scheme-handler/https' 'org.gnome.Epiphany.desktop'
+
+        ## ---------------------------------------------------------------------
+
     fi
-
-    ## Configure encodings -----------------------------------------------------
-
-    for encoding in 'KOI8-R' 'IBM866' 'windows-1251' 'UTF-8'
-    then
-        gsettingsadd org.gnome.Epiphany.state recent-encodings "${encoding}"
-    fi
-
-    ## Set Epiphany as default web browser =====================================
-
-    setdefaultapp   'text/html'              'org.gnome.Epiphany.desktop'
-    setdefaultapp   'application/xhtml+xml'  'org.gnome.Epiphany.desktop'
-    setdefaultapp   'x-scheme-handler/http'  'org.gnome.Epiphany.desktop'
-    setdefaultapp   'x-scheme-handler/https' 'org.gnome.Epiphany.desktop'
 
     ## Crerate RCZI web services group =========================================
 
