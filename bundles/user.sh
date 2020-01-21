@@ -1508,7 +1508,7 @@ _EOF
 
     addbookmark 'smb://172.16.8.21/share2'         'KUB'
     addbookmark 'smb://172.16.8.203'               'NAS'
-    addbookmark 'smb://data.rczifort.local/shares' 'RCZIFORT'
+    addbookmark 'smb://172.16.56.23/shares'        'RCZIFORT'
 
     ## Add network printer -----------------------------------------------------
 
