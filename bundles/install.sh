@@ -1055,6 +1055,7 @@ case "${bundle}" in
     if ispkginstalled gnome-shell
     then
         gnomeshellextension 7               # Removable Drive Menu
+        gnomeshellextension 790             # Redmine Issues
     fi
 
     ### Browser ================================================================
