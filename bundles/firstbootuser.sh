@@ -28,6 +28,14 @@ case "${bundle}" in
 
 "base")
 
+    for group in adm cdrom dip plugdev lxd lpadmin
+    do
+        if grep "^${group}:" /etc/group > /dev/null 2> /dev/null
+        then
+            usermod -a -G "${group}" "${user_name}"
+        fi
+    done
+
 ;;
 
 ### Base GUI ===================================================================
