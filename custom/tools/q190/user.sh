@@ -65,6 +65,7 @@ then
     hideapp 'org.gnome.Maps'
     hideapp 'org.gnome.Totem'
     hideapp 'org.gnome.Weather'
+    hideapp 'org.gnome.Photos'
     hideapp 'rhythmbox'
     hideapp 'telegramdesktop'
     hideapp 'shotwell'
