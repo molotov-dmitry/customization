@@ -1740,55 +1740,29 @@ _EOF
 
 ### File system ================================================================
 
-function fixpermissions()
+fixpermissions()
 {
-    mountpoint="$1"
-    userid="$2"
-    username="$3"
+    local dir="$1"
+    local newuid="$2"
+    local newgid="$3"
 
-    title "Fixing permissions for ${mountpoint}"
+    if [[ -z "$newgid" ]]
+    then
+        newgid="$newuid"
+    fi
 
-    mountpointsafe=$(safestring "${mountpoint}")
+    olduid="$(stat --printf="%u" "$dir")"
+    oldgid="$(stat --printf="%g" "$dir")"
 
-    fstype=$(grep "${mountpointsafe}" /etc/fstab | grep -v '^#' | sed "s/.*${mountpointsafe}[ \t]*//" | sed 's/[ \t].*//')
+    if [[ $newuid -ne $olduid ]]
+    then
+        find "$dir" -uid "$olduid" -exec chown "$newuid" {} \;
+    fi
 
-    [[ -z "${userid}" ]] && userid=$(id -u)
-    [[ -z "${username}" ]] && username=$(id -nu)
-
-    plugdevgroup=$(grep plugdev /etc/group | cut -d ':' -f 3)
-    [[ -z "${plugdevgroup}" ]] && plugdevgroup=$(id -g)
-
-    case "${fstype}" in
-    "ntfs")
-        silent '' sed -i "s/${mountpointsafe}[ \t]*${fstype}[ \t]*defaults[^ \t]*/${mountpointsafe}\t${fstype}\tdefaults,umask=000,uid=${plugdevgroup},gid=${plugdevgroup}/" /etc/fstab
-
-        if [[ $? -eq 0 ]]
-        then
-            msgdone
-            return 0
-        else
-            msgfail
-            return 1
-        fi
-    ;;
-    "ext4")
-        silent '' chown -R ${userid}:${userid} "${mountpoint}/${username}"
-        silent '' chmod -R 0744 "${mountpoint}"
-
-        if [[ $? -eq 0 ]]
-        then
-            msgdone
-            return 0
-        else
-            msgfail
-            return 1
-        fi
-    ;;
-    * )
-        msgwarn '[not fonund in fstab]'
-        return 0
-    ;;
-    esac
+    if [[ $newgid -ne $oldgid ]]
+    then
+        find "$dir" -gid "$oldgid" -exec chown ":$newgid" {} \;
+    fi
 }
 
 ### Live boot detection ========================================================
