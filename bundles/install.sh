@@ -867,6 +867,11 @@ case "${bundle}" in
     appinstall 'GIMP'                   'gimp gimp-help-ru'
     appinstall 'Imagemagick'            'imagemagick librsvg2-bin'
 
+    if gnomebased
+    then
+        appinstall 'Shotwell'           'shotwell'
+    fi
+
 ;;
 
 ### ============================================================================
