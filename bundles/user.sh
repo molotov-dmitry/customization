@@ -1615,6 +1615,21 @@ _EOF
         gsettingsadd  org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/RcziWeb/ categories "X-WEB-RCZI"
     fi
 
+    ## Photo editor ============================================================
+
+    if ispkginstalled shotwell
+    then
+        gsettings set org.yorba.shotwell.plugins.enable-state publishing-facebook false
+        gsettings set org.yorba.shotwell.plugins.enable-state publishing-gallery3 false
+        gsettings set org.yorba.shotwell.plugins.enable-state publishing-tumblr false
+        gsettings set org.yorba.shotwell.plugins.enable-state publishing-yandex-fotki false
+        gsettings set org.yorba.shotwell.plugins.enable-state publishing-piwigo false
+        gsettings set org.yorba.shotwell.plugins.enable-state publishing-rajce false
+        gsettings set org.yorba.shotwell.plugins.enable-state org-gnome-shotwell-publishing-google-photos false
+        gsettings set org.yorba.shotwell.plugins.enable-state publishing-flickr false
+        gsettings set org.yorba.shotwell.plugins.enable-state publishing-youtube false
+    fi
+
     ## =========================================================================
 
     fi
