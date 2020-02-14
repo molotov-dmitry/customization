@@ -476,7 +476,7 @@ case "${bundle}" in
 
     if havegraphics
     then
-        appinstall 'Sqlite gui'         'sqlitebrowser'
+        appinstall 'SQLite gui'         'sqlitebrowser'
     fi
 ;;
 

@@ -773,6 +773,11 @@ _EOF
 
 "dev/db")
 
+    if ispkginstalled sqlitebrowser
+    then
+        usercopy 'sqlitebrowser'
+    fi
+
 ;;
 
 ### JSON libraries =============================================================
