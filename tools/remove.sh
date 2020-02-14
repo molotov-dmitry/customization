@@ -57,6 +57,7 @@ appremove 'Cantata music player'    'cantata'
 appremove 'Elisa music player'      'elisa'
 appremove 'MPD'                     'mpd'
 appremove 'Shotwell'                'shotwell shotwell-common'
+appremove 'Eye of Gnome'            'eog'
 appremove 'Cheese'                  'cheese'
 
 appremove 'Sound recorder'          'gnome-sound-recorder'
