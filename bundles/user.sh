@@ -1098,6 +1098,13 @@ _EOF
         usercopy 'clementine'
     fi
 
+    ## Shotwell ----------------------------------------------------------------
+
+    if ispkginstalled shotwell
+    then
+        gsettings set org.yorba.shotwell.crop-settings last-crop-menu-choice 0
+    fi
+
     ## A simple MPRIS indicator button Gnome Shell extension -------------------
 
     if ispkginstalled gnome-shell
@@ -1308,6 +1315,11 @@ _EOF
 "graphics")
 
     hideapp 'display-im6.q16'
+
+    if ispkginstalled shotwell
+    then
+        gsettings set org.yorba.shotwell.crop-settings last-crop-menu-choice 0
+    fi
 
 ;;
 
