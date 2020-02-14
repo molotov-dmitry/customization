@@ -68,8 +68,6 @@ then
     hideapp 'org.gnome.Photos'
     hideapp 'rhythmbox'
     hideapp 'telegramdesktop'
-    hideapp 'shotwell'
-    hideapp 'shotwell-viewer'
 else
     hideapp 'org.gnome.Evolution'
     hideapp 'local.rczifort.ex01'
