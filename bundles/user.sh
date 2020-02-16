@@ -1339,6 +1339,11 @@ _EOF
         gsettings set org.yorba.shotwell.crop-settings last-crop-menu-choice 0
     fi
 
+    if ispkginstalled shotwell && ispkginstalled gimp
+    then
+        org.yorba.shotwell.preferences.editing external-photo-editor "$(getconfigline 'Exec' 'Desktop Entry' /usr/share/applications/gimp.desktop)"
+    fi
+
 ;;
 
 ### ============================================================================
