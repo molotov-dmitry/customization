@@ -1561,12 +1561,24 @@ _EOF
 
 ### Register MIME types ========================================================
 
-function addconfigline()
+getconfigline()
 {
-    key="$1"
-    value="$2"
-    section="$3"
-    file="$4"
+    local key="$1"
+    local section="$2"
+    local file="$3"
+
+    if [[ -r "$file" ]]
+    then
+        sed -n "/^[ \t]*\[$(safestring "${section}")\]/,/\[/s/^[ \t]*$(safestring "${key}")[ \t]*=[ \t]*//p" "${file}"
+    fi
+}
+
+addconfigline()
+{
+    local key="$1"
+    local value="$2"
+    local section="$3"
+    local file="$4"
 
     if ! grep -F "[${section}]" "$file" 1>/dev/null 2>/dev/null
     then
@@ -1587,20 +1599,82 @@ function addconfigline()
     fi
 }
 
-function mimeregister()
+prependconfigline()
 {
-    mime="$1"
-    app="$2"
+    local key="$1"
+    local value="$2"
+    local section="$3"
+    local file="$4"
 
-    addconfigline "${mime}" "${app};" 'Added Associations' "${HOME}/.config/mimeapps.list"
+    local newvalue="$value;$(getconfigline "$key" "$section" "$file" | tr ';' '\n' | grep -v "^${value}$" | grep -v '^$' | tr '\n' ';')"
+
+    if [[ "${newvalue: -1}" != ';' ]]
+    then
+        newvalue="${newvalue};"
+    fi
+
+    addconfigline "$key" "$newvalue" "$section" "$file"
+
 }
 
-function setdefaultapp()
+appendconfigline()
 {
-    mime="$1"
-    app="$2"
+    local key="$1"
+    local value="$2"
+    local section="$3"
+    local file="$4"
+
+    local newvalue="$(getconfigline "$key" "$section" "$file" | tr ';' '\n' | grep -v "^${value}$" | grep -v '^$' | tr '\n' ';' | sed 's/;$//');${value};"
+
+    if [[ "${newvalue:0:1}" == ';' ]]
+    then
+        newvalue="${newvalue:1}"
+    fi
+
+    addconfigline "$key" "$newvalue" "$section" "$file"
+}
+
+mimeregister()
+{
+    local mime="$1"
+    local app="$2"
+
+    prependconfigline "${mime}" "${app}" 'Added Associations' "${HOME}/.config/mimeapps.list"
+}
+
+setdefaultapp()
+{
+    local mime="$1"
+    local app="$2"
 
     addconfigline "${mime}" "${app}" 'Default Applications' "${HOME}/.config/mimeapps.list"
+}
+
+getmimelist()
+{
+    local app="$1"
+
+    for location in "${HOME}/.local/share/applications/" "/usr/local/share/applications/" "/usr/share/applications/"
+    do
+        local file="${location}/${app}.desktop"
+
+        if [[ -f "$file" ]]
+        then
+            getconfigline 'MimeType' 'Desktop Entry' "$file"
+            break
+        fi
+    done
+}
+
+mimedefault()
+{
+    local app="$1"
+
+    for mime in $(getmimelist "${app}" | tr ';' ' ')
+    do
+        mimeregister  "$mime" "${app}.desktop"
+        setdefaultapp "$mime" "${app}.desktop"
+    done
 }
 
 ### Add bookmark ===============================================================
