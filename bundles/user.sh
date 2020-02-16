@@ -1107,7 +1107,7 @@ _EOF
 
     if ispkginstalled shotwell
     then
-        mimedefault 'shotwell'
+        mimedefault 'shotwell-viewer'
 
         gsettings set org.yorba.shotwell.preferences.ui show-welcome-dialog false
         gsettings set org.yorba.shotwell.preferences.files auto-import true
@@ -1332,7 +1332,7 @@ _EOF
 
     if ispkginstalled shotwell
     then
-        mimedefault 'shotwell'
+        mimedefault 'shotwell-viewer'
 
         gsettings set org.yorba.shotwell.preferences.ui show-welcome-dialog false
         gsettings set org.yorba.shotwell.preferences.files auto-import true
