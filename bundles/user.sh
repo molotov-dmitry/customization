@@ -1107,6 +1107,8 @@ _EOF
 
     if ispkginstalled shotwell
     then
+        mimedefault 'shotwell'
+
         gsettings set org.yorba.shotwell.preferences.ui show-welcome-dialog false
         gsettings set org.yorba.shotwell.preferences.files auto-import true
         gsettings set org.yorba.shotwell.crop-settings last-crop-menu-choice 0
@@ -1323,8 +1325,15 @@ _EOF
 
     hideapp 'display-im6.q16'
 
+    if ispkginstalled gimp
+    then
+        mimedefault 'gimp'
+    fi
+
     if ispkginstalled shotwell
     then
+        mimedefault 'shotwell'
+
         gsettings set org.yorba.shotwell.preferences.ui show-welcome-dialog false
         gsettings set org.yorba.shotwell.preferences.files auto-import true
         gsettings set org.yorba.shotwell.crop-settings last-crop-menu-choice 0
