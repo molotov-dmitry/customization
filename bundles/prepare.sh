@@ -706,8 +706,6 @@ case "${bundle}" in
 
 "work")
 
-    cp -rf "${ROOT_PATH}/files/work/."     "${rootfs_dir}/"
-
 ;;
 
 "work-mail")

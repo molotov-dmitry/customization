@@ -1069,6 +1069,10 @@ case "${bundle}" in
     then
         appinstall 'Epiphany web browser'   'epiphany-browser'
     fi
+
+    ## Web services ============================================================
+
+    appinstall 'RCZI web services'      'rczi-web-services'
 ;;
 
 "work-mail")
