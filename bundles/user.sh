@@ -1107,6 +1107,8 @@ _EOF
 
     if ispkginstalled shotwell
     then
+        gsettings set org.yorba.shotwell.preferences.ui show-welcome-dialog false
+        gsettings set org.yorba.shotwell.preferences.files auto-import true
         gsettings set org.yorba.shotwell.crop-settings last-crop-menu-choice 0
     fi
 
@@ -1323,6 +1325,8 @@ _EOF
 
     if ispkginstalled shotwell
     then
+        gsettings set org.yorba.shotwell.preferences.ui show-welcome-dialog false
+        gsettings set org.yorba.shotwell.preferences.files auto-import true
         gsettings set org.yorba.shotwell.crop-settings last-crop-menu-choice 0
     fi
 
