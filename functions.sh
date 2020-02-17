@@ -89,7 +89,7 @@ function safestring()
 {
     inputstr="$1"
 
-    echo "${inputstr}" | sed 's/\//\\\//g'
+    echo "${inputstr}" | sed 's/\\/\\\\/g;s/\//\\\//g'
 }
 
 ### Connection =================================================================
