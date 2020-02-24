@@ -263,7 +263,7 @@ function appinstall()
             local required=1
         fi
 
-        if ispkginstalled "${pkgname}"
+        if [[ -n "$(apt-mark showmanual | grep "^${pkgname}$" )" ]]
         then
             continue
         fi
