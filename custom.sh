@@ -451,15 +451,15 @@ then
 
     ## Modify package manifest -------------------------------------------------
 
-    if grep '^sudo$' "${iso_dir}/${livedir}/filesystem.manifest-remove" > /dev/null 2>&1
-    then
-        silent 'Removing sudo from remove manifest'       sed -i '/^sudo$/d' "${iso_dir}/${livedir}/filesystem.manifest-remove"
-    fi
+    for pkg in '^sudo$' '^cifs-utils$' '^libgail'
+    do
+        pkgname="$(echo "$pkg" | tr -d '^$')"
 
-    if grep '^cifs-utils$' "${iso_dir}/${livedir}/filesystem.manifest-remove" > /dev/null 2>&1
-    then
-        silent 'Removing cifs-utils from remove manifest' sed -i '/^cifs-utils$/d' "${iso_dir}/${livedir}/filesystem.manifest-remove"
-    fi
+        if grep "${pkg}" "${iso_dir}/${livedir}/filesystem.manifest-remove" > /dev/null 2>&1
+        then
+            silent "Removing ${pkgname} from remove manifest" sed -i "/${pkg}/d" "${iso_dir}/${livedir}/filesystem.manifest-remove"
+        fi
+    done
 
     ## Adding EFI x32 ----------------------------------------------------------
 
