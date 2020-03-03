@@ -1562,6 +1562,37 @@ _EOF
                        ipv6.method ignore 2>/dev/null \
             || echo "Failed to add network connection" >&2
 
+
+        if [[ -f '/sys/class/net/eth0/address' ]]
+        then
+            addr=''
+
+            case "$(cat /sys/class/net/eth0/address)" in
+
+            'ac:22:0b:27:c5:ec')
+                addr='172.16.8.91'
+                ;;
+
+            esac
+
+            if [[ -n "$addr" ]]
+            then
+
+                nmcli conn add type ethernet con-name "RCZIFORT (STATIC)" \
+                               ifname '' ipv4.method manual \
+                               ipv4.address "${addr}/24" \
+                               ipv4.gateway "172.16.8.253" \
+                               ipv4.dns "172.16.56.14 172.16.56.10" \
+                               ipv4.dns-search "rczifort.local" \
+                               ipv4.ignore-auto-dns true \
+                               ipv6.method ignore \
+                               connection.autoconnect-priority 1 2>/dev/null \
+                    || echo "Failed to add network connection" >&2
+
+            fi
+
+        fi
+
         while read uuid
         do
             [[ -z "${uuid}" ]] && continue
