@@ -1147,7 +1147,7 @@ _EOF
 
     if ispkginstalled shotwell
     then
-        mimedefault 'shotwell-viewer'
+        mimedefault 'shotwell-viewer' 'image'
 
         gsettings set org.yorba.shotwell.preferences.ui show-welcome-dialog false
         gsettings set org.yorba.shotwell.preferences.files auto-import true
@@ -1367,12 +1367,12 @@ _EOF
 
     if ispkginstalled gimp
     then
-        mimedefault 'gimp'
+        mimedefault 'gimp' 'image'
     fi
 
     if ispkginstalled shotwell
     then
-        mimedefault 'shotwell-viewer'
+        mimedefault 'shotwell-viewer' 'image'
 
         gsettings set org.yorba.shotwell.preferences.ui show-welcome-dialog false
         gsettings set org.yorba.shotwell.preferences.files auto-import true
