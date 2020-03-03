@@ -1557,6 +1557,8 @@ _EOF
         nmcli conn add type ethernet con-name "RCZIFORT (DHCP)" \
                        ifname '' ipv4.method auto \
                        ipv4.dns "172.16.56.14 172.16.56.10" \
+                       ipv4.dns-search "rczifort.local" \
+                       ipv4.ignore-auto-dns true \
                        ipv6.method ignore 2>/dev/null \
             || echo "Failed to add network connection" >&2
 
