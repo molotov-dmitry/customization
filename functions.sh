@@ -1224,21 +1224,21 @@ function systemtype()
 
 ### Gsettings functions ========================================================
 
-function gsettingsclear()
+gsettingsclear()
 {
-    category="$1"
-    setting="$2"
+    local category="$1"
+    local setting="$2"
 
     gsettings set ${category} ${setting} '[]'
 }
 
-function gsettingsadd()
+gsettingsadd()
 {
-    category="$1"
-    setting="$2"
-    value="$3"
+    local category="$1"
+    local setting="$2"
+    local value="$3"
 
-    valuelist=$(gsettings get $category $setting | sed "s/\['//g" | sed "s/'\]//g" | sed "s/'\, '/\n/g" | sed '/@as \[\]/d')
+    local valuelist=$(gsettings get $category $setting | sed "s/\['//g" | sed "s/'\]//g" | sed "s/'\, '/\n/g" | sed '/@as \[\]/d')
 
     if [[ -n "$(echo "${valuelist}" | grep ^${value}$)" ]]
     then
@@ -1253,11 +1253,9 @@ function gsettingsadd()
 
     valuelist="${valuelist}${value}"
 
-    newvalue="[$(echo "$valuelist" | sed "s/^/'/;s/$/'/" | tr '\n' '\t' | sed 's/\t$//' | sed 's/\t/, /g')]"
+    local newvalue="[$(echo "$valuelist" | sed "s/^/'/;s/$/'/" | tr '\n' '\t' | sed 's/\t$//' | sed 's/\t/, /g')]"
 
     gsettings set $category $setting "${newvalue}"
-
-    return $?
 }
 
 ### Application menu functions =================================================
