@@ -646,12 +646,12 @@ case "${bundle}" in
 
     if gnomebased
     then
-        appinstall 'LibreOffice'        'libreoffice-calc libreoffice-writer libreoffice-gtk3 libreoffice-gnome libreoffice-style-breeze libreoffice-l10n-ru libreoffice-help-ru'
+        appinstall 'LibreOffice'        'libreoffice-calc libreoffice-writer libreoffice-draw libreoffice-gtk3 libreoffice-gnome libreoffice-style-breeze libreoffice-l10n-ru libreoffice-help-ru'
         appinstall 'Document viewer'    'evince'
 
     elif kdebased
     then
-        appinstall 'LibreOffice'        'libreoffice-calc libreoffice-writer libreoffice-qt5 libreoffice-kde5 libreoffice-style-breeze libreoffice-l10n-ru libreoffice-help-ru'
+        appinstall 'LibreOffice'        'libreoffice-calc libreoffice-writer libreoffice-draw libreoffice-qt5 libreoffice-kde5 libreoffice-style-breeze libreoffice-l10n-ru libreoffice-help-ru'
         appinstall 'Document viewer'    'okular'
     fi
 
