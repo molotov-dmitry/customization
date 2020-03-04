@@ -1688,7 +1688,7 @@ _EOF
 
         for encoding in 'KOI8-R' 'IBM866' 'windows-1251' 'UTF-8'
         do
-            gsettingsadd org.gnome.Epiphany.state recent-encodings "${encoding}"
+            dconfadd /org/gnome/epiphany/state recent-encodings "${encoding}"
         done
 
         ## Set Epiphany as default web browser =================================
