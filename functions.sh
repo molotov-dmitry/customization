@@ -1222,6 +1222,42 @@ function systemtype()
     return 0;
 }
 
+### DConf functions ============================================================
+
+dconfclear()
+{
+    local category="$1"
+    local setting="$2"
+
+    dconf write "${category}/${setting}" '@as []'
+}
+
+dconfadd()
+{
+    local category="$1"
+    local setting="$2"
+    local value="$3"
+
+    local valuelist=$(dconf read "${category}/${setting}" | sed "s/\['//g" | sed "s/'\]//g" | sed "s/'\, '/\n/g" | sed '/@as \[\]/d')
+
+    if [[ -n "$(echo "${valuelist}" | grep ^${value}$)" ]]
+    then
+        return 0
+    fi
+
+    if [[ -n "${valuelist}" ]]
+    then
+        valuelist="${valuelist}
+"
+    fi
+
+    valuelist="${valuelist}${value}"
+
+    local newvalue="[$(echo "$valuelist" | sed "s/^/'/;s/$/'/" | tr '\n' '\t' | sed 's/\t$//' | sed 's/\t/, /g')]"
+
+    dconf write "${category}/${setting}" "${newvalue}"
+}
+
 ### Gsettings functions ========================================================
 
 gsettingsclear()
