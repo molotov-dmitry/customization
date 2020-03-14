@@ -528,7 +528,12 @@ case "${bundle}" in
 
     if ispkginstalled nautilus
     then
-        appinstall 'RabbitVCS'          'rabbitvcs-core rabbitvcs-nautilus'
+        if ispkgavailable python3-nautilus
+        then
+            appinstall 'RabbitVCS'      'rabbitvcs-nautilus-python3'
+        else
+            appinstall 'RabbitVCS'      'rabbitvcs-nautilus'
+        fi
     fi
 
     appinstall 'Meld diff tool'     'meld'
