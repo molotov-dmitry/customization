@@ -878,7 +878,7 @@ _EOF
         gsettings set org.gnome.meld show-line-numbers  true
         gsettings set org.gnome.meld indent-width       4
 
-        addscenario 'compare' 'F3' '[[ $# -eq 0 ]] && ( svn info || git status ) && meld .\n[[ $# -eq 1 ]] && ( svn info "$1" || ( cd "$1" && git status ) ) && meld "$1"\n[[ $# -gt 1 ]] && meld "$@"'
+        addscenario 'compare' 'F3' '[[ $# -eq 0 ]] && ( svn info || git status ) && meld .\n[[ $# -eq 1 && -d "$1" ]] && ( svn info "$1" || ( cd "$1" && git status ) ) && meld "$1"\n[[ $# -eq 1 && ! -d "$1" ]] && ( svn info "$1" || ( cd "$(dirname "$1")" && git ls-files --error-unmatch "$(basename "$1")" ) ) && meld "$1"\n[[ $# -gt 1 ]] && meld "$@"'
         addkdescenario 'compare' 'F3' 'meld %F' 'meld' 'all/allfiles'
     fi
 
