@@ -68,6 +68,7 @@ then
     hideapp 'org.gnome.Photos'
     hideapp 'rhythmbox'
     hideapp 'telegramdesktop'
+    hideapp 'vk'
 else
     hideapp 'org.gnome.Evolution'
     hideapp 'local.rczifort.ex01'
