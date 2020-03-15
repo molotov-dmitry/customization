@@ -431,8 +431,11 @@ case "${bundle}" in
 
 "dev/qt4")
 
-    appinstall 'Qt4 SDK'                'qt4-dev-tools qt4-qmake'
-    appinstall 'Qt4 Libs'               'libqt4-dev libqt4-dev-bin libqt4-network libqt4-sql libqtcore4 libqt4-qt3support'
+    if ispkgavailable qt4-dev-tools
+    then
+        appinstall 'Qt4 SDK'            'qt4-dev-tools qt4-qmake'
+        appinstall 'Qt4 Libs'           'libqt4-dev libqt4-dev-bin libqt4-network libqt4-sql libqtcore4 libqt4-qt3support'
+    fi
 
 ;;
 
