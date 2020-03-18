@@ -7,12 +7,9 @@ cd "${ROOT_PATH}" || exit 1
 
 ### Add samba shares to fstab ==================================================
 
-sed -i '/[ \t]cifs[ \t]/d' /etc/fstab
+sed -i '/[ \t]/media/backup[ \t]/d' /etc/fstab
 
 echo '' >> /etc/fstab
-echo '//172.16.8.21/share2 /media/cub cifs guest,user=root,uid=1000,forceuid,gid=1000,forcegid,file_mode=0775,dir_mode=0775,iocharset=utf8,sec=ntlm 0 0' >> /etc/fstab
+echo '//172.16.8.203/backup /media/backup cifs guest,file_mode=0777,dir_mode=0777,iocharset=utf8 0 0' >> /etc/fstab
 
-### Fix directory permissions ==================================================
-
-fixpermissions '/media/documents' '1000'
 
