@@ -1,0 +1,12 @@
+[Unit]
+Description=SASL LDAP authenticator for Subversion server 
+ConditionPathIsDirectory=/media/svnrepo
+
+[Service]
+Type=forking
+Restart=always
+RestartSec=3
+ExecStart=/usr/sbin/saslauthd -a ldap -O /etc/saslauthd-svn.conf -m /media/svnrepo -n 5 -c -r
+
+[Install]
+WantedBy=svnserve.service
