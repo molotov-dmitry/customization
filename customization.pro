@@ -53,4 +53,5 @@ DISTFILES += \
     files/startup/custom-startup.service \
     custom/tools/device.bundle \
     custom/tools/test.bundle \
-    tools/afterbuild.sh
+    tools/afterbuild.sh \
+    custom/tools/server_work/create.sh
