@@ -1144,7 +1144,10 @@ function addservice
     srvname="$2"
     srvpath="$3"
 
-    silent "Creating ${srvdesc} service"   cp -f "${ROOT_PATH}/files/${srvpath}/${srvname}.service" '/etc/systemd/system/' || return 1
+    if [[ -f "${ROOT_PATH}/files/${srvpath}/${srvname}.service" || ! -f "/etc/systemd/system/${srvname}.service" ]]
+    then
+        silent "Creating ${srvdesc} service"   cp -f "${ROOT_PATH}/files/${srvpath}/${srvname}.service" '/etc/systemd/system/' || return 1
+    fi
 
     for target in $(grep '^WantedBy' "/etc/systemd/system/${srvname}.service" | cut -d '=' -f 2 | tr ' ' '\n')
     do
