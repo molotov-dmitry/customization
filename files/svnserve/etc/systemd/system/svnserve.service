@@ -1,13 +1,13 @@
 [Unit]
 Description=Subversion repository
 After=network.target
-ConditionPathIsDirectory=/media/documents/Repository/
+ConditionPathIsDirectory=/media/svnrepo/repo
 
 [Service]
 Type=forking
 Restart=always
 RestartSec=3
-ExecStart=/usr/bin/svnserve -d --root /media/documents/Repository/
+ExecStart=/usr/bin/svnserve -d --root /media/svnrepo/repo
 
 [Install]
 WantedBy=network-online.target

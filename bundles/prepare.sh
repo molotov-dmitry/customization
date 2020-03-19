@@ -180,7 +180,7 @@ case "${bundle}" in
 
 "server/svn")
 
-    preparefiles 'Svnserve' 'svnserve'
+    silent 'Copy SVN files' cp -rf "${ROOT_PATH}/files/svnserve/." "${rootfs_dir}/"
 
 ;;
 
