@@ -5,10 +5,13 @@ function packiso()
     iso_name="${config}-$1"
     iso_description="$2"
 
-    silent 'calculating md5' find "${iso_dir}/" -type f -print0 \
-        | grep --null-data -v -E '/isolinux/isolinux.bin|/isolinux/boot.cat|/md5sum.txt|/.checksum.md5|/manifest.diff' \
-        | xargs -0 md5sum 2>/dev/null \
-        | sed "s/$(safestring "${iso_dir}")/\./g" || exit 1
+    if [[ -f "${iso_dir}/md5sum.txt" ]]
+    then
+        silent 'Removing old files md5sums' rm -f "${iso_dir}/md5sum.txt"
+        silent '' pushd "${iso_dir}"
+        silent 'Calculating md5' bash -c 'find -type f -exec md5sum {} \; > md5sum.txt'
+        silent '' popd
+    fi
 
     silent 'Making dir for iso' mkdir -p "${res_dir}"
 
