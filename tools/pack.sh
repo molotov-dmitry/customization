@@ -7,9 +7,8 @@ function packiso()
 
     if [[ -f "${iso_dir}/md5sum.txt" ]]
     then
-        silent 'Removing old files md5sums' rm -f "${iso_dir}/md5sum.txt"
         silent '' pushd "${iso_dir}"
-        silent 'Calculating md5' bash -c 'find -type f -exec md5sum {} \; > md5sum.txt'
+        silent 'Calculating md5' bash -c 'find -type f ! -path ./md5sum.txt ! -path ./isolinux/isolinux.bin ! -path ./isolinux/boot.cat -exec md5sum {} \; > md5sum.txt'
         silent '' popd
     fi
 
