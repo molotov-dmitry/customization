@@ -421,14 +421,14 @@ function appdistupgrade()
 
 ### PPA functions ==============================================================
 
-function isppaadded()
+isppaadded()
 {
-    author="$1"
-    repo="$2"
+    local author="$1"
+    local repo="$2"
 
-    count=$(grep -h ^ /etc/apt/sources.list /etc/apt/sources.list.d/* 2> /dev/null | grep -v list.save | grep -v deb-src | grep -v '#deb' | grep deb | grep "/${author}/${repo}" | wc -l)
+    local count=$(grep -h ^ /etc/apt/sources.list /etc/apt/sources.list.d/* 2> /dev/null | grep -v list.save | grep -v deb-src | grep -v '#deb' | grep deb | grep "/${author}/${repo}" | wc -l)
 
-    if [[ count -gt 0 ]]
+    if [[ $count -gt 0 ]]
     then
         return 0
     else
@@ -438,19 +438,19 @@ function isppaadded()
     return 0
 }
 
-function repoadd()
+repoadd()
 {
-    reponame="$1"
-    repo="$2"
-    version="$3"
-    sections="$4"
-    keyfile="$5"
-    options="$6"
+    local reponame="$1"
+    local repo="$2"
+    local version="$3"
+    local sections="$4"
+    local keyfile="$5"
+    local options="$6"
 
     title "Adding $reponame repository"
 
     apt-key add "${ROOT_PATH}/files/${keyfile}" >/dev/null 2>&1
-    status=$?
+    local status=$?
 
     if [[ $status -ne 0 ]]
     then
@@ -473,9 +473,9 @@ function repoadd()
         repo="[${options}] ${repo}"
     fi
 
-    repofilename="$(echo "${reponame}" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')"
+    local repofilename="$(echo "${reponame}" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')"
 
-    sourceslist="deb ${repo} ${version} ${sections}"
+    local sourceslist="deb ${repo} ${version} ${sections}"
 
     echo "${sourceslist}" > "/etc/apt/sources.list.d/${repofilename}-${version}.list"
     status=$?
@@ -490,22 +490,22 @@ function repoadd()
     return $status
 }
 
-function ppaadd()
+ppaadd()
 {
-    reponame="$1"
-    author="$2"
-    repo="$3"
-    version="$4"
-    istrusted="$5"
+    local reponame="$1"
+    local author="$2"
+    local repo="$3"
+    local version="$4"
+    local istrusted="$5"
 
-    ### Set default repo name, if not set ======================================
+    #### Set default repo name, if not set =====================================
 
     if [[ -z "${repo}" ]]
     then
         repo='ppa'
     fi
 
-    ### Print information ======================================================
+    #### Print information =====================================================
 
     if [[ -n "${istrusted}" ]]
     then
@@ -514,11 +514,11 @@ function ppaadd()
         title "Adding $reponame repository"
     fi
 
-    ### Download PPA page ======================================================
+    #### Download PPA page =====================================================
 
     for i in $(seq 1 3)
     do
-        ppapage=$(wget -q -O - "https://launchpad.net/~${author}/+archive/ubuntu/${repo}")
+        local ppapage=$(wget -q -O - "https://launchpad.net/~${author}/+archive/ubuntu/${repo}")
 
         if [[ -n "${ppapage}" ]]
         then
@@ -535,9 +535,9 @@ function ppaadd()
         return 1
     fi
 
-    ### Get key ================================================================
+    #### Get key ===============================================================
 
-    recvkey=$(echo "${ppapage}" | grep '<code>' | sed 's/.*<code>//' | sed 's/<\/code>.*//' | cut -d '/' -f 2)
+    local recvkey=$(echo "${ppapage}" | grep '<code>' | sed 's/.*<code>//' | sed 's/<\/code>.*//' | cut -d '/' -f 2)
 
     if [[ -z "${recvkey}" ]]
     then
@@ -545,9 +545,9 @@ function ppaadd()
         return 2
     fi
 
-    ### Get repo links =========================================================
+    #### Get repo links ========================================================
 
-    links=$(echo "${ppapage}" | grep '<span id="series-deb' | grep '^deb' | sed 's/<\/a>.*//' | sed 's/<.*>//')
+    local links=$(echo "${ppapage}" | grep '<span id="series-deb' | grep '^deb' | sed 's/<\/a>.*//' | sed 's/<.*>//')
 
     if [[ -z "${links}" ]]
     then
@@ -555,27 +555,27 @@ function ppaadd()
         return 3
     fi
 
-    ### Set repo as trusted, if flag set =======================================
+    #### Set repo as trusted, if flag set ======================================
 
     if [[ -n "${istrusted}" ]]
     then
         links=$(echo "${links}" | sed 's/http:/[trusted=yes\] http:/g')
     fi
 
-    ### Get versions ===========================================================
+    #### Get versions ==========================================================
 
-    version_options=$(echo "${ppapage}" | grep '<option value="[^"]')
+    local version_options=$(echo "${ppapage}" | grep '<option value="[^"]')
 
-    versions=( $(echo "${version_options}" | cut -d '"' -f 2) )
-    release_dates=( $(echo "${version_options}" | sed 's/[^(]*//' | sed 's/(//' | sed 's/).*//' | sed 's/^$/00.00/') )
+    local versions=( $(echo "${version_options}" | cut -d '"' -f 2) )
+    local release_dates=( $(echo "${version_options}" | sed 's/[^(]*//' | sed 's/(//' | sed 's/).*//' | sed 's/^$/00.00/') )
 
-    version_count=${#versions[@]}
+    local version_count=${#versions[@]}
 
-    ### Find current release ---------------------------------------------------
+    #### Find current release --------------------------------------------------
 
     if [[ -z "${version}" ]]
     then
-        for (( index=0; index<${version_count}; index++ ))
+        for (( index = 0; index < ${version_count}; index++ ))
         do
             if [[ "${versions[$index]}" == "$(lsb_release -cs)" ]]
             then
@@ -585,7 +585,7 @@ function ppaadd()
         done
     fi
 
-    ### Find most recent release -----------------------------------------------
+    #### Find most recent release ----------------------------------------------
 
     if [[ -z "${version}" ]]
     then
@@ -601,14 +601,14 @@ function ppaadd()
         done
     fi
 
-    ### Use first release ------------------------------------------------------
+    #### Use first release -----------------------------------------------------
 
     if [[ -z "${version}" ]]
     then
         version="${versions[0]}"
     fi
 
-    ### Release not found ------------------------------------------------------
+    #### Release not found -----------------------------------------------------
 
     if [[ -z "${version}" ]]
     then
@@ -616,9 +616,9 @@ function ppaadd()
         return 4
     fi
 
-    ### Add key server =========================================================
+    #### Add key server ========================================================
 
-    keyserver=$(echo "${ppapage}" | grep -A2 'Signing key' | grep 'http' | cut -d '"' -f 2 | cut -d ':' -f 2 | cut -d '/' -f 3)
+    local keyserver=$(echo "${ppapage}" | grep -A2 'Signing key' | grep 'http' | cut -d '"' -f 2 | cut -d ':' -f 2 | cut -d '/' -f 3)
 
     apt-key adv --keyserver $keyserver --recv $recvkey >/dev/null 2>&1
 
@@ -628,9 +628,9 @@ function ppaadd()
         return 5
     fi
 
-    ### Add repo ===============================================================
+    #### Add repo ==============================================================
 
-    sourceslist="$(echo "${links}" | sed "s/$/ ${version} main/")"
+    local sourceslist="$(echo "${links}" | sed "s/$/ ${version} main/")"
 
     echo "${sourceslist}" > "/etc/apt/sources.list.d/${author}-${repo}-${version}.list"
 
@@ -640,7 +640,7 @@ function ppaadd()
         return 6
     fi
 
-    ### ========================================================================
+    #### =======================================================================
 
     msgdone
 
