@@ -55,9 +55,9 @@ case "${bundle}" in
 
 "kde")
 
-    if kdebased
+    if kdebased && isppaavailable 'kubuntu-ppa' 'backports'
     then
-        ppaadd 'Kubuntu backports'      'kubuntu-ppa' 'backports'
+        ppaadd 'Kubuntu backports' 'kubuntu-ppa' 'backports'
     fi
 
 ;;
