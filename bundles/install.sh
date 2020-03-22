@@ -502,7 +502,8 @@ case "${bundle}" in
     if gnomebased
     then
         appinstall 'Wireshark'          'wireshark-gtk'
-    else
+    elif kdebased
+    then
         appinstall 'Wireshark'          'wireshark-qt'
     fi
 
