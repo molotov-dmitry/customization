@@ -438,6 +438,74 @@ isppaadded()
     return 0
 }
 
+isppaavailable()
+{
+    local author="$1"
+    local repo="$2"
+
+    #### Set default repo name, if not set =====================================
+
+    if [[ -z "${repo}" ]]
+    then
+        repo='ppa'
+    fi
+
+    #### Download PPA page =====================================================
+
+    for i in $(seq 1 3)
+    do
+        local ppapage=$(wget -q -O - "https://launchpad.net/~${author}/+archive/ubuntu/${repo}")
+
+        if [[ -n "${ppapage}" ]]
+        then
+            break
+        fi
+
+        sleep 1
+
+    done
+
+    if [[ -z "${ppapage}" ]]
+    then
+        return 2
+    fi
+
+    #### Get repo links ========================================================
+
+    local links=$(echo "${ppapage}" | grep '<span id="series-deb' | grep '^deb' | sed 's/<\/a>.*//' | sed 's/<.*>//')
+
+    if [[ -z "${links}" ]]
+    then
+        return 3
+    fi
+
+    #### Get versions ==========================================================
+
+    local version_options=$(echo "${ppapage}" | grep '<option value="[^"]')
+
+    local versions=( $(echo "${version_options}" | cut -d '"' -f 2) )
+
+    local version_count=${#versions[@]}
+
+    #### Find current release --------------------------------------------------
+
+    if [[ -z "${version}" ]]
+    then
+        for (( index = 0; index < ${version_count}; index++ ))
+        do
+            if [[ "${versions[$index]}" == "$(lsb_release -cs)" ]]
+            then
+                return 0
+            fi
+        done
+    fi
+
+    #### =======================================================================
+
+    return 1
+
+}
+
 repoadd()
 {
     local reponame="$1"
