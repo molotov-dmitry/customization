@@ -644,7 +644,7 @@ case "${bundle}" in
 
 "appearance/wallpaper")
 
-    appinstall  'Backgrounds'           'backgrounds-custom backgrounds-night backgrounds-abstract backgrounds-blueprint'
+    appinstall  'Backgrounds'           'backgrounds-custom backgrounds-night backgrounds-abstract backgrounds-blueprint backgrounds-windows'
 
 ;;
 
