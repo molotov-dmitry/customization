@@ -430,6 +430,12 @@ case "${bundle}" in
     if havegraphics
     then
         appinstall 'Qt IDE'             'qtcreator'
+
+        #TODO: Remove after qtcreator update
+        if [[ "$(pkgversion qtcreator | cut -d '-' -f 1)" == '4.11.0' ]]
+        then
+            appinstall 'Clang headers' 'libclang-common-8-dev'
+        fi
     fi
 
 ;;
