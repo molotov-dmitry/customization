@@ -55,9 +55,17 @@ case "${bundle}" in
 
     if [[ "$(lsb_release -si)" == "Ubuntu" ]] && ispkginstalled gdm3
     then
-        gdm3_theme='gnome-shell'
+        #TODO: Remove at Ubuntu 20.04 release
+        if update-alternatives --list gdm3.css >/dev/null 2>/dev/null
+        then
+            silent 'Set GDM3 theme' update-alternatives --set gdm3.css "/usr/share/gnome-shell/theme/gnome-shell.css"
+        fi
 
-        silent 'Set GDM3 theme' update-alternatives --set gdm3.css "/usr/share/gnome-shell/theme/${gdm3_theme}.css"
+        if update-alternatives --list gdm3-theme.gresource >/dev/null 2>/dev/null
+        then
+            silent 'Set GDM3 theme' update-alternatives --set gdm3-theme.gresource "/usr/share/gnome-shell/gnome-shell-theme.gresource"
+        fi
+
     fi
 
 ;;

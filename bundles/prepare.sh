@@ -33,6 +33,7 @@ case "${bundle}" in
 
     ## Disable Plymouth --------------------------------------------------------
 
+    #TODO: Remove at Ubuntu 20.04 release
     if [[ "$(chroot "${rootfs_dir}" lsb_release -sd)" == 'Ubuntu 19.10' ]]
     then
         silent 'Disable Plymouth' cp -rf "${ROOT_PATH}/files/fix/plymouth/." "${rootfs_dir}/"
