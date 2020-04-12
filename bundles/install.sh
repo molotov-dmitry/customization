@@ -351,7 +351,13 @@ case "${bundle}" in
     appinstall 'GCC'                    'gcc g++ gdb [gcc-8] [g++-8]'
     appinstall 'Multilib tools'         'gcc-multilib g++-multilib'
     appinstall 'Clang'                  'llvm clang'
-   #appinstall 'LLDB'                   'lldb'
+
+    #TODO: Remove at Ubuntu 20.04 release
+    if [[ "$(chroot "${rootfs_dir}" lsb_release -sd)" != 'Ubuntu 19.10' ]]
+    then
+        appinstall 'LLDB'                   'lldb'
+    fi
+
     appinstall 'CMake'                  'cmake'
     appinstall 'Checkinstall'           'checkinstall'
     appinstall 'CRLF to LF'             'dos2unix'
