@@ -353,7 +353,7 @@ case "${bundle}" in
     appinstall 'Clang'                  'llvm clang'
 
     #TODO: Remove at Ubuntu 20.04 release
-    if [[ "$(chroot "${rootfs_dir}" lsb_release -sd)" != 'Ubuntu 19.10' ]]
+    if [[ "$(lsb_release -sd)" != 'Ubuntu 19.10' ]]
     then
         appinstall 'LLDB'                   'lldb'
     fi
