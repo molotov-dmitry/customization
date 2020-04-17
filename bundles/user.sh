@@ -1660,6 +1660,16 @@ _EOF
     git config --global http.https://git.rczifort.local.sslVerify false
     git config --global http.https://172.16.56.22.sslVerify       false
 
+    ## Make Git use specific username for home projects ------------------------
+
+    for userdir in '~' "/media/documents/${USER}"
+    do
+        git config --global "includeIf.gitdir:${userdir}/Projects/home/.path" '.gitconfig-home'
+    done
+
+    git config --file "${HOME}/.gitconfig-home" user.name  ''
+    git config --file "${HOME}/.gitconfig-home" user.email ''
+
     ## Add KOI8-R terminal profile ---------------------------------------------
 
     if ispkginstalled gnome-terminal
