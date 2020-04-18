@@ -219,6 +219,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'dev/gnome'
     bash "${scriptpath}" 'dev/db'
     bash "${scriptpath}" 'dev/json'
+    bash "${scriptpath}" 'dev/markdown'
     bash "${scriptpath}" 'dev/net'
     bash "${scriptpath}" 'dev/ti'
 
@@ -305,6 +306,12 @@ case "${bundle}" in
 ### JSON libraries =============================================================
 
 "dev/json")
+
+;;
+
+### Markdown editor ============================================================
+
+"dev/markdown")
 
 ;;
 

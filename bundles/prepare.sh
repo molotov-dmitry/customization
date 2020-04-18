@@ -268,6 +268,7 @@ case "${bundle}" in
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/gnome'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/db'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/json'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/markdown'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/net'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/ti'
 
@@ -367,6 +368,16 @@ case "${bundle}" in
 ### JSON libraries =============================================================
 
 "dev/json")
+
+;;
+
+### Markdown editor ============================================================
+
+"dev/markdown")
+
+    ## Ghostwriter markdown editor ---------------------------------------------
+
+    preparefiles 'Ghostwriter' 'ghostwriter'
 
 ;;
 
