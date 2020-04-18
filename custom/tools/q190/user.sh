@@ -70,6 +70,7 @@ then
     hideapp 'telegramdesktop'
     hideapp 'vk'
 else
+    hideapp 'ghostwriter'
     hideapp 'org.gnome.Evolution'
     hideapp 'local.rczifort.ex01'
     hideapp 'local.rczifort.git'

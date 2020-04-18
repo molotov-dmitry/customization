@@ -18,6 +18,7 @@ dev/qt4
 dev/gnome
 dev/db
 dev/json
+dev/markdown
 dev/net
 dev/ti
 
