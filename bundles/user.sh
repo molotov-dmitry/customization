@@ -222,7 +222,7 @@ case "${bundle}" in
             gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ apps "org.gnome.${app}.desktop"
         done
 
-        for app in htop update-manager usb-creator-gtk gnome-system-monitor ubiquity gnome-nettool yelp
+        for app in htop update-manager usb-creator-gtk gnome-system-monitor ubiquity gnome-nettool yelp ghostwriter
         do
             gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ apps "${app}.desktop"
         done
