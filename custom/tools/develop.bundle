@@ -2,8 +2,8 @@ base
 gui
 gtk
 gnome
-kde
 cinnamon
+kde
 qt
 
 driver
@@ -18,13 +18,14 @@ dev/qt4
 dev/gnome
 dev/db
 dev/json
+dev/markdown
 dev/net
 dev/ti
 
 work
 
+
 server/ssh
-server/smb
 
 vcs
 
