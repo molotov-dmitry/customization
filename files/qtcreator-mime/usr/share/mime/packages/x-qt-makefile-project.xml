@@ -4,13 +4,13 @@
   <mime-type type="application/x-qt-makefile-project">
     <comment xml:lang="en">Qt Makefile-based Project</comment>
     <glob pattern="*.creator"/>
-    <icon name="qtcreator"/>
+    <icon name="application-x-designer"/>
   </mime-type>
   
   <mime-type type="application/x-qt-qmake-project">
     <comment xml:lang="en">Qt QMake-based Project</comment>
     <glob pattern="*.pro"/>
-    <icon name="qtcreator"/>
+    <icon name="application-x-designer"/>
   </mime-type>
   
 </mime-info>
