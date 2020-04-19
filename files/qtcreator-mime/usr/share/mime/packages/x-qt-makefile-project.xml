@@ -8,9 +8,14 @@
   </mime-type>
   
   <mime-type type="application/x-qt-qmake-project">
-    <comment xml:lang="en">Qt QMake-based Project</comment>
+    <comment xml:lang="en">Qt QMake Profile</comment>
     <glob pattern="*.pro"/>
     <icon name="application-x-designer"/>
+  </mime-type>
+  
+  <mime-type type="application/vnd.nokia.xml.qt.resource">
+    <comment xml:lang="en">Qt Resource File</comment>
+    <glob pattern="*.qrc"/>
   </mime-type>
   
 </mime-info>
