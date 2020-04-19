@@ -152,7 +152,12 @@ case "${bundle}" in
 
         if [[ "$editor" == 'gnome.gedit' ]]
         then
-            gsettings set org.${editor}.preferences.editor display-overview-map   true
+            if [[ "$(pkgversion gedit | cut -d '.' -f 2)" -lt 36 ]]
+            then
+                gsettings set org.${editor}.preferences.editor display-overview-map true
+            else
+                gsettings set org.gnome.gedit.preferences.editor background-pattern 'grid'
+            fi
 
         elif [[ "$editor" == 'x.editor' ]]
         then
