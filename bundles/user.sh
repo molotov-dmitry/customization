@@ -941,7 +941,7 @@ _EOF
 
 "appearance/themes")
 
-    icon_theme='Paper'
+    icon_theme='mPapirus'
     cursor_theme='breeze_cursors'
     gtk_theme='Adwaita'
     wm_theme='Adwaita'
