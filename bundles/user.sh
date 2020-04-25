@@ -671,8 +671,6 @@ _EOF
 
         launcheradd 'org.qt-project.qtcreator'
 
-        changeapp 'org.qt-project.qtcreator' 'StartupWMClass' 'qtcreator'
-
         hideapp 'assistant-qt5'
         hideapp 'designer-qt5'
         hideapp 'linguist-qt5'
