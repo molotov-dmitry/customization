@@ -1404,17 +1404,17 @@ function hideapp()
 
     local apppath=""
 
-    if [[ -f "/usr/share/applications/${app}.desktop" ]]
+    if [[ -f "${HOME}/.local/share/applications/${app}.desktop" ]]
     then
-        apppath='/usr/share/applications'
+        apppath="${HOME}/.local/share/applications"
 
     elif [[ -f "/usr/local/share/applications/${app}.desktop" ]]
     then
         apppath='/usr/local/share/applications'
 
-    elif [[ -f "${HOME}/.local/share/applications/${app}.desktop" ]]
+    elif [[ -f "/usr/share/applications/${app}.desktop" ]]
     then
-        apppath="${HOME}/.local/share/applications"
+        apppath='/usr/share/applications'
 
     else
         return 0
