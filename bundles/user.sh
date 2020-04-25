@@ -679,9 +679,7 @@ _EOF
 
         ## Mime type -----------------------------------------------------------
 
-        mimeregister 'application/vnd.nokia.qt.qmakeprofile'    'org.qt-project.qtcreator.desktop'
-        mimeregister 'application/x-qt-qmake-project'           'org.qt-project.qtcreator.desktop'
-        mimeregister 'application/x-qt-makefile-project'        'org.qt-project.qtcreator.desktop'
+        mimedefault 'org.qt-project.qtcreator' 'application'
 
         ## Qt Creator ----------------------------------------------------------
 

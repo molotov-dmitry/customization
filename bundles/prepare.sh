@@ -327,8 +327,6 @@ case "${bundle}" in
 
     ## Qt Creator --------------------------------------------------------------
 
-    silent 'Copy QtCreator MIME types' cp -rf "${ROOT_PATH}/files/qtcreator-mime/." "${rootfs_dir}/"
-
     preparefiles 'QtCreator' 'qtcreator'
 
 ;;

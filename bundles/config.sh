@@ -365,10 +365,6 @@ _EOF
 
 "dev/qt")
 
-    silent 'Diverting Qt MIME'      dpkg-divert --add --rename --divert /usr/share/mime/packages/Nokia-QtCreator.xml.bak /usr/share/mime/packages/Nokia-QtCreator.xml
-    silent 'Updating MIME database' update-mime-database /usr/share/mime
-    silent 'Updating icon cache'    update-icon-caches /usr/share/icons/*
-
 ;;
 
 ### Qt SDK =====================================================================
