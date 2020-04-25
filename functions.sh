@@ -1517,9 +1517,14 @@ ${application}"
     fi
 }
 
-function launcheradd()
+launcheradd()
 {
-    application="$1"
+    local application="$1"
+
+    if ishidden "$application" && [[ "$2" != '--force' ]]
+    then
+        return 0
+    fi
 
     if ispkginstalled gnome-shell
     then
