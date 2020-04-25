@@ -1420,7 +1420,7 @@ function hideapp()
         return 0
     fi
 
-    if grep '^[[:space:]]*NoDisplay[[:space:]]*=[[:space:]]*true[[:space:]]*$' "${apppath}/${app}.desktop" 2>/dev/null
+    if grep '^[[:space:]]*NoDisplay[[:space:]]*=[[:space:]]*true[[:space:]]*$' "${apppath}/${app}.desktop" >/dev/null 2>/dev/null
     then
         return 0
     fi
