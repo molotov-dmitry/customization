@@ -1440,8 +1440,25 @@ function hideapp()
 ishidden()
 {
     local app="$1"
+    local apppath=""
 
-    grep '^[[:space:]]*NoDisplay[[:space:]]*=[[:space:]]*true[[:space:]]*$' "${HOME}/.local/share/applications/${app}.desktop" 2>/dev/null
+    if [[ -f "${HOME}/.local/share/applications/${app}.desktop" ]]
+    then
+        apppath="${HOME}/.local/share/applications"
+
+    elif [[ -f "/usr/local/share/applications/${app}.desktop" ]]
+    then
+        apppath='/usr/local/share/applications'
+
+    elif [[ -f "/usr/share/applications/${app}.desktop" ]]
+    then
+        apppath='/usr/share/applications'
+
+    else
+        return 0
+    fi
+
+    grep '^[[:space:]]*NoDisplay[[:space:]]*=[[:space:]]*true[[:space:]]*$' "${apppath}/${app}.desktop" >/dev/null 2>/dev/null
 }
 
 ### Launcher functions =========================================================
