@@ -66,6 +66,7 @@ case "${bundle}" in
     then
         gnomeshellextension 112             # Remove Accessibility
         gnomeshellextension 800             # Remove Dropdown Arrows
+        gnomeshellextension 2072            # Skip Window Ready Notification
     fi
 
     fi
