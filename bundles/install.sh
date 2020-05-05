@@ -1109,8 +1109,15 @@ case "${bundle}" in
 
     if ispkginstalled gnome-shell
     then
-        gnomeshellextension 7               # Removable Drive Menu
-        gnomeshellextension 790             # Redmine Issues
+        gnomeshellextension 7           # Removable Drive Menu
+
+        if dpkg --compare-versions "$(pkgversion gnome-shell)" ge 3.34
+        then
+            appinstall 'Redmine issues' 'gnome-shell-extension-redmine-issues'
+        else
+            gnomeshellextension 790     # Redmine Issues
+        fi
+
     fi
 
     ### Browser ================================================================
