@@ -1776,6 +1776,15 @@ _EOF
 
     fi
 
+    ## Create bookmark to rczi user ============================================
+
+    if [[ "${USER}" != 'rczi' && -n "$(cut -d ':' -f 1 /etc/passwd | grep '^rczi$')"  ]]
+    then
+        addbookmark 'sftp://rczi@localhost/home/rczi' 'rczi user'
+    fi
+
+    ## =========================================================================
+
 ;;
 
 "work-mail")
