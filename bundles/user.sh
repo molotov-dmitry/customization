@@ -278,6 +278,12 @@ case "${bundle}" in
         ## Remove Dropdown Arrows ----------------------------------------------
         gsettingsadd org.gnome.shell enabled-extensions 'remove-dropdown-arrows@mpdeimos.com'
 
+        ## Skip Window Ready Notification --------------------------------------
+        gsettingsadd org.gnome.shell enabled-extensions 'skipwindowreadynotification@JasonLG1979.github.io'
+
+        ## Bring Out Submenu Of Power Off/Logout Button ------------------------
+        gsettingsadd org.gnome.shell enabled-extensions 'BringOutSubmenuOfPowerOffLogoutButton@pratap.fastmail.fm'
+
     fi
 
     ## Window control buttons --------------------------------------------------
