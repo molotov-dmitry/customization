@@ -159,10 +159,23 @@ case "${bundle}" in
                 gsettings set org.gnome.gedit.preferences.editor background-pattern 'grid'
             fi
 
+            encodingsettings='candidate-encodings'
+
         elif [[ "$editor" == 'x.editor' ]]
         then
             gsettings set org.x.editor.preferences.ui minimap-visible true
+
+            encodingsettings='auto-detected'
         fi
+
+
+        gsettingsclear org.${editor}.preferences.encodings "$encodingsettings"
+
+        for encoding in 'UTF-8' 'WINDOWS-1251' 'KOI8R' 'CP866' 'UTF-16'
+        do
+            gsettingsadd org.${editor}.preferences.encodings "$encodingsettings" "$encoding"
+        done
+
 
         gsettings set org.${editor}.plugins active-plugins "['changecase', 'filebrowser', 'time', 'zeitgeistplugin', 'docinfo']"
     done
