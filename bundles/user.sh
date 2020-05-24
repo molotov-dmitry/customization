@@ -1052,6 +1052,15 @@ _EOF
 
 "appearance/wallpaper")
 
+    if [[ ! -f "${HOME}/.config/is-work-account" ]]
+    then
+        bgtheme='custom'
+        bgfile='file:///usr/share/backgrounds/custom/skunze_beach.jpg'
+    else
+        bgtheme='blueprint'
+        bgfile='file:///usr/share/backgrounds/blueprint/blueprint-empty.jpg'
+    fi
+
     if ispkginstalled gnome-shell
     then
         gsettings set org.gnome.desktop.background secondary-color      '#000000'
@@ -1060,7 +1069,7 @@ _EOF
         gsettings set org.gnome.desktop.background color-shading-type   'solid'
         gsettings set org.gnome.desktop.background draw-background      true
         gsettings set org.gnome.desktop.background picture-opacity      100
-        gsettings set org.gnome.desktop.background picture-uri          'file:///usr/share/backgrounds/custom/custom.xml'
+        gsettings set org.gnome.desktop.background picture-uri          "file:///usr/share/backgrounds/${bgtheme}/${bgtheme}.xml"
 
         gsettings set org.gnome.desktop.screensaver secondary-color      '#000000'
         gsettings set org.gnome.desktop.screensaver primary-color        '#000000'
@@ -1078,12 +1087,12 @@ _EOF
         gsettings set org.cinnamon.desktop.background picture-options    'zoom'
         gsettings set org.cinnamon.desktop.background color-shading-type 'solid'
         gsettings set org.cinnamon.desktop.background picture-opacity    100
-        gsettings set org.cinnamon.desktop.background picture-uri        'file:///usr/share/backgrounds/custom/skunze_beach.jpg'
+        gsettings set org.cinnamon.desktop.background picture-uri        "$bgfile"
 
         gsettings set org.cinnamon.desktop.background.slideshow delay             30
         gsettings set org.cinnamon.desktop.background.slideshow random-order      true
         gsettings set org.cinnamon.desktop.background.slideshow slideshow-paused  false
-        gsettings set org.cinnamon.desktop.background.slideshow image-source      'xml:///usr/share/gnome-background-properties/custom.xml'
+        gsettings set org.cinnamon.desktop.background.slideshow image-source      'xml:///usr/share/cinnamon-background-properties/${bgtheme}.xml'
         gsettings set org.cinnamon.desktop.background.slideshow slideshow-enabled true
     fi
 
