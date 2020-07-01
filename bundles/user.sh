@@ -263,6 +263,9 @@ case "${bundle}" in
 
         ## Disable modal dialogs attach ----------------------------------------
         gsettings set org.gnome.shell.overrides attach-modal-dialogs false
+
+        ## Disable frequent applications view ----------------------------------
+        gsettings set org.gnome.desktop.privacy remember-app-usage false
     fi
 
     ## Location services =======================================================
