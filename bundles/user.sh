@@ -1685,7 +1685,7 @@ _EOF
     then
         if [[ -z "$(lpstat -v | grep ' socket://172.16.8.200:9100$')" ]]
         then
-            lpadmin -p 'HP_Laserjet_1320' -D 'HP LaserJet 1320' -L 'Комната 8' \
+            lpadmin -p 'HP_Laserjet_1320' -D 'HP LaserJet 1320' -L 'Комната 11' \
                 -E -v 'socket://172.16.8.200:9100' \
                 -m 'foomatic-db-compressed-ppds:0/ppd/foomatic-ppd/Generic-PCL_5e_Printer-hpijs-pcl5e.ppd' \
                 -o printer-is-shared=false
