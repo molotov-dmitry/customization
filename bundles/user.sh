@@ -27,6 +27,13 @@ case "${bundle}" in
 
     hideapp 'info'
 
+    ## Disable Ubuntu telemetry ================================================
+
+    if which ubuntu-report >/dev/null 2>/dev/null
+    then
+        ubuntu-report send no
+    fi
+
     ## Aliases =================================================================
 
     echo alias highlight=\'grep --color=always -z\' >> ~/.bash_aliases

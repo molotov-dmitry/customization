@@ -73,6 +73,7 @@ appremove 'Konversation IRC client' 'konversation konversation-data'
 appremove 'Tomboy'                  'tomboy'
 
 appremove 'Unattended upgrades'     'unattended-upgrades'
+appremove 'Ubuntu telemetry'        'ubuntu-report'
 
 ## Remove unused ---------------------------------------------------------------
 
