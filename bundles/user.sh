@@ -1609,6 +1609,13 @@ _EOF
     if [[ -f "${HOME}/.config/is-work-account" ]]
     then
 
+    ## Disable first configuration =============================================
+
+    if [[ -f /usr/libexec/gnome-initial-setup ]]
+    then
+        echo -n 'yes' > "${HOME}/.config/gnome-initial-setup-done"
+    fi
+
     ## User network configuration ==============================================
 
     ## Configure network connections -------------------------------------------
