@@ -19,17 +19,25 @@ function packiso()
         silent 'Removing old iso' rm -f "${res_dir}/${iso_name}"
     fi
 
-    silent 'Generating iso' genisoimage -o "${res_dir}/${iso_name}" \
-        -b "isolinux/isolinux.bin" \
-        -c "isolinux/boot.cat" \
-        -p "Dmitry Sorokin" -V "${iso_description}" \
-        -no-emul-boot -boot-load-size 4 -boot-info-table \
-        -cache-inodes -r -J -l \
-        -x "${iso_dir}"/${livedir}/manifest.diff \
-        -joliet-long \
-        "${iso_dir}" || exit 1
+    if [[ -d "${iso_dir}/isolinux" ]]
+    then
+        silent 'Generating iso' genisoimage -o "${res_dir}/${iso_name}" \
+            -b "isolinux/isolinux.bin" \
+            -c "isolinux/boot.cat" \
+            -p "Dmitry Sorokin" -V "${iso_description}" \
+            -no-emul-boot -boot-load-size 4 -boot-info-table \
+            -cache-inodes -r -J -l \
+            -x "${iso_dir}"/${livedir}/manifest.diff \
+            -joliet-long \
+            "${iso_dir}" || exit 1
 
-    silent 'Making iso hybrid' isohybrid "${res_dir}/${iso_name}" || exit 1
+        silent 'Making iso hybrid' isohybrid "${res_dir}/${iso_name}" || exit 1
+
+    else
+        silent 'Generating iso' genisoimage -o "${res_dir}/${iso_name}" \
+            -f -v -J \
+            "${iso_dir}" || exit 1
+    fi
 
     if grep -sq "[ /]${iso_name}\$" "${res_dir}/MD5SUMS"
     then

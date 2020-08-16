@@ -294,7 +294,10 @@ silent 'Unmounting iso' umount /mnt
 
 ## Preparing -------------------------------------------------------------------
 
-silent 'Setting default language'       sh -c "echo ru > \"${iso_dir}\"/isolinux/lang"
+if [[ -d "${iso_dir}/isolinux" ]]
+then
+    silent 'Setting default language'       sh -c "echo ru > \"${iso_dir}\"/isolinux/lang"
+fi
 
 if isdebian
 then
