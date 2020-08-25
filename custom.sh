@@ -109,6 +109,11 @@ then
     appinstall 'ISO tools' 'genisoimage' || exit 1
 fi
 
+if ! ispkginstalled 'xorriso'
+then
+    appinstall 'ISO tools' 'xorriso' || exit 1
+fi
+
 ### Getting parameters =========================================================
 
 configs="@($(ls -1 "${ROOT_PATH}/custom/tools" | tr '\n' '|' | sed 's/|$//'))"
