@@ -4,6 +4,7 @@ function packiso()
 {
     iso_name="${config}-$1"
     iso_description="$2"
+    iso_src="$3"
 
     if [[ -f "${iso_dir}/md5sum.txt" ]]
     then
@@ -19,24 +20,40 @@ function packiso()
         silent 'Removing old iso' rm -f "${res_dir}/${iso_name}"
     fi
 
-    if [[ -d "${iso_dir}/isolinux" ]]
+    local make_hybrid=0
+
+    local -a iso_options
+
+    iso_options+=("-r")                                 # Sets ownership and permissions of the files in the ISO
+    iso_options+=("-V" "${iso_description}")            # Sets the filesystem's name
+    iso_options+=("-p" "Dmitry Sorokin")                # Sets the author's name
+    iso_options+=("-o" "${res_dir}/${iso_name}")        # Sets the name of the new ISO image file
+    iso_options+=("-J" "-joliet-long")             # Enables production of a Joliet tree for use on systems by Microsoft Inc
+    iso_options+=("-cache-inodes")                      # Ignored
+    iso_options+=("-allow-multidot")                    # Allows more than one dot to appear filenames
+    iso_options+=("-l")                                 # Allow full 31-character filenames
+
+
+    if [[ -n "${iso_src}" ]]
     then
-        silent 'Generating iso' genisoimage -o "${res_dir}/${iso_name}" \
-            -b "isolinux/isolinux.bin" \
-            -c "isolinux/boot.cat" \
-            -p "Dmitry Sorokin" -V "${iso_description}" \
-            -no-emul-boot -boot-load-size 4 -boot-info-table \
-            -cache-inodes -r -J -l \
-            -x "${iso_dir}"/${livedir}/manifest.diff \
-            -joliet-long \
-            "${iso_dir}" || exit 1
+        iso_options+=( $(xorriso -indev "${iso_src}" -report_el_torito as_mkisofs 2>/dev/null | grep '^-c \|^-b \|^-no-emul-boot$\|^-boot-load-size \|^-boot-info-table$\|^-eltorito-alt-boot$\|^-e \|^-no-emul-boot$\|^-boot-load-size ' | sed "s/ '/ /;s/'$//;s/^-e /--eltorito-boot /;s/ \// /") )
+        make_hybrid=0
+    elif [[ -d "${iso_dir}/isolinux" ]]
+    then
+        iso_options+=("-b" "isolinux/isolinux.bin")     # Boot image to be used when making an El Torito bootable CD for x86 PCs
+        iso_options+=("-c" "isolinux/boot.cat")         # Specifies the path and filename of the boot catalog
+        iso_options+=("-no-emul-boot")                  # The system will load and execute this image without performing any disk emulation.
+        iso_options+=("-boot-load-size" "4")            # Specifies the number of "virtual" (512-byte) sectors to load in no-emulation mode
+        iso_options+=("-boot-info-table")               # Specifies that a 56-byte table with information of the CD-ROM layout will be patched in at offset 8 in the boot file.
 
+        make_hybrid=1
+    fi
+
+    silent 'Generating iso' genisoimage "${iso_options[@]}" "${iso_dir}" || exit 1
+
+    if [[ $make_hybrid -eq 1 ]]
+    then
         silent 'Making iso hybrid' isohybrid "${res_dir}/${iso_name}" || exit 1
-
-    else
-        silent 'Generating iso' genisoimage -o "${res_dir}/${iso_name}" \
-            -f -v -J \
-            "${iso_dir}" || exit 1
     fi
 
     if grep -sq "[ /]${iso_name}\$" "${res_dir}/MD5SUMS"

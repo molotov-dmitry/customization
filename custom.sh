@@ -481,7 +481,7 @@ then
 
     ## Packing ISO -------------------------------------------------------------
 
-    packiso "$(basename "${iso_src}")" "${config}"
+    packiso "$(basename "${iso_src}")" "${config}" "${iso_src}"
 
 fi
 
