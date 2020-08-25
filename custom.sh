@@ -466,10 +466,18 @@ then
 
     ## Adding EFI x32 ----------------------------------------------------------
 
-    if test -d "${iso_dir}/EFI/BOOT" && ! isdebian
+    if ! test -d "${iso_dir}/EFI/BOOT"
     then
-        silent 'Getting EFI 32 image'       wget https://github.com/jfwells/linux-asus-t100ta/raw/master/boot/bootia32.efi -O "${iso_dir}/EFI/BOOT/bootia32.efi"
+        silent 'Creating EFI dir' mkdir -p "${iso_dir}/EFI/BOOT"
     fi
+
+    for efi in bootia32.efi BOOTx64.EFI grubx64.efi mmx64.efi
+    do
+        if ! test -f "${iso_dir}/EFI/BOOT/${efi}"
+        then
+            silent "Downloading ${efi}" wget "https://github.com/molotov-dmitry/efi-images/raw/master/${efi}" -O "${iso_dir}/EFI/BOOT/${efi}"
+        fi
+    done
 
     ## Packing ISO -------------------------------------------------------------
 
