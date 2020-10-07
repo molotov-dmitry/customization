@@ -91,7 +91,7 @@ case "${bundle}" in
     ## Qt5 GTK2 theme ----------------------------------------------------------
 
     cat >> /etc/profile.d/50-qt-qpa-platformtheme-gtk2.sh << "_EOF"
-case "${XDG_SESSION_DESKTOP,,}" in
+case "${XDG_SESSION_DESKTOP}" in
 
 'unity' | 'gnome' | 'gnome-xorg' | 'ubuntu' | 'ubuntu-wayland' | 'cinnamon' | 'cinnamon2d')
 
