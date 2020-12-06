@@ -1808,6 +1808,13 @@ _EOF
 
     fi
 
+    ## Configure calculator ====================================================
+
+    if ispkginstalled gnome-calculator
+    then
+        gsettings set org.gnome.calculator button-mode 'programming'
+    fi
+
     ## Crerate RCZI web services group =========================================
 
     if ispkginstalled gnome-shell
