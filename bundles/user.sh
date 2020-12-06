@@ -931,6 +931,10 @@ _EOF
 
     git config --global credential.helper store
 
+    ## Set default pull startegy -----------------------------------------------
+
+    git config --global pull.ff only
+
     ## Meld --------------------------------------------------------------------
 
     if ispkginstalled 'meld'
