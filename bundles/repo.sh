@@ -612,6 +612,11 @@ case "${bundle}" in
 
 "vm-host/vbox")
 
+    if ! ispkgavailable virtualbox
+    then
+        repoadd 'virtualbox' 'https://people.debian.org/~lucas/virtualbox-buster/' '.' '' 'virtualbox/virtualbox.gpg'
+    fi
+
 ;;
 
 ### ============================================================================

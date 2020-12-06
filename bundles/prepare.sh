@@ -710,6 +710,8 @@ case "${bundle}" in
 
 "vm-host/vbox")
 
+    preparefiles 'Virtualbox' 'virtualbox'
+
 ;;
 
 ### ============================================================================
