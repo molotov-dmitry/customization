@@ -1786,6 +1786,10 @@ _EOF
         dconf write /org/gnome/epiphany/web/enable-adblock       false
         dconf write /org/gnome/epiphany/web/enable-safe-browsing false
 
+        ## Do not restore tabs -------------------------------------------------
+
+        dconf write /org/gnome/epiphany/restore-session-policy  "'crashed'"
+
         ## Configure encodings -------------------------------------------------
 
         for encoding in 'KOI8-R' 'IBM866' 'windows-1251' 'UTF-8'
