@@ -189,7 +189,7 @@ case "${bundle}" in
 
     unset editors
 
-    ## gnome-terminal ----------------------------------------------------------
+    ## gnome-terminal ==========================================================
 
     if ispkginstalled gnome-terminal
     then
@@ -206,14 +206,14 @@ case "${bundle}" in
         gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" allow-bold false
     fi
 
-    ## Setup night light -------------------------------------------------------
+    ## Setup night light =======================================================
 
     if ispkginstalled redshift-gtk
     then
         usercopy 'redshift-gtk'
     fi
 
-    ## Lock screen orientation -------------------------------------------------
+    ## Lock screen orientation =================================================
 
     gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true
 
