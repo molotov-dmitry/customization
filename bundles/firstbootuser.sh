@@ -701,6 +701,8 @@ _EOF
 
 "work")
 
+    usermod -a -G dialout ${user_name}
+
 ;;
 
 "work-mail")
