@@ -954,6 +954,15 @@ _EOF
         addkdescenario 'gitg' '<Ctrl>F3' 'gitg %f' 'gitg' 'inode/directory'
     fi
 
+    ## Rabbitvcs ---------------------------------------------------------------
+
+    if ispkginstalled rabbitvcs-core || ispkginstalled rabbitvcs-core-python3
+    then
+        addconfigline 'hg'  'True'  'HideItem' "${HOME}/.config/rabbitvcs/settings.conf"
+        addconfigline 'svn' 'False' 'HideItem' "${HOME}/.config/rabbitvcs/settings.conf"
+        addconfigline 'git' 'False' 'HideItem' "${HOME}/.config/rabbitvcs/settings.conf"
+    fi
+
 ;;
 
 ### ============================================================================
