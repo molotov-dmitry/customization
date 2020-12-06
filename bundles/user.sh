@@ -213,6 +213,13 @@ case "${bundle}" in
         usercopy 'redshift-gtk'
     fi
 
+    ## Configure Gnome system monitor ==========================================
+
+    if ispkginstalled gnome-system-monitor
+    then
+        gsettings set org.gnome.gnome-system-monitor network-in-bits true
+    fi
+
     ## Lock screen orientation =================================================
 
     gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true
