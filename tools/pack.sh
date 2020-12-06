@@ -36,7 +36,7 @@ function packiso()
 
     if [[ -n "${iso_src}" ]]
     then
-        iso_options+=( $(xorriso -indev "${iso_src}" -report_el_torito as_mkisofs 2>/dev/null | grep '^-c \|^-b \|^-no-emul-boot$\|^-boot-load-size \|^-boot-info-table$\|^-eltorito-alt-boot$\|^-e \|^-no-emul-boot$\|^-boot-load-size ' | sed "s/ '/ /;s/'$//;s/^-e /--eltorito-boot /;s/ \// /") )
+        iso_options+=( $(xorriso -indev "${iso_src}" -report_el_torito as_mkisofs 2>/dev/null | grep '^-c \|^-b \|^-no-emul-boot$\|^-boot-load-size \|^-boot-info-table$\|^-no-emul-boot$\|^-boot-load-size ' | sed "s/ '/ /;s/'$//;s/^-e /--eltorito-boot /;s/ \// /") )
         make_hybrid=0
     elif [[ -d "${iso_dir}/isolinux" ]]
     then
