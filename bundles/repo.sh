@@ -612,9 +612,10 @@ case "${bundle}" in
 
 "vm-host/vbox")
 
-    if ! ispkgavailable virtualbox
+    if [[ "$(lsb_release -si)" == "Debian" && "$(lsb_release -rs | cut -d '.' -f 1)" -ge 10 ]]
     then
-        repoadd 'virtualbox' 'https://people.debian.org/~lucas/virtualbox-buster/' '.' '' 'virtualbox/virtualbox.gpg'
+        repoadd 'Backports'  'http://mirror.yandex.ru/debian' "$(lsb_release -cs)-backports" 'main'
+        repoadd 'Virtualbox' 'https://people.debian.org/~lucas' 'virtualbox-buster' '.' 'virtualbox/virtualbox.gpg'
     fi
 
 ;;
