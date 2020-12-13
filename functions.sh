@@ -517,18 +517,16 @@ repoadd()
 
     title "Adding $reponame repository"
 
-    apt-key add "${ROOT_PATH}/files/${keyfile}" >/dev/null 2>&1
-    local status=$?
-
-    if [[ $status -ne 0 ]]
+    if [[ -n "${keyfile}" ]]
     then
-        msgfail
-        return $status
-    fi
+        apt-key add "${ROOT_PATH}/files/${keyfile}" >/dev/null 2>&1
+        local status=$?
 
-    if [[ -z "${sections}" ]]
-    then
-        sections='main'
+        if [[ $status -ne 0 ]]
+        then
+            msgfail
+            return $status
+        fi
     fi
 
     if [[ -z "$(echo "${repo}" | grep '^[a-zA-Z]*://')" ]]
