@@ -223,7 +223,9 @@ function debinstall()
             msgdone
             return 0
         else
-            DEBIAN_FRONTEND=noninteractive apt install -f --yes --force-yes >/dev/null 2>&1
+            DEBIAN_FRONTEND=noninteractive apt install \
+                -o DPkg::Options::=--force-confold \
+                -f --yes --force-yes >/dev/null 2>&1
 
             if [[ $? -eq 0 ]] && ispkginstalled "${debname}"
             then
@@ -379,7 +381,7 @@ function appupgrade()
 {
     title 'Upgrading packages'
 
-    DEBIAN_FRONTEND=noninteractive apt upgrade --yes --force-yes >/dev/null 2>&1
+    DEBIAN_FRONTEND=noninteractive apt upgrade -o DPkg::Options::=--force-confold --yes --force-yes >/dev/null 2>&1
 
     if [[ $? -eq 0 ]]
     then
@@ -390,7 +392,7 @@ function appupgrade()
 
         title 'Retrying upgrading packages'
 
-        DEBIAN_FRONTEND=noninteractive apt upgrade --yes --force-yes >/dev/null 2>&1
+        DEBIAN_FRONTEND=noninteractive apt upgrade -o DPkg::Options::=--force-confold --yes --force-yes >/dev/null 2>&1
 
         if [[ $? -eq 0 ]]
         then
@@ -407,7 +409,7 @@ function appdistupgrade()
 {
     title 'Upgrading distributive'
 
-    DEBIAN_FRONTEND=noninteractive apt dist-upgrade --yes --force-yes >/dev/null 2>&1
+    DEBIAN_FRONTEND=noninteractive apt dist-upgrade -o DPkg::Options::=--force-confold --yes --force-yes >/dev/null 2>&1
 
     if [[ $? -eq 0 ]]
     then
