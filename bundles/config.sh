@@ -734,6 +734,8 @@ _EOF
 
 "work")
 
+    disableservice 'Cups Browser' cups-browsed
+
 ;;
 
 "work-mail")

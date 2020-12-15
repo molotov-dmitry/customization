@@ -1206,11 +1206,11 @@ function bundlelist()
 
 ### SystemD service functions ==================================================
 
-function addservice
+function addservice()
 {
-    srvdesc="$1"
-    srvname="$2"
-    srvpath="$3"
+    local srvdesc="$1"
+    local srvname="$2"
+    local srvpath="$3"
 
     if [[ -f "${ROOT_PATH}/files/${srvpath}/${srvname}.service" || ! -f "/etc/systemd/system/${srvname}.service" ]]
     then
@@ -1231,6 +1231,36 @@ function addservice
 
     return 0
 }
+
+function disableservice()
+{
+    local srvdesc="$1"
+    local srvname="$2"
+
+    if [[ -f "/etc/systemd/system/${srvname}.service" ]]
+    then
+        local location="/etc/systemd/system"
+
+    elif [[ -f "/lib/systemd/system/${srvname}.service" ]]
+    then
+        local location="/lib/systemd/system"
+    else
+        return 1
+    fi
+
+    for target in $(grep '^WantedBy' "${location}/${srvname}.service" | cut -d '=' -f 2 | tr ' ' '\n')
+    do
+        silent "Disabling ${srvdesc} for ${target//.target}" unlink "/etc/systemd/system/${target}.wants/${srvname}.service"
+    done
+
+    for target in $(grep '^RequiredBy' "${location}/${srvname}.service" | cut -d '=' -f 2 | tr ' ' '\n')
+    do
+        silent "Disabling ${srvdesc} for ${target//.target}" unlink "/etc/systemd/system/${target}.requires/${srvname}.service"
+    done
+
+    return 0
+}
+
 
 ### Desktop environment detection functions ====================================
 
