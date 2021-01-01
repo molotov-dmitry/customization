@@ -720,9 +720,13 @@ case "${bundle}" in
 
 "media")
 
-    appinstall 'Restricted extras'      'ubuntu-restricted-extras'
+    if ispkgavailable 'ubuntu-restricted-extras'
+    then
+        appinstall 'Restricted extras'      'ubuntu-restricted-extras'
+    fi
+
     appinstall 'VA API drivers'         'va-driver-all gstreamer1.0-vaapi'
-    appinstall 'Multimedia codecs'      'gstreamer1.0-plugins-bad gstreamer1.0-libav'
+    appinstall 'Multimedia codecs'      'gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad gstreamer1.0-libav libavcodec-extra'
 
     appinstall 'MPV Player'             'mpv'
 
