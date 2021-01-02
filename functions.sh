@@ -541,7 +541,7 @@ repoadd()
         repo="[${options}] ${repo}"
     fi
 
-    local repofilename="$(echo "${reponame}" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')"
+    local repofilename="$(echo "${reponame}" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | tr -d '/')"
 
     local sourceslist="deb ${repo} ${version} ${sections}"
 
