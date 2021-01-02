@@ -615,7 +615,7 @@ case "${bundle}" in
     if [[ "$(lsb_release -si)" == "Debian" && ( "$(lsb_release -rs | cut -d '.' -f 1)" -ge 10 || "$(lsb_release -rs)" == testing ) ]]
     then
         repoadd 'Backports'  'http://mirror.yandex.ru/debian' "$(lsb_release -cs)-backports" 'main'
-        repoadd 'Virtualbox' 'https://people.debian.org/~lucas' 'virtualbox-buster' '.' 'virtualbox/virtualbox.gpg'
+        repoadd 'Virtualbox' 'https://people.debian.org/~lucas/virtualbox-buster' './' '' 'virtualbox/virtualbox.gpg'
     fi
 
 ;;
