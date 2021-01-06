@@ -541,11 +541,11 @@ repoadd()
         repo="[${options}] ${repo}"
     fi
 
-    local repofilename="$(echo "${reponame}" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | tr -d '/')"
+    local repofilename="$(echo "${reponame}-${version}" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | tr -d '/.' | sed 's/-$//g')"
 
     local sourceslist="deb ${repo} ${version} ${sections}"
 
-    echo "${sourceslist}" > "/etc/apt/sources.list.d/${repofilename}-${version}.list"
+    echo "${sourceslist}" > "/etc/apt/sources.list.d/${repofilename}.list"
     status=$?
 
     if [[ $status -eq 0 ]]
