@@ -482,7 +482,6 @@ case "${bundle}" in
 
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/browser'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/mail'
-    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/chat'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/chat-extra'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/office'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/services'
@@ -511,20 +510,6 @@ case "${bundle}" in
     ## Geary -------------------------------------------------------------------
 
     preparefiles 'Geary' 'geary'
-
-;;
-
-### Chat =======================================================================
-
-"network/chat")
-
-    ## Empathy -----------------------------------------------------------------
-
-    preparefiles 'Empathy' 'empathy'
-
-    ## Pidgin ------------------------------------------------------------------
-
-    preparefiles 'Pidgin' 'pidgin'
 
 ;;
 
@@ -719,6 +704,20 @@ case "${bundle}" in
     ## Evolution ---------------------------------------------------------------
 
     preparefiles 'Evolution' 'evolution'
+
+;;
+
+### Chat =======================================================================
+
+"work-chat")
+
+    ## Empathy -----------------------------------------------------------------
+
+    preparefiles 'Empathy' 'empathy'
+
+    ## Pidgin ------------------------------------------------------------------
+
+    preparefiles 'Pidgin' 'pidgin'
 
 ;;
 

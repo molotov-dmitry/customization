@@ -778,7 +778,6 @@ case "${bundle}" in
 
     bash "${scriptpath}" 'network/browser'
     bash "${scriptpath}" 'network/mail'
-    bash "${scriptpath}" 'network/chat'
     bash "${scriptpath}" 'network/chat-extra'
     bash "${scriptpath}" 'network/office'
     bash "${scriptpath}" 'network/services'
@@ -819,23 +818,6 @@ case "${bundle}" in
         appinstall 'KDE PIM'                'kmail kontact korganizer ktnef kaddressbook kmailtransport-akonadi accountwizard'
     fi
 
-;;
-
-### Chat =======================================================================
-
-"network/chat")
-
-    #if gnomebased
-    #then
-        #appinstall 'Empathy'            'empathy telepathy-haze telepathy-accounts-signon telepathy-gabble'
-    #fi
-
-    #if kdebased
-    #then
-        #appinstall 'Kopete'             'kopete'
-    #fi
-
-    appinstall 'Pidgin'             'pidgin [pidgin-libnotify] [pidgin-indicator]'
 ;;
 
 ### Chat extra protocols =======================================================
@@ -1143,6 +1125,23 @@ case "${bundle}" in
     fi
 
 
+;;
+
+### Chat =======================================================================
+
+"work-chat")
+
+    #if gnomebased
+    #then
+        #appinstall 'Empathy'            'empathy telepathy-haze telepathy-accounts-signon telepathy-gabble'
+    #fi
+
+    #if kdebased
+    #then
+        #appinstall 'Kopete'             'kopete'
+    #fi
+
+    appinstall 'Pidgin'             'pidgin [pidgin-libnotify] [pidgin-indicator]'
 ;;
 
 ### ============================================================================

@@ -23,7 +23,7 @@ dev/net
 dev/ti
 
 work
-
+work-chat
 
 server/ssh
 
@@ -32,7 +32,6 @@ vcs
 appearance
 
 office
-network/chat
 network/remotedesktop
 graphics
 archive

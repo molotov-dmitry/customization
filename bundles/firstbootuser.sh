@@ -461,7 +461,6 @@ _EOF
 
     bash "${scriptpath}" 'network/browser' "$@"
     bash "${scriptpath}" 'network/mail' "$@"
-    bash "${scriptpath}" 'network/chat' "$@"
     bash "${scriptpath}" 'network/chat-extra' "$@"
     bash "${scriptpath}" 'network/office' "$@"
     bash "${scriptpath}" 'network/services' "$@"
@@ -479,12 +478,6 @@ _EOF
 ### Mail =======================================================================
 
 "network/mail")
-
-;;
-
-### Chat =======================================================================
-
-"network/chat")
 
 ;;
 
@@ -706,6 +699,12 @@ _EOF
 ;;
 
 "work-mail")
+
+;;
+
+### Chat =======================================================================
+
+"work-chat")
 
 ;;
 

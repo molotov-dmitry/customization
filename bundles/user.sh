@@ -1288,7 +1288,6 @@ _EOF
 
     bash "${scriptpath}" 'network/browser'
     bash "${scriptpath}" 'network/mail'
-    bash "${scriptpath}" 'network/chat'
     bash "${scriptpath}" 'network/chat-extra'
     bash "${scriptpath}" 'network/office'
     bash "${scriptpath}" 'network/services'
@@ -1323,35 +1322,6 @@ _EOF
 
             usercopy 'geary'
         fi
-    fi
-
-;;
-
-### Chat =======================================================================
-
-"network/chat")
-
-    ## Empathy -----------------------------------------------------------------
-
-    if ispkginstalled empathy
-    then
-        mkdir -p "${HOME}/.config/autostart"
-        cp -f "${ROOT_PATH}/files/empathy/empathy.desktop" "${HOME}/.config/autostart/"
-
-        gsettings set org.gnome.Empathy.conversation theme          'material'
-        gsettings set org.gnome.Empathy.conversation theme-variant  'Green'
-        gsettings set org.gnome.Empathy.conversation adium-path     '/usr/share/adium/message-styles/material.AdiumMessageStyle'
-
-        gsettings set org.gnome.Empathy.ui show-groups              true
-
-        gsettings set org.gnome.Empathy.conversation spell-checker-languages 'en,ru'
-    fi
-
-    ## Pidgin ------------------------------------------------------------------
-
-    if ispkginstalled pidgin
-    then
-        usercopy 'pidgin' --replace '.purple/prefs.xml'
     fi
 
 ;;
@@ -1895,6 +1865,36 @@ _EOF
     fi
 
 ;;
+
+### Chat =======================================================================
+
+"work-chat")
+
+    ## Empathy -----------------------------------------------------------------
+
+    if ispkginstalled empathy
+    then
+        mkdir -p "${HOME}/.config/autostart"
+        cp -f "${ROOT_PATH}/files/empathy/empathy.desktop" "${HOME}/.config/autostart/"
+
+        gsettings set org.gnome.Empathy.conversation theme          'material'
+        gsettings set org.gnome.Empathy.conversation theme-variant  'Green'
+        gsettings set org.gnome.Empathy.conversation adium-path     '/usr/share/adium/message-styles/material.AdiumMessageStyle'
+
+        gsettings set org.gnome.Empathy.ui show-groups              true
+
+        gsettings set org.gnome.Empathy.conversation spell-checker-languages 'en,ru'
+    fi
+
+    ## Pidgin ------------------------------------------------------------------
+
+    if ispkginstalled pidgin
+    then
+        usercopy 'pidgin' --replace '.purple/prefs.xml'
+    fi
+
+;;
+
 
 ### ============================================================================
 ### ============================================================================

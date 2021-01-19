@@ -421,7 +421,6 @@ case "${bundle}" in
 
     bash "${scriptpath}" 'network/browser'
     bash "${scriptpath}" 'network/mail'
-    bash "${scriptpath}" 'network/chat'
     bash "${scriptpath}" 'network/chat-extra'
     bash "${scriptpath}" 'network/office'
     bash "${scriptpath}" 'network/services'
@@ -441,14 +440,6 @@ case "${bundle}" in
 ### Mail =======================================================================
 
 "network/mail")
-
-;;
-
-### Chat =======================================================================
-
-"network/chat")
-
-    ppaadd  'Pidgin indicator' 'langdalepl' 'pidgin-indicator'
 
 ;;
 
@@ -629,6 +620,14 @@ case "${bundle}" in
 ;;
 
 "work-mail")
+
+;;
+
+### Chat =======================================================================
+
+"work-chat")
+
+    ppaadd  'Pidgin indicator' 'langdalepl' 'pidgin-indicator'
 
 ;;
 
