@@ -699,11 +699,6 @@ case "${bundle}" in
         appinstall 'Document viewer'    'okular'
     fi
 
-    #if havegraphics
-    #then
-        #appinstall 'OnlyOffice'         'onlyoffice-desktopeditors'
-    #fi
-
 ;;
 
 ### ============================================================================

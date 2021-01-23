@@ -390,9 +390,6 @@ case "${bundle}" in
     then
         ppaadd 'LibreOffice' 'libreoffice'
     fi
-
-    #repoadd 'OnlyOffice' 'download.onlyoffice.com/repo/debian' 'squeeze' 'main' 'onlyoffice/OnlyOffice.key'
-
 ;;
 
 ### ============================================================================
