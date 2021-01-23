@@ -253,7 +253,6 @@ case "${bundle}" in
     silent 'Download youtube-dl'        wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
     silent 'Setup youtube-dl'           chmod a+rx /usr/local/bin/youtube-dl
     appinstall 'Transmission'           'transmission-daemon'
-    appinstall 'EiskaltDC++'            'eiskaltdcpp-daemon'
 
 ;;
 
@@ -836,8 +835,6 @@ case "${bundle}" in
     then
         appinstall 'Transmission Qt'        'transmission-qt'
     fi
-
-    #debinstall 'EiskaltDC++ Remote Qt'  'eiskaltdcpp-remote-qt' '27' 'amd64'
 
 ;;
 

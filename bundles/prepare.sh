@@ -210,10 +210,6 @@ case "${bundle}" in
 
     preparefiles 'Transmission' 'transmission'
 
-    ## EsikaltDC++ -------------------------------------------------------------
-
-    preparefiles 'EiskaltDC++' 'eiskaltdcpp'
-
 ;;
 
 ### Proxy server ===============================================================

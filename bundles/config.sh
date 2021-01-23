@@ -239,14 +239,6 @@ _EOF
     silent 'Creating Transmission config dir' mkdir -p '/etc/transmission-daemon'
     silent 'Configuring Transmission'   cp -f "${ROOT_PATH}/files/transmission/settings.json" '/etc/transmission-daemon/'
 
-    ## EiskaltDC++ -------------------------------------------------------------
-
-    silent 'Creating EiskaltDC++ config dir' mkdir -p '/etc/eiskaltdcpp'
-    silent 'Configuring EiskaltDC++'        cp -f "${ROOT_PATH}/files/eiskaltdcpp/DCPlusPlus.xml" '/etc/eiskaltdcpp/'
-    silent 'Configuring EiskaltDC++ Hubs'   cp -f "${ROOT_PATH}/files/eiskaltdcpp/Favorites.xml" '/etc/eiskaltdcpp/'
-
-    addservice 'EiskaltDC++' 'eiskaltdcpp' 'eiskaltdcpp'
-
 ;;
 
 ### Proxy server ===============================================================
