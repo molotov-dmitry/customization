@@ -7,7 +7,7 @@ readonly CL_YELLOW='\e[33m'
 readonly CL_GREEN='\e[32m'
 readonly CL_BLUE='\e[34m'
 
-readonly TITLE_LENGTH=50
+readonly TITLE_LENGTH=70
 readonly SPACE_CHAR='.'
 
 ### Messages ===================================================================
