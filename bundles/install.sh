@@ -178,7 +178,6 @@ case "${bundle}" in
 "server")
 
     bash "${scriptpath}" 'server/ssh'
-    bash "${scriptpath}" 'server/ftp'
     bash "${scriptpath}" 'server/smb'
     bash "${scriptpath}" 'server/svn'
     bash "${scriptpath}" 'server/db'
@@ -194,29 +193,6 @@ case "${bundle}" in
 "server/ssh")
 
     appinstall 'Open SSH'               'openssh-server'
-
-;;
-
-### FTP server =================================================================
-
-"server/ftp")
-
-    appinstall 'FTP server'             'vsftpd'
-    status=$?
-
-    for i in $(seq 1 5)
-    do
-
-        if [[ ${status} -ne 0 ]]
-        then
-            silent '' killall vsftpd
-            silent 'Trying to fix Vsftpd' apt install -f
-
-            [[ $? -eq 0 ]] && break
-
-        fi
-
-    done
 
 ;;
 

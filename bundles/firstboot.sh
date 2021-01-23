@@ -114,7 +114,6 @@ case "${bundle}" in
 "server")
 
     bash "${scriptpath}" 'server/ssh'
-    bash "${scriptpath}" 'server/ftp'
     bash "${scriptpath}" 'server/smb'
     bash "${scriptpath}" 'server/svn'
     bash "${scriptpath}" 'server/db'
@@ -128,12 +127,6 @@ case "${bundle}" in
 ### OpenSSH server =============================================================
 
 "server/ssh")
-
-;;
-
-### FTP server =================================================================
-
-"server/ftp")
 
 ;;
 

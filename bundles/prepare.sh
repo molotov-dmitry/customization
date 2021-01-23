@@ -136,7 +136,6 @@ case "${bundle}" in
 "server")
 
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/ssh'
-    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/ftp'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/smb'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/svn'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/db'
@@ -150,14 +149,6 @@ case "${bundle}" in
 ### OpenSSH server =============================================================
 
 "server/ssh")
-
-;;
-
-### FTP server =================================================================
-
-"server/ftp")
-
-    preparefiles 'Vsftpd' 'vsftpd'
 
 ;;
 
