@@ -543,8 +543,6 @@ case "${bundle}" in
 
 "network/remote")
 
-    preparefiles 'Transmission remote' 'transmission-remote-gtk'
-
     #debprepare 'EiskaltDC++ Remote Qt' 'eiskaltdcpp-remote-qt' '27' 'amd64'
 ;;
 

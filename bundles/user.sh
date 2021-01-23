@@ -1360,49 +1360,6 @@ _EOF
 
 "network/remote")
 
-    ## Transmission Remote -----------------------------------------------------
-
-    if ispkginstalled transmission-remote-gtk
-    then
-        usercopy 'transmission-remote-gtk'
-    fi
-
-    ## EiskaltDC++ Remote ------------------------------------------------------
-
-    if ispkginstalled eiskaltdcpp-remote-qt
-    then
-        eiskaltdcpp-remote-qt-config --server-ip '188.134.72.31'
-
-        eiskaltdcpp-remote-qt-config --clear-directory
-
-        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Video/Фильмы
-        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Video/Youtube
-        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Video/Аниме
-        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Video/Мультфильмы
-        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Books
-        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Documents
-        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Music
-        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Downloads
-        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Images
-        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib
-        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Драйверы
-        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Игры
-        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/OS
-        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Утилиты
-        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Сеть
-        eiskaltdcpp-remote-qt-config --add-directory /media/documents/Distrib/Медиа
-
-        eiskaltdcpp-remote-qt-config --last-directory /media/documents/Downloads
-    fi
-
-    ## Bookmarks for SFTP ------------------------------------------------------
-
-    if [[ ! -f "${HOME}/.config/is-work-account" ]]
-    then
-        addbookmark 'sftp://188.134.72.31:2222/media/documents' 'AHOME'
-        addbookmark 'sftp://192.168.1.5/media/documents'        'AHOME (LAN)'
-    fi
-
 ;;
 
 ### Remote desktop =============================================================
@@ -1676,8 +1633,6 @@ _EOF
     fi
 
     ## Add network shares ------------------------------------------------------
-
-    addbookmark 'sftp://188.134.72.31:2222/media/documents' 'AHOME'
 
     addbookmark 'smb://172.16.8.21/share2'         'KUB'
     addbookmark 'smb://172.16.8.203'               'NAS'
