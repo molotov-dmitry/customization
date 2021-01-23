@@ -218,6 +218,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'dev/markdown'
     bash "${scriptpath}" 'dev/net'
     bash "${scriptpath}" 'dev/ti'
+    bash "${scriptpath}" 'dev/kmx32'
 
 ;;
 
@@ -323,6 +324,11 @@ case "${bundle}" in
 
 ;;
 
+### KMX32 GCC ==================================================================
+
+"dev/kmx32")
+
+;;
 
 ### ============================================================================
 ### Version control system =====================================================
