@@ -266,40 +266,6 @@ case "${bundle}" in
 
 ;;
 
-### GitLab =====================================================================
-
-"gitlab")
-
-    mkdir -p "${rootfs_dir}/tools/packages"
-
-    pushd "${rootfs_dir}/tools/packages" > /dev/null
-
-    silent 'Download Gitlab package' apt download gitlab
-
-    pkgname=$(ls gitlab_*.deb | sed 's/^gitlab/gitlab-stub/' | sed 's/_.*_/_current_/')
-
-    silent '' mkdir -p gitlab-stub/DEBIAN
-    silent 'Extracting package info' dpkg -e gitlab*.deb gitlab-stub/DEBIAN
-
-    pushd gitlab-stub/DEBIAN > /dev/null
-
-    silent 'Remove all info but control' find . -mindepth 1 ! -name 'control' -exec rm -rf {} +
-    silent 'Replacing package name' sed -i 's/^Package: gitlab/Package: gitlab-stub/' control
-
-    popd > /dev/null
-
-    silent '' chmod -R 0755 gitlab-stub
-    silent 'Creating Gitlab stub package' fakeroot dpkg-deb --build gitlab-stub
-    silent 'Changing stub package name' mv gitlab-stub.deb "${pkgname}"
-
-    silent 'Removing temp files' rm -rf gitlab-stub
-
-    popd > /dev/null
-
-    debinstall 'Gitlab stub'      'gitlab-stub' '' 'all'
-
-;;
-
 ### ============================================================================
 ### Development ================================================================
 ### ============================================================================

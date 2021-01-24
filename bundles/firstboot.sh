@@ -183,19 +183,6 @@ case "${bundle}" in
 
 ;;
 
-### GitLab =====================================================================
-
-"gitlab")
-
-    debconfselect 'gitlab' 'gitlab/ssl'         'false'
-    debconfselect 'gitlab' 'gitlab/letsencrypt' 'false'
-    debconfselect 'gitlab' 'gitlab/fqdn'        'gitlab.local'
-
-    #debinstall 'Gitlab' 'gitlab' '' 'all'
-    #appremove  'Gitlab stub' 'gitlab-stub'
-
-;;
-
 ### ============================================================================
 ### Development ================================================================
 ### ============================================================================

@@ -253,19 +253,6 @@ _EOF
 
 ;;
 
-### GitLab =====================================================================
-
-"gitlab")
-
-    if [[ -d /etc/nginx/sites-enabled/default ]]
-    then
-        silent 'Removing default nginx site' rm /etc/nginx/sites-enabled/default
-    fi
-
-    silent 'Modify firstboot script'    addconfigline 'After' 'postgresql.service' 'Unit' '/etc/systemd/system/custom-startup.service.d/after-postgresql.conf'
-
-;;
-
 ### ============================================================================
 ### Development ================================================================
 ### ============================================================================
