@@ -742,11 +742,6 @@ case "${bundle}" in
     silent     'Download youtube-dl'    wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
     silent     'Setup youtube-dl'       chmod a+rx /usr/local/bin/youtube-dl
 
-    #if gnomebased
-    #then
-        #appinstall 'Gnome Twitch app'  'gnome-twitch gnome-twitch-player-backend-mpv-opengl'
-    #fi
-
 ;;
 
 ### ============================================================================

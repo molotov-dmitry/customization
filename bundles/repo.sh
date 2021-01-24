@@ -406,8 +406,6 @@ case "${bundle}" in
 
 "media-online")
 
-    #ppaadd  'Ubuntu Handbook' 'ubuntuhandbook1' 'apps'  # For GNOME Twitch
-
 ;;
 
 ### ============================================================================
