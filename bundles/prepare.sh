@@ -527,7 +527,6 @@ case "${bundle}" in
 
 "network/remote")
 
-    #debprepare 'EiskaltDC++ Remote Qt' 'eiskaltdcpp-remote-qt' '27' 'amd64'
 ;;
 
 ### Remote desktop =============================================================
