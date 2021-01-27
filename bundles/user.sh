@@ -1782,10 +1782,6 @@ _EOF
         addbookmark 'sftp://rczi@localhost/home/rczi' 'rczi user'
     fi
 
-    ## Disable screen auto disable =============================================
-
-    gsettings set org.gnome.desktop.session idle-delay 0
-
     ## =========================================================================
 
 ;;
