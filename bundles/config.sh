@@ -283,10 +283,17 @@ _EOF
 
 "dev/build")
 
+    ## Fix ptrace --------------------------------------------------------------
+
     if [[ -f /etc/sysctl.d/10-ptrace.conf ]]
     then
         silent 'Ptrace fix'             sed -i 's/[ \t]*kernel.yama.ptrace_scope[ \t]*=[ \t]*1/kernel.yama.ptrace_scope = 0/' /etc/sysctl.d/10-ptrace.conf
     fi
+
+    ## Enable dmesg for all users ----------------------------------------------
+
+    silent 'Fix dmesg restriction' bash -c 'echo -e "kernel.dmesg_restrict = 0" > /etc/sysctl.d/90-dmesg.conf'
+    silent 'Fix dmesg restriction' sysctl kernel.dmesg_restrict=0
 
 ;;
 
