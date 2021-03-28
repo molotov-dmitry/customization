@@ -108,8 +108,8 @@ case "${bundle}" in
 
     ## File manager keybindings ================================================
 
-    addscenario 'terminal' 'F4' 'x-terminal-emulator' --fixpwd
-    addscenario 'compress' 'F7' '[[ $# -gt 0 ]] && file-roller -d "$@"'
+    addscenario 'terminal' 'F4' 'x-terminal-emulator &' --fixpwd
+    addscenario 'compress' 'F7' '[[ $# -gt 0 ]] && file-roller -d "$@" &'
 
     ## File chooser ============================================================
 
@@ -938,7 +938,7 @@ _EOF
         gsettings set org.gnome.meld show-line-numbers  true
         gsettings set org.gnome.meld indent-width       4
 
-        addscenario 'compare' 'F3' '[[ $# -eq 0 ]] && ( svn info || git status ) && meld .\n[[ $# -eq 1 && -d "$1" ]] && ( svn info "$1" || ( cd "$1" && git status ) ) && meld "$1"\n[[ $# -eq 1 && ! -d "$1" ]] && ( svn info "$1" || ( cd "$(dirname "$1")" && git ls-files --error-unmatch "$(basename "$1")" ) ) && meld "$1"\n[[ $# -gt 1 ]] && meld "$@"'
+        addscenario 'compare' 'F3' '[[ $# -eq 0 ]] && ( svn info || git status ) && meld . &\n[[ $# -eq 1 && -d "$1" ]] && ( svn info "$1" || ( cd "$1" && git status ) ) && meld "$1" &\n[[ $# -eq 1 && ! -d "$1" ]] && ( svn info "$1" || ( cd "$(dirname "$1")" && git ls-files --error-unmatch "$(basename "$1")" ) ) && meld "$1" &\n[[ $# -gt 1 ]] && meld "$@" &'
         addkdescenario 'compare' 'F3' 'meld %F' 'meld' 'all/allfiles'
     fi
 
@@ -948,7 +948,7 @@ _EOF
     then
         addkeybinding 'Gitg' 'gitg' '<Ctrl><Alt>G'
 
-        addscenario    'gitg' '<Ctrl>F3' '[[ $# -eq 0 ]] && git status && test -n "$(git diff-index --name-only HEAD --)" && gitg --standalone --commit .\n[[ $# -eq 0 ]] && git status && test -z "$(git diff-index --name-only HEAD --)" && gitg --standalone .\n[[ $# -eq 1 ]] && ( cd "$1" && git status && test -n "$(git diff-index --name-only HEAD --)" ) && gitg --standalone --commit "$1"\n[[ $# -eq 1 ]] && ( cd "$1" && git status && test -z "$(git diff-index --name-only HEAD --)" ) && gitg --standalone "$1"'
+        addscenario    'gitg' '<Ctrl>F3' '[[ $# -eq 0 ]] && git status && test -n "$(git diff-index --name-only HEAD --)" && gitg --standalone --commit . &\n[[ $# -eq 0 ]] && git status && test -z "$(git diff-index --name-only HEAD --)" && gitg --standalone . &\n[[ $# -eq 1 ]] && ( cd "$1" && git status && test -n "$(git diff-index --name-only HEAD --)" ) && gitg --standalone --commit "$1" &\n[[ $# -eq 1 ]] && ( cd "$1" && git status && test -z "$(git diff-index --name-only HEAD --)" ) && gitg --standalone "$1" &'
         addkdescenario 'gitg' '<Ctrl>F3' 'gitg %f' 'gitg' 'inode/directory'
     fi
 
