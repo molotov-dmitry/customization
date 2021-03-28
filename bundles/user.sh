@@ -611,6 +611,8 @@ case "${bundle}" in
 
 "dev/build")
 
+    echo "alias makej='make -j \$(nproc)'" >> ~/.bash_aliases
+
 ;;
 
 ### Code analysis tools ========================================================
