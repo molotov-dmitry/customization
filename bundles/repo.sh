@@ -301,6 +301,8 @@ case "${bundle}" in
 
 "dev/markdown")
 
+    ppaadd 'Marker' 'apandada1' 'marker'
+
 ;;
 
 ### Network ====================================================================

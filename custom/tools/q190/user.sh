@@ -72,6 +72,7 @@ then
     hideapp 'vk'
 else
     hideapp 'ghostwriter'
+    hideapp 'com.github.fabiocolacio.marker'
     hideapp 'org.gnome.Evolution'
     hideapp 'local.rczifort.ex01'
     hideapp 'local.rczifort.git'

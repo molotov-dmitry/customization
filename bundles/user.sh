@@ -254,7 +254,7 @@ case "${bundle}" in
             gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ apps "org.gnome.${app}.desktop"
         done
 
-        for app in htop update-manager usb-creator-gtk gnome-system-monitor ubiquity gnome-nettool yelp ghostwriter
+        for app in htop update-manager usb-creator-gtk gnome-system-monitor ubiquity gnome-nettool yelp ghostwriter com.github.fabiocolacio.marker
         do
             gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ apps "${app}.desktop"
         done
@@ -874,6 +874,19 @@ _EOF
     if ispkginstalled ghostwriter
     then
         usercopy 'ghostwriter'
+    fi
+
+    ## Marker markdown editor --------------------------------------------------
+
+    if ispkginstalled marker
+    then
+        gsettings set com.github.fabiocolacio.marker.preferences.preview css-theme          'GitHub2.css'
+        gsettings set com.github.fabiocolacio.marker.preferences.preview highlight-theme    'github'
+
+        gsettings set com.github.fabiocolacio.marker.preferences.editor enable-syntax-theme 'true'
+        gsettings set com.github.fabiocolacio.marker.preferences.editor syntax-theme        'tango'
+
+        gsettings set com.github.fabiocolacio.marker.preferences.editor replace-tabs        'true'
     fi
 
 ;;

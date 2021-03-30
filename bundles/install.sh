@@ -453,9 +453,12 @@ case "${bundle}" in
 
 "dev/markdown")
 
-    if havegraphics
+    if kdebased
     then
         appinstall 'Ghostwriter'        'ghostwriter'
+    elif gnomebased
+    then
+        appinstall 'Marker'             'marker'
     fi
 
 ;;
