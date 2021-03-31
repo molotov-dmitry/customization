@@ -224,7 +224,7 @@ function debinstall()
             return 0
         else
             DEBIAN_FRONTEND=noninteractive apt install \
-                -o DPkg::Options::=--force-confold \
+                -o "DPkg::Options::=--force-confold" \
                 -f --yes --force-yes >/dev/null 2>&1
 
             if [[ $? -eq 0 ]] && ispkginstalled "${debname}"
@@ -348,7 +348,8 @@ function appremove()
         msgwarn '[removed]'
         return 0
     else
-        apt purge ${remlist} --yes --force-yes --purge >/dev/null 2>&1
+        DEBIAN_FRONTEND=noninteractive apt purge ${remlist} \
+            --yes --force-yes --purge >/dev/null 2>&1
 
         if [[ $? -eq 0 ]]
         then
@@ -365,7 +366,9 @@ function appupdate()
 {
     title 'Updating package list'
 
-    apt update >/dev/null 2>&1
+    DEBIAN_FRONTEND=noninteractive apt update \
+        -o "DPkg::Options::=--force-confold" --yes --force-yes \
+        --allow-releaseinfo-change >/dev/null 2>&1
 
     if [[ $? -eq 0 ]]
     then
@@ -381,7 +384,9 @@ function appupgrade()
 {
     title 'Upgrading packages'
 
-    DEBIAN_FRONTEND=noninteractive apt upgrade -o DPkg::Options::=--force-confold --yes --force-yes >/dev/null 2>&1
+    DEBIAN_FRONTEND=noninteractive apt upgrade \
+        -o "DPkg::Options::=--force-confold" \
+        --yes --force-yes >/dev/null 2>&1
 
     if [[ $? -eq 0 ]]
     then
@@ -392,7 +397,9 @@ function appupgrade()
 
         title 'Retrying upgrading packages'
 
-        DEBIAN_FRONTEND=noninteractive apt upgrade -o DPkg::Options::=--force-confold --yes --force-yes >/dev/null 2>&1
+        DEBIAN_FRONTEND=noninteractive apt upgrade \
+            -o "DPkg::Options::=--force-confold" \
+            --yes --force-yes >/dev/null 2>&1
 
         if [[ $? -eq 0 ]]
         then
@@ -409,7 +416,9 @@ function appdistupgrade()
 {
     title 'Upgrading distributive'
 
-    DEBIAN_FRONTEND=noninteractive apt dist-upgrade -o DPkg::Options::=--force-confold --yes --force-yes >/dev/null 2>&1
+    DEBIAN_FRONTEND=noninteractive apt dist-upgrade \
+        -o "DPkg::Options::=--force-confold" \
+        --yes --force-yes >/dev/null 2>&1
 
     if [[ $? -eq 0 ]]
     then
