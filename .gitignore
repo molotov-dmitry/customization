@@ -1,3 +1,4 @@
-*.pro.user
-*.pro.user.*
-logs
+/*.pro.user
+/*.pro.user.*
+/logs/
+*.autosave
