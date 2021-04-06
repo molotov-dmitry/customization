@@ -1051,6 +1051,10 @@ case "${bundle}" in
     ## Web services ============================================================
 
     appinstall 'RCZI web services'      'rczi-web-services'
+
+    ## MOXA UPort driver =======================================================
+
+    appinstall 'MOXA UPort driver'      'mxu11x0-config mxu11x0-dkms'
 ;;
 
 "work-mail")
