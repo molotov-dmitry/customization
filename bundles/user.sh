@@ -963,8 +963,10 @@ _EOF
     then
         addkeybinding 'Gitg' 'gitg' '<Ctrl><Alt>G'
 
-        addscenario    'gitg' '<Ctrl>G' '[[ $# -eq 0 ]] && git status && test -n "$(git diff-index --name-only HEAD --)" && gitg --standalone --commit . &\n[[ $# -eq 0 ]] && git status && test -z "$(git diff-index --name-only HEAD --)" && gitg --standalone . &\n[[ $# -eq 1 ]] && ( cd "$1" && git status && test -n "$(git diff-index --name-only HEAD --)" ) && gitg --standalone --commit "$1" &\n[[ $# -eq 1 ]] && ( cd "$1" && git status && test -z "$(git diff-index --name-only HEAD --)" ) && gitg --standalone "$1" &'
-        addkdescenario 'gitg' '<Ctrl>G' 'gitg %f' 'gitg' 'inode/directory'
+        addscenario    'gitg'   '<Ctrl>G'  '[[ $# -eq 0 ]] && git status && test -n "$(git diff-index --name-only HEAD --)" && gitg --standalone --commit . &\n[[ $# -eq 0 ]] && git status && test -z "$(git diff-index --name-only HEAD --)" && gitg --standalone . &\n[[ $# -eq 1 ]] && ( cd "$1" && git status && test -n "$(git diff-index --name-only HEAD --)" ) && gitg --standalone --commit "$1" &\n[[ $# -eq 1 ]] && ( cd "$1" && git status && test -z "$(git diff-index --name-only HEAD --)" ) && gitg --standalone "$1" &'
+        addkdescenario 'gitg'   '<Ctrl>G'  'gitg %f' 'gitg' 'inode/directory'
+        addscenario    'gitgf3' '<Ctrl>F3' '[[ $# -eq 0 ]] && git status && test -n "$(git diff-index --name-only HEAD --)" && gitg --standalone --commit . &\n[[ $# -eq 0 ]] && git status && test -z "$(git diff-index --name-only HEAD --)" && gitg --standalone . &\n[[ $# -eq 1 ]] && ( cd "$1" && git status && test -n "$(git diff-index --name-only HEAD --)" ) && gitg --standalone --commit "$1" &\n[[ $# -eq 1 ]] && ( cd "$1" && git status && test -z "$(git diff-index --name-only HEAD --)" ) && gitg --standalone "$1" &'
+        addkdescenario 'gitgf3' '<Ctrl>F3' 'gitg %f' 'gitg' 'inode/directory'
     fi
 
     ## Rabbitvcs ---------------------------------------------------------------
