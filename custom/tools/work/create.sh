@@ -16,4 +16,4 @@ appinstall 'RTL8192EU driver'       'rtl8192eu-config rtl8192eu-dkms'
 
 ### Report builder =========================================================
 
-appinstall 'Work report'            'work-report report-builder'
+appinstall 'Work report'            'work-report report-builder report-builder-html'
