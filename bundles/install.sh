@@ -617,6 +617,8 @@ case "${bundle}" in
 
     appinstall 'JetBrains Mono fonts'   'fonts-jetbrains-mono'
 
+    appinstall 'Monospace font config'  'font-monospace-config'
+
 ;;
 
 ### Wallpaper ==================================================================
