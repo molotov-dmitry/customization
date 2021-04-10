@@ -592,7 +592,7 @@ case "${bundle}" in
 "appearance/fonts")
 
     silent     'Accepting EULA license' sh -c 'echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections'
-    appinstall 'MS TTF core fonts'      'ttf-mscorefonts-installer'
+    appinstall 'MS TTF core fonts'      'ttf-mscorefonts-installer fonts-microsoft'
 
     if [[ "$(lsb_release -si)" == "Ubuntu" ]]
     then
