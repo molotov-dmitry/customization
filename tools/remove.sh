@@ -75,6 +75,34 @@ appremove 'Tomboy'                  'tomboy'
 appremove 'Unattended upgrades'     'unattended-upgrades'
 appremove 'Ubuntu telemetry'        'ubuntu-report'
 
+appremove 'Fonts (Bengali)'         'fonts-beng fonts-beng-extra fonts-lohit-beng-assamese fonts-lohit-beng-bengali'
+appremove 'Fonts (Devanagari)'      'fonts-deva fonts-gargi fonts-lohit-deva fonts-nakula fonts-sahadeva fonts-samyak-deva'
+appremove 'Fonts (Gujarati)'        'fonts-gujr fonts-gujr-extra fonts-kalapi fonts-lohit-gujr fonts-samyak-gujr'
+appremove 'Fonts (Punjabi)'         'fonts-guru fonts-guru-extra fonts-lohit-guru'
+appremove 'Fonts (Kannada)'         'fonts-knda fonts-gubbi fonts-lohit-knda fonts-navilu'
+appremove 'Fonts (Malayalam)'       'fonts-mlym fonts-lohit-mlym fonts-samyak-mlym fonts-smc'
+appremove 'Fonts (Oriya)'           'fonts-orya fonts-lohit-orya fonts-orya-extra'
+appremove 'Fonts (Tamil)'           'fonts-taml fonts-lohit-taml fonts-samyak-taml fonts-lohit-taml-classical'
+appremove 'Fonts (Telugu)'          'fonts-telu fonts-lohit-telu fonts-lohit-telu'
+appremove 'Fonts (Sourashtra)'      'fonts-pagul'
+appremove 'Fonts (Indic)'           'fonts-indic'
+
+appremove 'Fonts (KACST)'           'fonts-kacst fonts-kacst-one'
+appremove 'Fonts (Cambodia)'        'fonts-khmeros-core'
+appremove 'Fonts (Lao)'             'fonts-lao'
+appremove 'Fonts (Sinhala)'         'fonts-lklug-sinhala'
+appremove 'Fonts (Noto Extra)'      'fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-unhinted'
+appremove 'Fonts (Ethiopic)'        'fonts-sil-abyssinica'
+appremove 'Fonts (Burmese)'         'fonts-sil-padauk'
+appremove 'Fonts (Tibetan)'         'fonts-tibetan-machine'
+appremove 'Fonts (Thai)'            'fonts-thai-tlwg fonts-tlwg-garuda fonts-tlwg-garuda-ttf fonts-tlwg-kinnari fonts-tlwg-kinnari-ttf fonts-tlwg-laksaman fonts-tlwg-laksaman-ttf fonts-tlwg-loma fonts-tlwg-loma-ttf fonts-tlwg-mono fonts-tlwg-mono-ttf fonts-tlwg-norasi fonts-tlwg-norasi-ttf fonts-tlwg-purisa fonts-tlwg-purisa-ttf fonts-tlwg-sawasdee fonts-tlwg-sawasdee-ttf fonts-tlwg-typewriter fonts-tlwg-typewriter-ttf fonts-tlwg-typist fonts-tlwg-typist-ttf fonts-tlwg-typo fonts-tlwg-typo-ttf fonts-tlwg-umpush fonts-tlwg-umpush-ttf fonts-tlwg-waree fonts-tlwg-waree-ttf'
+appremove 'Fonts (Droid)'           'fonts-droid-fallback'
+appremove 'Fonts (Libertine)'       'fonts-linuxlibertine'
+appremove 'Fonts (Freefont)'        'fonts-freefont-ttf'
+appremove 'Fonts ()'           ''
+appremove 'Fonts ()'           ''
+
+
 ## Remove unused ---------------------------------------------------------------
 
 silent 'Removing unused packages' apt autoremove --yes --force-yes --purge

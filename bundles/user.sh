@@ -1035,7 +1035,7 @@ _EOF
 "appearance/fonts")
 
     font_ui='Google Sans'
-    font_doc='Linux Libertine O'
+    font_doc='Noto Serif'
     font_fixed='Fira Code'
 
     font_ui_size='10'

@@ -564,7 +564,6 @@ case "${bundle}" in
     appinstall 'Papirus theme'          'papirus-icon-theme papirus-material-icon-theme'
     appinstall 'Oranchelo theme'        'oranchelo-icon-theme'
     appinstall 'Arc theme'              'arc-theme [arc-solid-theme]'
-    appinstall 'Adapta theme'           'adapta-gtk-theme'
 
     appinstall 'Mint themes'            'mint-themes'
 
@@ -598,9 +597,7 @@ case "${bundle}" in
         silent 'Re-download fonts'      /usr/lib/update-notifier/package-data-downloader
     fi
 
-    appinstall 'Noto fonts'             'fonts-noto'
-    appinstall 'Linux Libertine fonts'  'fonts-linuxlibertine'
-    appinstall 'Roboto fonts'           'fonts-roboto fonts-roboto-unhinted'
+    appinstall 'Noto fonts'             'fonts-noto-micro'
 
     if [[ "$(lsb_release -si)" == "Debian" ]]
     then
