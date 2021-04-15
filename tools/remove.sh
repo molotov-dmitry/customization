@@ -99,9 +99,6 @@ appremove 'Fonts (Thai)'            'fonts-thai-tlwg fonts-tlwg-garuda fonts-tlw
 appremove 'Fonts (Droid)'           'fonts-droid-fallback'
 appremove 'Fonts (Libertine)'       'fonts-linuxlibertine'
 appremove 'Fonts (Freefont)'        'fonts-freefont-ttf'
-appremove 'Fonts ()'           ''
-appremove 'Fonts ()'           ''
-
 
 ## Remove unused ---------------------------------------------------------------
 
