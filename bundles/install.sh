@@ -612,8 +612,6 @@ case "${bundle}" in
 
     appinstall 'JetBrains Mono fonts'   'fonts-jetbrains-mono'
 
-    appinstall 'PT and Astra PT fonts'  'fonts-pt fonts-pt-astra'
-
     appinstall 'Font configuration'     'font-config'
 
 ;;
