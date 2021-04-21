@@ -350,11 +350,7 @@ case "${bundle}" in
 
     ppaadd  'Numix Project'             'numix'
     ppaadd  'Paper Themes (Daily)'      'snwh'
-    ppaadd  'Noobslab Themes'           'noobslab'  'themes'
-    ppaadd  'Noobslab Icons'            'noobslab'  'icons'
-    ppaadd  'Oranchelo Icon Theme'      'oranchelo' 'oranchelo-icon-theme'
     ppaadd  'Papirus Icon Theme'        'papirus'   'papirus'
-    ppaadd  'Arc Theme'                 'fossfreedom' 'arc-gtk-theme-daily'
 
 ;;
 
@@ -617,8 +613,6 @@ case "${bundle}" in
 ### Chat =======================================================================
 
 "work-chat")
-
-    ppaadd  'Pidgin indicator' 'langdalepl' 'pidgin-indicator'
 
 ;;
 
