@@ -130,6 +130,13 @@ case "${bundle}" in
         gsettings set org.gnome.shell.extensions.desktop-icons show-trash false
     fi
 
+    ## Remove trash icon from dock =============================================
+
+    if ispkginstalled gnome-shell-extension-ubuntu-dock
+    then
+        gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false
+    fi
+
     ## Text editors ============================================================
 
     editors=()
