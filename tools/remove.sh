@@ -65,7 +65,7 @@ appremove 'Gnome TODO'              'gnome-todo'
 appremove 'Gnome Weather'           'gnome-weather'
 appremove 'Gnome Maps'              'gnome-maps'
 
-appremove 'Gnome desktop icons'     'gnome-shell-extension-desktop-icons'
+appremove 'Gnome desktop icons'     'gnome-shell-extension-desktop-icons gnome-shell-extension-desktop-icons-ng'
 
 appremove 'HexChat'                 'hexchat hexchat-common'
 appremove 'Akregator'               'akregator'
