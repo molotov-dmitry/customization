@@ -2,9 +2,14 @@
 
 function packiso()
 {
-    iso_name="${config}-$1"
-    iso_description="$2"
-    iso_src="$3"
+    local iso_old_name="$1"
+    local iso_description="$2"
+    local iso_src="$3"
+
+    local iso_extension="${iso_old_name##*.}"
+    local iso_filename="${iso_old_name%.*}"
+
+    local iso_name="${iso_filename}-${config}.${iso_extension}"
 
     if [[ -f "${iso_dir}/md5sum.txt" ]]
     then
