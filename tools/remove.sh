@@ -101,6 +101,16 @@ appremove 'Fonts (Libertine)'       'fonts-linuxlibertine'
 appremove 'Fonts (Freefont)'        'fonts-freefont-ttf'
 appremove 'Fonts (Liberation)'      'fonts-liberation2'
 
+appremove 'Fonts (Chinese)'         'fonts-arphic-ukai fonts-arphic-uming'
+
+appremove 'Language packs'          'language-pack-zh-hans-base language-pack-zh-hans language-pack-pt-base language-pack-pt language-pack-it-base language-pack-it language-pack-gnome-zh-hans-base language-pack-gnome-zh-hans language-pack-gnome-pt-base language-pack-gnome-pt language-pack-gnome-it-base language-pack-gnome-it language-pack-gnome-fr-base language-pack-gnome-fr language-pack-gnome-es-base language-pack-gnome-es language-pack-gnome-de-base language-pack-gnome-de language-pack-fr-base language-pack-fr language-pack-es-base language-pack-es language-pack-de-base language-pack-de'
+appremove 'Other languages'         'wfrench wbrazilian wngerman wogerman wportuguese wspanish wswiss witalian'
+appremove 'Firefox languages'       'firefox-locale-de firefox-locale-es firefox-locale-fr firefox-locale-it firefox-locale-pt firefox-locale-zh-hans'
+appremove 'Libreoffice languages'   'libreoffice-l10n-zh-tw libreoffice-l10n-zh-cn libreoffice-l10n-pt-br libreoffice-l10n-pt libreoffice-l10n-it libreoffice-l10n-fr libreoffice-l10n-es libreoffice-l10n-en-za libreoffice-l10n-de libreoffice-help-zh-tw libreoffice-help-zh-cn libreoffice-help-pt-br libreoffice-help-pt libreoffice-help-it libreoffice-help-fr libreoffice-help-es libreoffice-help-de'
+appremove 'Hunspell languages'      'hunspell-de-at-frami hunspell-de-ch-frami hunspell-de-de-frami hunspell-en-au hunspell-en-ca hunspell-en-za hunspell-es hunspell-fr hunspell-fr-classical hunspell-it hunspell-pt-br hunspell-pt-pt'
+appremove 'Hyphen languages'        'hyphen-de hyphen-en-ca hyphen-es hyphen-fr hyphen-it hyphen-pt-br hyphen-pt-pt'
+appremove 'Mythes languages'        'mythes-de mythes-de-ch mythes-en-au mythes-es mythes-fr mythes-it mythes-pt-pt'
+
 ## Remove unused ---------------------------------------------------------------
 
 silent 'Removing unused packages' apt autoremove --yes --force-yes --purge
