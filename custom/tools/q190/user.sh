@@ -58,7 +58,6 @@ fi
 
 if [[ -f "${HOME}/.config/is-work-account" ]]
 then
-    hideapp 'google-chrome'
     hideapp 'org.gnome.Geary'
     hideapp 'io.github.GnomeMpv'
     hideapp 'io.github.TransmissionRemoteGtk'

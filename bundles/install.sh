@@ -739,6 +739,8 @@ case "${bundle}" in
         appinstall 'Chrome Plasma'      'plasma-browser-integration'
     fi
 
+    appremove 'Firefox'                 'firefox firefox-locale-en firefox-locale-ru'
+
 ;;
 
 ### Mail =======================================================================
