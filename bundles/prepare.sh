@@ -612,7 +612,6 @@ case "${bundle}" in
 "optimize")
 
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'optimize/tmpfs'
-    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'optimize/chrome-ramdisk'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'optimize/disable-tracker'
 ;;
 
@@ -621,14 +620,6 @@ case "${bundle}" in
 "optimize/tmpfs")
 
     preparefiles 'tmpfs' 'tmpfs'
-
-;;
-
-### Keep Chromium's RAM disk between power-offs ================================
-
-"optimize/chrome-ramdisk")
-
-    preparefiles 'chrome-ramdisk' 'chrome-ramdisk'
 
 ;;
 

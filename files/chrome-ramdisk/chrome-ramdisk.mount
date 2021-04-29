@@ -1,8 +1,0 @@
-[Unit]
-Before=local-fs.target
-
-[Mount]
-What=tmpfs
-Where=<HOME>/.config/chromium
-Type=tmpfs
-Options=noatime,nodiratime,nodev,nosuid,uid=<UID>,gid=<GID>,size=300M

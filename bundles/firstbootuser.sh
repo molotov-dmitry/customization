@@ -583,7 +583,6 @@ _EOF
 "optimize")
 
     bash "${scriptpath}" 'optimize/tmpfs' "$@"
-    bash "${scriptpath}" 'optimize/chrome-ramdisk' "$@"
     bash "${scriptpath}" 'optimize/disable-tracker' "$@"
 ;;
 
@@ -609,35 +608,6 @@ _EOF
 
     find "${user_home}/.cache" -mindepth 1 -delete
     systemctl start ${mount_name}
-
-;;
-
-### Keep Chromium's RAM disk between power-offs ================================
-
-"optimize/chrome-ramdisk")
-
-    mount_name=$(systemd-escape -p --suffix=mount "${user_home}/.config/chromium")
-    safe_home=$(echo "${user_home}" | sed 's/\//\\\//g')
-    safe_mount=$(echo "${mount_name}" | sed 's/\\/\\\\\\/g')
-
-    ## make dir ----------------------------------------------------------------
-
-    sudo -u ${user_name} mkdir -p "${user_home}/.config/chromium"
-
-    ## Mount point -------------------------------------------------------------
-
-    sed "s/<USER>/${user_name}/g;s/<UID>/${user_id}/g;s/<GID>/${user_group}/g;s/<HOME>/${safe_home}/g;s/<MOUNT>/${safe_mount}/g" "${ROOT_PATH}/files/chrome-ramdisk/chrome-ramdisk.mount" > "/etc/systemd/system/${mount_name}"
-    systemctl enable ${mount_name}
-
-    ## User service ------------------------------------------------------------
-
-    sed "s/<USER>/${user_name}/g;s/<UID>/${user_id}/g;s/<GID>/${user_group}/g;s/<HOME>/${safe_home}/g;s/<MOUNT>/${safe_mount}/g" "${ROOT_PATH}/files/chrome-ramdisk/chrome-ramdisk.service" > "/etc/systemd/system/chrome-ramdisk-${user_name}.service"
-    systemctl enable chrome-ramdisk-${user_name}.service
-
-    ## Clear and mount directory -----------------------------------------------
-
-    find "${user_home}/.config/chromium" -mindepth 1 -delete
-    systemctl start chrome-ramdisk-${user_name}.service
 
 ;;
 

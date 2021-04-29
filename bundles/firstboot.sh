@@ -521,19 +521,12 @@ case "${bundle}" in
 "optimize")
 
     bash "${scriptpath}" 'optimize/tmpfs'
-    bash "${scriptpath}" 'optimize/chrome-ramdisk'
     bash "${scriptpath}" 'optimize/disable-tracker'
 ;;
 
 ### Mount directories with high I/O as tmpfs ===================================
 
 "optimize/tmpfs")
-
-;;
-
-### Keep Chromium's RAM disk between power-offs ================================
-
-"optimize/chrome-ramdisk")
 
 ;;
 
