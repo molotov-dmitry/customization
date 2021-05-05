@@ -1318,7 +1318,7 @@ _EOF
 
 "network/browser")
 
-    if ispkginstalled google-chrome-stable
+    if ispkginstalled google-chrome-stable && [[ ! -f "${HOME}/.config/is-work-account" ]]
     then
         launcheradd 'google-chrome'
     fi
