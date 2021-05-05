@@ -1748,8 +1748,6 @@ _EOF
 
         ## Set Epiphany as default web browser =================================
 
-        setdefaultapp   'text/html'              'org.gnome.Epiphany.desktop'
-        setdefaultapp   'application/xhtml+xml'  'org.gnome.Epiphany.desktop'
         setdefaultapp   'x-scheme-handler/http'  'org.gnome.Epiphany.desktop'
         setdefaultapp   'x-scheme-handler/https' 'org.gnome.Epiphany.desktop'
 
