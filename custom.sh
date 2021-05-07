@@ -136,7 +136,13 @@ do
     ;;
 
     '--fast')
+        slowcomp='0'
         fastcomp='1'
+    ;;
+
+    '--slow')
+        fastcomp='0'
+        slowcomp='1'
     ;;
 
     '--test')
@@ -184,11 +190,19 @@ else
     livedir='casper'
 fi
 
-if [[ ${fastcomp} -eq 0 ]]
+unset comp_options
+
+if [[ ${fastcomp} -ne 0 ]]
 then
-    comp=xz
+    comp_options='-comp gzip'
+    comp='GZip'
+elif [[ ${slowcomp} -eq 0 ]]
+then
+    comp_options='-comp xz'
+    comp='XZ normal'
 else
-    comp=gzip
+    comp_options='-b 1048576 -comp xz -Xdict-size 100%'
+    comp='XZ ultra'
 fi
 
 ### Check available ram ========================================================
@@ -452,9 +466,9 @@ then
 
     if [[ "$noprogress" == 'y' ]]
     then
-        silent 'build rootfs' mksquashfs "${rootfs_dir}" "${iso_dir}/${livedir}/filesystem.squashfs" -comp ${comp} || exit 1
+        silent 'build rootfs' mksquashfs "${rootfs_dir}" "${iso_dir}/${livedir}/filesystem.squashfs" ${comp_options} || exit 1
     else
-        mksquashfs "${rootfs_dir}" "${iso_dir}/${livedir}/filesystem.squashfs" -comp ${comp} || exit 1
+        mksquashfs "${rootfs_dir}" "${iso_dir}/${livedir}/filesystem.squashfs" ${comp_options} || exit 1
     fi
 
     ## Modify package manifest -------------------------------------------------
