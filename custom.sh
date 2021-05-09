@@ -485,18 +485,28 @@ then
 
     ## Adding EFI x32 ----------------------------------------------------------
 
-    if ! test -d "${iso_dir}/EFI/BOOT"
+    if test -d "${iso_dir}/EFI/BOOT"
     then
-        silent 'Creating EFI dir' mkdir -p "${iso_dir}/EFI/BOOT"
+        efi_boot_dir='BOOT'
+
+    elif test -d "${iso_dir}/EFI/boot"
+    then
+        efi_boot_dir='boot'
+
+    else
+        efi_boot_dir='BOOT'
+        silent 'Creating EFI dir' mkdir -p "${iso_dir}/EFI/${efi_boot_dir}"
     fi
 
     for efi in bootia32.efi BOOTx64.EFI grubx64.efi mmx64.efi
     do
-        if ! test -f "${iso_dir}/EFI/BOOT/${efi}"
+        if ! test -f "${iso_dir}/EFI/${efi_boot_dir}/${efi}"
         then
-            silent "Downloading ${efi}" wget "https://github.com/molotov-dmitry/efi-images/raw/master/${efi}" -O "${iso_dir}/EFI/BOOT/${efi}"
+            silent "Downloading ${efi}" wget "https://github.com/molotov-dmitry/efi-images/raw/master/${efi}" -O "${iso_dir}/EFI/${efi_boot_dir}/${efi}"
         fi
     done
+
+    unset efi_boot_dir
 
     ## Packing ISO -------------------------------------------------------------
 
