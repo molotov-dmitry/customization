@@ -500,7 +500,7 @@ then
 
     for efi in bootia32.efi BOOTx64.EFI grubx64.efi mmx64.efi
     do
-        if ! test -f "${iso_dir}/EFI/${efi_boot_dir}/${efi}"
+        if ! test -f "${iso_dir}/EFI/${efi_boot_dir}/${efi}" && ! test -f "${iso_dir}/EFI/${efi_boot_dir}/${efi,,}"
         then
             silent "Downloading ${efi}" wget "https://github.com/molotov-dmitry/efi-images/raw/master/${efi}" -O "${iso_dir}/EFI/${efi_boot_dir}/${efi}"
         fi
