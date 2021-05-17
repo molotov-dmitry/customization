@@ -501,10 +501,6 @@ case "${bundle}" in
 
 "network/chat-extra")
 
-    ## Telegram ----------------------------------------------------------------
-
-    preparefiles 'Telegram' 'telegram'
-
     ## VK ----------------------------------------------------------------------
 
     preparefiles 'VK' 'vk'

@@ -1348,18 +1348,6 @@ _EOF
 
 "network/chat-extra")
 
-    mkdir -p "${HOME}/.config/autostart"
-
-    if ispkginstalled telegram-desktop && ! ishidden telegramdesktop
-    then
-        usercopy 'telegram'
-    fi
-
-    if ispkginstalled vk && ! ishidden vk
-    then
-        cp -f '/usr/share/applications/vk.desktop' "${HOME}/.config/autostart/"
-    fi
-
 ;;
 
 ### Office =====================================================================
