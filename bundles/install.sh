@@ -125,6 +125,7 @@ case "${bundle}" in
 "driver/intel")
 
     appinstall 'Intel microcode'        'intel-microcode'
+    appinstall 'Intel graphics'         'intel-media-va-driver-non-free i965-va-driver-shaders'
 
 ;;
 
