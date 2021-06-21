@@ -434,9 +434,6 @@ case "${bundle}" in
 
 "network/chat-extra")
 
-    repoadd 'vk' 'https://desktop.userapi.com/debian/' 'stable' 'master' 'vk/vk.gpg'
-    silent  'Move VK repo' mv '/etc/apt/sources.list.d/vk-stable.list' '/etc/apt/sources.list.d/vk.list'
-
 ;;
 
 ### Office =====================================================================

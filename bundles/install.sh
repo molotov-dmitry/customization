@@ -762,7 +762,6 @@ case "${bundle}" in
 "network/chat-extra")
 
     appinstall 'Telegram client'        'telegram-desktop'
-    appinstall 'VK client'              'vk'
 
 ;;
 

@@ -68,7 +68,6 @@ then
     hideapp 'org.gnome.Photos'
     hideapp 'rhythmbox'
     hideapp 'telegramdesktop'
-    hideapp 'vk'
 else
     hideapp 'ghostwriter'
     hideapp 'com.github.fabiocolacio.marker'
