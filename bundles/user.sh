@@ -851,6 +851,11 @@ _EOF
             gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ auto-indent             true
             gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ overwrite-braces        true
         done
+
+        for plugin in dspy glade gvls_plugin jhbuild_plugin newcomers npm_plugin podman python_gi_imports_completion qemu rust-analyzer rustup_plugin valgrind_plugin
+        do
+            gsettings set org.gnome.builder.plugin:/org/gnome/builder/plugins/${plugin}/ enabled false
+        done
     fi
 
 ;;
