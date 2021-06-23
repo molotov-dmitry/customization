@@ -769,10 +769,10 @@ case "${bundle}" in
 
 "network/office")
 
-    if gnomebased
-    then
-        appinstall 'Gnome documents'    'gnome-documents'
-    fi
+    #if gnomebased
+    #then
+    #    appinstall 'Gnome documents'    'gnome-documents'
+    #fi
 
 ;;
 
@@ -780,11 +780,11 @@ case "${bundle}" in
 
 "network/services")
 
-    if gnomebased
-    then
-        appinstall 'Gnome Maps'             'gnome-maps'
-        appinstall 'Gnome Weather'          'gnome-weather'
-    fi
+    #if gnomebased
+    #then
+    #    appinstall 'Gnome Maps'             'gnome-maps'
+    #    appinstall 'Gnome Weather'          'gnome-weather'
+    #fi
 
 ;;
 
