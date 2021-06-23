@@ -1440,7 +1440,7 @@ function changeapp()
 function hideapp()
 {
     local app="$1"
-
+    local localapppath="${HOME}/.local/share/applications/${app}.desktop"
     local apppath=""
 
     if [[ -f "${HOME}/.local/share/applications/${app}.desktop" ]]
@@ -1459,7 +1459,7 @@ function hideapp()
         return 0
     fi
 
-    if grep '^[[:space:]]*NoDisplay[[:space:]]*=[[:space:]]*true[[:space:]]*$' "${apppath}/${app}.desktop" >/dev/null 2>/dev/null
+    if [[ -z "$(getconfigline 'MimeType' 'Desktop Entry' "$localapppath")" ]] && [[ "$(getconfigline 'NoDisplay' 'Desktop Entry' "$localapppath")" == 'true' ]]
     then
         return 0
     fi
@@ -1468,10 +1468,20 @@ function hideapp()
 
     if [[ "${apppath}" != "${HOME}/.local/share/applications" ]]
     then
-        cp -f "${apppath}/${app}.desktop" "${HOME}/.local/share/applications/${app}.desktop"
+        cp -f "${apppath}/${app}.desktop" "$localapppath"
     fi
 
-    addconfigline 'NoDisplay' 'true' 'Desktop Entry' "${HOME}/.local/share/applications/${app}.desktop"
+    addconfigline 'NoDisplay' 'true' 'Desktop Entry' "$localapppath"
+
+    if [[ -n "$(getconfigline 'MimeType' 'Desktop Entry' "$localapppath")" ]]
+    then
+        addconfigline 'MimeType' '' 'Desktop Entry' "$localapppath"
+    fi
+
+    if which update-desktop-database >/dev/null 2>/dev/null
+    then
+        update-desktop-database "${HOME}/.local/share/applications/"
+    fi
 
     return 0
 }
@@ -1735,7 +1745,7 @@ getconfigline()
 
     if [[ -r "$file" ]]
     then
-        sed -n "/^[ \t]*\[$(safestring "${section}")\]/,/\[/s/^[ \t]*$(safestring "${key}")[ \t]*=[ \t]*//p" "${file}"
+        sed -n "/^[ \t]*\[$(safestring "${section}")\]/,/^[ \t]*\[/s/^[ \t]*$(safestring "${key}")[ \t]*=[ \t]*//p" "${file}"
     fi
 }
 
