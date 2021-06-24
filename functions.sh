@@ -707,7 +707,7 @@ ppaadd()
 
     #### Add repo ==============================================================
 
-    local sourceslist="$(echo "${links}" | sed "s/$/ ${version} main/")"
+    local sourceslist="$(echo "${links}" | sed "s/$/ ${version} main/" | sed 's/^\([[:space:]]*deb-src[[:space:]]\)/#\1/')"
 
     echo "${sourceslist}" > "/etc/apt/sources.list.d/${author}-${repo}-${version}.list"
 
