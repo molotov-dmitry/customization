@@ -1,5 +1,5 @@
 
-if [ -r /tools/user.sh ] && [ ! -e "${HOME}/.config/.firstboot" ] && [ -e "/tools/status/.completed" ] && [ -n "${-##*c*}" ]
+if [ -r /tools/user.sh ] && [ ! -e "${HOME}/.config/.firstboot" ] && [ -e "/tools/status/.completed" ] && [ -n "${XDG_CURRENT_DESKTOP}" ]
 then
     mkdir -p "${HOME}/.config"
 
