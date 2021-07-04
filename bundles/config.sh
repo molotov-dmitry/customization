@@ -19,6 +19,11 @@ case "${bundle}" in
 
 "base")
 
+    if dpkg --compare-versions "$(pkgversion bash)" ge 5.1
+    then
+        echo -e "\nbind 'set enable-bracketed-paste off'" >> /etc/bash.bashrc
+    fi
+
 ;;
 
 ### Base GUI ===================================================================
