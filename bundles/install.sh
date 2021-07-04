@@ -939,38 +939,6 @@ case "${bundle}" in
 ;;
 
 ### ============================================================================
-### Virtual machine tools ======================================================
-### ============================================================================
-
-"vm-guest")
-
-    bash "${scriptpath}" 'vm-guest/vmware'
-    bash "${scriptpath}" 'vm-guest/vbox'
-;;
-
-"vm-guest/vmware")
-
-    appinstall 'VMWare tools'   'open-vm-tools'
-
-    if havegraphics
-    then
-        appinstall 'VMWare Xorg drivers' 'xserver-xorg-video-vmware [xserver-xorg-input-vmmouse] xauth xdg-utils'
-    fi
-
-;;
-
-"vm-guest/vbox")
-
-    appinstall 'VirtualBox tools' 'virtualbox-guest-utils'
-
-    if havegraphics
-    then
-        appinstall 'VirtualBox X11 tools' 'virtualbox-guest-x11'
-    fi
-
-;;
-
-### ============================================================================
 ### Virtual machine host tools =================================================
 ### ============================================================================
 
