@@ -561,7 +561,10 @@ case "${bundle}" in
     appinstall 'Breeze theme'           'breeze-cursor-theme breeze-icon-theme'
     appinstall 'Papirus theme'          'papirus-icon-theme papirus-material-icon-theme'
 
-    appinstall 'Mint themes'            'mint-themes'
+    if ispkginstalled cinnamon
+    then
+        appinstall 'Mint themes'            'mint-themes'
+    fi
 
     if ispkgavailable pop-gtk-theme
     then
