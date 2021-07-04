@@ -20,7 +20,3 @@ appinstall 'Base'                   'less mount grep sed wget'
 appinstall 'Bash completion'        'bash-completion'
 
 silent     'Fix sudo install'       apt-mark manual sudo
-
-### Configuration ==============================================================
-
-silent      'Disable lid close suspend' sed -i 's/[#]\?[[:blank:]]*HandleLidSwitch\([[:blank:]]*\)=\([[:blank:]]*\).*/HandleLidSwitch\1=\2ignore/' /etc/systemd/logind.conf
