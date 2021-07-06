@@ -18,6 +18,8 @@ dev/db
 dev/json
 dev/net
 
+server/ssh
+
 vcs
 
 appearance
