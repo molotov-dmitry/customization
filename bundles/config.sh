@@ -655,6 +655,11 @@ _EOF
 
     disableservice 'Cups Browser' cups-browsed
 
+    if test -f '/etc/gdm3/custom.conf'
+    then
+        addconfigline 'WaylandEnable' 'false' 'daemon' '/etc/gdm3/custom.conf'
+    fi
+
 ;;
 
 "work-mail")
