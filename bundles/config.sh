@@ -583,6 +583,9 @@ _EOF
 
 "cli/net")
 
+    silent 'Fix ping restriction' bash -c 'echo -e "net.ipv4.ping_group_range = 0 2147483647" > /etc/sysctl.d/99-allow-ping.conf'
+    silent 'Fix ping restriction' sysctl net.ipv4.ping_group_range='0 2147483647'
+
 ;;
 
 ### Command line tools for time sync ===========================================

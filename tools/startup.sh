@@ -36,9 +36,6 @@ then
 
     mkdir -p /tools/status/
 
-    setcap cap_net_raw+ep $(which ping)
-    echo "system: $?" >>  /tools/status/.firstboot
-
     bash /tools/firstboot.sh 1>> /tools/status/firstboot.log 2>&1
     echo "system: $?" >> /tools/status/.firstboot
 
