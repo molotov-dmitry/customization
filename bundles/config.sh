@@ -64,7 +64,13 @@ case "${bundle}" in
         then
             silent 'Set GDM3 theme' update-alternatives --set gdm3-theme.gresource "/usr/share/gnome-shell/gnome-shell-theme.gresource"
         fi
+    fi
 
+    ## Disbale Wayland ---------------------------------------------------------
+
+    if test -f '/etc/gdm3/custom.conf'
+    then
+        addconfigline 'WaylandEnable' 'false' 'daemon' '/etc/gdm3/custom.conf'
     fi
 
 ;;
@@ -654,11 +660,6 @@ _EOF
 "work")
 
     disableservice 'Cups Browser' cups-browsed
-
-    if test -f '/etc/gdm3/custom.conf'
-    then
-        addconfigline 'WaylandEnable' 'false' 'daemon' '/etc/gdm3/custom.conf'
-    fi
 
 ;;
 
