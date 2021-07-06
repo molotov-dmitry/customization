@@ -981,6 +981,10 @@ case "${bundle}" in
 
     appinstall 'LDAP user config'       'user-ldap-config'
 
+    ### GOST hash ==============================================================
+
+    appinstall 'GOST hashes'            'gostsum'
+
     ### Gnome shell extensions =================================================
 
     if ispkginstalled gnome-shell
