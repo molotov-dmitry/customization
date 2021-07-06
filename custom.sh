@@ -483,6 +483,20 @@ then
         fi
     done
 
+    ## Modify package manifest for minimal installation ------------------------
+
+    if [[ "${config}" == "work" || "${config}" == "develop" || "${config}" == "q190" ]]
+    then
+        if [[ -f "${iso_dir}/${livedir}/filesystem.manifest-minimal-remove" && -f "${iso_dir}/${livedir}/filesystem.manifest-remove" ]]
+        then
+            silent 'Creating minimal remove manifest' mv "${iso_dir}/${livedir}/filesystem.manifest-remove" "${iso_dir}/${livedir}/filesystem.manifest-minimal-remove"
+            echo 'ti-cgt'            >> "${iso_dir}/${livedir}/filesystem.manifest-minimal-remove"
+            echo 'ccs-pjt-editor-qt' >> "${iso_dir}/${livedir}/filesystem.manifest-minimal-remove"
+            echo 'kmx32-gcc'         >> "${iso_dir}/${livedir}/filesystem.manifest-minimal-remove"
+            echo 'kmx32-eclipse'     >> "${iso_dir}/${livedir}/filesystem.manifest-minimal-remove"
+        fi
+    fi
+
     ## Adding EFI x32 ----------------------------------------------------------
 
     if test -d "${iso_dir}/EFI/BOOT"
