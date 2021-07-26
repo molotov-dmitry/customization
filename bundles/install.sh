@@ -467,7 +467,11 @@ case "${bundle}" in
 "dev/net")
 
     appinstall 'ARPing'                 'iputils-arping'
-    silent     'Wireshark fix'          sh -c 'echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections'
+
+    if havegraphics
+    then
+        silent     'Wireshark fix'          sh -c 'echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections'
+    fi
 
     if gnomebased
     then
