@@ -47,6 +47,8 @@ appremove 'Apport'                  'apport apport-gtk'
 
 appremove 'Ubuntu web launchers'    'ubuntu-web-launchers'
 
+appremove 'Parental control'        'malcontent'
+
 appremove 'Rhythmbox'               'rhythmbox rhythmbox-data'
 appremove 'Gnome Music'             'gnome-music'
 appremove 'Totem'                   'totem totem-common'
