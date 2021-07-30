@@ -377,10 +377,6 @@ case "${bundle}" in
 
 "office")
 
-    if [[ "$(lsb_release -si)" == "Ubuntu" ]]
-    then
-        ppaadd 'LibreOffice' 'libreoffice'
-    fi
 ;;
 
 ### ============================================================================
