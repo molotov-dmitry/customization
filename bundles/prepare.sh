@@ -470,7 +470,6 @@ case "${bundle}" in
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/office'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/services'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/remote'
-    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/remotedesktop'
     
 ;;
 
@@ -518,12 +517,6 @@ case "${bundle}" in
 ### Remote clients =============================================================
 
 "network/remote")
-
-;;
-
-### Remote desktop =============================================================
-
-"network/remotedesktop")
 
 ;;
 
@@ -645,6 +638,8 @@ case "${bundle}" in
 
 ;;
 
+### Mail =======================================================================
+
 "work-mail")
 
     ## Evolution ---------------------------------------------------------------
@@ -664,6 +659,12 @@ case "${bundle}" in
     ## Pidgin ------------------------------------------------------------------
 
     preparefiles 'Pidgin' 'pidgin'
+
+;;
+
+### Remote desktop =============================================================
+
+"work-remote")
 
 ;;
 

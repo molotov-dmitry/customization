@@ -725,7 +725,6 @@ case "${bundle}" in
     bash "${scriptpath}" 'network/office'
     bash "${scriptpath}" 'network/services'
     bash "${scriptpath}" 'network/remote'
-    bash "${scriptpath}" 'network/remotedesktop'
 
 ;;
 
@@ -805,24 +804,6 @@ case "${bundle}" in
     if kdebased
     then
         appinstall 'Transmission Qt'        'transmission-qt'
-    fi
-
-;;
-
-### Remote desktop =============================================================
-
-"network/remotedesktop")
-
-    if gnomebased
-    then
-        appinstall 'RDP server' 'vino'
-        appinstall 'RDP client' 'remmina remmina-plugin-vnc remmina-plugin-rdp remmina-plugin-xdmcp'
-    fi
-
-    if kdebased
-    then
-        appinstall 'RDP server' 'krfb'
-        appinstall 'RDP client' 'krdc freerdp2-x11'
     fi
 
 ;;
@@ -1020,6 +1001,8 @@ case "${bundle}" in
     appinstall 'MOXA UPort driver'      'mxu11x0-config mxu11x0-dkms'
 ;;
 
+### Mail =======================================================================
+
 "work-mail")
 
     if gnomebased
@@ -1050,6 +1033,24 @@ case "${bundle}" in
     #fi
 
     appinstall 'Pidgin'             'pidgin [pidgin-libnotify] [pidgin-indicator]'
+;;
+
+### Remote desktop =============================================================
+
+"work-remote")
+
+    if gnomebased
+    then
+        appinstall 'RDP server' 'vino'
+        appinstall 'RDP client' 'remmina remmina-plugin-vnc remmina-plugin-rdp remmina-plugin-xdmcp'
+    fi
+
+    if kdebased
+    then
+        appinstall 'RDP server' 'krfb'
+        appinstall 'RDP client' 'krdc freerdp2-x11'
+    fi
+
 ;;
 
 ### ============================================================================
