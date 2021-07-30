@@ -106,6 +106,15 @@ case "${bundle}" in
     addkeybinding 'System Monitor' 'gnome-system-monitor' '<Ctrl><Shift>Escape'
     addkeybinding 'File Manager'   'nautilus -w'          '<Super>E'
 
+    if ! gsettings writable org.gnome.settings-daemon.plugins.media-keys terminal 1>/dev/null 2>/dev/null
+    then
+        gsettings set "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/03272b2abcbd90a5c5921228eb639a47/" name    "Terminal"
+        gsettings set "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/03272b2abcbd90a5c5921228eb639a47/" command "x-terminal-emulator"
+        gsettings set "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/03272b2abcbd90a5c5921228eb639a47/" binding "<Ctrl><Alt>T"
+
+        gsettingsadd org.gnome.settings-daemon.plugins.media-keys custom-keybindings "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/03272b2abcbd90a5c5921228eb639a47/"
+    fi
+
     ## File manager keybindings ================================================
 
     addscenario 'terminal' 'F4' 'x-terminal-emulator &' --fixpwd
