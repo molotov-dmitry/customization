@@ -631,7 +631,7 @@ case "${bundle}" in
 
 "appearance/avatar")
 
-    appinstall 'Imagemagick'            'imagemagick librsvg2-bin'
+    appinstall 'Imagemagick'            'librsvg2-bin'
 
 ;;
 
@@ -815,7 +815,7 @@ case "${bundle}" in
 "graphics")
 
     appinstall 'GIMP'                   'gimp gimp-help-ru'
-    appinstall 'Imagemagick'            'imagemagick librsvg2-bin'
+    appinstall 'Graphicsmagick'         'graphicsmagick-imagemagick-compat librsvg2-bin'
 
     if gnomebased
     then
