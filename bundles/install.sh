@@ -1032,7 +1032,7 @@ case "${bundle}" in
         #appinstall 'Kopete'             'kopete'
     #fi
 
-    appinstall 'Pidgin'             'pidgin [pidgin-libnotify] [pidgin-indicator]'
+    appinstall 'Pidgin'             'pidgin [pidgin-indicator]'
 ;;
 
 ### Remote desktop =============================================================
