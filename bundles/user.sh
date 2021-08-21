@@ -1387,8 +1387,6 @@ _EOF
 
 "graphics")
 
-    hideapp 'display-im6.q16'
-
     if ispkginstalled gimp
     then
         mimedefault 'gimp' 'image'
