@@ -631,7 +631,7 @@ case "${bundle}" in
 
 "appearance/avatar")
 
-    appinstall 'Imagemagick'            'librsvg2-bin'
+    appinstall 'SVG convert'            'librsvg2-bin'
 
 ;;
 
