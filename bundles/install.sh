@@ -56,7 +56,7 @@ case "${bundle}" in
     appinstall 'Nautilus'                   'nautilus nautilus-extension-gnome-terminal nautilus-sendto nautilus-share'
 
     appinstall 'Base applications'          'gnome-calculator gnome-system-monitor gnome-characters'
-    appinstall 'Tweak tool'                 'gnome-tweak-tool'
+    appinstall 'Tweak tool'                 'gnome-tweaks'
 
     appinstall 'Gnome appindicator support' 'gnome-shell-extension-appindicator'
 
@@ -676,7 +676,7 @@ case "${bundle}" in
     then
         appinstall 'Rhythmbox'              'rhythmbox rhythmbox-plugins'
         appinstall 'Totem video player'     'totem'
-        appinstall 'MPV Gnome GUI'          'gnome-mpv'
+        appinstall 'MPV Gnome GUI'          'celluloid'
 
         appinstall 'DLNA support'           'dleyna-server [dleyna-renderer]'
 
