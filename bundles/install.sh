@@ -570,11 +570,6 @@ case "${bundle}" in
         appinstall 'Mint themes'            'mint-themes'
     fi
 
-    if ispkgavailable pop-gtk-theme
-    then
-        appinstall 'Pop GTK Theme'      'pop-gtk-theme'
-    fi
-
     if ispkgavailable yaru-theme-icon
     then
         appinstall 'Yaru theme'         'yaru-theme-icon [yaru-theme-gtk]'
