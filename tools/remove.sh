@@ -15,6 +15,7 @@ appremove 'OEM kernel headers'      'linux-headers-oem linux-headers-4.15.0-1050
 
 appremove 'Apt listchanges'         'apt-listchanges'
 appremove 'Unattended upgrades'     'unattended-upgrades'
+appremove 'Aptitude'                'aptitude aptitude-common'
 
 ## Office ----------------------------------------------------------------------
 
