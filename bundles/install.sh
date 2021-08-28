@@ -567,7 +567,7 @@ case "${bundle}" in
 
     if ispkginstalled cinnamon
     then
-        appinstall 'Mint themes'            'mint-themes'
+        appinstall 'Mint themes'        'mint-themes'
     fi
 
     if ispkgavailable yaru-theme-icon
