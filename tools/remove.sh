@@ -57,6 +57,7 @@ appremove 'Symbols table'           'gucharmap'
 appremove 'Terminals'               'xterm xiterm+thai mlterm mlterm-common mlterm-tools'
 appremove 'Dconf editor'            'dconf-editor'
 appremove 'Landscape'               'landscape-client-ui-install'
+appremove 'USB image writer'        'usb-creator-common usb-creator-gtk usb-creator-kde'
 
 ## Help ------------------------------------------------------------------------
 
