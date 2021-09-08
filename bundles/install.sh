@@ -64,20 +64,15 @@ case "${bundle}" in
     then
         gnomeshellextension 112             # Remove Accessibility
         gnomeshellextension 2072            # Skip Window Ready Notification
+        gnomeshellextension 2917            # Bring Out Submenu Of Power Off/Logout Button
 
         if dpkg --compare-versions "$(pkgversion gnome-shell)" lt 40
         then
             gnomeshellextension 800         # Remove Dropdown Arrows
         fi
-
-        if dpkg --compare-versions "$(pkgversion gnome-shell)" ge 3.36
-        then
-            gnomeshellextension 2917        # Bring Out Submenu Of Power Off/Logout Button
-        fi
     fi
 
     fi
-
 ;;
 
 ### Cinnamon ===================================================================
