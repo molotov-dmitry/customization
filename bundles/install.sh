@@ -63,8 +63,12 @@ case "${bundle}" in
     if ispkginstalled gnome-shell
     then
         gnomeshellextension 112             # Remove Accessibility
-        gnomeshellextension 800             # Remove Dropdown Arrows
         gnomeshellextension 2072            # Skip Window Ready Notification
+
+        if dpkg --compare-versions "$(pkgversion gnome-shell)" lt 40
+        then
+            gnomeshellextension 800         # Remove Dropdown Arrows
+        fi
 
         if dpkg --compare-versions "$(pkgversion gnome-shell)" ge 3.36
         then
