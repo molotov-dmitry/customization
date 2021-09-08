@@ -175,12 +175,7 @@ case "${bundle}" in
 
         if [[ "$editor" == 'gnome.gedit' ]]
         then
-            if [[ "$(pkgversion gedit | cut -d '.' -f 2)" -lt 36 ]]
-            then
-                gsettings set org.${editor}.preferences.editor display-overview-map true
-            else
-                gsettings set org.gnome.gedit.preferences.editor background-pattern 'grid'
-            fi
+            gsettings set org.gnome.gedit.preferences.editor background-pattern 'grid'
 
             encodingsettings='candidate-encodings'
 
@@ -190,7 +185,6 @@ case "${bundle}" in
 
             encodingsettings='auto-detected'
         fi
-
 
         gsettingsclear org.${editor}.preferences.encodings "$encodingsettings"
 
