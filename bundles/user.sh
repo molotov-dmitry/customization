@@ -33,13 +33,6 @@ case "${bundle}" in
     then
         ubuntu-report send no
     fi
-
-    ## Aliases =================================================================
-
-    echo alias highlight=\'grep --color=always -z\' >> ~/.bash_aliases
-
-    echo -e "\nfunction ddusb()\n{\n    sudo dd if=\"\$1\" of=\"\$2\" bs=2M status=progress oflag=sync\n}\n\n" >> ~/.bash_aliases
-
 ;;
 
 ### Base GUI ===================================================================
@@ -621,8 +614,6 @@ case "${bundle}" in
 
 "dev/build")
 
-    echo "alias makej='make -j \$(nproc)'" >> ~/.bash_aliases
-
 ;;
 
 ### Code analysis tools ========================================================
@@ -927,29 +918,6 @@ _EOF
 ### Version control system =====================================================
 
 "vcs")
-
-    ## SVN color side-by-side diff alias ---------------------------------------
-
-    echo alias svndiff=\'svn --diff-cmd "colordiff" diff\' >> ~/.bash_aliases
-
-    ## SVN working copy clean function -----------------------------------------
-
-    if [[ -z "$(grep 'svnclean()' ~/.bash_aliases)" ]]
-    then
-        echo -e "\nfunction svnclean()\n{\n    svn st \"\$@\" --no-ignore | grep '^?\\|^I' | sed 's/^.[ ]*//' | tr '\\\\n' '\\\\0' | xargs -0 rm -rf\n}\n\n" >> ~/.bash_aliases
-    fi
-
-    ## Git revision number -----------------------------------------------------
-
-    if [[ -z "$(grep 'gitversion()' ~/.bash_aliases)" ]]
-    then
-        echo -e "\nfunction gitversion()\n{\n    git log --pretty=format:'%h' \"\$@\" | wc -w\n}\n\n" >> ~/.bash_aliases
-    fi
-
-    if [[ -z "$(grep 'githash()' ~/.bash_aliases)" ]]
-    then
-        echo -e "\nfunction githash()\n{\n    git rev-parse --short HEAD \"\$@\"\n}\n\n" >> ~/.bash_aliases
-    fi
 
     ## Make git save credentials by default ------------------------------------
 
