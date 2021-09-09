@@ -320,6 +320,7 @@ case "${bundle}" in
 "dev/style")
 
     appinstall 'Code beautifier'        'astyle clang-format'
+    appinstall 'UTF-8 BOM'              'utf8bom'
 
 ;;
 
