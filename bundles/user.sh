@@ -124,14 +124,6 @@ case "${bundle}" in
         gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
     fi
 
-    ## Remove home folder and trash icons from desktop =========================
-
-    if ispkginstalled gnome-shell-extension-desktop-icons
-    then
-        gsettings set org.gnome.shell.extensions.desktop-icons show-home false
-        gsettings set org.gnome.shell.extensions.desktop-icons show-trash false
-    fi
-
     ## Remove trash icon from dock =============================================
 
     if ispkginstalled gnome-shell-extension-ubuntu-dock
