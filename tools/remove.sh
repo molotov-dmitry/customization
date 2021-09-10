@@ -62,9 +62,10 @@ appremove 'Terminals'               'xterm xiterm+thai mlterm mlterm-common mlte
 appremove 'Dconf editor'            'dconf-editor'
 appremove 'Landscape'               'landscape-client-ui-install'
 appremove 'USB image writer'        'usb-creator-common usb-creator-gtk usb-creator-kde'
-appremove 'BTRFS tools'             'btrfs-progs'
+appremove 'FS tools'                'btrfs-progs reiserfsprogs'
 appremove 'Password checker'        'cracklib-runtime'
 appremove 'Speech synthesizer'      'espeak-ng-data libespeak-ng1 speech-dispatcher-espeak-ng'
+appremove 'Friendly recovery'       'friendly-recovery'
 
 ## Help ------------------------------------------------------------------------
 
@@ -99,7 +100,7 @@ appremove 'Fonts'                   'fonts-beng fonts-beng-extra fonts-lohit-ben
 appremove 'Language packs'          'language-pack-zh-hans-base language-pack-zh-hans language-pack-pt-base language-pack-pt language-pack-it-base language-pack-it language-pack-gnome-zh-hans-base language-pack-gnome-zh-hans language-pack-gnome-pt-base language-pack-gnome-pt language-pack-gnome-it-base language-pack-gnome-it language-pack-gnome-fr-base language-pack-gnome-fr language-pack-gnome-es-base language-pack-gnome-es language-pack-gnome-de-base language-pack-gnome-de language-pack-fr-base language-pack-fr language-pack-es-base language-pack-es language-pack-de-base language-pack-de wfrench wbrazilian wngerman wogerman wportuguese wspanish wswiss witalian firefox-locale-de firefox-locale-es firefox-locale-fr firefox-locale-it firefox-locale-pt firefox-locale-zh-hans libreoffice-l10n-zh-tw libreoffice-l10n-zh-cn libreoffice-l10n-pt-br libreoffice-l10n-pt libreoffice-l10n-it libreoffice-l10n-fr libreoffice-l10n-es libreoffice-l10n-en-za libreoffice-l10n-de libreoffice-help-zh-tw libreoffice-help-zh-cn libreoffice-help-pt-br libreoffice-help-pt libreoffice-help-it libreoffice-help-fr libreoffice-help-es libreoffice-help-de hunspell-de-at-frami hunspell-de-ch-frami hunspell-de-de-frami hunspell-en-au hunspell-en-ca hunspell-en-za hunspell-es hunspell-fr hunspell-fr-classical hunspell-it hunspell-pt-br hunspell-pt-pt hyphen-de hyphen-en-ca hyphen-es hyphen-fr hyphen-it hyphen-pt-br hyphen-pt-pt mythes-de mythes-de-ch mythes-en-au mythes-es mythes-fr mythes-it mythes-pt-pt'
 appremove 'Khmer converter'         'khmerconverter'
 appremove 'Hebrew calendar applet'  'hdate-applet'
-appremove 'Input methods'           'fcitx5 fcitx5-data fcitx5-modules fcitx5-chewing fcitx5-chineese-addons fcitx fcitx-bin fcitx-config-common fcitx-data fcitx-modules fcitx-frontend-all fcitx-mozc fcitx-mozc-data fcitx5-mozc mozc-utils-gui mozc-data mozc-server ibus-mozc anthy anthy-common gtk-im-libthai'
+appremove 'Input methods'           'fcitx5 fcitx5-data fcitx5-modules fcitx5-chewing fcitx5-chineese-addons fcitx fcitx-bin fcitx-config-common fcitx-data fcitx-modules fcitx-frontend-all fcitx-mozc fcitx-mozc-data fcitx5-mozc mozc-utils-gui mozc-data mozc-server ibus-mozc anthy anthy-common gtk-im-libthai ibus-libpinyin ibus-hangul ibus-chewing ibus-table-cangjie ibus-table-cangjie-big ibus-table-cangjie3 ibus-table-cangjie5 ibus-table-wubi ibus-unikey'
 
 ## Unused applications ---------------------------------------------------------
 
