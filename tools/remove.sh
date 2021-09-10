@@ -44,7 +44,7 @@ appremove 'Konversation IRC client' 'konversation konversation-data'
 ## Accesibility and parental control -------------------------------------------
 
 appremove 'Onboard'                 'onboard'
-appremove 'Orca screen reader'      'gnome-orca'
+appremove 'Orca screen reader'      'orca gnome-orca'
 appremove 'Parental control'        'malcontent'
 
 ## System ----------------------------------------------------------------------
