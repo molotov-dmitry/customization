@@ -16,6 +16,8 @@ appremove 'OEM kernel headers'      'linux-headers-oem linux-headers-4.15.0-1050
 appremove 'Apt listchanges'         'apt-listchanges'
 appremove 'Unattended upgrades'     'unattended-upgrades'
 appremove 'Aptitude'                'aptitude aptitude-common'
+appremove 'Partner packages'        'app-install-data-partner'
+
 
 ## Office ----------------------------------------------------------------------
 
@@ -46,6 +48,7 @@ appremove 'Konversation IRC client' 'konversation konversation-data'
 appremove 'Onboard'                 'onboard'
 appremove 'Orca screen reader'      'orca gnome-orca'
 appremove 'Parental control'        'malcontent'
+appremove 'Braille display'         'brltty'
 
 ## System ----------------------------------------------------------------------
 
@@ -59,6 +62,9 @@ appremove 'Terminals'               'xterm xiterm+thai mlterm mlterm-common mlte
 appremove 'Dconf editor'            'dconf-editor'
 appremove 'Landscape'               'landscape-client-ui-install'
 appremove 'USB image writer'        'usb-creator-common usb-creator-gtk usb-creator-kde'
+appremove 'BTRFS tools'             'btrfs-progs'
+appremove 'Password checker'        'cracklib-runtime'
+appremove 'Speech synthesizer'      'espeak-ng-data libespeak-ng1 speech-dispatcher-espeak-ng'
 
 ## Help ------------------------------------------------------------------------
 
