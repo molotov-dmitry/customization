@@ -92,7 +92,6 @@ appremove 'Cheese'                  'cheese'
 
 appremove 'Gnome Apps'              'gnome-sound-recorder gnome-todo gnome-weather gnome-maps gnome-contacts eog gnome-font-viewer gnome-documents'
 appremove 'Gnome desktop icons'     'gnome-shell-extension-desktop-icons gnome-shell-extension-desktop-icons-ng'
-appremove 'Font viewer'             ''
 
 ## Localization and fonts ------------------------------------------------------
 
