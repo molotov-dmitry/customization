@@ -8,7 +8,6 @@ dev/doc
 dev/man
 
 server/ssh
-server/smb
 
 vcs
 
