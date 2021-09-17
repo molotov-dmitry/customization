@@ -584,7 +584,6 @@ case "${bundle}" in
     bash "${scriptpath}" 'dev/markdown'
     bash "${scriptpath}" 'dev/net'
     bash "${scriptpath}" 'dev/ti'
-    bash "${scriptpath}" 'dev/kmx32'
 
 ;;
 
@@ -851,12 +850,6 @@ case "${bundle}" in
 ### TI TMS320C64XX =============================================================
 
 "dev/ti")
-
-;;
-
-### KMX32 GCC ==================================================================
-
-"dev/kmx32")
 
 ;;
 
