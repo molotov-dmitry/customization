@@ -131,7 +131,6 @@ case "${bundle}" in
 "server")
 
     bash "${scriptpath}" 'server/ssh' "$@"
-    bash "${scriptpath}" 'server/smb' "$@"
     bash "${scriptpath}" 'server/svn' "$@"
     bash "${scriptpath}" 'server/db' "$@"
     bash "${scriptpath}" 'server/iperf' "$@"
@@ -144,12 +143,6 @@ case "${bundle}" in
 ### OpenSSH server =============================================================
 
 "server/ssh")
-
-;;
-
-### SMB server =================================================================
-
-"server/smb")
 
 ;;
 

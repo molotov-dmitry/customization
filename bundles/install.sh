@@ -176,7 +176,6 @@ case "${bundle}" in
 "server")
 
     bash "${scriptpath}" 'server/ssh'
-    bash "${scriptpath}" 'server/smb'
     bash "${scriptpath}" 'server/svn'
     bash "${scriptpath}" 'server/db'
     bash "${scriptpath}" 'server/iperf'
@@ -191,14 +190,6 @@ case "${bundle}" in
 "server/ssh")
 
     appinstall 'Open SSH'               'openssh-server'
-
-;;
-
-### SMB server =================================================================
-
-"server/smb")
-
-    appinstall 'Samba'                  'cifs-utils samba winbind'
 
 ;;
 

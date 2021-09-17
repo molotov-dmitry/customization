@@ -136,7 +136,6 @@ case "${bundle}" in
 "server")
 
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/ssh'
-    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/smb'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/svn'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/db'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/iperf'
@@ -149,14 +148,6 @@ case "${bundle}" in
 ### OpenSSH server =============================================================
 
 "server/ssh")
-
-;;
-
-### SMB server =================================================================
-
-"server/smb")
-
-    preparefiles 'Samba' 'samba'
 
 ;;
 
