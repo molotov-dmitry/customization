@@ -181,7 +181,6 @@ case "${bundle}" in
     bash "${scriptpath}" 'server/iperf'
     bash "${scriptpath}" 'server/media'
     bash "${scriptpath}" 'server/download'
-    bash "${scriptpath}" 'server/proxy'
 
 ;;
 
@@ -242,16 +241,6 @@ case "${bundle}" in
     silent 'Download youtube-dl'        wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
     silent 'Setup youtube-dl'           chmod a+rx /usr/local/bin/youtube-dl
     appinstall 'Transmission'           'transmission-daemon'
-
-;;
-
-### Proxy server ===============================================================
-
-"server/proxy")
-
-    ## Squid3 ------------------------------------------------------------------
-
-    appinstall 'Squid3'                 'squid3'
 
 ;;
 

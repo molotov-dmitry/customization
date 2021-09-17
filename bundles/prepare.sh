@@ -141,7 +141,6 @@ case "${bundle}" in
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/iperf'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/media'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/download'
-    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'server/proxy'
 
 ;;
 
@@ -200,16 +199,6 @@ case "${bundle}" in
     ## Transmission ------------------------------------------------------------
 
     preparefiles 'Transmission' 'transmission'
-
-;;
-
-### Proxy server ===============================================================
-
-"server/proxy")
-
-    ## Squid3 ------------------------------------------------------------------
-
-    preparefiles 'Squid3' 'squid3'
 
 ;;
 

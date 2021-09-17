@@ -515,7 +515,6 @@ case "${bundle}" in
     bash "${scriptpath}" 'server/iperf'
     bash "${scriptpath}" 'server/media'
     bash "${scriptpath}" 'server/download'
-    bash "${scriptpath}" 'server/proxy'
 
 ;;
 
@@ -560,12 +559,6 @@ case "${bundle}" in
 "server/download")
 
     echo "alias ytpl='youtube-dl -o \"%(playlist_index)02d. %(title)s.%(ext)s\"'" >> ~/.bash_aliases
-
-;;
-
-### Proxy server ===============================================================
-
-"server/proxy")
 
 ;;
 

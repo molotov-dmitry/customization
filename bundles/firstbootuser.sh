@@ -136,7 +136,6 @@ case "${bundle}" in
     bash "${scriptpath}" 'server/iperf' "$@"
     bash "${scriptpath}" 'server/media' "$@"
     bash "${scriptpath}" 'server/download' "$@"
-    bash "${scriptpath}" 'server/proxy' "$@"
 
 ;;
 
@@ -179,12 +178,6 @@ case "${bundle}" in
 ### Download server ============================================================
 
 "server/download")
-
-;;
-
-### Proxy server ===============================================================
-
-"server/proxy")
 
 ;;
 

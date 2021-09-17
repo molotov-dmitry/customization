@@ -168,7 +168,6 @@ _EOF
     bash "${scriptpath}" 'server/iperf'
     bash "${scriptpath}" 'server/media'
     bash "${scriptpath}" 'server/download'
-    bash "${scriptpath}" 'server/proxy'
 
 ;;
 
@@ -239,18 +238,6 @@ _EOF
 
     silent 'Creating Transmission config dir' mkdir -p '/etc/transmission-daemon'
     silent 'Configuring Transmission'   cp -f "${ROOT_PATH}/files/transmission/settings.json" '/etc/transmission-daemon/'
-
-;;
-
-### Proxy server ===============================================================
-
-"server/proxy")
-
-    ## Squid3 ------------------------------------------------------------------
-
-    silent 'Creating Squid3 config dir' mkdir -p '/etc/squid3'
-    silent 'Configuring Squid3'         cp -f "${ROOT_PATH}/files/squid3/squid.conf" '/etc/squid3/'
-    silent 'Creating Squid3 users list' touch '/etc/squid3/internet_users'
 
 ;;
 
