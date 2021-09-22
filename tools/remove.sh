@@ -18,7 +18,6 @@ appremove 'Unattended upgrades'     'unattended-upgrades'
 appremove 'Aptitude'                'aptitude aptitude-common'
 appremove 'Partner packages'        'app-install-data-partner'
 
-
 ## Office ----------------------------------------------------------------------
 
 appremove 'Brasero'                 'brasero brasero-cdrkit brasero-common'
@@ -100,6 +99,18 @@ appremove 'Language packs'          'language-pack-zh-hans-base language-pack-zh
 appremove 'Khmer converter'         'khmerconverter'
 appremove 'Hebrew calendar applet'  'hdate-applet'
 appremove 'Input methods'           'fcitx5 fcitx5-data fcitx5-modules fcitx5-chewing fcitx5-chineese-addons fcitx fcitx-bin fcitx-config-common fcitx-data fcitx-modules fcitx-frontend-all fcitx-mozc fcitx-mozc-data fcitx5-mozc mozc-utils-gui mozc-data mozc-server ibus-mozc anthy anthy-common gtk-im-libthai ibus-libpinyin ibus-hangul ibus-chewing ibus-table-cangjie ibus-table-cangjie-big ibus-table-cangjie3 ibus-table-cangjie5 ibus-table-wubi ibus-unikey'
+
+## Snapd -----------------------------------------------------------------------
+
+if ispkginstalled snapd
+then
+    appremove 'Snap'                'snapd'
+fi
+
+if ispkgavailable snapd
+then
+    silent    'Disable Snapd'       apt-mark hold 'snapd'
+fi
 
 ## Unused applications ---------------------------------------------------------
 
