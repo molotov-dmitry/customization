@@ -388,7 +388,7 @@ case "${bundle}" in
     appinstall 'GTK+ SDK'               'libgtk-3-dev libgtkmm-3.0-dev libtool libtool-bin'
     appinstall 'GTK+ Libs'              'libgtksourceview-3.0-dev libgtksourceview-3.0-1 libgtksourceviewmm-3.0-0v5 libgtksourceview-3.0-dev libpeas-1.0-0 libpeas-dev libgit2-glib-1.0-dev libgit2-glib-1.0-0'
 
-    if havegraphics
+    if gnomebased
     then
         appinstall 'GTK+ IDE'           'anjuta glade'
     fi
@@ -399,7 +399,7 @@ case "${bundle}" in
 
 "dev/gnome")
 
-    if havegraphics
+    if gnomebased
     then
         appinstall 'GNOME IDE'          'gnome-builder'
     fi
@@ -494,7 +494,7 @@ case "${bundle}" in
         fi
     fi
 
-    if havegraphics
+    if gnomebased
     then
         appinstall 'Meld diff tool'     'meld'
 
