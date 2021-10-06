@@ -865,6 +865,13 @@ case "${bundle}" in
 
     git config --global pull.ff only
 
+    ## Set default branch name -------------------------------------------------
+
+    if dpkg --compare-versions "$(pkgversion git)" ge 2.28
+    then
+        git config --global init.defaultBranch master
+    fi
+
     ## Meld --------------------------------------------------------------------
 
     if ispkginstalled 'meld'
