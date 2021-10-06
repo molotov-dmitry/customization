@@ -34,13 +34,15 @@ appremove 'Firefox'                 'firefox firefox-esr xul-ext-ubufox xul-ext-
 appremove 'Unity web browser'       'webbrowser-app'
 appremove 'Thunderbird mail client' 'thunderbird'
 appremove 'Evolution mail client'   'evolution evolution-common'
-appremove 'Remote desktop client'   'remmina remmina-common remmina-plugin-rdp remmina-plugin-vnc'
+appremove 'Remote desktop client'   'remmina remmina-common remmina-plugin-rdp remmina-plugin-vnc krdc'
 appremove 'Ubuntu web launchers'    'ubuntu-web-launchers'
 appremove 'Transmission'            'transmission-common transmission-gtk'
 appremove 'KTorrent'                'ktorrent ktorrent-data'
 appremove 'HexChat'                 'hexchat hexchat-common'
 appremove 'Akregator'               'akregator'
 appremove 'Konversation IRC client' 'konversation konversation-data'
+appremove 'Browse'                  'sugar-browse-activity'
+appremove 'KDE Connect'             'kdeconnect'
 
 ## Accesibility and parental control -------------------------------------------
 
@@ -65,6 +67,7 @@ appremove 'FS tools'                'btrfs-progs reiserfsprogs'
 appremove 'Password checker'        'cracklib-runtime'
 appremove 'Speech synthesizer'      'espeak-ng-data libespeak-ng1 speech-dispatcher-espeak-ng'
 appremove 'Friendly recovery'       'friendly-recovery'
+appremove 'Plasma system monitor'   'plasma-systemmonitor'
 
 ## Help ------------------------------------------------------------------------
 
@@ -86,6 +89,7 @@ appremove 'Elisa music player'      'elisa'
 appremove 'MPD'                     'mpd'
 appremove 'Shotwell'                'shotwell shotwell-common'
 appremove 'Cheese'                  'cheese'
+appremove 'Pavucontrol'             'pavucontrol-qt'
 
 ## Gnome apps ------------------------------------------------------------------
 
