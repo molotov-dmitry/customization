@@ -825,7 +825,13 @@ function gnomeshellextension()
     local installdir='/usr/share/gnome-shell/extensions'
     local extid="$1"
     local shellver=$(dpkg-query -W -f='${Version}\n' gnome-shell | cut -d '.' -f 1-2)
-    local shellver="${shellver%%.*}.$(( ${shellver##*.} - ${shellver##*.} % 2 ))"
+
+    if dpkg --compare-versions "${shellver}" ge 40
+    then
+        local shellver="${shellver%%.*}"
+    else
+        local shellver="${shellver%%.*}.$(( ${shellver##*.} - ${shellver##*.} % 2 ))"
+    fi
 
     if [[ -z "${shellver}" ]]
     then
