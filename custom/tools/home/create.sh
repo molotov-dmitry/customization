@@ -7,4 +7,4 @@ cd "${ROOT_PATH}" || exit 1
 
 appinstall 'Notify server' 'notify-server'
 
-gnomeshellextension 1319        # GSConnect
+gnomeshellextension 1319 'GSConnect' '' 'gnome-shell-extension-gsconnect'

@@ -62,14 +62,11 @@ case "${bundle}" in
 
     if ispkginstalled gnome-shell
     then
-        gnomeshellextension 112             # Remove Accessibility
-        gnomeshellextension 2072            # Skip Window Ready Notification
-        gnomeshellextension 2917            # Bring Out Submenu Of Power Off/Logout Button
+            gnomeshellextension 112  'Remove Accessibility'             'ge 3.34' 'gnome-shell-extension-remove-accesibility'
+            gnomeshellextension 2072 'Skip Window Ready Notification'   'lt 3.38'
+            gnomeshellextension 800  'Remove Dropdown Arrows'           'lt 40'   'gnome-shell-extension-remove-dropdown-arrows'
 
-        if dpkg --compare-versions "$(pkgversion gnome-shell)" lt 40
-        then
-            gnomeshellextension 800         # Remove Dropdown Arrows
-        fi
+            gnomeshellextension 2917 'Bring Out Submenu Of Power Off/Logout Button'
     fi
 
     fi

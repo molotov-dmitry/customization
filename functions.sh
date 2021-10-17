@@ -821,10 +821,31 @@ function repoaddnonfree()
 
 function gnomeshellextension()
 {
+    local extid="$1"
+    local extdescription="$2"
+    local condition="$3"
+    local extpkg="$4"
+
+    ### Check condition --------------------------------------------------------
+
+    if [[ -n "$condition" ]] && ! dpkg --compare-versions "$(pkgversion gnome-shell)" ${condition}
+    then
+        return 0
+    fi
+
+    ### Check extension is available from repository ---------------------------
+
+    if [[ -n "$extpkg" ]] && ispkgavailable "$extpkg"
+    then
+        appinstall "$extdescription" "$extpkg"
+        return $?
+    fi
+
+    ### Install from Gnome Shell extensions website ----------------------------
+
+    local shellver=$(dpkg-query -W -f='${Version}\n' gnome-shell | cut -d '.' -f 1-2)
     local server='https://extensions.gnome.org'
     local installdir='/usr/share/gnome-shell/extensions'
-    local extid="$1"
-    local shellver=$(dpkg-query -W -f='${Version}\n' gnome-shell | cut -d '.' -f 1-2)
 
     if dpkg --compare-versions "${shellver}" ge 40
     then
@@ -835,7 +856,7 @@ function gnomeshellextension()
 
     if [[ -z "${shellver}" ]]
     then
-        title "Downloading extension #${extid}"
+        title "Downloading extension ${extdescription:-#${extid}}"
         msgfail 'shell not installed'
         return 1
     fi
@@ -844,7 +865,7 @@ function gnomeshellextension()
 
     if [[ $? -ne 0 ]]
     then
-        title "Downloading extension #${extid}"
+        title "Downloading extension ${extdescription:-#${extid}}"
         msgfail
         return 1
     fi
