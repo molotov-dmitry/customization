@@ -64,6 +64,11 @@ case "${bundle}" in
         then
             silent 'Set GDM3 theme' update-alternatives --set gdm3-theme.gresource "/usr/share/gnome-shell/gnome-shell-theme.gresource"
         fi
+
+        if update-alternatives --list gdm-theme.gresource >/dev/null 2>/dev/null
+        then
+            silent 'Set GDM3 theme' update-alternatives --set gdm-theme.gresource "/usr/share/gnome-shell/gnome-shell-theme.gresource"
+        fi
     fi
 
     ## Disbale Wayland ---------------------------------------------------------
