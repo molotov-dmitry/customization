@@ -239,11 +239,6 @@ _EOF
 
 "server/download")
 
-    ## Transmission ------------------------------------------------------------
-
-    silent 'Creating Transmission config dir' mkdir -p '/etc/transmission-daemon'
-    silent 'Configuring Transmission'   cp -f "${ROOT_PATH}/files/transmission/settings.json" '/etc/transmission-daemon/'
-
 ;;
 
 ### ============================================================================

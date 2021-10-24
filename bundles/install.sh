@@ -237,7 +237,9 @@ case "${bundle}" in
     appinstall 'Youtube downloader'     'youtube-dl ffmpeg phantomjs'
     silent 'Download youtube-dl'        wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
     silent 'Setup youtube-dl'           chmod a+rx /usr/local/bin/youtube-dl
+
     appinstall 'Transmission'           'transmission-daemon'
+    appinstall 'NGINX Web server'       'nginx'
 
 ;;
 

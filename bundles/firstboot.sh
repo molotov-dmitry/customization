@@ -167,6 +167,36 @@ case "${bundle}" in
 
 "server/download")
 
+    # Stub self-signed certificate for Transmission ----------------------------
+
+    mkdir -p '/media/documents/cert'
+
+    if [[ ! -f '/media/documents/cert/transmission.pem' ]]
+    then
+        ssh-keygen  \
+            -t rsa  \
+            -b 4096 \
+            -P ''   \
+            -m PEM  \
+            -f '/media/documents/cert/transmission.pem'
+    fi
+
+    if [[ ! -f '/media/documents/cert/transmission.crt' ]]
+    then
+        openssl req -new -x509                            \
+            -key '/media/documents/cert/transmission.pem' \
+            -days 1095                                    \
+            -subj '/C=/ST=/L=/O=/CN=127.0.0.1'            \
+            -addext 'subjectAltName=IP:127.0.0.1'         \
+            -out '/media/documents/cert/transmission.crt'
+    fi
+
+    if [[ ! -L '/etc/nginx/sites-enabled/transmission.conf' ]]
+    then
+        mkdir -p '/etc/nginx/sites-enabled'
+        ln -s '/etc/nginx/sites-available/transmission.conf' '/etc/nginx/sites-enabled/transmission.conf'
+    fi
+
 ;;
 
 ### ============================================================================

@@ -198,7 +198,7 @@ case "${bundle}" in
 
     ## Transmission ------------------------------------------------------------
 
-    preparefiles 'Transmission' 'transmission'
+    silent 'Copy Transmission files' cp -rf "${ROOT_PATH}/files/transmission/." "${rootfs_dir}/"
 
 ;;
 
