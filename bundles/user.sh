@@ -309,6 +309,9 @@ case "${bundle}" in
         ## Bring Out Submenu Of Power Off/Logout Button ------------------------
         gsettingsadd org.gnome.shell enabled-extensions 'BringOutSubmenuOfPowerOffLogoutButton@pratap.fastmail.fm'
 
+        ## Removable Drive Menu ------------------------------------------------
+        gsettingsadd org.gnome.shell enabled-extensions 'drive-menu@gnome-shell-extensions.gcampax.github.com'
+
     fi
 
     ## Window control buttons --------------------------------------------------
@@ -1594,13 +1597,6 @@ case "${bundle}" in
         gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${newprofileid}/" allow-bold false
 
         gsettingsadd org.gnome.Terminal.ProfilesList list "${newprofileid}"
-    fi
-
-    ## Gnome shell extensions ==================================================
-
-    if ispkginstalled gnome-shell
-    then
-        gsettingsadd org.gnome.shell enabled-extensions 'drive-menu@gnome-shell-extensions.gcampax.github.com'
     fi
 
     ## Configure Epiphany ======================================================
