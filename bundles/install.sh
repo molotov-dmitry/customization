@@ -62,11 +62,12 @@ case "${bundle}" in
 
     if ispkginstalled gnome-shell
     then
-            gnomeshellextension 112  'Remove Accessibility'             'ge 3.34' 'gnome-shell-extension-remove-accesibility'
-            gnomeshellextension 2072 'Skip Window Ready Notification'   'lt 3.38'
-            gnomeshellextension 800  'Remove Dropdown Arrows'           'lt 40'   'gnome-shell-extension-remove-dropdown-arrows'
+        gnomeshellextension 112  'Remove Accessibility'             'ge 3.34' 'gnome-shell-extension-remove-accesibility'
+        gnomeshellextension 2072 'Skip Window Ready Notification'   'lt 3.38'
+        gnomeshellextension 800  'Remove Dropdown Arrows'           'lt 40'   'gnome-shell-extension-remove-dropdown-arrows'
+        gnomeshellextension 7    'Removable Drive Menu'
 
-            gnomeshellextension 2917 'Bring Out Submenu Of Power Off/Logout Button'
+        gnomeshellextension 2917 'Bring Out Submenu Of Power Off/Logout Button'
     fi
 
     fi
@@ -939,8 +940,6 @@ case "${bundle}" in
 
     if ispkginstalled gnome-shell
     then
-        gnomeshellextension 7           # Removable Drive Menu
-
         appinstall 'Redmine issues' 'gnome-shell-extension-redmine-issues'
     fi
 
