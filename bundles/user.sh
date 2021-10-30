@@ -295,21 +295,29 @@ case "${bundle}" in
     if ispkginstalled gnome-shell
     then
         ## Enable app indicators -----------------------------------------------
+
         gsettingsadd org.gnome.shell enabled-extensions 'ubuntu-appindicators@ubuntu.com'
 
         ## Remove accessibility icon -------------------------------------------
+
         gsettingsadd org.gnome.shell enabled-extensions 'removeaccesibility@lomegor'
 
         ## Remove Dropdown Arrows ----------------------------------------------
+
         gsettingsadd org.gnome.shell enabled-extensions 'remove-dropdown-arrows@mpdeimos.com'
 
         ## Skip Window Ready Notification --------------------------------------
+
         gsettingsadd org.gnome.shell enabled-extensions 'skipwindowreadynotification@JasonLG1979.github.io'
 
         ## Bring Out Submenu Of Power Off/Logout Button ------------------------
+
         gsettingsadd org.gnome.shell enabled-extensions 'BringOutSubmenuOfPowerOffLogoutButton@pratap.fastmail.fm'
 
+        dconf write /org/gnome/shell/extensions/brngout/remove-suspend-button true
+
         ## Removable Drive Menu ------------------------------------------------
+
         gsettingsadd org.gnome.shell enabled-extensions 'drive-menu@gnome-shell-extensions.gcampax.github.com'
 
     fi
