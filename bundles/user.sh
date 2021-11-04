@@ -1113,13 +1113,6 @@ case "${bundle}" in
 
 "media")
 
-    ## launcher ----------------------------------------------------------------
-
-    if ispkginstalled rhythmbox
-    then
-        launcheradd 'rhythmbox'
-    fi
-
     ## hide apps from application menu -----------------------------------------
 
     hideapp 'easytag'
