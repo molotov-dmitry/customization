@@ -320,6 +320,18 @@ case "${bundle}" in
 
         gsettingsadd org.gnome.shell enabled-extensions 'drive-menu@gnome-shell-extensions.gcampax.github.com'
 
+        ## Dash to dock --------------------------------------------------------
+
+        gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true
+
+        gsettings set org.gnome.shell.extensions.dash-to-dock show-trash         false
+        gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts        false
+
+        gsettings set org.gnome.shell.extensions.dash-to-dock dock-position      'LEFT'
+        gsettings set org.gnome.shell.extensions.dash-to-dock extend-height      true
+        gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed         true
+
+        gsettingsadd org.gnome.shell enabled-extensions 'dash-to-dock@micxgx.gmail.com'
     fi
 
     ## Window control buttons --------------------------------------------------
