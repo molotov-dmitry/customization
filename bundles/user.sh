@@ -312,9 +312,9 @@ case "${bundle}" in
 
         ## Bring Out Submenu Of Power Off/Logout Button ------------------------
 
-        gsettingsadd org.gnome.shell enabled-extensions 'BringOutSubmenuOfPowerOffLogoutButton@pratap.fastmail.fm'
-
         dconf write /org/gnome/shell/extensions/brngout/remove-suspend-button true
+
+        gsettingsadd org.gnome.shell enabled-extensions 'BringOutSubmenuOfPowerOffLogoutButton@pratap.fastmail.fm'
 
         ## Removable Drive Menu ------------------------------------------------
 
