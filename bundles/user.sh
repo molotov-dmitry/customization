@@ -324,6 +324,8 @@ case "${bundle}" in
         gsettings set org.gnome.shell.extensions.dash-to-dock extend-height      true
         gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed         true
 
+        gsettings set org.gnome.shell.extensions.dash-to-dock custom-theme-shrink true
+
         gsettingsadd org.gnome.shell enabled-extensions 'dash-to-dock@micxgx.gmail.com'
     fi
 
