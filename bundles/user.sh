@@ -315,16 +315,16 @@ case "${bundle}" in
 
         ## Dash to dock --------------------------------------------------------
 
-        gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true
+        dconf write /org/gnome/shell/extensions/dash-to-dock/apply-custom-theme true
 
-        gsettings set org.gnome.shell.extensions.dash-to-dock show-trash         false
-        gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts        false
+        dconf write /org/gnome/shell/extensions/dash-to-dock/show-trash         false
+        dconf write /org/gnome/shell/extensions/dash-to-dock/show-mounts        false
 
-        gsettings set org.gnome.shell.extensions.dash-to-dock dock-position      'LEFT'
-        gsettings set org.gnome.shell.extensions.dash-to-dock extend-height      true
-        gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed         true
+        dconf write /org/gnome/shell/extensions/dash-to-dock/dock-position      'LEFT'
+        dconf write /org/gnome/shell/extensions/dash-to-dock/extend-height      true
+        dconf write /org/gnome/shell/extensions/dash-to-dock/dock-fixed         true
 
-        gsettings set org.gnome.shell.extensions.dash-to-dock custom-theme-shrink true
+        dconf write /org/gnome/shell/extensions/dash-to-dock/custom-theme-shrink true
 
         gsettingsadd org.gnome.shell enabled-extensions 'dash-to-dock@micxgx.gmail.com'
     fi
