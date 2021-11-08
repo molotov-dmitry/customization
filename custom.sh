@@ -489,7 +489,7 @@ then
     then
         if [[ -f "${iso_dir}/${livedir}/filesystem.manifest-minimal-remove" && -f "${iso_dir}/${livedir}/filesystem.manifest-remove" ]]
         then
-            silent 'Creating minimal remove manifest' mv "${iso_dir}/${livedir}/filesystem.manifest-remove" "${iso_dir}/${livedir}/filesystem.manifest-minimal-remove"
+            silent 'Creating minimal remove manifest' cp -f "${iso_dir}/${livedir}/filesystem.manifest-remove" "${iso_dir}/${livedir}/filesystem.manifest-minimal-remove"
 
             for package in ti-cgt ccs-pjt-editor-qt kmx32-gcc kmx32-eclipse
             do
