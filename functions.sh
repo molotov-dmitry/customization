@@ -327,6 +327,92 @@ function appinstall()
     fi
 }
 
+function apptmpinstall()
+{
+    local appname="$1"
+    local applist="$2"
+
+    local -a installlist
+
+    local -a missinglist
+    local -a skippedlist
+
+    title "Installing $appname (tmp)"
+
+    for app in ${applist}
+    do
+        if [[ "$app" == "["*"]" ]]
+        then
+            local pkgname=${app:1:-1}
+            local required=0
+        else
+            local pkgname=$app
+            local required=1
+        fi
+
+        if ispkgavailable "${pkgname}"
+        then
+            continue
+        fi
+
+        if ispkgavailable "${pkgname}"
+        then
+            installlist+=("${pkgname}")
+        #
+        elif [[ $required -gt 0 ]]
+        then
+            missinglist+=("${pkgname}")
+        else
+            skippedlist+=("${pkgname}")
+        fi
+
+    done
+
+    if [[ "${#missinglist[@]}" -gt 0 ]]
+    then
+        msgfail "[missing ${missinglist[*]}]"
+        return 1
+    fi
+
+    if [[ "${#installlist[@]}" -eq 0 ]]
+    then
+        if [[ "${#skippedlist[@]}" -eq 0 ]]
+        then
+            msgwarn '[installed]'
+            return 0
+        else
+            msgwarn "[missing ${skippedlist[*]}]"
+        fi
+    else
+        for (( i = 0; i < 2; i++ ))
+        do
+            export DEBIAN_FRONTEND=noninteractive
+            export DEBIAN_PRIORITY=critical
+
+            DEBIAN_FRONTEND=noninteractive apt install "${installlist[@]}" \
+                -o "Dpkg::Options::=--force-confdef" \
+                -o "Dpkg::Options::=--force-confold" \
+                --yes --force-yes --no-install-recommends \
+                --mark-auto >/dev/null 2>&1
+
+            if [[ $? -eq 0 ]]
+            then
+                if [[ "${#skippedlist[@]}" -eq 0 ]]
+                then
+                    msgdone
+                else
+                    msgwarn "[missing ${skippedlist[*]}]"
+                fi
+
+                return 0
+            fi
+        done
+
+        msgfail
+        return 1
+    fi
+}
+
 function appremove()
 {
     appname="$1"
@@ -875,8 +961,7 @@ function gnomeshellextension()
 
     if ! ispkginstalled jq
     then
-        appinstall 'JSON processor (tmp)' jq || return 1
-        packages_to_remove+=('jq')
+        apptmpinstall 'JSON processor' jq || return 1
     fi
 
     local ext_name=$(echo "${extinfo}" | jq -r '.name')
@@ -888,21 +973,18 @@ function gnomeshellextension()
     if [[ -z "${ext_uuid}" || -z "${ext_durl}" ]]
     then
         msgfail
-        appremove 'tmp packages' "${packages_to_remove[@]}"
         return 1
     fi
 
     if ! wget -O /tmp/extension.zip "https://extensions.gnome.org/${ext_durl}" >/dev/null 2>&1
     then
         msgfail
-        appremove 'tmp packages' "${packages_to_remove[@]}"
         return 1
     fi
 
     if ! rm -rf "${installdir}/${ext_uuid}"
     then
         msgfail '[remove dir]'
-        appremove 'tmp packages' "${packages_to_remove[@]}"
         rm -f /tmp/extension.zip
         return 1
     fi
@@ -911,7 +993,6 @@ function gnomeshellextension()
     if ! mkdir -p "${installdir}/${ext_uuid}"
     then
         msgfail '[create dir]'
-        appremove 'tmp packages' "${packages_to_remove[@]}"
         rm -f /tmp/extension.zip
         return 1
     fi
@@ -920,7 +1001,6 @@ function gnomeshellextension()
     if ! unzip /tmp/extension.zip -d "${installdir}/${ext_uuid}" >/dev/null 2>&1
     then
         msgfail '[unzip]'
-        appremove 'tmp packages' "${packages_to_remove[@]}"
         rm -f /tmp/extension.zip
         return 1
     fi
@@ -930,16 +1010,10 @@ function gnomeshellextension()
     if ! chmod -R a+r "${installdir}/${ext_uuid}" >/dev/null 2>&1
     then
         msgfail '[chmod]'
-        appremove 'tmp packages' "${packages_to_remove[@]}"
         return 1
     fi
 
     msgdone
-
-    if [ ${#packages_to_remove[@]} -gt 0 ]
-    then
-        appremove 'tmp packages' "${packages_to_remove[@]}"
-    fi
 
     return 0
 }
