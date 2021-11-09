@@ -52,6 +52,11 @@ case "${bundle}" in
     then
         appinstall 'Gnome session'          'gnome-shell gnome-session'
         appremove  'Ubuntu session'         'ubuntu-session ubuntu-settings gnome-shell-extension-ubuntu-dock yaru-theme-gnome-shell'
+
+        if ! ispkginstalled jq
+        then
+            apptmpinstall 'JSON processor' jq
+        fi
     fi
 
     appinstall 'Nautilus'                   'nautilus nautilus-extension-gnome-terminal nautilus-sendto nautilus-share'

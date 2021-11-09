@@ -71,6 +71,14 @@ case "${bundle}" in
         fi
     fi
 
+    ## Ubiquity theme ----------------------------------------------------------
+
+    if test -f /usr/share/gnome-shell/modes/ubiquity.json && ispkginstalled jq
+    then
+        jq 'del(.stylesheetName,.themeResourceName)' /usr/share/gnome-shell/modes/ubiquity.json > /usr/share/gnome-shell/modes/ubiquity-gnome.json
+        mv /usr/share/gnome-shell/modes/ubiquity-gnome.json /usr/share/gnome-shell/modes/ubiquity.json
+    fi
+
     ## Disbale Wayland ---------------------------------------------------------
 
     if test -f '/etc/gdm3/custom.conf'
