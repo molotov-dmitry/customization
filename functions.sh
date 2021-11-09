@@ -350,7 +350,7 @@ function apptmpinstall()
             local required=1
         fi
 
-        if ispkgavailable "${pkgname}"
+        if ispkginstalled "${pkgname}"
         then
             continue
         fi
