@@ -320,7 +320,7 @@ case "${bundle}" in
         dconf write /org/gnome/shell/extensions/dash-to-dock/show-trash         false
         dconf write /org/gnome/shell/extensions/dash-to-dock/show-mounts        false
 
-        dconf write /org/gnome/shell/extensions/dash-to-dock/dock-position      'LEFT'
+        dconf write /org/gnome/shell/extensions/dash-to-dock/dock-position      "'LEFT'"
         dconf write /org/gnome/shell/extensions/dash-to-dock/extend-height      true
         dconf write /org/gnome/shell/extensions/dash-to-dock/dock-fixed         true
 
