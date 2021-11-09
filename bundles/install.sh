@@ -51,7 +51,7 @@ case "${bundle}" in
     if ispkginstalled ubuntu-session
     then
         appinstall 'Gnome session'          'gnome-shell gnome-session'
-        appremove  'Ubuntu session'         'ubuntu-session gnome-shell-extension-ubuntu-dock yaru-theme-gnome-shell'
+        appremove  'Ubuntu session'         'ubuntu-session ubuntu-settings gnome-shell-extension-ubuntu-dock yaru-theme-gnome-shell'
     fi
 
     appinstall 'Nautilus'                   'nautilus nautilus-extension-gnome-terminal nautilus-sendto nautilus-share'
