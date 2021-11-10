@@ -359,9 +359,6 @@ silent 'Creating Bundle dir'            mkdir -p "${rootfs_dir}/tools/custom/too
 silent 'Copying functions script'       cp -f "${ROOT_PATH}/functions.sh"     "${rootfs_dir}/tools/" || exit 1
 silent 'Copying folders script'         cp -f "${ROOT_PATH}/tools/folders.sh" "${rootfs_dir}/tools/" || exit 1
 silent 'Copying bundle script'          cp -f "${ROOT_PATH}/tools/bundle.sh"  "${rootfs_dir}/tools/" || exit 1
-#silent 'Copying remove script'          cp -f "${ROOT_PATH}/tools/remove.sh"  "${rootfs_dir}/tools/" || exit 1
-#silent 'Copying prepare script'         cp -f "${ROOT_PATH}/tools/prepare.sh" "${rootfs_dir}/tools/" || exit 1
-#silent 'Copying mirror script'          cp -f "${ROOT_PATH}/tools/mirror.sh"  "${rootfs_dir}/tools/" || exit 1
 
 placescript 'repo'
 placescript 'create'
