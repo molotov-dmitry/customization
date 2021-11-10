@@ -62,21 +62,39 @@ chroot_script()
 {
     local rootfs_dir="$1"
     local name="$2"
-    local bundle="$3"
+    local config="$3"
 
     shift
     shift
     shift
 
-    silent "Copy ${name} script" cp -f "${ROOT_PATH}/tools/${name}.sh" "${rootfs_dir}/tools/" || return 1
-    chroot_rootfs "${rootfs_dir}" bash "/tools/${name}.sh" "$@"
+    if [[ -z "$config" ]]
+    then
+        silent "Copy ${name} script" cp -f "${ROOT_PATH}/tools/${name}.sh" "${rootfs_dir}/tools/" || return 1
 
-    if [[ "${bundle}" == "--bundle" ]]
+    elif [[ -f "${ROOT_PATH}/custom/tools/${config}/${name}.sh" ]]
+    then
+        silent "Copy ${name} script" cp -f "${ROOT_PATH}/custom/tools/${config}/${name}.sh" "${rootfs_dir}/tools/" || return 1
+
+    else
+        title "Copy ${name} script"
+        msgwarn '[missing]'
+    fi
+
+    if [[ -f "${rootfs_dir}/tools/${name}.sh" ]]
+    then
+        chroot_rootfs "${rootfs_dir}" bash "/tools/${name}.sh" "$@"
+    fi
+
+    if [[ -n "$config" ]]
     then
         chroot_rootfs "${rootfs_dir}" bash /tools/bundle.sh "${name}" "${config}"
     fi
 
-    silent "Remove ${name} script" rm -rf "${rootfs_dir}/tools/${name}.sh" || return 1
+    if [[ -f "${rootfs_dir}/tools/${name}.sh" ]]
+    then
+        silent "Remove ${name} script" rm -rf "${rootfs_dir}/tools/${name}.sh" || return 1
+    fi
 
     return 0
 }
