@@ -180,68 +180,6 @@ function pkgversion()
     LC_ALL=C dpkg -s "${app}" 2>/dev/null | grep '^Version:' | cut -d ' ' -f 2-
 }
 
-function debprepare()
-{
-    appname="$1"
-    debname="$2"
-    debversion="$3"
-    debarch="$4"
-
-    debpath="${ROOT_PATH}/packages/${debname}_${debversion}_${debarch}.deb"
-
-    mkdir -p "${rootfs_dir}/tools/packages"
-
-    silent "Copy ${appname} package" cp -f "${debpath}" "${rootfs_dir}/tools/packages/"
-}
-
-function debinstall()
-{
-    appname="$1"
-    debname="$2"
-    debversion="$3"
-    debarch="$4"
-
-    if [[ -z "${debversion}" ]]
-    then
-        pushd "${ROOT_PATH}/packages" > /dev/null
-
-        debversion=$(ls ${debname}_*_${debarch}.deb | sort | tail -n 1 | cut -d '_' -f 2)
-
-        popd > /dev/null
-    fi
-
-    debpath="${ROOT_PATH}/packages/${debname}_${debversion}_${debarch}.deb"
-
-    title "Installing $appname"
-
-    if ! ispkginstalled "${debname}"
-    then
-        dpkg -i "${debpath}" >/dev/null 2>&1
-
-        if [[ $? -eq 0 ]]
-        then
-            msgdone
-            return 0
-        else
-            DEBIAN_FRONTEND=noninteractive apt install \
-                -o "DPkg::Options::=--force-confold" \
-                -f --yes --force-yes >/dev/null 2>&1
-
-            if [[ $? -eq 0 ]] && ispkginstalled "${debname}"
-            then
-                msgdone
-                return 0
-            else
-                msgfail
-                return 1
-            fi
-        fi
-    else
-        msgwarn '[already installed]'
-        return 0
-    fi
-}
-
 function appinstall()
 {
     local appname="$1"
@@ -517,23 +455,6 @@ function appdistupgrade()
 }
 
 ### PPA functions ==============================================================
-
-isppaadded()
-{
-    local author="$1"
-    local repo="$2"
-
-    local count=$(grep -h ^ /etc/apt/sources.list /etc/apt/sources.list.d/* 2> /dev/null | grep -v list.save | grep -v deb-src | grep -v '#deb' | grep deb | grep "/${author}/${repo}" | wc -l)
-
-    if [[ $count -gt 0 ]]
-    then
-        return 0
-    else
-        return 1
-    fi
-
-    return 0
-}
 
 isppaavailable()
 {
@@ -864,30 +785,6 @@ function changemirror()
 
 }
 
-function changerelease()
-{
-    release="$1"
-    current_release=$(cat /etc/apt/sources.list | grep '^deb' | cut -d ' ' -f 3 | grep -v updates | grep -v 'backports' | grep -v 'security' | head -n1)
-
-    if [[ -z "${release}" ]]
-    then
-        title 'Changing release'
-        msgfail
-        return 1
-    fi
-
-    if [[ -z "${current_release}" ]]
-    then
-        title 'Changing release'
-        msgfail
-        return 2
-    fi
-
-    silent "Changing release '${current_release}' to '${release}'" sed -i "s/${current_release}/${release}/g" /etc/apt/sources.list
-
-    return $?
-}
-
 function repoaddnonfree()
 {
     if [[ "$(lsb_release -si)" == "Ubuntu" ]]
@@ -1028,25 +925,6 @@ function silent()
     [[ -n "${cmdtitle}" ]] && title "${cmdtitle}"
 
     "$@" >/dev/null 2>&1
-
-    if [[ $? -eq 0 ]]
-    then
-        [[ -n "${cmdtitle}" ]] && msgdone
-        return 0
-    else
-        [[ -n "${cmdtitle}" ]] && msgfail
-        return 1
-    fi
-}
-
-function silentsudo()
-{
-    cmdtitle="$1"
-    shift
-
-    [[ -n "${cmdtitle}" ]] && title "${cmdtitle}"
-
-    sudo "$@" >/dev/null 2>&1
 
     if [[ $? -eq 0 ]]
     then
@@ -1288,35 +1166,6 @@ function kdebased()
     fi
 }
 
-function desktoptype()
-{
-    echo "${XDG_CURRENT_DESKTOP}"
-
-    return 0;
-}
-
-function systemtype()
-{
-    if [[ "${XDG_CURRENT_DESKTOP}" == 'Unity' ]]
-    then
-        echo 'GNOME'
-    elif [[ "${XDG_CURRENT_DESKTOP}" == 'GNOME' ]]
-    then
-        echo 'GNOME'
-    elif [[ "${XDG_CURRENT_DESKTOP}" == 'ubuntu:GNOME' ]]
-    then
-        echo 'GNOME'
-    elif [[ "${XDG_CURRENT_DESKTOP}" == 'X-Cinnamon' ]]
-    then
-        echo 'Cinnamon'
-    elif [[ "${XDG_CURRENT_DESKTOP}" == 'KDE' ]]
-    then
-        echo 'KDE'
-    fi
-
-    return 0;
-}
-
 ### DConf functions ============================================================
 
 dconfclear()
@@ -1390,37 +1239,6 @@ gsettingsadd()
 }
 
 ### Application menu functions =================================================
-
-function changeapp()
-{
-    app="$1"
-
-    shift
-
-    ### Copy application =======================================================
-
-    mkdir -p "${HOME}/.local/share/applications/"
-
-    cp -f "/usr/share/applications/${app}.desktop" "${HOME}/.local/share/applications/${app}.desktop"
-
-    ### Update parameters ======================================================
-
-    while [[ $# -ge 2 ]]
-    do
-        parameter="$1"
-        value="$2"
-
-        shift
-        shift
-
-        sed -i "/^${parameter}=/d" "${HOME}/.local/share/applications/${app}.desktop"
-        echo "${parameter}=${value}" >> "${HOME}/.local/share/applications/${app}.desktop"
-    done
-
-    ### ========================================================================
-
-    return 0
-}
 
 function hideapp()
 {
@@ -1860,125 +1678,6 @@ function addbookmark()
     echo "${path} ${name}" >> "${HOME}/.config/gtk-3.0/bookmarks"
 }
 
-### Wallpaper ==================================================================
-
-function setwallpaper()
-{
-    wallpaper="$1"
-
-    if [[ "${wallpaper:0:1}" == '#' && ${#wallpaper} -eq 7 ]]
-    then
-        if ispkginstalled gnome-shell
-        then
-            gsettings set org.gnome.desktop.background primary-color        "${wallpaper}"
-            gsettings set org.gnome.desktop.background secondary-color      "${wallpaper}"
-            gsettings set org.gnome.desktop.background color-shading-type   'solid'
-            gsettings set org.gnome.desktop.background picture-options      'wallpaper'
-            gsettings set org.gnome.desktop.background picture-uri          'file:////usr/share/gnome-control-center/pixmaps/noise-texture-light.png'
-        fi
-
-    elif test -f "${wallpaper}"
-    then
-        if ispkginstalled gnome-shell
-        then
-            gsettings set org.gnome.desktop.background secondary-color  '#000000'
-            gsettings set org.gnome.desktop.background primary-color    '#000000'
-            gsettings set org.gnome.desktop.background picture-options  'zoom'
-            gsettings set org.gnome.desktop.background picture-uri      "file://${wallpaper}"
-        fi
-
-        if ispkginstalled cinnamon
-        then
-            gsettings set org.cinnamon.desktop.background secondary-color   '#000000'
-            gsettings set org.cinnamon.desktop.background primary-color     '#000000'
-            gsettings set org.cinnamon.desktop.background picture-options   'zoom'
-            gsettings set org.cinnamon.desktop.background picture-uri       "file://${wallpaper}"
-
-        fi
-
-    fi
-}
-
-function setlockscreen()
-{
-    wallpaper="$1"
-
-    if [[ "${wallpaper:0:1}" == '#' && ${#wallpaper} -eq 7 ]]
-    then
-        if ispkginstalled gnome-shell
-        then
-            gsettings set org.gnome.desktop.screensaver primary-color       "${wallpaper}"
-            gsettings set org.gnome.desktop.screensaver secondary-color     "${wallpaper}"
-            gsettings set org.gnome.desktop.screensaver color-shading-type  'solid'
-            gsettings set org.gnome.desktop.screensaver picture-options     'wallpaper'
-            gsettings set org.gnome.desktop.screensaver picture-uri         'file:////usr/share/gnome-control-center/pixmaps/noise-texture-light.png'
-        fi
-
-    elif test -f "${wallpaper}"
-    then
-        if ispkginstalled gnome-shell
-        then
-            gsettings set org.gnome.desktop.screensaver secondary-color '#000000'
-            gsettings set org.gnome.desktop.screensaver primary-color   '#000000'
-            gsettings set org.gnome.desktop.screensaver picture-options 'zoom'
-            gsettings set org.gnome.desktop.screensaver picture-uri     "file://${wallpaper}"
-        fi
-
-    fi
-}
-
-function bgdescr()
-{
-    local dm_installed=()
-
-    ispkginstalled gnome-shell && dm_installed+=( 'gnome' )
-    ispkginstalled cinnamon    && dm_installed+=( 'cinnamon' )
-    ispkginstalled mate        && dm_installed+=( 'mate' )
-
-    local root_bg_dir="$1"
-    local root_bg_name="${root_bg_dir//\//-}"
-
-    pushd "/usr/share/backgrounds/${root_bg_dir}/" > /dev/null
-
-    for dm in "${dm_installed[@]}"
-    do
-
-        mkdir -p "/usr/share/${dm}-background-properties"
-
-        cat > "/usr/share/${dm}-background-properties/${root_bg_name}.xml" << _EOF
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE wallpapers SYSTEM "${dm}-wp-list.dtd">
-<wallpapers>
-_EOF
-
-        for bg in *
-        do
-
-            local bg_name="${bg//_/\ }"
-            local bg_name="$(echo "${bg_name%.*}" | tr "[A-Z]" "[a-z]" | sed "s/\( \|^\)\(.\)/\1\u\2/g" )"
-
-            cat >> "/usr/share/${dm}-background-properties/${root_bg_name}.xml" << _EOF
- <wallpaper>
-     <name>${bg_name}</name>
-     <filename>/usr/share/backgrounds/${root_bg_dir}/${bg}</filename>
-     <options>zoom</options>
-     <pcolor>#000000</pcolor>
-     <scolor>#000000</scolor>
-     <shade_type>solid</shade_type>
- </wallpaper>
-_EOF
-
-        done
-
-        cat >> "/usr/share/${dm}-background-properties/${root_bg_name}.xml" << _EOF
-</wallpapers>
-_EOF
-
-    done
-
-    popd > /dev/null
-}
-
 ### File system ================================================================
 
 fixpermissions()
@@ -2006,30 +1705,7 @@ fixpermissions()
     fi
 }
 
-### Live boot detection ========================================================
-
-function islive()
-{
-    if [[ -n "$(grep ' / ' /etc/mtab | grep 'cow\|aufs')" ]]
-    then
-        return 0
-    else
-        return 1
-    fi
-}
-
 ### Kernel version =============================================================
-
-function kernelversionlist()
-{
-    ls /lib/modules/
-}
-
-function kernelversion()
-{
-    dpkg-query -W -f='${binary:Package}\n' linux-image-* | head -n 1 | sed 's/linux-image-//'
-    return 0;
-}
 
 kernellist()
 {
