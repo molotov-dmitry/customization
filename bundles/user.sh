@@ -78,7 +78,6 @@ case "${bundle}" in
     hideapp 'software-properties-gtk'
     hideapp 'software-properties-livepatch'
     hideapp 'org.gnome.PowerStats'
-    hideapp 'redshift-gtk'
 
     ## Keyboard ================================================================
 
@@ -185,13 +184,6 @@ case "${bundle}" in
         gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" background-transparency-percent 5
         gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" scrollbar-policy 'always'
         gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" allow-bold false
-    fi
-
-    ## Setup night light =======================================================
-
-    if ispkginstalled redshift-gtk
-    then
-        usercopy 'redshift-gtk'
     fi
 
     ## Configure Gnome system monitor ==========================================
