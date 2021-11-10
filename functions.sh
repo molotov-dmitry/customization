@@ -49,36 +49,28 @@ function message()
 
 function msgdone()
 {
-    [[ -n "$1" ]] && msg="$1" || msg='[done]'
-
-    message "$msg" "$CL_GREEN"
+    message "${1:-"[done]"}" "$CL_GREEN"
 
     return 0
 }
 
 function msginfo()
 {
-    [[ -n "$1" ]] && msg="$1" || msg='[info]'
-
-    message "$msg" "$CL_BLUE"
+    message "${1:-"[info]"}" "$CL_BLUE"
 
     return 0
 }
 
 function msgwarn()
 {
-    [[ -n "$1" ]] && msg="$1" || msg='[warn]'
-
-    message "$msg" "$CL_YELLOW"
+    message "${1:-"[warn]"}" "$CL_YELLOW"
 
     return 0
 }
 
 function msgfail()
 {
-    [[ -n "$1" ]] && msg="$1" || msg='[fail]'
-
-    message "$msg" "$CL_RED"
+    message "${1:-"[fail]"}" "$CL_RED"
 
     return 0
 }
