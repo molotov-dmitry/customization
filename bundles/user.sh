@@ -1394,45 +1394,6 @@ case "${bundle}" in
 ;;
 
 ### ============================================================================
-### Optimizations ==============================================================
-### ============================================================================
-
-"optimize")
-
-    bash "${scriptpath}" 'optimize/tmpfs'
-    bash "${scriptpath}" 'optimize/disable-tracker'
-;;
-
-### Mount directories with high I/O as tmpfs ===================================
-
-"optimize/tmpfs")
-
-;;
-
-### Disable Gnome tracker ======================================================
-
-"optimize/disable-tracker")
-
-    if ispkginstalled tracker
-    then
-        tracker daemon -t
-
-        mkdir -p "${HOME}/.config/autostart"
-        cd "${HOME}/.config/autostart"
-
-        cp  /etc/xdg/autostart/tracker-* ./
-
-        for FILE in tracker-*.desktop
-        do
-            echo 'Hidden=true' >> "$FILE"
-        done
-
-        rm -rf "${HOME}/.cache/tracker" "${HOME}/.local/share/tracker"
-    fi
-
-;;
-
-### ============================================================================
 ### Virtual machine host tools =================================================
 ### ============================================================================
 

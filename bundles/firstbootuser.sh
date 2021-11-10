@@ -549,47 +549,6 @@ _EOF
 ;;
 
 ### ============================================================================
-### Optimizations ==============================================================
-### ============================================================================
-
-"optimize")
-
-    bash "${scriptpath}" 'optimize/tmpfs' "$@"
-    bash "${scriptpath}" 'optimize/disable-tracker' "$@"
-;;
-
-### Mount directories with high I/O as tmpfs ===================================
-
-"optimize/tmpfs")
-
-    mount_name=$(systemd-escape -p --suffix=mount "${user_home}/.cache")
-
-    safe_home=$(echo "${user_home}" | sed 's/\//\\\//g')
-    safe_mount=$(echo "${mount_name}" | sed 's/\\/\\\\\\/g')
-
-    ## make dir ----------------------------------------------------------------
-
-    sudo -u ${user_name} mkdir -p "${user_home}/.cache"
-
-    ## Mount point -------------------------------------------------------------
-
-    sed "s/<USER>/${user_name}/g;s/<UID>/${user_id}/g;s/<GID>/${user_group}/g;s/<HOME>/${safe_home}/g;s/<MOUNT>/${safe_mount}/g" "${ROOT_PATH}/files/tmpfs/cache-ramdisk.mount" > "/etc/systemd/system/${mount_name}"
-    systemctl enable ${mount_name}
-
-    ## Clear and mount directory -----------------------------------------------
-
-    find "${user_home}/.cache" -mindepth 1 -delete
-    systemctl start ${mount_name}
-
-;;
-
-### Disable Gnome tracker ======================================================
-
-"optimize/disable-tracker")
-
-;;
-
-### ============================================================================
 ### Virtual machine host tools =================================================
 ### ============================================================================
 
