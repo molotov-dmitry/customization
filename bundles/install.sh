@@ -987,16 +987,6 @@ case "${bundle}" in
 
 "work-chat")
 
-    #if gnomebased
-    #then
-        #appinstall 'Empathy'            'empathy telepathy-haze telepathy-accounts-signon telepathy-gabble'
-    #fi
-
-    #if kdebased
-    #then
-        #appinstall 'Kopete'             'kopete'
-    #fi
-
     appinstall 'Pidgin'             'pidgin [pidgin-indicator]'
 ;;
 

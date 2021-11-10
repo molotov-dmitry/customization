@@ -625,10 +625,6 @@ case "${bundle}" in
 
 "work-chat")
 
-    ## Empathy -----------------------------------------------------------------
-
-    preparefiles 'Empathy' 'empathy'
-
     ## Pidgin ------------------------------------------------------------------
 
     preparefiles 'Pidgin' 'pidgin'

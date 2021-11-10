@@ -645,41 +645,6 @@ _EOF
 
 "work-chat")
 
-    ## Empathy -----------------------------------------------------------------
-
-    if ispkginstalled empathy
-    then
-        mkdir -p '/usr/share/adium/message-styles'
-        cp -rf "${ROOT_PATH}/files/empathy/material.AdiumMessageStyle" '/usr/share/adium/message-styles/'
-
-        while read color
-        do
-            colorvalue=$(echo "${color}" | cut -d ' ' -f 1)
-            colorname=$(echo "${color}" | cut -d ' ' -f 2-)
-
-            bash '/usr/share/adium/message-styles/material.AdiumMessageStyle/Contents/Resources/create.sh' "${colorname}" "${colorvalue}"
-
-        done < '/usr/share/adium/message-styles/material.AdiumMessageStyle/Contents/Resources/colorlist'
-    fi
-
-    ## Kopete ------------------------------------------------------------------
-
-    if ispkginstalled kopete
-    then
-        mkdir -p '/usr/share/kopete/styles'
-        cp -rf "${ROOT_PATH}/files/empathy/material.AdiumMessageStyle" '/usr/share/kopete/styles/material'
-
-        while read color
-        do
-            colorvalue=$(echo "${color}" | cut -d ' ' -f 1)
-            colorname=$(echo "${color}" | cut -d ' ' -f 2-)
-
-            bash '/usr/share/kopete/styles/material/Contents/Resources/create.sh' "${colorname}" "${colorvalue}"
-
-        done < '/usr/share/kopete/styles/material/Contents/Resources/colorlist'
-    fi
-
-    ## -------------------------------------------------------------------------
 ;;
 
 ### Remote desktop =============================================================
