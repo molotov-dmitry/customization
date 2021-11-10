@@ -374,7 +374,6 @@ silent 'Copying bundles list'           cp -f "${ROOT_PATH}/custom/tools/${confi
 silent 'Copying bundles list'           cp -f "${ROOT_PATH}/custom/tools/${config}.bundle" "${rootfs_dir}/tools/custom/tools/user.bundle" || exit 1
 
 silent 'Copying firstboot service'      cp -f "${ROOT_PATH}/files/startup/custom-startup.service" "${rootfs_dir}/tools/files" || exit 1
-silent 'Copying firstboot service'      cp -f "${ROOT_PATH}/files/startup/enable-startup.sh" "${rootfs_dir}/tools" || exit 1
 
 ## Executing custom config script ----------------------------------------------
 
@@ -407,7 +406,7 @@ chroot_rootfs "${rootfs_dir}" bash /tools/bundle.sh config "${config}"
 
 chroot_script "${rootfs_dir}" 'afterbuild' "${ROOT_PATH}/tools/afterbuild.sh"
 
-chroot_rootfs "${rootfs_dir}" bash /tools/enable-startup.sh
+chroot_script "${rootfs_dir}" 'enable-startup' "${ROOT_PATH}/tools/enable-startup.sh"
 
 if [[ "$debug" == 'y' ]]
 then
@@ -426,7 +425,6 @@ finish_chroot "${rootfs_dir}"
 silent 'Removing repo script'           rm -rf "${rootfs_dir}/tools/repo.sh"
 silent 'Removing create script'         rm -rf "${rootfs_dir}/tools/create.sh"
 silent 'Removing config script'         rm -rf "${rootfs_dir}/tools/config.sh"
-silent 'Removing statrup gen script'    rm -rf "${rootfs_dir}/tools/enable-startup.sh"
 
 silent 'Removing bundle list'           rm -f  "${rootfs_dir}/tools/custom/tools/${config}.bundle"
 

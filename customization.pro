@@ -41,6 +41,7 @@ DISTFILES += \
     functions.sh \
     tools/bundle.sh \
     tools/chroot.sh \
+    tools/enable-startup.sh \
     tools/folders.sh \
     tools/mirror.sh \
     tools/pack.sh \
@@ -49,7 +50,6 @@ DISTFILES += \
     tools/startup.sh \
     bundles/firstbootuser.sh \
     files/startup/99-firstlogin.sh \
-    files/startup/enable-startup.sh \
     files/startup/custom-startup.service \
     custom/tools/device.bundle \
     custom/tools/test.bundle \
