@@ -10,10 +10,19 @@ clear
 
 . "${ROOT_PATH}/functions.sh"
 . "${ROOT_PATH}/tools/chroot.sh"
-. "${ROOT_PATH}/tools/check.sh"
 . "${ROOT_PATH}/tools/pack.sh"
 
 #### Functions =================================================================
+
+isdebian()
+{
+    if [[ "$(basename "${iso_src}")" == debian* ]]
+    then
+        return 0
+    else
+        return 1
+    fi
+}
 
 placescript()
 {

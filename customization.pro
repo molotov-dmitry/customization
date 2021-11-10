@@ -40,7 +40,6 @@ DISTFILES += \
     custom/tools/work/user.sh \
     functions.sh \
     tools/bundle.sh \
-    tools/check.sh \
     tools/chroot.sh \
     tools/folders.sh \
     tools/mirror.sh \
