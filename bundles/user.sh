@@ -324,6 +324,8 @@ case "${bundle}" in
         dconf write /org/gnome/shell/extensions/dash-to-dock/extend-height      true
         dconf write /org/gnome/shell/extensions/dash-to-dock/dock-fixed         true
 
+        dconf write /org/gnome/shell/extensions/dash-to-dock/animation-time     0.0
+
         dconf write /org/gnome/shell/extensions/dash-to-dock/custom-theme-shrink true
 
         gsettingsadd org.gnome.shell enabled-extensions 'dash-to-dock@micxgx.gmail.com'
