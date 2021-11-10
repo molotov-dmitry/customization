@@ -80,21 +80,6 @@ case "${bundle}" in
     fi
 ;;
 
-### Cinnamon ===================================================================
-
-"cinnamon")
-
-    if gnomebased
-    then
-
-    appinstall 'Nautilus'               'nautilus nautilus-extension-gnome-terminal nautilus-sendto nautilus-share'
-    appinstall 'Cinnamon'               'cinnamon cinnamon-session cinnamon-screensaver cinnamon-l10n'
-    appinstall 'JSON editor'            'jq'
-    appinstall 'Redshift'               'redshift-gtk'
-
-    fi
-;;
-
 ### KDE ========================================================================
 
 "kde")
@@ -542,11 +527,6 @@ case "${bundle}" in
     appinstall 'Numix theme'            'numix-icon-theme-circle [numix-gtk-theme] [numix-blue-gtk-theme]'
     appinstall 'Breeze theme'           'breeze-cursor-theme breeze-icon-theme'
     appinstall 'Papirus theme'          'papirus-icon-theme papirus-material-icon-theme'
-
-    if ispkginstalled cinnamon
-    then
-        appinstall 'Mint themes'        'mint-themes'
-    fi
 
     if ispkgavailable yaru-theme-icon
     then

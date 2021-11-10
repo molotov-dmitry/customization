@@ -80,13 +80,6 @@ case "${bundle}" in
     hideapp 'org.gnome.PowerStats'
     hideapp 'redshift-gtk'
 
-    ## Hide Nemo if Nautilus installed -----------------------------------------
-
-    if ispkginstalled nemo && ispkginstalled nautilus
-    then
-        hideapp 'nemo'
-    fi
-
     ## Keyboard ================================================================
 
     gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'ru')]"
@@ -334,95 +327,6 @@ case "${bundle}" in
     ## Window control buttons --------------------------------------------------
 
     gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
-
-    ## =========================================================================
-
-    fi
-
-;;
-
-### Cinnamon ===================================================================
-
-"cinnamon")
-
-    if gnomebased
-    then
-
-    ## Keyboard layout ---------------------------------------------------------
-
-    gsettingsclear org.gnome.libgnomekbd.keyboard options
-
-    gsettingsadd org.gnome.libgnomekbd.keyboard options 'terminate\tterminate:ctrl_alt_bksp'
-    gsettingsadd org.gnome.libgnomekbd.keyboard options 'grp\tgrp:alt_shift_toggle'
-    gsettingsadd org.gnome.libgnomekbd.keyboard options 'grp_led\tgrp_led:scroll'
-
-    ## Set custom start menu icon ----------------------------------------------
-
-    cfgfile="${HOME}/.cinnamon/configs/menu@cinnamon.org/1.json"
-
-    mkdir -p "$(dirname "${cfgfile}")"
-    [[ ! -f "${cfgfile}" ]] && echo '{}' > "${cfgfile}"
-
-    tmpf=$(mktemp --tmpdir=$(dirname "${cfgfile}") -t)
-    jq '."menu-custom"."value" = true' "${cfgfile}" > "${tmpf}"
-    mv -f "${tmpf}" "${cfgfile}"
-
-    unset tmpf
-    unset cfgfile
-
-    ## Clear launcher ----------------------------------------------------------
-
-    cfgfile="${HOME}/.cinnamon/configs/panel-launchers@cinnamon.org/3.json"
-
-    mkdir -p "$(dirname "${cfgfile}")"
-    [[ ! -f "${cfgfile}" ]] && echo '{}' > "${cfgfile}"
-
-    tmpf=$(mktemp --tmpdir=$(dirname "${cfgfile}") -t)
-    jq '."launcherList"."value" = []' "${cfgfile}" > "${tmpf}"
-    mv -f "${tmpf}" "${cfgfile}"
-
-    unset tmpf
-    unset cfgfile
-
-    ## Clear grouped window list pinned applications ---------------------------
-
-    cfgfile="${HOME}/.cinnamon/configs/grouped-window-list@cinnamon.org/3.json"
-
-    mkdir -p "$(dirname "${cfgfile}")"
-    [[ ! -f "${cfgfile}" ]] && echo '{}' > "${cfgfile}"
-
-    tmpf=$(mktemp --tmpdir=$(dirname "${cfgfile}") -t)
-    jq '."pinned-apps"."value" = []' "${cfgfile}" > "${tmpf}"
-    mv -f "${tmpf}" "${cfgfile}"
-
-    unset tmpf
-    unset cfgfile
-
-    ## Hide desktop icons ------------------------------------------------------
-
-    gsettings set org.nemo.desktop desktop-layout 'false::false'
-
-    ## Disable Nemo plugins ----------------------------------------------------
-
-    gsettingsadd org.nemo.plugins disabled-actions    'add-desklets.nemo_action'
-    gsettingsadd org.nemo.plugins disabled-extensions 'ChangeColorFolder+NemoPython'
-
-    ## Set Nautilus as default file manager ------------------------------------
-
-    if ispkginstalled nemo && ispkginstalled nautilus
-    then
-        mimeregister    'inode/directory' 'org.gnome.Nautilus.desktop'
-        setdefaultapp   'inode/directory' 'org.gnome.Nautilus.desktop'
-    fi
-
-    ## Use text instead of layout flags ----------------------------------------
-
-    gsettings set org.cinnamon.desktop.interface keyboard-layout-show-flags false
-    gsettings set org.cinnamon.desktop.interface keyboard-layout-use-upper  true
-
-    ## Setup hot corners -------------------------------------------------------
-
-    gsettings set org.cinnamon hotcorner-layout  "['scale:true:0', 'scale:false:0', 'scale:false:0', 'desktop:true:700']"
 
     ## =========================================================================
 
@@ -952,16 +856,6 @@ case "${bundle}" in
         gsettings set org.gnome.desktop.wm.preferences theme    "${wm_theme}"
     fi
 
-    if ispkginstalled cinnamon
-    then
-        gsettings set org.cinnamon.desktop.interface icon-theme     "${icon_theme}"
-        gsettings set org.cinnamon.desktop.interface cursor-theme   "${cursor_theme}"
-
-        gsettings set org.cinnamon.desktop.interface gtk-theme      'Mint-Y-Darker-Aqua'
-        gsettings set org.cinnamon.desktop.wm.preferences theme     'Mint-Y-Dark'
-        gsettings set org.cinnamon.theme name                       'Mint-Y-Aqua'
-    fi
-
     if kdebased
     then
         for file in "${HOME}/.config/kdeglobals" "${HOME}/.kde/share/config/kdeglobals"
@@ -989,15 +883,6 @@ case "${bundle}" in
         gsettings set org.gnome.desktop.interface document-font-name    "${font_doc} ${font_doc_size}"
         gsettings set org.gnome.desktop.interface monospace-font-name   "${font_fixed} ${font_fixed_size}"
         gsettings set org.gnome.desktop.wm.preferences titlebar-font    "${font_ui} ${font_ui_size}"
-    fi
-
-    if ispkginstalled cinnamon
-    then
-        gsettings set org.cinnamon.desktop.interface font-name          "${font_ui} ${font_ui_size}"
-        gsettings set org.gnome.desktop.interface document-font-name    "${font_doc} ${font_doc_size}"
-        gsettings set org.gnome.desktop.interface monospace-font-name   "${font_fixed} ${font_fixed_size}"
-        gsettings set org.cinnamon.desktop.wm.preferences titlebar-font "${font_ui} ${font_ui_size}"
-        gsettings set org.nemo.desktop font                             "${font_ui} ${font_ui_size}"
     fi
 
     if kdebased
@@ -1060,22 +945,6 @@ case "${bundle}" in
         gsettings set org.gnome.desktop.screensaver picture-opacity      100
         gsettings set org.gnome.desktop.screensaver picture-uri          'file:///usr/share/backgrounds/night/night.xml'
 
-    fi
-
-    if ispkginstalled cinnamon
-    then
-        gsettings set org.cinnamon.desktop.background secondary-color    '#000000'
-        gsettings set org.cinnamon.desktop.background primary-color      '#000000'
-        gsettings set org.cinnamon.desktop.background picture-options    'zoom'
-        gsettings set org.cinnamon.desktop.background color-shading-type 'solid'
-        gsettings set org.cinnamon.desktop.background picture-opacity    100
-        gsettings set org.cinnamon.desktop.background picture-uri        "$bgfile"
-
-        gsettings set org.cinnamon.desktop.background.slideshow delay             30
-        gsettings set org.cinnamon.desktop.background.slideshow random-order      true
-        gsettings set org.cinnamon.desktop.background.slideshow slideshow-paused  false
-        gsettings set org.cinnamon.desktop.background.slideshow image-source      'xml:///usr/share/cinnamon-background-properties/${bgtheme}.xml'
-        gsettings set org.cinnamon.desktop.background.slideshow slideshow-enabled true
     fi
 
 ;;
