@@ -62,16 +62,21 @@ chroot_script()
 {
     local rootfs_dir="$1"
     local name="$2"
-    local path="$3"
-    local scriptname="$(basename "${path}")"
+    local bundle="$3"
 
     shift
     shift
     shift
 
-    silent "Copy ${name} script" cp -f "${path}" "${rootfs_dir}/tools/" || return 1
-    chroot_rootfs "${rootfs_dir}" bash "/tools/${scriptname}" "$@"
-    silent "Remove ${name} script" rm -rf "${rootfs_dir}/tools/${scriptname}" || return 1
+    silent "Copy ${name} script" cp -f "${ROOT_PATH}/tools/${name}.sh" "${rootfs_dir}/tools/" || return 1
+    chroot_rootfs "${rootfs_dir}" bash "/tools/${name}.sh" "$@"
+
+    if [[ "${bundle}" == "--bundle" ]]
+    then
+        chroot_rootfs "${rootfs_dir}" bash /tools/bundle.sh "${name}" "${config}"
+    fi
+
+    silent "Remove ${name} script" rm -rf "${rootfs_dir}/tools/${name}.sh" || return 1
 
     return 0
 }
@@ -360,10 +365,6 @@ silent 'Copying functions script'       cp -f "${ROOT_PATH}/functions.sh"     "$
 silent 'Copying folders script'         cp -f "${ROOT_PATH}/tools/folders.sh" "${rootfs_dir}/tools/" || exit 1
 silent 'Copying bundle script'          cp -f "${ROOT_PATH}/tools/bundle.sh"  "${rootfs_dir}/tools/" || exit 1
 
-placescript 'repo'
-placescript 'create'
-placescript 'config'
-
 silent 'Copying usersboot script'       cp -f "${ROOT_PATH}/tools/startup.sh" "${rootfs_dir}/tools/" || exit 1
 
 silent 'Copying bundle scripts'         cp -rf "${ROOT_PATH}/bundles" "${rootfs_dir}/tools/" || exit 1
@@ -391,22 +392,18 @@ fi
 
 start_chroot "${rootfs_dir}"
 
-chroot_script "${rootfs_dir}" 'remove' "${ROOT_PATH}/tools/remove.sh"
-chroot_script "${rootfs_dir}" 'prepare' "${ROOT_PATH}/tools/prepare.sh"
+chroot_script "${rootfs_dir}" 'remove'
+chroot_script "${rootfs_dir}" 'prepare'
 
-chroot_rootfs "${rootfs_dir}" bash /tools/repo.sh
-chroot_rootfs "${rootfs_dir}" bash /tools/bundle.sh repo "${config}"
-chroot_script "${rootfs_dir}" 'mirror' "${ROOT_PATH}/tools/mirror.sh"
+chroot_script "${rootfs_dir}" 'repo' --bundle
+chroot_script "${rootfs_dir}" 'mirror'
 
-chroot_rootfs "${rootfs_dir}" bash /tools/create.sh
-chroot_rootfs "${rootfs_dir}" bash /tools/bundle.sh install "${config}"
+chroot_script "${rootfs_dir}" 'create' --bundle
+chroot_script "${rootfs_dir}" 'config' --bundle
 
-chroot_rootfs "${rootfs_dir}" bash /tools/config.sh
-chroot_rootfs "${rootfs_dir}" bash /tools/bundle.sh config "${config}"
+chroot_script "${rootfs_dir}" 'afterbuild'
 
-chroot_script "${rootfs_dir}" 'afterbuild' "${ROOT_PATH}/tools/afterbuild.sh"
-
-chroot_script "${rootfs_dir}" 'enable-startup' "${ROOT_PATH}/tools/enable-startup.sh"
+chroot_script "${rootfs_dir}" 'enable-startup'
 
 if [[ "$debug" == 'y' ]]
 then
@@ -421,10 +418,6 @@ fi
 finish_chroot "${rootfs_dir}"
 
 ## Clean up after chroot step --------------------------------------------------
-
-silent 'Removing repo script'           rm -rf "${rootfs_dir}/tools/repo.sh"
-silent 'Removing create script'         rm -rf "${rootfs_dir}/tools/create.sh"
-silent 'Removing config script'         rm -rf "${rootfs_dir}/tools/config.sh"
 
 silent 'Removing bundle list'           rm -f  "${rootfs_dir}/tools/custom/tools/${config}.bundle"
 
