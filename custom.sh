@@ -413,11 +413,11 @@ start_chroot "${rootfs_dir}"
 chroot_script "${rootfs_dir}" 'remove'
 chroot_script "${rootfs_dir}" 'prepare'
 
-chroot_script "${rootfs_dir}" 'repo' --bundle
+chroot_script "${rootfs_dir}" 'repo' "${config}"
 chroot_script "${rootfs_dir}" 'mirror'
 
-chroot_script "${rootfs_dir}" 'create' --bundle
-chroot_script "${rootfs_dir}" 'config' --bundle
+chroot_script "${rootfs_dir}" 'create' "${config}"
+chroot_script "${rootfs_dir}" 'config' "${config}"
 
 chroot_script "${rootfs_dir}" 'afterbuild'
 
