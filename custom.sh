@@ -181,10 +181,6 @@ do
         nobuild='y'
     ;;
 
-    '--quiet')
-        nobeep='y'
-    ;;
-
     '--no-progress')
         noprogress='y'
     ;;
@@ -281,12 +277,6 @@ fi
 if [[ "$nobuild" == 'y' ]]
 then
     echo -n "skip mkfs:    "
-    msgwarn 'yes'
-fi
-
-if [[ "$nobeep" == 'y' ]]
-then
-    echo -n "no beep:      "
     msgwarn 'yes'
 fi
 
@@ -560,11 +550,3 @@ if [[ "$notify" == 'y' ]]
 then
     echo "media-optical:${config}-$(basename "${iso_src}") build completed" | nc -b -w1 -u 255.255.255.255 14993
 fi
-
-### Finish signal ==============================================================
-
-if [[ "$nobeep" != 'y' ]]
-then
-    silent '' beep -f 2050 -r 2 -d 100 -l 30
-fi
-
