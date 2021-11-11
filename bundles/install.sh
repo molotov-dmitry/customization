@@ -247,10 +247,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'dev/style'
     bash "${scriptpath}" 'dev/doc'
     bash "${scriptpath}" 'dev/man'
-    bash "${scriptpath}" 'dev/x11'
-    bash "${scriptpath}" 'dev/opengl'
     bash "${scriptpath}" 'dev/qt'
-    bash "${scriptpath}" 'dev/qt4'
     bash "${scriptpath}" 'dev/gtk'
     bash "${scriptpath}" 'dev/gnome'
     bash "${scriptpath}" 'dev/db'
@@ -317,22 +314,6 @@ case "${bundle}" in
 
 ;;
 
-### X11 SDK ====================================================================
-
-"dev/x11")
-
-    appinstall 'X11 sdk'                'libx11-dev'
-
-;;
-
-### OpenGL SDK =================================================================
-
-"dev/opengl")
-
-    appinstall 'OpenGL sdk'             'freeglut3 freeglut3-dev libglew-dev libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev'
-
-;;
-
 ### Qt SDK =====================================================================
 
 "dev/qt")
@@ -352,24 +333,6 @@ case "${bundle}" in
 
         appinstall 'Qt Creator MIME'    'qtcreator-mime'
     fi
-
-;;
-
-### Qt4 SDK ====================================================================
-
-"dev/qt4")
-
-    if ispkgavailable qt4-dev-tools
-    then
-        appinstall 'Qt4 SDK'            'qt4-dev-tools qt4-qmake'
-        appinstall 'Qt4 Libs'           'libqt4-dev libqt4-dev-bin libqt4-network libqt4-sql libqtcore4 libqt4-qt3support'
-    fi
-
-;;
-
-### KDE SDK ====================================================================
-
-"dev/kde")
 
 ;;
 

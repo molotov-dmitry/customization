@@ -482,10 +482,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'dev/style'
     bash "${scriptpath}" 'dev/doc'
     bash "${scriptpath}" 'dev/man'
-    bash "${scriptpath}" 'dev/x11'
-    bash "${scriptpath}" 'dev/opengl'
     bash "${scriptpath}" 'dev/qt'
-    bash "${scriptpath}" 'dev/qt4'
     bash "${scriptpath}" 'dev/gtk'
     bash "${scriptpath}" 'dev/gnome'
     bash "${scriptpath}" 'dev/db'
@@ -523,18 +520,6 @@ case "${bundle}" in
 ### Documentation and references ===============================================
 
 "dev/man")
-
-;;
-
-### X11 SDK ====================================================================
-
-"dev/x11")
-
-;;
-
-### OpenGL SDK =================================================================
-
-"dev/opengl")
 
 ;;
 
@@ -612,25 +597,6 @@ case "${bundle}" in
         ## ---------------------------------------------------------------------
 
     fi
-
-;;
-
-### Qt4 SDK ====================================================================
-
-"dev/qt4")
-
-    if ispkginstalled 'qtcreator'
-    then
-        hideapp 'assistant-qt4'
-        hideapp 'designer-qt4'
-        hideapp 'linguist-qt4'
-    fi
-
-;;
-
-### KDE SDK ====================================================================
-
-"dev/kde")
 
 ;;
 

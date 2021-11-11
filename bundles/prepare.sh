@@ -205,10 +205,7 @@ case "${bundle}" in
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/style'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/doc'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/man'
-    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/x11'
-    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/opengl'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/qt'
-    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/qt4'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/gtk'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/gnome'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/db'
@@ -254,18 +251,6 @@ case "${bundle}" in
 
 ;;
 
-### X11 SDK ====================================================================
-
-"dev/x11")
-
-;;
-
-### OpenGL SDK =================================================================
-
-"dev/opengl")
-
-;;
-
 ### Qt SDK =====================================================================
 
 "dev/qt")
@@ -273,18 +258,6 @@ case "${bundle}" in
     ## Qt Creator --------------------------------------------------------------
 
     preparefiles 'QtCreator' 'qtcreator'
-
-;;
-
-### Qt4 SDK ====================================================================
-
-"dev/qt4")
-
-;;
-
-### KDE SDK ====================================================================
-
-"dev/kde")
 
 ;;
 

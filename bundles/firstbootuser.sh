@@ -186,10 +186,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'dev/style' "$@"
     bash "${scriptpath}" 'dev/doc' "$@"
     bash "${scriptpath}" 'dev/man' "$@"
-    bash "${scriptpath}" 'dev/x11' "$@"
-    bash "${scriptpath}" 'dev/opengl' "$@"
     bash "${scriptpath}" 'dev/qt' "$@"
-    bash "${scriptpath}" 'dev/qt4' "$@"
     bash "${scriptpath}" 'dev/gtk' "$@"
     bash "${scriptpath}" 'dev/gnome' "$@"
     bash "${scriptpath}" 'dev/db' "$@"
@@ -230,33 +227,9 @@ case "${bundle}" in
 
 ;;
 
-### X11 SDK ====================================================================
-
-"dev/x11")
-
-;;
-
-### OpenGL SDK =================================================================
-
-"dev/opengl")
-
-;;
-
 ### Qt SDK =====================================================================
 
 "dev/qt")
-
-;;
-
-### Qt4 SDK ====================================================================
-
-"dev/qt4")
-
-;;
-
-### KDE SDK ====================================================================
-
-"dev/kde")
 
 ;;
 
