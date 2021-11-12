@@ -372,8 +372,6 @@ silent 'Creating Bundle dir'            mkdir -p "${rootfs_dir}/tools/custom/too
 silent 'Copying functions script'       cp -f "${ROOT_PATH}/functions.sh"     "${rootfs_dir}/tools/" || exit 1
 silent 'Copying bundle script'          cp -f "${ROOT_PATH}/tools/bundle.sh"  "${rootfs_dir}/tools/" || exit 1
 
-silent 'Copying usersboot script'       cp -f "${ROOT_PATH}/tools/startup.sh" "${rootfs_dir}/tools/" || exit 1
-
 silent 'Copying bundle scripts'         cp -rf "${ROOT_PATH}/bundles" "${rootfs_dir}/tools/" || exit 1
 
 silent 'Copying bundles list'           cp -f "${ROOT_PATH}/custom/tools/${config}.bundle" "${rootfs_dir}/tools/custom/tools/" || exit 1
@@ -381,7 +379,9 @@ silent 'Copying bundles list'           cp -f "${ROOT_PATH}/custom/tools/${confi
 silent 'Copying bundles list'           cp -f "${ROOT_PATH}/custom/tools/${config}.bundle" "${rootfs_dir}/tools/custom/tools/firstbootuser.bundle" || exit 1
 silent 'Copying bundles list'           cp -f "${ROOT_PATH}/custom/tools/${config}.bundle" "${rootfs_dir}/tools/custom/tools/user.bundle" || exit 1
 
-silent 'Copying firstboot service'      cp -f "${ROOT_PATH}/files/startup/custom-startup.service" "${rootfs_dir}/tools/files" || exit 1
+## Copy startup files ----------------------------------------------------------
+
+silent 'Copy startup files'             cp -rfP "${ROOT_PATH}/tools/startup/." "${rootfs_dir}/" || exit 1
 
 ## Executing custom config script ----------------------------------------------
 
@@ -410,8 +410,6 @@ chroot_script "${rootfs_dir}" 'config' "${config}"
 
 chroot_script "${rootfs_dir}" 'afterbuild'
 
-chroot_script "${rootfs_dir}" 'enable-startup'
-
 if [[ "$debug" == 'y' ]]
 then
     chroot_rootfs "${rootfs_dir}" bash
@@ -432,12 +430,6 @@ silent 'Removing bundle list'           rm -f  "${rootfs_dir}/tools/custom/tools
 
 placescript 'firstboot'
 placescript 'firstbootuser'
-
-## Copying user script ---------------------------------------------------------
-
-silent '' mkdir -p "${rootfs_dir}/etc/profile.d" || exit 1
-silent 'Copy user first login script' cp -f "${ROOT_PATH}/files/startup/99-firstlogin.sh" "${rootfs_dir}/etc/profile.d/" || exit 1
-
 placescript 'user'
 
 ## Finalizing customization ----------------------------------------------------
