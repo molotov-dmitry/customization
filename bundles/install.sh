@@ -818,6 +818,8 @@ case "${bundle}" in
 
 "folders")
 
+    appinstall 'User folders' 'user-folders'
+
 ;;
 
 ### ============================================================================

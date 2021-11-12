@@ -1214,7 +1214,7 @@ case "${bundle}" in
 
 "folders")
 
-    bash "${ROOT_PATH}/folders.sh"
+    user-folders
 
     addbookmark "file://${HOME}/Projects" 'Projects'
 

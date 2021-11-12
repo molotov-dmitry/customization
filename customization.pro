@@ -35,7 +35,6 @@ DISTFILES += \
     tools/bundle.sh \
     tools/chroot.sh \
     tools/enable-startup.sh \
-    tools/folders.sh \
     tools/mirror.sh \
     tools/pack.sh \
     tools/prepare.sh \

@@ -370,7 +370,6 @@ silent 'Creating Files dir'             mkdir -p "${rootfs_dir}/tools/files" || 
 silent 'Creating Bundle dir'            mkdir -p "${rootfs_dir}/tools/custom/tools" || exit 1
 
 silent 'Copying functions script'       cp -f "${ROOT_PATH}/functions.sh"     "${rootfs_dir}/tools/" || exit 1
-silent 'Copying folders script'         cp -f "${ROOT_PATH}/tools/folders.sh" "${rootfs_dir}/tools/" || exit 1
 silent 'Copying bundle script'          cp -f "${ROOT_PATH}/tools/bundle.sh"  "${rootfs_dir}/tools/" || exit 1
 
 silent 'Copying usersboot script'       cp -f "${ROOT_PATH}/tools/startup.sh" "${rootfs_dir}/tools/" || exit 1
