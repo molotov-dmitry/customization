@@ -408,14 +408,7 @@ case "${bundle}" in
     if havegraphics
     then
         silent     'Wireshark fix'          sh -c 'echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections'
-    fi
-
-    if gnomebased
-    then
-        appinstall 'Wireshark'          'wireshark-gtk'
-    elif kdebased
-    then
-        appinstall 'Wireshark'          'wireshark-qt'
+        appinstall 'Wireshark'             'wireshark'
     fi
 
 ;;
