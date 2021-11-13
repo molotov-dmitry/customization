@@ -511,20 +511,11 @@ case "${bundle}" in
 "appearance/fonts")
 
     appinstall 'MS TTF core fonts'      'fonts-microsoft-core fonts-microsoft fonts-cascadia-code'
-
     appinstall 'Noto fonts'             'fonts-noto-micro'
-
-    if [[ "$(lsb_release -si)" == "Debian" ]]
-    then
-        appinstall 'Ubuntu fonts'       'ttf-ubuntu-font-family'
-    fi
-
+    appinstall 'Ubuntu fonts'           'fonts-ubuntu'
     appinstall 'Fira Code fonts'        'fonts-firacode'
-
     appinstall 'Hack fonts'             'fonts-hack'
-
     appinstall 'Google Sans fonts'      'fonts-google-sans'
-
     appinstall 'JetBrains Mono fonts'   'fonts-jetbrains-mono'
 
     appinstall 'Font configuration'     'font-config'
