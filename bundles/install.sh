@@ -589,14 +589,6 @@ case "${bundle}" in
         appinstall 'Shotwell'               'shotwell'
     fi
 
-    if kdebased
-    then
-        appinstall 'Clementine'             'clementine'
-        appinstall 'Kaffeine media player'  'kaffeine'
-
-        appinstall 'Kid3'                   'kid3'
-    fi
-
     if ispkginstalled gnome-shell
     then
         gnomeshellextension 1379        # A simple MPRIS indicator button
@@ -655,11 +647,6 @@ case "${bundle}" in
     if gnomebased
     then
         appinstall 'Geary mail client'      'geary'
-    fi
-
-    if kdebased
-    then
-        appinstall 'KDE PIM'                'kmail kontact korganizer ktnef kaddressbook kmailtransport-akonadi accountwizard'
     fi
 
 ;;
