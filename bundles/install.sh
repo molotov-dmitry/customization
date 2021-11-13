@@ -510,14 +510,7 @@ case "${bundle}" in
 
 "appearance/fonts")
 
-    silent     'Accepting EULA license' sh -c 'echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections'
-    appinstall 'MS TTF core fonts'      'ttf-mscorefonts-installer fonts-microsoft fonts-cascadia-code'
-
-    if [[ "$(lsb_release -si)" == "Ubuntu" ]]
-    then
-        silent 'Change fonts repo'      sed -i 's#http://downloads.sourceforge.net/corefonts#https://github.com/pushcx/corefonts/raw/master#g' /usr/share/package-data-downloads/ttf-mscorefonts-installer
-        silent 'Re-download fonts'      /usr/lib/update-notifier/package-data-downloader
-    fi
+    appinstall 'MS TTF core fonts'      'fonts-microsoft-core fonts-microsoft fonts-cascadia-code'
 
     appinstall 'Noto fonts'             'fonts-noto-micro'
 
