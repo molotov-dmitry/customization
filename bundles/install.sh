@@ -19,6 +19,9 @@ case "${bundle}" in
 
 "base")
 
+    appinstall 'Bash completion'        'bash-completion'
+    appinstall 'Sudo'                   'sudo'
+
 ;;
 
 ### Base GUI ===================================================================
