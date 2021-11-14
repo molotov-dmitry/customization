@@ -993,13 +993,6 @@ case "${bundle}" in
         usercopy 'mpv'
     fi
 
-    ## Clementine --------------------------------------------------------------
-
-    if ispkginstalled clementine
-    then
-        usercopy 'clementine'
-    fi
-
     ## Shotwell ----------------------------------------------------------------
 
     if ispkginstalled shotwell
