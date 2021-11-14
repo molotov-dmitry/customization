@@ -542,9 +542,6 @@ _EOF
 
 "cli/ttycolors")
 
-    silent '' mkdir -p /etc/profile.d
-    silent 'Copy TTY colors config' cp -f "${ROOT_PATH}/files/tty/colors.sh" '/etc/profile.d/'
-
 ;;
 
 ### ============================================================================

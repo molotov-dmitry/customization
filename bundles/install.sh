@@ -777,6 +777,8 @@ case "${bundle}" in
 
 "cli/ttycolors")
 
+    appinstall 'Gnome TTY colors' 'vtrgb-gnome'
+
 ;;
 
 ### ============================================================================
