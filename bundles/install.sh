@@ -724,7 +724,6 @@ case "${bundle}" in
     bash "${scriptpath}" 'cli/files'
     bash "${scriptpath}" 'cli/monitor'
     bash "${scriptpath}" 'cli/net'
-    bash "${scriptpath}" 'cli/time'
     bash "${scriptpath}" 'cli/ttycolors'
 
 ;;
@@ -758,14 +757,6 @@ case "${bundle}" in
     appinstall 'UPnP client'            'miniupnpc'
     appinstall 'Network tools'          'net-tools'
     appinstall 'Iperf'                  'iperf iperf3'
-
-;;
-
-### Command line tools for time sync ===========================================
-
-"cli/time")
-
-    #appinstall 'NTP client'             'ntp'
 
 ;;
 

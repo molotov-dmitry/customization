@@ -479,7 +479,6 @@ case "${bundle}" in
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'cli/files'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'cli/monitor'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'cli/net'
-    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'cli/time'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'cli/ttycolors'
 
 ;;
@@ -499,12 +498,6 @@ case "${bundle}" in
 ### Command line network applications ==========================================
 
 "cli/net")
-
-;;
-
-### Command line tools for time sync ===========================================
-
-"cli/time")
 
 ;;
 
