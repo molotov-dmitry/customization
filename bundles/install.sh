@@ -414,6 +414,8 @@ case "${bundle}" in
         appinstall 'tshark'                'tshark'
     fi
 
+    appinstall 'Iperf'                  'iperf iperf3'
+
 ;;
 
 ### TI TMS320C64XX =============================================================
@@ -757,7 +759,6 @@ case "${bundle}" in
     appinstall 'CLI web browsers'       'elinks w3m'
     appinstall 'UPnP client'            'miniupnpc'
     appinstall 'Network tools'          'net-tools'
-    appinstall 'Iperf'                  'iperf iperf3'
 
 ;;
 
