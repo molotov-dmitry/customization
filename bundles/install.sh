@@ -500,6 +500,8 @@ case "${bundle}" in
         appinstall 'Spinner plymouth theme' 'plymouth-theme-spinner'
     fi
 
+    appinstall 'Gnome TTY colors' 'vtrgb-gnome'
+
 ;;
 
 ### System fonts ===============================================================
@@ -724,7 +726,6 @@ case "${bundle}" in
     bash "${scriptpath}" 'cli/files'
     bash "${scriptpath}" 'cli/monitor'
     bash "${scriptpath}" 'cli/net'
-    bash "${scriptpath}" 'cli/ttycolors'
 
 ;;
 
@@ -757,14 +758,6 @@ case "${bundle}" in
     appinstall 'UPnP client'            'miniupnpc'
     appinstall 'Network tools'          'net-tools'
     appinstall 'Iperf'                  'iperf iperf3'
-
-;;
-
-### TTY colors =================================================================
-
-"cli/ttycolors")
-
-    appinstall 'Gnome TTY colors' 'vtrgb-gnome'
 
 ;;
 

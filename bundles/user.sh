@@ -1159,7 +1159,6 @@ case "${bundle}" in
     bash "${scriptpath}" 'cli/files'
     bash "${scriptpath}" 'cli/monitor'
     bash "${scriptpath}" 'cli/net'
-    bash "${scriptpath}" 'cli/ttycolors'
 
 ;;
 
@@ -1186,12 +1185,6 @@ case "${bundle}" in
 ### Command line network applications ==========================================
 
 "cli/net")
-
-;;
-
-### TTY colors =================================================================
-
-"cli/ttycolors")
 
 ;;
 

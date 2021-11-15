@@ -506,7 +506,6 @@ _EOF
     bash "${scriptpath}" 'cli/files'
     bash "${scriptpath}" 'cli/monitor'
     bash "${scriptpath}" 'cli/net'
-    bash "${scriptpath}" 'cli/ttycolors'
 
 ;;
 
@@ -528,12 +527,6 @@ _EOF
 
     silent 'Fix ping restriction' bash -c 'echo -e "net.ipv4.ping_group_range = 0 2147483647" > /etc/sysctl.d/99-allow-ping.conf'
     silent 'Fix ping restriction' sysctl net.ipv4.ping_group_range='0 2147483647'
-
-;;
-
-### TTY colors =================================================================
-
-"cli/ttycolors")
 
 ;;
 
