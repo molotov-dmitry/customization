@@ -359,7 +359,7 @@ case "${bundle}" in
 
     if gnomebased
     then
-        appinstall 'GNOME IDE'          'gnome-builder'
+        appinstall 'GNOME Builder'      'gnome-builder'
     fi
 
 ;;
