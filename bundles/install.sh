@@ -405,10 +405,13 @@ case "${bundle}" in
 
     appinstall 'ARPing'                 'iputils-arping'
 
+    silent     'Wireshark fix'          sh -c 'echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections'
+
     if havegraphics
     then
-        silent     'Wireshark fix'          sh -c 'echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections'
         appinstall 'Wireshark'             'wireshark'
+    else
+        appinstall 'tshark'                'tshark'
     fi
 
 ;;
@@ -750,8 +753,6 @@ case "${bundle}" in
 
 "cli/net")
 
-    silent 'Wireshark fix'              sh -c 'echo wireshark-common wireshark-common/install-setuid boolean true | debconf-set-selections'
-    appinstall 'tshark'                 'tshark'
     appinstall 'curl'                   'curl'
     appinstall 'CLI web browsers'       'elinks w3m'
     appinstall 'UPnP client'            'miniupnpc'
