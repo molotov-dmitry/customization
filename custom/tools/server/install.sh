@@ -6,3 +6,4 @@ cd "${ROOT_PATH}" || exit 1
 . "${ROOT_PATH}/functions.sh"
 
 appinstall 'Live USB creator' 'usb-creator-cli'
+appinstall 'UPnP client'      'miniupnpc'
