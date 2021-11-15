@@ -684,11 +684,6 @@ case "${bundle}" in
         appinstall 'Transmission remote'    'transmission-remote-gtk'
     fi
 
-    if kdebased
-    then
-        appinstall 'Transmission Qt'        'transmission-qt'
-    fi
-
 ;;
 
 ### ============================================================================
