@@ -550,15 +550,6 @@ case "${bundle}" in
         rm -rf "${HOME}/.config/QtProject"
         usercopy 'qtcreator' --replace '.config/QtProject/QtCreator.ini'
 
-        ## Disable ClangFormat for QtCreator 4.11.0 ----------------------------
-
-        #TODO: Remove after qtcreator update
-        if [[ "$(pkgversion qtcreator | cut -d '-' -f 1)" == '4.11.0' ]]
-        then
-            addconfigline 'Ignored'      'Android, AutoTest, Bazaar, ClangFormat, CMakeProjectManager, CVS, CodePaster, FakeVim, GLSLEditor, Mercurial, Perforce, PythonEditor, QbsProjectManager, QmakeAndroidSupport, QmlDesigner, QmlJSEditor, QmlJSTools, QmlProfiler, QmlProjectManager, Qnx, TaskList' 'Plugins' "${HOME}/.config/QtProject/QtCreator.ini"
-            addconfigline 'ForceEnabled' 'Beautifier, Cppcheck, Todo' 'Plugins' "${HOME}/.config/QtProject/QtCreator.ini"
-        fi
-
         ## Configure color schemes ---------------------------------------------
 
         qvariant=''
