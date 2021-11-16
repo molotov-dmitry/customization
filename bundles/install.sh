@@ -580,8 +580,6 @@ case "${bundle}" in
         appinstall 'Rhythmbox'              'rhythmbox rhythmbox-plugins'
         appinstall 'MPV Gnome GUI'          'celluloid'
 
-        appinstall 'DLNA support'           'dleyna-server [dleyna-renderer]'
-
         appinstall 'EasyTag'                'easytag'
 
         appinstall 'Gnome Photos'           'gnome-photos'
