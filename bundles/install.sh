@@ -578,7 +578,6 @@ case "${bundle}" in
     if gnomebased
     then
         appinstall 'Rhythmbox'              'rhythmbox rhythmbox-plugins'
-        appinstall 'Totem video player'     'totem'
         appinstall 'MPV Gnome GUI'          'celluloid'
 
         appinstall 'DLNA support'           'dleyna-server [dleyna-renderer]'
