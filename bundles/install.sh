@@ -580,7 +580,6 @@ case "${bundle}" in
         appinstall 'Rhythmbox'              'rhythmbox rhythmbox-plugins'
         appinstall 'MPV Gnome GUI'          'celluloid'
 
-        appinstall 'Gnome Photos'           'gnome-photos'
         appinstall 'Shotwell'               'shotwell'
     fi
 
