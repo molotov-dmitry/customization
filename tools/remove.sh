@@ -79,6 +79,7 @@ packages_to_remove+=('debian-reference-common')
 ## Games -----------------------------------------------------------------------
 
 packages_to_remove+=('gnome-2048' 'gnome-mines' 'gnome-sudoku' 'gnome-mahjongg' 'aisleriot' 'gnome-klotski' 'gnome-chess' 'five-or-more' 'four-in-a-row' 'gnome-nibbles' 'hitori' 'iagno' 'lightsoff' 'quadrapassel' 'gnome-robots' 'swell-foop' 'tali' 'gnome-taquin' 'gnome-tetravex' 'kpat' 'ksudoku' 'kmahjongg' 'kmines')
+packages_to_remove+=('gamemode')
 
 ## Multimedia ------------------------------------------------------------------
 
@@ -105,6 +106,14 @@ packages_to_remove+=('language-pack-zh-hans-base' 'language-pack-zh-hans' 'langu
 packages_to_remove+=('khmerconverter')
 packages_to_remove+=('hdate-applet')
 packages_to_remove+=('fcitx5' 'fcitx5-data' 'fcitx5-modules' 'fcitx5-chewing' 'fcitx5-chineese-addons' 'fcitx' 'fcitx-bin' 'fcitx-config-common' 'fcitx-data' 'fcitx-modules' 'fcitx-frontend-all' 'fcitx-mozc' 'fcitx-mozc-data' 'fcitx5-mozc' 'mozc-utils-gui' 'mozc-data' 'mozc-server' 'ibus-mozc' 'anthy' 'anthy-common' 'gtk-im-libthai' 'ibus-libpinyin' 'ibus-hangul' 'ibus-chewing' 'ibus-table-cangjie' 'ibus-table-cangjie-big' 'ibus-table-cangjie3' 'ibus-table-cangjie5' 'ibus-table-wubi' 'ibus-unikey')
+packages_to_remove+=('libpinyin13' 'libpinyin-data')
+
+## Development -----------------------------------------------------------------
+
+for package in $(apt-mark showmanual | grep '^libabsl[0-9]')
+do
+    packages_to_remove+=("$package")
+done
 
 ## Snapd -----------------------------------------------------------------------
 
