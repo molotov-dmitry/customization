@@ -629,8 +629,11 @@ case "${bundle}" in
 
         gsettings set org.gnome.builder        follow-night-light   false
         gsettings set org.gnome.builder        night-mode           false
+
         gsettings set org.gnome.builder.editor show-map             true
         gsettings set org.gnome.builder.editor font-name            'Fira Code 12'
+
+        gsettings set org.gnome.builder.terminal font-name          'Fira Code 12'
 
         for lang in awk c changelog cmake cpp cpphdr css csv desktop diff dosbatch dot gdb-log html ini java js json markdown pascal php sh sql vala xml yaml
         do
@@ -658,7 +661,7 @@ case "${bundle}" in
             gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ overwrite-braces        true
         done
 
-        for plugin in dspy glade gvls_plugin jhbuild_plugin newcomers npm_plugin podman python_gi_imports_completion qemu rust-analyzer rustup_plugin valgrind_plugin
+        for plugin in c-pack code-index codespell color-picker copyright_plugin ctags dspy gdiagnose gettext gjs_symbols glade gnome-code-assistance gvls_plugin jhbuild_plugin newcomers npm_plugin podman python_gi_imports_completion qemu rust-analyzer rustup_plugin vala_pack_plugin valgrind_plugin
         do
             gsettings set org.gnome.builder.plugin:/org/gnome/builder/plugins/${plugin}/ enabled false
         done
