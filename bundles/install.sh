@@ -352,6 +352,7 @@ case "${bundle}" in
     if gnomebased
     then
         appinstall 'GNOME Builder'      'gnome-builder'
+        appremove  'Gedit'              'gedit'
     fi
 
 ;;

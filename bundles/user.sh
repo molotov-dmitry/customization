@@ -621,6 +621,7 @@ case "${bundle}" in
 
         ## Register mimetypes --------------------------------------------------
 
+        mimeregister 'text/plain'                'org.gnome.Builder.desktop'
         mimeregister 'text/x-makefile'           'org.gnome.Builder.desktop'
         mimeregister 'application/x-shellscript' 'org.gnome.Builder.desktop'
 
