@@ -1443,6 +1443,14 @@ case "${bundle}" in
         addbookmark 'sftp://rczi@localhost/home/rczi' 'rczi user'
     fi
 
+    ## Disable suspend and screen off timeout ==================================
+
+    if ispkginstalled gnome-shell
+    then
+        gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
+        gsettings set org.gnome.desktop.session               idle-delay             0
+    fi
+
     ## =========================================================================
 
 ;;
