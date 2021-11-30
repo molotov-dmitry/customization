@@ -1079,8 +1079,6 @@ case "${bundle}" in
             launcheradd 'org.gnome.Geary'
 
             setdefaultapp 'x-scheme-handler/mailto' 'org.gnome.Geary.desktop'
-
-            usercopy 'geary'
         fi
     fi
 
