@@ -786,10 +786,6 @@ case "${bundle}" in
 
     appinstall 'RCZI Root CA cert'      'ca-rczifort'
 
-    ### Plymouth theme =========================================================
-
-    appinstall 'RCZI plymouth theme'    plymouth-theme-rczi
-
     ### Network switcher =======================================================
 
     appinstall 'Network Switcher'       'network-switch'
