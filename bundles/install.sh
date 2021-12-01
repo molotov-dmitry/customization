@@ -572,7 +572,10 @@ case "${bundle}" in
         appinstall 'Rhythmbox'              'rhythmbox rhythmbox-plugins'
         appinstall 'MPV Gnome GUI'          'celluloid'
 
-        appinstall 'Shotwell'               'shotwell'
+        if ! ispkginstalled shotwell
+        then
+            appinstall 'Eye of Gnome'       'eog'
+        fi
     fi
 
     if ispkginstalled gnome-shell
@@ -690,6 +693,7 @@ case "${bundle}" in
 
     if gnomebased
     then
+        appremove  'Eye of Gnome'       'eog'
         appinstall 'Shotwell'           'shotwell'
     fi
 

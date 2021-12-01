@@ -989,15 +989,11 @@ case "${bundle}" in
         usercopy 'mpv'
     fi
 
-    ## Shotwell ----------------------------------------------------------------
+    ## Eye of Gnome ------------------------------------------------------------
 
-    if ispkginstalled shotwell
+    if ispkginstalled eog
     then
-        mimedefault 'shotwell-viewer' 'image'
-
-        gsettings set org.yorba.shotwell.preferences.ui show-welcome-dialog false
-        gsettings set org.yorba.shotwell.preferences.files auto-import true
-        gsettings set org.yorba.shotwell.crop-settings last-crop-menu-choice 0
+        mimedefault 'org.gnome.eog' 'image'
     fi
 
     ## A simple MPRIS indicator button Gnome Shell extension -------------------
