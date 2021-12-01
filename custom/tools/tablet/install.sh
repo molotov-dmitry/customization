@@ -15,3 +15,6 @@ appinstall 'Intel UCM files' 'ucm-intel'
 
 appinstall 'ZRAM config' 'zram-config'
 
+### IA32 EFI GRUB ==============================================================
+
+appinstall 'IA32 EFI GRUB' 'grub-efi-ia32-bin'
