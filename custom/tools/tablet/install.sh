@@ -10,3 +10,8 @@ cd "${ROOT_PATH}" || exit 1
 ## Audio -----------------------------------------------------------------------
 
 appinstall 'Intel UCM files' 'ucm-intel'
+
+### Compressed RAM =============================================================
+
+appinstall 'ZRAM config' 'zram-config'
+
