@@ -131,7 +131,7 @@ case "${bundle}" in
         gsettings set org.${editor}.preferences.editor highlight-current-line true
         gsettings set org.${editor}.preferences.editor bracket-matching       true
 
-        gsettings set org.${editor}.preferences.editor insert-spaces          false
+        gsettings set org.${editor}.preferences.editor insert-spaces          true
         gsettings set org.${editor}.preferences.editor tabs-size              4
 
         gsettings set org.${editor}.preferences.editor display-right-margin   true
@@ -145,6 +145,7 @@ case "${bundle}" in
 
         if [[ "$editor" == 'gnome.gedit' ]]
         then
+            gsettings set org.gnome.gedit.preferences.editor display-overview-map true
             gsettings set org.gnome.gedit.preferences.editor background-pattern 'grid'
 
             encodingsettings='candidate-encodings'
