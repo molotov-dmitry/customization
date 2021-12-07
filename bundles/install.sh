@@ -736,6 +736,7 @@ case "${bundle}" in
 "cli/monitor")
 
     appinstall 'htop'                   'htop'
+    appinstall 'btop'                   'btop'
     appinstall 'iotop'                  'iotop'
     appinstall 'Net bandwidth monitor'  'speedometer'
     appinstall 'tmux'                   'tmux'
