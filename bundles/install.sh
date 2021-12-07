@@ -21,6 +21,7 @@ case "${bundle}" in
 
     appinstall 'Bash completion'        'bash-completion'
     appinstall 'Sudo'                   'sudo'
+    appinstall 'GRUB force menu'        'grub-force-menu'
 
 ;;
 
