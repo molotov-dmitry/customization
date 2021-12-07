@@ -9,7 +9,11 @@ cd "${ROOT_PATH}" || exit 1
 
 ## Audio -----------------------------------------------------------------------
 
-appinstall 'Intel UCM files' 'ucm-intel'
+appinstall 'Intel UCM files' 'ucm-intel bytcr-rt5640-config'
+
+## G-sensor --------------------------------------------------------------------
+
+appinstall 'G-sensor config' 'dexp-gx110-sensor-matrix'
 
 ### Compressed RAM =============================================================
 
