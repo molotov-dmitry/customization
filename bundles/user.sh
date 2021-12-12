@@ -469,8 +469,6 @@ case "${bundle}" in
 
 "server/download")
 
-    echo "alias ytpl='youtube-dl -o \"%(playlist_index)02d. %(title)s.%(ext)s\"'" >> ~/.bash_aliases
-
 ;;
 
 ### ============================================================================
@@ -1033,8 +1031,6 @@ case "${bundle}" in
 ### Online video ===============================================================
 
 "media-online")
-
-    echo "alias ytmp3='youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0'" >> ~/.bash_aliases
 
 ;;
 
