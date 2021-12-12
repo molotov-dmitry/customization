@@ -529,7 +529,7 @@ repoadd()
 
     if [[ -n "${keyfile}" ]]
     then
-        apt-key add "${ROOT_PATH}/files/${keyfile}" >/dev/null 2>&1
+        apt-key add "${ROOT_PATH}/keys/${keyfile}" >/dev/null 2>&1
         local status=$?
 
         if [[ $status -ne 0 ]]

@@ -21,10 +21,6 @@ case "${bundle}" in
 
 "base")
 
-    ## Repository key ==========================================================
-
-    preparefiles 'AHome' 'ahome'
-
 ;;
 
 ### Base GUI ===================================================================
@@ -405,8 +401,6 @@ case "${bundle}" in
 
 "network/browser")
 
-    preparefiles 'Chrome' 'chrome'
-
     mkdir -p "${rootfs_dir}/etc/default"
 
     echo 'repo_add_once="false"'                >  "${rootfs_dir}/etc/default/google-chrome"
@@ -509,8 +503,6 @@ case "${bundle}" in
 ;;
 
 "vm-host/vbox")
-
-    preparefiles 'Virtualbox' 'virtualbox'
 
 ;;
 

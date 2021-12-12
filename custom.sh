@@ -382,6 +382,7 @@ silent 'Copying bundles list'           cp -f "${ROOT_PATH}/custom/tools/${confi
 ## Copy startup files ----------------------------------------------------------
 
 silent 'Copy startup files'             cp -rfP "${ROOT_PATH}/tools/startup/." "${rootfs_dir}/" || exit 1
+silent 'Copy GPG keys'                  cp -rfP "${ROOT_PATH}/tools/keys"      "${rootfs_dir}/tools/" || exit 1
 
 ## Executing custom config script ----------------------------------------------
 
@@ -422,6 +423,7 @@ finish_chroot "${rootfs_dir}"
 ## Clean up after chroot step --------------------------------------------------
 
 silent 'Removing bundle list'           rm -f  "${rootfs_dir}/tools/custom/tools/${config}.bundle"
+silent 'Removing GPG keys'              rm -rf "${rootfs_dir}/tools/keys"
 
 ## Copying first boot script ---------------------------------------------------
 

@@ -19,7 +19,7 @@ case "${bundle}" in
 
 "base")
 
-    repoadd 'AHome' '188.134.72.31:8191' 'ahome' 'contrib' 'ahome/ahome.gpg'
+    repoadd 'AHome' '188.134.72.31:8191' 'ahome' 'contrib' 'ahome.gpg'
 
 ;;
 
@@ -157,7 +157,7 @@ case "${bundle}" in
 
 "server/media")
 
-    repoadd 'plexmediaserver' 'downloads.plex.tv/repo/deb' 'public' 'main' 'plexmediaserver/PlexSign.key'
+    repoadd 'plexmediaserver' 'downloads.plex.tv/repo/deb' 'public' 'main' 'plex.gpg'
 
 ;;
 
@@ -358,7 +358,7 @@ case "${bundle}" in
 
 "network/browser")
 
-    repoadd 'Google Chrome' 'http://dl.google.com/linux/chrome/deb/' 'stable' 'main' 'chrome/google.key' 'arch=amd64'
+    repoadd 'Google Chrome' 'http://dl.google.com/linux/chrome/deb/' 'stable' 'main' 'google.gpg' 'arch=amd64'
 
 ;;
 
@@ -461,7 +461,7 @@ case "${bundle}" in
     if [[ "$(lsb_release -si)" == "Debian" && ( "$(lsb_release -rs | cut -d '.' -f 1)" -ge 10 || "$(lsb_release -rs)" == testing ) ]]
     then
         repoadd 'Backports'  'http://mirror.yandex.ru/debian' "$(lsb_release -cs)-backports" 'main'
-        repoadd 'Virtualbox' 'https://people.debian.org/~lucas/virtualbox-buster' './' '' 'virtualbox/virtualbox.gpg'
+        repoadd 'Virtualbox' 'https://people.debian.org/~lucas/virtualbox-buster' './' '' 'virtualbox.gpg'
     fi
 
 ;;
