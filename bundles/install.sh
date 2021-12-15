@@ -563,7 +563,7 @@ case "${bundle}" in
     appinstall 'VA API drivers'         'va-driver-all gstreamer1.0-vaapi'
     appinstall 'Multimedia codecs'      'gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad gstreamer1.0-libav libavcodec-extra'
 
-    appinstall 'MPV Player'             'mpv'
+    appinstall 'MPV Player'             'mpv custom-config-mpv'
 
     if gnomebased
     then

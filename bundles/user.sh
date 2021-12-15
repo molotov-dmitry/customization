@@ -980,13 +980,6 @@ case "${bundle}" in
         gsettings set org.gnome.rhythmbox.plugins.iradio initial-stations-loaded true
     fi
 
-    ## MPV ---------------------------------------------------------------------
-
-    if ispkginstalled mpv
-    then
-        usercopy 'mpv'
-    fi
-
     ## Eye of Gnome ------------------------------------------------------------
 
     if ispkginstalled eog
