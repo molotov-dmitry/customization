@@ -590,6 +590,12 @@ case "${bundle}" in
 "media-online")
 
     appinstall 'Youtube downloader'     'yt-dlp yt-dlp-scripts phantomjs'
+    appinstall 'MPV for youtube'        'yt-mpv'
+
+    if gnomebased
+    then
+        appinstall 'MPV Gnome GUI for youtube'  'yt-celluloid'
+    fi
 
 ;;
 
