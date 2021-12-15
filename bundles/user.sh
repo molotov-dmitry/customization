@@ -941,8 +941,6 @@ case "${bundle}" in
 
     if ispkginstalled rhythmbox
     then
-        usercopy 'rhythmbox'
-
         gsettingsclear org.gnome.rhythmbox.plugins seen-plugins
 
         gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'soundcloud'
@@ -976,8 +974,6 @@ case "${bundle}" in
         gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'mmkeys'
         gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'grilo'
         gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'generic-player'
-
-        gsettings set org.gnome.rhythmbox.plugins.iradio initial-stations-loaded true
     fi
 
     ## Eye of Gnome ------------------------------------------------------------
