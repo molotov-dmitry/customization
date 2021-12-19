@@ -466,6 +466,18 @@ then
         mksquashfs "${rootfs_dir}" "${iso_dir}/${livedir}/filesystem.squashfs" ${comp_options} || exit 1
     fi
 
+    ## Set Russian as default locale -------------------------------------------
+
+    if [[ -f "${iso_dir}/preseed/ubuntu.seed" ]]
+    then
+        cat >> "${iso_dir}/preseed/ubuntu.seed" << EOF
+# Set language, country and locale.
+d-i debian-installer/language string ru
+d-i debian-installer/country string RU
+d-i debian-installer/locale string ru_RU.UTF-8
+EOF
+    fi
+
     ## Modify package manifest -------------------------------------------------
 
     for pkg in '^sudo$' '^cifs-utils$' '^libgail'
