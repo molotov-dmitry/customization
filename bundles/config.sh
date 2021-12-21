@@ -182,10 +182,6 @@ _EOF
 
 "server/ssh")
 
-    silent 'Configuring Open SSH' touch /etc/ssh/sshd_config
-    silent 'Configuring Open SSH' sed -i '/^ClientAliveInterval/d;/^ClientAliveCountMax/d' /etc/ssh/sshd_config
-    silent 'Configuring Open SSH' bash -c 'echo -e "\nClientAliveInterval 300\nClientAliveCountMax 2" >> /etc/ssh/sshd_config'
-
 ;;
 
 ### SVN server =================================================================

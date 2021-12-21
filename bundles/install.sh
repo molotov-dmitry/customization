@@ -182,7 +182,7 @@ case "${bundle}" in
 
 "server/ssh")
 
-    appinstall 'Open SSH'               'openssh-server'
+    appinstall 'Open SSH'               'custom-config-openssh-server openssh-server'
 
 ;;
 
