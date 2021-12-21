@@ -96,7 +96,7 @@ case "${bundle}" in
 
 "qt")
 
-    appinstall 'GTK2 style for Qt5'         'qt5-style-plugins'
+    appinstall 'GTK2 style for Qt5'         'qt5-style-plugins custom-config-qt-gtk2-theme'
 ;;
 
 ### ============================================================================
