@@ -225,6 +225,8 @@ case "${bundle}" in
     appinstall 'MiniDLNA'               'minidlna'
     appinstall 'Plex Media Server'      'plexmediaserver'
 
+    appinstall 'Inotify max watch'      'custom-config-sysctl-inotify-max-watch'
+
 ;;
 
 ### Download server ============================================================
@@ -271,6 +273,8 @@ case "${bundle}" in
     appinstall 'CMake'                  'cmake'
     appinstall 'Checkinstall'           'checkinstall'
     appinstall 'CRLF to LF'             'dos2unix'
+
+    appinstall 'Allow user debug'       'custom-config-sysctl-ptrace-scope custom-config-sysctl-allow-user-dmesg'
 
 ;;
 
@@ -751,6 +755,8 @@ case "${bundle}" in
     appinstall 'curl'                   'curl'
     appinstall 'CLI web browsers'       'elinks w3m'
     appinstall 'Network tools'          'net-tools'
+
+    appinstall 'Allow user ping'        'custom-config-sysctl-allow-user-ping'
 
 ;;
 

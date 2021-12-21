@@ -218,9 +218,6 @@ _EOF
 
     ## MiniDLNA ----------------------------------------------------------------
 
-    silent 'Inotyfy max watchs fix' bash -c 'echo -e "fs.inotify.max_user_watches = 100000" > /etc/sysctl.d/90-inotify.conf'
-    silent 'Inotify max watchs fix' sysctl fs.inotify.max_user_watches=100000
-
     silent 'Configuring MiniDLNA'   cp -f "${ROOT_PATH}/files/minidlna/minidlna.conf" '/etc/'
 
     ## Plex Media Server -------------------------------------------------------
@@ -264,18 +261,6 @@ _EOF
 ### Build tools ================================================================
 
 "dev/build")
-
-    ## Fix ptrace --------------------------------------------------------------
-
-    if [[ -f /etc/sysctl.d/10-ptrace.conf ]]
-    then
-        silent 'Ptrace fix'             sed -i 's/[ \t]*kernel.yama.ptrace_scope[ \t]*=[ \t]*1/kernel.yama.ptrace_scope = 0/' /etc/sysctl.d/10-ptrace.conf
-    fi
-
-    ## Enable dmesg for all users ----------------------------------------------
-
-    silent 'Fix dmesg restriction' bash -c 'echo -e "kernel.dmesg_restrict = 0" > /etc/sysctl.d/90-dmesg.conf'
-    silent 'Fix dmesg restriction' sysctl kernel.dmesg_restrict=0
 
 ;;
 
@@ -520,9 +505,6 @@ _EOF
 ### Command line network applications ==========================================
 
 "cli/net")
-
-    silent 'Fix ping restriction' bash -c 'echo -e "net.ipv4.ping_group_range = 0 2147483647" > /etc/sysctl.d/99-allow-ping.conf'
-    silent 'Fix ping restriction' sysctl net.ipv4.ping_group_range='0 2147483647'
 
 ;;
 
