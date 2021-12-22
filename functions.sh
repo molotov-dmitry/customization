@@ -28,7 +28,7 @@ function spaces()
 function title()
 {
     title="$1"
-    echo -n "[$(date +%H:%M:%S)] $title"
+    echo -n "[$(date -u +%H:%M:%S)] $title"
     spaces "$title"
 
     return 0
