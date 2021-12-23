@@ -482,14 +482,9 @@ case "${bundle}" in
 "appearance/themes")
 
     appinstall 'Adwaita theme'          'gnome-themes-standard'
-    appinstall 'Numix theme'            'numix-icon-theme-circle [numix-gtk-theme] [numix-blue-gtk-theme]'
+    appinstall 'Numix theme'            'numix-icon-theme-circle'
     appinstall 'Breeze theme'           'breeze-cursor-theme breeze-icon-theme'
     appinstall 'Papirus theme'          'papirus-icon-theme papirus-material-icon-theme'
-
-    if ispkgavailable yaru-theme-icon
-    then
-        appinstall 'Yaru theme'         'yaru-theme-icon [yaru-theme-gtk]'
-    fi
 
     if ispkgavailable plymouth-theme-spinner
     then
