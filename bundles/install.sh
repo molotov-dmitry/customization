@@ -266,7 +266,7 @@ case "${bundle}" in
 "dev/build")
 
     appinstall 'Build tools'            'build-essential unifdef'
-    appinstall 'GCC'                    'gcc g++ gdb [gcc-8] [g++-8]'
+    appinstall 'GCC'                    'gcc g++ gdb'
     appinstall 'Multilib tools'         'gcc-multilib g++-multilib'
     appinstall 'Clang'                  'llvm clang lldb'
 
