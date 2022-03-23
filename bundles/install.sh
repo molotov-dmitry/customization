@@ -158,7 +158,7 @@ case "${bundle}" in
 
 "driver/fs")
 
-    appinstall 'exFAT support'  'exfat-fuse exfat-utils'
+    appinstall 'exFAT support'  'exfat-fuse exfatprogs'
     appinstall 'CIFS support'   'cifs-utils'
 
 ;;
