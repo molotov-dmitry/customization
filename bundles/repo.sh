@@ -456,10 +456,10 @@ case "${bundle}" in
 
 "vm-host/vbox")
 
-    if [[ "$(lsb_release -si)" == "Debian" && ( "$(lsb_release -rs | cut -d '.' -f 1)" -ge 10 || "$(lsb_release -rs)" == testing ) ]]
+    if [[ "$(lsb_release -si)" == "Debian" ]]
     then
         repoadd 'Backports'  'http://mirror.yandex.ru/debian' "$(lsb_release -cs)-backports" 'main'
-        repoadd 'Virtualbox' 'https://people.debian.org/~lucas/virtualbox-buster' './' '' 'virtualbox.gpg'
+        repoadd 'AHome Debian' '188.134.72.31:8192' 'ahome' 'contrib' 'ahome.gpg'
     fi
 
 ;;
