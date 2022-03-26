@@ -819,7 +819,7 @@ function gnomeshellextension()
 
     ### Install from Gnome Shell extensions website ----------------------------
 
-    local shellver=$(dpkg-query -W -f='${Version}\n' gnome-shell | cut -d '.' -f 1-2)
+    local shellver=$(dpkg-query -W -f='${Version}\n' gnome-shell | cut -d '.' -f 1-2 | cut -d '~' -f 1 | cut -d '-' -f 1 | cut -d '+' -f 1)
     local server='https://extensions.gnome.org'
     local installdir='/usr/share/gnome-shell/extensions'
 
