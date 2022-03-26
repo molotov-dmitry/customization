@@ -800,6 +800,7 @@ function gnomeshellextension()
     local extdescription="$2"
     local condition="$3"
     local extpkg="$4"
+    local extname="${extdescription:-#${extid}}"
 
     ### Check condition --------------------------------------------------------
 
@@ -831,7 +832,7 @@ function gnomeshellextension()
 
     if [[ -z "${shellver}" ]]
     then
-        title "Downloading extension ${extdescription:-#${extid}}"
+        title "Downloading extension ${extname}"
         msgfail 'shell not installed'
         return 1
     fi
@@ -840,7 +841,7 @@ function gnomeshellextension()
 
     if [[ $? -ne 0 ]]
     then
-        title "Downloading extension ${extdescription:-#${extid}}"
+        title "Downloading extension ${extname}"
         msgfail
         return 1
     fi
@@ -857,7 +858,7 @@ function gnomeshellextension()
     local ext_uuid=$(echo "${extinfo}" | jq -r '.uuid')
     local ext_durl=$(echo "${extinfo}" | jq -r '.download_url')
 
-    title "Downloading ${ext_name}"
+    title "Downloading ${ext_name:-${extname}}"
 
     if [[ -z "${ext_uuid}" || -z "${ext_durl}" ]]
     then
