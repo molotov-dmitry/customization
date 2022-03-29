@@ -86,6 +86,11 @@ case "${bundle}" in
         addconfigline 'WaylandEnable' 'false' 'daemon' '/etc/gdm3/custom.conf'
     fi
 
+    if test -f '/etc/gdm3/daemon.conf'
+    then
+        addconfigline 'WaylandEnable' 'false' 'daemon' '/etc/gdm3/daemon.conf'
+    fi
+
 ;;
 
 ### KDE ========================================================================
