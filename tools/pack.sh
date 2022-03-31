@@ -11,70 +11,84 @@ function packiso()
 
     local iso_name="${iso_filename}-${config}.${iso_extension}"
 
-    if [[ -f "${iso_dir}/md5sum.txt" ]]
-    then
-        silent '' pushd "${iso_dir}"
-        silent 'Calculating md5' bash -c 'find -type f ! -path ./md5sum.txt ! -path ./isolinux/isolinux.bin ! -path ./isolinux/boot.cat -exec md5sum {} \; > md5sum.txt'
-        silent '' popd
-    fi
+    ### Calculate files hash ===================================================
 
-    silent 'Making dir for iso' mkdir -p "${res_dir}"
+    silent '' pushd "${iso_dir}"
+    silent 'Calculating md5' bash -c 'find -type f ! -path ./md5sum.txt ! -path ./isolinux/isolinux.bin ! -path ./isolinux/boot.cat -exec md5sum {} \; > md5sum.txt'
+    silent '' popd
 
-    if [[ -e "${res_dir}/${iso_name}" ]]
-    then
-        silent 'Removing old iso' rm -f "${res_dir}/${iso_name}"
-    fi
+    ### Remove old iso image ===================================================
 
-    local make_hybrid=0
+    mkdir -p "${res_dir}"
+    rm -f "${res_dir}/${iso_name}"
+
+    ### Set options ============================================================
 
     local -a iso_options
 
-    iso_options+=("-r")                                 # Sets ownership and permissions of the files in the ISO
+    ### mkisofs options --------------------------------------------------------
+
+    iso_options+=('-R' '-r')                            # Sets ownership and permissions of the files in the ISO
+    iso_options+=('-J' '-joliet-long')                  # Enables production of a Joliet tree for use on systems by Microsoft Inc
+
+    iso_options+=('-l')                                 # Allow full 31-character filenames
+    iso_options+=('-cache-inodes')                      # Cache inode and device numbers to find hard links to files
+    iso_options+=("-allow-multidot")                    # Allows more than one dot to appear filenames
+
+    iso_options+=('-iso-level' '3')                     # Set the iso9660 conformance level
+
+    ### xorriso boot options ---------------------------------------------------
+
+    if [[ -f '/usr/lib/ISOLINUX/isohdpfx.bin' && -d "${iso_dir}/isolinux" ]]
+    then
+        iso_options+=('-isohybrid-mbr')
+        iso_options+=('/usr/lib/ISOLINUX/isohdpfx.bin') # Set SYSLINUX mbr/isohdp[fp]x*.bin for isohybrid
+        iso_options+=('-partition_offset' '16')             # Make image mountable by first partition, too
+    fi
+
+    ### Common options ---------------------------------------------------------
+
     iso_options+=("-V" "${iso_description}")            # Sets the filesystem's name
     iso_options+=("-p" "Dmitry Sorokin")                # Sets the author's name
+
     iso_options+=("-o" "${res_dir}/${iso_name}")        # Sets the name of the new ISO image file
-    iso_options+=("-J" "-joliet-long")             # Enables production of a Joliet tree for use on systems by Microsoft Inc
-    iso_options+=("-cache-inodes")                      # Ignored
-    iso_options+=("-allow-multidot")                    # Allows more than one dot to appear filenames
-    iso_options+=("-l")                                 # Allow full 31-character filenames
 
+    ### mkisofs boot options ---------------------------------------------------
 
-    if [[ -n "${iso_src}" ]]
-    then
-        iso_options+=( $(xorriso -indev "${iso_src}" -report_el_torito as_mkisofs 2>/dev/null | grep '^-c \|^-b \|^-no-emul-boot$\|^-boot-load-size \|^-boot-info-table$\|^-no-emul-boot$\|^-boot-load-size ' | sed "s/ '/ /;s/'$//;s/^-e /--eltorito-boot /;s/ \// /") )
-        make_hybrid=0
-    elif [[ -d "${iso_dir}/isolinux" ]]
+    if [[ -d "${iso_dir}/isolinux" ]]
     then
         iso_options+=("-b" "isolinux/isolinux.bin")     # Boot image to be used when making an El Torito bootable CD for x86 PCs
         iso_options+=("-c" "isolinux/boot.cat")         # Specifies the path and filename of the boot catalog
-        iso_options+=("-no-emul-boot")                  # The system will load and execute this image without performing any disk emulation.
-        iso_options+=("-boot-load-size" "4")            # Specifies the number of "virtual" (512-byte) sectors to load in no-emulation mode
-        iso_options+=("-boot-info-table")               # Specifies that a 56-byte table with information of the CD-ROM layout will be patched in at offset 8 in the boot file.
-
-        make_hybrid=1
+        iso_options+=('-no-emul-boot')                  # The system will load and execute this image without performing any disk emulation.
+        iso_options+=('-boot-load-size' '4')            # Specifies the number of "virtual" (512-byte) sectors to load in no-emulation mode
+        iso_options+=('-boot-info-table')               # Specifies that a 56-byte table with information of the CD-ROM layout will be patched in at offset 8 in the boot file.
+        iso_options+=('-isohybrid-gpt-basdat')          #
+        iso_options+=('-isohybrid-apm-hfsplus')         #
     fi
 
-    silent 'Generating iso' genisoimage "${iso_options[@]}" "${iso_dir}" || exit 1
+    ### Generate iso ===========================================================
 
-    if [[ $make_hybrid -eq 1 ]]
+    silent 'Generating iso' xorriso -as mkisofs "${iso_options[@]}" "${iso_dir}" || exit 1
+
+    if [[ -d "${iso_dir}/isolinux" ]]
     then
         silent 'Making iso hybrid' isohybrid "${res_dir}/${iso_name}" || exit 1
     fi
 
+    silent 'Changing rights for iso' chmod -R a+rw "${res_dir}"
+
+    ### Update MD5 hash for all custom iso images ==============================
+
     sed -i "/[ /]${iso_name}\$/d" "${res_dir}/MD5SUMS" 2>/dev/null
     md5sum "${res_dir}/${iso_name}" | sed 's/\/.*\///' >> "${res_dir}/MD5SUMS"
 
-    sed -i "/[ /]${iso_name}\$/d" "${res_dir}/REV" 2>/dev/null
-    echo "$(git log --pretty=format:'%h' | wc -w) $(git rev-parse --short HEAD) ${iso_name}" >> "${res_dir}/REV"
-
-    for iso in $(cut -d ' ' -f 3 "${res_dir}/MD5SUMS" "${res_dir}/REV" | sort -u)
+    for iso in $(cut -d ' ' -f 3 "${res_dir}/MD5SUMS" | sort -u)
     do
         if [[ ! -f "${res_dir}/${iso}" ]]
         then
             sed -i "/[ /]${iso}\$/d" "${res_dir}/MD5SUMS" 2>/dev/null
-            sed -i "/[ /]${iso}\$/d" "${res_dir}/REV"     2>/dev/null
         fi
     done
 
-    silent 'Changing rights for iso' chmod -R a+rw "${res_dir}"
+    ### ========================================================================
 }
