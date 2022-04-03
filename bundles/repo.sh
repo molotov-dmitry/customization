@@ -21,6 +21,13 @@ case "${bundle}" in
 
     repoadd 'AHome' '188.134.72.31:8191' 'ahome' 'contrib' 'ahome.gpg'
 
+    if [[ "$(lsb_release -si)" == "Debian" ]]
+    then
+        repoadd 'Backports'    'http://mirror.yandex.ru/debian' "$(lsb_release -cs)-backports" 'main'
+        repoadd 'AHome Debian' '188.134.72.31:8192' 'ahome' 'contrib' 'ahome.gpg'
+    fi
+
+
 ;;
 
 ### Base GUI ===================================================================
@@ -455,12 +462,6 @@ case "${bundle}" in
 ;;
 
 "vm-host/vbox")
-
-    if [[ "$(lsb_release -si)" == "Debian" ]]
-    then
-        repoadd 'Backports'  'http://mirror.yandex.ru/debian' "$(lsb_release -cs)-backports" 'main'
-        repoadd 'AHome Debian' '188.134.72.31:8192' 'ahome' 'contrib' 'ahome.gpg'
-    fi
 
 ;;
 
