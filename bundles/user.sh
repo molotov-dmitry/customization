@@ -626,8 +626,13 @@ case "${bundle}" in
 
         ## gnome builder -------------------------------------------------------
 
-        gsettings set org.gnome.builder        follow-night-light   false
-        gsettings set org.gnome.builder        night-mode           false
+        if dpkg --compare-versions "$(pkgversion gnome-builder)" ge 42
+        then
+            gsettings set org.gnome.builder    style-variant        'follow'
+        else
+            gsettings set org.gnome.builder    follow-night-light   false
+            gsettings set org.gnome.builder    night-mode           false
+        fi
 
         gsettings set org.gnome.builder.editor show-map             true
         gsettings set org.gnome.builder.editor font-name            'Fira Code 12'
