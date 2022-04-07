@@ -72,5 +72,12 @@
 		<pref name='accounts'>
 			<pref name='buddyicon' type='path' value='<<HOME>>/.face'/>
 		</pref>
+		<pref name="docklet">
+            <pref name="blink" type="bool" value="0"/>
+            <pref name="show" type="string" value="never"/>
+            <pref name="gtk">
+                <pref name="embedded" type="bool" value="0"/>
+            </pref>
+        </pref>
 	</pref>
 </pref>
