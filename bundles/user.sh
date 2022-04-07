@@ -175,17 +175,22 @@ case "${bundle}" in
     if ispkginstalled gnome-terminal
     then
         term_profile=$(gsettings get org.gnome.Terminal.ProfilesList default | cut -d "'" -f 2)
+        term_profile_path="org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/"
 
         gsettings set org.gnome.Terminal.Legacy.Settings default-show-menubar false
         gsettings set org.gnome.Terminal.Legacy.Settings menu-accelerator-enabled false
         gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'dark'
 
-        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" visible-name 'UTF-8'
-        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" use-transparent-background true
-        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" background-transparency-percent 5
-        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" scrollbar-policy 'always'
+        gsettings set "${term_profile_path}" visible-name 'UTF-8'
+        gsettings set "${term_profile_path}" scrollbar-policy 'always'
 
-        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/" palette "['rgb(23,20,33)', 'rgb(192,28,40)', 'rgb(38,162,105)', 'rgb(162,115,76)', 'rgb(18,72,139)', 'rgb(163,71,186)', 'rgb(42,161,179)', 'rgb(208,207,204)', 'rgb(94,92,100)', 'rgb(246,97,81)', 'rgb(51,209,122)', 'rgb(233,173,12)', 'rgb(42,123,222)', 'rgb(192,97,203)', 'rgb(51,199,222)', 'rgb(255,255,255)']"
+        gsettings set "${term_profile_path}" palette "['rgb(23,20,33)', 'rgb(192,28,40)', 'rgb(38,162,105)', 'rgb(162,115,76)', 'rgb(18,72,139)', 'rgb(163,71,186)', 'rgb(42,161,179)', 'rgb(208,207,204)', 'rgb(94,92,100)', 'rgb(246,97,81)', 'rgb(51,209,122)', 'rgb(233,173,12)', 'rgb(42,123,222)', 'rgb(192,97,203)', 'rgb(51,199,222)', 'rgb(255,255,255)']"
+
+        if gsettings writeable "${term_profile_path}" use-transparent-background 1>/dev/null 2>/dev/null
+        then
+            gsettings set "${term_profile_path}" use-transparent-background true
+            gsettings set "${term_profile_path}" background-transparency-percent 5
+        fi
     fi
 
     ## Configure Gnome system monitor ==========================================
@@ -1337,15 +1342,19 @@ case "${bundle}" in
     if ispkginstalled gnome-terminal
     then
         newprofileid="$(uuidgen)"
+        newprofilepath="org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${newprofileid}/"
 
-        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${newprofileid}/" visible-name 'KOI8-R'
-        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${newprofileid}/" encoding 'KOI8-R'
-        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${newprofileid}/" use-transparent-background true
-        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${newprofileid}/" background-transparency-percent 5
-        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${newprofileid}/" scrollbar-policy 'always'
+        gsettings set "${newprofilepath}" visible-name 'KOI8-R'
+        gsettings set "${newprofilepath}" encoding 'KOI8-R'
+        gsettings set "${newprofilepath}" scrollbar-policy 'always'
 
-        gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${newprofileid}/" palette "['rgb(23,20,33)', 'rgb(192,28,40)', 'rgb(38,162,105)', 'rgb(162,115,76)', 'rgb(18,72,139)', 'rgb(163,71,186)', 'rgb(42,161,179)', 'rgb(208,207,204)', 'rgb(94,92,100)', 'rgb(246,97,81)', 'rgb(51,209,122)', 'rgb(233,173,12)', 'rgb(42,123,222)', 'rgb(192,97,203)', 'rgb(51,199,222)', 'rgb(255,255,255)']"
+        gsettings set "${newprofilepath}" palette "['rgb(23,20,33)', 'rgb(192,28,40)', 'rgb(38,162,105)', 'rgb(162,115,76)', 'rgb(18,72,139)', 'rgb(163,71,186)', 'rgb(42,161,179)', 'rgb(208,207,204)', 'rgb(94,92,100)', 'rgb(246,97,81)', 'rgb(51,209,122)', 'rgb(233,173,12)', 'rgb(42,123,222)', 'rgb(192,97,203)', 'rgb(51,199,222)', 'rgb(255,255,255)']"
 
+        if gsettings writeable "${newprofilepath}" use-transparent-background 1>/dev/null 2>/dev/null
+        then
+            gsettings set "${newprofilepath}" use-transparent-background true
+            gsettings set "${newprofilepath}" background-transparency-percent 5
+        fi
 
         gsettingsadd org.gnome.Terminal.ProfilesList list "${newprofileid}"
     fi
