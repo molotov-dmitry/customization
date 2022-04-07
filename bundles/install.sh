@@ -805,13 +805,6 @@ case "${bundle}" in
 
     appinstall 'GOST hashes'            'gostsum'
 
-    ### Gnome shell extensions =================================================
-
-    if ispkginstalled gnome-shell
-    then
-        appinstall 'Redmine issues' 'gnome-shell-extension-redmine-issues'
-    fi
-
     ### Browser ================================================================
 
     if gnomebased
