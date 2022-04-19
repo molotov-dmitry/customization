@@ -73,7 +73,13 @@ case "${bundle}" in
 
     if ispkginstalled gnome-shell
     then
-        gnomeshellextension 307  'Dash to Dock'                     ''        'gnome-shell-extension-dashtodock'
+        if ispkgavailable gnome-shell-extension-ubuntu-dock && ! ispkgavailable gnome-shell-extension-dashtodock
+        then
+            appinstall 'Ubuntu Dock' 'gnome-shell-extension-ubuntu-dock'
+        else
+            gnomeshellextension 307  'Dash to Dock'                 ''        'gnome-shell-extension-dashtodock'
+        fi
+
         gnomeshellextension 112  'Remove Accessibility'             'ge 3.34' 'gnome-shell-extension-remove-accesibility'
         gnomeshellextension 2072 'Skip Window Ready Notification'   'lt 3.38'
         gnomeshellextension 800  'Remove Dropdown Arrows'           'lt 40'   'gnome-shell-extension-remove-dropdown-arrows'
