@@ -352,7 +352,7 @@ case "${bundle}" in
 
 "network/browser")
 
-    repoadd 'Google Chrome' 'http://dl.google.com/linux/chrome/deb/' 'stable' 'main' 'google.gpg' 'arch=amd64'
+    repoadd 'Google Chrome' 'http://dl.google.com/linux/chrome/deb/' 'stable' 'main' 'google-chrome.gpg' 'arch=amd64'
 
 ;;
 
