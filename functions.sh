@@ -132,15 +132,6 @@ function usercopy()
 
 ### Packages ===================================================================
 
-function debconfselect()
-{
-    package="$1"
-    selection="$2"
-    value="$3"
-
-    sh -c "echo ${package} ${selection} select ${value} | debconf-set-selections"
-}
-
 function ispkginstalled()
 {
     app="$1"
