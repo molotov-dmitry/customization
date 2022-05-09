@@ -71,6 +71,7 @@ packages_to_remove+=('cracklib-runtime')
 packages_to_remove+=('espeak-ng-data' 'libespeak-ng1' 'speech-dispatcher-espeak-ng')
 packages_to_remove+=('friendly-recovery')
 packages_to_remove+=('plasma-systemmonitor')
+packages_to_remove+=('libu2f-udev')
 
 ## Help ------------------------------------------------------------------------
 
