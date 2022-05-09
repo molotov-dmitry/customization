@@ -529,7 +529,7 @@ repoadd()
 
     if [[ -n "${keyfile}" ]]
     then
-        apt-key add "${ROOT_PATH}/keys/${keyfile}" >/dev/null 2>&1
+        mv -f "${ROOT_PATH}/keys/${keyfile}" "/etc/apt/trusted.gpg.d/${keyfile}" >/dev/null 2>&1
         local status=$?
 
         if [[ $status -ne 0 ]]
