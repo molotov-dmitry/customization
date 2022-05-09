@@ -25,7 +25,7 @@ packages_to_remove+=('app-install-data-partner')
 packages_to_remove+=('brasero' 'brasero-cdrkit' 'brasero-common')
 packages_to_remove+=('k3b' 'k3b-data')
 packages_to_remove+=('simple-scan' 'skanlite')
-packages_to_remove+=('libreoffice-draw' 'libreoffice-impress' 'libreoffice-math')
+packages_to_remove+=('libreoffice-draw' 'libreoffice-impress' 'libreoffice-math libreoffice-help-common')
 packages_to_remove+=('kmail' 'kontact' 'korganizer' 'ktnef' 'kaddressbook' 'knotes')
 packages_to_remove+=('goldendict')
 packages_to_remove+=('tomboy')
@@ -52,6 +52,7 @@ packages_to_remove+=('onboard')
 packages_to_remove+=('orca' 'gnome-orca')
 packages_to_remove+=('malcontent')
 packages_to_remove+=('brltty')
+packages_to_remove+=('gnome-accessibility-themes')
 
 ## System ----------------------------------------------------------------------
 
@@ -98,6 +99,7 @@ packages_to_remove+=('pavucontrol-qt')
 
 packages_to_remove+=('gnome-sound-recorder' 'gnome-todo' 'gnome-weather' 'gnome-maps' 'gnome-contacts' 'eog' 'gnome-font-viewer' 'gnome-documents')
 packages_to_remove+=('gnome-shell-extension-desktop-icons' 'gnome-shell-extension-desktop-icons-ng')
+packages_to_remove+=('gnome-session-canberra')
 
 ## Localization and fonts ------------------------------------------------------
 

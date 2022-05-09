@@ -522,7 +522,7 @@ case "${bundle}" in
 
     if gnomebased
     then
-        appinstall 'LibreOffice'        'libreoffice-calc libreoffice-writer libreoffice-gtk3 libreoffice-gnome libreoffice-style-breeze libreoffice-l10n-ru libreoffice-help-ru'
+        appinstall 'LibreOffice'        'libreoffice-calc libreoffice-writer libreoffice-gtk3 libreoffice-gnome libreoffice-style-breeze libreoffice-l10n-ru'
         appinstall 'Document viewer'    'evince'
     fi
 
@@ -671,7 +671,7 @@ case "${bundle}" in
 
 "graphics")
 
-    appinstall 'GIMP'                   'gimp gimp-help-ru'
+    appinstall 'GIMP'                   'gimp'
     appinstall 'Graphicsmagick'         'graphicsmagick-imagemagick-compat librsvg2-bin'
 
     if gnomebased
