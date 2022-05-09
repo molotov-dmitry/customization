@@ -234,7 +234,7 @@ case "${bundle}" in
             gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ apps "org.gnome.${app}.desktop"
         done
 
-        for app in htop update-manager usb-creator-gtk gnome-system-monitor ubiquity gnome-nettool yelp ghostwriter com.github.fabiocolacio.marker nm-connection-editor
+        for app in htop update-manager usb-creator-gtk gnome-system-monitor ubiquity gnome-nettool yelp com.github.fabiocolacio.marker nm-connection-editor
         do
             gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ apps "${app}.desktop"
         done
@@ -334,40 +334,6 @@ case "${bundle}" in
     ## =========================================================================
 
     fi
-
-;;
-
-### KDE ========================================================================
-
-"kde")
-
-    ## KDE =====================================================================
-
-    if kdebased
-    then
-        usercopy 'kde'
-
-        ## Keyboard ------------------------------------------------------------
-
-        addkeybinding 'System Monitor' 'ksysguard'        '<Ctrl><Shift>Escape'
-        addkeybinding 'File Manager'   'dolphin'          '<Super>E'
-    fi
-
-    ## Konsole =================================================================
-
-    if ispkginstalled konsole
-    then
-        usercopy 'konsole'
-    fi
-
-    ## Kate ====================================================================
-
-    if ispkginstalled kate
-    then
-        usercopy 'kate'
-    fi
-
-
 
 ;;
 
@@ -703,13 +669,6 @@ case "${bundle}" in
 
 "dev/markdown")
 
-    ## Ghostwriter markdown editor ---------------------------------------------
-
-    if ispkginstalled ghostwriter
-    then
-        usercopy 'ghostwriter'
-    fi
-
     ## Marker markdown editor --------------------------------------------------
 
     if ispkginstalled marker
@@ -766,7 +725,6 @@ case "${bundle}" in
         gsettings set org.gnome.meld indent-width       4
 
         addscenario 'compare' 'F3' '[[ $# -eq 0 ]] && ( svn info || git status ) && meld . &\n[[ $# -eq 1 && -d "$1" ]] && ( svn info "$1" || ( cd "$1" && git status ) ) && meld "$1" &\n[[ $# -eq 1 && ! -d "$1" ]] && ( svn info "$1" || ( cd "$(dirname "$1")" && git ls-files --error-unmatch "$(basename "$1")" ) ) && meld "$1" &\n[[ $# -gt 1 ]] && meld "$@" &'
-        addkdescenario 'compare' 'F3' 'meld %F' 'meld' 'all/allfiles'
     fi
 
     ## Gitg --------------------------------------------------------------------
@@ -776,7 +734,6 @@ case "${bundle}" in
         addkeybinding 'Gitg' 'gitg' '<Ctrl><Alt>G'
 
         addscenario    'gitg'   '<Ctrl>G'  '[[ $# -eq 0 ]] && git status && test -n "$(git diff-index --name-only HEAD --)" && gitg --standalone --commit . &\n[[ $# -eq 0 ]] && git status && test -z "$(git diff-index --name-only HEAD --)" && gitg --standalone . &\n[[ $# -eq 1 ]] && ( cd "$1" && git status && test -n "$(git diff-index --name-only HEAD --)" ) && gitg --standalone --commit "$1" &\n[[ $# -eq 1 ]] && ( cd "$1" && git status && test -z "$(git diff-index --name-only HEAD --)" ) && gitg --standalone "$1" &'
-        addkdescenario 'gitg'   '<Ctrl>G'  'gitg %f' 'gitg' 'inode/directory'
     fi
 
     ## Rabbitvcs ---------------------------------------------------------------
@@ -821,13 +778,6 @@ case "${bundle}" in
         gsettings set org.gnome.desktop.wm.preferences theme    "${wm_theme}"
     fi
 
-    if kdebased
-    then
-        for file in "${HOME}/.config/kdeglobals" "${HOME}/.kde/share/config/kdeglobals"
-        do
-            addconfigline 'Theme' "${icon_theme}" 'Icons' "$file"
-        done
-    fi
 ;;
 
 ### System fonts ===============================================================
@@ -848,26 +798,6 @@ case "${bundle}" in
         gsettings set org.gnome.desktop.interface document-font-name    "${font_doc} ${font_doc_size}"
         gsettings set org.gnome.desktop.interface monospace-font-name   "${font_fixed} ${font_fixed_size}"
         gsettings set org.gnome.desktop.wm.preferences titlebar-font    "${font_ui} ${font_ui_size}"
-    fi
-
-    if kdebased
-    then
-        font_options="-1,5,50,0,0,0,0,0,Regular"
-
-        addconfigline 'XftHintStyle' 'hintslight' 'General' "${HOME}/.config/kdeglobals"
-        addconfigline 'XftSubPixel'  ''           'General' "${HOME}/.config/kdeglobals"
-
-        addconfigline 'fixed' "${font_fixed},${font_fixed_size},${font_options}" 'General' "${HOME}/.config/kdeglobals"
-
-        for file in "${HOME}/.config/kdeglobals" "${HOME}/.kde/share/config/kdeglobals"
-        do
-            for font in font menuFont smallestReadableFont toolBarFont
-            do
-                addconfigline "$font" "${font_ui},${font_ui_size},${font_options}" 'General' "$file"
-            done
-        done
-
-        unset font_options
     fi
 
     unset font_ui

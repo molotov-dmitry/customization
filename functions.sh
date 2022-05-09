@@ -1149,16 +1149,6 @@ function gnomebased()
     fi
 }
 
-function kdebased()
-{
-    if ispkginstalled 'plasma-desktop'
-    then
-        return 0
-    else
-        return 1
-    fi
-}
-
 ### DConf functions ============================================================
 
 dconfclear()
@@ -1320,10 +1310,6 @@ function launcherclear()
         gsettings set org.cinnamon favorite-apps '[]'
     fi
 
-    if kdebased
-    then
-        sqlite3 "${HOME}/.local/share/kactivitymanagerd/resources/database" "DELETE FROM ResourceLink WHERE usedActivity = ':global' AND initiatingAgent = 'org.kde.plasma.favorites.applications'"
-    fi
 }
 
 function launcheradd_var()
@@ -1381,10 +1367,6 @@ launcheradd()
         launcheradd_var "$application" 'org.cinnamon' 'favorite-apps'
     fi
 
-    if kdebased
-    then
-        sqlite3 "${HOME}/.local/share/kactivitymanagerd/resources/database" "INSERT INTO ResourceLink(usedActivity, initiatingAgent, targettedResource) VALUES(':global', 'org.kde.plasma.favorites.applications', '${application}.desktop')"
-    fi
 }
 
 ### Custom keybindings =========================================================
@@ -1418,39 +1400,6 @@ function addkeybinding()
         gsettings set "org.cinnamon.desktop.keybindings.custom-keybinding:${path}" binding "['${binding}']"
 
         gsettingsadd org.cinnamon.desktop.keybindings custom-list "${cmd}"
-    fi
-
-    if kdebased
-    then
-        local kdebinding="$(echo "${binding}" | sed 's/Escape/Esc/g' | sed 's/<Super>/<Meta>/g' | tr '>' '+' | tr -d '<')"
-        local lastaction="$(grep '^\[Data_[[:digit:]]*\]$' "${HOME}/.config/khotkeysrc" | cut -d '_' -f 2 | cut -d ']' -f 1 | sort -g | tail -n1)"
-        let lastaction++
-        local uuid="$(uuidgen)"
-
-        addconfigline 'Type'    'SIMPLE_ACTION_DATA'    "Data_${lastaction}" "${HOME}/.config/khotkeysrc"
-        addconfigline 'Enabled' 'true'                  "Data_${lastaction}" "${HOME}/.config/khotkeysrc"
-        addconfigline 'Name'    "$name"                 "Data_${lastaction}" "${HOME}/.config/khotkeysrc"
-        addconfigline 'Comment' "$name"                 "Data_${lastaction}" "${HOME}/.config/khotkeysrc"
-
-        addconfigline 'ActionsCount' '1'                "Data_${lastaction}Actions" "${HOME}/.config/khotkeysrc"
-
-        addconfigline 'Type'       'COMMAND_URL'        "Data_${lastaction}Actions0" "${HOME}/.config/khotkeysrc"
-        addconfigline 'CommandURL' "${command}"         "Data_${lastaction}Actions0" "${HOME}/.config/khotkeysrc"
-
-        addconfigline 'ConditionsCount' '0'             "Data_${lastaction}Conditions" "${HOME}/.config/khotkeysrc"
-        addconfigline 'Comment'         ''              "Data_${lastaction}Conditions" "${HOME}/.config/khotkeysrc"
-
-        addconfigline 'TriggersCount' '1'               "Data_${lastaction}Triggers" "${HOME}/.config/khotkeysrc"
-        addconfigline 'Comment'       'Simple_action'   "Data_${lastaction}Triggers" "${HOME}/.config/khotkeysrc"
-
-        addconfigline 'Uuid' "{${uuid}}"                "Data_${lastaction}Triggers0" "${HOME}/.config/khotkeysrc"
-        addconfigline 'Type' 'SHORTCUT'                 "Data_${lastaction}Triggers0" "${HOME}/.config/khotkeysrc"
-        addconfigline 'Key'  "${kdebinding}"            "Data_${lastaction}Triggers0" "${HOME}/.config/khotkeysrc"
-
-        addconfigline 'DataCount' ${lastaction}         'Data' "${HOME}/.config/khotkeysrc"
-
-        addconfigline "{${uuid}}" "${kdebinding},none,${name}" "khotkeys" "${HOME}/.config/kglobalshortcutsrc"
-
     fi
 }
 
@@ -1499,35 +1448,6 @@ function addscenario()
 
         sed -i "/^${binding} /d"        "${HOME}/.config/nemo/scripts-accels"
         echo "${binding} ${name}.sh" >> "${HOME}/.config/nemo/scripts-accels"
-    fi
-}
-
-function addkdescenario()
-{
-    local name="$1"
-    local binding="$2"
-    local command="$3"
-    local icon="$4"
-    local mimetype="$5"
-
-    if ispkginstalled 'dolphin'
-    then
-        mkdir -p "${HOME}/.local/share/kservices5"
-
-cat >> "${HOME}/.local/share/kservices5/${name}.desktop" << _EOF
-[Desktop Entry]
-Type=Service
-X-KDE-ServiceTypes=KonqPopupMenu/Plugin
-MimeType=${mimetype};
-Actions=action${name};
-
-[Desktop Action action${name}]
-Exec=${command}
-Icon=${icon}
-
-Name=${name}
-_EOF
-
     fi
 }
 

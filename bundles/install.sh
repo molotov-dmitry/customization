@@ -91,12 +91,6 @@ case "${bundle}" in
     fi
 ;;
 
-### KDE ========================================================================
-
-"kde")
-
-;;
-
 ### ============================================================================
 ### Qt =========================================================================
 ### ============================================================================
@@ -390,10 +384,7 @@ case "${bundle}" in
 
 "dev/markdown")
 
-    if kdebased
-    then
-        appinstall 'Ghostwriter'        'ghostwriter'
-    elif gnomebased
+    if gnomebased
     then
         appinstall 'Marker'             'marker'
     fi
@@ -456,17 +447,6 @@ case "${bundle}" in
         appinstall 'Meld diff tool'     'meld'
 
         appinstall 'Git repo viewer'    'gitg'
-    fi
-
-    if kdebased
-    then
-        appinstall 'Kompare diff tool'  'kompare'
-        appinstall 'KDE SVN'            'kdesvn'
-
-        if ispkginstalled dolphin
-        then
-            appinstall 'Dolphin plugins'    'dolphin-plugins'
-        fi
     fi
 
 ;;
@@ -544,11 +524,6 @@ case "${bundle}" in
     then
         appinstall 'LibreOffice'        'libreoffice-calc libreoffice-writer libreoffice-gtk3 libreoffice-gnome libreoffice-style-breeze libreoffice-l10n-ru libreoffice-help-ru'
         appinstall 'Document viewer'    'evince'
-
-    elif kdebased
-    then
-        appinstall 'LibreOffice'        'libreoffice-calc libreoffice-writer libreoffice-qt5 libreoffice-kde5 libreoffice-style-breeze libreoffice-l10n-ru libreoffice-help-ru'
-        appinstall 'Document viewer'    'okular'
     fi
 
 ;;
@@ -837,12 +812,6 @@ case "${bundle}" in
         appinstall 'Evolution mail client'  'evolution evolution-data-server evolution-ews evolution-plugins'
     fi
 
-    if kdebased
-    then
-        appinstall 'KDE PIM'                'kmail kontact korganizer ktnef kaddressbook kmailtransport-akonadi accountwizard'
-    fi
-
-
 ;;
 
 ### Chat =======================================================================
@@ -860,12 +829,6 @@ case "${bundle}" in
     then
         appinstall 'RDP server' 'vino'
         appinstall 'RDP client' 'remmina remmina-plugin-vnc remmina-plugin-rdp remmina-plugin-xdmcp'
-    fi
-
-    if kdebased
-    then
-        appinstall 'RDP server' 'krfb'
-        appinstall 'RDP client' 'krdc freerdp2-x11'
     fi
 
 ;;
