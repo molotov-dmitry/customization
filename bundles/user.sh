@@ -324,7 +324,14 @@ case "${bundle}" in
 
         dconf write /org/gnome/shell/extensions/dash-to-dock/custom-theme-shrink true
 
-        gsettingsadd org.gnome.shell enabled-extensions 'dash-to-dock@micxgx.gmail.com'
+        if isgnomeshellextensioninstalled 'dash-to-dock@micxgx.gmail.com'
+        then
+            gsettingsadd org.gnome.shell enabled-extensions 'dash-to-dock@micxgx.gmail.com'
+
+        elif isgnomeshellextensioninstalled 'ubuntu-dock@ubuntu.com'
+        then
+            gsettingsadd org.gnome.shell enabled-extensions 'ubuntu-dock@ubuntu.com'
+        fi
     fi
 
     ## Window control buttons --------------------------------------------------
