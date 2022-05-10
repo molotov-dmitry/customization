@@ -785,6 +785,13 @@ function repoaddnonfree()
 
 ### Gnome shell extensions functions ===========================================
 
+function isgnomeshellextensioninstalled()
+{
+    ext="$1"
+
+    test -d "/usr/share/gnome-shell/extensions/${ext}" || test -d "${HOME}/.local/share/gnome-shell/extensions/${ext}"
+}
+
 function gnomeshellextension()
 {
     local extid="$1"
