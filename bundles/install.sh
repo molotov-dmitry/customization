@@ -548,13 +548,10 @@ case "${bundle}" in
 
     if gnomebased
     then
-        appinstall 'Rhythmbox'              'rhythmbox rhythmbox-plugins'
-        appinstall 'MPV Gnome GUI'          'celluloid'
+        appinstall 'Rhythmbox'          'rhythmbox rhythmbox-plugins'
+        appinstall 'MPV Gnome GUI'      'celluloid'
 
-        if ! ispkginstalled shotwell
-        then
-            appinstall 'Eye of Gnome'       'eog'
-        fi
+        appinstall 'Eye of Gnome'       'eog'
     fi
 
     if ispkginstalled gnome-shell
@@ -673,12 +670,7 @@ case "${bundle}" in
 
     appinstall 'GIMP'                   'gimp'
     appinstall 'Graphicsmagick'         'graphicsmagick-imagemagick-compat librsvg2-bin'
-
-    if gnomebased
-    then
-        appremove  'Eye of Gnome'       'eog'
-        appinstall 'Shotwell'           'shotwell'
-    fi
+    appinstall 'Eye of Gnome'           'eog'
 
 ;;
 

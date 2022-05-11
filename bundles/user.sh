@@ -229,7 +229,7 @@ case "${bundle}" in
         gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ name 'Utils.directory'
         gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ translate true
 
-        for app in Characters FileRoller DiskUtility Devhelp Screenshot baobab seahorse.Application Software tweaks Extensions Logs
+        for app in Characters FileRoller DiskUtility Devhelp Screenshot baobab seahorse.Application Software tweaks Extensions Logs eog
         do
             gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ apps "org.gnome.${app}.desktop"
         done
@@ -1050,18 +1050,9 @@ case "${bundle}" in
         mimedefault 'gimp' 'image'
     fi
 
-    if ispkginstalled shotwell
+    if ispkginstalled eog
     then
-        mimedefault 'shotwell-viewer' 'image'
-
-        gsettings set org.yorba.shotwell.preferences.ui show-welcome-dialog false
-        gsettings set org.yorba.shotwell.preferences.files auto-import true
-        gsettings set org.yorba.shotwell.crop-settings last-crop-menu-choice 0
-    fi
-
-    if ispkginstalled shotwell && ispkginstalled gimp
-    then
-        gsettings set org.yorba.shotwell.preferences.editing external-photo-editor "$(getconfigline 'Exec' 'Desktop Entry' /usr/share/applications/gimp.desktop)"
+        mimedefault 'org.gnome.eog' 'image'
     fi
 
 ;;
@@ -1348,21 +1339,6 @@ case "${bundle}" in
         gsettingsadd org.gnome.desktop.app-folders folder-children 'RcziWeb'
         gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/RcziWeb/ name 'RCZI Web Services'
         gsettingsadd  org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/RcziWeb/ categories "X-WEB-RCZI"
-    fi
-
-    ## Photo editor ============================================================
-
-    if ispkginstalled shotwell
-    then
-        gsettings set org.yorba.shotwell.plugins.enable-state publishing-facebook false
-        gsettings set org.yorba.shotwell.plugins.enable-state publishing-gallery3 false
-        gsettings set org.yorba.shotwell.plugins.enable-state publishing-tumblr false
-        gsettings set org.yorba.shotwell.plugins.enable-state publishing-yandex-fotki false
-        gsettings set org.yorba.shotwell.plugins.enable-state publishing-piwigo false
-        gsettings set org.yorba.shotwell.plugins.enable-state publishing-rajce false
-        gsettings set org.yorba.shotwell.plugins.enable-state org-gnome-shotwell-publishing-google-photos false
-        gsettings set org.yorba.shotwell.plugins.enable-state publishing-flickr false
-        gsettings set org.yorba.shotwell.plugins.enable-state publishing-youtube false
     fi
 
     ## =========================================================================
