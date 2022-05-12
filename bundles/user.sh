@@ -1214,11 +1214,6 @@ case "${bundle}" in
         ssh-keygen -q -t rsa -N '' -f "${HOME}/.ssh/id_rsa" 2>/dev/null <<< y >/dev/null
     fi
 
-    ## Make Git accept self-signed certificate ---------------------------------
-
-    git config --global http.https://git.rczifort.local.sslVerify false
-    git config --global http.https://172.16.56.22.sslVerify       false
-
     ## Make Git use specific username for home projects ------------------------
 
     for userdir in '~' "/media/documents/${USER}"
