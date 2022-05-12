@@ -239,11 +239,6 @@ case "${bundle}" in
 
     if ispkginstalled gnome-shell
     then
-        if gsettings writeable org.gnome.settings-daemon.plugins.color active >/dev/null 2>/dev/null
-        then
-            gsettings set org.gnome.settings-daemon.plugins.color active                     true
-        fi
-
         gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled            true
         gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
     fi
@@ -561,7 +556,6 @@ case "${bundle}" in
 
     ## Hide Sysprof ============================================================
 
-    hideapp 'org.gnome.Sysprof2'
     hideapp 'org.gnome.Sysprof3'
 
     ## Gnome Builder ===========================================================
@@ -686,10 +680,7 @@ case "${bundle}" in
 
     ## Set default branch name -------------------------------------------------
 
-    if dpkg --compare-versions "$(pkgversion git)" ge 2.28
-    then
-        git config --global init.defaultBranch master
-    fi
+    git config --global init.defaultBranch master
 
     ## Meld --------------------------------------------------------------------
 
