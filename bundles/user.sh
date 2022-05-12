@@ -194,19 +194,40 @@ case "${bundle}" in
 
     if ispkginstalled gnome-shell
     then
-        gsettingsadd org.gnome.desktop.app-folders folder-children 'Utils'
+        # Utilities ------------------------------------------------------------
+
         gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ name 'Utils.directory'
         gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ translate true
 
-        for app in Characters FileRoller DiskUtility Devhelp Screenshot baobab seahorse.Application Software tweaks Extensions Logs eog
+        for app in Characters FileRoller DiskUtility Devhelp Screenshot baobab seahorse.Application Software tweaks Extensions Logs
         do
             gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ apps "org.gnome.${app}.desktop"
         done
 
-        for app in htop update-manager usb-creator-gtk gnome-system-monitor ubiquity gnome-nettool yelp com.github.fabiocolacio.marker nm-connection-editor sqlitebrowser
+        for app in htop update-manager usb-creator-gtk gnome-system-monitor ubiquity gnome-nettool yelp nm-connection-editor sqlitebrowser
         do
             gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ apps "${app}.desktop"
         done
+
+        gsettingsadd org.gnome.desktop.app-folders folder-children 'Utils'
+
+        # Media ----------------------------------------------------------------
+
+        gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ name 'Office.directory'
+        gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ translate true
+
+        for app in eog Evince Builder
+        do
+            gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ apps "org.gnome.${app}.desktop"
+        done
+
+        for app in com.github.fabiocolacio.marker gimp
+        do
+            gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ apps "${app}.desktop"
+        done
+
+        gsettingsadd org.gnome.desktop.app-folders folder-children 'Office'
+
     fi
 
     ## Gnome desktop ===========================================================
