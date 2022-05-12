@@ -112,57 +112,36 @@ case "${bundle}" in
 
     ## Text editors ============================================================
 
-    editors=()
+    if ispkginstalled gedit
+    then
+        gsettings set org.gnome.gedit.preferences.editor use-default-font       true
 
-    ispkginstalled gedit && editors+=( 'gnome.gedit' )
-    ispkginstalled xed   && editors+=( 'x.editor' )
+        gsettings set org.gnome.gedit.preferences.editor display-line-numbers   true
+        gsettings set org.gnome.gedit.preferences.editor highlight-current-line true
+        gsettings set org.gnome.gedit.preferences.editor bracket-matching       true
 
-    for editor in "${editors[@]}"
-    do
-        gsettings set org.${editor}.preferences.editor use-default-font       true
+        gsettings set org.gnome.gedit.preferences.editor insert-spaces          true
+        gsettings set org.gnome.gedit.preferences.editor tabs-size              4
 
-        gsettings set org.${editor}.preferences.editor display-line-numbers   true
-        gsettings set org.${editor}.preferences.editor highlight-current-line true
-        gsettings set org.${editor}.preferences.editor bracket-matching       true
+        gsettings set org.gnome.gedit.preferences.editor display-right-margin   true
+        gsettings set org.gnome.gedit.preferences.editor right-margin-position  80
+        gsettings set org.gnome.gedit.preferences.editor display-overview-map   true
+        gsettings set org.gnome.gedit.preferences.editor background-pattern     'grid'
 
-        gsettings set org.${editor}.preferences.editor insert-spaces          true
-        gsettings set org.${editor}.preferences.editor tabs-size              4
+        gsettings set org.gnome.gedit.preferences.editor syntax-highlighting    true
+        gsettings set org.gnome.gedit.preferences.editor scheme                 'kate'
 
-        gsettings set org.${editor}.preferences.editor display-right-margin   true
-        gsettings set org.${editor}.preferences.editor right-margin-position  80
+        gsettings set org.gnome.gedit.preferences.editor wrap-mode              'none'
 
-        gsettings set org.${editor}.preferences.editor syntax-highlighting    true
-
-        gsettings set org.${editor}.preferences.editor scheme                 'kate'
-
-        gsettings set org.${editor}.preferences.editor wrap-mode              'none'
-
-        if [[ "$editor" == 'gnome.gedit' ]]
-        then
-            gsettings set org.gnome.gedit.preferences.editor display-overview-map true
-            gsettings set org.gnome.gedit.preferences.editor background-pattern 'grid'
-
-            encodingsettings='candidate-encodings'
-
-        elif [[ "$editor" == 'x.editor' ]]
-        then
-            gsettings set org.x.editor.preferences.ui minimap-visible true
-
-            encodingsettings='auto-detected'
-        fi
-
-        gsettingsclear org.${editor}.preferences.encodings "$encodingsettings"
+        gsettingsclear org.gnome.gedit.preferences.encodings candidate-encodings
 
         for encoding in 'UTF-8' 'WINDOWS-1251' 'KOI8R' 'CP866' 'UTF-16'
         do
-            gsettingsadd org.${editor}.preferences.encodings "$encodingsettings" "$encoding"
+            gsettingsadd org.gnome.gedit.preferences.encodings candidate-encodings "$encoding"
         done
 
-
-        gsettings set org.${editor}.plugins active-plugins "['changecase', 'filebrowser', 'time', 'zeitgeistplugin', 'docinfo']"
-    done
-
-    unset editors
+        gsettings set org.gnome.gedit.plugins active-plugins "['sort']"
+    fi
 
     ## gnome-terminal ==========================================================
 
