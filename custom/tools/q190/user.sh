@@ -69,7 +69,6 @@ then
     hideapp 'rhythmbox'
     hideapp 'telegramdesktop'
 else
-    hideapp 'ghostwriter'
     hideapp 'com.github.fabiocolacio.marker'
     hideapp 'org.gnome.Evolution'
     hideapp 'local.rczifort.ex01'

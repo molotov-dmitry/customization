@@ -503,10 +503,6 @@ case "${bundle}" in
 
         launcheradd 'org.qt-project.qtcreator'
 
-        hideapp 'assistant-qt5'
-        hideapp 'designer-qt5'
-        hideapp 'linguist-qt5'
-
         ## Mime type -----------------------------------------------------------
 
         mimedefault 'org.qt-project.qtcreator' 'application'
