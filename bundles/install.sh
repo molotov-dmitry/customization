@@ -775,6 +775,10 @@ case "${bundle}" in
 
     appinstall 'LDAP user config'       'user-ldap-config'
 
+    ### Printers configuration script ==========================================
+
+    appinstall 'Printers configuration' 'rczi-printer-configuration'
+
     ### GOST hash ==============================================================
 
     appinstall 'GOST hashes'            'gostsum'
