@@ -226,6 +226,11 @@ case "${bundle}" in
             gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ apps "${app}.desktop"
         done
 
+        for app in startcenter writer calc impress base math
+        do
+            gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ apps "libreoffice-${app}.desktop"
+        done
+
         gsettingsadd org.gnome.desktop.app-folders folder-children 'Office'
 
     fi
