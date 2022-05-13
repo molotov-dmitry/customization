@@ -277,6 +277,11 @@ case "${bundle}" in
 
     appinstall 'Allow user debug'       'custom-config-sysctl-ptrace-scope custom-config-sysctl-allow-user-dmesg'
 
+    if havegraphics
+    then
+        appinstall 'Develop templates'  'file-templates-develop'
+    fi
+
 ;;
 
 ### Code analysis tools ========================================================
@@ -736,6 +741,11 @@ case "${bundle}" in
 "folders")
 
     appinstall 'User folders' 'user-folders'
+
+    if havegraphics
+    then
+        appinstall 'Base templates' 'file-templates-base'
+    fi
 
 ;;
 

@@ -33,11 +33,6 @@ case "${bundle}" in
 
 "gui")
 
-    ## File templates ==========================================================
-
-    xdg-user-dirs-update
-    rsync -r "${ROOT_PATH}/files/template/" "$(xdg-user-dir TEMPLATES)/"
-
 ;;
 
 ### GTK-based GUI ==============================================================

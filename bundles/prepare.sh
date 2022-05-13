@@ -27,8 +27,6 @@ case "${bundle}" in
 
 "gui")
 
-    preparefiles 'templates' 'template'
-
 ;;
 
 ### GTK-based GUI ==============================================================
