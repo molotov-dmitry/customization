@@ -255,10 +255,6 @@ case "${bundle}" in
 
 "dev/db")
 
-    ## SQLite browser ----------------------------------------------------------
-
-    preparefiles 'SQLite browser' 'sqlitebrowser'
-
 ;;
 
 ### JSON libraries =============================================================
