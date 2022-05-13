@@ -639,11 +639,6 @@ case "${bundle}" in
 
 "dev/db")
 
-    if ispkginstalled sqlitebrowser
-    then
-        usercopy 'sqlitebrowser'
-    fi
-
 ;;
 
 ### JSON libraries =============================================================
@@ -775,6 +770,7 @@ case "${bundle}" in
     font_ui_size='10'
     font_doc_size='12'
     font_fixed_size='12'
+    font_table_size='10'
 
     if ispkginstalled gnome-shell
     then
@@ -784,6 +780,15 @@ case "${bundle}" in
         gsettings set org.gnome.desktop.wm.preferences titlebar-font    "${font_ui} ${font_ui_size}"
     fi
 
+    if ispkginstalled sqlitebrowser
+    then
+        addconfigline 'fontsize' "${font_table_size}" 'databrowser' "${HOME}/.config/sqlitebrowser/sqlitebrowser.conf"
+        addconfigline 'font'     "${font_fixed}"      'databrowser' "${HOME}/.config/sqlitebrowser/sqlitebrowser.conf"
+        addconfigline 'fontsize' "${font_fixed_size}" 'editor'      "${HOME}/.config/sqlitebrowser/sqlitebrowser.conf"
+        addconfigline 'font'     "${font_fixed}"      'editor'      "${HOME}/.config/sqlitebrowser/sqlitebrowser.conf"
+        addconfigline 'fontsize' "${font_fixed_size}" 'log'         "${HOME}/.config/sqlitebrowser/sqlitebrowser.conf"
+    fi
+
     unset font_ui
     unset font_doc
     unset font_fixed
@@ -791,6 +796,7 @@ case "${bundle}" in
     unset font_ui_size
     unset font_doc_size
     unset font_fixed_size
+    unset font_table_size
 
 ;;
 
