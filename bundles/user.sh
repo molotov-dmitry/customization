@@ -807,10 +807,8 @@ case "${bundle}" in
     if [[ ! -f "${HOME}/.config/is-work-account" ]]
     then
         bgtheme='custom'
-        bgfile='file:///usr/share/backgrounds/custom/skunze_beach.jpg'
     else
         bgtheme='blueprint'
-        bgfile='file:///usr/share/backgrounds/blueprint/blueprint-empty.jpg'
     fi
 
     if ispkginstalled gnome-shell
