@@ -170,8 +170,6 @@ case "${bundle}" in
 
 "server/svn")
 
-    addservice 'Subversion server'      'svnserve' 'svnserve'
-
 ;;
 
 ### DB server ==================================================================

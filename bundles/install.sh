@@ -191,7 +191,7 @@ case "${bundle}" in
 
 "server/svn")
 
-    appinstall 'Subversion'             'subversion'
+    appinstall 'Subversion'             'subversion svnserve-daemon'
     appinstall 'Repo creation tool'     'svn-repo-create'
 
 ;;

@@ -124,8 +124,6 @@ case "${bundle}" in
 
 "server/svn")
 
-    silent 'Copy SVN files' cp -rf "${ROOT_PATH}/files/svnserve/." "${rootfs_dir}/"
-
 ;;
 
 ### DB server ==================================================================
