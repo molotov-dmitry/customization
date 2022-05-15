@@ -69,6 +69,8 @@ case "${bundle}" in
     appinstall 'Base applications'          'gnome-calculator gnome-system-monitor gnome-characters'
     appinstall 'Tweak tool'                 'gnome-tweaks'
 
+    appinstall 'Gnome desktop directories'  'gnome-menus'
+
     appinstall 'Gnome appindicator support' 'gnome-shell-extension-appindicator'
 
     if ispkginstalled gnome-shell

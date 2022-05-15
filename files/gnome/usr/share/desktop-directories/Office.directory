@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Office
-Name[ru]=Офис
-Comment=Office
-Comment[ru]=Офис
-Icon=applications-office
-Type=Directory
-X-Ubuntu-Gettext-Domain=gnome-menus-3.0
-
