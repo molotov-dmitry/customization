@@ -152,10 +152,6 @@ case "${bundle}" in
 
 "server/media")
 
-    ## MiniDLNA ----------------------------------------------------------------
-
-    preparefiles 'MiniDLNA' 'minidlna'
-
     ## Plex Media Server -------------------------------------------------------
 
     preparefiles 'Plex media server' 'plexmediaserver'

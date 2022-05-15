@@ -198,10 +198,6 @@ case "${bundle}" in
 
 "server/media")
 
-    ## MiniDLNA ----------------------------------------------------------------
-
-    silent 'Configuring MiniDLNA'   cp -f "${ROOT_PATH}/files/minidlna/minidlna.conf" '/etc/'
-
     ## Plex Media Server -------------------------------------------------------
 
     silent 'Creating Plex config dir'   mkdir -p '/var/lib/plexmediaserver/Library/Application Support/Plex Media Server'

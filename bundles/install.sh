@@ -223,7 +223,7 @@ case "${bundle}" in
 
 "server/media")
 
-    appinstall 'MiniDLNA'               'minidlna'
+    appinstall 'MiniDLNA'               'minidlna custom-config-minidlna'
     appinstall 'Plex Media Server'      'plexmediaserver'
 
     appinstall 'Inotify max watch'      'custom-config-sysctl-inotify-max-watch'
