@@ -512,8 +512,6 @@ case "${bundle}" in
 
 "work")
 
-    disableservice 'Cups Browser' cups-browsed
-
 ;;
 
 
