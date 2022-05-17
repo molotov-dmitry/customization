@@ -1080,6 +1080,11 @@ case "${bundle}" in
 
     addbookmark "file://${HOME}/Projects" 'Projects'
 
+    for dir in 'Общедоступные' 'Шаблоны' 'Рабочий стол'
+    do
+        grep -qs "^${dir}$" "${HOME}/.hidden" || echo "$dir" >> "${HOME}/.hidden"
+    done
+
 ;;
 
 ### ============================================================================
