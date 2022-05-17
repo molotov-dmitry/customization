@@ -577,7 +577,7 @@ case "${bundle}" in
 
     ## Gnome Builder ===========================================================
 
-    if ispkginstalled 'gnome-builder'
+    if ispkginstalled gnome-builder
     then
 
         ## Register mimetypes --------------------------------------------------
@@ -597,9 +597,7 @@ case "${bundle}" in
         fi
 
         gsettings set org.gnome.builder.editor show-map             true
-        gsettings set org.gnome.builder.editor font-name            'Fira Code 12'
 
-        gsettings set org.gnome.builder.terminal font-name          'Fira Code 12'
 
         for lang in awk c changelog cmake cpp cpphdr css csv desktop diff dosbatch dot gdb-log html ini java js json markdown pascal php sh sql vala xml yaml
         do
@@ -787,6 +785,12 @@ case "${bundle}" in
         addconfigline 'fontsize' "${font_fixed_size}" 'editor'      "${HOME}/.config/sqlitebrowser/sqlitebrowser.conf"
         addconfigline 'font'     "${font_fixed}"      'editor'      "${HOME}/.config/sqlitebrowser/sqlitebrowser.conf"
         addconfigline 'fontsize' "${font_fixed_size}" 'log'         "${HOME}/.config/sqlitebrowser/sqlitebrowser.conf"
+    fi
+
+    if ispkginstalled gnome-builder
+    then
+        gsettings set org.gnome.builder.editor font-name    "${font_fixed} ${font_fixed_size}"
+        gsettings set org.gnome.builder.terminal font-name  "${font_fixed} ${font_fixed_size}"
     fi
 
     unset font_ui
