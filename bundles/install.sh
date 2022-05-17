@@ -791,6 +791,10 @@ case "${bundle}" in
 
     appinstall 'Printers configuration' 'rczi-printer-configuration'
 
+    ### Network configuration script ===========================================
+
+    appinstall 'Network configuration'  'rczi-network-configuration'
+
     ### GOST hash ==============================================================
 
     appinstall 'GOST hashes'            'gostsum'
