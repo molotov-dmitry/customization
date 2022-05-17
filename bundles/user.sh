@@ -598,7 +598,6 @@ case "${bundle}" in
 
         gsettings set org.gnome.builder.editor show-map             true
 
-
         for lang in awk c changelog cmake cpp cpphdr css csv desktop diff dosbatch dot gdb-log html ini java js json markdown pascal php sh sql vala xml yaml
         do
             gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ indent-width            -1
@@ -746,7 +745,6 @@ case "${bundle}" in
     gtk_theme='Adwaita'
     wm_theme='Adwaita'
 
-
     if ispkginstalled gnome-shell
     then
         gsettings set org.gnome.desktop.interface icon-theme    "${icon_theme}"
@@ -817,21 +815,7 @@ case "${bundle}" in
 
     if ispkginstalled gnome-shell
     then
-        gsettings set org.gnome.desktop.background secondary-color      '#000000'
-        gsettings set org.gnome.desktop.background primary-color        '#000000'
-        gsettings set org.gnome.desktop.background picture-options      'zoom'
-        gsettings set org.gnome.desktop.background color-shading-type   'solid'
-        gsettings set org.gnome.desktop.background draw-background      true
-        gsettings set org.gnome.desktop.background picture-opacity      100
-        gsettings set org.gnome.desktop.background picture-uri          "file:///usr/share/backgrounds/${bgtheme}/${bgtheme}.xml"
-
-        gsettings set org.gnome.desktop.screensaver secondary-color      '#000000'
-        gsettings set org.gnome.desktop.screensaver primary-color        '#000000'
-        gsettings set org.gnome.desktop.screensaver picture-options      'zoom'
-        gsettings set org.gnome.desktop.screensaver color-shading-type   'solid'
-        gsettings set org.gnome.desktop.screensaver picture-opacity      100
-        gsettings set org.gnome.desktop.screensaver picture-uri          'file:///usr/share/backgrounds/night/night.xml'
-
+        gsettings set org.gnome.desktop.background picture-uri "file:///usr/share/backgrounds/${bgtheme}/${bgtheme}.xml"
     fi
 
 ;;
