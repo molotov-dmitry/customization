@@ -90,6 +90,13 @@ case "${bundle}" in
         gnomeshellextension 2917 'Bring Out Submenu Of Power Off/Logout Button'
     fi
 
+    appinstall 'Gnome default config'       'custom-config-gnome'
+
+    if ispkginstalled gedit
+    then
+        appinstall 'Gedit default config'   'custom-config-gedit'
+    fi
+
     fi
 ;;
 
@@ -361,7 +368,7 @@ case "${bundle}" in
 
     if gnomebased
     then
-        appinstall 'GNOME Builder'      'gnome-builder'
+        appinstall 'GNOME Builder'      'gnome-builder custom-config-gnome-builder'
     fi
 
 ;;
@@ -393,7 +400,7 @@ case "${bundle}" in
 
     if gnomebased
     then
-        appinstall 'Marker'             'marker'
+        appinstall 'Marker'             'marker custom-config-marker'
     fi
 
 ;;
@@ -451,7 +458,7 @@ case "${bundle}" in
 
     if gnomebased
     then
-        appinstall 'Meld diff tool'     'meld'
+        appinstall 'Meld diff tool'     'meld custom-config-meld'
 
         appinstall 'Git repo viewer'    'gitg'
     fi
@@ -479,6 +486,8 @@ case "${bundle}" in
     appinstall 'Numix theme'            'numix-icon-theme-circle'
     appinstall 'Breeze theme'           'breeze-cursor-theme breeze-icon-theme'
     appinstall 'Papirus theme'          'papirus-icon-theme papirus-material-icon-theme'
+
+    appinstall 'Default cursor theme'   'custom-config-cursor-theme'
 
     if ispkgavailable plymouth-theme-spinner
     then
@@ -555,7 +564,7 @@ case "${bundle}" in
 
     if gnomebased
     then
-        appinstall 'Rhythmbox'          'rhythmbox rhythmbox-plugins'
+        appinstall 'Rhythmbox'          'rhythmbox rhythmbox-plugins custom-config-rhythmbox'
         appinstall 'MPV Gnome GUI'      'celluloid'
 
         appinstall 'Eye of Gnome'       'eog'

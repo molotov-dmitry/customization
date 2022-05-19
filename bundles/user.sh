@@ -94,50 +94,6 @@ case "${bundle}" in
     addscenario 'terminal' 'F4' 'x-terminal-emulator &' --fixpwd
     addscenario 'compress' 'F7' '[[ $# -gt 0 ]] && file-roller -d "$@" &'
 
-    ## File chooser ============================================================
-
-    gsettings set org.gtk.Settings.FileChooser sort-directories-first       true
-
-    ## Set Nautilus default icon size ==========================================
-
-    if ispkginstalled nautilus
-    then
-        gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
-    fi
-
-    ## Text editors ============================================================
-
-    if ispkginstalled gedit
-    then
-        gsettings set org.gnome.gedit.preferences.editor use-default-font       true
-
-        gsettings set org.gnome.gedit.preferences.editor display-line-numbers   true
-        gsettings set org.gnome.gedit.preferences.editor highlight-current-line true
-        gsettings set org.gnome.gedit.preferences.editor bracket-matching       true
-
-        gsettings set org.gnome.gedit.preferences.editor insert-spaces          true
-        gsettings set org.gnome.gedit.preferences.editor tabs-size              4
-
-        gsettings set org.gnome.gedit.preferences.editor display-right-margin   true
-        gsettings set org.gnome.gedit.preferences.editor right-margin-position  80
-        gsettings set org.gnome.gedit.preferences.editor display-overview-map   true
-        gsettings set org.gnome.gedit.preferences.editor background-pattern     'grid'
-
-        gsettings set org.gnome.gedit.preferences.editor syntax-highlighting    true
-        gsettings set org.gnome.gedit.preferences.editor scheme                 'kate'
-
-        gsettings set org.gnome.gedit.preferences.editor wrap-mode              'none'
-
-        gsettingsclear org.gnome.gedit.preferences.encodings candidate-encodings
-
-        for encoding in 'UTF-8' 'WINDOWS-1251' 'KOI8R' 'CP866' 'UTF-16'
-        do
-            gsettingsadd org.gnome.gedit.preferences.encodings candidate-encodings "$encoding"
-        done
-
-        gsettings set org.gnome.gedit.plugins active-plugins "['sort']"
-    fi
-
     ## gnome-terminal ==========================================================
 
     if ispkginstalled gnome-terminal
@@ -159,13 +115,6 @@ case "${bundle}" in
             gsettings set "${term_profile_path}" use-transparent-background true
             gsettings set "${term_profile_path}" background-transparency-percent 5
         fi
-    fi
-
-    ## Configure Gnome system monitor ==========================================
-
-    if ispkginstalled gnome-system-monitor
-    then
-        gsettings set org.gnome.gnome-system-monitor network-in-bits true
     fi
 
     ## =========================================================================
@@ -230,40 +179,6 @@ case "${bundle}" in
 
     fi
 
-    ## Gnome desktop ===========================================================
-
-    if ispkginstalled gnome-shell
-    then
-        ## Hide desktop icons --------------------------------------------------
-        gsettings set org.gnome.desktop.background show-desktop-icons false
-    fi
-
-    ## Gnome shell =============================================================
-
-    if ispkginstalled gnome-shell
-    then
-        ## Enable hot corners --------------------------------------------------
-        gsettings set org.gnome.desktop.interface enable-hot-corners true
-
-        ## Disable modal dialogs attach ----------------------------------------
-        gsettings set org.gnome.shell.overrides attach-modal-dialogs false
-
-        ## Disable frequent applications view ----------------------------------
-        gsettings set org.gnome.desktop.privacy remember-app-usage false
-    fi
-
-    ## Location services =======================================================
-
-    gsettings set org.gnome.system.location enabled true
-
-    ## night light =============================================================
-
-    if ispkginstalled gnome-shell
-    then
-        gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled            true
-        gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
-    fi
-
     ## Gnome shell extensions ==================================================
 
     if ispkginstalled gnome-shell
@@ -318,10 +233,6 @@ case "${bundle}" in
             gsettingsadd org.gnome.shell enabled-extensions 'ubuntu-dock@ubuntu.com'
         fi
     fi
-
-    ## Window control buttons --------------------------------------------------
-
-    gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
 
     ## =========================================================================
 
@@ -586,16 +497,6 @@ case "${bundle}" in
 
         ## gnome builder -------------------------------------------------------
 
-        if dpkg --compare-versions "$(pkgversion gnome-builder)" ge 42
-        then
-            gsettings set org.gnome.builder    style-variant        'follow'
-        else
-            gsettings set org.gnome.builder    follow-night-light   false
-            gsettings set org.gnome.builder    night-mode           false
-        fi
-
-        gsettings set org.gnome.builder.editor show-map             true
-
         for lang in awk c changelog cmake cpp cpphdr css csv desktop diff dosbatch dot gdb-log html ini java js json markdown pascal php sh sql vala xml yaml
         do
             gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/${lang}/ indent-width            -1
@@ -646,18 +547,6 @@ case "${bundle}" in
 
 "dev/markdown")
 
-    ## Marker markdown editor --------------------------------------------------
-
-    if ispkginstalled marker
-    then
-        gsettings set com.github.fabiocolacio.marker.preferences.preview css-theme          'GitHub2.css'
-        gsettings set com.github.fabiocolacio.marker.preferences.preview highlight-theme    'github'
-
-        gsettings set com.github.fabiocolacio.marker.preferences.editor enable-syntax-theme 'true'
-        gsettings set com.github.fabiocolacio.marker.preferences.editor syntax-theme        'tango'
-
-        gsettings set com.github.fabiocolacio.marker.preferences.editor replace-tabs        'true'
-    fi
 
 ;;
 
@@ -693,11 +582,6 @@ case "${bundle}" in
 
     if ispkginstalled 'meld'
     then
-        gsettings set org.gnome.meld highlight-syntax   true
-        gsettings set org.gnome.meld style-scheme       'kate'
-        gsettings set org.gnome.meld show-line-numbers  true
-        gsettings set org.gnome.meld indent-width       4
-
         addscenario 'compare' 'F3' '[[ $# -eq 0 ]] && ( svn info || git status ) && meld . &\n[[ $# -eq 1 && -d "$1" ]] && ( svn info "$1" || ( cd "$1" && git status ) ) && meld "$1" &\n[[ $# -eq 1 && ! -d "$1" ]] && ( svn info "$1" || ( cd "$(dirname "$1")" && git ls-files --error-unmatch "$(basename "$1")" ) ) && meld "$1" &\n[[ $# -gt 1 ]] && meld "$@" &'
     fi
 
@@ -739,14 +623,12 @@ case "${bundle}" in
 "appearance/themes")
 
     icon_theme='mPapirus'
-    cursor_theme='breeze_cursors'
     gtk_theme='Adwaita'
     wm_theme='Adwaita'
 
     if ispkginstalled gnome-shell
     then
         gsettings set org.gnome.desktop.interface icon-theme    "${icon_theme}"
-        gsettings set org.gnome.desktop.interface cursor-theme  "${cursor_theme}"
         gsettings set org.gnome.desktop.interface gtk-theme     "${gtk_theme}"
         gsettings set org.gnome.desktop.wm.preferences theme    "${wm_theme}"
     fi
@@ -852,45 +734,6 @@ case "${bundle}" in
 
     hideapp 'easytag'
     hideapp 'mpv'
-
-    ## rhythmbox ---------------------------------------------------------------
-
-    if ispkginstalled rhythmbox
-    then
-        gsettingsclear org.gnome.rhythmbox.plugins seen-plugins
-
-        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'soundcloud'
-        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'sendto'
-        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'replaygain'
-        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'rbzeitgeist'
-        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'rblirc'
-        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'rb'
-        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'pythonconsole'
-        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'notification'
-        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'mtpdevice'
-        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'mpris'
-        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'magnatune'
-        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'lyrics'
-        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'ipod'
-        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'im-status'
-        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'grilo'
-        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'fmradio'
-        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'dbus-media-server'
-        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'daap'
-        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'audioscrobbler'
-        gsettingsadd org.gnome.rhythmbox.plugins seen-plugins 'artsearch'
-
-        gsettingsclear org.gnome.rhythmbox.plugins active-plugins
-
-        gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'replaygain'
-        gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'rb'
-        gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'power-manager'
-        #gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'notification'
-        gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'mpris'
-        gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'mmkeys'
-        gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'grilo'
-        gsettingsadd org.gnome.rhythmbox.plugins active-plugins 'generic-player'
-    fi
 
     ## Eye of Gnome ------------------------------------------------------------
 
