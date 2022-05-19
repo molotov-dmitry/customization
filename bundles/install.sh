@@ -97,6 +97,11 @@ case "${bundle}" in
         appinstall 'Gedit default config'   'custom-config-gedit'
     fi
 
+    if ispkginstalled gnome-terminal
+    then
+        appinstall 'Gnome Terminal default config'   'custom-config-gnome-terminal'
+    fi
+
     fi
 ;;
 

@@ -101,10 +101,6 @@ case "${bundle}" in
         term_profile=$(gsettings get org.gnome.Terminal.ProfilesList default | cut -d "'" -f 2)
         term_profile_path="org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${term_profile}/"
 
-        gsettings set org.gnome.Terminal.Legacy.Settings default-show-menubar false
-        gsettings set org.gnome.Terminal.Legacy.Settings menu-accelerator-enabled false
-        gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'dark'
-
         gsettings set "${term_profile_path}" visible-name 'UTF-8'
         gsettings set "${term_profile_path}" scrollbar-policy 'always'
 
