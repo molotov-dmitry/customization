@@ -106,7 +106,7 @@ case "${bundle}" in
 
         gsettings set "${term_profile_path}" palette "['rgb(23,20,33)', 'rgb(192,28,40)', 'rgb(38,162,105)', 'rgb(162,115,76)', 'rgb(18,72,139)', 'rgb(163,71,186)', 'rgb(42,161,179)', 'rgb(208,207,204)', 'rgb(94,92,100)', 'rgb(246,97,81)', 'rgb(51,209,122)', 'rgb(233,173,12)', 'rgb(42,123,222)', 'rgb(192,97,203)', 'rgb(51,199,222)', 'rgb(255,255,255)']"
 
-        if gsettings writeable "${term_profile_path}" use-transparent-background 1>/dev/null 2>/dev/null
+        if gsettings writable "${term_profile_path}" use-transparent-background 1>/dev/null 2>/dev/null
         then
             gsettings set "${term_profile_path}" use-transparent-background true
             gsettings set "${term_profile_path}" background-transparency-percent 5
@@ -1011,7 +1011,7 @@ case "${bundle}" in
 
         gsettings set "${newprofilepath}" palette "['rgb(23,20,33)', 'rgb(192,28,40)', 'rgb(38,162,105)', 'rgb(162,115,76)', 'rgb(18,72,139)', 'rgb(163,71,186)', 'rgb(42,161,179)', 'rgb(208,207,204)', 'rgb(94,92,100)', 'rgb(246,97,81)', 'rgb(51,209,122)', 'rgb(233,173,12)', 'rgb(42,123,222)', 'rgb(192,97,203)', 'rgb(51,199,222)', 'rgb(255,255,255)']"
 
-        if gsettings writeable "${newprofilepath}" use-transparent-background 1>/dev/null 2>/dev/null
+        if gsettings writable "${newprofilepath}" use-transparent-background 1>/dev/null 2>/dev/null
         then
             gsettings set "${newprofilepath}" use-transparent-background true
             gsettings set "${newprofilepath}" background-transparency-percent 5
