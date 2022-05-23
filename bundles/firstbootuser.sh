@@ -288,7 +288,6 @@ case "${bundle}" in
     bash "${scriptpath}" 'appearance/themes' "$@"
     bash "${scriptpath}" 'appearance/fonts' "$@"
     bash "${scriptpath}" 'appearance/wallpaper' "$@"
-    bash "${scriptpath}" 'appearance/avatar' "$@"
 
 ;;
 
@@ -307,58 +306,6 @@ case "${bundle}" in
 ### Wallpaper ==================================================================
 
 "appearance/wallpaper")
-
-;;
-
-### User avatar ================================================================
-
-"appearance/avatar")
-
-    ## Generate avatar if not exists -------------------------------------------
-
-    if which rsvg-convert >/dev/null
-    then
-        USER_NAME_LETTER=${user_comment:0:1}
-
-        AVATAR_COLORS=('D32F2F' 'B71C1C' 'AD1457' 'EC407A' 'AB47BC' '6A1B9A' 'AA00FF' '5E35B1' '3F51B5' '1565C0' '0091EA' '00838F' '00897B' '388E3C' '558B2F' 'E65100' 'BF360C' '795548' '607D8B')
-        AVATAR_COLORS_COUNT=${#AVATAR_COLORS[@]}
-        INDEX=$(( (RANDOM * RANDOM + RANDOM) % AVATAR_COLORS_COUNT ))
-
-        bgcolor="#${AVATAR_COLORS[$INDEX]}"
-        fgfont="Arial"
-
-        if [[ "gpqy" == *"${USER_NAME_LETTER}"* || "аруцд" == *"${USER_NAME_LETTER}"* ]]
-        then
-            dy=25
-        elif [[ "У"  == *"${USER_NAME_LETTER}"* ]]
-        then
-            dy=40
-        elif [[ "${USER_NAME_LETTER}" == "${USER_NAME_LETTER^^}" && "Д" != *"${USER_NAME_LETTER}"* ]]
-        then
-            dy=35
-        else
-            dy=30
-        fi
-
-        cat << _EOF | rsvg-convert -w 512 -h 512 -f png -o "${user_home}/.face"
-<svg width="1000" height="1000">
-  <circle cx="500" cy="500" r="400" fill="${bgcolor}" />
-  <text x="50%" y="50%" text-anchor="middle" fill="white" font-size="500px" dy="0.${dy}em" font-family="${fgfont}">${USER_NAME_LETTER}</text>
-</svg>
-_EOF
-
-        chown "${user_name}:${user_name}" "${user_home}/.face"
-    fi
-
-    ## Configure account icon --------------------------------------------------
-
-    echo mkdir -p '/var/lib/AccountsService/icons/'
-
-    cp -f "${user_home}/.face" "/var/lib/AccountsService/icons/${user_name}"
-
-    addconfigline Icon "/var/lib/AccountsService/icons/${user_name}" User "/var/lib/AccountsService/users/${user_name}"
-
-    ## -------------------------------------------------------------------------
 
 ;;
 

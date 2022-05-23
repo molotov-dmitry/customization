@@ -479,7 +479,6 @@ case "${bundle}" in
     bash "${scriptpath}" 'appearance/themes'
     bash "${scriptpath}" 'appearance/fonts'
     bash "${scriptpath}" 'appearance/wallpaper'
-    bash "${scriptpath}" 'appearance/avatar'
 
 ;;
 
@@ -524,14 +523,6 @@ case "${bundle}" in
 "appearance/wallpaper")
 
     appinstall  'Backgrounds'           'backgrounds-custom backgrounds-night backgrounds-abstract backgrounds-blueprint backgrounds-windows'
-
-;;
-
-### User avatar ================================================================
-
-"appearance/avatar")
-
-    appinstall 'SVG convert'            'librsvg2-bin'
 
 ;;
 

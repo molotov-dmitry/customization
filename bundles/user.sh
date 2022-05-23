@@ -610,7 +610,6 @@ case "${bundle}" in
     bash "${scriptpath}" 'appearance/themes'
     bash "${scriptpath}" 'appearance/fonts'
     bash "${scriptpath}" 'appearance/wallpaper'
-    bash "${scriptpath}" 'appearance/avatar'
 
 ;;
 
@@ -693,12 +692,6 @@ case "${bundle}" in
     then
         gsettings set org.gnome.desktop.background picture-uri "file:///usr/share/backgrounds/${bgtheme}/${bgtheme}.xml"
     fi
-
-;;
-
-### User avatar ================================================================
-
-"appearance/avatar")
 
 ;;
 

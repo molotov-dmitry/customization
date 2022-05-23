@@ -280,7 +280,6 @@ case "${bundle}" in
     bash "${scriptpath}" 'appearance/themes'
     bash "${scriptpath}" 'appearance/fonts'
     bash "${scriptpath}" 'appearance/wallpaper'
-    bash "${scriptpath}" 'appearance/avatar'
 
 ;;
 
@@ -300,12 +299,6 @@ case "${bundle}" in
 ### Wallpaper ==================================================================
 
 "appearance/wallpaper")
-
-;;
-
-### User avatar ================================================================
-
-"appearance/avatar")
 
 ;;
 
