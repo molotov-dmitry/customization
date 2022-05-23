@@ -337,12 +337,6 @@ case "${bundle}" in
 
 "appearance/themes")
 
-    ## Cursor theme ------------------------------------------------------------
-
-    cursor_theme='breeze_cursors'
-
-    silent 'Set cursor theme' update-alternatives --set x-cursor-theme "/etc/X11/cursors/${cursor_theme}.theme"
-
 ;;
 
 ### System fonts ===============================================================
