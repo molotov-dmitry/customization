@@ -19,6 +19,8 @@ packages_to_remove+=('apt-listchanges')
 packages_to_remove+=('unattended-upgrades')
 packages_to_remove+=('aptitude' 'aptitude-common')
 packages_to_remove+=('app-install-data-partner')
+packages_to_remove+=('gnome-software gnome-software-common')
+packages_to_remove+=('synaptic')
 
 ## Office ----------------------------------------------------------------------
 
@@ -98,7 +100,7 @@ packages_to_remove+=('pavucontrol-qt')
 
 ## Gnome apps ------------------------------------------------------------------
 
-packages_to_remove+=('gnome-sound-recorder' 'gnome-todo' 'gnome-weather' 'gnome-maps' 'gnome-contacts' 'eog' 'gnome-font-viewer' 'gnome-documents')
+packages_to_remove+=('gnome-sound-recorder' 'gnome-todo' 'gnome-weather' 'gnome-maps' 'gnome-contacts' 'gnome-clocks' 'eog' 'gnome-font-viewer' 'gnome-documents')
 packages_to_remove+=('gnome-shell-extension-desktop-icons' 'gnome-shell-extension-desktop-icons-ng')
 packages_to_remove+=('gnome-session-canberra')
 
