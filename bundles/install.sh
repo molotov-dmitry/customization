@@ -390,10 +390,6 @@ case "${bundle}" in
     appinstall 'Postgres'               'postgresql-client libpq5 libpq-dev'
     appinstall 'SQLite'                 'sqlite3 libsqlite3-0 libsqlite3-dev'
 
-    if havegraphics
-    then
-        appinstall 'SQLite gui'         'sqlitebrowser'
-    fi
 ;;
 
 ### JSON libraries =============================================================

@@ -651,15 +651,6 @@ case "${bundle}" in
         gsettings set org.gnome.desktop.wm.preferences titlebar-font    "${font_ui} ${font_ui_size}"
     fi
 
-    if ispkginstalled sqlitebrowser
-    then
-        addconfigline 'fontsize' "${font_table_size}" 'databrowser' "${HOME}/.config/sqlitebrowser/sqlitebrowser.conf"
-        addconfigline 'font'     "${font_fixed}"      'databrowser' "${HOME}/.config/sqlitebrowser/sqlitebrowser.conf"
-        addconfigline 'fontsize' "${font_fixed_size}" 'editor'      "${HOME}/.config/sqlitebrowser/sqlitebrowser.conf"
-        addconfigline 'font'     "${font_fixed}"      'editor'      "${HOME}/.config/sqlitebrowser/sqlitebrowser.conf"
-        addconfigline 'fontsize' "${font_fixed_size}" 'log'         "${HOME}/.config/sqlitebrowser/sqlitebrowser.conf"
-    fi
-
     if ispkginstalled gnome-builder
     then
         gsettings set org.gnome.builder.editor font-name    "${font_fixed} ${font_fixed_size}"
