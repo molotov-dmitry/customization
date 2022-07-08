@@ -615,11 +615,6 @@ case "${bundle}" in
     then
         appinstall 'Chrome Gnome Shell' 'chrome-gnome-shell'
     fi
-
-    if ispkginstalled plasma-desktop
-    then
-        appinstall 'Chrome Plasma'      'plasma-browser-integration'
-    fi
 ;;
 
 ### Mail =======================================================================
