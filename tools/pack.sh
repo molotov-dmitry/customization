@@ -64,6 +64,16 @@ function packiso()
         iso_options+=('-boot-info-table')               # Specifies that a 56-byte table with information of the CD-ROM layout will be patched in at offset 8 in the boot file.
         iso_options+=('-isohybrid-gpt-basdat')          #
         iso_options+=('-isohybrid-apm-hfsplus')         #
+    elif [[ -f "${iso_dir}/boot/grub/i386-pc/eltorito.img" && -f "${iso_dir}/boot.catalog" && -f "${iso_dir}/EFI/boot/grubx64.efi" ]]
+    then
+        iso_options+=('-b' 'boot/grub/i386-pc/eltorito.img')    # Boot image to be used when making an El Torito bootable CD for x86 PCs
+        iso_options+=('-c' 'boot.catalog')              # Specifies the path and filename of the boot catalog
+        iso_options+=('-no-emul-boot')                  # The system will load and execute this image without performing any disk emulation.
+        iso_options+=('-boot-load-size' '4')            # Specifies the number of "virtual" (512-byte) sectors to load in no-emulation mode
+        iso_options+=('-boot-info-table')               # Specifies that a 56-byte table with information of the CD-ROM layout will be patched in at offset 8 in the boot file.
+        iso_options+=('-eltorito-alt-boot')
+        iso_options+=('-e' 'EFI/boot/grubx64.efi')
+        iso_options+=('-no-emul-boot')
     fi
 
     ### Generate iso ===========================================================
