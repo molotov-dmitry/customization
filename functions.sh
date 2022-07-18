@@ -781,6 +781,8 @@ function repoaddnonfree()
         silent 'Enabling contrib/non-free'  sed -i 's/main[  ]*$/main contrib non-free/g' /etc/apt/sources.list
 
     fi
+    
+    silent 'Removing empty sources' sed -i '/^[  ]*#/d;/^deb[-src]* [ ]*[^ ]* [ ]*[^ ]* [ ]*$/d;/^[ ]*$/d'  /etc/apt/sources.list
 }
 
 ### Gnome shell extensions functions ===========================================
