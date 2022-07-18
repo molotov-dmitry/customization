@@ -7,6 +7,7 @@ DISTFILES += \
     bundles/repo.sh \
     bundles/user.sh \
     build.sh \
+    configure.sh \
     custom/tools/cli.bundle \
     custom/tools/cli/user.sh \
     custom/tools/develop.bundle \
