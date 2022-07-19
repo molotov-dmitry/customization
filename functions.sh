@@ -782,7 +782,7 @@ function repoaddnonfree()
 
     fi
     
-    silent 'Removing empty sources' sed -i '/^[  ]*#/d;/^deb[-src]* [ ]*[^ ]* [ ]*[^ ]* [ ]*$/d;/^[ ]*$/d'  /etc/apt/sources.list
+    silent 'Removing empty sources' sed -i '/^[  ]*#/d;/^deb[-src]* [ ]*[^ ]* [ ]*[^ ]*[ ]*$/d;/^[ ]*$/d'  /etc/apt/sources.list
 }
 
 ### Gnome shell extensions functions ===========================================
