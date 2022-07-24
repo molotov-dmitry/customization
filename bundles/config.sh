@@ -21,7 +21,10 @@ case "${bundle}" in
 
     if dpkg --compare-versions "$(pkgversion bash)" ge 5.1
     then
-        echo -e "\nbind 'set enable-bracketed-paste off'" >> /etc/bash.bashrc
+        if [[ -z "$(grep "^[ \t]*bind 'set enable-bracketed-paste off'[ \t]*$" /etc/bash.bashrc)" ]]
+        then
+            echo -e "\nbind 'set enable-bracketed-paste off'" >> /etc/bash.bashrc
+        fi
     fi
 
 ;;
