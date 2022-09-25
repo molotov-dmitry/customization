@@ -465,13 +465,6 @@ case "${bundle}" in
 
 "dev/gtk")
 
-    ## launcher ----------------------------------------------------------------
-
-    if ispkginstalled 'anjuta'
-    then
-        launcheradd 'anjuta'
-    fi
-
 ;;
 
 ### Gnome SDK ==================================================================
