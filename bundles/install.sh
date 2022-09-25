@@ -290,8 +290,6 @@ case "${bundle}" in
     appinstall 'Multilib tools'         'gcc-multilib g++-multilib'
     appinstall 'Clang'                  'llvm clang lldb'
 
-    appinstall 'CMake'                  'cmake'
-    appinstall 'Checkinstall'           'checkinstall'
     appinstall 'CRLF to LF'             'dos2unix'
 
     appinstall 'Allow user debug'       'custom-config-sysctl-ptrace-scope custom-config-sysctl-allow-user-dmesg'
@@ -450,7 +448,6 @@ case "${bundle}" in
 "vcs")
 
     appinstall 'VCS'                    'git subversion colordiff'
-    appinstall 'Git flow'               'git-flow'
 
     if ispkginstalled nautilus
     then
@@ -720,7 +717,6 @@ case "${bundle}" in
     appinstall 'htop'                   'htop'
     appinstall 'btop'                   'btop'
     appinstall 'iotop'                  'iotop'
-    appinstall 'Net bandwidth monitor'  'speedometer'
     appinstall 'tmux'                   'tmux'
 
 ;;
