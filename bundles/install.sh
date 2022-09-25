@@ -451,12 +451,7 @@ case "${bundle}" in
 
     if ispkginstalled nautilus
     then
-        if ispkgavailable python3-nautilus
-        then
-            appinstall 'RabbitVCS'      'rabbitvcs-nautilus-python3'
-        else
-            appinstall 'RabbitVCS'      'rabbitvcs-nautilus'
-        fi
+        appinstall 'RabbitVCS'          'rabbitvcs-nautilus'
     fi
 
     if gnomebased
