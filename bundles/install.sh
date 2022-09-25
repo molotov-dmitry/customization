@@ -558,7 +558,7 @@ case "${bundle}" in
 
     if gnomebased
     then
-        appinstall 'Rhythmbox'          'rhythmbox rhythmbox-plugins custom-config-rhythmbox'
+        appinstall 'Amberol'            'amberol'
         appinstall 'MPV Gnome GUI'      'celluloid'
 
         appinstall 'Eye of Gnome'       'eog'
