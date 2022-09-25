@@ -837,7 +837,7 @@ case "${bundle}" in
     if gnomebased
     then
         appinstall 'RDP server' 'vino'
-        appinstall 'RDP client' 'remmina remmina-plugin-vnc remmina-plugin-rdp remmina-plugin-xdmcp'
+        appinstall 'RDP client' 'gnome-connections'
     fi
 
 ;;
