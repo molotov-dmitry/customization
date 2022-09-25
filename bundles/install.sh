@@ -64,7 +64,7 @@ case "${bundle}" in
         fi
     fi
 
-    appinstall 'Nautilus'                   'nautilus nautilus-extension-gnome-terminal nautilus-sendto nautilus-share'
+    appinstall 'Nautilus'                   'nautilus nautilus-extension-gnome-terminal'
 
     appinstall 'Base applications'          'gnome-calculator gnome-system-monitor gnome-characters'
     appinstall 'Tweak tool'                 'gnome-tweaks'
