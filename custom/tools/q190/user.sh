@@ -67,6 +67,7 @@ then
     hideapp 'org.gnome.Weather'
     hideapp 'org.gnome.Photos'
     hideapp 'rhythmbox'
+    hideapp 'amberol'
     hideapp 'telegramdesktop'
 else
     hideapp 'com.github.fabiocolacio.marker'
