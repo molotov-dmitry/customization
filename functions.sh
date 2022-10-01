@@ -912,7 +912,7 @@ function gnomeshellextension()
 
 function silent()
 {
-    cmdtitle="$1"
+    local cmdtitle="$1"
     shift
 
     [[ -n "${cmdtitle}" ]] && title "${cmdtitle}"
@@ -925,6 +925,24 @@ function silent()
         return 0
     else
         [[ -n "${cmdtitle}" ]] && msgfail
+        return 1
+    fi
+}
+
+function silent_fail()
+{
+    local cmdtitle="$1"
+    shift
+
+    "$@" >/dev/null 2>&1
+
+    if [[ $? -eq 0 ]]
+    then
+        return 0
+    else
+        [[ -n "${cmdtitle}" ]] && title "${cmdtitle}"
+        [[ -n "${cmdtitle}" ]] && msgfail
+
         return 1
     fi
 }
