@@ -83,8 +83,6 @@ case "${bundle}" in
         fi
 
         gnomeshellextension 112  'Remove Accessibility'             'ge 3.34' 'gnome-shell-extension-remove-accesibility'
-        gnomeshellextension 2072 'Skip Window Ready Notification'   'lt 3.38'
-        gnomeshellextension 800  'Remove Dropdown Arrows'           'lt 40'   'gnome-shell-extension-remove-dropdown-arrows'
         gnomeshellextension 7    'Removable Drive Menu'
 
         gnomeshellextension 2917 'Bring Out Submenu Of Power Off/Logout Button'
