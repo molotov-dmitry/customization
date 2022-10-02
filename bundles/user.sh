@@ -113,6 +113,15 @@ case "${bundle}" in
         fi
     fi
 
+    ## Default zoom level in Nautilus ==========================================
+
+    #TODO: Remove after minimal version of Nautilus becomes 43
+
+    if ispkginstalled nautilus && dpkg --compare-versions "$(pkgversion nautilus | cut -d ':' -f 2-)" lt 43
+    then
+        gsettings set org.gnome.nautilus.icon-view default-zoom-level large
+    fi
+
     ## =========================================================================
 
     fi
