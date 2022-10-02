@@ -56,7 +56,7 @@ case "${bundle}" in
     if ispkginstalled ubuntu-session
     then
         appinstall 'Gnome session'          'gnome-shell gnome-session'
-        appremove  'Ubuntu session'         'ubuntu-session ubuntu-settings gnome-shell-extension-ubuntu-dock yaru-theme-gnome-shell'
+        appremove  'Ubuntu session'         'ubuntu-session ubuntu-settings gnome-shell-extension-ubuntu-dock yaru-theme-gnome-shell yaru-theme-gtk yaru-theme-icon'
 
         if ! ispkginstalled jq
         then
