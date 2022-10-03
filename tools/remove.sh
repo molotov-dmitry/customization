@@ -31,6 +31,7 @@ packages_to_remove+=('libreoffice-draw' 'libreoffice-impress' 'libreoffice-math 
 packages_to_remove+=('kmail' 'kontact' 'korganizer' 'ktnef' 'kaddressbook' 'knotes')
 packages_to_remove+=('goldendict')
 packages_to_remove+=('tomboy')
+packages_to_remove+=('printer-driver-brlaser' 'printer-driver-c2esp' 'printer-driver-m2300w' 'printer-driver-min12xxw' 'printer-driver-pnm2ppa' 'printer-driver-sag-gdi' 'printer-driver-splix')
 
 ## Network ---------------------------------------------------------------------
 
