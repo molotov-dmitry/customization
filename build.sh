@@ -364,10 +364,10 @@ fi
 
 ## Preparing customization scripts ---------------------------------------------
 
-silent 'Removing Tools dir'             rm -rf   "${rootfs_dir}/tools" || exit 1
-silent 'Creating Tools dir'             mkdir -p "${rootfs_dir}/tools" || exit 1
-silent 'Creating Files dir'             mkdir -p "${rootfs_dir}/tools/files" || exit 1
-silent 'Creating Bundle dir'            mkdir -p "${rootfs_dir}/tools/custom/tools" || exit 1
+silent_fail 'Removing Tools dir'             rm -rf   "${rootfs_dir}/tools" || exit 1
+silent_fail 'Creating Tools dir'             mkdir -p "${rootfs_dir}/tools" || exit 1
+silent_fail 'Creating Files dir'             mkdir -p "${rootfs_dir}/tools/files" || exit 1
+silent_fail 'Creating Bundle dir'            mkdir -p "${rootfs_dir}/tools/custom/tools" || exit 1
 
 silent 'Copying functions script'       cp -f "${ROOT_PATH}/functions.sh"     "${rootfs_dir}/tools/" || exit 1
 silent 'Copying bundle script'          cp -f "${ROOT_PATH}/tools/bundle.sh"  "${rootfs_dir}/tools/" || exit 1
@@ -415,7 +415,7 @@ fi
 
 if [[ $(lsof -t "${remaster_dir}" | wc -l) -gt 0 ]]
 then
-    silent 'Killing remaining processes' kill $(lsof -t "${remaster_dir}")
+    silent_fail 'Killing remaining processes' kill $(lsof -t "${remaster_dir}")
 fi
 
 finish_chroot "${rootfs_dir}"
@@ -433,7 +433,7 @@ placescript 'user'
 
 ## Finalizing customization ----------------------------------------------------
 
-silent 'Changing tools mode'            chmod -R 777 "${rootfs_dir}/tools"
+silent_fail 'Changing tools mode'            chmod -R 777 "${rootfs_dir}/tools"
 
 ## Packing image ===============================================================
 
@@ -456,7 +456,7 @@ then
 
     if [[ -e "${iso_dir}/${livedir}/filesystem.squashfs" ]]
     then
-        silent 'Removing old rootfs' rm -f "${iso_dir}/${livedir}/filesystem.squashfs"
+        silent_fail 'Removing old rootfs' rm -f "${iso_dir}/${livedir}/filesystem.squashfs"
     fi
 
     if [[ "$noprogress" == 'y' ]]
@@ -519,7 +519,7 @@ EOF
 
     else
         efi_boot_dir='BOOT'
-        silent 'Creating EFI dir' mkdir -p "${iso_dir}/EFI/${efi_boot_dir}"
+        silent_fail 'Creating EFI dir' mkdir -p "${iso_dir}/EFI/${efi_boot_dir}"
     fi
 
     for efi in bootia32.efi BOOTx64.EFI grubx64.efi mmx64.efi
