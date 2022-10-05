@@ -306,8 +306,8 @@ do
     silent "unmounting ${umountpath}" umount -l "${umountpath}"
 done
 
-silent 'Removing old CD'                rm -rf "${remaster_dir}"
-silent 'Creating remaster directory'    mkdir -p "${remaster_dir}"
+silent_fail 'Removing old CD'                rm -rf "${remaster_dir}"
+silent_fail 'Creating remaster directory'    mkdir -p "${remaster_dir}"
 
 if [[ $useram -eq 1 ]]
 then
@@ -329,7 +329,7 @@ silent 'Unpacking rootfs' unsquashfs -f -d "${rootfs_dir}" "/mnt/${livedir}/file
 
 ## -----------------------------------------------------------------------------
 
-silent 'Unmounting iso' umount /mnt
+silent_fail 'Unmounting iso' umount /mnt
 
 ### Generating custom CD =======================================================
 
@@ -449,7 +449,7 @@ then
         silent 'Getting versions from manifest' bash -c "cat \"${iso_dir}/${livedir}/filesystem.manifest\" | cut -d ' ' -f 1 > \"${iso_dir}/filesystem.manifest.tmp\""
         silent 'Diff manifests'                 bash -c "diff --unchanged-group-format='' \"${iso_dir}/filesystem.manifest.tmp\" \"${iso_dir}/${livedir}/manifest.diff\" > \"${iso_dir}/filesystem.manifest-desktop.tmp\""
         silent 'Building manifest desktop file' bash -c "chroot \"${rootfs_dir}\"  dpkg-query -W --showformat='${Package} ${Version}\n' $(cat "${iso_dir}/filesystem.manifest-desktop.tmp") | egrep '.+ .+' > \"${iso_dir}/${livedir}/filesystem.manifest-desktop\""
-        silent 'Removing temp files'            bash -c "rm \"${iso_dir}/filesystem.manifest.tmp\" \"${iso_dir}/filesystem.manifest-desktop.tmp\""
+        silent_fail 'Removing temp files'       bash -c "rm \"${iso_dir}/filesystem.manifest.tmp\" \"${iso_dir}/filesystem.manifest-desktop.tmp\""
     else
         silent 'Creating desktop manifest' cp -f "${iso_dir}/${livedir}/filesystem.manifest" "${iso_dir}/${livedir}/filesystem.manifest-desktop"
     fi
