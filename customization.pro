@@ -21,6 +21,8 @@ DISTFILES += \
     custom/tools/media/user.sh \
     custom/tools/q190.bundle \
     custom/tools/q190/user.sh \
+    custom/tools/q190-lite.bundle \
+    custom/tools/q190-lite/user.sh \
     custom/tools/server.bundle \
     custom/tools/server/firstboot.sh \
     custom/tools/server/install.sh \
