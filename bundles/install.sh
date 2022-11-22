@@ -472,7 +472,7 @@ case "${bundle}" in
 
 "appearance/themes")
 
-    appinstall 'Adwaita theme'          'gnome-themes-standard'
+    appinstall 'Adwaita theme'          'gnome-themes-extra'
     appinstall 'Numix theme'            'numix-icon-theme-circle'
     appinstall 'Breeze theme'           'breeze-cursor-theme breeze-icon-theme'
     appinstall 'Papirus theme'          'papirus-icon-theme papirus-material-icon-theme'
