@@ -484,7 +484,7 @@ case "${bundle}" in
         appinstall 'Spinner plymouth theme' 'plymouth-theme-spinner'
     fi
 
-    appinstall 'Gnome TTY colors' 'vtrgb-gnome'
+    appinstall 'Gnome TTY colors' 'custom-config-vtrgb-gnome-theme'
 
 ;;
 
