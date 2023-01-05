@@ -19,15 +19,12 @@ case "${bundle}" in
 
 "base")
 
-    repoadd 'AHome' '188.134.72.31:8191' 'ahome' 'contrib' 'ahome.gpg'
+    repoadd 'AHome' "188.134.72.31:9090/$(lsb_release -si | tr '[:upper:]' '[:lower:]')" "$(lsb_release -sc)" 'contrib' 'ahome.gpg'
 
     if [[ "$(lsb_release -si)" == "Debian" ]]
     then
         repoadd 'Backports'    'http://mirror.yandex.ru/debian' "$(lsb_release -cs)-backports" 'main'
-        repoadd 'AHome Debian' '188.134.72.31:8192' 'ahome' 'contrib' 'ahome.gpg'
     fi
-
-
 ;;
 
 ### Base GUI ===================================================================
