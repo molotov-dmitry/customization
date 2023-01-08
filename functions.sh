@@ -214,7 +214,7 @@ function appinstall()
     then
         if [[ "${#skippedlist[@]}" -eq 0 ]]
         then
-            msgwarn '[installed]'
+            msginfo '[installed]'
             return 0
         else
             msgwarn "[missing ${skippedlist[*]}]"
@@ -299,7 +299,7 @@ function apptmpinstall()
     then
         if [[ "${#skippedlist[@]}" -eq 0 ]]
         then
-            msgwarn '[installed]'
+            msginfo '[installed]'
             return 0
         else
             msgwarn "[missing ${skippedlist[*]}]"
@@ -352,7 +352,7 @@ function appremove()
 
     if [[ -z "${remlist}" ]]
     then
-        msgwarn '[removed]'
+        msginfo '[removed]'
         return 0
     else
         DEBIAN_FRONTEND=noninteractive apt purge ${remlist} \
