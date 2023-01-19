@@ -428,42 +428,6 @@ case "${bundle}" in
         rm -rf "${HOME}/.config/QtProject"
         usercopy 'qtcreator' --replace '.config/QtProject/QtCreator.ini'
 
-        ## Configure color schemes ---------------------------------------------
-
-        qvariant=''
-
-        declare -A qtstyles
-
-        qtstyles['flat-light']="${HOME}/.config/QtProject/qtcreator/styles/material.xml"
-        qtstyles['flat-dark']="${HOME}/.config/QtProject/qtcreator/styles/material_dark.xml"
-
-        count="${#qtstyles[@]}"
-
-        qvariant="${qvariant}$(printf %08x%08x 8 $count)"
-
-        for i in "${!qtstyles[@]}"
-        do
-            key="$i"
-            val="${qtstyles[$i]}"
-
-            keylength=$((${#key} * 2))
-            vallength=$((${#val} * 2))
-
-            keyhex=$(echo -n "$key" | iconv -t utf-16be | xxd -p | tr -d '\n')
-            valhex=$(echo -n "$val" | iconv -t utf-16be | xxd -p | tr -d '\n')
-
-            delimiter='0000000a'
-
-            qvariant="${qvariant}$(printf %08x%s%s%08x%s "$keylength" "$keyhex" "$delimiter" "$vallength" "$valhex")"
-        done
-
-        qvariant="$(echo -n "$qvariant" | sed 's/\(..\)/\\x\1/g' | sed 's/\\x08/\\b/g;s/\\x0a/\\n/g' | sed 's/\\x2f/\//g' | sed 's/\\x00/\\0/g;s/\\x0/\\x/g')"
-
-        addconfigline 'ColorSchemes' "@Variant(${qvariant})" 'TextEditor' "${HOME}/.config/QtProject/QtCreator.ini"
-
-        unset qvariant
-        unset qtstyles
-
         ## ---------------------------------------------------------------------
 
     fi

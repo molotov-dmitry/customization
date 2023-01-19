@@ -349,7 +349,7 @@ case "${bundle}" in
 
     if havegraphics
     then
-        appinstall 'Qt IDE'             'qtcreator qtcreator-mime'
+        appinstall 'Qt IDE'             'qtcreator qtcreator-mime custom-config-qtcreator'
     fi
 
 ;;
