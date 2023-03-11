@@ -79,18 +79,6 @@ case "${bundle}" in
         mv /usr/share/gnome-shell/modes/ubiquity-gnome.json /usr/share/gnome-shell/modes/ubiquity.json
     fi
 
-    ## Disbale Wayland ---------------------------------------------------------
-
-    if test -f '/etc/gdm3/custom.conf'
-    then
-        addconfigline 'WaylandEnable' 'false' 'daemon' '/etc/gdm3/custom.conf'
-    fi
-
-    if test -f '/etc/gdm3/daemon.conf'
-    then
-        addconfigline 'WaylandEnable' 'false' 'daemon' '/etc/gdm3/daemon.conf'
-    fi
-
 ;;
 
 ### ============================================================================
