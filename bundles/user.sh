@@ -419,6 +419,17 @@ case "${bundle}" in
         rm -rf "${HOME}/.config/QtProject"
         usercopy 'qtcreator' --replace '.config/QtProject/QtCreator.ini'
 
+        ## Add Clangd folder to gitignore --------------------------------------
+
+        if dpkg --compare-versions "$(pkgversion qtcreator)" ge 7
+        then
+            if ! grep -q ^.qtc_clangd$ .config/git/ignore 2>/dev/null
+            then
+                mkdir -p "${HOME}/.config/git"
+                echo '.qtc_clangd' >> "${HOME}/.config/git/ignore"
+            fi
+        fi
+
         ## ---------------------------------------------------------------------
 
     fi
