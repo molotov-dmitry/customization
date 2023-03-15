@@ -416,8 +416,7 @@ case "${bundle}" in
 
         ## Qt Creator ----------------------------------------------------------
 
-        rm -rf "${HOME}/.config/QtProject"
-        usercopy 'qtcreator' --replace '.config/QtProject/QtCreator.ini'
+        addconfigline 'Projects' "${HOME}/Projects" 'Directories' "${HOME}/.config/QtProject/QtCreator.ini"
 
         ## Add Clangd folder to gitignore --------------------------------------
 
