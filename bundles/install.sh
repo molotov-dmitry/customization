@@ -795,6 +795,14 @@ case "${bundle}" in
 
     appinstall 'RCZI web services'      'rczi-web-services'
 
+    # Replace Gnome text editor with Gedit =====================================
+
+    if ispkginstalled gnome-text-editor
+    then
+        appremove 'Gnome Text editor'   'gnome-text-editor'
+        appinstall 'Gedit'              'gedit custom-config-gedit'
+    fi
+
 ;;
 
 ### Mail =======================================================================
