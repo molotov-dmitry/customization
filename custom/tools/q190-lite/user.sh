@@ -68,7 +68,9 @@ then
     hideapp 'org.gnome.Photos'
     hideapp 'rhythmbox'
     hideapp 'amberol'
+    hideapp 'io.bassi.Amberol'
     hideapp 'telegramdesktop'
+    hideapp 'org.telegram.desktop' # it is not an extension
 else
     hideapp 'com.github.fabiocolacio.marker'
     hideapp 'org.gnome.Evolution'
