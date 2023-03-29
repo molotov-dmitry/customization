@@ -794,6 +794,7 @@ case "${bundle}" in
     ## Web services ============================================================
 
     appinstall 'RCZI web services'      'rczi-web-services'
+    appinstall 'GitLab notifications'   'gitlab-notify'
 
     # Replace Gnome text editor with Gedit =====================================
 
