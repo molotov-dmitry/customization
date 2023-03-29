@@ -554,7 +554,7 @@ case "${bundle}" in
 
     if ispkginstalled gnome-shell
     then
-        gnomeshellextension 1379            # A simple MPRIS indicator button
+        gnomeshellextension 1379    'lt 43' # A simple MPRIS indicator button
         gnomeshellextension 906     'lt 43' # Sound Input & Output Device Chooser
         gnomeshellextension 517             # Caffeine
     fi
