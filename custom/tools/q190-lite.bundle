@@ -19,7 +19,6 @@ dev/net
 dev/ti
 
 work
-work-mail
 work-chat
 
 server/ssh
