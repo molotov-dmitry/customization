@@ -905,6 +905,15 @@ function gnomeshellextension()
 
     msgdone
 
+    ### Fix missing GLib compiled schema =======================================
+
+    if [[ -d "${installdir}/${ext_uuid}/schemas" && ! -f "${installdir}/${ext_uuid}/schemas/gschemas.compiled" ]]
+    then
+        silent 'Compile schema' glib-compile-schemas "${installdir}/${ext_uuid}/schemas"
+    fi
+
+    ### ========================================================================
+
     return 0
 }
 
