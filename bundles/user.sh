@@ -181,29 +181,33 @@ case "${bundle}" in
     then
         ## Enable app indicators -----------------------------------------------
 
-        gsettingsadd org.gnome.shell enabled-extensions 'ubuntu-appindicators@ubuntu.com'
+        if isgnomeshellextensioninstalled 'ubuntu-appindicators@ubuntu.com'
+        then
+            gsettingsadd org.gnome.shell enabled-extensions 'ubuntu-appindicators@ubuntu.com'
+        fi
 
         ## Remove accessibility icon -------------------------------------------
 
-        gsettingsadd org.gnome.shell enabled-extensions 'removeaccesibility@lomegor'
-
-        ## Remove Dropdown Arrows ----------------------------------------------
-
-        gsettingsadd org.gnome.shell enabled-extensions 'remove-dropdown-arrows@mpdeimos.com'
-
-        ## Skip Window Ready Notification --------------------------------------
-
-        gsettingsadd org.gnome.shell enabled-extensions 'skipwindowreadynotification@JasonLG1979.github.io'
+        if isgnomeshellextensioninstalled 'removeaccesibility@lomegor'
+        then
+            gsettingsadd org.gnome.shell enabled-extensions 'removeaccesibility@lomegor'
+        fi
 
         ## Bring Out Submenu Of Power Off/Logout Button ------------------------
 
-        dconf write /org/gnome/shell/extensions/brngout/remove-suspend-button true
+        if isgnomeshellextensioninstalled 'BringOutSubmenuOfPowerOffLogoutButton@pratap.fastmail.fm'
+        then
+            dconf write /org/gnome/shell/extensions/brngout/remove-suspend-button true
 
-        gsettingsadd org.gnome.shell enabled-extensions 'BringOutSubmenuOfPowerOffLogoutButton@pratap.fastmail.fm'
+            gsettingsadd org.gnome.shell enabled-extensions 'BringOutSubmenuOfPowerOffLogoutButton@pratap.fastmail.fm'
+        fi
 
         ## Removable Drive Menu ------------------------------------------------
 
-        gsettingsadd org.gnome.shell enabled-extensions 'drive-menu@gnome-shell-extensions.gcampax.github.com'
+        if isgnomeshellextensioninstalled 'drive-menu@gnome-shell-extensions.gcampax.github.com'
+        then
+            gsettingsadd org.gnome.shell enabled-extensions 'drive-menu@gnome-shell-extensions.gcampax.github.com'
+        fi
 
         ## Dash to dock --------------------------------------------------------
 
@@ -691,17 +695,15 @@ case "${bundle}" in
 
     ## A simple MPRIS indicator button Gnome Shell extension -------------------
 
-    if ispkginstalled gnome-shell
+    if ispkginstalled gnome-shell && isgnomeshellextensioninstalled 'mprisindicatorbutton@JasonLG1979.github.io'
     then
         gsettingsadd org.gnome.shell enabled-extensions 'mprisindicatorbutton@JasonLG1979.github.io'
     fi
 
     ## Sound Input & Output Device Chooser Gnome Shell extension ---------------
 
-    if ispkginstalled gnome-shell
+    if ispkginstalled gnome-shell && isgnomeshellextensioninstalled 'sound-output-device-chooser@kgshank.net'
     then
-        gsettingsadd org.gnome.shell enabled-extensions 'sound-output-device-chooser@kgshank.net'
-
         dconf write /org/gnome/shell/extensions/sound-output-device-chooser/hide-on-single-device   true
         dconf write /org/gnome/shell/extensions/sound-output-device-chooser/show-input-devices      false
         dconf write /org/gnome/shell/extensions/sound-output-device-chooser/show-profiles           false
@@ -709,16 +711,18 @@ case "${bundle}" in
         dconf write /org/gnome/shell/extensions/sound-output-device-chooser/hide-menu-icons         false
         dconf write /org/gnome/shell/extensions/sound-output-device-chooser/icon-theme              "'monochrome'"
         dconf write /org/gnome/shell/extensions/sound-output-device-chooser/show-input-slider       false
+
+        gsettingsadd org.gnome.shell enabled-extensions 'sound-output-device-chooser@kgshank.net'
     fi
 
     ## Caffeine ----------------------------------------------------------------
 
-    if ispkginstalled gnome-shell
+    if ispkginstalled gnome-shell && isgnomeshellextensioninstalled 'caffeine@patapon.info'
     then
-        gsettingsadd org.gnome.shell enabled-extensions 'caffeine@patapon.info'
-
         dconf write /org/gnome/shell/extensions/caffeine/show-indicator     false
         dconf write /org/gnome/shell/extensions/caffeine/show-notifications false
+
+        gsettingsadd org.gnome.shell enabled-extensions 'caffeine@patapon.info'
     fi
 
 ;;
