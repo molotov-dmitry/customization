@@ -30,6 +30,8 @@ network
 graphics
 archive
 
+vm-host
+
 cli
 
 folders
