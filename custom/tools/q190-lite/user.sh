@@ -76,7 +76,6 @@ else
     hideapp 'org.gnome.Evolution'
     hideapp 'local.rczifort.ex01'
     hideapp 'local.rczifort.git'
-    hideapp 'local.rczifort.redmine'
     hideapp 'ccs-pjt-editor-qt'
     hideapp 'pidgin'
 fi
