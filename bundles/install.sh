@@ -30,7 +30,12 @@ case "${bundle}" in
 
 "gui")
 
-    appinstall 'Language pack'              'hyphen-ru mythes-ru hunspell-ru [language-pack-gnome-ru] [language-pack-gnome-ru-base] [language-pack-ru] [language-pack-ru-base]'
+    appinstall 'Dictionaries'               'hyphen-ru mythes-ru hunspell-ru'
+
+    if ispkgavailable 'language-pack-ru'
+    then
+        appinstall 'Language pack'          '[language-pack-gnome-ru] [language-pack-gnome-ru-base] [language-pack-ru] [language-pack-ru-base]'
+    fi
 
     if ! ispkginstalled 'systemd-timesyncd'
     then
