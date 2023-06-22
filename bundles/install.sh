@@ -32,6 +32,11 @@ case "${bundle}" in
 
     appinstall 'Language pack'              'hyphen-ru mythes-ru hunspell-ru [language-pack-gnome-ru] [language-pack-gnome-ru-base] [language-pack-ru] [language-pack-ru-base]'
 
+    if ! ispkginstalled 'systemd-timesyncd'
+    then
+        appinstall 'Time sync'              'systemd-timesyncd'
+    fi
+
 ;;
 
 ### GTK-based GUI ==============================================================
