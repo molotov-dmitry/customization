@@ -13,6 +13,10 @@ declare -a packages_to_remove
 
 packages_to_remove+=('linux-headers-oem' 'linux-headers-4.15.0-1050-oem' 'linux-oem-headers-4.15.0-1050')
 
+## Firmware --------------------------------------------------------------------
+
+packages_to_remove+=('raspi-firmware' 'firmware-netronome')
+
 ## Package management ----------------------------------------------------------
 
 packages_to_remove+=('apt-listchanges')
@@ -113,6 +117,8 @@ packages_to_remove+=('khmerconverter')
 packages_to_remove+=('hdate-applet')
 packages_to_remove+=('fcitx5' 'fcitx5-data' 'fcitx5-modules' 'fcitx5-chewing' 'fcitx5-chineese-addons' 'fcitx' 'fcitx-bin' 'fcitx-config-common' 'fcitx-data' 'fcitx-modules' 'fcitx-frontend-all' 'fcitx-mozc' 'fcitx-mozc-data' 'fcitx5-mozc' 'mozc-utils-gui' 'mozc-data' 'mozc-server' 'ibus-mozc' 'anthy' 'anthy-common' 'gtk-im-libthai' 'ibus-libpinyin' 'ibus-hangul' 'ibus-chewing' 'ibus-table-cangjie' 'ibus-table-cangjie-big' 'ibus-table-cangjie3' 'ibus-table-cangjie5' 'ibus-table-wubi' 'ibus-unikey')
 packages_to_remove+=('libpinyin13' 'libpinyin-data')
+packages_to_remove+=('aspell-no')
+packages_to_remove+=('gimp-help-sv')
 
 ## Development -----------------------------------------------------------------
 
