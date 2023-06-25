@@ -19,7 +19,7 @@ case "${bundle}" in
 
 "base")
 
-    appinstall 'Bash completion'        'bash-completion'
+    appinstall 'Bash completion'        'bash-completion command-not-found'
     appinstall 'Sudo'                   'sudo'
     appinstall 'GRUB force menu'        'grub-force-menu'
     appinstall 'Rsync'                  'rsync'
