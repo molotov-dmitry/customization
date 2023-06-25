@@ -21,7 +21,7 @@ case "${bundle}" in
 
     appinstall 'Bash completion'        'bash-completion command-not-found'
     appinstall 'Sudo'                   'sudo'
-    appinstall 'GRUB force menu'        'grub-force-menu'
+    appinstall 'GRUB force menu'        'grub-force-menu grub-enable-os-prober'
     appinstall 'Rsync'                  'rsync'
 
 ;;
