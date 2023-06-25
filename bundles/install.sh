@@ -492,6 +492,23 @@ case "${bundle}" in
     if ispkgavailable plymouth-theme-spinner
     then
         appinstall 'Spinner plymouth theme' 'plymouth-theme-spinner'
+
+    elif ispkgavailable plymouth-themes
+    then
+
+        appinstall 'Plymouth themes'        'plymouth-themes'
+    fi
+
+    if test -x /usr/sbin/plymouth-set-default-theme
+    then
+        for theme in bgrt spinner emerald
+        do
+            if /usr/sbin/plymouth-set-default-theme -l | grep --silent "^$theme$"
+            then
+                silent "Set plymouth theme to $theme" /usr/sbin/plymouth-set-default-theme "$theme"
+                break
+            fi
+        done
     fi
 
     appinstall 'Gnome TTY colors' 'custom-config-vtrgb-gnome-theme'
