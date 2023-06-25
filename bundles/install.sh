@@ -511,6 +511,11 @@ case "${bundle}" in
         done
     fi
 
+    if [[ "$(lsb_release -si)" == "Debian" ]]
+    then
+        appinstall 'GRUB enable splash'     'grub-enable-splash'
+    fi
+
     appinstall 'Gnome TTY colors' 'custom-config-vtrgb-gnome-theme'
 
 ;;
