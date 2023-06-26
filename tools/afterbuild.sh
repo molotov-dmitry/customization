@@ -5,8 +5,8 @@ cd "${ROOT_PATH}" || exit 1
 
 . "${ROOT_PATH}/functions.sh"
 
-silent 'Removed unnecessary packages' apt autoremove --yes --force-yes --allow-downgrades --allow-remove-essential --purge -qq
-silent 'Cleaning up'                  apt autoclean
+DEBIAN_FRONTEND=noninteractive silent 'Remove unnecessary packages' apt autoremove --yes --force-yes --allow-downgrades --allow-remove-essential --purge -qq
+DEBIAN_FRONTEND=noninteractive silent 'Cleaning up'                 apt autoclean
 
 if ispkginstalled dkms
 then

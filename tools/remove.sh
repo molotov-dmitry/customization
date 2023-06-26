@@ -167,4 +167,5 @@ fi
 
 ## Unused applications ---------------------------------------------------------
 
-silent 'Removed unnecessary packages' apt autoremove --yes --force-yes --allow-downgrades --allow-remove-essential --purge -qq
+DEBIAN_FRONTEND=noninteractive silent 'Purge removed packages'      apt purge --yes --force-yes --allow-downgrades --allow-remove-essential --purge -qq $(dpkg -l | awk '/^rc/ {print $2}')
+DEBIAN_FRONTEND=noninteractive silent 'Remove unnecessary packages' apt autopurge --yes --force-yes --allow-downgrades --allow-remove-essential --purge -qq
