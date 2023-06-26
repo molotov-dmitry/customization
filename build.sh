@@ -355,6 +355,11 @@ then
     silent 'Move sources.list' mv "${rootfs_dir}/etc/apt/sources.list.d/base.list" "${rootfs_dir}/etc/apt/sources.list"
 fi
 
+if grep -qs ' file:' "${rootfs_dir}/etc/apt/sources.list"
+then
+    silent 'Disable ISO repository' sed -i '/ file:/d' "${rootfs_dir}/etc/apt/sources.list"
+fi
+
 ## Copy user files =============================================================
 
 if [[ -d "${ROOT_PATH}/custom/files/${config}" ]]
