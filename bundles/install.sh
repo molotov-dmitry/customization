@@ -316,6 +316,7 @@ case "${bundle}" in
     appinstall 'Static analysis tools'  'cppcheck'
     appinstall 'Dynamic analysis tools' 'valgrind'
     appinstall 'Function complexity'    'pmccabe'
+    appinstall 'GNU time'               'time'
 
 ;;
 
