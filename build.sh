@@ -493,7 +493,7 @@ EOF
 
     ## Modify package manifest for minimal installation ------------------------
 
-    if [[ "${config}" == "work" || "${config}" == "develop" || "${config}" == "q190" ]]
+    if [[ "${config}" == "work" || "${config}" == "develop" || "${config}" == "q190" || "${config}" == "q190-lite" ]]
     then
         if [[ -f "${iso_dir}/${livedir}/filesystem.manifest-minimal-remove" && -f "${iso_dir}/${livedir}/filesystem.manifest-remove" ]]
         then
