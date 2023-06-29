@@ -463,6 +463,8 @@ case "${bundle}" in
         appinstall 'Meld diff tool'     'meld custom-config-meld'
 
         appinstall 'Git repo viewer'    'gitg'
+    else
+        appinstall 'Git TUI'            'tig'
     fi
 
 ;;
