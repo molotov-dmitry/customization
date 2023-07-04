@@ -19,6 +19,9 @@ case "${bundle}" in
 
 "base")
 
+    repoaddnonfree
+    changemirror 'mirror.yandex.ru'
+
 ;;
 
 ### Base GUI ===================================================================
