@@ -42,6 +42,8 @@ case "${bundle}" in
         appinstall 'Time sync'              'systemd-timesyncd'
     fi
 
+    appinstall 'Libsecret tools'            'libsecret-tools'
+
 ;;
 
 ### GTK-based GUI ==============================================================
