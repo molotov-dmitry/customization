@@ -631,7 +631,7 @@ case "${bundle}" in
 
 "network/browser")
 
-    appinstall 'Google Chrome'          'google-chrome-stable'
+    appinstall 'Google Chrome'          'google-chrome-stable libnss3-tools'
 
     if ispkginstalled gnome-shell
     then
