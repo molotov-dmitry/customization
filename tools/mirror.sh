@@ -15,6 +15,10 @@ repoaddnonfree
 
 changemirror 'mirror.yandex.ru'
 
+## Removed source repositories -------------------------------------------------
+
+silent 'Remove source repositories' sed -i '/^[ \t]*deb-src /d' /etc/apt/sources.list
+
 ## Update all packages ---------------------------------------------------------
 
 appupdate

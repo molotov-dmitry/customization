@@ -22,6 +22,8 @@ case "${bundle}" in
     repoaddnonfree
     changemirror 'mirror.yandex.ru'
 
+    sed -i '/^[ \t]*deb-src /d' /etc/apt/sources.list
+
 ;;
 
 ### Base GUI ===================================================================
