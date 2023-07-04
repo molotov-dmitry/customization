@@ -716,56 +716,16 @@ ppaadd()
 
 function changemirror()
 {
-    mirror="$1"
+    local mirror="$1"
 
     if [[ -z "${mirror}" ]]
     then
-        title 'Changing mirror'
+        title 'Change mirror'
         msgfail
         return 1
     fi
 
-    if [[ "$(lsb_release -si)" == "Ubuntu" ]]
-    then
-        current_mirror=$(cat /etc/apt/sources.list | grep '^deb' | grep -v updates | grep -v 'backports' | sed -r 's/[[:blank:]]*deb(\-src)?[[:blank:]]*//' | cut -d ' ' -f 1 | sed 's/.*:\/\///' | cut -d '/' -f 1 | head -n1)
-
-        if [[ -z "${current_mirror}" ]]
-        then
-            title 'Changing mirror'
-            msgfail
-            return 2
-        fi
-
-        silent "Changing mirror '${current_mirror}' to '${mirror}'" sed -i "s/${current_mirror}/${mirror}/g" /etc/apt/sources.list
-
-        return $?
-
-    elif [[ "$(lsb_release -si)" == "LinuxMint" ]]
-    then
-        mirror_mint=$(grep '^deb' /etc/apt/sources.list.d/official-package-repositories.list | grep 'id:linuxmint_main' | sed -r 's/[[:blank:]]*deb(\-src)?[[:blank:]]*//' | cut -d ' ' -f 1 | sed 's/.*:\/\///' | cut -d '/' -f 1 | head -n1)
-
-        if [[ -z "${mirror_mint}" ]]
-        then
-            title 'Changing mirror'
-            msgfail
-            return 2
-        fi
-
-        silent "Changing mirror '${mirror_mint}' to '${mirror}'" sed -i "s/${mirror_mint}/${mirror}\/linuxmint-packages/g" /etc/apt/sources.list.d/official-package-repositories.list
-
-
-
-        mirrors_ubuntu=$(grep '^deb' /etc/apt/sources.list.d/official-package-repositories.list | grep -v 'id:linuxmint_main' | grep -v 'partner' | sed -r 's/[[:blank:]]*deb(\-src)?[[:blank:]]*//' | cut -d ' ' -f 1 | sed 's/.*:\/\///' | cut -d '/' -f 1 | uniq)
-
-        for mirror_ubuntu in ${mirrors_ubuntu}
-        do
-            silent "Changing mirror '${mirror_ubuntu}' to '${mirror}'" sed -i "s/${mirror_ubuntu}/${mirror}/g" /etc/apt/sources.list.d/official-package-repositories.list
-        done
-
-        return $?
-
-    fi
-
+    silent "Change mirror to '${mirror}'" sed -i "s/http:\/\/[^\/]*/http:\/\/${mirror}/" /etc/apt/sources.list
 }
 
 function repoaddnonfree()
