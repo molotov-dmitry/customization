@@ -174,6 +174,8 @@ case "${bundle}" in
 
 "driver/wifi")
 
+    appinstall 'Intel WiFi module config'   'device-config-iwlwifi'
+
 ;;
 
 ### Printer drivers and PPDs ===================================================
