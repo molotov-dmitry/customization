@@ -84,6 +84,7 @@ packages_to_remove+=('libu2f-udev')
 packages_to_remove+=('calamares')
 packages_to_remove+=('exim4-base' 'exim4-config' 'exim4-daemon-light')
 packages_to_remove+=('fakeroot')
+packages_to_remove+=('xdg-desktop-portal-gnome')
 
 ## Help ------------------------------------------------------------------------
 
