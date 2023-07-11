@@ -24,6 +24,11 @@ case "${bundle}" in
 
     sed -i '/^[ \t]*deb-src /d' /etc/apt/sources.list
 
+    if [[ "$(timedatectl show -p LocalRTC --value)" != 'no' ]]
+    then
+        timedatectl set-local-rtc 0
+    fi
+
 ;;
 
 ### Base GUI ===================================================================
