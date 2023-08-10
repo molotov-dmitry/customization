@@ -18,6 +18,8 @@ packages_to_remove+=('dkms')
 
 packages_to_remove+=('raspi-firmware' 'firmware-netronome' 'atmel-firmware' 'dahdi-firmware-nonfree' 'firmware-ast' 'firmware-ath9k-htc' 'firmware-ivtv' 'firmware-realtek-rtl8723cs-bt' 'firmware-siano' 'firmware-zd1211' 'hdmi2usb-fx2-firmware')
 packages_to_remove+=('ixo-usb-jtag')
+packages_to_remove+=('i2c-tools')
+packages_to_remove+=('indi-dsi')
 
 ## Package management ----------------------------------------------------------
 
@@ -55,6 +57,7 @@ packages_to_remove+=('akregator')
 packages_to_remove+=('konversation' 'konversation-data')
 packages_to_remove+=('sugar-browse-activity')
 packages_to_remove+=('kdeconnect')
+packages_to_remove+=('lynx')
 
 ## Accesibility and parental control -------------------------------------------
 
@@ -87,9 +90,11 @@ packages_to_remove+=('exim4-base' 'exim4-config' 'exim4-daemon-light')
 packages_to_remove+=('fakeroot')
 packages_to_remove+=('xdg-desktop-portal-gnome')
 packages_to_remove+=('build-essential')
-packages_to_remove+=('edid-decode')
+packages_to_remove+=('edid-decode' 'read-edid')
 packages_to_remove+=('ethtool' 'hw-probe')
 packages_to_remove+=('libbdplus0')
+packages_to_remove+=('libc-devtools')
+packages_to_remove+=('mesa-utils')
 
 ## Help ------------------------------------------------------------------------
 
@@ -113,6 +118,8 @@ packages_to_remove+=('mpd')
 packages_to_remove+=('shotwell' 'shotwell-common')
 packages_to_remove+=('cheese')
 packages_to_remove+=('pavucontrol-qt')
+packages_to_remove+=('imagemagick-6-common')
+packages_to_remove+=('rygel-playbin' 'rygel-tracker')
 
 ## Gnome apps ------------------------------------------------------------------
 
@@ -157,6 +164,7 @@ packages_to_remove+=('nkf' 'opencc')
 packages_to_remove+=('re')
 packages_to_remove+=('swath' 'swath-data')
 packages_to_remove+=('konwert')
+packages_to_remove+=('pocketsphinx-en-us')
 
 ## Misc ------------------------------------------------------------------------
 
