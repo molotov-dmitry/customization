@@ -44,6 +44,8 @@ case "${bundle}" in
 
     appinstall 'Libsecret tools'            'libsecret-tools'
 
+    appinstall 'Notify utils'               'libnotify-bin'
+
 ;;
 
 ### GTK-based GUI ==============================================================
@@ -167,6 +169,8 @@ case "${bundle}" in
         appinstall 'Firmwares'          'firmware-linux'
 
     fi
+
+    appinstall 'IRQ balance'            'irqbalance'
 
 ;;
 
@@ -303,6 +307,7 @@ case "${bundle}" in
     appinstall 'Clang'                  'llvm clang lldb'
 
     appinstall 'CRLF to LF'             'dos2unix'
+    appinstall 'Hex print'              'xxd'
 
     appinstall 'Allow user debug'       'custom-config-sysctl-ptrace-scope custom-config-sysctl-allow-user-dmesg'
 
@@ -421,7 +426,9 @@ case "${bundle}" in
 
 "dev/net")
 
-    appinstall 'ARPing'                 'iputils-arping'
+    appinstall 'IP utils'               'bind9-dnsutils iputils-tracepath iputils-arping'
+    appinstall 'netcat'                 'netcat-openbsd'
+    appinstall 'tcpdump'                'tcpdump'
 
     silent     'Wireshark fix'          sh -c 'echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections'
 
@@ -712,6 +719,7 @@ case "${bundle}" in
 
 "archive")
 
+    appinstall 'Zip'                    'zip'
     appinstall '7-zip'                  'p7zip-rar p7zip-full'
 
 ;;
