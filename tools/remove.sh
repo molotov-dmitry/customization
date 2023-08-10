@@ -95,6 +95,7 @@ packages_to_remove+=('ethtool' 'hw-probe')
 packages_to_remove+=('libbdplus0')
 packages_to_remove+=('libc-devtools')
 packages_to_remove+=('mesa-utils')
+packages_to_remove+=('gcc' 'make')
 
 ## Help ------------------------------------------------------------------------
 
