@@ -829,7 +829,7 @@ case "${bundle}" in
 
     ### GOST hash ==============================================================
 
-    appinstall 'GOST hashes'            'gostsum'
+    appinstall 'GOST hashes'            'gostsum ctrlsum'
 
     ### Browser ================================================================
 
