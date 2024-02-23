@@ -462,7 +462,7 @@ case "${bundle}" in
 
 "vcs")
 
-    appinstall 'VCS'                    'git subversion colordiff'
+    appinstall 'VCS'                    'git custom-config-git subversion colordiff'
 
     if ispkginstalled nautilus
     then

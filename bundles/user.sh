@@ -533,18 +533,6 @@ case "${bundle}" in
 
 "vcs")
 
-    ## Make git save credentials by default ------------------------------------
-
-    git config --global credential.helper store
-
-    ## Set default pull startegy -----------------------------------------------
-
-    git config --global pull.ff only
-
-    ## Set default branch name -------------------------------------------------
-
-    git config --global init.defaultBranch master
-
     ## Meld --------------------------------------------------------------------
 
     if ispkginstalled 'meld'
