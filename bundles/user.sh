@@ -177,7 +177,7 @@ case "${bundle}" in
 
     ## Gnome shell extensions ==================================================
 
-    if ispkginstalled gnome-shell
+    if ispkginstalled gnome-shell && [[ "$(lsb_release -si)" != 'Zorin' ]]
     then
         ## Enable app indicators -----------------------------------------------
 
@@ -580,7 +580,7 @@ case "${bundle}" in
     gtk_theme='Adwaita'
     wm_theme='Adwaita'
 
-    if ispkginstalled gnome-shell
+    if ispkginstalled gnome-shell && [[ "$(lsb_release -si)" != 'Zorin' ]]
     then
         gsettings set org.gnome.desktop.interface icon-theme    "${icon_theme}"
         gsettings set org.gnome.desktop.interface gtk-theme     "${gtk_theme}"
@@ -602,7 +602,7 @@ case "${bundle}" in
     font_fixed_size='12'
     font_table_size='10'
 
-    if ispkginstalled gnome-shell
+    if ispkginstalled gnome-shell && [[ "$(lsb_release -si)" != 'Zorin' ]]
     then
         gsettings set org.gnome.desktop.interface font-name             "${font_ui} ${font_ui_size}"
         gsettings set org.gnome.desktop.interface document-font-name    "${font_doc} ${font_doc_size}"
@@ -638,7 +638,7 @@ case "${bundle}" in
         bgtheme='blueprint'
     fi
 
-    if ispkginstalled gnome-shell
+    if ispkginstalled gnome-shell && [[ "$(lsb_release -si)" != 'Zorin' ]]
     then
         gsettings set org.gnome.desktop.background picture-uri "file:///usr/share/backgrounds/${bgtheme}/${bgtheme}.xml"
     fi
@@ -657,7 +657,10 @@ case "${bundle}" in
 
     ## Libreoffice  ------------------------------------------------------------
 
+    if [[ "$(lsb_release -si)" != 'Zorin' ]]
+    then
     usercopy 'libreoffice'
+    fi
 
 ;;
 
