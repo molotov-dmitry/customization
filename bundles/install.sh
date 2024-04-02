@@ -186,7 +186,13 @@ case "${bundle}" in
 
 "driver/printer")
 
-    appinstall 'HP PPD files'   'hpijs-ppds'
+    if ispkginstalled cups-filters
+    then
+        appinstall 'HP PPD files'   'hpijs-ppds'
+    else
+        title 'Installing HP PPD files'
+        msgwarn '[skip]'
+    fi
 
 ;;
 
