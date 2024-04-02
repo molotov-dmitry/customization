@@ -206,7 +206,7 @@ done
 remaster_dir="/remaster"
 iso_dir="${remaster_dir}/remaster-iso"
 rootfs_dir="${remaster_dir}/remaster-root"
-res_dir="/media/documents/Distrib/OS/custom"
+res_dir="$(dirname "${iso_src}")/custom"
 
 common_file_path="${ROOT_PATH}/files"
 custom_file_path="${ROOT_PATH}/custom/files/${config}"
@@ -259,6 +259,7 @@ echo "config:       ${config}"
 echo "iso image:    ${iso_src}"
 echo "remaster dir: ${remaster_dir}"
 echo "rootfs dir:   ${livedir}"
+echo "target dir:   ${res_dir}"
 
 echo -n "use ram:      "
 if [[ $useram -eq 1 ]]
