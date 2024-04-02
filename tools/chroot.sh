@@ -50,7 +50,7 @@ function deactivate()
     local dir="$1"
     local file="$2"
 
-    if [[ -f "${dir}/${file}" ]]
+    if [[ -e "${dir}/${file}" ]]
     then
         silent_fail "Deactivating ${file}" chroot "${dir}" bash -c "dpkg-divert --local --rename --add \"${file}\" && ln -s /bin/true \"${file}\""
     fi
@@ -63,10 +63,10 @@ function reactivate()
     local dir="$1"
     local file="$2"
 
-    if [[ -f "${dir}/${file}" ]]
+    if [[ -n "$(chroot "${dir}" dpkg-divert --list "${file}")" ]]
     then
         silent_fail "Reactivating ${file}" chroot "${dir}" bash -c "rm -f \"${file}\"; dpkg-divert --rename --remove \"${file}\""
-	fi
+    fi
 
     return 0
 }
