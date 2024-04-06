@@ -467,6 +467,7 @@ case "${bundle}" in
         ## Register mimetypes --------------------------------------------------
 
         mimeregister 'text/plain'                'org.gnome.Builder.desktop'
+        mimedefault  'org.gnome.Builder' '' 'text/html'
 
         ## gnome builder -------------------------------------------------------
 

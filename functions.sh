@@ -1555,6 +1555,9 @@ mimedefault()
     local app="$1"
     local type="$2"
 
+    shift
+    shift
+
     for mime in $(getmimelist "${app}" | tr ';' ' ')
     do
         if [[ -n "${type}" && "${type}" != "${mime%%/*}" ]]
@@ -1563,6 +1566,15 @@ mimedefault()
         fi
 
         mimeregister  "$mime" "${app}.desktop"
+
+        for ignore
+        do
+            if [[ "${mime}" == "${ignore}" ]]
+            then
+                continue 2
+            fi
+        done
+
         setdefaultapp "$mime" "${app}.desktop"
     done
 }
