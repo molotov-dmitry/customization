@@ -425,11 +425,9 @@ case "${bundle}" in
 
 "vm-host")
 
-    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'vm-host/vbox'
-
 ;;
 
-"vm-host/vbox")
+"vm-host-vbox")
 
 ;;
 

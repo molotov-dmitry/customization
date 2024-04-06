@@ -760,11 +760,16 @@ case "${bundle}" in
 
 "vm-host")
 
-    bash "${scriptpath}" 'vm-host/vbox'
+    DEBIAN_PRIORITY=critical DEBIAN_FRONTEND=noninteractive silent \
+    'Installing Gnome Boxes' \
+    apt install 'gnome-boxes' 'qemu-kvm' 'qemu-utils' 'ovmf' \
+    -o "Dpkg::Options::=--force-confdef" \
+    -o "Dpkg::Options::=--force-confold" \
+    --yes --force-yes --no-install-recommends
 
 ;;
 
-"vm-host/vbox")
+"vm-host-vbox")
 
     silent     'Accepting Oracle EULA' sh -c 'echo virtualbox-ext-pack virtualbox-ext-pack/license boolean true | debconf-set-selections'
 

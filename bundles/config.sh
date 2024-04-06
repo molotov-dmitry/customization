@@ -452,11 +452,9 @@ case "${bundle}" in
 
 "vm-host")
 
-    bash "${scriptpath}" 'vm-host/vbox'
-
 ;;
 
-"vm-host/vbox")
+"vm-host-vbox")
 
     ## Disbale Wayland ---------------------------------------------------------
 
