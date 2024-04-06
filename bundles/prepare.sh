@@ -332,8 +332,6 @@ case "${bundle}" in
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/browser'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/mail'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/chat'
-    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/office'
-    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/services'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'network/remote'
     
 ;;
@@ -358,18 +356,6 @@ case "${bundle}" in
 ### Chat extra protocols =======================================================
 
 "network/chat")
-
-;;
-
-### Office =====================================================================
-
-"network/office")
-
-;;
-
-### Online services ============================================================
-
-"network/services")
 
 ;;
 

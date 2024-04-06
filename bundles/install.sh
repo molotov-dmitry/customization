@@ -627,8 +627,6 @@ case "${bundle}" in
     bash "${scriptpath}" 'network/browser'
     bash "${scriptpath}" 'network/mail'
     bash "${scriptpath}" 'network/chat'
-    bash "${scriptpath}" 'network/office'
-    bash "${scriptpath}" 'network/services'
     bash "${scriptpath}" 'network/remote'
 
 ;;
@@ -661,29 +659,6 @@ case "${bundle}" in
 "network/chat")
 
     appinstall 'Telegram client'        'telegram-desktop'
-
-;;
-
-### Office =====================================================================
-
-"network/office")
-
-    #if gnomebased
-    #then
-    #    appinstall 'Gnome documents'    'gnome-documents'
-    #fi
-
-;;
-
-### Online services ============================================================
-
-"network/services")
-
-    #if gnomebased
-    #then
-    #    appinstall 'Gnome Maps'             'gnome-maps'
-    #    appinstall 'Gnome Weather'          'gnome-weather'
-    #fi
 
 ;;
 
