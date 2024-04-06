@@ -568,7 +568,6 @@ case "${bundle}" in
 
     bash "${scriptpath}" 'appearance/themes'
     bash "${scriptpath}" 'appearance/fonts'
-    bash "${scriptpath}" 'appearance/wallpaper'
 
 ;;
 
@@ -624,24 +623,6 @@ case "${bundle}" in
     unset font_doc_size
     unset font_fixed_size
     unset font_table_size
-
-;;
-
-### Wallpaper ==================================================================
-
-"appearance/wallpaper")
-
-    if [[ ! -f "${HOME}/.config/is-work-account" ]]
-    then
-        bgtheme='custom'
-    else
-        bgtheme='blueprint'
-    fi
-
-    if ispkginstalled gnome-shell
-    then
-        gsettings set org.gnome.desktop.background picture-uri "file:///usr/share/backgrounds/${bgtheme}/${bgtheme}.xml"
-    fi
 
 ;;
 

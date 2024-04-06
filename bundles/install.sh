@@ -494,7 +494,6 @@ case "${bundle}" in
 
     bash "${scriptpath}" 'appearance/themes'
     bash "${scriptpath}" 'appearance/fonts'
-    bash "${scriptpath}" 'appearance/wallpaper'
 
 ;;
 
@@ -553,14 +552,6 @@ case "${bundle}" in
     appinstall 'JetBrains Mono fonts'   'fonts-jetbrains-mono'
 
     appinstall 'Font configuration'     'font-config'
-
-;;
-
-### Wallpaper ==================================================================
-
-"appearance/wallpaper")
-
-    appinstall  'Backgrounds'           'backgrounds-custom backgrounds-night backgrounds-abstract backgrounds-blueprint backgrounds-windows'
 
 ;;
 
