@@ -85,10 +85,10 @@ case "${bundle}" in
 
     appinstall 'Gnome desktop directories'  'gnome-menus'
 
-    appinstall 'Gnome appindicator support' 'gnome-shell-extension-appindicator'
-
     if ispkginstalled gnome-shell
     then
+        gnomeshellextension 615 'Gnome appindicator support'        ''      'gnome-shell-extension-appindicator'
+
         if ispkgavailable gnome-shell-extension-ubuntu-dock && ! ispkgavailable gnome-shell-extension-dashtodock
         then
             appinstall 'Ubuntu Dock' 'gnome-shell-extension-ubuntu-dock'
