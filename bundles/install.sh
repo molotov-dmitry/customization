@@ -158,16 +158,15 @@ case "${bundle}" in
 
 "driver/firmware")
 
-    if [[ "$(lsb_release -si)" == "Ubuntu" ]]
-    then
 
+    if ispkgavailable linux-firmware
+    then
         appinstall 'Firmwares'          'linux-firmware'
+    fi
 
-    elif [[ "$(lsb_release -si)" == "Debian" ]]
+    if ispkgavailable firmware-linux
     then
-
         appinstall 'Firmwares'          'firmware-linux'
-
     fi
 
     appinstall 'IRQ balance'            'irqbalance'
