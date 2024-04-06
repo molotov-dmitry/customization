@@ -214,26 +214,29 @@ case "${bundle}" in
 
         ## Dash to dock --------------------------------------------------------
 
-        dconf write /org/gnome/shell/extensions/dash-to-dock/apply-custom-theme true
-
-        dconf write /org/gnome/shell/extensions/dash-to-dock/show-trash         false
-        dconf write /org/gnome/shell/extensions/dash-to-dock/show-mounts        false
-
-        dconf write /org/gnome/shell/extensions/dash-to-dock/dock-position      "'LEFT'"
-        dconf write /org/gnome/shell/extensions/dash-to-dock/extend-height      true
-        dconf write /org/gnome/shell/extensions/dash-to-dock/dock-fixed         true
-
-        dconf write /org/gnome/shell/extensions/dash-to-dock/animation-time     0.0
-
-        dconf write /org/gnome/shell/extensions/dash-to-dock/custom-theme-shrink true
-
-        if isgnomeshellextensioninstalled 'dash-to-dock@micxgx.gmail.com'
+        if isgnomeshellextensioninstalled 'dash-to-dock@micxgx.gmail.com' || isgnomeshellextensioninstalled 'ubuntu-dock@ubuntu.com'
         then
-            gsettingsadd org.gnome.shell enabled-extensions 'dash-to-dock@micxgx.gmail.com'
+            dconf write /org/gnome/shell/extensions/dash-to-dock/apply-custom-theme true
 
-        elif isgnomeshellextensioninstalled 'ubuntu-dock@ubuntu.com'
-        then
-            gsettingsadd org.gnome.shell enabled-extensions 'ubuntu-dock@ubuntu.com'
+            dconf write /org/gnome/shell/extensions/dash-to-dock/show-trash         false
+            dconf write /org/gnome/shell/extensions/dash-to-dock/show-mounts        false
+
+            dconf write /org/gnome/shell/extensions/dash-to-dock/dock-position      "'LEFT'"
+            dconf write /org/gnome/shell/extensions/dash-to-dock/extend-height      true
+            dconf write /org/gnome/shell/extensions/dash-to-dock/dock-fixed         true
+
+            dconf write /org/gnome/shell/extensions/dash-to-dock/animation-time     0.0
+
+            dconf write /org/gnome/shell/extensions/dash-to-dock/custom-theme-shrink true
+
+            if isgnomeshellextensioninstalled 'dash-to-dock@micxgx.gmail.com'
+            then
+                gsettingsadd org.gnome.shell enabled-extensions 'dash-to-dock@micxgx.gmail.com'
+
+            elif isgnomeshellextensioninstalled 'ubuntu-dock@ubuntu.com'
+            then
+                gsettingsadd org.gnome.shell enabled-extensions 'ubuntu-dock@ubuntu.com'
+            fi
         fi
     fi
 
