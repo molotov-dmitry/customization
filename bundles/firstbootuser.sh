@@ -334,7 +334,7 @@ case "${bundle}" in
 
     bash "${scriptpath}" 'network/browser' "$@"
     bash "${scriptpath}" 'network/mail' "$@"
-    bash "${scriptpath}" 'network/chat-extra' "$@"
+    bash "${scriptpath}" 'network/chat' "$@"
     bash "${scriptpath}" 'network/office' "$@"
     bash "${scriptpath}" 'network/services' "$@"
     bash "${scriptpath}" 'network/remote' "$@"
@@ -355,7 +355,7 @@ case "${bundle}" in
 
 ### Chat extra protocols =======================================================
 
-"network/chat-extra")
+"network/chat")
 
 ;;
 
