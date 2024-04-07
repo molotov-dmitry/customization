@@ -124,8 +124,14 @@ packages_to_remove+=('rygel-playbin' 'rygel-tracker')
 
 ## Gnome apps ------------------------------------------------------------------
 
+if [[ "$(lsb_release -si)" != 'Zorin' ]]
+then
+    packages_to_remove+=('gnome-shell-extensions' 'gnome-shell-extension-desktop-icons' 'gnome-shell-extension-desktop-icons-ng')
+else
+    packages_to_remove+=('gnome-shell-extension-desktop-icons' 'gnome-shell-extension-desktop-icons-ng')
+fi
+
 packages_to_remove+=('gnome-sound-recorder' 'gnome-todo' 'gnome-weather' 'gnome-maps' 'gnome-contacts' 'gnome-clocks' 'eog' 'gnome-font-viewer' 'gnome-documents')
-packages_to_remove+=('gnome-shell-extensions' 'gnome-shell-extension-desktop-icons' 'gnome-shell-extension-desktop-icons-ng')
 packages_to_remove+=('gnome-session-canberra')
 packages_to_remove+=('gnome-sushi')
 packages_to_remove+=('gnome-user-share')

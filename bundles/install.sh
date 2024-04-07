@@ -85,10 +85,8 @@ case "${bundle}" in
 
     appinstall 'Gnome desktop directories'  'gnome-menus'
 
-    if ispkginstalled gnome-shell
+    if ispkginstalled gnome-shelll && [[ "$(lsb_release -si)" != 'Zorin' ]]
     then
-        gnomeshellextension 615 'Gnome appindicator support'        ''      'gnome-shell-extension-appindicator'
-
         if ispkgavailable gnome-shell-extension-ubuntu-dock && ! ispkgavailable gnome-shell-extension-dashtodock
         then
             appinstall 'Ubuntu Dock' 'gnome-shell-extension-ubuntu-dock'
@@ -505,7 +503,10 @@ case "${bundle}" in
     appinstall 'Breeze theme'           'breeze-cursor-theme breeze-icon-theme'
     appinstall 'Papirus theme'          'papirus-icon-theme papirus-material-icon-theme'
 
-    appinstall 'Default cursor theme'   'custom-config-cursor-theme'
+    if [[ "$(lsb_release -si)" != 'Zorin' ]]
+    then
+        appinstall 'Default cursor theme'   'custom-config-cursor-theme'
+    fi
 
     if ispkgavailable plymouth-theme-spinner
     then
@@ -517,7 +518,7 @@ case "${bundle}" in
         appinstall 'Plymouth themes'        'plymouth-themes'
     fi
 
-    if test -x /usr/sbin/plymouth-set-default-theme
+    if test -x /usr/sbin/plymouth-set-default-theme && [[ "$(lsb_release -si)" != 'Zorin' ]]
     then
         for theme in bgrt spinner emerald
         do
@@ -534,7 +535,10 @@ case "${bundle}" in
         appinstall 'GRUB enable splash'     'grub-enable-splash'
     fi
 
-    appinstall 'Gnome TTY colors' 'custom-config-vtrgb-gnome-theme'
+    if [[ "$(lsb_release -si)" != 'Zorin' ]]
+    then
+        appinstall 'Gnome TTY colors' 'custom-config-vtrgb-gnome-theme'
+    fi
 
 ;;
 
@@ -594,7 +598,7 @@ case "${bundle}" in
         appinstall 'Eye of Gnome'       'eog'
     fi
 
-    if ispkginstalled gnome-shell
+    if ispkginstalled gnome-shell && [[ "$(lsb_release -si)" != 'Zorin' ]]
     then
         gnomeshellextension 1379    'A simple MPRIS indicator button'       'lt 43'
         gnomeshellextension 906     'Sound Input & Output Device Chooser'   'lt 43'
