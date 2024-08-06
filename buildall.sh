@@ -24,10 +24,16 @@ do
     else
         if [ -z "${line##*\=*}" ]
 	then
-	    zsynclink="${line##*=}"
+	    link="${line##*=}"
+            linkext="${link##*.}"
             iso="${line%%=*}"
 
-	    zsync "${zsynclink}" -o "/media/documents/Distrib/OS/$iso"
+            if [[ "${linkext}" == 'zsync' ]]
+            then
+	        zsync "${link}" -o "/media/documents/Distrib/OS/$iso"
+            else
+                wget -q "${link}" -O "/media/documents/Distrib/OS/$iso"
+            fi
 	else
             iso="${line}"
 	fi
