@@ -128,7 +128,10 @@ case "${bundle}" in
 
 "qt")
 
-    appinstall 'GTK2 style for Qt5'         'qt5-style-plugins custom-config-qt-gtk2-theme'
+    if gnomebased
+    then
+        appinstall 'GTK2 style for Qt5'         'qt5-style-plugins custom-config-qt-gtk2-theme'
+    fi
 ;;
 
 ### ============================================================================
@@ -680,7 +683,11 @@ case "${bundle}" in
 
     appinstall 'GIMP'                   'gimp'
     appinstall 'Graphicsmagick'         'graphicsmagick-imagemagick-compat librsvg2-bin'
-    appinstall 'Eye of Gnome'           'eog'
+
+    if gnomebased
+    then
+        appinstall 'Eye of Gnome'           'eog'
+    fi
 
 ;;
 
@@ -760,12 +767,15 @@ case "${bundle}" in
 
 "vm-host")
 
-    DEBIAN_PRIORITY=critical DEBIAN_FRONTEND=noninteractive silent \
-    'Installing Gnome Boxes' \
-    apt install 'gnome-boxes' 'qemu-kvm' 'qemu-utils' 'ovmf' \
-    -o "Dpkg::Options::=--force-confdef" \
-    -o "Dpkg::Options::=--force-confold" \
-    --yes --force-yes --no-install-recommends
+    if gnomebased
+    then
+        DEBIAN_PRIORITY=critical DEBIAN_FRONTEND=noninteractive silent \
+        'Installing Gnome Boxes' \
+        apt install 'gnome-boxes' 'qemu-kvm' 'qemu-utils' 'ovmf' \
+        -o "Dpkg::Options::=--force-confdef" \
+        -o "Dpkg::Options::=--force-confold" \
+        --yes --force-yes --no-install-recommends
+    fi
 
 ;;
 
@@ -836,7 +846,10 @@ case "${bundle}" in
 
 "work-chat")
 
-    appinstall 'Pidgin'             'pidgin [pidgin-indicator]'
+    if gnomebased
+    then
+        appinstall 'Pidgin'             'pidgin [pidgin-indicator]'
+    fi
 ;;
 
 ### ============================================================================
