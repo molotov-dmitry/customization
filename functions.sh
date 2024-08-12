@@ -134,9 +134,7 @@ function usercopy()
 
 function ispkginstalled()
 {
-    app="$1"
-
-    if dpkg -s "${app}" >/dev/null 2>&1
+    if [[ "$(dpkg-query --showformat='${db:Status-Status}' --show "$1" 2>/dev/null)" == 'installed' ]]
     then
         return 0
     else
@@ -146,7 +144,7 @@ function ispkginstalled()
 
 function ispkgavailable()
 {
-    app="$1"
+    local app="$1"
 
     if [[ -n "$(apt-cache pkgnames | grep "^$app$")" ]]
     then
@@ -158,9 +156,7 @@ function ispkgavailable()
 
 function pkgversion()
 {
-    app="$1"
-
-    LC_ALL=C dpkg -s "${app}" 2>/dev/null | grep '^Version:' | cut -d ' ' -f 2-
+    dpkg-query --showformat='${Version}' --show "$1" 2>/dev/null
 }
 
 function appinstall()
@@ -336,26 +332,26 @@ function apptmpinstall()
 
 function appremove()
 {
-    appname="$1"
-    applist="$2"
+    local appname="$1"
+    local applist="$2"
     title "Removing $appname"
 
-    remlist=""
+    local -a remlist
 
     for app in ${applist}
     do
         if ispkginstalled "${app}"
         then
-            remlist="${remlist} ${app}"
+            remlist+=("${app}")
         fi
     done
 
-    if [[ -z "${remlist}" ]]
+    if [[ "${#remlist[@]}" -eq 0 ]]
     then
         msginfo '[removed]'
         return 0
     else
-        DEBIAN_FRONTEND=noninteractive apt purge ${remlist} \
+        DEBIAN_FRONTEND=noninteractive apt purge "${remlist[@]}" \
             --yes --force-yes --purge >/dev/null 2>&1
 
         if [[ $? -eq 0 ]]
