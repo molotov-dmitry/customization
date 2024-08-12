@@ -641,7 +641,7 @@ case "${bundle}" in
 
     if ispkginstalled gnome-shell
     then
-        appinstall 'Chrome Gnome Shell' 'chrome-gnome-shell'
+        appinstall 'Gnome browser integration' 'gnome-browser-connector'
     fi
 ;;
 

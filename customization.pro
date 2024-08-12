@@ -37,6 +37,7 @@ DISTFILES += \
     custom/tools/work.bundle \
     custom/tools/work/config.sh \
     custom/tools/work/install.sh \
+    custom/tools/work/repo.sh \
     custom/tools/work/user.sh \
     functions.sh \
     tools/afterbuild.sh \
