@@ -256,6 +256,11 @@ case "${bundle}" in
 
 "dev/qt")
 
+    if dpkg --compare-versions "$(pkgversion python3)" ge 3.11 && grep -sq 'inspect\.getargspec' /usr/share/qtcreator/debugger/dumper.py
+    then
+        silent 'Fix QtCreator Debug Helpers' sed -i 's/inspect\.getargspec/inspect.getfullargspec/g' /usr/share/qtcreator/debugger/dumper.py
+    fi
+
 ;;
 
 ### GTK SDK ====================================================================
