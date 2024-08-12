@@ -829,6 +829,11 @@ case "${bundle}" in
     appinstall 'RCZI web services'      'rczi-web-services'
     appinstall 'GitLab notifications'   'gitlab-notify'
 
+    if havegraphics
+    then
+        appinstall 'SPICE client'       'virt-viewer'
+    fi
+
 ;;
 
 ### Mail =======================================================================
