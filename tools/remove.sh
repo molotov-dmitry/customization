@@ -20,6 +20,7 @@ packages_to_remove+=('raspi-firmware' 'firmware-netronome' 'atmel-firmware' 'dah
 packages_to_remove+=('ixo-usb-jtag')
 packages_to_remove+=('i2c-tools')
 packages_to_remove+=('indi-dsi')
+packages_to_remove+=('jh7100-bootloader-recovery')
 
 ## Package management ----------------------------------------------------------
 
@@ -66,6 +67,8 @@ packages_to_remove+=('orca' 'gnome-orca')
 packages_to_remove+=('malcontent')
 packages_to_remove+=('brltty')
 packages_to_remove+=('gnome-accessibility-themes')
+packages_to_remove+=('at-spi2-core')
+packages_to_remove+=('kmouth')
 
 ## System ----------------------------------------------------------------------
 
@@ -96,6 +99,7 @@ packages_to_remove+=('libbdplus0')
 packages_to_remove+=('libc-devtools')
 packages_to_remove+=('mesa-utils')
 packages_to_remove+=('gcc' 'make')
+packages_to_remove+=('kontrast')
 
 ## Help ------------------------------------------------------------------------
 
@@ -159,6 +163,7 @@ packages_to_remove+=('libpinyin13' 'libpinyin-data')
 packages_to_remove+=('aspell-am' 'aspell-ar' 'aspell-ar-large' 'aspell-bg' 'aspell-bn' 'aspell-ca' 'aspell-cs' 'aspell-cy' 'aspell-da' 'aspell-de' 'aspell-el' 'aspell-eo' 'aspell-es' 'aspell-et' 'aspell-eu' 'aspell-fa' 'aspell-fr' 'aspell-ga' 'aspell-gl-minimos' 'aspell-gu' 'aspell-he' 'aspell-hi' 'aspell-hr' 'aspell-hu' 'aspell-is' 'aspell-it' 'aspell-kk' 'aspell-ku' 'aspell-lt' 'aspell-lv' 'aspell-ml' 'aspell-mr' 'aspell-nl' 'aspell-no' 'aspell-pa' 'aspell-pl' 'aspell-pt-br' 'aspell-pt-pt' 'aspell-ro' 'aspell-sk' 'aspell-sl' 'aspell-sv' 'aspell-ta' 'aspell-te' 'aspell-tl' 'aspell-uk')
 packages_to_remove+=('hunspell' 'hunspell-ar' 'hunspell-be' 'hunspell-bg' 'hunspell-bs' 'hunspell-ca' 'hunspell-cs' 'hunspell-da' 'hunspell-de-at' 'hunspell-de-ch' 'hunspell-de-de' 'hunspell-el' 'hunspell-en-gb' 'hunspell-eu' 'hunspell-gl' 'hunspell-gu' 'hunspell-hi' 'hunspell-hr' 'hunspell-hu' 'hunspell-id' 'hunspell-is' 'hunspell-kk' 'hunspell-kmr' 'hunspell-ko' 'hunspell-lt' 'hunspell-lv' 'hunspell-ml' 'hunspell-ne' 'hunspell-nl' 'hunspell-pl' 'hunspell-ro' 'hunspell-si' 'hunspell-sl' 'hunspell-sr' 'hunspell-sv' 'hunspell-te' 'hunspell-th' 'hunspell-vi')
 packages_to_remove+=('fcitx5-chinese-addons' 'fcitx5-chinese-addons-bin' 'fcitx5-chinese-addons-data' 'fcitx5-module-chttrans' 'fcitx5-module-cloudpinyin' 'fcitx5-module-fullwidth' 'fcitx5-module-lua' 'fcitx5-module-lua-common' 'fcitx5-module-pinyinhelper' 'fcitx5-module-punctuation' 'fcitx5-pinyin' 'fcitx5-table')
+packages_to_remove+=('fcitx5-config-qt' 'fcitx5-frontend-qt5')
 packages_to_remove+=('manpages-de' 'manpages-es' 'manpages-fr' 'manpages-hu' 'manpages-it' 'manpages-ja' 'manpages-ja-dev' 'manpages-mk' 'manpages-nl' 'manpages-pl' 'manpages-pl-dev' 'manpages-pt-br' 'manpages-ro' 'manpages-tr' 'manpages-zh')
 packages_to_remove+=('mueller7-dict')
 packages_to_remove+=('nkf' 'opencc')
@@ -166,6 +171,7 @@ packages_to_remove+=('re')
 packages_to_remove+=('swath' 'swath-data')
 packages_to_remove+=('konwert')
 packages_to_remove+=('pocketsphinx-en-us')
+packages_to_remove+=('ibus-gtk' 'ibus-gtk4' 'ibus-gtk3' 'ibus' 'ibus-data')
 
 ## Misc ------------------------------------------------------------------------
 
