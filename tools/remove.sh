@@ -6,6 +6,7 @@ cd "${ROOT_PATH}" || exit 1
 . "${ROOT_PATH}/functions.sh"
 
 declare -a packages_to_remove
+declare -a packages_to_mark_auto
 
 ### Applications ===============================================================
 
@@ -64,7 +65,7 @@ packages_to_remove+=('lynx')
 
 packages_to_remove+=('onboard')
 packages_to_remove+=('orca' 'gnome-orca')
-packages_to_remove+=('malcontent')
+packages_to_mark_auto+=('malcontent')
 packages_to_remove+=('brltty')
 packages_to_remove+=('gnome-accessibility-themes')
 packages_to_remove+=('at-spi2-core')
@@ -91,7 +92,6 @@ packages_to_remove+=('libu2f-udev')
 packages_to_remove+=('calamares')
 packages_to_remove+=('exim4-base' 'exim4-config' 'exim4-daemon-light')
 packages_to_remove+=('fakeroot')
-packages_to_remove+=('xdg-desktop-portal-gnome')
 packages_to_remove+=('build-essential')
 packages_to_remove+=('edid-decode' 'read-edid')
 packages_to_remove+=('ethtool' 'hw-probe')
@@ -100,6 +100,8 @@ packages_to_remove+=('libc-devtools')
 packages_to_remove+=('mesa-utils')
 packages_to_remove+=('gcc' 'make')
 packages_to_remove+=('kontrast')
+
+packages_to_mark_auto+=('xdg-desktop-portal-gnome')
 
 ## Help ------------------------------------------------------------------------
 
@@ -202,6 +204,16 @@ if [[ ${#packages_to_remove[@]} -gt 0 ]]
 then
     appremove 'Unused packages' "${packages_to_remove[*]}"
 fi
+
+## Mark some packages as auto ==================================================
+
+for pkgname in "${packages_to_mark_auto[@]}"
+do
+    if [[ -n "$(apt-mark showmanual | grep "^${pkgname}$" )" ]]
+    then
+        silent "Mark ${pkgname} as auto" apt-mark auto "${pkgname}"
+    fi
+done
 
 ## Disabling Snapd =============================================================
 
