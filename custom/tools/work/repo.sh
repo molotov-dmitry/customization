@@ -5,6 +5,8 @@ cd "${ROOT_PATH}" || exit 1
 
 . "${ROOT_PATH}/functions.sh"
 
+### Google Chrome ==============================================================
+
 if [[ "$(lsb_release -si)" == "Ubuntu" ]]
 then
     repoadd 'Google Chrome' 'http://dl.google.com/linux/chrome/deb/' 'stable' 'main' 'google-chrome.gpg' 'arch=amd64'
@@ -14,3 +16,7 @@ then
     echo 'repo_add_once="false"'                >  "/etc/default/google-chrome"
     echo 'repo_reenable_on_distupgrade="false"' >> "/etc/default/google-chrome"
 fi
+
+### Element.io =================================================================
+
+repoadd 'Element.io' 'https://packages.element.io/debian/' 'default' 'main' 'element-io.gpg'

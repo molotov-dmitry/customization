@@ -26,3 +26,7 @@ if ispkginstalled gnome-shell
 then
     appinstall 'Gnome browser integration' 'gnome-browser-connector'
 fi
+
+### Element desktop ============================================================
+
+appinstall 'Element desktop'        'element-desktop'

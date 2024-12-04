@@ -11,3 +11,7 @@ cd "${ROOT_PATH}" || exit 1
 
 appinstall 'Trackpad fix'   'device-config-toposh-trackpad-fix'
 appinstall 'Display fix'    'device-config-toposh-display-fix'
+
+### Element desktop ============================================================
+
+appinstall 'Element Web'    'rczi-element-web'

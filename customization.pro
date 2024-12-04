@@ -19,7 +19,10 @@ DISTFILES += \
     custom/tools/home/user.sh \
     custom/tools/media.bundle \
     custom/tools/media/user.sh \
+    custom/tools/q190-lite/install.sh \
     custom/tools/q190.bundle \
+    custom/tools/q190/install.sh \
+    custom/tools/q190/repo.sh \
     custom/tools/q190/user.sh \
     custom/tools/q190-lite.bundle \
     custom/tools/q190-lite/user.sh \
@@ -34,6 +37,8 @@ DISTFILES += \
     custom/tools/tablet/install.sh \
     custom/tools/tablet/user.sh \
     custom/tools/test.bundle \
+    custom/tools/toposh/install.sh \
+    custom/tools/toposh/user.sh \
     custom/tools/work.bundle \
     custom/tools/work/config.sh \
     custom/tools/work/install.sh \
