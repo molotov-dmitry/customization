@@ -5,10 +5,6 @@ cd "${ROOT_PATH}" || exit 1
 
 . "${ROOT_PATH}/functions.sh"
 
-### CD burning =================================================================
-
-appinstall 'Xorriso'                'xorriso'
-
 ### Wi-Fi driver ===============================================================
 
 appinstall 'RTL8192EU driver'       'rtl8192eu-config rtl8192eu-dkms'

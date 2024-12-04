@@ -817,6 +817,10 @@ case "${bundle}" in
 
     appinstall 'GOST hashes'            'gostsum ctrlsum'
 
+    ### CD burning =============================================================
+
+    appinstall 'Xorriso'                'xorriso'
+
     ### Browser ================================================================
 
     if gnomebased
