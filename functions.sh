@@ -731,7 +731,7 @@ function repoaddnonfree()
         silent 'Clear sources.list'             sed -i 's/ restricted//g;s/ universe//g;s/ multiverse//g'   /etc/apt/sources.list
         silent 'Enabling universe/multiverse'   sed -i 's/main[  ]*$/main restricted universe multiverse/g' /etc/apt/sources.list
 
-    elif [[ "$(lsb_release -si)" == "Debian" ]] && dpkg --compare-versions "$(lsb_release -sr)" ge 12
+    elif [[ "$(lsb_release -si)" == "Debian" ]] && ( [[ "$(lsb_release -sr)" == 'n/a' ]] || dpkg --compare-versions "$(lsb_release -sr)" ge 12 )
     then
         silent 'Clear sources.list'         sed -i 's/ non-free-firmware//g;s/ contrib//g;s/ non-free//g' /etc/apt/sources.list
         silent 'Enabling contrib/non-free'  sed -i 's/main[  ]*$/main contrib non-free non-free-firmware/g' /etc/apt/sources.list
