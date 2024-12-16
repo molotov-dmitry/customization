@@ -52,7 +52,7 @@ case "${bundle}" in
 
 "gtk")
 
-    appinstall 'GTK+ modules' 'libcanberra-gtk-module libgail-common appmenu-gtk2-module appmenu-gtk3-module'
+    appinstall 'GTK+ modules' 'appmenu-gtk3-module'
 
 ;;
 
@@ -857,7 +857,7 @@ case "${bundle}" in
 
     if gnomebased
     then
-        appinstall 'Pidgin'             'pidgin [pidgin-indicator]'
+        appinstall 'Pidgin'             'pidgin [pidgin-indicator] [libcanberra-gtk-module] [libgail-common] [appmenu-gtk2-module]'
     fi
 ;;
 
