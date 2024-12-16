@@ -135,6 +135,9 @@ packages_to_remove+=('gnome-shell-extensions' 'gnome-shell-extension-desktop-ico
 packages_to_remove+=('gnome-session-canberra')
 packages_to_remove+=('gnome-sushi')
 packages_to_remove+=('gnome-user-share')
+packages_to_remove+=('gnome-tour')
+packages_to_remove+=('gnome-snapshot')
+packages_to_remove+=('loupe')
 
 ## KDE & Qt --------------------------------------------------------------------
 
