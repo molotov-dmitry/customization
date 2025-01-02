@@ -552,6 +552,7 @@ case "${bundle}" in
     appinstall 'Hack fonts'             'fonts-hack'
     appinstall 'Google Sans fonts'      'fonts-google-sans'
     appinstall 'JetBrains Mono fonts'   'fonts-jetbrains-mono'
+    appinstall 'Comfortaa fonts'        'fonts-comfortaa'
 
     appinstall 'Font configuration'     'font-config'
 
