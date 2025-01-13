@@ -776,6 +776,9 @@ case "${bundle}" in
         -o "Dpkg::Options::=--force-confdef" \
         -o "Dpkg::Options::=--force-confold" \
         --yes --force-yes --no-install-recommends
+
+        appinstall 'Virt Manager' 'virt-manager custom-config-virt-manager libvirt-daemon libvirt-daemon-system'
+
     fi
 
 ;;

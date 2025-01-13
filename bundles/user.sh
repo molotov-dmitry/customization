@@ -147,7 +147,7 @@ case "${bundle}" in
             gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ apps "org.gnome.${app}.desktop"
         done
 
-        for app in htop btop update-manager usb-creator-gtk gnome-system-monitor ubiquity gnome-nettool yelp nm-connection-editor sqlitebrowser
+        for app in htop btop update-manager usb-creator-gtk gnome-system-monitor ubiquity gnome-nettool yelp nm-connection-editor sqlitebrowser remote-viewer
         do
             gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ apps "${app}.desktop"
         done

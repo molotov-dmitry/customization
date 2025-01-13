@@ -427,6 +427,16 @@ case "${bundle}" in
 
 "vm-host")
 
+    if grep -qs ^kvm: /etc/group
+    then
+        usermod -a -G kvm ${user_name}
+    fi
+
+    if grep -qs ^libvirt: /etc/group
+    then
+        usermod -a -G libvirt ${user_name}
+    fi
+
 ;;
 
 "vm-host-vbox")
