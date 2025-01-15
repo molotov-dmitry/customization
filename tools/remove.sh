@@ -225,6 +225,13 @@ then
     silent    'Disable Snapd'       apt-mark hold 'snapd'
 fi
 
+## Disabling Apparmor =============================================================
+
+if ispkgavailable apparmor
+then
+    silent    'Disable AppArmor'    apt-mark hold 'apparmor'
+fi
+
 ## Unused applications ---------------------------------------------------------
 
 DEBIAN_FRONTEND=noninteractive silent 'Purge removed packages'      apt purge --yes --force-yes --allow-downgrades --allow-remove-essential --purge -qq $(dpkg -l | awk '/^rc/ {print $2}')
