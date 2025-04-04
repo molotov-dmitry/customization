@@ -175,27 +175,43 @@ function appinstall()
     do
         if [[ "$app" == "["*"]" ]]
         then
+
             local pkgname=${app:1:-1}
             local required=0
+            local forceinstall=0
+
+        elif [[ "${app:0:1}" == '!' ]]
+        then
+
+            local pkgname=${app:1}
+            local required=1
+            local forceinstall=1
+
         else
             local pkgname=$app
             local required=1
+            local forceinstall=0
         fi
 
-        if [[ -n "$(apt-mark showmanual | grep "^${pkgname}$" )" ]]
+        if [[ $forceinstall -eq 0 ]]
         then
-            continue
-        fi
+            if [[ -n "$(apt-mark showmanual | grep "^${pkgname}$" )" ]]
+            then
+                continue
+            fi
 
-        if ispkgavailable "${pkgname}"
-        then
-            installlist+=("${pkgname}")
-        #
-        elif [[ $required -gt 0 ]]
-        then
-            missinglist+=("${pkgname}")
+            if ispkgavailable "${pkgname}"
+            then
+                installlist+=("${pkgname}")
+            #
+            elif [[ $required -gt 0 ]]
+            then
+                missinglist+=("${pkgname}")
+            else
+                skippedlist+=("${pkgname}")
+            fi
         else
-            skippedlist+=("${pkgname}")
+            installlist+=("${pkgname}")
         fi
 
     done
