@@ -441,6 +441,8 @@ case "${bundle}" in
 
 "folders")
 
+    system-folders
+
     if [[ -z "$(grep -v "^#" /etc/fstab | grep /media/documents | grep x-gvfs-hide)" ]]
     then
         sed -i 's/\(\/media\/documents[[:space:]]\+[^[:space:]]\+[[:space:]]\+\)defaults\([[:space:]]\+\)/\1defaults,x-gvfs-hide\2/' /etc/fstab
