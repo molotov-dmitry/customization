@@ -427,6 +427,13 @@ case "${bundle}" in
 
 "vm-host")
 
+    bash "${scriptpath}" 'vm-host/server' "$@"
+    bash "${scriptpath}" 'vm-host/client' "$@"
+
+;;
+
+"vm-host/server")
+
     if grep -qs ^kvm: /etc/group
     then
         usermod -a -G kvm ${user_name}
@@ -436,6 +443,10 @@ case "${bundle}" in
     then
         usermod -a -G libvirt ${user_name}
     fi
+
+;;
+
+"vm-host/client")
 
 ;;
 

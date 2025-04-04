@@ -768,17 +768,26 @@ case "${bundle}" in
 
 "vm-host")
 
+    bash "${scriptpath}" 'vm-host/server'
+    bash "${scriptpath}" 'vm-host/client'
+
     if gnomebased
     then
-        DEBIAN_PRIORITY=critical DEBIAN_FRONTEND=noninteractive silent \
-        'Installing Gnome Boxes' \
-        apt install 'gnome-boxes' 'qemu-kvm' 'qemu-utils' 'ovmf' \
-        -o "Dpkg::Options::=--force-confdef" \
-        -o "Dpkg::Options::=--force-confold" \
-        --yes --force-yes --no-install-recommends
+        appinstall 'Gnome Boxes' 'gnome-boxes'
+    fi
+;;
 
-        appinstall 'Virt Manager' 'virt-manager custom-config-virt-manager libvirt-daemon libvirt-daemon-system'
+"vm-host/server")
 
+    appinstall 'Libvirt daemon' 'libvirt-daemon libvirt-daemon-system !qemu-kvm qemu-utils ovmf'
+
+;;
+
+"vm-host/client")
+
+    if havegraphics
+    then
+        appinstall 'Virt Manager' 'virt-manager custom-config-virt-manager'
     fi
 
 ;;

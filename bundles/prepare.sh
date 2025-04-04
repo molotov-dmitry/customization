@@ -425,6 +425,17 @@ case "${bundle}" in
 
 "vm-host")
 
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'vm-host/server'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'vm-host/client'
+
+;;
+
+"vm-host/server")
+
+;;
+
+"vm-host/client")
+
 ;;
 
 "vm-host-vbox")

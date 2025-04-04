@@ -420,6 +420,17 @@ case "${bundle}" in
 
 "vm-host")
 
+    bash "${scriptpath}" 'vm-host/server'
+    bash "${scriptpath}" 'vm-host/client'
+
+;;
+
+"vm-host/server")
+
+;;
+
+"vm-host/client")
+
 ;;
 
 "vm-host-vbox")
