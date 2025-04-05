@@ -188,6 +188,10 @@ do
     '--notify')
         notify='y'
     ;;
+    
+    '--non-interactive')
+        noninteractive='y'
+    ;;
 
     *.iso)
         iso_src="$1"
@@ -289,13 +293,23 @@ fi
 
 echo "compress:     ${comp}"
 
-read
+if [[ "$noninteractive" != 'y' ]]
+then
+    read
+else
+    sleep 1
+fi
 
 ### Showing bundles ============================================================
 
 bundlelist
 
-read
+if [[ "$noninteractive" != 'y' ]]
+then
+    read
+else
+    sleep 1
+fi
 
 ### Unpack image ===============================================================
 
