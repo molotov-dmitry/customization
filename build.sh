@@ -239,12 +239,13 @@ fi
 
 ### Check available ram ========================================================
 
+readonly MEM_GB_REQIRED=24
+
 if [[ -z "${useram}" ]]
 then
-
     freemem=$(cat /proc/meminfo | grep MemAvailable | cut -d ":" -f 2 | sed 's/[^0-9]//g')
 
-    if [[ $freemem -gt 12*1024*1024 ]]
+    if [[ $freemem -gt $MEM_GB_REQIRED*1024*1024 ]]
     then
         let useram=1
     else
@@ -326,7 +327,7 @@ silent_fail 'Creating remaster directory'    mkdir -p "${remaster_dir}"
 
 if [[ $useram -eq 1 ]]
 then
-    silent 'Creating TMPFS for remaster' mount -t tmpfs -o size=12G tmpfs "${remaster_dir}"
+    silent 'Creating TMPFS for remaster' mount -t tmpfs -o size=${MEM_GB_REQIRED}G tmpfs "${remaster_dir}"
 fi
 
 ## Unpacking ISO ---------------------------------------------------------------
