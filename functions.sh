@@ -315,6 +315,7 @@ function apptmpinstall()
             return 0
         else
             msgwarn "[missing ${skippedlist[*]}]"
+            return 0
         fi
     else
         for (( i = 0; i < 2; i++ ))
