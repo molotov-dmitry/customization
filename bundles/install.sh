@@ -202,7 +202,7 @@ case "${bundle}" in
 
 "driver/fs")
 
-    appinstall 'exFAT support'  'exfat-fuse exfatprogs'
+    appinstall 'exFAT support'  'exfat-fuse [exfatprogs]'
     appinstall 'CIFS support'   'cifs-utils'
 
 ;;
@@ -372,8 +372,8 @@ case "${bundle}" in
 
 "dev/qt")
 
-    appinstall 'Qt SDK'                 'qtbase5-dev-tools qml qtbase5-dev qtdeclarative5-dev qt5-doc'
-    appinstall 'Qt Libs'                'libqt5svg5 libqt5svg5-dev libqt5webkit5-dev libqt5charts5-dev libqt5xmlpatterns5-dev libqt5x11extras5-dev libqt5serialport5-dev libqt5sql5-sqlite'
+    appinstall 'Qt SDK'                 'qtbase5-dev-tools qml qtbase5-dev qtdeclarative5-dev [qt5-doc]'
+    appinstall 'Qt Libs'                'libqt5svg5 libqt5svg5-dev [libqt5webkit5-dev] libqt5charts5-dev libqt5xmlpatterns5-dev libqt5x11extras5-dev libqt5serialport5-dev libqt5sql5-sqlite'
 
     if havegraphics
     then
@@ -434,7 +434,7 @@ case "${bundle}" in
 
 "dev/net")
 
-    appinstall 'IP utils'               'bind9-dnsutils iputils-tracepath iputils-arping'
+    appinstall 'IP utils'               '[bind9-dnsutils] iputils-tracepath iputils-arping'
     appinstall 'netcat'                 'netcat-openbsd'
     appinstall 'tcpdump'                'tcpdump'
 
@@ -729,7 +729,7 @@ case "${bundle}" in
 "cli/monitor")
 
     appinstall 'htop'                   'htop'
-    appinstall 'btop'                   'btop'
+    appinstall 'btop'                   '[btop]'
     appinstall 'iotop'                  'iotop'
     appinstall 'tmux'                   'tmux'
 
