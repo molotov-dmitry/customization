@@ -118,11 +118,17 @@ function finish_chroot()
     silent_fail 'Removing D-Bus UUID' rm -f "${ROOTFS_DIR}/var/lib/dbus/machine-id"
 
     silent_fail 'Unmounting /dev/pts'  chroot "${ROOTFS_DIR}" umount "/dev/pts"
+
+    if findmnt "${ROOTFS_DIR}/sys/firmware/efi/efivars" >/dev/null 2>/dev/null
+    then
+        silent_fail 'Unmounting efivars'    chroot "${ROOTFS_DIR}" umount "/sys/firmware/efi/efivars"
+    fi
+
     silent_fail 'Unmounting /sys'      chroot "${ROOTFS_DIR}" umount "/sys"
 
-    if [[ -n "$(mount | grep "${ROOTFS_DIR}/proc/sys/fs/binfmt_misc")" ]]
+    if findmnt "${ROOTFS_DIR}/proc/sys/fs/binfmt_misc" >/dev/null 2>/dev/null
     then
-        silent_fail 'Unmounting binfmt'    chroot "${ROOTFS_DIR}" umount "/proc/sys/fs/binfmt_misc"
+        silent_fail 'Unmounting binfmt'     chroot "${ROOTFS_DIR}" umount "/proc/sys/fs/binfmt_misc"
     fi
 
     silent_fail 'Unmounting /proc'     chroot "${ROOTFS_DIR}" umount "/proc"
