@@ -21,7 +21,7 @@ case "${bundle}" in
 
     repoadd 'AHome' "188.134.72.31:9090/$(lsb_release -si | tr '[:upper:]' '[:lower:]')" "$(lsb_release -sc)" 'contrib' 'ahome.gpg'
 
-    if [[ "$(lsb_release -si)" == "Debian" ]]
+    if [[ "$(lsb_release -si)" == "Debian" ]] && [[ "$(lsb_release -sr)" == 'n/a' || "$(lsb_release -sr)" -gt 10 ]]
     then
         repoadd 'Backports'    'http://mirror.yandex.ru/debian' "$(lsb_release -cs)-backports" 'main'
     fi
