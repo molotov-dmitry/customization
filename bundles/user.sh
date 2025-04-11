@@ -994,6 +994,11 @@ case "${bundle}" in
         gsettingsadd org.gnome.desktop.app-folders folder-children 'RcziWeb'
         gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/RcziWeb/ name 'RCZI Web Services'
         gsettingsadd  org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/RcziWeb/ categories "X-WEB-RCZI"
+
+        for app in pidgin element-desktop
+        do
+            gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/RcziWeb/ apps "${app}.desktop"
+        done
     fi
 
     ## =========================================================================
