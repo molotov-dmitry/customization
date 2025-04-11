@@ -317,6 +317,11 @@ case "${bundle}" in
     appinstall 'CRLF to LF'             'dos2unix'
     appinstall 'Hex print'              'xxd'
 
+    if gnomebased
+    then
+        appinstall 'Hex viewer'         'ghex'
+    fi
+
     appinstall 'Allow user debug'       'custom-config-sysctl-ptrace-scope custom-config-sysctl-allow-user-dmesg'
 
     if havegraphics
