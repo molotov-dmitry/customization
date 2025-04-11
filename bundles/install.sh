@@ -476,6 +476,7 @@ case "${bundle}" in
 "vcs")
 
     appinstall 'VCS'                    'git custom-config-git subversion colordiff'
+    appinstall 'Git TUI'                'tig'
 
     if ispkginstalled nautilus
     then
@@ -485,10 +486,7 @@ case "${bundle}" in
     if gnomebased
     then
         appinstall 'Meld diff tool'     'meld custom-config-meld'
-
         appinstall 'Git repo viewer'    'gitg'
-    else
-        appinstall 'Git TUI'            'tig'
     fi
 
 ;;
