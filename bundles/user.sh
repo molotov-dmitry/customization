@@ -33,6 +33,30 @@ case "${bundle}" in
 
 "gui")
 
+    ## KDE =====================================================================
+
+    if kdebased
+    then
+        usercopy 'kde'
+
+        kwriteconfig6 --file 'kdeglobals' --group 'KDE' --key 'SingleClick' false
+        kwriteconfig6 --file 'dolphinrc'  --group 'VersionControl' --key 'enabledPlugins' 'Git'
+    fi
+
+    ## Konsole =================================================================
+
+    if ispkginstalled konsole
+    then
+        usercopy 'konsole'
+    fi
+
+    ## Kate ====================================================================
+
+    if ispkginstalled kate
+    then
+        usercopy 'kate'
+    fi
+
 ;;
 
 ### GTK-based GUI ==============================================================
@@ -542,6 +566,12 @@ case "${bundle}" in
 
 "dev/markdown")
 
+    ## Ghostwriter markdown editor ---------------------------------------------
+
+    if ispkginstalled ghostwriter
+    then
+        usercopy 'ghostwriter'
+    fi
 
 ;;
 
@@ -628,6 +658,15 @@ case "${bundle}" in
         gsettings set org.gnome.desktop.wm.preferences theme    "${wm_theme}"
     fi
 
+    if kdebased
+    then
+        if [[ -x "/usr/lib/$(arch)-linux-gnu/libexec/plasma-changeicons" ]]
+        then
+            "/usr/lib/$(arch)-linux-gnu/libexec/plasma-changeicons" "${icon_theme}"
+        else
+            kwriteconfig6 --file 'kdeglobals' --group 'Icons' --key 'Theme' "${icon_theme}"
+        fi
+    fi
 ;;
 
 ### System fonts ===============================================================
