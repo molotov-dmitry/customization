@@ -327,6 +327,11 @@ case "${bundle}" in
         appinstall 'Hex viewer'         'ghex'
     fi
 
+    if kdebased
+    then
+        appinstall 'Hex viewer'         'okteta'
+    fi
+
     appinstall 'Allow user debug'       'custom-config-sysctl-ptrace-scope custom-config-sysctl-allow-user-dmesg'
 
     if havegraphics
