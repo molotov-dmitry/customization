@@ -425,6 +425,11 @@ case "${bundle}" in
     appinstall 'Postgres'               'postgresql-client libpq5 libpq-dev'
     appinstall 'SQLite'                 'sqlite3 libsqlite3-0 libsqlite3-dev'
 
+    if kdebased
+    then
+        appinstall 'SQLite Browser'     'sqlitebrowser'
+    fi
+
 ;;
 
 ### JSON libraries =============================================================
@@ -442,6 +447,11 @@ case "${bundle}" in
     if gnomebased
     then
         appinstall 'Marker'             'marker custom-config-marker'
+    fi
+
+    if kdebased
+    then
+        appinstall 'Ghostwriter'        'ghostwriter'
     fi
 
 ;;
@@ -513,6 +523,17 @@ case "${bundle}" in
     then
         appinstall 'Meld diff tool'     'meld custom-config-meld'
         appinstall 'Git repo viewer'    'gitg'
+    fi
+
+    if kdebased
+    then
+        appinstall 'Diff tools'         'kompare kdiff3'
+        appinstall 'KDE SVN'            'kdesvn'
+
+        if ispkginstalled dolphin
+        then
+            appinstall 'Dolphin plugins'    'dolphin-plugins'
+        fi
     fi
 
 ;;
@@ -599,6 +620,12 @@ case "${bundle}" in
         appinstall 'Document viewer'    'evince'
     fi
 
+    if kdebased
+    then
+        appinstall 'LibreOffice'        'libreoffice-calc libreoffice-writer libreoffice-qt6 libreoffice-kf6 libreoffice-plasma libreoffice-style-breeze libreoffice-l10n-ru'
+        appinstall 'Document viewer'    'okular'
+    fi
+
 ;;
 
 ### ============================================================================
@@ -632,6 +659,11 @@ case "${bundle}" in
         gnomeshellextension 1379    'A simple MPRIS indicator button'       'lt 43'
         gnomeshellextension 906     'Sound Input & Output Device Chooser'   'lt 43'
         gnomeshellextension 517     'Caffeine'                              ''      'gnome-shell-extension-caffeine'
+    fi
+
+    if kdebased
+    then
+        appinstall 'Gwenview'       'gwenview'
     fi
 
 ;;
@@ -717,6 +749,11 @@ case "${bundle}" in
     if gnomebased
     then
         appinstall 'Eye of Gnome'           'eog'
+    fi
+
+    if kdebased
+    then
+        appinstall 'Gwenview'           'gwenview'
     fi
 
 ;;
@@ -894,6 +931,17 @@ case "${bundle}" in
         appinstall 'Evolution mail client'  'evolution evolution-data-server evolution-ews evolution-plugins'
     fi
 
+    if kdebased
+    then
+        appinstall 'KDE PIM'                'kmail kontact korganizer kaddressbook accountwizard'
+
+        if ispkginstalled 'akonadi-backend-mysql'
+        then
+            appinstall 'Akonadi SQLite backend' 'akonadi-backend-sqlite'
+            appremove 'Akonadi MySQL backend' 'akonadi-backend-mysql'
+        fi
+    fi
+
 ;;
 
 ### Chat =======================================================================
@@ -903,6 +951,11 @@ case "${bundle}" in
     if gnomebased
     then
         appinstall 'Pidgin'             'pidgin [pidgin-indicator] [libcanberra-gtk-module] [libgail-common] [appmenu-gtk2-module]'
+    fi
+
+    if kdebased
+    then
+        appinstall 'Kaidan'             'kaidan'
     fi
 ;;
 
