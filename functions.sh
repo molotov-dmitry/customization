@@ -929,6 +929,16 @@ function gnomebased()
     fi
 }
 
+function kdebased()
+{
+    if ispkginstalled 'plasma-desktop'
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
 ### DConf functions ============================================================
 
 dconfclear()
@@ -1090,6 +1100,10 @@ function launcherclear()
         gsettings set org.cinnamon favorite-apps '[]'
     fi
 
+    if kdebased && ispkginstalled sqlite3
+    then
+        sqlite3 "${HOME}/.local/share/kactivitymanagerd/resources/database" "DELETE FROM ResourceLink WHERE usedActivity = ':global' AND initiatingAgent = 'org.kde.plasma.favorites.applications'"
+    fi
 }
 
 function launcheradd_var()
@@ -1147,6 +1161,10 @@ launcheradd()
         launcheradd_var "$application" 'org.cinnamon' 'favorite-apps'
     fi
 
+    if kdebased && ispkginstalled sqlite3
+    then
+        sqlite3 "${HOME}/.local/share/kactivitymanagerd/resources/database" "INSERT INTO ResourceLink(usedActivity, initiatingAgent, targettedResource) VALUES(':global', 'org.kde.plasma.favorites.applications', '${application}.desktop')"
+    fi
 }
 
 ### Custom keybindings =========================================================

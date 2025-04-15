@@ -27,6 +27,10 @@ case "${bundle}" in
 
 "gui")
 
+    preparefiles 'KDE'      'kde'
+    preparefiles 'Konsole'  'konsole'
+    preparefiles 'Kate'     'kate'
+
 ;;
 
 ### GTK-based GUI ==============================================================
@@ -250,6 +254,10 @@ case "${bundle}" in
 ### Markdown editor ============================================================
 
 "dev/markdown")
+
+    ## Ghostwriter markdown editor ---------------------------------------------
+
+    preparefiles 'Ghostwriter' 'ghostwriter'
 
 ;;
 
