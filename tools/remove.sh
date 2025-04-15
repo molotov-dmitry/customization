@@ -88,7 +88,6 @@ packages_to_remove+=('btrfs-progs' 'reiserfsprogs' 'xfsprogs')
 packages_to_remove+=('cracklib-runtime')
 packages_to_remove+=('espeak-ng-data' 'libespeak-ng1' 'speech-dispatcher-espeak-ng')
 packages_to_remove+=('friendly-recovery')
-packages_to_remove+=('plasma-systemmonitor')
 packages_to_remove+=('libu2f-udev')
 packages_to_remove+=('calamares')
 packages_to_remove+=('exim4-base' 'exim4-config' 'exim4-daemon-light')
@@ -119,7 +118,7 @@ packages_to_remove+=('gamemode')
 packages_to_remove+=('rhythmbox' 'rhythmbox-data')
 packages_to_remove+=('gnome-music')
 packages_to_remove+=('totem' 'totem-common')
-packages_to_remove+=('vlc' 'vlc-bin' 'vlc-data')
+packages_to_remove+=('vlc' 'vlc-bin')
 packages_to_remove+=('cantata')
 packages_to_remove+=('elisa')
 packages_to_remove+=('mpd')
@@ -128,6 +127,10 @@ packages_to_remove+=('cheese')
 packages_to_remove+=('pavucontrol-qt')
 packages_to_remove+=('imagemagick-6-common')
 packages_to_remove+=('rygel-playbin' 'rygel-tracker')
+packages_to_remove+=('juk')
+packages_to_remove+=('dragonplayer')
+
+packages_to_mark_auto+=('vlc-data')
 
 ## Gnome apps ------------------------------------------------------------------
 
@@ -143,6 +146,8 @@ packages_to_remove+=('loupe')
 ## KDE & Qt --------------------------------------------------------------------
 
 packages_to_remove+=('qtwayland5' 'qttranslations5-l10n' 'qt5-gtk-platformtheme')
+
+packages_to_mark_auto+=('kate')
 
 ## Localization and fonts ------------------------------------------------------
 

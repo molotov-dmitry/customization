@@ -1,0 +1,9 @@
+[Layout]
+Options=terminate:ctrl_alt_bksp,grp_led:scroll,grp:alt_shift_toggle,grp:win_space_toggle
+ResetOldOptions=true
+ShowFlag=false
+ShowLabel=true
+ShowLayoutIndicator=true
+ShowSingle=false
+SwitchMode=Global
+Use=false
