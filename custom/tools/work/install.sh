@@ -27,6 +27,11 @@ then
     appinstall 'Gnome browser integration' 'gnome-browser-connector'
 fi
 
+if kdebased
+then
+    appinstall 'KDE browser integration' 'plasma-browser-integration'
+fi
+
 ### Element desktop ============================================================
 
 appinstall 'Element desktop'        'element-desktop'
