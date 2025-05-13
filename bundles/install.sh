@@ -605,7 +605,7 @@ case "${bundle}" in
     then
         gnomeshellextension 1379    'A simple MPRIS indicator button'       'lt 43'
         gnomeshellextension 906     'Sound Input & Output Device Chooser'   'lt 43'
-        gnomeshellextension 517     'Caffeine'
+        gnomeshellextension 517     'Caffeine'                              ''      'gnome-shell-extension-caffeine'
     fi
 
 ;;
