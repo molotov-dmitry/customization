@@ -329,6 +329,11 @@ case "${bundle}" in
         appinstall 'Develop templates'  'file-templates-develop'
     fi
 
+    if gnomebased
+    then
+        appinstall 'Gnome Pomodoro'     'gnome-shell-pomodoro custom-config-gnome-pomodoro'
+    fi
+
 ;;
 
 ### Code analysis tools ========================================================

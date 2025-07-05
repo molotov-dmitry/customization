@@ -142,7 +142,7 @@ case "${bundle}" in
         gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ name 'System-Tools.directory'
         gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ translate true
 
-        for app in Characters FileRoller DiskUtility Devhelp Screenshot baobab seahorse.Application Software tweaks Extensions Logs GHex
+        for app in Characters FileRoller DiskUtility Devhelp Screenshot baobab seahorse.Application Software tweaks Extensions Logs GHex Pomodoro
         do
             gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utils/ apps "org.gnome.${app}.desktop"
         done
@@ -1010,6 +1010,13 @@ case "${bundle}" in
     if [[ "${USER}" != 'rczi' && -n "$(cut -d ':' -f 1 /etc/passwd | grep '^rczi$')"  ]]
     then
         addbookmark 'sftp://rczi@localhost/home/rczi' 'rczi user'
+    fi
+
+    ## Enable Pomodoro extensions ==============================================
+
+    if ispkginstalled gnome-shell && isgnomeshellextensioninstalled 'pomodoro@arun.codito.in'
+    then
+        gsettingsadd org.gnome.shell enabled-extensions 'pomodoro@arun.codito.in'
     fi
 
     ## Disable suspend and screen off timeout ==================================
