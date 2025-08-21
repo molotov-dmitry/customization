@@ -130,7 +130,14 @@ case "${bundle}" in
 
     if gnomebased
     then
-        appinstall 'GTK2 style for Qt5'         'qt5-style-plugins custom-config-qt-gtk2-theme'
+        if ispkgavailable 'custom-config-qt-gnome-theme'
+        then
+            appinstall 'GNOME platform config for Qt'   'custom-config-qt-gnome-theme'
+
+        elif ispkgavailable 'custom-config-qt-gtk2-theme'
+        then
+            appinstall 'GTK2 platform config for Qt'    'custom-config-qt-gtk2-theme'
+        fi
     fi
 ;;
 
