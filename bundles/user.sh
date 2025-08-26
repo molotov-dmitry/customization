@@ -189,11 +189,11 @@ case "${bundle}" in
             gsettingsadd org.gnome.shell enabled-extensions 'ubuntu-appindicators@ubuntu.com'
         fi
 
-        ## Remove accessibility icon -------------------------------------------
+        ## Hide Universal Access -----------------------------------------------
 
-        if isgnomeshellextensioninstalled 'removeaccesibility@lomegor'
+        if isgnomeshellextensioninstalled 'hide-universal-access@akiirui.github.io'
         then
-            gsettingsadd org.gnome.shell enabled-extensions 'removeaccesibility@lomegor'
+            gsettingsadd org.gnome.shell enabled-extensions 'hide-universal-access@akiirui.github.io'
         fi
 
         ## Bring Out Submenu Of Power Off/Logout Button ------------------------

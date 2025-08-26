@@ -96,7 +96,7 @@ case "${bundle}" in
             gnomeshellextension 307  'Dash to Dock'                 ''        'gnome-shell-extension-dashtodock'
         fi
 
-        gnomeshellextension 112  'Remove Accessibility'             'ge 3.34' 'gnome-shell-extension-remove-accesibility'
+        gnomeshellextension 2398 'Hide Universal Access'            'ge 3.34' 'gnome-shell-extension-hide-universal-access'
         gnomeshellextension 7    'Removable Drive Menu'
 
         gnomeshellextension 2917 'Bring Out Submenu Of Power Off/Logout Button'
