@@ -843,7 +843,9 @@ case "${bundle}" in
 
     ### GOST hash ==============================================================
 
-    appinstall 'GOST hashes'            'gostsum ctrlsum'
+    appinstall 'GOST hashes'            'gostsum'
+    appinstall 'CtrlSum'                'ctrlsum'
+    appinstall 'GetCRC'                 'getcrc'
 
     ### CD burning =============================================================
 
