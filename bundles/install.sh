@@ -492,7 +492,14 @@ case "${bundle}" in
 
     if ispkginstalled nautilus
     then
-        appinstall 'RabbitVCS'          'rabbitvcs-nautilus'
+        if ispkgavailable 'turtle-nautilus'
+        then
+            appinstall 'Turtle Git'         'turtle-nautilus'
+
+        elif ispkgavailable 'rabbitvcs-nautilus'
+        then
+            appinstall 'RabbitVCS'          'rabbitvcs-nautilus'
+        fi
     fi
 
     if gnomebased
