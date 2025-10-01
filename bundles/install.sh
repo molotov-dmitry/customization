@@ -793,10 +793,6 @@ case "${bundle}" in
     bash "${scriptpath}" 'vm-host/server'
     bash "${scriptpath}" 'vm-host/client'
 
-    if gnomebased
-    then
-        appinstall 'Gnome Boxes' 'gnome-boxes'
-    fi
 ;;
 
 "vm-host/server")
