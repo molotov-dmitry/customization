@@ -347,7 +347,7 @@ case "${bundle}" in
 
 "dev/analysis")
 
-    appinstall 'Static analysis tools'  'cppcheck'
+    appinstall 'Static analysis tools'  'cppcheck clang-tools'
     appinstall 'Dynamic analysis tools' 'valgrind'
     appinstall 'Function complexity'    'pmccabe'
     appinstall 'GNU time'               'time'
