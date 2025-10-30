@@ -389,7 +389,7 @@ case "${bundle}" in
 
 "dev/qt")
 
-    appinstall 'Qt SDK'                 'qtbase5-dev-tools qml qtbase5-dev qtdeclarative5-dev [qt5-doc]'
+    appinstall 'Qt SDK'                 'qtbase5-dev-tools qml qtbase5-dev qtdeclarative5-dev qtbase5-doc qtserialport5-doc qtwebview5-doc'
     appinstall 'Qt Libs'                'libqt5svg5 libqt5svg5-dev [libqt5webkit5-dev] libqt5charts5-dev libqt5xmlpatterns5-dev libqt5x11extras5-dev libqt5serialport5-dev libqt5sql5-sqlite'
 
     if havegraphics
