@@ -31,6 +31,7 @@ packages_to_remove+=('aptitude' 'aptitude-common')
 packages_to_remove+=('app-install-data-partner')
 packages_to_remove+=('gnome-software gnome-software-common')
 packages_to_remove+=('synaptic')
+packages_to_remove+=('packagekit')
 
 ## Office ----------------------------------------------------------------------
 
