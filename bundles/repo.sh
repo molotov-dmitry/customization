@@ -298,7 +298,8 @@ case "${bundle}" in
 
 "office")
 
-    if [[ "$(lsb_release -si)" == "Debian" ]]
+    #TODO: Remove after libreoffice fix
+    if [[ "$(lsb_release -si)" == "Debian" && "$(lsb_release -sr)" -lt 13 ]]
     then
         silent 'Enable LibreOffice backports' bash -c "mkdir -p /etc/apt/preferences.d && echo -e \"Package: src:libreoffice\nPin: release n=$(lsb_release -cs)-backports\nPin-Priority: 500\" > /etc/apt/preferences.d/libreoffice.pref"
     fi
