@@ -799,6 +799,11 @@ case "${bundle}" in
 
     appinstall 'Libvirt daemon' 'libvirt-daemon libvirt-daemon-system !qemu-kvm qemu-utils ovmf'
 
+    if [[ "$(lsb_release -si)" != "Debian" ]] || [[ "$(lsb_release -sr)" == 'n/a' || "$(lsb_release -sr)" -ge 13 ]]
+    then
+        appinstall 'QEMU QXL (SPICE) module' 'qemu-system-modules-spice'
+    fi
+
 ;;
 
 "vm-host/client")
