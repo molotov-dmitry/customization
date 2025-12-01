@@ -200,7 +200,13 @@ case "${bundle}" in
 
         if isgnomeshellextensioninstalled 'BringOutSubmenuOfPowerOffLogoutButton@pratap.fastmail.fm'
         then
-            dconf write /org/gnome/shell/extensions/brngout/remove-suspend-button true
+            if dpkg --compare-versions "$(pkgversion gnome-shell)" ge 45
+            then
+                dconf write /org/gnome/shell/extensions/bring-out-submenu-of-power-off-logout/hide-suspend-button true
+                dconf write /org/gnome/shell/extensions/bring-out-submenu-of-power-off-logout/hide-switch-user-button true
+            else
+                dconf write /org/gnome/shell/extensions/brngout/remove-suspend-button true
+            fi
 
             gsettingsadd org.gnome.shell enabled-extensions 'BringOutSubmenuOfPowerOffLogoutButton@pratap.fastmail.fm'
         fi
