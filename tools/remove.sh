@@ -66,7 +66,7 @@ packages_to_remove+=('lynx')
 
 packages_to_remove+=('onboard')
 packages_to_remove+=('orca' 'gnome-orca')
-packages_to_mark_auto+=('malcontent')
+packages_to_remove+=('malcontent' 'malcontent-gui')
 packages_to_remove+=('brltty')
 packages_to_remove+=('gnome-accessibility-themes')
 packages_to_remove+=('at-spi2-core')
