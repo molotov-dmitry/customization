@@ -840,11 +840,49 @@ case "${bundle}" in
 
     user-folders
 
+    if dpkg --compare-versions "$(pkgversion nautilus)" ge 47
+    then
+        for xdgdir in DOCUMENTS DOWNLOAD PICTURES
+        do
+            for dirpath in "$(xdg-user-dir $xdgdir)"
+            do
+                for dirname in "${dirpath#$HOME/}"
+                do
+                    addbookmark "file://${dirpath}" "${dirname}"
+                done
+            done
+        done
+    fi
+
     addbookmark "file://${HOME}/Projects" 'Projects'
 
-    for dir in 'Общедоступные' 'Шаблоны' 'Рабочий стол'
+    for xdgdir in DESKTOP TEMPLATES PUBLICSHARE
     do
-        grep -qs "^${dir}$" "${HOME}/.hidden" || echo "$dir" >> "${HOME}/.hidden"
+        for dirpath in "$(xdg-user-dir $xdgdir)"
+        do
+            for dirname in "${dirpath#$HOME/}"
+            do
+                grep -qs "^${dirname}$" "${HOME}/.hidden" || echo "$dirname" >> "${HOME}/.hidden"
+            done
+        done
+    done
+
+    for xdgdir in MUSIC VIDEOS
+    do
+        for dirpath in "$(xdg-user-dir $xdgdir)"
+        do
+            for dirname in "${dirpath#$HOME/}"
+            do
+                if [[ -f "${HOME}/.config/is-work-account" ]]
+                then
+                    grep -qs "^${dirname}$" "${HOME}/.hidden" || echo "$dirname" >> "${HOME}/.hidden"
+
+                elif dpkg --compare-versions "$(pkgversion nautilus)" ge 47
+                then
+                    addbookmark "file://${dirpath}" "${dirname}"
+                fi
+            done
+        done
     done
 
 ;;

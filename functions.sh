@@ -1594,16 +1594,49 @@ mimedefault()
 
 ### Add bookmark ===============================================================
 
+function htmlescape()
+{
+    local in="$(echo "$1" | sed "s/&/\&amp\;/g;s/</\&lt\;/g;s/>/\&gt\;/g;s/\"/\&quot\;/g;s/'/\&\#39\;/g;")"
+
+    while LC_ALL=C IFS= read -r -d "" -n 1 c
+    do
+        local cnum="$(printf "%d" "'${c}")"
+
+        if [[ "${c}" == ' ' || ${cnum} -gt 127 ]]
+        then
+            printf "%%%02X" "${cnum}"
+        else
+            printf "%s" "$c"
+        fi
+    done < <(printf '%s' "$in")
+}
+
 function addbookmark()
 {
-    path="$1"
-    name="$2"
+    local path="$(htmlescape "$1")"
+    local name="$2"
+    local options="$3"
+
+    local pathfind="${path}"
+
+    while [[ "${pathfind: -1}" == '/' ]]
+    do
+        pathfind="${pathfind:0:-1}"
+    done
 
     mkdir -p "${HOME}/.config/gtk-3.0/"
 
     touch "${HOME}/.config/gtk-3.0/bookmarks"
 
-    sed -i "/$(safestring "${path} ")/d" "${HOME}/.config/gtk-3.0/bookmarks"
+    if grep -qs "^${pathfind}/\\? " "${HOME}/.config/gtk-3.0/bookmarks"
+    then
+        if [[ "${options}" == '--force' || "${options}" == '--rename' ]]
+        then
+            sed -i "s/^$(safestring "${pathfind}/")\\? .*/$(safestring "${path} ${name}")/" "${HOME}/.config/gtk-3.0/bookmarks"
+        fi
+
+        return 0
+    fi
 
     echo "${path} ${name}" >> "${HOME}/.config/gtk-3.0/bookmarks"
 }
