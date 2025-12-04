@@ -576,6 +576,15 @@ case "${bundle}" in
         addconfigline 'git' 'False' 'HideItem' "${HOME}/.config/rabbitvcs/settings.conf"
     fi
 
+    ## Turtle-Git --------------------------------------------------------------
+
+    if ispkginstalled turtle-cli
+    then
+        hideapp de.philippun1.turtle
+
+        gsettings set de.philippun1.turtle log-show-all-branches true
+    fi
+
 ;;
 
 ### ============================================================================
