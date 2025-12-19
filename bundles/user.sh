@@ -235,6 +235,8 @@ case "${bundle}" in
 
             dconf write /org/gnome/shell/extensions/dash-to-dock/custom-theme-shrink true
 
+            dconf write /org/gnome/shell/extensions/dash-to-dock/show-icons-notifications-counter false
+
             if isgnomeshellextensioninstalled 'dash-to-dock@micxgx.gmail.com'
             then
                 gsettingsadd org.gnome.shell enabled-extensions 'dash-to-dock@micxgx.gmail.com'
