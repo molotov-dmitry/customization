@@ -95,7 +95,6 @@ case "${bundle}" in
     ## File manager keybindings ================================================
 
     addscenario 'terminal' 'F4' 'x-terminal-emulator &' --fixpwd
-    addscenario 'compress' 'F7' '[[ $# -gt 0 ]] && file-roller -d "$@" &'
 
     ## gnome-terminal ==========================================================
 
@@ -113,6 +112,20 @@ case "${bundle}" in
         then
             gsettings set "${term_profile_path}" use-transparent-background true
             gsettings set "${term_profile_path}" background-transparency-percent 5
+        fi
+    fi
+
+    ## File Roller =============================================================
+
+    if ispkginstalled file-roller
+    then
+        addscenario 'compress' 'F7' '[[ $# -gt 0 ]] && file-roller -d "$@" &'
+
+        if dpkg --compare-versions "$(pkgversion gnome-shell)" ge 48
+        then
+            xdg-mime default org.gnome.FileRoller.desktop \
+                $(sed -n -e "/^MimeType=inode\/directory;/{s///;s/;/ /gp}" \
+                /usr/share/applications/org.gnome.Nautilus.desktop)
         fi
     fi
 
