@@ -911,7 +911,7 @@ function disableservice()
 
 function havegraphics()
 {
-    if ispkginstalled 'xserver-xorg'
+    if ispkginstalled 'xserver-xorg' || ispkginstalled 'libwayland-server0'
     then
         return 0
     else
