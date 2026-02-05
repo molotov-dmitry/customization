@@ -1319,7 +1319,7 @@ setdefaultapp()
     local mime="$1"
     local app="$2"
 
-    addconfigline "${mime}" "${app}" 'Default Applications' "${HOME}/.config/mimeapps.list"
+    xdg-mime default "${app}.desktop" "${mime}"
 }
 
 getmimelist()
@@ -1342,6 +1342,7 @@ mimedefault()
 {
     local app="$1"
     local type="$2"
+    local mimelist=()
 
     shift
     shift
@@ -1353,8 +1354,6 @@ mimedefault()
             continue
         fi
 
-        mimeregister  "$mime" "${app}.desktop"
-
         for ignore
         do
             if [[ "${mime}" == "${ignore}" ]]
@@ -1363,8 +1362,13 @@ mimedefault()
             fi
         done
 
-        setdefaultapp "$mime" "${app}.desktop"
+        mimelist+=("$mime")
     done
+
+    if [[ ${#mimelist[@]} -gt 0 ]]
+    then
+        xdg-mime default "${app}.desktop" "${mimelist[@]}"
+    fi
 }
 
 ### Add bookmark ===============================================================
