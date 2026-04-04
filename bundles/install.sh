@@ -52,8 +52,6 @@ case "${bundle}" in
 
 "gtk")
 
-    appinstall 'GTK+ modules' 'appmenu-gtk3-module'
-
 ;;
 
 ### ============================================================================
