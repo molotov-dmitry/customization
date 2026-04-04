@@ -40,6 +40,12 @@ case "${bundle}" in
         silent 'Modify firstboot script'    addconfigline 'Before' 'sddm.service' 'Unit' '/etc/systemd/system/custom-startup.service.d/before-sddm.conf'
     fi
 
+    if ispkginstalled libgtk-3-bin
+    then
+        echo 'export GTK_A11Y=none'   > /etc/profile.d/50-disable-gtk-a11y.sh
+        echo 'export NO_AT_BRIDGE=1' >> /etc/profile.d/50-disable-gtk-a11y.sh
+    fi
+
 ;;
 
 ### GTK-based GUI ==============================================================
