@@ -19,6 +19,12 @@ DISTFILES += \
     custom/tools/home/user.sh \
     custom/tools/media.bundle \
     custom/tools/media/user.sh \
+    custom/tools/neobit.bundle \
+    custom/tools/neobit/config.sh \
+    custom/tools/neobit/install.sh \
+    custom/tools/neobit/prepare.sh \
+    custom/tools/neobit/repo.sh \
+    custom/tools/neobit/user.sh \
     custom/tools/q190-lite/install.sh \
     custom/tools/q190.bundle \
     custom/tools/q190/install.sh \
