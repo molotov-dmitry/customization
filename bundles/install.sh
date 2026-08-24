@@ -307,6 +307,7 @@ case "${bundle}" in
     bash "${scriptpath}" 'dev/markdown'
     bash "${scriptpath}" 'dev/net'
     bash "${scriptpath}" 'dev/ti'
+    bash "${scriptpath}" 'dev/serial'
 
 ;;
 
@@ -476,6 +477,14 @@ case "${bundle}" in
     then
         appinstall 'CCS project editor' 'ccs-pjt-editor-qt'
     fi
+
+;;
+
+### Serial interfaces ==========================================================
+
+"dev/serial")
+
+    appinstall 'GNU Screen'     'screen'
 
 ;;
 

@@ -183,6 +183,7 @@ case "${bundle}" in
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/markdown'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/net'
     bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/ti'
+    bash "${scriptpath}" "${config}" "${rootfs_dir}" 'dev/serial'
 
 ;;
 
@@ -261,6 +262,12 @@ case "${bundle}" in
 ### TI TMS320C64XX =============================================================
 
 "dev/ti")
+
+;;
+
+### Serial interfaces ==========================================================
+
+"dev/serial")
 
 ;;
 

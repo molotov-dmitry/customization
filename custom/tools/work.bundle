@@ -17,6 +17,7 @@ dev/db
 dev/json
 dev/net
 dev/ti
+dev/serial
 
 work
 work-mail
