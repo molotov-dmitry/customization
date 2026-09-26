@@ -95,9 +95,9 @@ case "${bundle}" in
         fi
 
         gnomeshellextension 2398 'Hide Universal Access'            'ge 3.34' 'gnome-shell-extension-hide-universal-access'
-        gnomeshellextension 7    'Removable Drive Menu'
+        gnomeshellextension 7    'Removable Drive Menu'             ''        'gnome-shell-extension-drive-menu'
 
-        gnomeshellextension 2917 'Bring Out Submenu Of Power Off/Logout Button'
+        gnomeshellextension 2917 'Bring Out Submenu Of Power Off/Logout Button' '' 'gnome-shell-extension-bring-out-submenu-of-power-off-logout'
     fi
 
     appinstall 'Gnome default config'       'custom-config-gnome'
