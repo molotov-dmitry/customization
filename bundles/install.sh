@@ -597,6 +597,7 @@ case "${bundle}" in
     then
         appinstall 'LibreOffice'        'libreoffice-calc libreoffice-writer libreoffice-gtk3 libreoffice-gnome libreoffice-style-breeze libreoffice-l10n-ru'
         appinstall 'Document viewer'    'evince'
+        appinstall 'Gnome To Do'        'endeavour'
     fi
 
 ;;

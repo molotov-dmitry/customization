@@ -172,7 +172,7 @@ case "${bundle}" in
         gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ name 'Office.directory'
         gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ translate true
 
-        for app in eog Evince Builder
+        for app in eog Evince Builder Todo
         do
             gsettingsadd org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ apps "org.gnome.${app}.desktop"
         done
