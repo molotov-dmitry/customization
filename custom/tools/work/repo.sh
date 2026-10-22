@@ -19,4 +19,4 @@ fi
 
 ### Element.io =================================================================
 
-repoadd 'Element.io' 'https://packages.element.io/debian/' 'default' 'main' 'element-io.gpg'
+repoadd 'Element.io' 'http://mirror.ahome.spb.ru/packages.element.io/debian/' 'default' 'main' 'element-io.gpg' 'arch=amd64'
