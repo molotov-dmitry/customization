@@ -884,6 +884,10 @@ case "${bundle}" in
         appinstall 'SPICE client'       'virt-viewer'
     fi
 
+    ### Fonts ==================================================================
+
+    appinstall 'PT Astra fonts'         'fonts-pt-astra'
+
 ;;
 
 ### Mail =======================================================================
